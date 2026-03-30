@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JD Monthly Recap — 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0C0D10;
+      --surface: #14151A;
+      --surface2: #1C1D23;
+      --border: rgba(255,255,255,.07);
+      --border-hover: rgba(255,255,255,.18);
+      --text: #F0EEE9;
+      --text-muted: #6E6C68;
+      --text-soft: #A8A5A0;
+      --gold: #D4A84B;
+      --gold-dim: rgba(212,168,75,.12);
+      --sage: #5CB872;
+      --sky: #5A9DC0;
+      --vio: #8B7EC8;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
+      --serif: 'Libre Baskerville', Georgia, serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 20px 80px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* subtle grain */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: .6;
+    }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 680px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .header-eyebrow {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .header-eyebrow::before,
+    .header-eyebrow::after {
+      content: '';
+      width: 32px;
+      height: 1px;
+      background: rgba(212,168,75,.35);
+    }
+    .header h1 {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+    .header-sub {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+
+    /* ── YEAR STATS ── */
+    .year-stats {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+      padding: 16px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      width: 100%;
+    }
+    .ys-item {
+      text-align: center;
+    }
+    .ys-val {
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      display: block;
+    }
+    .ys-val.green { color: var(--sage); }
+    .ys-val.gold  { color: var(--gold); }
+    .ys-val.sky   { color: var(--sky);  }
+    .ys-key {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      display: block;
+      margin-top: 3px;
+    }
+
+    /* ── MONTH GRID ── */
+    .months {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      width: 100%;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 520px) {
+      .months { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .month-card {
+      display: block;
+      text-decoration: none;
+      padding: 20px 18px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color .18s, transform .18s, background .18s, box-shadow .18s;
+      position: relative;
+      overflow: hidden;
+    }
+    .month-card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      background: var(--surface2);
+      box-shadow: 0 8px 32px rgba(0,0,0,.5);
+    }
+    .month-card.done {
+      border-color: rgba(92,184,114,.2);
+    }
+    .month-card.done:hover {
+      border-color: rgba(92,184,114,.45);
+    }
+    .month-card.latest {
+      border-color: rgba(212,168,75,.35);
+      background: rgba(212,168,75,.04);
+    }
+    .month-card.latest:hover {
+      border-color: rgba(212,168,75,.65);
+      background: rgba(212,168,75,.07);
+    }
+    .month-card.upcoming {
+      opacity: .45;
+      cursor: default;
+      pointer-events: none;
+    }
+    /* accent bar on done/latest cards */
+    .month-card.done::before,
+    .month-card.latest::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+    .month-card.done::before {
+      background: linear-gradient(90deg, transparent, rgba(92,184,114,.5), transparent);
+    }
+    .month-card.latest::before {
+      background: linear-gradient(90deg, transparent, rgba(212,168,75,.7), transparent);
+    }
+
+    .card-num {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    .card-month {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 700;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .card-year {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .card-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 10px;
+    }
+    .chip {
+      font-family: var(--mono);
+      font-size: 9px;
+      padding: 2px 7px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.06);
+      color: var(--text-muted);
+      background: rgba(255,255,255,.03);
+      white-space: nowrap;
+    }
+    .chip.g { color: var(--sage); border-color: rgba(92,184,114,.2); background: rgba(92,184,114,.07); }
+    .chip.d { color: var(--gold); border-color: rgba(212,168,75,.2); background: rgba(212,168,75,.07); }
+    .chip.b { color: var(--sky);  border-color: rgba(90,157,192,.2); background: rgba(90,157,192,.07); }
+
+    .card-badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 9px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 500;
+      letter-spacing: .3px;
+    }
+    .badge-latest {
+      background: rgba(212,168,75,.18);
+      color: var(--gold);
+      border: 1px solid rgba(212,168,75,.3);
+    }
+    .badge-done {
+      background: rgba(92,184,114,.1);
+      color: var(--sage);
+      border: 1px solid rgba(92,184,114,.2);
+    }
+    .badge-upcoming {
+      background: rgba(255,255,255,.04);
+      color: var(--text-muted);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    /* ── SERMON LINK ── */
+    .sermon-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 12px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      text-decoration: none;
+      color: var(--text-soft);
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .5px;
+      transition: border-color .18s, color .18s, background .18s;
+      margin-bottom: 40px;
+    }
+    .sermon-link:hover {
+      border-color: rgba(212,168,75,.4);
+      color: var(--gold);
+      background: rgba(212,168,75,.04);
+    }
+    .sermon-link-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: .7;
+      flex-shrink: 0;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      text-align: center;
+      line-height: 2;
+    }
+    .footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color .15s;
+    }
+    .footer a:hover { color: var(--text-soft); }
+  </style>
+</head>
+<body>
+<div class="shell">
+
+  <header class="header">
+    <div class="header-eyebrow">JD Meyers · 2026</div>
+    <h1>Monthly Recap</h1>
+    <p class="header-sub">Spiritual · Physical · Financial · Intellectual · Creative</p>
+  </header>
+
+  <!-- Year-to-date quick stats -->
+  <div class="year-stats">
+    <div class="ys-item">
+      <span class="ys-val green">$2,794</span>
+      <span class="ys-key">YTD Saved</span>
+    </div>
+    <div class="ys-item">
+      <span class="ys-val">12 / 12</span>
+      <span class="ys-key">Sermons</span>
+    </div>
+    <div class="ys-item">
+      <span class="ys-val sky">59</span>
+      <span class="ys-key">Gym Days</span>
+    </div>
+    <div class="ys-item">
+      <span class="ys-val gold">3.834</span>
+      <span class="ys-key">GPA</span>
+    </div>
+    <div class="ys-item">
+      <span class="ys-val">3 Months</span>
+      <span class="ys-key">Complete</span>
+    </div>
+  </div>
+
+  <!-- Month cards -->
+  <div class="months">
+
+    <a class="month-card done" href="2026-01.html">
+      <div class="card-num">Month 01</div>
+      <div class="card-month">January</div>
+      <div class="card-year">2026</div>
+      <div class="card-chips">
+        <span class="chip g">+$812</span>
+        <span class="chip b">22 gym</span>
+        <span class="chip d">4 sermons</span>
+      </div>
+      <span class="card-badge badge-done">Complete</span>
+    </a>
+
+    <a class="month-card done" href="2026-02.html">
+      <div class="card-num">Month 02</div>
+      <div class="card-month">February</div>
+      <div class="card-year">2026</div>
+      <div class="card-chips">
+        <span class="chip g">+$1,094</span>
+        <span class="chip b">19 gym</span>
+        <span class="chip d">4 sermons</span>
+      </div>
+      <span class="card-badge badge-done">Complete</span>
+    </a>
+
+    <a class="month-card latest" href="2026-03_v2.html">
+      <div class="card-num">Month 03</div>
+      <div class="card-month">March</div>
+      <div class="card-year">2026</div>
+      <div class="card-chips">
+        <span class="chip g">+$887</span>
+        <span class="chip b">18 gym</span>
+        <span class="chip d">4 sermons</span>
+      </div>
+      <span class="card-badge badge-latest">Latest</span>
+    </a>
+
+    <div class="month-card upcoming">
+      <div class="card-num">Month 04</div>
+      <div class="card-month">April</div>
+      <div class="card-year">2026</div>
+      <span class="card-badge badge-upcoming">Upcoming</span>
+    </div>
+
+    <div class="month-card upcoming">
+      <div class="card-num">Month 05</div>
+      <div class="card-month">May</div>
+      <div class="card-year">2026</div>
+      <span class="card-badge badge-upcoming">Upcoming</span>
+    </div>
+
+    <div class="month-card upcoming">
+      <div class="card-num">Month 06</div>
+      <div class="card-month">June</div>
+      <div class="card-year">2026</div>
+      <span class="card-badge badge-upcoming">Upcoming</span>
+    </div>
+
+    <div class="month-card upcoming">
+      <div class="card-num">Month 07</div>
+      <div class="card-month">July</div>
+      <div class="card-year">2026</div>
+      <span class="card-badge badge-upcoming">Upcoming</span>
+    </div>
+
+    <div class="month-card upcoming">
+      <div class="card-num">Month 08</div>
+      <div class="card-month">August</div>
+      <div class="card-year">2026</div>
+      <span class="card-badge badge-upcoming">Upcoming</span>
+    </div>
+
+    <div class="month-card upcoming">
+      <div class="card-num">Month 09</div>
+      <div class="card-month">September</div>
+      <div class="card-year">2026</div>
+      <span class="card-badge badge-upcoming">Upcoming</span>
+    </div>
+
+    <div class="month-card upcoming">
+      <div class="card-num">Month 10</div>
+      <div class="card-month">October</div>
+      <div class="card-year">2026</div>
+      <span class="card-badge badge-upcoming">Upcoming</span>
+    </div>
+
+    <div class="month-card upcoming">
+      <div class="card-num">Month 11</div>
+      <div class="card-month">November</div>
+      <div class="card-year">2026</div>
+      <span class="card-badge badge-upcoming">Upcoming</span>
+    </div>
+
+    <div class="month-card upcoming">
+      <div class="card-num">Month 12</div>
+      <div class="card-month">December</div>
+      <div class="card-year">2026</div>
+      <span class="card-badge badge-upcoming">Upcoming</span>
+    </div>
+
+  </div>
+
+  <!-- Sermon series link -->
+  <a class="sermon-link" href="cbc-sermons.html">
+    <span class="sermon-link-dot"></span>
+    CBC Sermon Series — Acts 2026 · Full Dashboard
+    <span class="sermon-link-dot"></span>
+  </a>
+
+  <footer class="footer">
+    Add a new month: upload 2026-XX.html · add a card above · move "latest" class<br>
+    <a href="https://github.com" target="_blank">Hosted on GitHub Pages</a> · JD Meyers 2026
+  </footer>
+
+</div>
+</body>
+</html>

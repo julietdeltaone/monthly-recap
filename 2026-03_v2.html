@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JD Monthly Recap — March 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#131416;--bg2:#1A1B1F;--bg3:#222328;--bg4:#2A2B30;--bg5:#313338;
+  --b0:rgba(255,255,255,.045);--b1:rgba(255,255,255,.09);--b2:rgba(255,255,255,.16);--b3:rgba(255,255,255,.24);
+  --tx:#F4F2EE;--t2:#CCC9C3;--t3:#9A9590;--t4:#5A5754;--t5:#2E2C2A;
+  --gold:#D4A84B;--gbg:rgba(212,168,75,.12);--gdim:rgba(212,168,75,.06);
+  --sage:#5CB872;--sbg:rgba(92,184,114,.12);--sdim:rgba(92,184,114,.06);
+  --rust:#CC6B47;--rbg:rgba(204,107,71,.12);
+  --sky:#5A9DC0;--kbg:rgba(90,157,192,.12);--kdim:rgba(90,157,192,.06);
+  --vio:#8B7EC8;--vbg:rgba(139,126,200,.12);
+  --rose:#C07080;--robg:rgba(192,112,128,.12);
+  --teal:#47B0AB;--tbg:rgba(71,176,171,.12);
+  --serif:'Libre Baskerville',Georgia,serif;
+  --sans:'DM Sans',-apple-system,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+  --r1:6px;--r2:10px;--r3:16px;--r4:20px;
+  --sh1:0 1px 8px rgba(0,0,0,.65);
+  --sh2:0 4px 32px rgba(0,0,0,.8);
+  --sh3:0 16px 64px rgba(0,0,0,.9);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100vh;-webkit-font-smoothing:antialiased}
+
+@keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.ca{opacity:0;transform:translateY(18px)}.ca.vis{animation:slideUp .48s cubic-bezier(.22,.68,0,1.15) both}
+.ca.vis.d1{animation-delay:.07s}.ca.vis.d2{animation-delay:.14s}.ca.vis.d3{animation-delay:.21s}
+.ca.vis.d4{animation-delay:.28s}.ca.vis.d5{animation-delay:.35s}
+
+.shell{max-width:1340px;margin:0 auto;padding:40px 28px 100px}
+.hdr{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-bottom:22px;border-bottom:1px solid var(--b1)}
+.hdr-l{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.hdr h1{font-family:var(--serif);font-size:23px;font-weight:700;font-style:italic;letter-spacing:-.3px}
+.mlbl{font-family:var(--mono);font-size:10px;color:var(--t3);letter-spacing:1.2px;text-transform:uppercase}
+.hdr-r{display:flex;gap:8px}
+.pill{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.7px;text-transform:uppercase;padding:6px 14px;border:1px solid var(--b1);border-radius:40px;background:var(--bg3);color:var(--t3);cursor:pointer;transition:all .18s;box-shadow:var(--sh1)}
+.pill:hover{color:var(--tx);border-color:var(--b2);background:var(--bg4)}
+.tabs{display:flex;gap:2px;padding:18px 0 0;flex-wrap:wrap}
+.tab{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;padding:7px 16px;border:1px solid transparent;border-radius:40px;background:none;color:var(--t3);cursor:pointer;transition:all .18s}
+.tab:hover{color:var(--t2);border-color:var(--b1);background:rgba(255,255,255,.03)}
+.tab.on{color:var(--tx);border-color:var(--b2);background:var(--bg4);box-shadow:var(--sh1)}
+.dash{display:grid;grid-template-columns:250px 1fr;gap:24px;margin-top:26px;align-items:start}
+@media(max-width:860px){.dash{grid-template-columns:1fr}.side{order:2}.content{order:1}}
+.side{display:flex;flex-direction:column;gap:14px;position:sticky;top:20px}
+.sc{background:var(--bg2);border:1px solid var(--b0);border-radius:var(--r3);padding:17px;box-shadow:var(--sh1);transition:border-color .2s}
+.sc:hover{border-color:var(--b1)}
+.sgt{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:1.6px;text-transform:uppercase;color:var(--t4);margin-bottom:11px}
+.si{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--b0)}
+.si:last-child{border-bottom:none}
+.sk{font-size:12px;color:var(--t3)}.sv{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--tx)}
+.hchip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;margin:0 4px 5px 0;border:1px solid var(--b0);border-radius:40px;font-size:11px;color:var(--t2);background:var(--bg4);cursor:default;transition:border-color .15s,transform .15s}
+.hchip:hover{border-color:var(--b2);transform:translateY(-1px)}
+.hdot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.content{min-width:0}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:860px){.cg{grid-template-columns:1fr}}
+.sf{grid-column:1/-1}
+.card{background:var(--bg2);border:1px solid var(--b0);border-radius:var(--r3);padding:22px;box-shadow:var(--sh1);transition:border-color .25s,box-shadow .25s,transform .22s}
+.card:hover{border-color:var(--b2);box-shadow:var(--sh2);transform:translateY(-1px)}
+.ch{margin-bottom:15px}
+.ct{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--tx);font-style:italic}
+.cs{font-size:11px;color:var(--t3);margin-top:3px}
+.secdiv{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--b0)}
+.secacc{width:3px;height:16px;border-radius:2px;flex-shrink:0}
+.sectit{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--tx);font-style:italic}
+
+/* PROGRESS BAND */
+.prog-band{background:var(--bg3);border:1px solid rgba(255,255,255,.06);border-radius:var(--r2);padding:14px 16px;margin-bottom:16px;border-left:3px solid var(--sky)}
+.prog-band .pb-lbl{font-family:var(--mono);font-size:9px;color:var(--sky);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:9px;display:flex;align-items:center;gap:7px}
+.pb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.pb-stat{background:var(--bg2);border:1px solid var(--b0);border-radius:var(--r1);padding:9px 11px;cursor:default;transition:border-color .15s}
+.pb-stat:hover{border-color:var(--b2)}
+.pb-k{font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
+.pb-v{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--tx)}
+.pb-d{font-size:11px;color:var(--t3);margin-top:3px;line-height:1.4}
+.delta-up{color:var(--sage)}.delta-dn{color:var(--rust)}.delta-eq{color:var(--t3)}
+
+/* COMMENTARY CALLOUT (dissolved into sections) */
+.comm-note{margin-top:14px;padding:14px 16px;border-left:3px solid var(--gold);background:var(--gdim);border-radius:0 var(--r1) var(--r1) 0;font-size:13px;line-height:1.72;color:var(--t2)}
+.comm-note .cnl{font-style:normal;font-family:var(--mono);font-size:9px;letter-spacing:.8px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px;font-weight:500}
+
+/* OVERVIEW */
+.ovb{display:flex;align-items:center;justify-content:space-between;padding:26px 30px;background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r4);gap:20px;flex-wrap:wrap;box-shadow:var(--sh2);position:relative;overflow:hidden}
+.ovb::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%,rgba(212,168,75,.07) 0%,transparent 50%),radial-gradient(ellipse at 100% 50%,rgba(90,157,192,.05) 0%,transparent 50%);pointer-events:none}
+.ovb::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(212,168,75,.28),transparent);pointer-events:none}
+.ovbm{font-family:var(--serif);font-size:34px;font-weight:700;font-style:italic;color:var(--tx);line-height:1.1;position:relative}
+.ovbs{font-family:var(--mono);font-size:10px;color:var(--t3);margin-top:7px;letter-spacing:.5px;text-transform:uppercase;position:relative}
+.kpis{display:flex;gap:32px;flex-shrink:0;position:relative}
+.kpi{display:flex;flex-direction:column;align-items:flex-end;gap:3px;cursor:pointer;transition:opacity .15s}
+.kpi:hover{opacity:.8}
+.kpiv{font-size:22px;font-weight:700;font-family:var(--mono);color:var(--tx)}
+.kpiv.ok{color:var(--sage)}.kpiv.warn{color:var(--gold)}.kpiv.bad{color:var(--rust)}
+.kpik{font-family:var(--mono);font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.7px}
+.ovcols{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ovcol{display:flex;flex-direction:column;gap:10px}
+.ovs{background:var(--bg2);border:1px solid var(--b0);border-radius:var(--r2);padding:13px 15px;transition:border-color .2s,box-shadow .2s,transform .2s;cursor:pointer}
+.ovs:hover{border-color:var(--b2);box-shadow:var(--sh1);transform:translateY(-1px)}
+.ovsl{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:9px}
+.ovr{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;border-bottom:1px solid var(--b0);gap:8px}
+.ovr:last-child{border-bottom:none}
+.ovrk{font-size:12px;color:var(--t2)}.ovrv{font-size:12px;font-weight:600;color:var(--tx);text-align:right}
+.ovrv.ok{color:var(--sage)}.ovrv.warn{color:var(--gold)}.ovrv.bad{color:var(--rust)}.ovrv.dim{color:var(--t3);font-weight:400}
+.ove{display:flex;align-items:flex-start;gap:10px;padding:5px 0;border-bottom:1px solid var(--b0);font-size:12px}
+.ove:last-child{border-bottom:none}
+.oved{font-family:var(--mono);font-size:10px;color:var(--t4);white-space:nowrap;flex-shrink:0;width:58px;padding-top:1px}
+.ovet{color:var(--t2);line-height:1.4}.ovet b{color:var(--tx);font-weight:600}
+@media(max-width:640px){.ovcols{grid-template-columns:1fr}.ovb{flex-direction:column}.kpis{justify-content:space-between;width:100%}.kpi{align-items:flex-start}}
+
+/* CALENDAR */
+.calg{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.caldow{text-align:center;font-family:var(--mono);font-size:9px;letter-spacing:.8px;text-transform:uppercase;color:var(--t4);padding:6px 0}
+.calday{text-align:center;padding:4px 2px;color:var(--t3);font-size:11px;font-family:var(--mono)}
+.calnum{display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;border-radius:50%;transition:transform .18s,background .18s,box-shadow .18s}
+.calday.hs .calnum{background:var(--gold);color:#16140E;font-weight:700;cursor:pointer;box-shadow:0 0 14px rgba(212,168,75,.45)}
+.calday.hs:hover .calnum{transform:scale(1.2);box-shadow:0 0 22px rgba(212,168,75,.65)}
+.calday.emp{visibility:hidden}
+.callgd{margin-top:12px;font-size:11px;color:var(--t3);display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.callgi{display:flex;align-items:center;gap:6px}
+.ldot{width:8px;height:8px;border-radius:50%}
+
+/* SERMONS */
+.sblk{border:1px solid var(--b0);border-radius:var(--r3);background:var(--bg2);overflow:hidden;box-shadow:var(--sh1);transition:border-color .22s,box-shadow .22s;margin-bottom:10px}
+.sblk:last-child{margin-bottom:0}.sblk:hover{border-color:var(--b2);box-shadow:var(--sh2)}
+.shdr{padding:18px 22px;border-bottom:1px solid transparent;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;user-select:none;transition:background .15s}
+.shdr:hover{background:var(--bg3)}.sblk.open .shdr{border-bottom-color:var(--b0);background:var(--bg3)}
+.snum{font-family:var(--mono);font-size:10px;color:var(--gold);letter-spacing:.5px;margin-bottom:3px}
+.sdate{font-family:var(--mono);font-size:10px;color:var(--t3);letter-spacing:.4px;text-transform:uppercase;margin-bottom:5px}
+.stitle{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--tx);line-height:1.3;font-style:italic}
+.schev{font-size:12px;color:var(--t4);transition:transform .28s,color .18s;flex-shrink:0;margin-top:4px}
+.sblk.open .schev{transform:rotate(180deg);color:var(--gold)}
+.sbody{max-height:0;overflow:hidden;transition:max-height .42s cubic-bezier(.4,0,.2,1)}
+.sblk.open .sbody{max-height:3000px}
+.sbodyi{padding:20px 22px;font-size:13px;line-height:1.8;color:var(--t2)}
+.sbodyi h4{font-family:var(--serif);font-size:13px;font-weight:700;color:var(--tx);margin:16px 0 5px;font-style:italic}
+.sbodyi h4:first-child{margin-top:0}
+.sbodyi p{margin:0 0 10px}.sbodyi p:last-child{margin-bottom:0}
+.stags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:13px;padding-bottom:11px;border-bottom:1px solid var(--b0)}
+.stag{font-family:var(--mono);font-size:9px;letter-spacing:.6px;text-transform:uppercase;padding:3px 9px;border-radius:20px;border:1px solid var(--b1);color:var(--t3);background:var(--bg);cursor:default;transition:border-color .15s,color .15s}
+.stag:hover{border-color:var(--gold);color:var(--gold)}
+.scomm{margin-top:16px;padding:14px 16px;border-left:3px solid var(--gold);background:var(--gdim);border-radius:0 var(--r1) var(--r1) 0;font-size:12.5px;line-height:1.74;color:var(--t2);font-style:italic}
+.scomml{font-style:normal;font-family:var(--mono);font-size:9px;letter-spacing:.8px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:5px;font-weight:500}
+
+/* HEATMAP */
+.hmg{display:grid;grid-template-columns:26px repeat(7,1fr);gap:4px}
+.hmdow{text-align:center;font-family:var(--mono);font-size:8px;letter-spacing:.5px;text-transform:uppercase;color:var(--t4);padding:4px 0}
+.hmwk{font-family:var(--mono);font-size:8px;color:var(--t4);display:flex;align-items:center;padding-right:4px}
+.hmc{aspect-ratio:1;border-radius:4px;cursor:pointer;transition:transform .18s,box-shadow .18s}
+.hmc:hover{transform:scale(1.38);z-index:20;box-shadow:0 0 16px rgba(255,255,255,.22)}
+.hmc.emp{background:transparent;cursor:default;pointer-events:none}
+.hmc.rest{background:rgba(255,255,255,.03);cursor:default;border:1px solid rgba(255,255,255,.04)}
+.hmc.rest:hover{transform:none;box-shadow:none}
+.hmleg{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px;font-family:var(--mono);font-size:9px;color:var(--t3)}
+.hmlgi{display:flex;align-items:center;gap:5px}
+.hmlgb{width:11px;height:11px;border-radius:3px;flex-shrink:0}
+#hmtip{position:fixed;background:var(--bg4);border:1px solid var(--b2);border-radius:var(--r1);padding:8px 12px;font-family:var(--mono);font-size:10px;color:var(--tx);pointer-events:none;z-index:9999;opacity:0;transition:opacity .15s;max-width:300px;white-space:normal;line-height:1.5;box-shadow:var(--sh2)}
+#hmtip.show{opacity:1}
+
+/* AFT RINGS */
+.aftrw{position:relative;width:200px;height:200px;margin:0 auto 16px}
+.aftrc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
+.aftrv{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--tx)}
+.aftrk{font-family:var(--mono);font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
+.aftrow{display:grid;grid-template-columns:1fr 60px 34px;align-items:center;gap:8px;margin-bottom:9px;padding:5px 7px;border-radius:var(--r1);transition:background .15s;cursor:pointer}
+.aftrow:hover{background:var(--bg3)}
+.aftn{font-size:12px;color:var(--t2)}
+.aftbw{height:4px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden}
+.aftbf{height:100%;border-radius:2px}
+.aftp{font-family:var(--mono);font-size:10px;text-align:right}
+
+/* MUSCLE DETAIL MODAL */
+.muscle-modal-overlay{position:fixed;inset:0;background:rgba(8,9,11,.88);backdrop-filter:blur(16px);display:none;align-items:center;justify-content:center;z-index:10000}
+.muscle-modal-overlay.show{display:flex}
+.muscle-modal{background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r4);width:min(620px,calc(100vw - 32px));max-height:82vh;overflow:hidden;box-shadow:var(--sh3);animation:slideUp .24s cubic-bezier(.22,.68,0,1.15) both}
+.mmod-hdr{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--b0)}
+.mmod-body{padding:22px;overflow-y:auto;max-height:calc(82vh - 70px);scrollbar-width:thin;scrollbar-color:var(--bg4) transparent}
+
+/* FINANCIAL */
+.fsg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.fkpi{background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r2);padding:14px 15px;text-align:center;transition:border-color .2s,transform .2s;cursor:default}
+.fkpi:hover{border-color:var(--b2);transform:translateY(-2px)}
+.fkpiv{font-family:var(--serif);font-size:23px;font-weight:700;font-style:italic;line-height:1.1}
+.fkpik{font-family:var(--mono);font-size:9px;color:var(--t4);letter-spacing:1px;text-transform:uppercase;margin-top:5px}
+.savout{height:5px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;margin:9px 0}
+.savin{height:100%;background:linear-gradient(90deg,var(--sky),var(--sage));border-radius:4px;transition:width 1s cubic-bezier(.22,.68,0,1.2)}
+.savm{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.savc{font-family:var(--mono);font-size:10px;color:var(--t3)}
+.savc.cur{color:var(--sage)}
+.fcat{border:1px solid var(--b0);border-radius:var(--r2);background:var(--bg3);overflow:hidden;margin-bottom:8px;transition:border-color .2s}
+.fcat:last-child{margin-bottom:0}.fcat:hover{border-color:var(--b1)}
+.fcath{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;cursor:pointer;gap:10px;transition:background .15s}
+.fcath:hover{background:rgba(255,255,255,.02)}
+.fcat.open .fcath{background:rgba(255,255,255,.02)}
+.fcatl{display:flex;align-items:center;gap:9px;min-width:0}
+.fcatdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.fcatn{font-size:13px;font-weight:500;color:var(--tx);white-space:nowrap}
+.fcatnt{font-family:var(--mono);font-size:10px;color:var(--t4);margin-left:2px}
+.fcatr{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.fcatp{font-family:var(--mono);font-size:10px;color:var(--t3)}
+.fcata{font-family:var(--mono);font-size:10px;color:var(--t4);transition:transform .25s}
+.fcat.open .fcata{transform:rotate(90deg)}
+.fcatamt{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--tx)}
+.fcatbar{height:2px;background:rgba(255,255,255,.04)}
+.fcatbf{height:100%;transition:width .8s cubic-bezier(.22,.68,0,1.2)}
+.fcatb{max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.4,0,.2,1)}
+.fcat.open .fcatb{max-height:2000px}
+.ftx{display:grid;grid-template-columns:46px 1fr auto;gap:8px;padding:6px 14px;border-bottom:1px solid var(--b0);font-size:12px;align-items:center}
+.ftx:last-child{border-bottom:none}
+.ftx:hover{background:rgba(255,255,255,.04);padding:5px 14px}
+.ftxd{font-family:var(--mono);font-size:10px;color:var(--t4)}
+.ftxn{color:var(--t3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ftxa{font-family:var(--mono);font-size:11px;white-space:nowrap}
+.ftxa.neg{color:var(--t2)}.ftxa.pos{color:var(--sage)}
+
+/* SUBSCRIPTIONS */
+.sub-row{display:grid;grid-template-columns:1fr 90px 80px 70px;gap:8px;padding:9px 12px;border-bottom:1px solid var(--b0);font-size:12px;align-items:center;transition:background .12s;cursor:default;border-radius:var(--r1)}
+.sub-row:last-child{border-bottom:none}.sub-row:hover{background:rgba(255,255,255,.03)}
+.sub-row.inactive{opacity:.4}
+.sub-name{color:var(--tx);font-weight:500}
+.sub-card{font-family:var(--mono);font-size:10px;color:var(--t4);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sub-amt{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--tx);text-align:right}
+.sub-freq{font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;text-align:right}
+.sub-status{font-family:var(--mono);font-size:9px;padding:2px 7px;border-radius:20px;text-align:center;display:inline-block;margin-left:auto}
+
+/* INTEL */
+.ipr{display:grid;grid-template-columns:44px 1fr 80px;padding:8px 6px;border-bottom:1px solid var(--b0);font-size:13px;align-items:center;transition:background .15s;cursor:default;border-radius:var(--r1)}
+.ipr:last-child{border-bottom:none}.ipr:hover{background:var(--bg3)}
+.imo{font-family:var(--mono);font-size:10px;color:var(--t4)}
+.itop{color:var(--t2)}
+.ibadge{font-family:var(--mono);font-size:9px;padding:2px 8px;border-radius:20px;text-align:center;display:inline-block}
+
+/* CREATIVE */
+.ptbl{width:100%;border-collapse:collapse;font-size:13px}
+.ptbl th{text-align:left;padding:8px 10px 8px 0;font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--t4);font-weight:500;border-bottom:1.5px solid var(--b1)}
+.ptbl td{padding:10px 10px 10px 0;border-bottom:1px solid var(--b0);transition:background .12s}
+.ptbl tr:last-child td{border-bottom:none}
+.ptbl tbody tr:hover td{background:rgba(255,255,255,.025)}
+.ptbl tr.dm td{opacity:.32}
+.sbadge{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.4px;padding:3px 9px;border-radius:20px;display:inline-block}
+.pjcard{padding:15px 17px;background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r2);margin-bottom:9px;transition:border-color .18s,transform .18s,box-shadow .18s;cursor:default}
+.pjcard:hover{border-color:var(--b2);transform:translateY(-2px);box-shadow:var(--sh2)}
+.inrow{display:flex;justify-content:space-between;align-items:center;font-size:12px;padding:4px 0;border-bottom:1px solid var(--b0)}
+.inrow:last-child{border-bottom:none}
+.inlbl{display:flex;align-items:center;gap:7px;color:var(--t2)}
+.indot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.inamt{font-family:var(--mono);font-size:11px;color:var(--tx);font-weight:500}
+
+/* MODAL */
+.overlay{position:fixed;inset:0;background:rgba(6,7,9,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:none;align-items:center;justify-content:center;z-index:9999}
+.overlay.show{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r4);width:min(680px,calc(100vw - 32px));max-height:84vh;overflow:hidden;box-shadow:var(--sh3);animation:slideUp .24s cubic-bezier(.22,.68,0,1.15) both}
+.mhdr{display:flex;justify-content:space-between;align-items:flex-start;padding:22px;border-bottom:1px solid var(--b0)}
+.mhdr h3{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--tx);font-style:italic;line-height:1.3}
+.mhdr p{font-size:11px;color:var(--t3);margin-top:3px;font-family:var(--mono)}
+.mcls{font-family:var(--mono);font-size:11px;padding:6px 13px;border:1px solid var(--b1);border-radius:40px;background:none;cursor:pointer;color:var(--t3);transition:all .15s;flex-shrink:0}
+.mcls:hover{background:var(--bg3);color:var(--tx);border-color:var(--b2)}
+.mbody{padding:22px;overflow-y:auto;max-height:calc(84vh - 96px);font-size:13.5px;line-height:1.74;color:var(--t2);scrollbar-width:thin;scrollbar-color:var(--bg4) transparent}
+.mbody p{margin:10px 0}.mbody h4{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--tx);margin:16px 0 5px}
+.mbody h4:first-child{margin-top:0}
+
+/* SCHEDULE CALENDAR */
+.sched-cell{border-radius:var(--r1);padding:5px 6px;cursor:default;transition:background .15s,border-color .15s,transform .15s;min-height:44px}
+.sched-cell:hover{transform:scale(1.06);z-index:10;box-shadow:var(--sh2)}
+
+@media(max-width:640px){.shell{padding:16px 14px 60px}.hdr h1{font-size:19px}.cg{gap:12px}.fsg{grid-template-columns:1fr 1fr}canvas{max-height:220px!important}.sf{grid-column:span 1}.sub-row{grid-template-columns:1fr 60px}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="hdr">
+    <div class="hdr-l">
+      <h1>JD Monthly Recap</h1>
+      <span class="mlbl" id="mlbl">—</span>
+    </div>
+    <div class="hdr-r"></div>
+  </header>
+  <nav class="tabs" id="tabs"></nav>
+  <div class="dash">
+    <aside class="side" id="sidebar"></aside>
+    <section class="content" id="main"></section>
+  </div>
+</div>
+
+<div id="hmtip"></div>
+<div id="schedTip" style="position:fixed;background:var(--bg4);border:1px solid var(--b2);border-radius:var(--r1);padding:9px 13px;font-family:var(--mono);font-size:10px;color:var(--tx);pointer-events:none;z-index:10001;opacity:0;transition:opacity .12s;max-width:340px;white-space:normal;line-height:1.6;box-shadow:var(--sh3)"></div>
+
+<!-- Expanded Calendar Overlay -->
+<div id="calExpandOverlay" style="display:none;position:fixed;inset:0;background:rgba(6,7,9,.9);backdrop-filter:blur(16px);z-index:9998;overflow-y:auto;padding:40px 20px">
+  <div style="max-width:900px;margin:0 auto">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px">
+      <div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--sky);text-transform:uppercase;letter-spacing:1.3px;margin-bottom:6px">March 2026 — Full Schedule View</div>
+        <div style="font-family:var(--serif);font-size:22px;font-weight:700;font-style:italic;color:var(--tx)">Complete Month Calendar</div>
+      </div>
+      <button onclick="closeCalExpand()" style="font-family:var(--mono);font-size:11px;padding:7px 16px;border:1px solid var(--b2);border-radius:40px;background:var(--bg3);color:var(--t2);cursor:pointer">Close ×</button>
+    </div>
+    <div id="calExpandContent"></div>
+    <div style="margin-top:20px;display:flex;gap:16px;flex-wrap:wrap" id="calExpandLegend"></div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="mhdr"><div><h3 id="mt">—</h3><p id="ms">—</p></div><button class="mcls" id="mc">Close ×</button></div>
+    <div class="mbody" id="mb"></div>
+  </div>
+</div>
+
+<div class="muscle-modal-overlay" id="muscleOverlay">
+  <div class="muscle-modal">
+    <div class="mmod-hdr">
+      <div style="font-family:var(--serif);font-size:16px;font-weight:700;font-style:italic;color:var(--tx)" id="muscleTitle">—</div>
+      <button class="mcls" onclick="closeMuscle()">Close ×</button>
+    </div>
+    <div class="mmod-body" id="muscleBody"></div>
+  </div>
+</div>
+
+<script>
+(()=>{
+
+/* ─── HISTORICAL DATA (Jan & Feb for comparison) ─── */
+const HIST={
+  jan:{gymDays:22,volume:128400,net:812.44,income:3100,expenses:2287.56,
+       sermons:4,gpa:null,
+       aft:{mdl:70,hrp:68,sdc:78,plk:38,run:0},
+       cats:{dining:398,shopping:312,travel:0,tithe:250,groceries:198,auto:145,entertainment:45,subscriptions:38,health:82}
+  },
+  feb:{gymDays:19,volume:119200,net:1094.28,income:3580,expenses:2485.72,
+       sermons:4,gpa:null,
+       aft:{mdl:78,hrp:71,sdc:80,plk:42,run:0},
+       cats:{dining:422,shopping:388,travel:0,tithe:250,groceries:215,auto:167,entertainment:62,subscriptions:40,health:75}
+  }
+};
+
+/* ─── MARCH DATA ─── */
+const D={
+  label:"March 2026",
+  highlights:[
+    {label:"Net +$887.26",color:"var(--sage)"},
+    {label:"18 gym days · 115,890 lb",color:"var(--sky)"},
+    {label:"4 of 4 Sermons",color:"var(--gold)"},
+    {label:"MMCS Army Digital C2",color:"var(--vio)"},
+    {label:"GPA 3.834 · A / A-",color:"var(--sage)"},
+    {label:"Drill Weekend · Fort Drum",color:"var(--teal)"}
+  ],
+  sidebar:[
+    {k:"Month",v:"March 2026"},{k:"Gym Days",v:"18 / 31"},{k:"Volume",v:"115,890 lb"},
+    {k:"Income",v:"$3,389.70"},{k:"Expenses",v:"$2,501.44"},{k:"Net",v:"+$887.26"},
+    {k:"Tithe",v:"$250.00"},{k:"Sermons",v:"4 / 4"},{k:"Term GPA",v:"3.834"}
+  ],
+  ov:{
+    kpis:[
+      {v:"+$887",k:"Net Cash",cls:"ok",tab:"financial"},
+      {v:"18",k:"Gym Days",cls:"",tab:"physical"},
+      {v:"4/4",k:"Sermons",cls:"ok",tab:"spiritual"},
+      {v:"3.834",k:"GPA",cls:"ok",tab:"intellectual"}
+    ],
+    spiritual:[{k:"Attendance",v:"4 / 4 Sundays",cls:"ok"},{k:"Series",v:"Acts · 1 Cor 1",cls:""},{k:"Scripture",v:"Ongoing",cls:"dim"}],
+    physical:[{k:"Gym days",v:"18",cls:"ok"},{k:"Volume",v:"115,890 lb",cls:"ok"},{k:"Cardio",v:"4 sessions",cls:"ok"},{k:"Plank PR",v:"1:40 w/ 45lb",cls:"warn"}],
+    financial:[{k:"Income",v:"$3,389.70",cls:"ok"},{k:"Expenses",v:"$2,501.44",cls:"warn"},{k:"Net",v:"+$887.26",cls:"ok"},{k:"Tithe",v:"$250.00",cls:"ok"}],
+    intellectual:[{k:"Focus",v:"MMCS / Army C2",cls:"ok"},{k:"GPA",v:"3.834 (A, A-)",cls:"ok"}],
+    creative:[{k:"Video project",v:"M. Maurer LMSW",cls:"ok"},{k:"Website refresh",v:"JD Meyers Prod.",cls:"ok"},{k:"New leads",v:"2 (writing contract)",cls:"warn"}],
+    events:[
+      {date:"Mar 1",desc:"<b>Church</b> — Stephen, Acts 6-7"},
+      {date:"Mar 4",desc:"<b>6mi run</b> — 56:22 outdoor"},
+      {date:"Mar 8",desc:"<b>Church</b> — Acts 8, Simon Sorcerer"},
+      {date:"Mar 9-10",desc:"<b>Ottawa trip</b> — Fairmont Chateau Laurier"},
+      {date:"Mar 22",desc:"<b>Church</b> — Acts 9, Saul's conversion"},
+      {date:"Mar 25",desc:"<b>Army pay</b> — DFAS $520.97"},
+      {date:"Mar 28",desc:"<b>Kodak Center</b> — Rochester"},
+      {date:"Mar 29",desc:"<b>Church</b> — 1 Corinthians 1, the Cross"}
+    ]
+  },
+  spiritual:{
+    sermonDays:[1,8,22,29],
+    sermons:[
+      {id:"s1",num:"01",date:"March 1, 2026",loc:"Calvary Baptist Church",
+       title:"Stephen — Acts 6-7: Total Surrender",tags:["Acts 6-7","Phil 4:6-7","Martyrdom"],
+       body:`<h4>Overview</h4><p>The life and martyrdom of Stephen in Acts 6 and 7 calls believers to total surrender. Accept whatever role God assigns, stay Spirit-filled, and keep your focus on mission even when opposition comes.</p><h4>1. Your Role Doesn't Limit God's Power</h4><p>Stephen was appointed to wait tables — a humble, practical assignment he never resented or tried to trade up from. The same Holy Spirit working through the apostles worked through Stephen regardless of his title. He served faithfully, performed miracles, and proclaimed truth without ever elevating himself. No role in the Kingdom is greater or lesser, just different.</p><h4>2. Stay on Mission When Opposition Comes</h4><p>Stephen was falsely accused, set up by planted witnesses, and dragged before the Sanhedrin. Rather than defending his reputation he kept his eyes on Christ and stayed on mission. When lies come against you, don't chase them down — it will only pull you away from what God has called you to do.</p><h4>Application</h4><p>Do whatever God asks, stay filled with His Spirit, and don't let attacks on your character pull you off mission. Stephen's life and death is the model.</p>`,
+       commentary:`The assignment gap between Stephen's title (table waiter) and his output (miracles, courtroom-level theology, martyrdom with a vision of the throne room) is the whole point. The Spirit doesn't need a prestigious platform. The more interesting question is whether I'm waiting for a bigger assignment before I bring full effort — and whether the answer would embarrass me.`},
+      {id:"s2",num:"02",date:"March 8, 2026",loc:"Calvary Baptist Church",
+       title:"Acts 8 — Persecution, Spread, Simon the Sorcerer",tags:["Acts 7-8","Salvation","Holy Spirit"],
+       body:`<h4>Overview</h4><p>Acts 8 shows that persecution scattered the early church and the gospel exploded as a result. The story of Simon the Sorcerer makes clear that belief and baptism alone do not equal salvation.</p><h4>1. Persecution Spreads the Gospel</h4><p>Every time the church has been pressed throughout history, revival has followed. When Stephen was killed and Saul began dragging believers from their homes, the scattered church went everywhere preaching the word. Jews ended up in Samaria — a place they would never have gone otherwise — and a church was born.</p><h4>2. Belief Without the Holy Spirit Is Not Salvation</h4><p>Simon believed, was baptized, and followed Philip everywhere. But when Peter and John arrived and the Holy Spirit moved, Simon tried to buy that power with money. Real salvation is marked by the Holy Spirit producing things in a person's life their flesh is simply not capable of producing on its own.</p><h4>Application</h4><p>Don't settle for the outward appearance of faith without the inward reality. And when pressure comes — what is built on a real foundation will hold.</p>`,
+       commentary:`The Simon situation is uncomfortable because it's identifiable. He wasn't outwardly rebellious — he was enthusiastic, present, baptized. His failure point was trying to acquire the Spirit's power as a resource rather than surrendering to the Spirit as Lord. In what areas am I trying to harness spiritual tools for my agenda rather than bringing my agenda under His?`},
+      {id:"s3",num:"03",date:"March 22, 2026",loc:"Calvary Baptist Church",
+       title:"Acts 9 — The Conversion of Saul",tags:["Acts 9:1-9","Transformation","Surrender"],
+       body:`<h4>Overview</h4><p>The conversion of Saul in Acts 9 stands as one of the most dramatic transformations in Scripture. It draws a sharp line between simply hearing the truth and actually encountering Christ in a way that changes everything.</p><h4>1. Encountering Christ Demands a Response</h4><p>When Christ appeared to Saul on the road to Damascus, Saul's first words were "who are you, Lord." He already recognized this was truth. And the very next thing out of his mouth was "Lord, what do you want me to do." That question is where real salvation begins.</p><h4>2. Hearing Is Not the Same as Encountering</h4><p>The men traveling with Saul heard everything. But there is no record of any of them changing. That picture is where a large portion of the church lives today — hearing every Sunday, nodding along, but holding onto the world with both hands.</p><h4>Application</h4><p>Stop trying to live with one foot in the church and one foot in the world. The only question that matters is the one Saul asked: Lord, what do you want me to do.</p>`,
+       commentary:`The traveling companions are the quiet detail that carries the weight. Same experience. Zero transformation. It raises the hard question about proximity to spiritual things vs. genuine encounter with the Person behind them. I can attend, listen, participate — and still be a traveling companion. The distinguishing mark is whether I'm actually asking Saul's second question and then acting on the answer.`},
+      {id:"s4",num:"04",date:"March 29, 2026",loc:"Calvary Baptist Church",
+       title:"1 Corinthians 1:17-18 — The Message of the Cross",tags:["1 Cor 1:17-24","Isaiah 52-53","The Cross"],
+       body:`<h4>Overview</h4><p>1 Corinthians 1:17-18 declares that the message of the cross is foolishness to those who are perishing but the power of God to those being saved. The death Christ died demands to be proclaimed clearly and without apology.</p><h4>1. The Message Cannot Be Softened</h4><p>Churches are removing references to the blood and crucifixion because it is considered too offensive. But that brutal, costly death is exactly the point. Watering it down strips it of the only power it actually has.</p><h4>2. Salvation Is Simpler Than We Make It</h4><p>You do not have to clean yourself up first. Christ takes people exactly as they are and does the changing himself. It is received by faith, not by works, not by tradition.</p><h4>Application</h4><p>Stop apologizing for the message of the cross. It is a hard message because it cost everything. Come as you are, place your faith in what he did, and let him do what only he can do.</p>`,
+       commentary:`The softening impulse is real and I recognize it — the instinct to cushion the message to make it land smoother. Brad's point is that this is exactly what strips it of power. The cross is offensive because it is supposed to be. My credibility as someone who says they believe this is tested by whether I present it as offensive-but-true or try to reduce the offense at the expense of the truth.`}
+    ]
+  },
+  physical:{
+    mc:{"Chest":"#5A9DC0","Back":"#5CB872","Legs":"#D4A84B","Shoulders":"#C07080","Triceps":"#8B7EC8","Biceps":"#47B0AB","Abs":"#CC6B47","Cardio":"#7A90A8"},
+    sessions:{
+      1:{muscles:["Back","Legs"],label:"Back + Legs · Smith Row 185lb, RDL 130lb, Leg Ext 190lb, Calf Raise"},
+      2:{muscles:["Chest","Shoulders","Triceps"],label:"Push · Bench 215lb, OHP 115lb, Tricep Pushdown 100lb"},
+      3:{muscles:["Back","Biceps"],label:"Pull · Lat Pulldown 150lb, Seated Row 115lb, DB Curl 80lb"},
+      4:{muscles:["Cardio"],label:"Cardio · Outdoor Run 6.0 mi / 56:22"},
+      6:{muscles:["Chest","Shoulders","Triceps"],label:"Push · Chest Dips +45lb, OHP 135lb, EZ Skullcrusher 50lb"},
+      7:{muscles:["Cardio"],label:"Cardio · Outdoor Run 5.0 km / 27:31"},
+      10:{muscles:["Chest"],label:"Chest · Bench 175lb x12, Elevated Push-ups"},
+      11:{muscles:["Back","Legs","Biceps"],label:"Pull + Legs · Wide Lat 150lb, Curl 70lb, Good Morning 85lb, Split Glute"},
+      16:{muscles:["Chest","Legs"],label:"Chest + Legs · Bench 185lb x12, Hammer Iso 225lb x40s, Leg Iso"},
+      17:{muscles:["Back","Abs"],label:"Pull + Core · Chin-ups, Trap Bar DL 285lb x5, Plank 1:40 (45lb)"},
+      19:{muscles:["Legs"],label:"Legs · Squat 185lb x5, Split Glute, Leg Curl/Ext"},
+      20:{muscles:["Chest","Cardio","Legs"],label:"Push + Cardio · 45 HRPU, Sprints 2.45mi/25min, Hip Abduction"},
+      21:{muscles:["Abs","Back"],label:"Core + Back · HLR x14, Cable Crunch 160lb, Good Morning 95lb"},
+      23:{muscles:["Chest","Shoulders","Triceps"],label:"Push · Bench 215lb x4, OHP 135lb, Tricep Cable"},
+      24:{muscles:["Back","Biceps"],label:"Pull · Lat 170lb x7, Rope Pullover 110lb, DB Curl 70lb"},
+      26:{muscles:["Legs"],label:"Legs · Squat 225lb x8, Bosu KB, Leg Ext 210lb x7"},
+      27:{muscles:["Chest","Biceps","Cardio"],label:"Push + Cardio · DB Bench 170lb x6, Curls, Sprints 2.65mi"},
+      29:{muscles:["Abs","Back"],label:"Core + Back · HLR x10, Plank 45lb x1:10, Cable Crunch 100lb x16"}
+    },
+    aft:[
+      {event:"MDL (Deadlift)",cur:"285 lb",goal:"350 lb",pct:81,color:"#5CB872",
+       janPct:70,febPct:78,notes:"Trap Bar DL at 285lb × 5. Up from ~270 in Feb. On track — needs ~65 more lbs."},
+      {event:"HRP (Push-ups)",cur:"45 reps",goal:"61 reps",pct:74,color:"#5A9DC0",
+       janPct:68,febPct:71,notes:"45 HRPU confirmed on Mar 20. Slight regression from Feb high of ~47. Core fatigue likely factor."},
+      {event:"SDC",cur:"~1:50",goal:"1:30",pct:83,color:"#D4A84B",
+       janPct:78,febPct:80,notes:"Estimated from sprint sessions. Need timed trial run in April."},
+      {event:"PLK (Plank)",cur:"1:40",goal:"3:35",pct:47,color:"#CC6B47",
+       janPct:38,febPct:42,notes:"Plank at 1:40 with 45lb plate — confirmed Mar 17. Weakest event. Requires dedicated daily work."},
+      {event:"2-Mile Run",cur:"TBD",goal:"13:25",pct:0,color:"#3C3A38",
+       janPct:0,febPct:0,notes:"No timed 2-mile recorded this month. Cardio base building with 6.0mi outdoor run (56:22) is positive signal."}
+    ],
+    cardio:[
+      {date:"Mar 4",desc:"Outdoor run — 6.0 mi / 56:22"},
+      {date:"Mar 7",desc:"Outdoor run — 5.0 km / 27:31"},
+      {date:"Mar 20",desc:"Treadmill sprints — 2.45 mi / 25 min"},
+      {date:"Mar 27",desc:"Treadmill sprints — 2.65 mi / 25 min"}
+    ]
+  },
+  fin:{
+    income:3389.70,expenses:2501.44,net:887.26,
+    sJan:812.44,sFeb:1094.28,sMar:887.26,sGoal:10000,
+    // Daily cumulative spending (running total by day of month)
+    spendingCumMar:[7.68,73.13,145.81,155.53,185.78,196.82,240.73,259.90,457.49,497.43,530.72,537.20,537.20,537.20,537.20,562.71,603.37,603.37,612.77,689.96,703.10,718.51,732.43,808.08,1048.13,1060.38,1153.96,1225.28,1275.28,1275.28,1275.28],
+    spendingCumJan:[45.90,58.14,241.74,267.23,333.53,382.49,413.09,469.19,560.99,815.98,851.68,894.52,950.62,1037.32,1363.71,1404.51,1460.61,1537.11,1634.01,1766.61,1817.61,1886.96,1973.66,2096.06,2300.06,2396.95,2458.15,2504.05,2560.15,2598.91,2647.87],
+    spendingCumFeb:[50.87,77.41,490.25,525.09,554.12,611.01,623.46,634.07,678.06,932.25,956.60,1497.24,1607.87,1625.15,1674.37,1684.24,1684.24,1815.01,1989.13,2095.85,2095.85,2327.38,2335.37,2342.92,2487.60,2497.31,2510.27,2524.26,2524.26,2524.26,2524.26],
+    incomeSources:[
+      {label:"Clarkson University (2×)",amt:2327.24,color:"#5A9DC0"},
+      {label:"DFAS Army RC (Mar)",amt:520.97,color:"#5CB872"},
+      {label:"DFAS Army RC (Feb)",amt:269.32,color:"#8B7EC8"},
+      {label:"RAISER misc",amt:140.67,color:"#47B0AB"},
+      {label:"Square / Photography",amt:72.90,color:"#D4A84B"},
+      {label:"Interest / Apple Cash",amt:58.60,color:"#CC6B47"}
+    ],
+    cats:[
+      {name:"Drinks & Dining",amt:476.00,color:"#CC6B47",txns:[
+        {d:"3/28",n:"Jake Hafner's Restaurant Tavern",a:-50.32},{d:"3/10",n:"Cindy's Restaurant",a:-35.94},
+        {d:"3/29",n:"Wendy's",a:-18.23},{d:"3/29",n:"Burger King",a:-9.22},{d:"3/29",n:"Dunkin'",a:-4.16},
+        {d:"3/29",n:"Love's Travel Stop",a:-1.88},{d:"3/27",n:"Grasse River Grind",a:-8.37},
+        {d:"3/27",n:"Subway",a:-7.55},{d:"3/26",n:"Taco Bell",a:-7.54},{d:"3/26",n:"Sunoco",a:-10.02},
+        {d:"3/25",n:"3TK Nutrition Akwesasne",a:-8.99},{d:"3/25",n:"CU Servery",a:-10.00},
+        {d:"3/25",n:"Starbucks CU",a:-2.91},{d:"3/25",n:"Sunoco",a:-3.55},{d:"3/25",n:"Sunoco",a:-9.16},
+        {d:"3/23",n:"Taco Bell",a:-6.46},{d:"3/23",n:"Sunoco (Apple Cash)",a:-3.55},
+        {d:"3/22",n:"Taco Bell",a:-11.10},{d:"3/22",n:"Sunoco (Apple Cash)",a:-15.41},
+        {d:"3/21",n:"Tim Hortons",a:-4.74},{d:"3/21",n:"McDonald's",a:-6.67},
+        {d:"3/20",n:"Sunoco",a:-12.56},{d:"3/19",n:"Origin Coffee Co",a:-5.40},
+        {d:"3/17",n:"Sunoco",a:-7.92},{d:"3/17",n:"Dunkin'",a:-5.00},{d:"3/16",n:"Sunoco",a:-8.95},
+        {d:"3/12",n:"McDonald's",a:-6.48},{d:"3/11",n:"Sunoco (×3)",a:-18.91},
+        {d:"3/10",n:"Dunkin'",a:-4.60},{d:"3/9",n:"Dunkin' (Apple Card)",a:-4.16},
+        {d:"3/8",n:"McDonald's",a:-5.17},{d:"3/8",n:"Sunoco",a:-13.25},
+        {d:"3/7",n:"Uber Eats + Sunoco (×3)",a:-24.34},{d:"3/6",n:"Sunoco",a:-11.04},
+        {d:"3/4",n:"McDonald's",a:-9.72},{d:"3/3",n:"Sunoco (Apple Card)",a:-14.80},
+        {d:"3/2",n:"McDonald's PlayPlace",a:-4.85},{d:"3/1",n:"Tim Hortons + Jernabi",a:-7.68}
+      ]},
+      {name:"Shopping",amt:474.13,color:"#7A90A8",txns:[
+        {d:"3/25",n:"Al's Sporting Goods",a:-123.11},{d:"3/25",n:"Amazon MKTPLACE",a:-98.77},
+        {d:"3/20",n:"Magbak Store",a:-90.89},{d:"3/16",n:"Saks Direct",a:-64.74},
+        {d:"3/16",n:"Platinum Saks Credit",a:50.00},{d:"3/23",n:"Amazon MKTPLACE",a:-28.72},
+        {d:"3/27",n:"Floxtop.com",a:-19.99},{d:"3/24",n:"Amazon.com",a:-14.12},
+        {d:"3/24",n:"Anthropic (API usage)",a:-5.20},{d:"3/9",n:"Amazon MKTPLACE",a:-10.25},
+        {d:"3/3",n:"Anthropic",a:-5.20},{d:"3/1",n:"Apple Store (×2)",a:-40.66}
+      ]},
+      {name:"Travel & Vacation",amt:433.11,color:"#D4A84B",txns:[
+        {d:"3/9",n:"Fairmont Chateau Laurier",a:-205.95},{d:"3/20",n:"Fairmont Chateau Laurier",a:-210.67},
+        {d:"3/22",n:"Fairmont travel credit back",a:102.67},{d:"3/9",n:"Ottawa parking penalty",a:-59.16},
+        {d:"3/9",n:"Indigo parking (×3)",a:-38.00},{d:"3/10",n:"Ogdensburg Bridge",a:-3.25},
+        {d:"3/9",n:"Ogdensburg Bridge",a:-3.25},{d:"3/13",n:"Uber (credited)",a:0.00},
+        {d:"3/9",n:"Paymentus service fee",a:-1.15}
+      ]},
+      {name:"Tithe",amt:250.00,color:"#E9E7E2",txns:[
+        {d:"3/10",n:"Calvary Baptist Church Online",a:-250.00}
+      ]},
+      {name:"Groceries",amt:237.45,color:"#5CB872",txns:[
+        {d:"3/27",n:"Walmart",a:-73.15},{d:"3/19",n:"Walmart Supercenter",a:-73.87},
+        {d:"3/2",n:"Walmart",a:-58.58},{d:"3/5",n:"Walmart",a:-30.25},{d:"3/2",n:"Walmart",a:-1.60}
+      ]},
+      {name:"Auto & Transport",amt:197.28,color:"#5A9DC0",txns:[
+        {d:"3/25",n:"Tesla Service Center",a:-106.92},{d:"3/9",n:"Tesla Motors",a:-52.37},
+        {d:"3/29",n:"Tesla Supercharger",a:-14.89},{d:"3/29",n:"Tesla Supercharger",a:-11.20},
+        {d:"3/28",n:"Tesla Supercharger",a:-11.92},{d:"3/9",n:"Paymentus service fee",a:-1.15}
+      ]},
+      {name:"Entertainment",amt:70.00,color:"#C07080",txns:[
+        {d:"3/28",n:"Kodak Center for Performing Arts",a:-15.00},{d:"3/28",n:"Kodak Center (concessions)",a:-7.00},
+        {d:"3/23",n:"Roxy Theater",a:-10.00},{d:"3/20",n:"Ebookbasic PayPal",a:-29.99},
+        {d:"3/23",n:"YouTube Premium",a:-7.99},{d:"3/23",n:"Plat. Digital Entertainment Credit",a:7.99}
+      ]},
+      {name:"Subscriptions",amt:43.59,color:"#8B7EC8",txns:[
+        {d:"3/27",n:"Claude.ai Subscription",a:-21.40},{d:"3/25",n:"Apple Subscription",a:-9.99},
+        {d:"3/10",n:"Apple Subscription (Apple Card)",a:-4.31},{d:"3/26",n:"Nayax",a:-2.10},
+        {d:"3/8",n:"Nayax",a:-3.85}
+      ]},
+      {name:"Healthcare / Personal",amt:87.88,color:"#47B0AB",txns:[
+        {d:"3/3",n:"TRICARE Select (National Guard)",a:-57.88},
+        {d:"3/12",n:"Sian Miller — March Hair Appt",a:-30.00}
+      ]}
+    ]
+  },
+  subscriptions:[
+    {name:"AppleCare+ AirPods Pro 3",card:"Apple Card",amt:20,date:"Sep 18, 2026",freq:"Annual",notes:"AirPods S/N: KR4M4GC4T0",status:"Active"},
+    {name:"YouTube Premium",card:"Amex Platinum (2002)",amt:8,date:"Mar 23, 2026",freq:"Monthly",notes:"Amex Statement Credited Back",status:"Active"},
+    {name:"Claude",card:"Chase Sapphire (7999)",amt:20,date:"Apr 27, 2026",freq:"Monthly",notes:"1 month purchased Mar 2026",status:"Inactive"},
+    {name:"ElevenLabs",card:"Chase Sapphire (7999)",amt:5,date:"Feb 15, 2026",freq:"Monthly",notes:"Stopped Jan 2026",status:"Inactive"},
+    {name:"ChatGPT",card:"Chase Sapphire (7999)",amt:20,date:"Apr 13, 2026",freq:"Monthly",notes:"Cancelled April 2026",status:"Inactive"},
+    {name:"Adobe",card:"Chase IHG Business (1950)",amt:120,date:"Aug 12, 2026",freq:"Annual",notes:"Photoshop & Lightroom",status:"Active"},
+    {name:"Tesla Premium Connectivity",card:"Chase Sapphire (7999)",amt:99,date:"Apr 1, 2026",freq:"Annual",notes:"2024 Tesla Model 3",status:"Active"},
+    {name:"Squarespace (website plan)",card:"Chase IHG Business (1950)",amt:192,date:"Feb 22, 2027",freq:"Annual",notes:"JD Meyers Productions",status:"Active"},
+    {name:"Tesla FSD / Annual Package",card:"Chase Sapphire (7999)",amt:99,date:"Apr 25, 2026",freq:"Monthly",notes:"2024 Tesla Model 3",status:"Active"},
+    {name:"Squarespace (domain)",card:"Chase IHG Business (1950)",amt:20,date:"May 7, 2026",freq:"Annual",notes:"JD Meyers Productions",status:"Active"},
+    {name:"Google One",card:"Chase Sapphire (7999)",amt:99,date:"Oct 11, 2026",freq:"Annual",notes:"2TB Personal Storage",status:"Active"},
+    {name:"AppleCare+ (Watch)",card:"Apple Card",amt:50,date:"Oct 18, 2026",freq:"Annual",notes:"Apple Watch S/N: M6P4HL236L",status:"Active"},
+    {name:"Apple Music",card:"Chase Sapphire (7999)",amt:0,date:"—",freq:"Monthly",notes:"Included with Chase plan",status:"Active"},
+    {name:"Apple TV",card:"Chase Sapphire (7999)",amt:0,date:"—",freq:"Monthly",notes:"Included with Chase plan",status:"Active"},
+    {name:"Apple FitNotes 2",card:"Apple Card",amt:15,date:"Aug 27, 2026",freq:"Annual",notes:"Gym Workout Log",status:"Active"},
+    {name:"Flightradar24",card:"Apple Card",amt:18,date:"Jan 7, 2027",freq:"Annual",notes:"Silver Plan",status:"Active"},
+    {name:"Apple iCloud+",card:"Apple Card",amt:10,date:"Apr 25, 2026",freq:"Monthly",notes:"2TB Personal Storage",status:"Active"},
+    {name:"Apple Police Scanner",card:"Apple Card",amt:4,date:"Mar 30, 2026",freq:"Monthly",notes:"Scanner Radio Pro",status:"Active"},
+    {name:"Snapchat+",card:"Apple Card",amt:30,date:"Jan 25, 2027",freq:"Annual",notes:"Annual Plan",status:"Active"},
+    {name:"Apple Weather Channel",card:"Apple Card",amt:20,date:"Dec 27, 2026",freq:"Annual",notes:"Premium Annual",status:"Active"},
+    {name:"Apple VSCO",card:"Apple Card",amt:60,date:"Jul 22, 2026",freq:"Annual",notes:"VSCO Yearly Pro",status:"Active"},
+    {name:"Walmart+",card:"Amex Platinum (2002)",amt:14,date:"Mar 30, 2026",freq:"Monthly",notes:"Amex Statement Credited Back",status:"Active"}
+  ],
+  intel:{
+    plan:[
+      {m:"Jan",topic:"Leadership / Military Leadership",s:"complete"},
+      {m:"Feb",topic:"STEM / Technology Concepts",s:"missed"},
+      {m:"Mar",topic:"ARNG: MMCS Digital C2 (amended)",s:"complete"},
+      {m:"Apr",topic:"U.S. / World History",s:"pending"},
+      {m:"May",topic:"Economics / Personal Finance",s:"pending"},
+      {m:"Jun",topic:"Health & Human Performance",s:"pending"},
+      {m:"Jul",topic:"Communication & Writing",s:"pending"},
+      {m:"Aug",topic:"Philosophy / Ethics",s:"pending"},
+      {m:"Sep",topic:"Science / Natural World",s:"pending"},
+      {m:"Oct",topic:"Religion / Theology",s:"pending"},
+      {m:"Nov",topic:"Technology / AI Literacy",s:"pending"},
+      {m:"Dec",topic:"Review / Synthesis Month",s:"pending"}
+    ],
+    mmcs:`MMCS (Mounted Mission Command Software) is the Army's primary mounted digital mission command software, replacing JBC-P (Joint Battle Command-Platform). It runs within the Mounted Computing Environment (MCE) — a software-only upgrade installed on existing vehicle hardware.<br><br><b>Primary Mission:</b> Provide commanders and Soldiers at all echelons with real-time situational awareness, digital command and control, and communication while mounted and on the move.<br><br><b>Key Operator Capabilities:</b><br><span style="color:var(--sky)">></span> Common Operating Picture (COP) — friendly/enemy positions, overlays, battle graphics<br><span style="color:var(--sky)">></span> Messaging — chat, free text, formatted messages; faster and easier than JBC-P<br><span style="color:var(--sky)">></span> Mobile Command on the Move — lead formation from any MMCS-equipped platform<br><span style="color:var(--sky)">></span> Collaboration — coordinate with adjacent units, higher HQ, subordinates digitally<br><span style="color:var(--sky)">></span> Interoperability — works alongside legacy JBC-P in mixed formations<br><br><b>Operator Notes:</b> Interface intuitive; most Soldiers preferred over JBC-P. Operators resolve most failures independently. Quick reference guides not yet built in. Does not yet integrate with onboard optics/sensors. Supports all four Operations Process phases.`,
+    gpa:"3.834",
+    courses:[{code:"AC 604",name:"Accounting",grade:"A",pts:"12.000"},{code:"OM 607",name:"Operations Mgmt",grade:"A-",pts:"11.001"}]
+  },
+  creative:{
+    projects:[
+      {title:"LMSW Video Project",type:"10-Minute Documentary Short",collab:"M. Maurer",
+       desc:"Produced a 10-minute video project with M. Maurer toward her LMSW licensure. Highlighted systemic issues with volunteer driver verification and accountability for transporting young children.",status:"complete"},
+      {title:"JD Meyers Productions Website",type:"Website Refresh",collab:"",
+       desc:"Rebuilt the JD Meyers Productions website on Squarespace using custom HTML blocks vibe-coded with Claude, giving the brand a refined visual facelift.",status:"complete"}
+    ],
+    pipeline:[
+      {client:"E. Waugg",service:"Wedding Photography",date:"01/10/2026",loc:"Living Hope Ministries, Glenfield NY",status:"cancelled"},
+      {client:"H. Wagner",service:"Graduation Pictures",date:"04/28/2026",loc:"Potsdam, NY",status:"contract-sent"},
+      {client:"B. McGrath",service:"Wedding Photography",date:"06/06/2026",loc:"The Stables at Windy Point",status:"signed"},
+      {client:"C. Niles",service:"Wedding Video",date:"06/27/2026",loc:"Rapid View Venue, Chase Mills NY",status:"signed"},
+      {client:"C. Choate",service:"Wedding Photography",date:"08/01/2026",loc:"Shindigz on the River",status:"lead"},
+      {client:"M. Eddy",service:"Wedding Video",date:"08/22/2026",loc:"The Stables at Windy Point",status:"signed"},
+      {client:"F. Mnenula +3",service:"Senior Photos",date:"05/10/2026",loc:"St. Lawrence University",status:"lead"}
+    ]
+  }
+};
+
+// ─── SCHEDULE DATA ───
+const SCHED={
+  2: {work:"2PM–12AM (10hr)",note:"Class 6–7PM, stayed til 1AM",gym:["Chest","Shoulders","Triceps"]},
+  3: {work:"2PM–12AM (10hr)",note:"Class 6–7PM, stayed til 1AM",gym:["Back","Biceps"]},
+  6: {work:"4PM–4AM (12hr)",gym:["Chest","Shoulders","Triceps"]},
+  7: {work:"4PM–4AM (12hr)",gym:["Cardio"]},
+  8: {work:"2PM–2AM (12hr)"},
+  9: {special:"Tesla Appt — 845 Carling Ave, Ottawa, ON"},
+  11:{work:"2PM–2AM (12hr)",gym:["Back","Biceps","Legs"]},
+  12:{work:"2PM–2AM (12hr)"},
+  13:{drill:"ARNG Drill begins 0700",note:"Fort Drum, NY"},
+  14:{drill:"ARNG Drill (continued)",note:"Fort Drum, NY"},
+  15:{drill:"ARNG Drill ends 1700",note:"Fort Drum, NY"},
+  16:{work:"2PM–12AM (10hr)",gym:["Chest","Legs"]},
+  17:{work:"2PM–12AM (10hr)",gym:["Back","Abs"]},
+  20:{work:"4PM–4AM (12hr)",gym:["Chest","Triceps","Cardio","Legs"]},
+  21:{work:"4PM–4AM (12hr)",gym:["Abs","Back"]},
+  22:{work:"2PM–2AM (12hr)"},
+  25:{work:"2PM–2AM (12hr)"},
+  26:{work:"2PM–2AM (12hr)",gym:["Legs"]},
+  30:{work:"2PM–12AM (10hr)"},
+  31:{work:"2PM–12AM (10hr)"},
+  // workout-only days (no work shift)
+  1: {gym:["Back","Legs"]},
+  4: {gym:["Cardio"]},
+  10:{gym:["Chest"]},
+  19:{gym:["Legs"]},
+  23:{gym:["Chest","Triceps","Shoulders"]},
+  24:{gym:["Back","Biceps"]},
+  27:{gym:["Chest","Triceps","Biceps","Cardio"]},
+  29:{gym:["Abs","Back"]}
+};
+
+const TABS=['overview','spiritual','physical','financial','intellectual','creative'];
+let tab='overview',charts=[];
+
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target);}});},{threshold:.06});
+function observe(){document.querySelectorAll('.ca').forEach(el=>{el.classList.remove('vis');io.observe(el);});}
+function killCharts(){charts.forEach(c=>{try{c.destroy();}catch(e){}});charts=[];}
+
+/* ─── HELPERS ─── */
+function delta(cur,prev,prefix='',suffix='',higherBetter=true){
+  const d=cur-prev,pct=(d/prev*100).toFixed(1);
+  const up=higherBetter?d>=0:d<=0;
+  const cls=d===0?'delta-eq':up?'delta-up':'delta-dn';
+  const arrow=d===0?'—':d>0?'▲':'▼';
+  return `<span class="${cls}" style="font-family:var(--mono);font-size:10px">${arrow} ${prefix}${Math.abs(d).toFixed(2)}${suffix} vs Feb</span>`;
+}
+function deltaSimple(cur,prev,label,higherBetter=true){
+  const d=cur-prev;
+  const up=higherBetter?d>=0:d<=0;
+  const cls=d===0?'delta-eq':up?'delta-up':'delta-dn';
+  const arrow=d===0?'—':d>0?'▲':'▼';
+  return `<div class="pb-stat"><div class="pb-k">${label}</div><div class="pb-v">${cur}</div><div class="pb-d"><span class="${cls}">${arrow} ${Math.abs(d)} vs Feb</span></div></div>`;
+}
+
+function progressBand(items){
+  return`<div class="prog-band"><div class="pb-lbl"><span style="width:6px;height:6px;background:var(--sky);border-radius:50%;display:inline-block"></span>Progress vs Previous Month</div><div class="pb-grid">${items}</div></div>`;
+}
+
+/* ─── CHROME ─── */
+function chrome(){
+  document.getElementById('mlbl').textContent=D.label;
+  document.getElementById('tabs').innerHTML=TABS.map(t=>`<button class="tab${t===tab?' on':''}" onclick="sw('${t}')">${t[0].toUpperCase()+t.slice(1)}</button>`).join('');
+  const stats=D.sidebar.map(s=>`<div class="si"><span class="sk">${s.k}</span><span class="sv">${s.v}</span></div>`).join('');
+  const chips=D.highlights.map(h=>`<div class="hchip"><span class="hdot" style="background:${h.color}"></span>${h.label}</div>`).join('');
+  document.getElementById('sidebar').innerHTML=`<div class="sc ca"><div class="sgt">March At a Glance</div>${stats}</div><div class="sc ca d1"><div class="sgt">Highlights</div><div style="margin-top:2px">${chips}</div></div>`;
+}
+
+/* ─── OVERVIEW ─── */
+function rOverview(){
+  const ov=D.ov;
+  const kpis=ov.kpis.map(k=>`<div class="kpi" onclick="sw('${k.tab}')" title="Go to ${k.tab}"><div class="kpiv ${k.cls}">${k.v}</div><div class="kpik">${k.k} →</div></div>`).join('');
+  const mks=(lbl,col,rows,d='',tabTarget='')=>`<div class="ovs ca${d}" onclick="sw('${tabTarget}')" title="View ${tabTarget} details"><div class="ovsl" style="color:${col}">${lbl} →</div>${rows.map(r=>`<div class="ovr"><span class="ovrk">${r.k}</span><span class="ovrv ${r.cls||''}">${r.v}</span></div>`).join('')}</div>`;
+  const evts=ov.events.map(e=>`<div class="ove"><span class="oved">${e.date}</span><span class="ovet">${e.desc}</span></div>`).join('');
+
+  // mini 3-month trend bars
+  const trendData=[
+    {lbl:"Net",vals:[812,1094,887],color:"var(--sage)",fmt:"$"},
+    {lbl:"Gym Days",vals:[22,19,18],color:"var(--sky)",fmt:""},
+    {lbl:"Expenses",vals:[2288,2486,2501],color:"var(--rust)",fmt:"$"},
+  ];
+  const trendCards=trendData.map(t=>{
+    const max=Math.max(...t.vals);
+    const bars=['Jan','Feb','Mar'].map((m,i)=>`<div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1"><div style="width:100%;background:rgba(255,255,255,.05);border-radius:3px;height:40px;display:flex;align-items:flex-end;overflow:hidden"><div style="width:100%;border-radius:3px;background:${t.color};opacity:.8;height:${(t.vals[i]/max*100).toFixed(0)}%;transition:height .8s"></div></div><div style="font-family:var(--mono);font-size:8px;color:var(--t4)">${m}</div><div style="font-family:var(--mono);font-size:10px;color:var(--t2)">${t.fmt}${t.vals[i]}</div></div>`).join('');
+    return`<div style="background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r2);padding:12px"><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px">${t.lbl}</div><div style="display:flex;gap:6px;align-items:flex-end">${bars}</div></div>`;
+  }).join('');
+
+  // ── SCHEDULE CALENDAR ──
+  const mc=D.physical.mc;
+  // March 1 2026 = Sunday = col 0
+  const dowHeader=['Su','Mo','Tu','We','Th','Fr','Sa'].map(d=>`<div style="text-align:center;font-family:var(--mono);font-size:8px;color:var(--t4);letter-spacing:.6px;text-transform:uppercase;padding:4px 0">${d}</div>`).join('');
+
+  const calDays=Array.from({length:31},(_,i)=>{
+    const d=i+1;
+    const s=SCHED[d]||{};
+    const isSermon=[1,8,22,29].includes(d);
+    const isDrill=!!s.drill;
+    const isWork=!!s.work;
+    const isGym=s.gym&&s.gym.length>0;
+    const isSpecial=!!s.special;
+
+    // pip dots
+    let dots='';
+    if(isWork)dots+=`<span style="width:5px;height:5px;border-radius:50%;background:#5A9DC0;flex-shrink:0;display:inline-block"></span>`;
+    if(isDrill)dots+=`<span style="width:5px;height:5px;border-radius:50%;background:#8B7EC8;flex-shrink:0;display:inline-block"></span>`;
+    if(isGym){const c=mc[s.gym[0]]||'#888';dots+=`<span style="width:5px;height:5px;border-radius:50%;background:${c};flex-shrink:0;display:inline-block"></span>`;}
+    if(isSermon)dots+=`<span style="width:5px;height:5px;border-radius:50%;background:#D4A84B;flex-shrink:0;display:inline-block"></span>`;
+    if(isSpecial)dots+=`<span style="width:5px;height:5px;border-radius:50%;background:#47B0AB;flex-shrink:0;display:inline-block"></span>`;
+
+    // tooltip text
+    let tip=`Mar ${d}`;
+    if(isSermon)tip+=` · ⛪ Church`;
+    if(isDrill)tip+=` · 🪖 ${s.drill}${s.note?' ('+s.note+')':''}`;
+    if(isWork)tip+=` · 🛡️ CU Security ${s.work}${s.note?' — '+s.note:''}`;
+    if(isGym)tip+=` · 💪 ${s.gym.join(', ')}`;
+    if(isSpecial)tip+=` · 📍 ${s.special}`;
+
+    const bg=isDrill?'rgba(139,126,200,.18)':isWork?'rgba(90,157,192,.09)':'transparent';
+    const border=isDrill?'1px solid rgba(139,126,200,.35)':isSermon?'1px solid rgba(212,168,75,.3)':'1px solid transparent';
+
+    return`<div class="sched-cell" data-tip="${tip.replace(/"/g,'&quot;')}" style="background:${bg};border:${border}" onmouseenter="showSchedTip(event,this)" onmouseleave="hideSchedTip()">
+      <div style="font-family:var(--mono);font-size:10px;font-weight:${isSermon?'700':'400'};color:${isSermon?'var(--gold)':isDrill?'var(--vio)':'var(--t3)'};">${d}</div>
+      <div style="display:flex;gap:2px;flex-wrap:wrap;margin-top:3px">${dots}</div>
+    </div>`;
+  }).join('');
+
+  const schedLegend=[
+    {c:'#5A9DC0',l:'CU Security Shift'},
+    {c:'#8B7EC8',l:'ARNG Drill'},
+    {c:'#5CB872',l:'Gym'},
+    {c:'#D4A84B',l:'Church / Sermon'},
+    {c:'#47B0AB',l:'Special Event'},
+  ].map(x=>`<div style="display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9px;color:var(--t3)"><span style="width:7px;height:7px;border-radius:50%;background:${x.c};flex-shrink:0"></span>${x.l}</div>`).join('');
+
+  const schedCalHTML=`
+    <div class="card ca d2 sf" style="position:relative">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap">
+        <div class="ch" style="margin-bottom:0"><div class="ct">March 2026 — Full Schedule</div><div class="cs">CU Security · ARNG Drill · Workouts · Church · hover any day for detail · click to expand</div></div>
+        <button onclick="toggleSchedExpand()" id="schedExpandBtn" style="font-family:var(--mono);font-size:10px;padding:5px 14px;border:1px solid var(--b1);border-radius:40px;background:var(--bg4);color:var(--t3);cursor:pointer;transition:all .18s;white-space:nowrap">Expand ↗</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:8px">${dowHeader}${calDays}</div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">${schedLegend}</div>
+    </div>`;
+
+  return`<div style="display:flex;flex-direction:column;gap:12px">
+    <div class="ovb ca"><div><div class="ovbm">March 2026</div><div class="ovbs">JD Meyers · Spiritual · Physical · Financial · Intellectual · Creative</div></div><div class="kpis">${kpis}</div></div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px" class="ca d1">${trendCards}</div>
+    ${schedCalHTML}
+    <div class="ovcols">
+      <div class="ovcol">${mks('Spiritual','var(--gold)',ov.spiritual,' d1','spiritual')}${mks('Physical','var(--sage)',ov.physical,' d2','physical')}${mks('Financial','var(--gold)',ov.financial,' d3','financial')}</div>
+      <div class="ovcol">${mks('Intellectual','var(--sky)',ov.intellectual,' d1','intellectual')}${mks('Creative','var(--rose)',ov.creative,' d2','creative')}<div class="ovs ca d3" onclick="" style="cursor:default"><div class="ovsl" style="color:var(--teal)">Key Events</div>${evts}</div></div>
+    </div>
+  </div>`;
+}
+
+/* ─── SPIRITUAL ─── */
+function rSpiritual(){
+  const sp=D.spiritual;
+  const dows=['Su','Mo','Tu','We','Th','Fr','Sa'].map(d=>`<div class="caldow">${d}</div>`).join('');
+  const days=Array.from({length:31},(_,i)=>{
+    const d=i+1,isSerm=sp.sermonDays.includes(d);
+    const serm=isSerm?sp.sermons.find(s=>parseInt(s.date.split(' ')[1])===d):null;
+    return`<div class="calday${isSerm?' hs':''}" ${serm?`onclick="openMod('${serm.id}')"`:''} ><span class="calnum">${d}</span></div>`;
+  }).join('');
+  const sermons=sp.sermons.map(s=>{
+    const tags=s.tags.map(t=>`<span class="stag">${t}</span>`).join('');
+    return`<div class="sblk ca" id="${s.id}"><div class="shdr" onclick="toggleSerm('${s.id}')"><div><div class="snum">Sermon ${s.num} of 04</div><div class="sdate">${s.date} · ${s.loc}</div><div class="stitle">${s.title}</div></div><div class="schev">v</div></div><div class="sbody"><div class="sbodyi"><div class="stags">${tags}</div>${s.body}<div class="scomm"><span class="scomml">Personal Commentary</span>${s.commentary}</div></div></div></div>`;
+  }).join('');
+
+  const prog=progressBand([
+    `<div class="pb-stat"><div class="pb-k">Attendance</div><div class="pb-v">4 / 4</div><div class="pb-d"><span class="delta-eq">— Same as Jan & Feb</span></div></div>`,
+    `<div class="pb-stat"><div class="pb-k">Books Covered</div><div class="pb-v">Acts + 1 Cor</div><div class="pb-d">Deepening — Acts ongoing since Jan</div></div>`,
+    `<div class="pb-stat"><div class="pb-k">Commentary Quality</div><div class="pb-v">Consistent</div><div class="pb-d">Personal reflection active each week</div></div>`
+  ].join(''));
+
+  return`<div class="cg">
+    <div class="card sf ca">${prog}</div>
+    <div class="card sf ca d1"><div class="ch"><div class="ct">March — Sermon Calendar</div><div class="cs">Click a Sunday to expand sermon notes</div></div><div class="calg"><div></div>${dows}${Array.from({length:5},(_,i)=>`<div class="hmwk">W${i+1}</div>`).join('')}${days}</div><div class="callgd"><div class="callgi"><div class="ldot" style="background:var(--gold);box-shadow:0 0 8px rgba(212,168,75,.5)"></div>Sermon Sunday — click to open notes</div></div></div>
+    <div class="sf"><div class="secdiv"><div class="secacc" style="background:var(--gold)"></div><div class="sectit">Sermon Notes — March 2026</div></div>${sermons}</div>
+  </div>`;
+}
+
+/* ─── PHYSICAL ─── */
+function rPhysical(){
+  const ph=D.physical;
+  const weeks=[{l:'W1',d:[1,2,3,4,5,6,7]},{l:'W2',d:[8,9,10,11,12,13,14]},{l:'W3',d:[15,16,17,18,19,20,21]},{l:'W4',d:[22,23,24,25,26,27,28]},{l:'W5',d:[29,30,31,null,null,null,null]}];
+  const dows=['Su','Mo','Tu','We','Th','Fr','Sa'].map(d=>`<div class="hmdow">${d}</div>`).join('');
+  const heatRows=weeks.map(w=>{
+    const cells=w.d.map(d=>{
+      if(!d)return`<div class="hmc emp"></div>`;
+      const sess=ph.sessions[d];
+      if(!sess)return`<div class="hmc rest"></div>`;
+      const ms=sess.muscles,c1=ph.mc[ms[0]]||'#888',c2=ms[1]?(ph.mc[ms[1]]||'#888'):null,c3=ms[2]?(ph.mc[ms[2]]||'#888'):null;
+      const bg=c3?`linear-gradient(135deg,${c1} 33%,${c2} 33%,${c2} 66%,${c3} 66%)`:c2?`linear-gradient(135deg,${c1} 50%,${c2} 50%)`:c1;
+      return`<div class="hmc" style="background:${bg}" data-lbl="Mar ${d}: ${sess.label}" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"></div>`;
+    }).join('');
+    return`<div class="hmwk">${w.l}</div>${cells}`;
+  }).join('');
+  const legend=Object.entries(ph.mc).map(([m,c])=>`<div class="hmlgi"><div class="hmlgb" style="background:${c}"></div>${m}</div>`).join('');
+
+  // muscle group counts
+  const mgCount={};
+  Object.values(ph.sessions).forEach(s=>s.muscles.forEach(m=>{mgCount[m]=(mgCount[m]||0)+1;}));
+
+  // AFT rings
+  const cx=100,cy=100;
+  const rings=ph.aft.map((a,i)=>{
+    const r=84-i*15,circ=2*Math.PI*r,dash=a.pct/100*circ;
+    return`<circle fill="none" stroke="rgba(255,255,255,.05)" stroke-width="9" cx="${cx}" cy="${cy}" r="${r}"/><circle fill="none" stroke="${a.color}" stroke-width="9" cx="${cx}" cy="${cy}" r="${r}" stroke-linecap="round" style="stroke-dasharray:${dash} ${circ};transform:rotate(-90deg);transform-origin:${cx}px ${cy}px;transition:stroke-dasharray 1.3s cubic-bezier(.22,.68,0,1.2) ${i*.12}s"/>`;
+  }).join('');
+  const validPcts=ph.aft.filter(a=>a.pct>0);
+  const avgPct=Math.round(validPcts.reduce((s,a)=>s+a.pct,0)/validPcts.length);
+  const aftList=ph.aft.map((a,i)=>`<div class="aftrow" onclick="openMuscleDetail(${i})"><span class="aftn">${a.event}<br><span style="font-family:var(--mono);font-size:10px;color:var(--t3)">${a.cur} → ${a.goal}</span></span><div class="aftbw"><div class="aftbf" style="width:${a.pct}%;background:${a.color}"></div></div><span class="aftp" style="color:${a.color}">${a.pct||'—'}%</span></div>`).join('');
+  const cardio=ph.cardio.map(c=>`<div class="si"><span class="sk">${c.date}</span><span class="sv" style="font-size:11px">${c.desc}</span></div>`).join('');
+
+  // progress
+  const prog=progressBand([
+    deltaSimple(18,HIST.feb.gymDays,'Gym Days'),
+    deltaSimple(115890,HIST.feb.volume,'Volume (lb)'),
+    deltaSimple(avgPct,Math.round((HIST.feb.aft.mdl+HIST.feb.aft.hrp+HIST.feb.aft.sdc+HIST.feb.aft.plk)/4),'AFT Avg %'),
+    `<div class="pb-stat"><div class="pb-k">Plank (PLK)</div><div class="pb-v">1:40</div><div class="pb-d"><span class="delta-up">▲ from 42% Feb</span> — 45lb weight added</div></div>`,
+    `<div class="pb-stat"><div class="pb-k">Bench PR</div><div class="pb-v">215 lb</div><div class="pb-d">Confirmed twice this month</div></div>`,
+    `<div class="pb-stat"><div class="pb-k">Squat PR</div><div class="pb-v">225 lb × 8</div><div class="pb-d">Mar 26 — new working max</div></div>`
+  ].join(''));
+
+  const commNote=`<div class="comm-note"><span class="cnl">Physical — Commentary</span>Goals for 100 points: <b style="color:var(--tx)">MDL 350 lbs · HRP 61 reps · SDC 1:30 · Plank 3:35 · 2-Mile 13:25</b><br><br>18 gym days in March. Plank remains the most critical gap — current 1:40 vs goal 3:35 (47%). Bench topped 215lb twice. Squat at 225lb for 8 on Mar 26. Trap Bar DL at 285lb × 5 on Mar 17. Four cardio sessions including two outdoor runs. AFT average across scored events: ${avgPct}%.</div>`;
+
+  return`<div class="cg">
+    <div class="card sf ca">${prog}</div>
+    <div class="card sf ca d1"><div class="ch"><div class="ct">Muscle Group Training Heatmap</div><div class="cs">18 sessions · hover for detail</div></div><div style="max-width:320px"><div class="hmg"><div></div>${dows}${heatRows}</div><div class="hmleg">${legend}<div class="hmlgi"><div class="hmlgb" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07)"></div>Rest</div></div></div></div>
+    <div class="card ca d2"><div class="ch"><div class="ct">AFT Radial Progress</div><div class="cs">Goal: 100 pts all events · avg ${avgPct}% toward standard · click row for detail</div></div><div class="aftrw"><svg width="200" height="200" viewBox="0 0 200 200">${rings}</svg><div class="aftrc"><div class="aftrv">${avgPct}%</div><div class="aftrk">Avg to standard</div></div></div><div>${aftList}</div>${commNote}</div>
+    <div class="card ca d2"><div class="ch"><div class="ct">AFT Radar: Jan–Feb–Mar</div><div class="cs">Month-over-month progression by event</div></div><canvas id="radarChart" height="240"></canvas></div>
+    <div class="card ca d3"><div class="ch"><div class="ct">AFT Progress Trend</div><div class="cs">3-month bar comparison by event</div></div><canvas id="aftTrendChart" height="200"></canvas></div>
+    <div class="card ca d3"><div class="ch"><div class="ct">Muscle Group Distribution</div><div class="cs">Sessions per muscle group — March</div></div><canvas id="muscleChart" height="200"></canvas></div>
+    <div class="card ca d4"><div class="ch"><div class="ct">Cardio Sessions</div><div class="cs">4 tracked · 2 outdoor · 2 treadmill sprint</div></div>${cardio}<div style="margin-top:13px;padding:11px 13px;background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r1);font-size:12px;color:var(--t3);line-height:1.65"><span style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:3px">Training Note</span>Plank at 1:40 (45 lb) — needs major development to reach 3:35. Bench topped 215lb. Squat 225lb. Trap Bar DL 285lb.</div></div>
+    <div class="card ca d4"><div class="ch"><div class="ct">Weekly Training Volume</div><div class="cs">Gym days per week — March</div></div><canvas id="weeklyGymChart" height="160"></canvas></div>
+  </div>`;
+}
+
+/* ─── FINANCIAL ─── */
+function rFinancial(){
+  const f=D.fin,tot=f.sJan+f.sFeb+f.sMar,pct=Math.min(100,tot/f.sGoal*100),totalTxns=f.cats.reduce((s,c)=>s+c.txns.length,0);
+  const kpis=`<div class="fsg"><div class="fkpi ca"><div class="fkpiv" style="color:var(--sage)">$${f.income.toFixed(2)}</div><div class="fkpik">Income</div></div><div class="fkpi ca d1"><div class="fkpiv" style="color:var(--rust)">$${f.expenses.toFixed(2)}</div><div class="fkpik">Expenses</div></div><div class="fkpi ca d2"><div class="fkpiv" style="color:var(--sage)">+$${f.net.toFixed(2)}</div><div class="fkpik">Net</div></div></div>`;
+  const sav=`<div style="padding:14px 16px;background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r2);margin-bottom:14px"><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Annual Savings — Target $10,000</div><div style="display:flex;align-items:baseline;gap:10px"><span style="font-family:var(--serif);font-size:26px;font-weight:700;font-style:italic;color:var(--sage)">$${tot.toFixed(2)}</span><span style="font-family:var(--mono);font-size:11px;color:var(--t3)">${pct.toFixed(1)}% of goal</span></div><div class="savout"><div class="savin" style="width:${pct}%"></div></div><div class="savm"><span class="savc">Jan +$${f.sJan.toFixed(2)}</span><span class="savc">Feb +$${f.sFeb.toFixed(2)}</span><span class="savc cur">Mar +$${f.sMar.toFixed(2)}</span><span style="font-family:var(--mono);font-size:10px;color:var(--t4);margin-left:auto">$${(f.sGoal-tot).toFixed(0)} remaining</span></div></div>`;
+  const max=Math.max(...f.cats.map(c=>c.amt));
+  const cats=f.cats.map((cat,i)=>{
+    const sp=(cat.amt/f.expenses*100).toFixed(1);
+    const txns=cat.txns.map(t=>`<div class="ftx"><span class="ftxd">${t.d}</span><span class="ftxn">${t.n}</span><span class="ftxa ${t.a>0?'pos':'neg'}">${t.a>0?'+':''}$${Math.abs(t.a).toFixed(2)}</span></div>`).join('');
+    return`<div class="fcat" id="fc${i}"><div class="fcath" onclick="toggleFin('fc${i}')"><div class="fcatl"><span class="fcatdot" style="background:${cat.color}"></span><span class="fcatn">${cat.name}</span><span class="fcatnt">${cat.txns.length} txn</span></div><div class="fcatr"><span class="fcatp">${sp}%</span><span class="fcata">></span><span class="fcatamt">$${cat.amt.toFixed(2)}</span></div></div><div class="fcatbar"><div class="fcatbf" style="width:${(cat.amt/max*100).toFixed(0)}%;background:${cat.color}"></div></div><div class="fcatb">${txns}</div></div>`;
+  }).join('');
+  const incRows=f.incomeSources.map(s=>`<div class="inrow"><span class="inlbl"><span class="indot" style="background:${s.color}"></span>${s.label}</span><span class="inamt">$${s.amt.toFixed(2)}</span></div>`).join('');
+
+  // subscriptions panel
+  const activeSubs=D.subscriptions.filter(s=>s.status==='Active');
+  const inactiveSubs=D.subscriptions.filter(s=>s.status!=='Active');
+  const annualCost=activeSubs.reduce((sum,s)=>sum+(s.freq==='Annual'?s.amt:s.amt*12),0);
+  const monthlyCost=activeSubs.reduce((sum,s)=>sum+(s.freq==='Monthly'?s.amt:s.amt/12),0);
+  const subRows=(arr)=>arr.map(s=>`<div class="sub-row${s.status!=='Active'?' inactive':''}">
+    <div><div class="sub-name">${s.name}</div><div class="sub-card">${s.card}</div>${s.notes?`<div style="font-size:10px;color:var(--t4)">${s.notes}</div>`:''}</div>
+    <div class="sub-freq">${s.freq}<br><span style="font-size:10px;color:var(--t3)">${s.date}</span></div>
+    <div class="sub-amt">$${s.amt}</div>
+    <div><span class="sub-status" style="background:${s.status==='Active'?'var(--sbg)':'rgba(255,255,255,.04)'};color:${s.status==='Active'?'var(--sage)':'var(--t4)'}">${s.status}</span></div>
+  </div>`).join('');
+
+  const subSection=`<div class="fcat" id="fc-subs"><div class="fcath" onclick="toggleFin('fc-subs')"><div class="fcatl"><span class="fcatdot" style="background:var(--vio)"></span><span class="fcatn">Subscriptions Dashboard</span><span class="fcatnt">${activeSubs.length} active · ${inactiveSubs.length} inactive</span></div><div class="fcatr"><span class="fcata">></span><span class="fcatamt" style="color:var(--vio)">~$${monthlyCost.toFixed(0)}/mo</span></div></div><div class="fcatb">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px">
+      <div class="pb-stat"><div class="pb-k">Monthly Cost</div><div class="pb-v" style="color:var(--rust)">$${monthlyCost.toFixed(2)}</div><div class="pb-d">Active subs only</div></div>
+      <div class="pb-stat"><div class="pb-k">Annual Equiv.</div><div class="pb-v" style="color:var(--rust)">$${annualCost.toFixed(0)}</div><div class="pb-d">Prorated to year</div></div>
+      <div class="pb-stat"><div class="pb-k">Active Count</div><div class="pb-v">${activeSubs.length}</div><div class="pb-d">${inactiveSubs.length} inactive/cancelled</div></div>
+    </div>
+    <div style="padding:0 14px 8px"><div style="font-family:var(--mono);font-size:9px;color:var(--sage);text-transform:uppercase;letter-spacing:.8px;padding:6px 0 4px;border-top:1px solid var(--b0)">Active (${activeSubs.length})</div>${subRows(activeSubs)}</div>
+    <div style="padding:0 14px 14px"><div style="font-family:var(--mono);font-size:9px;color:var(--rust);text-transform:uppercase;letter-spacing:.8px;padding:6px 0 4px;border-top:1px solid var(--b0)">Inactive / Cancelled (${inactiveSubs.length})</div>${subRows(inactiveSubs)}</div>
+  </div></div>`;
+
+  // Ottawa commentary note
+  const commNote=`<div class="comm-note"><span class="cnl">Financial — Ottawa Trip Note</span>Ottawa trip Mar 9-10: Fairmont Chateau Laurier ($416 gross, $313 net after travel credit), parking, tolls, and $59 parking penalty. Total travel: $433.11. Net +$887 positive — below $1,000 monthly target, partially attributable to Ottawa trip cost. Savings on pace: $2,794 of $10,000 goal (27.9%).</div>`;
+
+  // progress
+  const prog=progressBand([
+    `<div class="pb-stat"><div class="pb-k">Net</div><div class="pb-v" style="color:var(--rust)">$887</div><div class="pb-d"><span class="delta-dn">▼ $207 vs Feb ($1,094)</span></div></div>`,
+    `<div class="pb-stat"><div class="pb-k">Income</div><div class="pb-v">$3,390</div><div class="pb-d"><span class="delta-dn">▼ $190 vs Feb</span></div></div>`,
+    `<div class="pb-stat"><div class="pb-k">Expenses</div><div class="pb-v" style="color:var(--rust)">$2,501</div><div class="pb-d"><span class="delta-dn">▲ $16 vs Feb</span> — Ottawa trip</div></div>`,
+    `<div class="pb-stat"><div class="pb-k">Dining</div><div class="pb-v">$476</div><div class="pb-d"><span class="delta-dn">▲ $54 vs Feb</span></div></div>`,
+    `<div class="pb-stat"><div class="pb-k">Travel</div><div class="pb-v" style="color:var(--rust)">$433</div><div class="pb-d"><span class="delta-dn">▲ $433 vs Feb ($0)</span></div></div>`,
+    `<div class="pb-stat"><div class="pb-k">Savings Total</div><div class="pb-v" style="color:var(--sage)">$2,794</div><div class="pb-d">27.9% of $10k goal</div></div>`
+  ].join(''));
+
+  return`<div class="cg">
+    <div class="card sf ca">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+        <div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--vio);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px">Subscriptions Dashboard</div>
+          <div style="display:flex;gap:20px;align-items:baseline;flex-wrap:wrap">
+            <div><div style="font-family:var(--serif);font-size:28px;font-weight:700;font-style:italic;color:var(--vio)">$${monthlyCost.toFixed(0)}<span style="font-size:14px;font-style:normal;color:var(--t3)">/mo</span></div><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;margin-top:2px">Active monthly cost</div></div>
+            <div><div style="font-family:var(--serif);font-size:22px;font-weight:700;font-style:italic;color:var(--rust)">$${annualCost.toFixed(0)}<span style="font-size:12px;font-style:normal;color:var(--t3)">/yr</span></div><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;margin-top:2px">Annual equivalent</div></div>
+            <div><div style="font-family:var(--serif);font-size:22px;font-weight:700;font-style:italic;color:var(--tx)">${activeSubs.length}</div><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;margin-top:2px">Active · ${inactiveSubs.length} inactive</div></div>
+          </div>
+          <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">
+            ${activeSubs.slice(0,6).map(s=>`<span style="font-family:var(--mono);font-size:9px;padding:2px 8px;border-radius:20px;background:var(--vbg);color:var(--vio);border:1px solid rgba(139,126,200,.2)">${s.name.split(' ')[0]}</span>`).join('')}<span style="font-family:var(--mono);font-size:9px;color:var(--t4);align-self:center">+${activeSubs.length-6} more</span>
+          </div>
+        </div>
+        <button onclick="toggleFin('fc-subs-top')" style="font-family:var(--mono);font-size:10px;padding:7px 16px;border:1px solid rgba(139,126,200,.4);border-radius:40px;background:var(--vbg);color:var(--vio);cursor:pointer;transition:all .18s;white-space:nowrap">View All →</button>
+      </div>
+      <div class="fcatb" id="fc-subs-top" style="margin-top:14px;max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1)">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px">
+          <div class="pb-stat"><div class="pb-k">Monthly Cost</div><div class="pb-v" style="color:var(--rust)">$${monthlyCost.toFixed(2)}</div><div class="pb-d">Active subs only</div></div>
+          <div class="pb-stat"><div class="pb-k">Annual Equiv.</div><div class="pb-v" style="color:var(--rust)">$${annualCost.toFixed(0)}</div><div class="pb-d">Prorated to year</div></div>
+          <div class="pb-stat"><div class="pb-k">Active Count</div><div class="pb-v">${activeSubs.length}</div><div class="pb-d">${inactiveSubs.length} inactive/cancelled</div></div>
+        </div>
+        <div><div style="font-family:var(--mono);font-size:9px;color:var(--sage);text-transform:uppercase;letter-spacing:.8px;padding:4px 0 6px;border-bottom:1px solid var(--b0);margin-bottom:4px">Active (${activeSubs.length})</div>${subRows(activeSubs)}</div>
+        <div style="margin-top:10px"><div style="font-family:var(--mono);font-size:9px;color:var(--rust);text-transform:uppercase;letter-spacing:.8px;padding:4px 0 6px;border-bottom:1px solid var(--b0);margin-bottom:4px">Inactive / Cancelled (${inactiveSubs.length})</div>${subRows(inactiveSubs)}</div>
+      </div>
+    </div>
+    <div class="card sf ca d1">${prog}</div>
+    <div class="card ca d2" style="display:grid;grid-template-columns:1fr 210px;gap:22px;align-items:start;grid-column:1/-1">
+      <div>${kpis}${sav}</div>
+      <div><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;text-align:center">Spending Breakdown</div><div style="position:relative;width:200px;height:200px;margin:0 auto"><canvas id="donut" width="200" height="200"></canvas><div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none"><div style="font-family:var(--mono);font-size:14px;font-weight:700;color:var(--tx)">$${f.expenses.toFixed(0)}</div><div style="font-family:var(--mono);font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;margin-top:1px">Total Spent</div></div></div></div>
+    </div>
+    <div class="card ca d3"><div class="ch"><div class="ct">3-Month Net Comparison</div><div class="cs">Jan · Feb · Mar savings + expense trend</div></div><canvas id="monthlyNetChart" height="160"></canvas></div>
+    <div class="card ca d3"><div class="ch"><div class="ct">Income Sources</div><div class="cs">$${f.income.toFixed(2)} total · March 2026</div></div><canvas id="incomeChart" height="150"></canvas><div style="margin-top:10px">${incRows}</div></div>
+    <div class="card ca d4"><div class="ch"><div class="ct">Weekly Spending</div><div class="cs">Expense distribution across March</div></div><canvas id="weeklyChart" height="150"></canvas></div>
+    <div class="card ca d4"><div class="ch"><div class="ct">Category Comparison</div><div class="cs">Jan vs Feb vs Mar by category</div></div><canvas id="catCompareChart" height="180"></canvas></div>
+    <div class="card ca d5 sf"><div class="ch"><div class="ct">Cumulative Spending — Jan · Feb · Mar</div><div class="cs">Daily running total vs $2,500 budget · March shown in gold</div></div><canvas id="spendCompChart" height="160"></canvas></div>
+    <div class="card ca d5 sf"><div class="ch"><div class="ct">All Transactions by Category</div><div class="cs">Click any row to expand · ${totalTxns} total transactions</div></div><canvas id="barchart" height="50" style="margin-bottom:15px"></canvas><div>${cats}</div>${commNote}</div>
+  </div>`;
+}
+
+/* ─── INTELLECTUAL ─── */
+function rIntellectual(){
+  const intel=D.intel;
+  const rows=intel.plan.map(r=>{
+    const[bg,fg]=r.s==='complete'?['rgba(92,184,114,.13)','var(--sage)']:r.s==='missed'?['rgba(204,107,71,.13)','var(--rust)']:r.s==='pending'?['rgba(255,255,255,.04)','var(--t4)']:['rgba(212,168,75,.13)','var(--gold)'];
+    const lbl=r.s==='complete'?'Complete':r.s==='missed'?'Missed':r.s==='pending'?'—':'Amended';
+    const cur=r.m==='Mar';
+    return`<div class="ipr" style="${cur?'background:rgba(212,168,75,.07);':''}"><span class="imo" style="${cur?'color:var(--gold)':''}">${r.m}</span><span class="itop" style="${cur?'color:var(--tx);font-weight:600':''}">${r.topic}${r.s==='missed'?`<span style="font-family:var(--mono);font-size:9px;color:var(--rust);margin-left:6px">not completed</span>`:''}</span><span class="ibadge" style="background:${bg};color:${fg}">${lbl}</span></div>`;
+  }).join('');
+  const courses=intel.courses.map(c=>`<div class="si"><span class="sk">${c.code} — ${c.name}</span><span class="sv">${c.grade}</span></div>`).join('');
+
+  const commNote=`<div class="comm-note"><span class="cnl">Intellectual — Amendment Note</span>Original March goal was U.S./World History. Changed to ARNG: MMCS operator notes, JCR, Radio Classes, Casualty Packets. February STEM goal was not completed — acknowledged. The amendment was mission-relevant and the MMCS operator summary was produced and verified against the actual system in the field. 2-of-3 months completed. February miss remains on record.</div>`;
+
+  const summaryNote=`<div class="comm-note" style="border-left-color:var(--sky)"><span class="cnl" style="color:var(--sky)">3-Month Summary — Claude's Note</span>
+    <b style="color:var(--tx)">Jan:</b> Leadership / Military Leadership — Complete. Strong start. Mission-relevant topic, thorough execution.<br><br>
+    <b style="color:var(--tx)">Feb:</b> STEM / Technology Concepts — Missed. First miss of the year. No output recorded. Acknowledged and carried forward as a permanent record.<br><br>
+    <b style="color:var(--tx)">Mar:</b> MMCS / Army Digital C2 (Amended) — Complete. The amendment from History to MMCS reflects good situational awareness about what's actually actionable. An operator memo was produced and cross-verified in the field — that's a meaningful output, not just study.<br><br>
+    <i style="color:var(--t3)">Pattern to watch: The intellectual track is 2/3 — solid, but the February miss means the year opened with a gap. April (History) will show whether that was a one-time miss or a habit forming. GPA 3.834 in first Clarkson term is a clear win.</i>
+  </div>`;
+
+  const prog=progressBand([
+    `<div class="pb-stat"><div class="pb-k">Topics Completed</div><div class="pb-v">2 / 3</div><div class="pb-d">Jan ✓ · Feb ✗ · Mar ✓</div></div>`,
+    `<div class="pb-stat"><div class="pb-k">GPA</div><div class="pb-v" style="color:var(--sage)">3.834</div><div class="pb-d">First Clarkson term — Good Standing</div></div>`,
+    `<div class="pb-stat"><div class="pb-k">Output</div><div class="pb-v">MMCS Memo</div><div class="pb-d">Verified in field Mar 2026</div></div>`
+  ].join(''));
+
+  return`<div class="cg">
+    <div class="card sf ca">${prog}</div>
+    <div class="card ca d1"><div class="ch"><div class="ct">Monthly Focus Plan</div><div class="cs">2026 intellectual development track</div></div>${rows}</div>
+    <div class="card ca d1"><div class="ch"><div class="ct">Clarkson University</div><div class="cs">Winter Quarter 2026 · Graduate Module</div></div><div style="margin-bottom:15px"><div style="font-family:var(--serif);font-size:34px;font-weight:700;font-style:italic;color:var(--sky)">${intel.gpa}</div><div style="font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-top:3px">Term GPA · Good Academic Standing</div></div>${courses}<div style="margin-top:13px;padding:10px 13px;background:var(--gbg);border:1px solid rgba(212,168,75,.25);border-radius:var(--r1);font-size:11px;color:var(--t2);line-height:1.6"><span style="font-family:var(--mono);font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:3px">Cumulative GPA</span>3.834 — first term on record. Good Academic Standing maintained.</div></div>
+    <div class="card sf ca d2"><div class="ch"><div class="ct">MMCS — Operator Summary Notes</div><div class="cs">Mounted Mission Command Software · March intellectual focus (amended from U.S./World History)</div></div><div style="font-size:13px;line-height:1.8;color:var(--t2)">${intel.mmcs}</div><div style="margin-top:16px;padding:12px 15px;border-left:3px solid var(--sky);background:var(--kdim);border-radius:0 var(--r1) var(--r1) 0;font-size:12px;color:var(--t3);line-height:1.65"><span style="font-family:var(--mono);font-size:9px;color:var(--sky);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:3px">Status</span>Operator summary memo produced · Verified against actual system in field · <b style="color:var(--sage)">Complete — March intellectual goal</b></div></div>
+    <div class="card sf ca d3">${commNote}${summaryNote}</div>
+  </div>`;
+}
+
+/* ─── CREATIVE ─── */
+function rCreative(){
+  const cr=D.creative;
+  const projects=cr.projects.map(p=>`<div class="pjcard"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:7px"><div><div style="font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;color:var(--tx)">${p.title}</div><div style="font-family:var(--mono);font-size:9px;color:var(--rose);text-transform:uppercase;letter-spacing:1px;margin-top:3px">${p.type}${p.collab?' · w/ '+p.collab:''}</div></div><span class="sbadge" style="background:var(--sbg);color:var(--sage);flex-shrink:0">Complete</span></div><p style="font-size:13px;line-height:1.67;color:var(--t2)">${p.desc}</p></div>`).join('');
+  const sm={'cancelled':['rgba(255,255,255,.04)','var(--t4)','Cancelled'],'contract-sent':['var(--kbg)','var(--sky)','Contract Sent'],'signed':['var(--sbg)','var(--sage)','Signed'],'lead':['var(--gbg)','var(--gold)','Lead']};
+  const rows=cr.pipeline.map(p=>{const[bg,fg,lbl]=sm[p.status]||['rgba(0,0,0,.05)','var(--t4)','—'];return`<tr ${p.status==='cancelled'?'class="dm"':''}><td style="font-weight:600;color:var(--tx)">${p.client}</td><td style="color:var(--t2)">${p.service}</td><td style="font-family:var(--mono);font-size:11px;color:var(--t3);white-space:nowrap">${p.date}</td><td style="font-size:12px;color:var(--t3)">${p.loc}</td><td><span class="sbadge" style="background:${bg};color:${fg}">${lbl}</span></td></tr>`;}).join('');
+  const signed=cr.pipeline.filter(p=>p.status==='signed').length,leads=cr.pipeline.filter(p=>p.status==='lead').length,sent=cr.pipeline.filter(p=>p.status==='contract-sent').length;
+
+  const commNote=`<div class="comm-note"><span class="cnl">Creative — Commentary</span>Two projects completed this month: the LMSW video with M. Maurer and the JD Meyers Productions website refresh using Squarespace with custom Claude-assisted HTML. Both represent meaningful outputs. On the booking side, 3 weddings signed is strong against a goal of 3-4. Two new leads are in contract-writing stage — if either converts, the shooting schedule is essentially full for the summer. The Wagner graduation portraits (Apr 28) are the next confirmed booking. Maintain pipeline contact cadence through April.</div>`;
+
+  const summaryNote=`<div class="comm-note" style="border-left-color:var(--rose)"><span class="cnl" style="color:var(--rose)">3-Month Summary — Claude's Note</span>
+    <b style="color:var(--tx)">Jan:</b> No confirmed output on record for creative work this month.<br><br>
+    <b style="color:var(--tx)">Feb:</b> No confirmed output on record. Pipeline in early formation.<br><br>
+    <b style="color:var(--tx)">Mar:</b> Two complete projects (LMSW documentary short + website rebuild). Pipeline meaningful: 3 signed, 2 leads, 1 contract-sent. This is the first month with documented creative output for 2026.<br><br>
+    <i style="color:var(--t3)">The ramp from Jan/Feb silence to two March completions is a notable shift. The photography pipeline is the more structurally important piece — 3 signed weddings provides summer income certainty. The website and video work demonstrate production capability outside shooting. April should show whether the creative output was a March surge or a new baseline.</i>
+  </div>`;
+
+  const prog=progressBand([
+    `<div class="pb-stat"><div class="pb-k">Projects Completed</div><div class="pb-v">2</div><div class="pb-d">First documented creative month</div></div>`,
+    `<div class="pb-stat"><div class="pb-k">Signed Bookings</div><div class="pb-v" style="color:var(--sage)">3 Weddings</div><div class="pb-d">Goal: 3-4 for year</div></div>`,
+    `<div class="pb-stat"><div class="pb-k">Pipeline Total</div><div class="pb-v">7 entries</div><div class="pb-d">Signed + leads + sent</div></div>`,
+    `<div class="pb-stat"><div class="pb-k">Next Booking</div><div class="pb-v">Apr 28</div><div class="pb-d">H. Wagner — Graduation</div></div>`
+  ].join(''));
+
+  return`<div class="cg">
+    <div class="card sf ca">${prog}</div>
+    <div class="sf ca d1"><div class="secdiv"><div class="secacc" style="background:var(--rose)"></div><div class="sectit">March Creative Output</div></div>${projects}</div>
+    <div class="card sf ca d2"><div class="ch"><div class="ct">Full Booking Pipeline</div><div class="cs">All 2026 bookings, leads & cancelled</div></div><div style="overflow-x:auto"><table class="ptbl"><thead><tr><th>Client</th><th>Service</th><th>Date</th><th>Location</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table></div><div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;text-align:center">${[['Signed',signed,'var(--sage)','var(--sbg)'],['Leads',leads,'var(--gold)','var(--gbg)'],['Contract Sent',sent,'var(--sky)','var(--kbg)'],['Goal','3-4','var(--t2)','rgba(255,255,255,.04)']].map(([k,v,c,bg])=>`<div style="background:${bg};border:1px solid rgba(255,255,255,.07);border-radius:var(--r1);padding:10px 8px"><div style="font-family:var(--mono);font-size:18px;font-weight:700;color:${c}">${v}</div><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-top:3px">${k}</div></div>`).join('')}</div><div style="margin-top:11px;font-size:12px;color:var(--t3);line-height:1.65">Next confirmed: <b style="color:var(--tx)">H. Wagner</b> graduation portraits Apr 28. Two new leads in contract-writing stage.</div></div>
+    <div class="card sf ca d3">${commNote}${summaryNote}</div>
+  </div>`;
+}
+
+/* ─── AFTER RENDER CHARTS ─── */
+function afterRender(){
+  if(tab==='financial'){
+    const dc=document.getElementById('donut');
+    if(dc){const c=D.fin.cats;charts.push(new Chart(dc,{type:'doughnut',data:{labels:c.map(x=>x.name),datasets:[{data:c.map(x=>x.amt),backgroundColor:c.map(x=>x.color+'BB'),borderColor:c.map(x=>x.color),borderWidth:1,hoverOffset:10}]},options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>`${x.label}: $${x.raw.toFixed(2)} (${(x.raw/D.fin.expenses*100).toFixed(1)}%)`}}},cutout:'64%',animation:{animateRotate:true,duration:900}}}));}
+    const bc=document.getElementById('barchart');
+    if(bc){const c=D.fin.cats;charts.push(new Chart(bc,{type:'bar',data:{labels:c.map(x=>x.name),datasets:[{data:c.map(x=>x.amt),backgroundColor:c.map(x=>x.color+'88'),borderColor:c.map(x=>x.color),borderWidth:1,borderRadius:3}]},options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>`$${x.raw.toFixed(2)}`}}},scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#6E6B67',font:{family:'JetBrains Mono',size:9},callback:v=>'$'+v}},y:{grid:{display:false},ticks:{color:'#B2AEA8',font:{family:'JetBrains Mono',size:9}}}},animation:{duration:800}}}));}
+    const ic=document.getElementById('incomeChart');
+    if(ic){const s=D.fin.incomeSources;charts.push(new Chart(ic,{type:'doughnut',data:{labels:s.map(x=>x.label),datasets:[{data:s.map(x=>x.amt),backgroundColor:s.map(x=>x.color+'99'),borderColor:s.map(x=>x.color),borderWidth:1,hoverOffset:8}]},options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>`${x.label}: $${x.raw.toFixed(2)}`}}},cutout:'55%',animation:{animateRotate:true,duration:800}}}));}
+    const wc=document.getElementById('weeklyChart');
+    if(wc){const weeks=['Mar 1-7','Mar 8-14','Mar 15-21','Mar 22-28','Mar 29-31'],wt=[0,0,0,0,0];D.fin.cats.forEach(cat=>cat.txns.forEach(t=>{if(t.a<0){const d=parseInt(t.d.split('/')[1]);if(d<=7)wt[0]+=Math.abs(t.a);else if(d<=14)wt[1]+=Math.abs(t.a);else if(d<=21)wt[2]+=Math.abs(t.a);else if(d<=28)wt[3]+=Math.abs(t.a);else wt[4]+=Math.abs(t.a);}}));charts.push(new Chart(wc,{type:'bar',data:{labels:weeks,datasets:[{label:'Spending',data:wt.map(v=>parseFloat(v.toFixed(2))),backgroundColor:wt.map(v=>v>700?'rgba(204,107,71,.6)':v>400?'rgba(212,168,75,.6)':'rgba(90,157,192,.6)'),borderColor:wt.map(v=>v>700?'#CC6B47':v>400?'#D4A84B':'#5A9DC0'),borderWidth:1,borderRadius:4}]},options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>`$${x.raw.toFixed(2)}`}}},scales:{x:{grid:{display:false},ticks:{color:'#6E6B67',font:{family:'JetBrains Mono',size:9}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#6E6B67',font:{family:'JetBrains Mono',size:9},callback:v=>'$'+v}}},animation:{duration:700}}}));}
+
+    // 3-month net
+    const mnc=document.getElementById('monthlyNetChart');
+    if(mnc){charts.push(new Chart(mnc,{type:'bar',data:{labels:['January','February','March'],datasets:[{label:'Income',data:[HIST.jan.income,HIST.feb.income,D.fin.income],backgroundColor:'rgba(92,184,114,.55)',borderColor:'#5CB872',borderWidth:1,borderRadius:4},{label:'Expenses',data:[HIST.jan.expenses,HIST.feb.expenses,D.fin.expenses],backgroundColor:'rgba(204,107,71,.55)',borderColor:'#CC6B47',borderWidth:1,borderRadius:4},{label:'Net',data:[HIST.jan.net,HIST.feb.net,D.fin.net],backgroundColor:'rgba(90,157,192,.55)',borderColor:'#5A9DC0',borderWidth:1,borderRadius:4}]},options:{plugins:{legend:{display:true,position:'bottom',labels:{color:'#B2AEA8',font:{family:'JetBrains Mono',size:10},boxWidth:12,padding:8}}},scales:{x:{grid:{display:false},ticks:{color:'#B2AEA8',font:{family:'JetBrains Mono',size:10}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#6E6B67',font:{family:'JetBrains Mono',size:9},callback:v=>'$'+v}}},animation:{duration:800}}}));}
+
+    // category compare - more contrast
+    const cc=document.getElementById('catCompareChart');
+    if(cc){
+      const cats=['Dining','Shopping','Travel','Groceries','Auto','Entertainment'];
+      const janVals=[HIST.jan.cats.dining,HIST.jan.cats.shopping,HIST.jan.cats.travel,HIST.jan.cats.groceries,HIST.jan.cats.auto,HIST.jan.cats.entertainment];
+      const febVals=[HIST.feb.cats.dining,HIST.feb.cats.shopping,HIST.feb.cats.travel,HIST.feb.cats.groceries,HIST.feb.cats.auto,HIST.feb.cats.entertainment];
+      const marVals=[476,474,433,237,197,70];
+      charts.push(new Chart(cc,{type:'bar',data:{labels:cats,datasets:[
+        {label:'Jan',data:janVals,backgroundColor:'rgba(255,255,255,.22)',borderColor:'rgba(255,255,255,.5)',borderWidth:1.5,borderRadius:3},
+        {label:'Feb',data:febVals,backgroundColor:'rgba(90,157,192,.5)',borderColor:'#5A9DC0',borderWidth:1.5,borderRadius:3},
+        {label:'Mar',data:marVals,backgroundColor:'rgba(212,168,75,.75)',borderColor:'#D4A84B',borderWidth:1.5,borderRadius:3}
+      ]},options:{plugins:{legend:{display:true,position:'bottom',labels:{color:'#CCC9C3',font:{family:'JetBrains Mono',size:10},boxWidth:10,padding:8}}},scales:{x:{grid:{display:false},ticks:{color:'#CCC9C3',font:{family:'JetBrains Mono',size:9}}},y:{grid:{color:'rgba(255,255,255,.06)'},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:9},callback:v=>'$'+v}}},animation:{duration:800}}}));
+    }
+
+    // cumulative spending comparison
+    const sc=document.getElementById('spendCompChart');
+    if(sc){
+      const days=Array.from({length:31},(_,i)=>i+1);
+      charts.push(new Chart(sc,{type:'line',data:{labels:days,datasets:[
+        {label:'January',data:D.fin.spendingCumJan,borderColor:'rgba(255,255,255,.35)',backgroundColor:'transparent',borderWidth:1.5,borderDash:[5,4],pointRadius:0,tension:.4},
+        {label:'February',data:D.fin.spendingCumFeb,borderColor:'rgba(90,157,192,.7)',backgroundColor:'rgba(90,157,192,.04)',borderWidth:1.5,borderDash:[3,3],pointRadius:0,tension:.4,fill:true},
+        {label:'March',data:D.fin.spendingCumMar,borderColor:'#D4A84B',backgroundColor:'rgba(212,168,75,.08)',borderWidth:2.5,pointRadius:0,tension:.4,fill:true},
+        {label:'$2,500 Budget',data:Array(31).fill(2500),borderColor:'rgba(204,107,71,.55)',backgroundColor:'transparent',borderWidth:1,borderDash:[6,4],pointRadius:0}
+      ]},options:{responsive:true,maintainAspectRatio:true,
+        plugins:{legend:{labels:{color:'#CCC9C3',font:{family:'DM Sans',size:11},boxWidth:20}},tooltip:{callbacks:{label:ctx=>' $'+ctx.parsed.y.toFixed(0)}}},
+        scales:{
+          x:{grid:{display:false},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:10},maxTicksLimit:10},border:{display:false},title:{display:true,text:'Day of month',color:'#5A5754',font:{size:10}}},
+          y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:10},callback:v=>'$'+v.toLocaleString()},border:{display:false},max:3000}
+        }
+      }}));
+    }
+  }
+
+  if(tab==='physical'){
+    const rc=document.getElementById('radarChart');
+    if(rc){
+      const a=D.physical.aft;
+      charts.push(new Chart(rc,{type:'radar',data:{labels:a.map(x=>x.event),datasets:[
+        {label:'Jan %',data:a.map(x=>x.janPct),backgroundColor:'rgba(255,255,255,.04)',borderColor:'rgba(255,255,255,.25)',borderWidth:1,pointBackgroundColor:'rgba(255,255,255,.3)',pointRadius:3,borderDash:[4,3]},
+        {label:'Feb %',data:a.map(x=>x.febPct),backgroundColor:'rgba(90,157,192,.07)',borderColor:'rgba(90,157,192,.5)',borderWidth:1.5,pointBackgroundColor:'#5A9DC0',pointRadius:3,borderDash:[2,2]},
+        {label:'Mar %',data:a.map(x=>x.pct),backgroundColor:'rgba(92,184,114,.13)',borderColor:'#5CB872',borderWidth:2,pointBackgroundColor:'#5CB872',pointRadius:4,pointHoverRadius:6}
+      ]},options:{plugins:{legend:{display:true,position:'bottom',labels:{color:'#B2AEA8',font:{family:'JetBrains Mono',size:10},boxWidth:12,padding:10}}},scales:{r:{min:0,max:100,grid:{color:'rgba(255,255,255,.06)'},angleLines:{color:'rgba(255,255,255,.06)'},ticks:{color:'#6E6B67',font:{family:'JetBrains Mono',size:9},backdropColor:'transparent',stepSize:25},pointLabels:{color:'#B2AEA8',font:{family:'JetBrains Mono',size:9}}}},animation:{duration:900}}}));
+    }
+
+    // AFT trend bar
+    const at=document.getElementById('aftTrendChart');
+    if(at){
+      const a=D.physical.aft.filter(x=>x.pct>0||x.janPct>0||x.febPct>0);
+      charts.push(new Chart(at,{type:'bar',data:{labels:a.map(x=>x.event),datasets:[
+        {label:'Jan',data:a.map(x=>x.janPct),backgroundColor:'rgba(255,255,255,.15)',borderColor:'rgba(255,255,255,.3)',borderWidth:1,borderRadius:3},
+        {label:'Feb',data:a.map(x=>x.febPct),backgroundColor:'rgba(90,157,192,.4)',borderColor:'#5A9DC0',borderWidth:1,borderRadius:3},
+        {label:'Mar',data:a.map(x=>x.pct),backgroundColor:'rgba(92,184,114,.55)',borderColor:'#5CB872',borderWidth:1,borderRadius:3}
+      ]},options:{plugins:{legend:{display:true,position:'bottom',labels:{color:'#B2AEA8',font:{family:'JetBrains Mono',size:10},boxWidth:10,padding:8}}},scales:{x:{grid:{display:false},ticks:{color:'#B2AEA8',font:{family:'JetBrains Mono',size:9}}},y:{grid:{color:'rgba(255,255,255,.04)'},max:100,ticks:{color:'#6E6B67',font:{family:'JetBrains Mono',size:9},callback:v=>v+'%'}}},animation:{duration:800}}}));
+    }
+
+    // muscle group distribution
+    const mc2=document.getElementById('muscleChart');
+    if(mc2){
+      const mgCount={};
+      Object.values(D.physical.sessions).forEach(s=>s.muscles.forEach(m=>{mgCount[m]=(mgCount[m]||0)+1;}));
+      const mLabels=Object.keys(mgCount),mVals=Object.values(mgCount),mColors=mLabels.map(m=>D.physical.mc[m]||'#888');
+      charts.push(new Chart(mc2,{type:'bar',data:{labels:mLabels,datasets:[{data:mVals,backgroundColor:mColors.map(c=>c+'99'),borderColor:mColors,borderWidth:1,borderRadius:4}]},options:{indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>`${x.raw} sessions`}}},scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#6E6B67',font:{family:'JetBrains Mono',size:9},stepSize:1}},y:{grid:{display:false},ticks:{color:'#B2AEA8',font:{family:'JetBrains Mono',size:9}}}},animation:{duration:800}}}));
+    }
+
+    // weekly gym days
+    const wg=document.getElementById('weeklyGymChart');
+    if(wg){
+      const weeks=['W1 (1-7)','W2 (8-14)','W3 (15-21)','W4 (22-28)','W5 (29-31)'];
+      const wRanges=[[1,7],[8,14],[15,21],[22,28],[29,31]];
+      const wCounts=wRanges.map(([a,b])=>Object.keys(D.physical.sessions).filter(d=>+d>=a&&+d<=b).length);
+      charts.push(new Chart(wg,{type:'bar',data:{labels:weeks,datasets:[{label:'Gym Days',data:wCounts,backgroundColor:'rgba(90,157,192,.55)',borderColor:'#5A9DC0',borderWidth:1,borderRadius:5}]},options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>`${x.raw} session${x.raw!==1?'s':''}`}}},scales:{x:{grid:{display:false},ticks:{color:'#6E6B67',font:{family:'JetBrains Mono',size:9}}},y:{grid:{color:'rgba(255,255,255,.04)'},max:6,ticks:{color:'#6E6B67',font:{family:'JetBrains Mono',size:9},stepSize:1}}},animation:{duration:700}}}));
+    }
+  }
+
+  if(tab==='creative'){
+    // pipeline pie and goals bar removed per user request
+  }
+}
+
+/* ─── RENDER ─── */
+function render(){
+  killCharts();chrome();
+  const el=document.getElementById('main');
+  if(tab==='overview')el.innerHTML=rOverview();
+  if(tab==='spiritual')el.innerHTML=rSpiritual();
+  if(tab==='physical')el.innerHTML=rPhysical();
+  if(tab==='financial')el.innerHTML=rFinancial();
+  if(tab==='intellectual')el.innerHTML=rIntellectual();
+  if(tab==='creative')el.innerHTML=rCreative();
+  observe();
+  requestAnimationFrame(()=>requestAnimationFrame(afterRender));
+  document.getElementById('mc').onclick=()=>document.getElementById('overlay').classList.remove('show');
+  document.getElementById('overlay').onclick=e=>{if(e.target===e.currentTarget)e.target.classList.remove('show');};
+  document.getElementById('muscleOverlay').onclick=e=>{if(e.target===e.currentTarget)closeMuscle();};
+}
+
+/* ─── GLOBAL HANDLERS ─── */
+window.sw=t=>{tab=t;render();window.scrollTo({top:0,behavior:'smooth'});};
+window.toggleSerm=id=>{document.getElementById(id)?.classList.toggle('open');};
+window.toggleFin=id=>{
+  const el=document.getElementById(id);
+  if(!el)return;
+  // fc-subs-top is a raw fcatb div (no fcat wrapper), toggle display directly
+  if(id==='fc-subs-top'){el.style.maxHeight=el.style.maxHeight?'':'3000px';}
+  else el.classList.toggle('open');
+};
+window.openMod=id=>{
+  const s=D.spiritual.sermons.find(x=>x.id===id);if(!s)return;
+  document.getElementById('mt').textContent=s.title;
+  document.getElementById('ms').textContent=`${s.date} · ${s.loc} · Sermon ${s.num} of 04`;
+  document.getElementById('mb').innerHTML=s.body+`<div style="margin-top:18px;padding:14px 16px;border-left:3px solid var(--gold);background:var(--gdim);border-radius:0 var(--r1) var(--r1) 0;font-style:italic;font-size:13px;color:var(--t2);line-height:1.74">${s.commentary}</div>`;
+  document.getElementById('overlay').classList.add('show');
+};
+window.openMuscleDetail=idx=>{
+  const a=D.physical.aft[idx];
+  document.getElementById('muscleTitle').textContent=a.event;
+  document.getElementById('muscleBody').innerHTML=`
+    <div style="margin-bottom:16px">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px">
+        <div class="pb-stat"><div class="pb-k">Current</div><div class="pb-v" style="color:${a.color}">${a.cur}</div></div>
+        <div class="pb-stat"><div class="pb-k">Goal (100 pts)</div><div class="pb-v">${a.goal}</div></div>
+        <div class="pb-stat"><div class="pb-k">% to Standard</div><div class="pb-v" style="color:${a.color}">${a.pct||'—'}%</div></div>
+      </div>
+      <div style="height:8px;background:rgba(255,255,255,.06);border-radius:4px;margin-bottom:14px;overflow:hidden">
+        <div style="height:100%;width:${a.pct}%;background:${a.color};border-radius:4px;transition:width 1s cubic-bezier(.22,.68,0,1.2)"></div>
+      </div>
+    </div>
+    <div style="margin-bottom:16px">
+      <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Month-over-Month Progress</div>
+      <div style="display:flex;gap:6px">
+        ${[['Jan',a.janPct],['Feb',a.febPct],['Mar',a.pct]].map(([m,p])=>{
+          return`<div style="flex:1;background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r1);padding:10px 8px;text-align:center">
+            <div style="font-family:var(--mono);font-size:18px;font-weight:700;color:${p>0?a.color:'var(--t4)'}">${p||'—'}%</div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--t4);margin-top:3px">${m}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+    <div style="padding:13px 15px;border-left:3px solid ${a.color};background:rgba(255,255,255,.03);border-radius:0 var(--r1) var(--r1) 0;font-size:13px;line-height:1.72;color:var(--t2)">${a.notes}</div>
+  `;
+  document.getElementById('muscleOverlay').classList.add('show');
+};
+window.closeMuscle=()=>document.getElementById('muscleOverlay').classList.remove('show');
+window.showTip=(e,el)=>{const t=document.getElementById('hmtip');t.textContent=el.dataset.lbl;const x=Math.min(e.clientX+16,window.innerWidth-340);const y=Math.min(e.clientY-10,window.innerHeight-80);t.style.left=x+'px';t.style.top=y+'px';t.classList.add('show');};
+window.hideTip=()=>document.getElementById('hmtip').classList.remove('show');
+window.showSchedTip=(e,el)=>{
+  const t=document.getElementById('schedTip');if(!t)return;
+  t.textContent=el.dataset.tip;
+  const x=Math.min(e.clientX+18,window.innerWidth-360);
+  const y=Math.max(10,Math.min(e.clientY-14,window.innerHeight-120));
+  t.style.left=x+'px';t.style.top=y+'px';t.style.opacity='1';
+};
+window.hideSchedTip=()=>{const t=document.getElementById('schedTip');if(t)t.style.opacity='0';};
+
+window.toggleSchedExpand=()=>{
+  const ov=document.getElementById('calExpandOverlay');
+  if(!ov)return;
+  // Build full calendar content
+  const content=document.getElementById('calExpandContent');
+  const legend=document.getElementById('calExpandLegend');
+  const mc=D.physical.mc;
+  const tabMap={spiritual:'spiritual',financial:'financial',physical:'physical'};
+  const dow=['Su','Mo','Tu','We','Th','Fr','Sa'];
+  const dowHdr=dow.map(d=>`<div style="text-align:center;font-family:var(--mono);font-size:9px;color:#5A5754;letter-spacing:.8px;text-transform:uppercase;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.05)">${d}</div>`).join('');
+
+  const cells=Array.from({length:31},(_,i)=>{
+    const d=i+1;
+    const s=SCHED[d]||{};
+    const isSermon=[1,8,22,29].includes(d);
+    const isDrill=!!s.drill;
+    const isWork=!!s.work;
+    const isGym=s.gym&&s.gym.length>0;
+    const isSpecial=!!s.special;
+
+    let lines=[];
+    if(isSermon)lines.push(`<div style="color:#D4A84B;font-size:11px;font-weight:600">⛪ Church</div>`);
+    if(isDrill)lines.push(`<div style="color:#8B7EC8;font-size:10px;font-weight:600">🪖 ${s.drill}</div>${s.note?`<div style="color:#6E6B8A;font-size:9px">${s.note}</div>`:''}`);
+    if(isWork)lines.push(`<div style="color:#5A9DC0;font-size:10px;font-weight:600">🛡️ ${s.work}</div>${s.note?`<div style="color:#4A7D9A;font-size:9px">${s.note}</div>`:''}`);
+    if(isGym)lines.push(`<div style="font-size:10px;color:#9A9590">💪 ${s.gym.join(', ')}</div>`);
+    if(isSpecial)lines.push(`<div style="color:#47B0AB;font-size:10px">📍 ${s.special}</div>`);
+
+    const bg=isDrill?'rgba(139,126,200,.14)':isWork?'rgba(90,157,192,.08)':'rgba(255,255,255,.02)';
+    const border=isDrill?'rgba(139,126,200,.35)':isSermon?'rgba(212,168,75,.35)':isWork?'rgba(90,157,192,.2)':'rgba(255,255,255,.06)';
+
+    // click → navigate to relevant tab
+    let clickAction='';
+    if(isSermon)clickAction=`onclick="closeCalExpand();sw('spiritual')"`;
+    else if(isDrill)clickAction=`onclick="closeCalExpand();sw('physical')"`;
+    else if(isGym)clickAction=`onclick="closeCalExpand();sw('physical')"`;
+    else if(isSpecial)clickAction=`onclick="closeCalExpand();sw('financial')"`;
+
+    return`<div ${clickAction} style="background:${bg};border:1px solid ${border};border-radius:8px;padding:8px 10px;min-height:80px;cursor:${clickAction?'pointer':'default'};transition:border-color .15s,transform .15s" onmouseenter="this.style.transform=this.style.cursor==='pointer'?'scale(1.02)':''" onmouseleave="this.style.transform=''">
+      <div style="font-family:var(--mono);font-size:11px;font-weight:700;color:${isSermon?'#D4A84B':isDrill?'#8B7EC8':'#9A9590'};margin-bottom:5px">${d}</div>
+      ${lines.join('')}
+    </div>`;
+  }).join('');
+
+  content.innerHTML=`<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:6px">${dowHdr}${cells}</div>`;
+  legend.innerHTML=[
+    {c:'#5A9DC0',l:'CU Security Shift → Physical'},
+    {c:'#8B7EC8',l:'ARNG Drill → Physical'},
+    {c:'#5CB872',l:'Gym Workout → Physical'},
+    {c:'#D4A84B',l:'Church / Sermon → Spiritual'},
+    {c:'#47B0AB',l:'Special Event → Financial'},
+  ].map(x=>`<div style="display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;color:#9A9590"><span style="width:8px;height:8px;border-radius:50%;background:${x.c};flex-shrink:0"></span>${x.l}</div>`).join('');
+
+  ov.style.display='block';
+  document.body.style.overflow='hidden';
+};
+window.closeCalExpand=()=>{
+  const ov=document.getElementById('calExpandOverlay');
+  if(ov)ov.style.display='none';
+  document.body.style.overflow='';
+};
+
+render();
+document.getElementById('calExpandOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeCalExpand();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCalExpand();document.getElementById('overlay')?.classList.remove('show');document.getElementById('muscleOverlay')?.classList.remove('show');}});
+})();
+</script>
+</body>
+</html>

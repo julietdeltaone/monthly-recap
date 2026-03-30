@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CBC Sermon Series — Acts 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#1a1410;--parchment:#f5f0e8;--cream:#faf7f2;--gold:#b8860b;--gold-light:#d4a830;--rust:#8b3a2a;--muted:#7a6e62;--border:#d9d0c0;--card-bg:#ffffff;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Source Serif 4',Georgia,serif;background:var(--parchment);color:var(--ink);min-height:100vh;}
+  .site-header{background:var(--ink);color:var(--parchment);padding:2.5rem 2rem 2rem;text-align:center;position:relative;overflow:hidden;}
+  .site-header::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 60px,rgba(184,134,11,.06) 60px,rgba(184,134,11,.06) 61px);}
+  .header-eyebrow{font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold-light);margin-bottom:.75rem;position:relative;}
+  .site-header h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:700;line-height:1.1;position:relative;}
+  .site-header h1 em{font-style:italic;color:var(--gold-light);}
+  .header-sub{font-size:.95rem;color:rgba(245,240,232,.6);margin-top:.75rem;font-style:italic;position:relative;}
+  .header-rule{width:60px;height:2px;background:var(--gold);margin:1.25rem auto 0;}
+  /* PROGRESS BAR */
+  .progress-bar-wrap{position:sticky;top:0;z-index:50;background:var(--ink);padding:.55rem 2rem .65rem;border-bottom:1px solid rgba(255,255,255,.06);}
+  .progress-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;}
+  .progress-label{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.4);transition:color .3s;}
+  .progress-pct{font-size:.64rem;letter-spacing:.15em;color:var(--gold-light);font-weight:600;transition:all .4s;}
+  .progress-track{height:4px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;position:relative;}
+  .progress-fill{
+    height:100%;
+    background:linear-gradient(90deg,var(--gold) 0%,var(--gold-light) 60%,#f0c84a 100%);
+    border-radius:4px;
+    transition:width .55s cubic-bezier(.4,0,.2,1);
+    position:relative;
+    box-shadow:0 0 8px rgba(184,134,11,.5);
+  }
+  .progress-fill::after{
+    content:'';
+    position:absolute;
+    top:0;right:0;bottom:0;
+    width:40px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+    animation:shimmer 1.8s ease-in-out infinite;
+  }
+  @keyframes shimmer{
+    0%{transform:translateX(-40px);opacity:0;}
+    40%{opacity:1;}
+    100%{transform:translateX(40px);opacity:0;}
+  }
+  .progress-fill.just-changed{animation:pulse-glow .5s ease-out;}
+  @keyframes pulse-glow{
+    0%{box-shadow:0 0 0 rgba(184,134,11,0);}
+    40%{box-shadow:0 0 16px rgba(212,168,48,.8);}
+    100%{box-shadow:0 0 8px rgba(184,134,11,.5);}
+  }
+  /* SEARCH */
+  .search-wrap{margin-bottom:1.5rem;position:relative;}
+  .search-input{width:100%;background:var(--card-bg);border:1px solid var(--border);border-radius:4px;padding:.6rem 2.5rem .6rem .9rem;font-family:'Source Serif 4',serif;font-size:.88rem;color:var(--ink);outline:none;transition:border-color .2s,box-shadow .2s;}
+  .search-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,134,11,.08);}
+  .search-input::placeholder{color:var(--muted);}
+  .search-clear{position:absolute;right:.7rem;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--muted);font-size:1rem;display:none;line-height:1;transition:color .2s;}
+  .search-clear:hover{color:var(--rust);}
+  .search-results-count{font-size:.72rem;color:var(--muted);margin-top:.4rem;font-style:italic;min-height:1rem;transition:opacity .2s;}
+  /* GLANCE VIEW */
+  .view-toggle{display:flex;gap:.4rem;margin-bottom:1.5rem;}
+  .view-btn{background:var(--card-bg);border:1px solid var(--border);border-radius:4px;padding:.4rem .85rem;font-size:.74rem;cursor:pointer;font-family:'Source Serif 4',serif;color:var(--muted);transition:all .2s;}
+  .view-btn:hover{border-color:var(--gold);color:var(--gold);}
+  .view-btn.active{background:var(--ink);border-color:var(--ink);color:var(--parchment);}
+  .glance-view{display:none;}
+  .glance-view.visible{display:block;}
+  .detail-view.hidden{display:none;}
+  .glance-grid{display:flex;flex-direction:column;gap:.6rem;}
+  .glance-item{background:var(--card-bg);border:1px solid var(--border);border-radius:6px;padding:1.1rem 1.4rem;cursor:pointer;transition:all .2s;display:grid;grid-template-columns:auto 1fr auto;gap:1rem;align-items:center;}
+  .glance-item:hover{border-color:var(--gold);background:var(--parchment);}
+  .glance-item.active-glance{border-color:var(--gold);background:#fdf8ee;}
+  .glance-num{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--border);line-height:1;}
+  .glance-item.active-glance .glance-num{color:var(--gold);}
+  .glance-date{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.2rem;}
+  .glance-title{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:.3rem;}
+  .glance-overview{font-size:.82rem;line-height:1.6;color:var(--muted);font-weight:300;}
+  .glance-arrow{color:var(--border);font-size:1rem;transition:color .2s;}
+  .glance-item:hover .glance-arrow{color:var(--gold);}
+  /* READ TIME BADGE */
+  .read-time{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.5rem;display:flex;align-items:center;gap:.3rem;}
+  .read-time::before{content:'';display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--border);}
+  .main-layout{max-width:1100px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+  .month-tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+  .month-tab{background:var(--card-bg);border:1px solid var(--border);border-radius:4px;padding:.45rem 1.1rem;font-size:.78rem;cursor:pointer;font-family:'Source Serif 4',serif;color:var(--muted);transition:all .2s;letter-spacing:.08em;}
+  .month-tab:hover{border-color:var(--gold);color:var(--gold);}
+  .month-tab.active{background:var(--ink);border-color:var(--ink);color:var(--parchment);}
+  .section-label{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:.75rem;}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--border);}
+  .timeline-section{margin-bottom:2rem;}
+  .timeline{display:flex;align-items:stretch;background:var(--card-bg);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+  .timeline-item{flex:1;padding:1rem .85rem;cursor:pointer;border-right:1px solid var(--border);transition:background .2s;}
+  .timeline-item:last-child{border-right:none;}
+  .timeline-item:hover{background:var(--parchment);}
+  .timeline-item.active{background:var(--ink);}
+  .timeline-item.active .tl-date{color:var(--gold-light);}
+  .timeline-item.active .tl-title{color:var(--parchment);}
+  .timeline-item.active .tl-book{color:rgba(245,240,232,.5);}
+  .timeline-item.active .tl-dot{background:var(--gold-light);}
+  .tl-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);margin-bottom:.5rem;}
+  .tl-date{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem;}
+  .tl-title{font-family:'Playfair Display',serif;font-size:.82rem;font-weight:700;line-height:1.3;color:var(--ink);margin-bottom:.25rem;}
+  .tl-book{font-size:.63rem;color:var(--muted);font-style:italic;}
+  .themes-section{margin-bottom:2rem;}
+  .themes-grid{display:flex;flex-wrap:wrap;gap:.5rem;}
+  .theme-tag{background:var(--card-bg);border:1px solid var(--border);border-radius:100px;padding:.32rem .85rem;font-size:.76rem;cursor:pointer;transition:all .2s;color:var(--muted);display:flex;align-items:center;gap:.4rem;}
+  .theme-tag:hover{border-color:var(--gold);color:var(--gold);}
+  .theme-tag.active{background:var(--gold);border-color:var(--gold);color:white;}
+  .theme-tag .tag-count{background:rgba(0,0,0,.12);border-radius:100px;padding:0 .35rem;font-size:.64rem;font-weight:600;}
+  .theme-tag.active .tag-count{background:rgba(255,255,255,.25);}
+  .sermon-content{display:none;animation:fadeIn .3s ease;}
+  .sermon-content.visible{display:block;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+  .sermon-card{background:var(--card-bg);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+  .sermon-header{padding:1.75rem 2rem 1.4rem;border-bottom:1px solid var(--border);}
+  .sermon-date-badge{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem;}
+  .sermon-title{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3vw,1.9rem);line-height:1.2;color:var(--ink);}
+  .sermon-scripture-pills{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.9rem;}
+  .scripture-pill{background:var(--parchment);border:1px solid var(--border);border-radius:4px;padding:.22rem .55rem;font-size:.7rem;color:var(--rust);cursor:pointer;transition:all .2s;font-style:italic;}
+  .scripture-pill:hover{background:var(--rust);color:white;border-color:var(--rust);}
+  .sermon-body{padding:1.75rem 2rem;display:grid;grid-template-columns:1fr 1fr;gap:2rem;}
+  .content-block{margin-bottom:1.5rem;}
+  .content-block-label{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem;}
+  .content-block-label::after{content:'';flex:1;height:1px;background:var(--border);}
+  .overview-text{font-size:1rem;line-height:1.75;color:var(--ink);font-weight:300;}
+  .key-point{margin-bottom:1.1rem;padding:1rem 1rem 1rem .9rem;border-left:3px solid var(--gold);background:var(--parchment);border-radius:0 4px 4px 0;}
+  .key-point-title{font-family:'Playfair Display',serif;font-size:.93rem;font-weight:700;color:var(--ink);margin-bottom:.45rem;}
+  .key-point-text{font-size:.87rem;line-height:1.7;color:#4a4035;font-weight:300;}
+  .application-block{grid-column:1/-1;background:var(--ink);color:var(--parchment);border-radius:4px;padding:1.3rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;}
+  .app-icon{font-size:1.3rem;flex-shrink:0;margin-top:.1rem;}
+  .app-label{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-light);margin-bottom:.4rem;}
+  .app-text{font-size:.88rem;line-height:1.7;color:rgba(245,240,232,.85);font-weight:300;font-style:italic;}
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(26,20,16,.7);z-index:100;align-items:center;justify-content:center;padding:1rem;}
+  .modal-overlay.open{display:flex;}
+  .modal-box{background:var(--cream);border:1px solid var(--border);border-radius:8px;max-width:520px;width:100%;padding:2rem;position:relative;max-height:80vh;overflow-y:auto;animation:modalIn .25s ease;}
+  @keyframes modalIn{from{opacity:0;transform:scale(.96) translateY(10px);}to{opacity:1;transform:scale(1) translateY(0);}}
+  .modal-ref{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--rust);margin-bottom:.75rem;}
+  .modal-text{font-family:'Playfair Display',serif;font-size:1.05rem;line-height:1.8;color:var(--ink);font-style:italic;}
+  .modal-source{font-size:.75rem;color:var(--muted);margin-top:1rem;}
+  .modal-close{position:absolute;top:1rem;right:1rem;background:none;border:1px solid var(--border);border-radius:4px;width:28px;height:28px;cursor:pointer;font-size:.85rem;color:var(--muted);display:flex;align-items:center;justify-content:center;}
+  .modal-close:hover{background:var(--parchment);}
+  .sermon-nav{display:flex;justify-content:space-between;align-items:center;margin-top:1rem;}
+  .nav-btn{background:var(--card-bg);border:1px solid var(--border);border-radius:4px;padding:.5rem 1rem;font-size:.78rem;cursor:pointer;font-family:'Source Serif 4',serif;color:var(--muted);transition:all .2s;}
+  .nav-btn:hover:not(:disabled){border-color:var(--gold);color:var(--gold);}
+  .nav-btn:disabled{opacity:.3;cursor:default;}
+  .nav-counter{font-size:.75rem;color:var(--muted);font-style:italic;}
+  @media(max-width:680px){.sermon-body{grid-template-columns:1fr;}.timeline{flex-direction:column;}.timeline-item{border-right:none;border-bottom:1px solid var(--border);}.timeline-item:last-child{border-bottom:none;}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <p class="header-eyebrow">Calvary Baptist Church · 2026</p>
+  <h1>Walking Through <em>Acts</em></h1>
+  <p class="header-sub">A sermon series on the early church</p>
+  <div class="header-rule"></div>
+</header>
+<div class="progress-bar-wrap">
+  <div class="progress-meta">
+    <span class="progress-label" id="progress-label">Sermon 1 of 10</span>
+    <span class="progress-pct" id="progress-pct">10%</span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:10%"></div></div>
+</div>
+<main class="main-layout">
+  <div class="view-toggle">
+    <button class="view-btn active" onclick="setView('detail',this)">Sermon View</button>
+    <button class="view-btn" onclick="setView('glance',this)">Series at a Glance</button>
+  </div>
+  <div class="search-wrap">
+    <input class="search-input" id="search-input" type="text" placeholder="Search sermons by keyword, theme, or scripture..." oninput="handleSearch(this.value)">
+    <button class="search-clear" id="search-clear" onclick="clearSearch()">&#x2715;</button>
+    <div class="search-results-count" id="search-count"></div>
+  </div>
+  <div class="glance-view" id="glance-view"><div class="glance-grid" id="glance-grid"></div></div>
+  <div class="detail-view" id="detail-view">
+  <div class="month-tabs">
+    <div class="month-tab active" onclick="filterMonth('all',this)">All Sermons</div>
+    <div class="month-tab" onclick="filterMonth('jan',this)">January</div>
+    <div class="month-tab" onclick="filterMonth('feb',this)">February</div>
+    <div class="month-tab" onclick="filterMonth('mar',this)">March</div>
+  </div>
+  <section class="timeline-section">
+    <p class="section-label">Sermon Series Timeline</p>
+    <div class="timeline" id="timeline"></div>
+  </section>
+  <section class="themes-section">
+    <p class="section-label">Recurring Themes</p>
+    <div class="themes-grid">
+      <span class="theme-tag" onclick="filterTheme('holy-spirit',this)">Holy Spirit <span class="tag-count">8</span></span>
+      <span class="theme-tag" onclick="filterTheme('surrender',this)">Surrender <span class="tag-count">7</span></span>
+      <span class="theme-tag" onclick="filterTheme('persecution',this)">Persecution <span class="tag-count">4</span></span>
+      <span class="theme-tag" onclick="filterTheme('salvation',this)">Salvation <span class="tag-count">8</span></span>
+      <span class="theme-tag" onclick="filterTheme('boldness',this)">Boldness <span class="tag-count">4</span></span>
+      <span class="theme-tag" onclick="filterTheme('heart',this)">Heart <span class="tag-count">5</span></span>
+      <span class="theme-tag active" onclick="filterTheme(null,this)">All Sermons</span>
+    </div>
+  </section>
+  <div id="sermon-cards"></div>
+  <div class="sermon-nav">
+    <button class="nav-btn" id="prev-btn" onclick="navSermon(-1)" disabled>← Previous</button>
+    <span class="nav-counter" id="nav-counter"></span>
+    <button class="nav-btn" id="next-btn" onclick="navSermon(1)">Next →</button>
+  </div>
+  </div><!-- end detail-view -->
+</main>
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <div class="modal-ref" id="modal-ref"></div>
+    <div class="modal-text" id="modal-text"></div>
+    <div class="modal-source" id="modal-source"></div>
+  </div>
+</div>
+<script>
+const sermons=[
+  {
+    id:0,month:'jan',date:'January 4, 2026',title:'Waiting Is Not Passive',book:'Acts 1',
+    themes:['holy-spirit','surrender'],
+    scriptures:[{label:'Acts 1:4–8',key:'acts14'},{label:'Romans 8:26–27',key:'rom826'}],
+    overview:'Acts 1 draws a line between genuine waiting on God and what most of us actually do. The disciples went to a place with no distractions, prayed together in one accord, and made specific petitions to the Lord until the promise came. That kind of waiting is active, hungry, and costly.',
+    points:[
+      {title:'1. Real Waiting Looks Nothing Like What We Do',text:'Most of us, when offended or in need, skip prayer and go straight to building a coalition. We want people on our side right now. We don\'t want to wait on God to soften hearts and fix the issue. The disciples in Acts 1 were in constant prayer and supplication, fasting, suffering together, and becoming the church in the process. That is the definition of waiting on the Lord.'},
+      {title:'2. Forgiveness Is the Litmus Test',text:'The people who can hurt you most are usually the closest to you, and sometimes you genuinely do not have it in yourself to forgive them. That is exactly why you need the Holy Spirit. Forgiveness should be what the church is known for. Instead we are known for judgment. If you cannot forgive, that is not just a character flaw. According to Matthew 6, it is a spiritual problem that only the Spirit can fix.'}
+    ],
+    application:'Stop going to other people first. Go to God. Wait on him in prayer and supplication, not as a formality but as a genuine act of dependence. God is still moving even when you cannot feel it, taste it, or touch it. Just because you have not stepped into the promise does not mean his presence is not there.'
+  },
+  {
+    id:1,month:'jan',date:'January 11, 2026',title:'The Day of Pentecost',book:'Acts 2',
+    themes:['holy-spirit','salvation'],
+    scriptures:[{label:'Acts 2:1–4',key:'acts21'},{label:'Galatians 5:22–23',key:'gal522'}],
+    overview:'Acts 2 is the fulfillment of everything Acts 1 was building toward. The Holy Spirit came on all of them at once, not just the leaders, and the evidence was not emotional but transformational. The fruit of the Spirit is the proof, and that fruit is something your flesh is simply not capable of producing on its own.',
+    points:[
+      {title:'1. Everyone Who Waited Was Filled',text:'They were all in one accord in one place. Not just the apostles. Not just the spiritually impressive. Everyone who had gathered with one purpose was filled. Spirit-filling is not reserved for special Christians. It is available to every believer who yields and receives what God freely offers rather than trying to manufacture it through effort.'},
+      {title:'2. The Cross Must Be Enough to Forgive Others Too',text:'God\'s purpose is not to keep us trapped in shame but to liberate us from sin\'s guilt entirely. When you refuse to forgive someone, you are functionally saying the cross was not sufficient. If the cross was enough to cover your sin before God, then it is enough to release what others have done to you. Anything less denies the power of what Christ actually accomplished.'}
+    ],
+    application:'Come to God with complete honesty about sin, not religious pretense. Drop the mask. The Spirit does the work. Your job is to stop trying to produce what only God can produce and start receiving what is already being freely offered.'
+  },
+  {
+    id:2,month:'jan',date:'January 25, 2026',title:'Peter Before and After',book:'Acts 2 — Peter\'s Sermon',
+    themes:['holy-spirit','salvation','surrender'],
+    scriptures:[{label:'Acts 2:38–41',key:'acts238'},{label:'Luke 22:54–62',key:'luke2254'}],
+    overview:'Peter\'s sermon in Acts 2 is the most successful in history, 3,000 souls in one day. But the same man who preached it boldly was the same man who denied Christ three times in a courtyard just weeks before. The only thing that changed between those two Peters was the Holy Spirit. That difference is everything.',
+    points:[
+      {title:'1. You Can Do Ministry Without Salvation',text:'Peter cast out demons and healed people before Pentecost. He followed Jesus for three years. When pressure came, he denied Christ three times. Spiritual activity is not proof of salvation. You can apply biblical principles, live a moral life, and do a lot of impressive religious things without ever genuinely submitting your will to the Holy Spirit. The principles of Christ work whether you believe or not. That is what makes it so easy to confuse behavior modification with transformation.'},
+      {title:'2. The Roller Coaster Is a Sign, Not Just a Struggle',text:'The pattern of youth camp highs that last two weeks followed by doubt and rebellion is not just immaturity. It is what life looks like when the Holy Spirit has not genuinely taken residence. When everything is going well you feel close to God, when things fall apart you fall apart. That is not Spirit-filled Christianity. When the Holy Spirit is truly there, something sustains that has nothing to do with circumstances.'}
+    ],
+    application:'Ask yourself honestly where you are. If you have been on this roller coaster for years, that is not something to manage better. It is a signal. The chairman of a deacon board can walk the aisle and say this has been my whole life. It is never too late and no role is too impressive to need the real thing.'
+  },
+  {
+    id:3,month:'feb',date:'February 1, 2026',title:'What I Do Have, I Give You',book:'Acts 3:1–26, 4:1–4',
+    themes:['holy-spirit','surrender','boldness'],
+    scriptures:[{label:'Acts 3:6',key:'acts36'},{label:'Acts 3:1–10',key:'acts31'},{label:'Acts 4:1–4',key:'acts41'}],
+    overview:'Acts 3 puts three kinds of people in the same moment. Those who have been changed and must give what they have. Those who are broken and need to receive. And those in positions of authority who resist what the Spirit is doing. Every person in the room is one of those three.',
+    points:[
+      {title:'1. You Have More Than You Think',text:'Peter and John had no money. The religious culture said if you cannot give alms, stay home. But they were no longer operating by the world\'s economy. They had the name of Jesus and they gave that instead. Faith required action. It did not happen when Peter spoke the words. It happened when he took the man by the hand and pulled him up. Satan wants you fixated on what you do not have. If you have salvation and hope in Christ, you have everything that matters.'},
+      {title:'2. Opposition Will Come from Inside the Church',text:'Peter and John were not arrested by pagans. They were arrested by the priests, the captain of the temple, the Sadducees. The religious establishment. When you start moving in the power of God it will disrupt systems and people who have a stake in those systems will not like it. That cost is expected. That cost is worth it. Do not let it surprise you and do not let it stop you.'}
+    ],
+    application:'Figure out which category you are in right now. If you have been changed, stop focusing on what you lack and start freely giving what you do have. If you are the beggar, reach up and take the hand being extended. If you are the one resisting what the Spirit is doing because it upsets your plan, repent and let him work.'
+  },
+  {
+    id:4,month:'feb',date:'February 8, 2026',title:'Boldness in the Face of Opposition',book:'Acts 4:1–12',
+    themes:['holy-spirit','persecution','boldness'],
+    scriptures:[{label:'Acts 4:8–10',key:'acts48'},{label:'Acts 4:11–12',key:'acts411'},{label:'Psalm 118:22',key:'ps11822'}],
+    overview:'Acts 4 shows what faithful obedience actually costs. Peter and John healed a man and preached the gospel. They ended up in jail. The next day they stood before the most powerful religious leaders in the known world and preached the exact same message without softening a single word. The Holy Spirit is how that happens.',
+    points:[
+      {title:'1. Doing the Right Thing Can Still Get You Punished',text:'They did exactly what God called them to do and ended up in custody. The religious leaders were not angry about the miracle. They were angry because the preaching confirmed Jesus as Messiah, which meant they had made a catastrophic mistake. Obedience to God does not produce favorable outcomes from the world. It just does not. The Christian life gets harder, not easier. The audiences get harder. The message stays the same.'},
+      {title:'2. The Holy Spirit Is How You Get Off the Roller Coaster',text:'Then Peter, filled with the Holy Spirit, said to them. That phrase is the turning point. His boldness before the most powerful men in Israel was not self-generated and it was not personality. It was the Spirit. He preached the same uncompromising gospel to a harder crowd in a more dangerous situation and did not change a word. There is no other name under heaven by which we must be saved. Said it straight to their faces.'}
+    ],
+    application:'Expect opposition when you obey God. Faithfulness is not measured by favorable outcomes. The message does not change based on who is in the room. Rely on the Spirit, not on your own courage, and keep going when it gets harder.'
+  },
+  {
+    id:5,month:'feb',date:'February 15, 2026',title:'Surrendered Hearts, Dangerous Hearts',book:'Acts 4:32 — 5:11, Matthew 11–12',
+    themes:['surrender','heart','salvation'],
+    scriptures:[{label:'Acts 4:36–37',key:'acts436'},{label:'Acts 5:1–11',key:'acts51'},{label:'Matthew 11:28–30',key:'matt1128'},{label:'Matthew 12:31–32',key:'matt1231'}],
+    overview:'Acts 4 and 5 place two responses to the gospel side by side. Barnabas sold his land and gave everything with a heart that had genuinely found rest in Christ. Ananias and Sapphira did the same act with deception at the core. Matthew 11 and 12 make clear that God has always judged the intent behind the action, not the action itself.',
+    points:[
+      {title:'1. Barnabas Found the Rest Christ Actually Offers',text:'Barnabas was a wealthy landowner. He sold it all and laid it at the apostles\' feet with no agenda. His security was in Christ and nothing else mattered anymore. He saw people losing their family names, their inheritances, their livelihoods because of their faith, and he said here, you can use this better than I can. That is what happens when someone has genuinely encountered grace. The world\'s economy stops making sense.'},
+      {title:'2. Ananias and Sapphira Wanted the Look Without the Reality',text:'Their sin was not the amount they gave. The land was theirs. Peter said so directly. They could have kept half and said so and that would have been fine. The sin was performing surrender while holding back, wanting to be perceived as holy without doing what holiness actually requires. Peter said you have not lied to men but to God. This is the same pattern as the Pharisees in Matthew 12 who saw Jesus fulfill every messianic prophecy and still did not care because they had their own agenda.'}
+    ],
+    application:'What are you holding back? Your future, your plans, your security? Maybe unintentionally. Christ says come to me, all you who are heavy laden, and I will give you rest. Barnabas found that rest. God is either Lord of all or he is not Lord at all. Do not hold anything back.'
+  },
+  {
+    id:6,month:'mar',date:'March 1, 2026',title:'Total Surrender',book:'Acts 6–7 — Stephen',
+    themes:['surrender','persecution','holy-spirit'],
+    scriptures:[{label:'Philippians 4:6–7',key:'phil46'},{label:'Acts 6:1–7',key:'acts61'},{label:'Acts 6:8–15',key:'acts68'},{label:'Acts 7:51–60',key:'acts751'}],
+    overview:'The life and martyrdom of Stephen in Acts 6 and 7 calls believers to total surrender. Accept whatever role God assigns, stay Spirit-filled, and keep your focus on mission even when opposition comes.',
+    points:[
+      {title:'1. Your Role Does Not Limit God\'s Power',text:'Stephen was appointed to wait tables. He never resented it or tried to trade up from it. The same Holy Spirit working through the apostles worked through Stephen regardless of his title. He served faithfully, performed miracles, and proclaimed truth without elevating himself. Within the body of Christ there is nothing greater or lesser, just different functions. The power of God flows through the function you accept, not the one you wish you had.'},
+      {title:'2. Stay on Mission When the Lies Come',text:'Stephen was falsely accused, set up by planted witnesses, and dragged before the Sanhedrin. He never once stopped to defend himself. He did not say I did not say that. He just gave them a history lesson proving from Abraham to Moses that God\'s people have always rejected truth tellers. When lies come against your character, chasing them down only pulls you off mission. Stephen kept his eyes fixed and stayed on point all the way to the end.'}
+    ],
+    application:'Do whatever God asks regardless of how glamorous or unglamorous it is. Stay filled with his Spirit. And when people lie about you, do not chase it. Stephen beat the temptation to defend himself, the temptation to resent his assignment, and the dread of persecution. He did it by staying focused on Christ. His life and death is the model.'
+  },
+  {
+    id:7,month:'mar',date:'March 8, 2026',title:'More Than Belief',book:'Acts 8 — Simon the Sorcerer',
+    themes:['holy-spirit','salvation','persecution'],
+    scriptures:[{label:'Acts 8:1–8',key:'acts81'},{label:'Acts 8:18–23',key:'acts818'}],
+    overview:'Acts 8 shows that persecution scattered the early church and the gospel exploded as a result. Every time in history that Christianity has been pressed and persecuted, revival has followed. The story of Simon the Sorcerer then draws a hard line: belief and baptism alone do not equal salvation. The Holy Spirit must actually come and change the heart.',
+    points:[
+      {title:'1. Persecution Has Never Shut the Gospel Down',text:'After Stephen\'s death, Saul began dragging believers out of their homes and committing them to prison that was nothing like the Holiday Inn. The church scattered into regions they never would have gone otherwise. Jews ended up preaching in Samaria of all places, a place they would not have been caught in before. Philip planted a church there. The gospel went everywhere because the pressure pushed it everywhere. Satan has been there for the whole story and still has not figured out that pressing the church only spreads it.'},
+      {title:'2. Simon Wanted the Power Without the Change',text:'Simon the Sorcerer believed, was baptized, and followed Philip everywhere. But when Peter and John arrived and the Spirit moved, Simon tried to buy that power with money. He wanted the outward manifestation without the inward transformation. He wanted people to look at him the way they looked at Peter and John without anything actually changing inside him. Peter called it exactly what it was: wickedness. Your heart is not right. Repent. That is the American church in a sentence. Give me the open manifestation. I do not want to change my ways.'}
+    ],
+    application:'If there has been no real change, no fruit that your flesh could not have produced on its own, that is worth taking seriously today. Real salvation is marked by the Holy Spirit doing things in your life you cannot explain. If you can sin without guilt or conviction, that is the signal. Today is the day.'
+  },
+  {
+    id:8,month:'mar',date:'March 22, 2026',title:'Road to Damascus',book:'Acts 9 — Saul\'s Conversion',
+    themes:['salvation','surrender','holy-spirit'],
+    scriptures:[{label:'Acts 9:1–9',key:'acts91'}],
+    overview:'The conversion of Saul in Acts 9 is one of the most dramatic transformations in scripture. But the real lesson is not the drama. It is the two questions Saul asked, and the difference between the men who were with him who heard everything and changed nothing, and the man on his face in the dirt who was never the same again.',
+    points:[
+      {title:'1. Two Questions That Define Genuine Salvation',text:'When Christ appeared, Saul did not panic or deny. He said who are you, Lord. He already recognized this was the truth before he even knew the name. That is what happens when the Spirit shows up. Something in you knows. And immediately he asked Lord, what do you want me to do. That second question is where real salvation begins. Not a prayer said to clean your life up. Not applying biblical principles because they work. A full surrender of direction and will. That is the conversion.'},
+      {title:'2. Hearing Is Not the Same as Encountering',text:'The men traveling with Saul heard the voice, heard the entire conversation, and there is no record of a single one of them changing. They heard the word and kept walking. That is where a significant portion of the church lives. Hearing every Sunday, nodding along, still managing money like the world, still relating like the world, still rejoicing at the wrong things. It has to be more than just hearing. An encounter changes you. Three days blind, not eating, not drinking. Saul was completely undone. That kind of change cannot be faked.'}
+    ],
+    application:'Stop trying to stand in both worlds. The same Christ who stopped Saul on that road is still revealing himself. The only question that matters is the one Saul asked. Lord, what do you want me to do. And when he gives you direction, the other end is already being prepared. You just have to move.'
+  },
+  {
+    id:9,month:'mar',date:'March 29, 2026',title:'The Message of the Cross',book:'1 Corinthians 1 — Easter',
+    themes:['salvation','boldness','heart'],
+    scriptures:[{label:'1 Corinthians 1:17–18',key:'cor117'},{label:'1 Corinthians 1:21–24',key:'cor121'},{label:'Isaiah 53:1–3',key:'isa531'},{label:'Isaiah 52:14',key:'isa5214'},{label:'Matthew 27:26–35',key:'matt2726'},{label:'Luke 22:41–42',key:'luke2241'}],
+    overview:'1 Corinthians 1:17–18 declares that the message of the cross is foolishness to those who are perishing but the power of God to those being saved. Churches are removing the blood, the crucifixion, the suffering, replacing it with a bloodless gospel that has no power. The traditions of men will never change you from the inside out. Only the cross can do that.',
+    points:[
+      {title:'1. The Old Bloody Message Cannot Be Softened',text:'A major multi-campus church in North Carolina sent a video to all its campus pastors barring them from mentioning the cross, the crucifixion, or the blood at their Easter service. The reason given: it\'s too gross and icky. That was 2025. In 2009 a church asked for the song Lead Me to the Cross to be removed from a Good Friday service because it might trigger teenagers. The message has been changing for a long time. Denominations are moving toward salvation through social activism and being a good person. That bloodless gospel lacks power and it lacks hope. It was prophesied 900 years before it happened. You do not get to sanitize it.'},
+      {title:'2. Salvation Is Simpler Than We Make It',text:'You do not have to clean yourself up. You do not have to turn over a new leaf. Some of us do not even know how to change, and that is fine because that is not what is being asked. The gospel is this: you and I should have died in our sin and Christ died in our place. Receive that by faith. Christ takes you exactly as you are and does the changing himself. He instills his desires in your heart and you start wanting what he wants. The rest follows. We keep attaching conditions to something that is not supposed to have conditions.'}
+    ],
+    application:'Stop apologizing for the message of the cross. It is a hard message because it cost everything. Come to Christ as you are, place your faith in what he did, and let him do what only he can do from there. The traditions of men will not change you. Only the cross will.'
+  }
+];
+
+const scriptures={
+  acts14:{ref:'Acts 1:4–5',text:'"And being assembled together with them, He commanded them not to depart from Jerusalem, but to wait for the Promise of the Father, which He said, you have heard from Me; for John truly baptized with water, but you shall be baptized with the Holy Spirit not many days from now."',source:'New King James Version'},
+  rom826:{ref:'Romans 8:26–27',text:'"Likewise the Spirit also helps in our weaknesses. For we do not know what we should pray for as we ought, but the Spirit Himself makes intercession for us with groanings which cannot be uttered. Now He who searches the hearts knows what the mind of the Spirit is, because He makes intercession for the saints according to the will of God."',source:'New King James Version'},
+  acts21:{ref:'Acts 2:1–4',text:'"When the Day of Pentecost had fully come, they were all with one accord in one place. And suddenly there came a sound from heaven, as of a rushing mighty wind... Then there appeared to them divided tongues, as of fire, and one sat upon each of them. And they were all filled with the Holy Spirit."',source:'New King James Version'},
+  gal522:{ref:'Galatians 5:22–23',text:'"But the fruit of the Spirit is love, joy, peace, longsuffering, kindness, goodness, faithfulness, gentleness, self-control. Against such there is no law."',source:'New King James Version'},
+  acts238:{ref:'Acts 2:38–41',text:'"Then Peter said to them, Repent, and let every one of you be baptized in the name of Jesus Christ for the remission of sins; and you shall receive the gift of the Holy Spirit. For the promise is to you and to your children, and to all who are afar off, as many as the Lord our God will call... Then those who gladly received his word were baptized; and that day about three thousand souls were added to them."',source:'New King James Version'},
+  luke2254:{ref:'Luke 22:54–62',text:'"Having arrested Him, they led Him and brought Him into the high priest\'s house. But Peter followed at a distance... And a certain servant girl, seeing him as he sat by the fire, looked intently at him and said, This man was also with Him. But he denied it, saying, Woman, I do not know Him... And immediately, while he was still speaking, the rooster crowed. And the Lord turned and looked at Peter. Then Peter remembered the word of the Lord... So Peter went out and wept bitterly."',source:'New King James Version'},
+  acts36:{ref:'Acts 3:6',text:'"Then Peter said, Silver and gold I do not have, but what I do have I give you: In the name of Jesus Christ of Nazareth, rise up and walk."',source:'New King James Version'},
+  acts31:{ref:'Acts 3:1–3',text:'"Now Peter and John went up together to the temple at the hour of prayer, the ninth hour. And a certain man lame from his mother\'s womb was carried, whom they laid daily at the gate of the temple which is called Beautiful, to ask alms from those who entered the temple."',source:'New King James Version'},
+  acts41:{ref:'Acts 4:1–3',text:'"Now as they spoke to the people, the priests, the captain of the temple, and the Sadducees came upon them, being greatly disturbed that they taught the people and preached in Jesus the resurrection from the dead. And they laid hands on them, and put them in custody until the next day."',source:'New King James Version'},
+  acts48:{ref:'Acts 4:8–10',text:'"Then Peter, filled with the Holy Spirit, said to them, Rulers of the people and elders of Israel: If we this day are judged for a good deed done to a helpless man, by what means he has been made well, let it be known to you all, and to all the people of Israel, that by the name of Jesus Christ of Nazareth, whom you crucified, whom God raised from the dead, by Him this man stands here before you whole."',source:'New King James Version'},
+  acts411:{ref:'Acts 4:11–12',text:'"This is the stone which was rejected by you builders, which has become the chief cornerstone. Nor is there salvation in any other, for there is no other name under heaven given among men by which we must be saved."',source:'New King James Version'},
+  ps11822:{ref:'Psalm 118:22',text:'"The stone which the builders rejected has become the chief cornerstone. This was the Lord\'s doing; it is marvelous in our eyes."',source:'New King James Version'},
+  acts436:{ref:'Acts 4:36–37',text:'"And Joses, who was also named Barnabas by the apostles (which is translated Son of Encouragement), a Levite of the country of Cyprus, having land, sold it, and brought the money and laid it at the apostles\' feet."',source:'New King James Version'},
+  acts51:{ref:'Acts 5:3–5',text:'"But Peter said, Ananias, why has Satan filled your heart to lie to the Holy Spirit and keep back part of the price of the land for yourself?... You have not lied to men but to God. Then Ananias, hearing these words, fell down and breathed his last."',source:'New King James Version'},
+  matt1128:{ref:'Matthew 11:28–30',text:'"Come to Me, all you who labor and are heavy laden, and I will give you rest. Take My yoke upon you and learn from Me, for I am gentle and lowly in heart, and you will find rest for your souls. For My yoke is easy and My burden is light."',source:'New King James Version'},
+  matt1231:{ref:'Matthew 12:31–32',text:'"Therefore I say to you, every sin and blasphemy will be forgiven men, but the blasphemy against the Spirit will not be forgiven men. Anyone who speaks a word against the Son of Man, it will be forgiven him; but whoever speaks against the Holy Spirit, it will not be forgiven him, either in this age or in the age to come."',source:'New King James Version'},
+  phil46:{ref:'Philippians 4:6–7',text:'"Be anxious for nothing, but in everything by prayer and supplication, with thanksgiving, let your requests be made known to God; and the peace of God, which surpasses all understanding, will guard your hearts and minds through Christ Jesus."',source:'New King James Version'},
+  acts61:{ref:'Acts 6:1–4',text:'"Now in those days, when the number of the disciples was multiplying, there arose a complaint against the Hebrews by the Hellenists... Then the twelve summoned the multitude of the disciples and said, It is not desirable that we should leave the word of God and serve tables. Therefore, brethren, seek out from among you seven men of good reputation, full of the Holy Spirit and wisdom, whom we may appoint over this business."',source:'New King James Version'},
+  acts68:{ref:'Acts 6:8–11',text:'"And Stephen, full of faith and power, did great wonders and signs among the people... and they were not able to resist the wisdom and the Spirit by which he spoke. Then they secretly induced men to say, We have heard him speak blasphemous words against Moses and God."',source:'New King James Version'},
+  acts751:{ref:'Acts 7:51–60',text:'"You stiff-necked and uncircumcised in heart and ears! You always resist the Holy Spirit... They cried out with a loud voice, stopped their ears, and ran at him with one accord... And they stoned Stephen as he was calling on God and saying, Lord Jesus, receive my spirit. Then he knelt down and cried out with a loud voice, Lord, do not charge them with this sin."',source:'New King James Version'},
+  acts81:{ref:'Acts 8:1–8',text:'"At that time a great persecution arose against the church which was at Jerusalem; and they were all scattered throughout the regions of Judea and Samaria, except the apostles... As for Saul, he made havoc of the church, entering every house, and dragging off men and women, committing them to prison. Therefore those who were scattered went everywhere preaching the word."',source:'New King James Version'},
+  acts818:{ref:'Acts 8:18–23',text:'"And when Simon saw that through the laying on of the apostles\' hands the Holy Spirit was given, he offered them money, saying, Give me this power also, that anyone on whom I lay hands may receive the Holy Spirit. But Peter said to him, Your money perish with you, because you thought that the gift of God could be purchased with money! You have neither part nor portion in this matter, for your heart is not right in the sight of God. Repent therefore of this your wickedness."',source:'New King James Version'},
+  acts91:{ref:'Acts 9:3–6',text:'"As he journeyed he came near Damascus, and suddenly a light shone around him from heaven. Then he fell to the ground, and heard a voice saying to him, Saul, Saul, why are you persecuting Me? And he said, Who are You, Lord? Then the Lord said, I am Jesus, whom you are persecuting. It is hard for you to kick against the goads. So he, trembling and astonished, said, Lord, what do You want me to do?"',source:'New King James Version'},
+  cor117:{ref:'1 Corinthians 1:17–18',text:'"For Christ did not send me to baptize, but to preach the gospel, not with wisdom of words, lest the cross of Christ should be made of no effect. For the message of the cross is foolishness to those who are perishing, but to us who are being saved it is the power of God."',source:'New King James Version'},
+  cor121:{ref:'1 Corinthians 1:21–24',text:'"For since, in the wisdom of God, the world through wisdom did not know God, it pleased God through the foolishness of the message preached to save those who believe. For Jews request a sign, and Greeks seek after wisdom; but we preach Christ crucified, to the Jews a stumbling block and to the Greeks foolishness, but to those who are called, both Jews and Greeks, Christ the power of God and the wisdom of God."',source:'New King James Version'},
+  isa531:{ref:'Isaiah 53:1–3',text:'"Who has believed our report? And to whom has the arm of the Lord been revealed? For He shall grow up before Him as a tender plant, and as a root out of dry ground. He has no form or comeliness; and when we see Him, there is no beauty that we should desire Him. He is despised and rejected by men, a Man of sorrows and acquainted with grief."',source:'New King James Version · Prophesied ~700 BC'},
+  isa5214:{ref:'Isaiah 52:14',text:'"Just as many were astonished at you, so His visage was marred more than any man, and His form more than the sons of men."',source:'New King James Version · Prophesied ~700 BC'},
+  matt2726:{ref:'Matthew 27:26–35',text:'"And when he had scourged Jesus, he delivered Him to be crucified... Then they crucified Him, and divided His garments, casting lots."',source:'New King James Version'},
+  luke2241:{ref:'Luke 22:41–42',text:'"And He was withdrawn from them about a stone\'s throw, and He knelt down and prayed, saying, Father, if it is Your will, take this cup away from Me; nevertheless not My will, but Yours, be done."',source:'New King James Version'}
+};
+
+let currentId=0,visibleIds=sermons.map(s=>s.id);
+
+function readTime(s){
+  const words=(s.overview+' '+s.points.map(p=>p.title+' '+p.text).join(' ')+' '+s.application).split(/\s+/).length;
+  return Math.max(2,Math.round(words/200))+' min read';
+}
+
+function buildGlance(){
+  const g=document.getElementById('glance-grid');
+  g.innerHTML='';
+  sermons.forEach((s,i)=>{
+    const div=document.createElement('div');
+    div.className='glance-item'+(s.id===currentId?' active-glance':'');
+    div.setAttribute('data-gid',s.id);
+    div.onclick=()=>{
+      document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelector('.view-btn').classList.add('active');
+      document.getElementById('glance-view').classList.remove('visible');
+      document.getElementById('detail-view').classList.remove('hidden');
+      selectSermon(s.id);
+    };
+    div.innerHTML=`<div class="glance-num">${String(i+1).padStart(2,'0')}</div><div><div class="glance-date">${s.date}</div><div class="glance-title">${s.title}</div><div class="glance-overview">${s.overview}</div></div><div class="glance-arrow">&#8594;</div>`;
+    g.appendChild(div);
+  });
+}
+
+function updateProgress(){
+  const allIds=sermons.map(s=>s.id);
+  const pos=allIds.indexOf(currentId)+1;
+  const total=allIds.length;
+  const pct=Math.round((pos/total)*100);
+  const fill=document.getElementById('progress-fill');
+  fill.classList.remove('just-changed');
+  void fill.offsetWidth; // force reflow to restart animation
+  fill.style.width=pct+'%';
+  fill.classList.add('just-changed');
+  document.getElementById('progress-label').textContent='Sermon '+pos+' of '+total;
+  document.getElementById('progress-pct').textContent=pct+'%';
+}
+
+function setView(view,el){
+  document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  if(view==='glance'){
+    document.getElementById('glance-view').classList.add('visible');
+    document.getElementById('detail-view').classList.add('hidden');
+  } else {
+    document.getElementById('glance-view').classList.remove('visible');
+    document.getElementById('detail-view').classList.remove('hidden');
+  }
+}
+
+function handleSearch(val){
+  const clear=document.getElementById('search-clear');
+  const count=document.getElementById('search-count');
+  val=val.trim().toLowerCase();
+  clear.style.display=val?'block':'none';
+  if(!val){
+    visibleIds=sermons.map(s=>s.id);
+    count.textContent='';
+    buildTimeline();
+    updateNav();
+    return;
+  }
+  visibleIds=sermons.filter(s=>{
+    const hay=(s.title+' '+s.overview+' '+s.points.map(p=>p.title+' '+p.text).join(' ')+' '+s.application+' '+s.scriptures.map(sc=>sc.label).join(' ')+' '+s.themes.join(' ')).toLowerCase();
+    return hay.includes(val);
+  }).map(s=>s.id);
+  count.textContent=visibleIds.length===0?'No results found':visibleIds.length+' sermon'+(visibleIds.length===1?'':'s')+' match';
+  sermons.forEach(s=>{
+    const tl=document.querySelector('[data-id="'+s.id+'"]');
+    if(tl)tl.style.opacity=visibleIds.includes(s.id)?'1':'0.3';
+  });
+  if(visibleIds.length>0&&!visibleIds.includes(currentId))selectSermon(visibleIds[0]);
+  updateNav();
+}
+
+function clearSearch(){
+  document.getElementById('search-input').value='';
+  handleSearch('');
+}
+
+function buildTimeline(){
+  const tl=document.getElementById('timeline');
+  tl.innerHTML='';
+  const vis=sermons.filter(s=>visibleIds.includes(s.id));
+  vis.forEach(s=>{
+    const d=document.createElement('div');
+    d.className='timeline-item'+(s.id===currentId?' active':'');
+    d.setAttribute('data-id',s.id);
+    d.onclick=()=>selectSermon(s.id);
+    const shortDate=s.date.replace(', 2026','');
+    d.innerHTML=`<div class="tl-dot"></div><div class="tl-date">${shortDate}</div><div class="tl-title">${s.title}</div><div class="tl-book">${s.book}</div>`;
+    tl.appendChild(d);
+  });
+}
+
+function buildCards(){
+  const c=document.getElementById('sermon-cards');
+  c.innerHTML='';
+  sermons.forEach(s=>{
+    const pills=s.scriptures.map(sc=>`<span class="scripture-pill" onclick="openScripture('${sc.key}')">${sc.label}</span>`).join('');
+    const pts=s.points.map(p=>`<div class="key-point"><div class="key-point-title">${p.title}</div><div class="key-point-text">${p.text}</div></div>`).join('');
+    const div=document.createElement('div');
+    div.id='sermon-'+s.id;
+    div.className='sermon-content'+(s.id===currentId?' visible':'');
+    div.innerHTML=`<div class="sermon-card"><div class="sermon-header"><div class="sermon-date-badge">${s.date}</div><div class="sermon-title">${s.title}</div><div class="read-time">${readTime(s)}</div><div class="sermon-scripture-pills">${pills}</div></div><div class="sermon-body"><div class="overview-col"><div class="content-block"><p class="content-block-label">Overview</p><p class="overview-text">${s.overview}</p></div></div><div class="points-col"><div class="content-block"><p class="content-block-label">Key Points</p>${pts}</div></div><div class="application-block"><div class="app-icon">&#10022;</div><div><div class="app-label">Application</div><p class="app-text">${s.application}</p></div></div></div></div>`;
+    c.appendChild(div);
+  });
+}
+
+function selectSermon(id){
+  document.querySelectorAll('.sermon-content').forEach(el=>el.classList.remove('visible'));
+  const el=document.getElementById('sermon-'+id);
+  if(el)el.classList.add('visible');
+  currentId=id;
+  buildTimeline();
+  buildGlance();
+  updateNav();
+  updateProgress();
+}
+
+function filterMonth(month,el){
+  document.querySelectorAll('.month-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  visibleIds=month==='all'?sermons.map(s=>s.id):sermons.filter(s=>s.month===month).map(s=>s.id);
+  selectSermon(visibleIds[0]);
+  buildTimeline();
+}
+
+function filterTheme(theme,el){
+  document.querySelectorAll('.theme-tag').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  visibleIds=theme?sermons.filter(s=>s.themes.includes(theme)).map(s=>s.id):sermons.map(s=>s.id);
+  sermons.forEach(s=>{
+    const tl=document.querySelector('[data-id="'+s.id+'"]');
+    if(tl)tl.style.opacity=visibleIds.includes(s.id)?'1':'0.35';
+  });
+  if(visibleIds.length>0)selectSermon(visibleIds[0]);
+  updateNav();
+}
+
+function navSermon(dir){
+  const idx=visibleIds.indexOf(currentId);
+  const next=visibleIds[idx+dir];
+  if(next!==undefined)selectSermon(next);
+}
+
+function updateNav(){
+  const idx=visibleIds.indexOf(currentId);
+  document.getElementById('prev-btn').disabled=idx===0;
+  document.getElementById('next-btn').disabled=idx===visibleIds.length-1;
+  document.getElementById('nav-counter').textContent=(idx+1)+' of '+visibleIds.length;
+}
+
+function openScripture(key){
+  const s=scriptures[key];
+  if(!s)return;
+  document.getElementById('modal-ref').textContent=s.ref;
+  document.getElementById('modal-text').textContent=s.text;
+  document.getElementById('modal-source').textContent=s.source;
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeModal(e){if(e.target===document.getElementById('modal'))closeModalDirect();}
+function closeModalDirect(){document.getElementById('modal').classList.remove('open');}
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')closeModalDirect();
+  if(e.key==='ArrowRight')navSermon(1);
+  if(e.key==='ArrowLeft')navSermon(-1);
+});
+
+buildCards();
+buildGlance();
+// Check URL hash to auto-select month (e.g. #jan, #feb, #mar)
+const hashMonth = window.location.hash.replace('#','').toLowerCase();
+const monthMap = {jan:'jan',january:'jan',feb:'feb',february:'feb',mar:'mar',march:'mar'};
+const startMonth = monthMap[hashMonth];
+if(startMonth){
+  // Filter to that month, activate correct tab
+  visibleIds = sermons.filter(s=>s.month===startMonth).map(s=>s.id);
+  if(visibleIds.length===0) visibleIds = sermons.map(s=>s.id);
+  // Mark tab active
+  document.querySelectorAll('.month-tab').forEach(t=>{
+    if(t.textContent.toLowerCase().startsWith(startMonth.slice(0,3))) t.classList.add('active');
+    else t.classList.remove('active');
+  });
+}
+buildTimeline();
+updateNav();
+updateProgress();
+// Select first visible sermon
+if(visibleIds.length>0) selectSermon(visibleIds[0]);
+</script>
+</body>
+</html>
