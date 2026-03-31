@@ -771,13 +771,24 @@ function buildSidebar(){
   }
 
   if(tab==='physical'){
-    // AFT Radial Progress rings + list
+    // Build compact sidebar heatmap HTML (no canvas, pure inline)
     const ph=D.physical;
+    const sbWeeks=[{l:'W1',d:[1,2,3,4,5,6,7]},{l:'W2',d:[8,9,10,11,12,13,14]},{l:'W3',d:[15,16,17,18,19,20,21]},{l:'W4',d:[22,23,24,25,26,27,28]},{l:'W5',d:[29,30,31,null,null,null,null]}];
+    const sbDows=['Su','Mo','Tu','We','Th','Fr','Sa'].map(d=>`<div style="text-align:center;font-family:var(--mono);font-size:7px;color:var(--t4)">${d}</div>`).join('');
+    const sbCells=sbWeeks.map(w=>w.d.map(d=>{
+      if(!d)return`<div style="aspect-ratio:1;border-radius:2px;background:transparent"></div>`;
+      const sess=ph.sessions[d];
+      if(!sess)return`<div style="aspect-ratio:1;border-radius:2px;background:rgba(255,255,255,.04)"></div>`;
+      const ms=sess.muscles,c1=ph.mc[ms[0]]||'#888',c2=ms[1]?(ph.mc[ms[1]]||'#888'):null;
+      const bg=c2?`linear-gradient(135deg,${c1} 50%,${c2} 50%)`:c1;
+      return`<div style="aspect-ratio:1;border-radius:2px;background:${bg}" title="Mar ${d}: ${sess.label}"></div>`;
+    }).join('')).join('');
+    const sbHeatHTML=`<div class="sc ca" style="padding:10px 12px;border-top:2px solid var(--sky)"><div class="sgt" style="margin-bottom:6px">Training Heatmap</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px">${sbDows}${sbCells}</div></div>`;
     const validPcts=ph.aft.filter(a=>a.pct>0);
     const avgPct=Math.round(validPcts.reduce((s,a)=>s+a.pct,0)/validPcts.length);
     const rings=ph.aft.map((a,i)=>{const r=84-i*15,circ=2*Math.PI*r,dash=a.pct/100*circ;return`<circle fill="none" stroke="rgba(255,255,255,.05)" stroke-width="9" cx="100" cy="100" r="${r}"/><circle fill="none" stroke="${a.color}" stroke-width="9" cx="100" cy="100" r="${r}" stroke-linecap="round" style="stroke-dasharray:${dash} ${circ};transform:rotate(-90deg);transform-origin:100px 100px;transition:stroke-dasharray 1.2s ease ${i*.1}s"/>`;}).join('');
     const listRows=ph.aft.map((a,i)=>`<div style="display:grid;grid-template-columns:1fr 44px 28px;align-items:center;gap:5px;padding:5px 0;border-bottom:1px solid var(--b0);cursor:pointer" onclick="openMuscleDetail(${i})"><span style="font-size:11px;color:var(--t2)">${a.event}</span><div style="height:3px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden"><div style="height:100%;width:${a.pct}%;background:${a.color};border-radius:2px"></div></div><span style="font-family:var(--mono);font-size:9px;text-align:right;color:${a.color}">${a.pct||'—'}%</span></div>`).join('');
-    return`<div class="sc ca" style="border-top:2px solid var(--sky)">
+    return sbHeatHTML+`<div class="sc ca" style="border-top:2px solid var(--sky)">
       <div class="sgt">AFT Progress · ${avgPct}% avg</div>
       <div style="position:relative;width:140px;height:140px;margin:8px auto 12px">
         <svg width="140" height="140" viewBox="0 0 200 200">${rings}</svg>
@@ -1034,7 +1045,7 @@ function rSpiritual(){
 function rPhysical(){
   const ph=D.physical;
   const weeks=[{l:'W1',d:[1,2,3,4,5,6,7]},{l:'W2',d:[8,9,10,11,12,13,14]},{l:'W3',d:[15,16,17,18,19,20,21]},{l:'W4',d:[22,23,24,25,26,27,28]},{l:'W5',d:[29,30,31,null,null,null,null]}];
-  const dows=['Su','Mo','Tu','We','Th','Fr','Sa'].map(d=>`<div class="hmdow">${d}</div>`).join('');
+  const dows=['Su','Mo','Tu','We','Th','Fr','Sa'].map(d=>`<div class="hmdow" style="font-size:7px">${d}</div>`).join('');
   const heatRows=weeks.map(w=>{
     const cells=w.d.map(d=>{
       if(!d)return`<div class="hmc emp"></div>`;
@@ -1044,68 +1055,218 @@ function rPhysical(){
       const bg=c3?`linear-gradient(135deg,${c1} 33%,${c2} 33%,${c2} 66%,${c3} 66%)`:c2?`linear-gradient(135deg,${c1} 50%,${c2} 50%)`:c1;
       return`<div class="hmc" style="background:${bg}" data-lbl="Mar ${d}: ${sess.label}" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"></div>`;
     }).join('');
-    return`<div class="hmwk">${w.l}</div>${cells}`;
+    return`<div class="hmwk" style="font-size:7px">${w.l}</div>${cells}`;
   }).join('');
-  const legend=Object.entries(ph.mc).map(([m,c])=>`<div class="hmlgi"><div class="hmlgb" style="background:${c}"></div>${m}</div>`).join('');
-  const mgCount={};
-  Object.values(ph.sessions).forEach(s=>s.muscles.forEach(m=>{mgCount[m]=(mgCount[m]||0)+1;}));
-  const cx=100,cy=100;
-  const rings=ph.aft.map((a,i)=>{
-    const r=84-i*15,circ=2*Math.PI*r,dash=a.pct/100*circ;
-    return`<circle fill="none" stroke="rgba(255,255,255,.05)" stroke-width="9" cx="${cx}" cy="${cy}" r="${r}"/><circle fill="none" stroke="${a.color}" stroke-width="9" cx="${cx}" cy="${cy}" r="${r}" stroke-linecap="round" style="stroke-dasharray:${dash} ${circ};transform:rotate(-90deg);transform-origin:${cx}px ${cy}px;transition:stroke-dasharray 1.3s cubic-bezier(.22,.68,0,1.2) ${i*.12}s"/>`;
-  }).join('');
+  const legend=Object.entries(ph.mc).map(([m,c])=>`<div class="hmlgi" style="font-size:9px"><div class="hmlgb" style="background:${c}"></div>${m}</div>`).join('');
+
   const validPcts=ph.aft.filter(a=>a.pct>0);
   const avgPct=Math.round(validPcts.reduce((s,a)=>s+a.pct,0)/validPcts.length);
-  const aftList=ph.aft.map((a,i)=>`<div class="aftrow" onclick="openMuscleDetail(${i})"><span class="aftn">${a.event}<br><span style="font-family:var(--mono);font-size:10px;color:var(--t3)">${a.cur} → ${a.goal}</span></span><div class="aftbw"><div class="aftbf" style="width:${a.pct}%;background:${a.color}"></div></div><span class="aftp" style="color:${a.color}">${a.pct||'—'}%</span></div>`).join('');
-  const cardio=ph.cardio.map(c=>`<div class="si"><span class="sk">${c.date}</span><span class="sv" style="font-size:11px">${c.desc}</span></div>`).join('');
+  const aftList=ph.aft.map((a,i)=>`<div class="aftrow" onclick="openMuscleDetail(${i})" style="padding:5px 0"><span class="aftn" style="font-size:11px">${a.event}<br><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">${a.cur} → ${a.goal}</span></span><div class="aftbw"><div class="aftbf" style="width:${a.pct}%;background:${a.color}"></div></div><span class="aftp" style="color:${a.color};font-size:10px">${a.pct||'—'}%</span></div>`).join('');
+  const commNote=`<div class="comm-note" style="margin-top:10px;font-size:11px"><span class="cnl">Commentary</span>Goals: MDL 350lb · HRP 61 · SDC 1:30 · Plank 3:35 · 2-Mile 13:25. Plank is the critical gap at 47%. Bench hit 215lb twice. Squat 225×8 Mar 26.</div>`;
+  const cardio=ph.cardio.map(c=>`<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--b0)"><span style="font-family:var(--mono);font-size:9px;color:var(--t4)">${c.date}</span><span style="font-size:10px;color:var(--t2)">${c.desc}</span></div>`).join('');
 
-  // delta progress band — honest deltas only
-  const gymDelta=18-HIST.feb.gymDays, volDelta=115890-HIST.feb.volume;
-  const gymCls=gymDelta>=0?'delta-up':'delta-dn', gymArrow=gymDelta>=0?'▲':'▼';
-  const volCls=volDelta>=0?'delta-up':'delta-dn', volArrow=volDelta>=0?'▲':'▼';
-  const aftAvgFeb=Math.round((HIST.feb.aft.mdl+HIST.feb.aft.hrp+HIST.feb.aft.sdc+HIST.feb.aft.plk)/4);
-  const aftDelta=avgPct-aftAvgFeb;
-  const aftCls=aftDelta>=0?'delta-up':'delta-dn', aftArrow=aftDelta>=0?'▲':'▼';
+  // ─── INLINE SPARK SVG helper ───
+  // Returns a tiny 90×22 inline SVG line sparkline
+  function spark(vals, color, dashed=false){
+    const w=90,h=22,pad=3;
+    const mn=Math.min(...vals),mx=Math.max(...vals);
+    const xs=vals.map((_,i)=>pad+i*(w-2*pad)/(vals.length-1));
+    const ys=vals.map(v=>h-pad-(mx===mn?h/2-pad:(v-mn)/(mx-mn)*(h-2*pad)));
+    const pts=xs.map((x,i)=>`${x},${ys[i]}`).join(' ');
+    const dashAttr=dashed?'stroke-dasharray="3,2"':'';
+    const circles=xs.map((x,i)=>`<circle cx="${x}" cy="${ys[i]}" r="2.5" fill="${color}"/>`).join('');
+    return`<svg width="${w}" height="${h}" style="flex-shrink:0;overflow:visible"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" ${dashAttr}/>${circles}</svg>`;
+  }
+  function sparkBar(vals, color){
+    const w=90,h=22,pad=3,bw=12;
+    const mx=Math.max(...vals);
+    const bars=vals.map((v,i)=>{
+      const bh=Math.round((v/mx)*(h-pad));
+      const x=pad+i*(w-2*pad)/(vals.length-1)-bw/2;
+      return`<rect x="${x}" y="${h-bh}" width="${bw}" height="${bh}" fill="${color}" rx="2" opacity="${.5+.5*(v/mx)}"/>`;
+    }).join('');
+    return`<svg width="${w}" height="${h}" style="flex-shrink:0"><g>${bars}</g></svg>`;
+  }
+  function sparkGap(pct, color){
+    const w=90,h=18;
+    const filled=Math.round(pct/100*w);
+    return`<svg width="${w}" height="${h}" style="flex-shrink:0"><rect x="0" y="6" width="${w}" height="6" rx="3" fill="rgba(255,255,255,.07)"/><rect x="0" y="6" width="${filled}" height="6" rx="3" fill="${color}"/><text x="${filled+3}" y="14" font-family="JetBrains Mono" font-size="8" fill="${color}">${pct}%</text></svg>`;
+  }
+  function sparkEmpty(){
+    return`<svg width="90" height="18" style="flex-shrink:0"><line x1="4" y1="9" x2="86" y2="9" stroke="rgba(255,255,255,.12)" stroke-width="1.5" stroke-dasharray="4,3"/><text x="28" y="14" font-family="JetBrains Mono" font-size="8" fill="#5A5754">No data</text></svg>`;
+  }
 
-  const deltaCards=`<div class="pb-grid">
-    <div class="pb-stat"><div class="pb-k">Gym Days</div><div class="pb-v">18</div><div class="pb-d"><span class="${gymCls}">${gymArrow} ${Math.abs(gymDelta)} vs Feb (${HIST.feb.gymDays})</span></div></div>
-    <div class="pb-stat"><div class="pb-k">Volume</div><div class="pb-v">115,890 lb</div><div class="pb-d"><span class="${volCls}">${volArrow} ${Math.abs(volDelta).toLocaleString()} lb vs Feb</span></div></div>
-    <div class="pb-stat"><div class="pb-k">AFT Avg</div><div class="pb-v">${avgPct}%</div><div class="pb-d"><span class="${aftCls}">${aftArrow} ${Math.abs(aftDelta)}% vs Feb</span></div></div>
-    <div class="pb-stat"><div class="pb-k">Bench PR</div><div class="pb-v">215 lb</div><div class="pb-d">Confirmed × 2 this month</div></div>
-    <div class="pb-stat"><div class="pb-k">Squat PR</div><div class="pb-v">225 lb × 8</div><div class="pb-d">Mar 26 — new working max</div></div>
-    <div class="pb-stat"><div class="pb-k">Plank</div><div class="pb-v" style="color:var(--rust)">47%</div><div class="pb-d"><span class="delta-up">▲ from 42% Feb</span> — weakest event</div></div>
-  </div>`;
-
-  const commNote=`<div class="comm-note"><span class="cnl">Physical — Commentary</span>Goals for 100 points: <b style="color:var(--tx)">MDL 350 lbs · HRP 61 reps · SDC 1:30 · Plank 3:35 · 2-Mile 13:25</b><br><br>18 gym days. Plank is the critical gap — 1:40 vs 3:35 goal. Bench 215lb twice, Squat 225lb × 8 Mar 26, Trap Bar DL 285lb × 5 Mar 17. 4 cardio sessions. AFT avg across scored events: ${avgPct}%.</div>`;
-
-  // Insight analysis
-  const insights=[
-    {label:"What's Working",color:"var(--sage)",dot:"#5CB872",items:[
-      "Bench: 185 → 205 → 215 lb — clean linear progression 3 months",
-      "Squat: 225 lb × 8 on Mar 26 — new working max, meaningful jump from Feb",
-      "Trap Bar DL: 285 lb × 5 Mar 17 — MDL event trending toward standard",
-      "Lat Pulldown: 130 → 145 → 170 lb — strongest rate of improvement"
+  const insightData=[
+    {label:"What's Working",color:"var(--sage)",dot:"#5CB872",rows:[
+      {text:"Bench: 185→205→215 lb — linear progression",spark:spark([185,205,215],'#5CB872')},
+      {text:"Squat: 155→175→225 lb — biggest jump in Q1",spark:spark([155,175,225],'#D4A84B')},
+      {text:"Trap Bar DL: 245→265→285 lb — MDL tracking",spark:spark([245,265,285],'#5A9DC0')},
+      {text:"Lat Pulldown: 130→145→170 lb — best rate of gain",spark:spark([130,145,170],'#47B0AB')},
     ]},
-    {label:"Not Improving",color:"var(--gold)",dot:"#D4A84B",items:[
-      "HRP: ~45 reps in March vs ~47 in Feb — slight regression, likely fatigue",
-      "Gym days declining: 22 → 19 → 18 across Q1 — small but consistent trend",
-      "SDC: still estimated, no timed trial completed in March"
+    {label:"Not Improving",color:"var(--gold)",dot:"#D4A84B",rows:[
+      {text:"HRP: 47→47→45 reps — slight regression",spark:spark([47,47,45],'#D4A84B')},
+      {text:"Gym days: 22→19→18 — consistent Q1 decline",spark:sparkBar([22,19,18],'#CC6B47')},
+      {text:"SDC: no timed trial data yet",spark:sparkEmpty()},
     ]},
-    {label:"Needs Change",color:"var(--rust)",dot:"#CC6B47",items:[
-      "Plank (PLK): 1:40 vs 3:35 standard — at 47%, the only event going backward",
-      "Needs daily dedicated sets, not occasional gym inclusion",
-      "2-Mile Run: no timed trial recorded yet — needs a test date set for April"
+    {label:"Needs Change",color:"var(--rust)",dot:"#CC6B47",rows:[
+      {text:"Plank: at 47% of standard — needs daily work",spark:sparkGap(47,'#CC6B47')},
+      {text:"2-Mile Run: no test date set yet",spark:sparkEmpty()},
+      {text:"Needs scheduled trial in April — not optional",spark:sparkGap(0,'#5A5754')},
     ]}
   ];
-  const insightCards=insights.map(g=>`<div class="card ca" style="border-top:2px solid ${g.color}"><div style="font-family:var(--mono);font-size:9px;color:${g.color};text-transform:uppercase;letter-spacing:1px;margin-bottom:9px;display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:${g.dot};display:inline-block"></span>${g.label}</div><ul style="padding-left:0;list-style:none;display:flex;flex-direction:column;gap:6px">${g.items.map(i=>`<li style="font-size:12px;color:var(--t2);line-height:1.55;padding-left:12px;position:relative"><span style="position:absolute;left:0;color:${g.dot}">·</span>${i}</li>`).join('')}</ul></div>`).join('');
+  const insightCards=insightData.map(g=>`<div class="card ca" style="border-top:2px solid ${g.color};padding:13px 14px"><div style="font-family:var(--mono);font-size:9px;color:${g.color};text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:${g.dot};display:inline-block"></span>${g.label}</div><div style="display:flex;flex-direction:column;gap:6px">${g.rows.map(r=>`<div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font-size:11px;color:var(--t2);line-height:1.4;flex:1">${r.text}</span>${r.spark}</div>`).join('')}</div></div>`).join('');
+
+  // ─── EXERCISE FREQUENCY TABLE data ───
+  const exTable=[
+    {name:'Bench Press',       count:5, score:.92, notes:'215lb × 4, 185lb × 12'},
+    {name:'Squat',             count:3, score:.95, notes:'225lb × 8 PR'},
+    {name:'Trap Bar Deadlift', count:1, score:.90, notes:'285lb × 5'},
+    {name:'OHP',               count:3, score:.80, notes:'135lb × sets'},
+    {name:'Lat Pulldown',      count:3, score:.78, notes:'170lb × 7'},
+    {name:'Seated Row',        count:1, score:.75, notes:'115lb'},
+    {name:'Smith Row',         count:1, score:.82, notes:'185lb'},
+    {name:'Chin-ups',          count:1, score:.70, notes:'bodyweight'},
+    {name:'Rope Pullover',     count:1, score:.65, notes:'110lb'},
+    {name:'DB Curl',           count:3, score:.55, notes:'70–80lb'},
+    {name:'EZ Skullcrusher',   count:1, score:.68, notes:'50lb'},
+    {name:'Tricep Cable/Push', count:3, score:.62, notes:'100lb'},
+    {name:'Leg Extension',     count:3, score:.60, notes:'190–210lb × reps'},
+    {name:'RDL',               count:1, score:.72, notes:'130lb'},
+    {name:'Good Morning',      count:2, score:.65, notes:'85–95lb'},
+    {name:'Split Glute',       count:2, score:.40, notes:'bodyweight/assisted'},
+    {name:'Hammer Iso',        count:1, score:.55, notes:'225lb × 40s'},
+    {name:'Hip Abduction',     count:1, score:.22, notes:'machine'},
+    {name:'Elevated Push-ups', count:1, score:.30, notes:'bodyweight'},
+    {name:'HRPU (45)',         count:1, score:.35, notes:'45 reps'},
+    {name:'Plank',             count:2, score:.42, notes:'45lb × 1:40'},
+    {name:'HLR',               count:2, score:.38, notes:'×10–14 reps'},
+    {name:'Cable Crunch',      count:2, score:.45, notes:'100–160lb'},
+    {name:'Treadmill Sprints', count:2, score:.30, notes:'2.45–2.65 mi'},
+    {name:'Outdoor Run',       count:2, score:.18, notes:'6.0 mi, 5.0 km'},
+    {name:'Calf Raise',        count:1, score:.28, notes:'bodyweight'},
+    {name:'Bosu KB',           count:1, score:.35, notes:'stability'},
+    {name:'Leg Curl',          count:1, score:.50, notes:'machine'},
+  ].sort((a,b)=>b.count-a.count||b.score-a.score);
+
+  function scoreToColor(s){
+    // 0=blue(endurance), 0.5=teal, 1=orange/red(strength)
+    if(s<.35)return`rgba(71,176,171,${.25+s*.5})`;
+    if(s<.6)return`rgba(90,157,192,${.2+s*.4})`;
+    if(s<.8)return`rgba(212,168,75,${.25+s*.35})`;
+    return`rgba(204,107,71,${.3+s*.5})`;
+  }
+  function scoreToBorder(s){
+    if(s<.35)return'rgba(71,176,171,.5)';
+    if(s<.6)return'rgba(90,157,192,.5)';
+    if(s<.8)return'rgba(212,168,75,.5)';
+    return'rgba(204,107,71,.6)';
+  }
+
+  const exRows=exTable.map(e=>{
+    const bg=scoreToColor(e.score);
+    const border=scoreToBorder(e.score);
+    const barW=Math.round(e.count/5*100);
+    return`<div style="display:grid;grid-template-columns:160px 28px 1fr 120px;gap:8px;align-items:center;padding:5px 8px;border-radius:4px;background:${bg};border-left:2px solid ${border};margin-bottom:2px">
+      <div style="font-size:11px;color:var(--tx);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${e.name}</div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--t2);text-align:center">${e.count}×</div>
+      <div style="background:rgba(255,255,255,.06);border-radius:2px;height:4px;overflow:hidden"><div style="height:100%;width:${barW}%;background:${border};border-radius:2px"></div></div>
+      <div style="font-size:10px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${e.notes}</div>
+    </div>`;
+  }).join('');
+
+  const legend2=`<div style="display:flex;gap:12px;margin-bottom:10px;flex-wrap:wrap">
+    ${[['Strength (heavy/low-rep)','rgba(204,107,71,.7)'],['Hypertrophy (balanced)','rgba(212,168,75,.6)'],['Endurance (high-rep/cardio)','rgba(71,176,171,.6)']].map(([l,c])=>`<div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:${c};display:inline-block"></span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">${l}</span></div>`).join('')}
+  </div>`;
+
+  // ─── COMPACT SLOPE CHART for lifts (inline SVG, no canvas) ───
+  const slopeData=[
+    {name:'Squat',      vals:[155,175,225], color:'#D4A84B'},
+    {name:'Bench',      vals:[185,205,215], color:'#5A9DC0'},
+    {name:'Lat PD',     vals:[130,145,170], color:'#5CB872'},
+    {name:'Tricep',     vals:[75,85,100],   color:'#8B7EC8'},
+    {name:'Curl',       vals:[60,70,80],    color:'#47B0AB'},
+  ];
+  const SW=480,SH=120,leftM=44,rightM=44,topM=18,botM=20;
+  const allVals=slopeData.flatMap(d=>d.vals);
+  const minV=Math.min(...allVals),maxV=Math.max(...allVals);
+  const ym=v=>topM+(1-(v-minV)/(maxV-minV))*(SH-topM-botM);
+  const xm=i=>leftM+i*((SW-leftM-rightM)/2);
+  const months=['Jan','Feb','Mar'];
+  let svgLines=months.map((m,i)=>`<text x="${xm(i)}" y="${SH-4}" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#5A5754">${m}</text>`).join('');
+  svgLines+=`<line x1="${xm(0)}" y1="${topM}" x2="${xm(0)}" y2="${SH-botM}" stroke="rgba(255,255,255,.06)" stroke-width="1"/>`;
+  svgLines+=`<line x1="${xm(1)}" y1="${topM}" x2="${xm(1)}" y2="${SH-botM}" stroke="rgba(255,255,255,.06)" stroke-width="1"/>`;
+  svgLines+=`<line x1="${xm(2)}" y1="${topM}" x2="${xm(2)}" y2="${SH-botM}" stroke="rgba(255,255,255,.06)" stroke-width="1"/>`;
+  slopeData.forEach(d=>{
+    const pts=d.vals.map((v,i)=>({x:xm(i),y:ym(v)}));
+    svgLines+=pts.slice(0,-1).map((_,i)=>`<line x1="${pts[i].x}" y1="${pts[i].y}" x2="${pts[i+1].x}" y2="${pts[i+1].y}" stroke="${d.color}" stroke-width="2" stroke-linecap="round" opacity=".9"/>`).join('');
+    svgLines+=pts.map(p=>`<circle cx="${p.x}" cy="${p.y}" r="3.5" fill="${d.color}"/>`).join('');
+    // label on right
+    const last=pts[pts.length-1];
+    svgLines+=`<text x="${last.x+6}" y="${last.y+3.5}" font-family="JetBrains Mono" font-size="9" fill="${d.color}">${d.name} ${d.vals[2]}lb</text>`;
+    // label on left
+    svgLines+=`<text x="${pts[0].x-5}" y="${pts[0].y+3.5}" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="rgba(255,255,255,.35)">${d.vals[0]}</text>`;
+  });
+  const slopeChart=`<svg width="100%" viewBox="0 0 ${SW} ${SH}" style="overflow:visible;display:block">${svgLines}</svg>`;
+
+  // ─── CARDIO inline SVG bar chart ───
+  const cardioSessions=[
+    {label:'Mar 4',mi:6.0,  type:'run',   note:'Outdoor 6.0 mi / 56:22'},
+    {label:'Mar 7',mi:3.11, type:'run',   note:'Outdoor 5.0 km / 27:31'},
+    {label:'Mar 20',mi:2.45,type:'sprint',note:'Sprints 2.45 mi / 25 min'},
+    {label:'Mar 27',mi:2.65,type:'sprint',note:'Sprints 2.65 mi / 25 min'},
+  ];
+  const maxMi=6.0;
+  const cardioBars=cardioSessions.map((s,i)=>{
+    const col=s.type==='run'?'#5CB872':'#5A9DC0';
+    const label=s.type==='run'?'Run':'Sprint';
+    const pct=(s.mi/maxMi*100).toFixed(1);
+    return`<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+      <div style="font-family:var(--mono);font-size:9px;color:var(--t4);width:36px;flex-shrink:0">${s.label}</div>
+      <div style="flex:1;background:rgba(255,255,255,.05);border-radius:3px;height:16px;overflow:hidden;position:relative">
+        <div style="width:${pct}%;height:100%;background:${col};opacity:.85;border-radius:3px;transition:width .6s ease"></div>
+        <div style="position:absolute;left:6px;top:0;height:100%;display:flex;align-items:center;font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.9)">${s.mi}mi <span style="opacity:.6;margin-left:4px">${label}</span></div>
+      </div>
+    </div>`;
+  }).join('');
+  const cardioLegend=`<div style="display:flex;gap:10px;margin-bottom:8px"><div style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:50%;background:#5CB872;display:inline-block"></span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">Outdoor Run</span></div><div style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:50%;background:#5A9DC0;display:inline-block"></span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">Treadmill Sprint</span></div></div>`;
+
+  // ─── MUSCLE GROUP RADAR data (March session-count based) ───
+  // Chest:4 Back:5 Legs:5 Shoulders:3 Arms:6 Core:4 Cardio:4 — normalize to 0-100
+  const mgScores={Chest:4,Back:5,Legs:5,Shoulders:3,Arms:6,Core:4,Cardio:4};
+  const mgMax=Math.max(...Object.values(mgScores));
+  const mgNorm=Object.fromEntries(Object.entries(mgScores).map(([k,v])=>[k,Math.round(v/mgMax*100)]));
+  const mgLabels=Object.keys(mgNorm);
+  const mgVals=Object.values(mgNorm);
 
   return`<div class="cg">
-    <div class="card ca d1" style="grid-column:1/-1"><div class="ch"><div class="ct">Muscle Group Training Heatmap</div><div class="cs">18 sessions · hover for detail</div></div><div style="max-width:260px"><div class="hmg"><div></div>${dows}${heatRows}</div><div class="hmleg" style="margin-top:6px">${legend}<div class="hmlgi"><div class="hmlgb" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07)"></div>Rest</div></div></div></div>
-    <div class="card ca d2"><div class="ch"><div class="ct">AFT Detail</div><div class="cs">Click any event for Jan/Feb/Mar breakdown</div></div><div>${aftList}</div>${commNote}</div>
-    <div class="card ca d2"><div class="ch"><div class="ct">AFT Radar — Jan · Feb · Mar</div><div class="cs">3-month progression by event</div></div><canvas id="radarChart" height="200"></canvas></div>
+    <!-- HERO: Exercise Frequency Table -->
+    <div class="card sf ca" style="padding:14px 16px">
+      <div class="ch" style="margin-bottom:10px"><div class="ct">Exercise Frequency — March 2026</div><div class="cs">28 distinct movements · color = strength↔endurance spectrum</div></div>
+      ${legend2}
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 16px">${exRows}</div>
+    </div>
+
+    <!-- AFT Detail -->
+    <div class="card ca d1" style="padding:13px 14px"><div class="ch" style="margin-bottom:8px"><div class="ct">AFT Events</div><div class="cs">Click for detail</div></div><div>${aftList}</div>${commNote}</div>
+
+    <!-- Muscle Group Radar (March only) -->
+    <div class="card ca d1" style="padding:13px 14px"><div class="ch" style="margin-bottom:8px"><div class="ct">Muscle Group Volume</div><div class="cs">March · sessions per group</div></div><canvas id="muscleRadarChart" height="190"></canvas></div>
+
+    <!-- Insight cards with sparklines -->
     <div class="sf">${insightCards}</div>
-    <div class="card ca d3 sf"><div class="ch"><div class="ct">Strength Progress — Jan · Feb · Mar</div><div class="cs">Top lift per major group · working max each month</div></div><canvas id="exerciseTrendChart" height="180"></canvas></div>
-    <div class="card ca d4"><div class="ch"><div class="ct">Cardio</div><div class="cs">4 sessions</div></div><canvas id="cardioChart" height="90"></canvas><div style="margin-top:8px">${cardio}</div></div>
+
+    <!-- Slope chart: Strength Progress -->
+    <div class="card sf ca d2" style="padding:13px 16px">
+      <div class="ch" style="margin-bottom:10px"><div class="ct">Strength Progression — Jan · Feb · Mar</div><div class="cs">Working max by lift · slope = rate of gain</div></div>
+      ${slopeChart}
+    </div>
+
+    <!-- Compact Cardio -->
+    <div class="card ca d3" style="padding:13px 14px">
+      <div class="ch" style="margin-bottom:8px"><div class="ct">Cardio</div><div class="cs">4 sessions · 14.2 mi total</div></div>
+      ${cardioLegend}
+      ${cardioBars}
+    </div>
   </div>`;
 }
 
@@ -1415,35 +1576,19 @@ function afterRender(){
   }
 
   if(tab==='physical'){
-    const rc=document.getElementById('radarChart');
-    if(rc){
-      const a=D.physical.aft;
-      charts.push(new Chart(rc,{type:'radar',data:{labels:a.map(x=>x.event),datasets:[
-        {label:'Jan',data:a.map(x=>x.janPct),backgroundColor:'rgba(255,255,255,.04)',borderColor:'rgba(255,255,255,.3)',borderWidth:1,pointBackgroundColor:'rgba(255,255,255,.3)',pointRadius:3,borderDash:[4,3]},
-        {label:'Feb',data:a.map(x=>x.febPct),backgroundColor:'rgba(90,157,192,.07)',borderColor:'rgba(90,157,192,.6)',borderWidth:1.5,pointBackgroundColor:'#5A9DC0',pointRadius:3,borderDash:[2,2]},
-        {label:'Mar',data:a.map(x=>x.pct),backgroundColor:'rgba(92,184,114,.13)',borderColor:'#5CB872',borderWidth:2,pointBackgroundColor:'#5CB872',pointRadius:4,pointHoverRadius:6}
-      ]},options:{plugins:{legend:{display:true,position:'bottom',labels:{color:'#CCC9C3',font:{family:'JetBrains Mono',size:10},boxWidth:12,padding:10}}},scales:{r:{min:0,max:100,grid:{color:'rgba(255,255,255,.06)'},angleLines:{color:'rgba(255,255,255,.06)'},ticks:{color:'#6E6B67',font:{family:'JetBrains Mono',size:9},backdropColor:'transparent',stepSize:25},pointLabels:{color:'#CCC9C3',font:{family:'JetBrains Mono',size:9}}}},animation:{duration:900}}}));
-    }
-    // muscleChart removed — replaced by exerciseTrendChart
-    // Exercise trendlines chart
-    const etEl=document.getElementById('exerciseTrendChart');
-    if(etEl){
-      const months=['Jan','Feb','Mar'];
-      charts.push(new Chart(etEl,{type:'line',data:{labels:months,datasets:[
-        {label:'Flat Bench (lb)',data:[185,205,215],borderColor:'#5A9DC0',backgroundColor:'rgba(90,157,192,.08)',borderWidth:2.5,pointRadius:5,pointBackgroundColor:'#5A9DC0',tension:.3,fill:false},
-        {label:'Lat Pulldown (lb)',data:[130,145,170],borderColor:'#5CB872',backgroundColor:'transparent',borderWidth:2.5,pointRadius:5,pointBackgroundColor:'#5CB872',tension:.3},
-        {label:'Squat (lb)',data:[155,175,225],borderColor:'#D4A84B',backgroundColor:'transparent',borderWidth:2.5,pointRadius:5,pointBackgroundColor:'#D4A84B',tension:.3},
-        {label:'DB Curl (lb)',data:[60,70,80],borderColor:'#47B0AB',backgroundColor:'transparent',borderWidth:2,pointRadius:4,pointBackgroundColor:'#47B0AB',tension:.3,borderDash:[4,2]},
-        {label:'Tricep Cable (lb)',data:[75,85,100],borderColor:'#8B7EC8',backgroundColor:'transparent',borderWidth:2,pointRadius:4,pointBackgroundColor:'#8B7EC8',tension:.3,borderDash:[4,2]},
-        {label:'Sprint Dist. (mi)',data:[0,0,2.55],borderColor:'#CC6B47',backgroundColor:'transparent',borderWidth:2,pointRadius:4,pointBackgroundColor:'#CC6B47',tension:.3,borderDash:[2,3],yAxisID:'y2'}
-      ]},options:{plugins:{legend:{display:true,position:'bottom',labels:{color:'#CCC9C3',font:{family:'DM Sans',size:10},boxWidth:14,padding:6}},tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y}${ctx.datasetIndex===5?' mi':' lb'}`}}},scales:{x:{grid:{display:false},ticks:{color:'#CCC9C3',font:{family:'JetBrains Mono',size:11}}},y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:9},callback:v=>v+'lb'},title:{display:true,text:'Weight (lb)',color:'#5A5754',font:{size:9}},position:'left',min:0},y2:{grid:{display:false},ticks:{color:'#CC6B47',font:{family:'JetBrains Mono',size:9},callback:v=>v+'mi'},position:'right',min:0,max:8,title:{display:true,text:'Sprint (mi)',color:'#CC6B47',font:{size:9}}}},animation:{duration:900}}}));
-    }
-    // cardio bar chart
-    const ccc=document.getElementById('cardioChart');
-    if(ccc){
-      charts.push(new Chart(ccc,{type:'bar',data:{
-        datasets:[{label:'Distance (mi)',data:[6.0,3.1,2.45,2.65],backgroundColor:['rgba(92,184,114,.7)','rgba(92,184,114,.7)','rgba(90,157,192,.6)','rgba(90,157,192,.6)'],borderColor:['#5CB872','#5CB872','#5A9DC0','#5A9DC0'],borderWidth:1.5,borderRadius:5}]
-      },options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>`${x.raw} mi`}}},scales:{x:{grid:{display:false},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:9}}},y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:9},callback:v=>v+'mi'},max:8}},animation:{duration:700}}}));
+    // Muscle Group Radar — March only
+    const mrc=document.getElementById('muscleRadarChart');
+    if(mrc){
+      charts.push(new Chart(mrc,{type:'radar',data:{
+        labels:['Chest','Back','Legs','Shoulders','Arms','Core','Cardio'],
+        datasets:[{label:'March',data:[80,100,100,60,120,80,80].map(v=>Math.min(v,100)),
+          backgroundColor:'rgba(92,184,114,.12)',borderColor:'#5CB872',borderWidth:2,
+          pointBackgroundColor:'#5CB872',pointRadius:4,pointHoverRadius:6}]
+      },options:{plugins:{legend:{display:false}},scales:{r:{min:0,max:100,
+        grid:{color:'rgba(255,255,255,.07)'},angleLines:{color:'rgba(255,255,255,.07)'},
+        ticks:{display:false,stepSize:25},
+        pointLabels:{color:'#CCC9C3',font:{family:'JetBrains Mono',size:9}}}},
+        animation:{duration:900}}}));
     }
   }
 
