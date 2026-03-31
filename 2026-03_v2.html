@@ -681,7 +681,7 @@ const SCHED={
   29:{gym:["Abs","Back"]}
 };
 
-const TABS=['overview','spiritual','physical','financial','intellectual','creative'];
+const TABS=['overview','spiritual','physical','financial','intellectual','creative','reflections'];
 // Restore tab from URL hash on load
 const _hash=window.location.hash.replace('#','');
 let tab=TABS.includes(_hash)?_hash:'overview';
@@ -715,7 +715,7 @@ function progressBand(items){
 function chrome(){
   document.getElementById('mlbl').textContent=D.label;
   document.getElementById('tabs').innerHTML=TABS.map(t=>{
-    const labels={overview:'Overview',spiritual:'Spiritual',physical:'Physical',financial:'Financial',intellectual:'Intellectual',creative:'Creative'};
+    const labels={overview:'Overview',spiritual:'Spiritual',physical:'Physical',financial:'Financial',intellectual:'Intellectual',creative:'Creative',reflections:'Reflections'};
     return`<button class="tab${t===tab?' on':''}" data-t="${t}" onclick="sw('${t}')">${labels[t]||t}</button>`;
   }).join('');
   document.getElementById('sidebar').innerHTML=buildSidebar();
@@ -733,21 +733,24 @@ function buildSidebar(){
   const row=(k,v,cls='',delta='')=>`<div class="si"><span class="sk">${k}</span><span class="sv ${cls}" style="display:flex;align-items:baseline;gap:4px">${v}${delta}</span></div>`;
 
   if(tab==='overview'){
-    // 3-month trend sparklines
-    const tItems=[
-      {k:'Net',vals:[812,1094,887],colors:['rgba(255,255,255,.5)','rgba(90,157,192,.7)','#D4A84B'],higher:true,fmt:v=>'$'+v},
-      {k:'Gym Days',vals:[22,19,18],colors:['rgba(255,255,255,.5)','rgba(90,157,192,.7)','#D4A84B'],higher:true,fmt:v=>v},
-      {k:'Expenses',vals:[2288,2486,2501],colors:['rgba(255,255,255,.5)','rgba(204,107,71,.7)','#D4A84B'],higher:false,fmt:v=>'$'+v},
-    ];
-    const bars=tItems.map(t=>{
-      const max=Math.max(...t.vals);
-      const b=['Jan','Feb','Mar'].map((m,i)=>`<div style="display:flex;flex-direction:column;align-items:center;gap:2px;flex:1"><div style="width:100%;background:rgba(255,255,255,.05);border-radius:2px;height:32px;display:flex;align-items:flex-end;overflow:hidden"><div style="width:100%;background:${t.colors[i]};height:${Math.round(t.vals[i]/max*100)}%;border-radius:2px"></div></div><div style="font-family:var(--mono);font-size:7px;color:var(--t4)">${m}</div><div style="font-family:var(--mono);font-size:8px;color:var(--t2)">${t.fmt(t.vals[i])}</div></div>`).join('');
-      const trend=t.vals[2]>t.vals[1]?(t.higher?'delta-up':'delta-dn'):(t.higher?'delta-dn':'delta-up');
-      const pct=Math.abs((t.vals[2]-t.vals[1])/t.vals[1]*100).toFixed(0);
-      const arrow=t.vals[2]>=t.vals[1]?'▲':'▼';
-      return`<div style="background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r1);padding:9px 10px 7px;margin-bottom:6px"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px"><span style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px">${t.k}</span><span class="${trend}" style="font-family:var(--mono);font-size:9px">${arrow}${pct}%</span></div><div style="display:flex;gap:3px;align-items:flex-end">${b}</div></div>`;
-    }).join('');
-    return`<div class="sc ca"><div class="sgt">3-Month Trend</div>${bars}</div>`;
+    return`<div class="sc ca" style="border-top:2px solid var(--gold)">
+      <div class="sgt" style="color:var(--gold)">March Review</div>
+      <div style="margin-bottom:12px">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--sage);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:var(--sage);display:inline-block"></span>Keep Doing</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:5px">Consistent church attendance — 4 for 4, third month running. That rhythm is building something worth protecting.</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.6">Shipping real projects. The TaxiZero app, intake form, and LMSW video are all completed outputs — not just started ones. The bias toward finishing is the right instinct.</div>
+      </div>
+      <div style="margin-bottom:12px">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--sky);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:var(--sky);display:inline-block"></span>Improvements</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:5px">Net dropped $207 from February's high of $1,094. The Ottawa trip was a one-time cost, but dining at $476 — the single largest spending category — has room to compress month over month.</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.6">Gym days dropped from 22 → 19 → 18 across the three months. The trend is small but consistent. Worth watching before it becomes a pattern.</div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--rust);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:var(--rust);display:inline-block"></span>Correct</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:5px">Plank is at 47% of the AFT standard — the only event trending backwards relative to what's needed. It needs dedicated daily work, not occasional gym sets. Nothing else will close that gap.</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.6">February's intellectual miss is still the only unresolved gap in the year. April's focus is History — completing it cleanly would reset the record at 3-for-4 and show the February miss was an anomaly, not a habit.</div>
+      </div>
+    </div>`;
   }
 
   if(tab==='spiritual'){
@@ -789,13 +792,16 @@ function buildSidebar(){
   }
 
   if(tab==='financial'){
-    // Income Breakdown — March only
     const marchIncome=D.fin.incomeSources.filter(s=>!s.label.includes('Feb adj.'));
-    const incRows=marchIncome.map(s=>`<div class="si"><span class="sk" style="display:flex;align-items:center;gap:5px"><span style="width:6px;height:6px;border-radius:50%;background:${s.color};flex-shrink:0"></span>${s.label}</span><span class="sv" style="color:var(--sage)">$${s.amt.toFixed(2)}</span></div>`).join('');
+    const maxInc=Math.max(...marchIncome.map(s=>s.amt));
+    const incRows=marchIncome.map(s=>{
+      const w=Math.round(s.amt/maxInc*100);
+      return`<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px"><span style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:${s.color};flex-shrink:0"></span>${s.label}</span><span style="font-family:var(--mono);font-size:10px;color:var(--sage)">$${s.amt.toFixed(0)}</span></div><div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden"><div style="width:${w}%;height:100%;background:${s.color};border-radius:2px;transition:width .8s ease"></div></div></div>`;
+    }).join('');
     return`<div class="sc ca" style="border-top:2px solid var(--sage)">
       <div class="sgt">Income — March</div>
       ${incRows}
-      <div class="si" style="margin-top:4px"><span class="sk" style="font-weight:600;color:var(--t2)">Total</span><span class="sv" style="color:var(--sage);font-size:13px">$${D.fin.income.toFixed(2)}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:8px 0 0;margin-top:4px;border-top:1px solid var(--b0)"><span style="font-size:12px;color:var(--t2);font-weight:600">Total</span><span style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--sage)">$${D.fin.income.toFixed(2)}</span></div>
     </div>`;
   }
 
@@ -837,6 +843,19 @@ function buildSidebar(){
       ${row('Next Booking','Apr 28','')}
       <div style="margin-top:10px;padding:8px 10px;background:var(--sdim);border:1px solid rgba(92,184,114,.2);border-radius:var(--r1);font-size:11px;color:var(--t3);line-height:1.5">Goal: 3–4 weddings for 2026. On track.</div>
       <a href="https://txizero.github.io/fair-estimate/" target="_blank" style="display:block;margin-top:10px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--teal);text-decoration:none;padding:6px 0;border-top:1px solid var(--b0)">TaxiZero App — Live ↗</a>
+    </div>`;
+  }
+
+  if(tab==='reflections'){
+    return`<div class="sc ca" style="border-top:2px solid var(--gold)">
+      <div class="sgt">March Snapshot</div>
+      <div class="si"><span class="sk">Net Cash</span><span class="sv" style="color:var(--sage)">+$887</span></div>
+      <div class="si"><span class="sk">Gym Days</span><span class="sv">18</span></div>
+      <div class="si"><span class="sk">Sermons</span><span class="sv" style="color:var(--gold)">4 / 4</span></div>
+      <div class="si"><span class="sk">GPA</span><span class="sv" style="color:var(--sky)">3.83</span></div>
+      <div class="si"><span class="sk">Projects</span><span class="sv" style="color:var(--sage)">4 complete</span></div>
+      <div class="si"><span class="sk">Savings YTD</span><span class="sv">$2,794</span></div>
+      <div style="margin-top:10px;padding:9px 10px;background:rgba(212,168,75,.07);border:1px solid rgba(212,168,75,.15);border-radius:var(--r1);font-size:11px;color:var(--t3);line-height:1.55">ARNG contract ends June 2027. Decision window is open.</div>
     </div>`;
   }
 
@@ -1059,12 +1078,34 @@ function rPhysical(){
 
   const commNote=`<div class="comm-note"><span class="cnl">Physical — Commentary</span>Goals for 100 points: <b style="color:var(--tx)">MDL 350 lbs · HRP 61 reps · SDC 1:30 · Plank 3:35 · 2-Mile 13:25</b><br><br>18 gym days. Plank is the critical gap — 1:40 vs 3:35 goal. Bench 215lb twice, Squat 225lb × 8 Mar 26, Trap Bar DL 285lb × 5 Mar 17. 4 cardio sessions. AFT avg across scored events: ${avgPct}%.</div>`;
 
+  // Insight analysis
+  const insights=[
+    {label:"What's Working",color:"var(--sage)",dot:"#5CB872",items:[
+      "Bench: 185 → 205 → 215 lb — clean linear progression 3 months",
+      "Squat: 225 lb × 8 on Mar 26 — new working max, meaningful jump from Feb",
+      "Trap Bar DL: 285 lb × 5 Mar 17 — MDL event trending toward standard",
+      "Lat Pulldown: 130 → 145 → 170 lb — strongest rate of improvement"
+    ]},
+    {label:"Not Improving",color:"var(--gold)",dot:"#D4A84B",items:[
+      "HRP: ~45 reps in March vs ~47 in Feb — slight regression, likely fatigue",
+      "Gym days declining: 22 → 19 → 18 across Q1 — small but consistent trend",
+      "SDC: still estimated, no timed trial completed in March"
+    ]},
+    {label:"Needs Change",color:"var(--rust)",dot:"#CC6B47",items:[
+      "Plank (PLK): 1:40 vs 3:35 standard — at 47%, the only event going backward",
+      "Needs daily dedicated sets, not occasional gym inclusion",
+      "2-Mile Run: no timed trial recorded yet — needs a test date set for April"
+    ]}
+  ];
+  const insightCards=insights.map(g=>`<div class="card ca" style="border-top:2px solid ${g.color}"><div style="font-family:var(--mono);font-size:9px;color:${g.color};text-transform:uppercase;letter-spacing:1px;margin-bottom:9px;display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:${g.dot};display:inline-block"></span>${g.label}</div><ul style="padding-left:0;list-style:none;display:flex;flex-direction:column;gap:6px">${g.items.map(i=>`<li style="font-size:12px;color:var(--t2);line-height:1.55;padding-left:12px;position:relative"><span style="position:absolute;left:0;color:${g.dot}">·</span>${i}</li>`).join('')}</ul></div>`).join('');
+
   return`<div class="cg">
-    <div class="card ca d1" style="grid-column:1/-1"><div class="ch"><div class="ct">Muscle Group Training Heatmap</div><div class="cs">18 sessions · hover for detail · daily spend underlay available when CSV updated</div></div><div style="max-width:300px"><div class="hmg"><div></div>${dows}${heatRows}</div><div class="hmleg" style="margin-top:8px">${legend}<div class="hmlgi"><div class="hmlgb" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07)"></div>Rest</div></div></div></div>
+    <div class="card ca d1" style="grid-column:1/-1"><div class="ch"><div class="ct">Muscle Group Training Heatmap</div><div class="cs">18 sessions · hover for detail</div></div><div style="max-width:260px"><div class="hmg"><div></div>${dows}${heatRows}</div><div class="hmleg" style="margin-top:6px">${legend}<div class="hmlgi"><div class="hmlgb" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07)"></div>Rest</div></div></div></div>
     <div class="card ca d2"><div class="ch"><div class="ct">AFT Detail</div><div class="cs">Click any event for Jan/Feb/Mar breakdown</div></div><div>${aftList}</div>${commNote}</div>
-    <div class="card ca d2"><div class="ch"><div class="ct">AFT Radar — Jan · Feb · Mar</div><div class="cs">3-month progression by event</div></div><canvas id="radarChart" height="240"></canvas></div>
-    <div class="card sf ca d3"><div class="ch"><div class="ct">Key Exercise Trends — Jan · Feb · Mar</div><div class="cs">Bench · Lat Pulldown · Squat · Curl · Tricep Cable · Treadmill Sprint</div></div><canvas id="exerciseTrendChart" height="220"></canvas></div>
-    <div class="card ca d3"><div class="ch"><div class="ct">Cardio</div><div class="cs">4 sessions tracked</div></div>${cardio}<canvas id="cardioChart" height="130" style="margin-top:12px"></canvas></div>
+    <div class="card ca d2"><div class="ch"><div class="ct">AFT Radar — Jan · Feb · Mar</div><div class="cs">3-month progression by event</div></div><canvas id="radarChart" height="200"></canvas></div>
+    <div class="sf">${insightCards}</div>
+    <div class="card ca d3 sf"><div class="ch"><div class="ct">Strength Progress — Jan · Feb · Mar</div><div class="cs">Top lift per major group · working max each month</div></div><canvas id="exerciseTrendChart" height="180"></canvas></div>
+    <div class="card ca d4"><div class="ch"><div class="ct">Cardio</div><div class="cs">4 sessions</div></div><canvas id="cardioChart" height="90"></canvas><div style="margin-top:8px">${cardio}</div></div>
   </div>`;
 }
 
@@ -1132,10 +1173,13 @@ function rFinancial(){
           }).join('')}
         </div>
         <div style="padding:18px 22px">
-          <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">Income Breakdown</div>
-          ${D.fin.incomeSources.map(s=>`<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--b0)"><span style="font-size:12px;color:var(--t2);display:flex;align-items:center;gap:7px"><span style="width:6px;height:6px;border-radius:50%;background:${s.color};flex-shrink:0"></span>${s.label}</span><span style="font-family:var(--mono);font-size:12px;font-weight:500;color:var(--sage)">$${s.amt.toFixed(2)}</span></div>`).join('')}
-          <div style="display:flex;justify-content:space-between;padding:7px 0;margin-top:2px"><span style="font-size:13px;color:var(--t2);font-weight:600">Total</span><span style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--tx)">$${D.fin.income.toFixed(2)}</span></div>
-          <div style="font-family:var(--mono);font-size:9px;color:var(--t4);margin-top:6px;text-align:right">Ready</div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">Annual Savings Progress</div>
+          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px"><span style="font-family:var(--serif);font-size:28px;font-weight:700;font-style:italic;color:var(--sage)">$${tot.toFixed(0)}</span><span style="font-family:var(--mono);font-size:10px;color:var(--t3)">${pct.toFixed(1)}% of $10k goal</span></div>
+          <div style="height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;margin-bottom:12px"><div style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--sage),rgba(92,184,114,.6));border-radius:3px;transition:width 1s ease"></div></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--b0)"><span style="font-size:12px;color:var(--t3)">Jan</span><span style="font-family:var(--mono);font-size:11px;color:var(--sage)">+$${f.sJan.toFixed(0)}</span></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--b0)"><span style="font-size:12px;color:var(--t3)">Feb</span><span style="font-family:var(--mono);font-size:11px;color:var(--sage)">+$${f.sFeb.toFixed(0)}</span></div>
+          <div style="display:flex;justify-content:space-between;padding:5px 0;background:rgba(212,168,75,.05);margin:0 -4px;padding:5px 4px;border-radius:4px"><span style="font-size:12px;color:var(--gold);font-weight:600">Mar</span><span style="font-family:var(--mono);font-size:11px;color:var(--gold)">+$${f.sMar.toFixed(0)}</span></div>
+          <div style="display:flex;justify-content:space-between;padding:8px 0 0;margin-top:4px"><span style="font-size:12px;color:var(--t3)">Remaining</span><span style="font-family:var(--mono);font-size:11px;color:var(--t2)">$${(f.sGoal-tot).toFixed(0)}</span></div>
         </div>
       </div>
       <div style="padding:16px 22px">
@@ -1171,8 +1215,23 @@ function rFinancial(){
     <div class="card ca d2"><div class="ch"><div class="ct">Annual Savings</div><div class="cs">Target $10,000</div></div>${kpis}${sav}</div>
     <!-- Charts row -->
     <div class="card ca d2"><div class="ch"><div class="ct">3-Month Comparison</div><div class="cs">Income · Expenses · Net</div></div><canvas id="monthlyNetChart" height="160"></canvas></div>
-    <div class="card ca d3"><div class="ch"><div class="ct">Daily Spending Heatmap</div><div class="cs">March — color = top category for that day</div></div><div id="dailySpendHeat" style="margin-top:4px"></div><div style="margin-top:8px;font-family:var(--mono);font-size:9px;color:var(--t4)">Hover cell for day total</div></div>
-    <div class="card ca d3"><div class="ch"><div class="ct">Category Trend Lines</div><div class="cs">Cumulative spend per category — March</div></div><canvas id="catTrendChart" height="180"></canvas></div>
+    <div class="card ca d3"><div class="ch"><div class="ct">Daily Spending Heatmap — March 2026</div><div class="cs">Each cell = 1 day · color = largest category · intensity = total spend</div></div><div id="dailySpendHeat" style="margin-top:6px"></div><div id="daySpendTooltip" style="font-family:var(--mono);font-size:10px;color:var(--t2);margin-top:6px;min-height:16px;padding:4px 0;border-top:1px solid var(--b0)"></div></div>
+    <div class="card ca d3"><div class="ch"><div class="ct">Notable Purchases</div><div class="cs">March spending highlights</div></div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:flex-start;gap:12px;padding:10px;background:var(--bg3);border-radius:var(--r1);border:1px solid var(--b0)">
+          <div style="width:36px;height:36px;border-radius:8px;background:rgba(90,157,192,.15);border:1px solid rgba(90,157,192,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">👟</div>
+          <div><div style="font-size:13px;color:var(--tx);font-weight:600;margin-bottom:2px">Nike Pegasus Plus</div><div style="font-size:12px;color:var(--t3);line-height:1.5">Running shoe upgrade — $123.11</div></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;padding:10px;background:var(--bg3);border-radius:var(--r1);border:1px solid var(--b0)">
+          <div style="width:36px;height:36px;border-radius:8px;background:rgba(71,176,171,.15);border:1px solid rgba(71,176,171,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">🔌</div>
+          <div><div style="font-size:13px;color:var(--tx);font-weight:600;margin-bottom:2px">Wireless Car Charger</div><div style="font-size:12px;color:var(--t3);line-height:1.5">Replaced melting adhesive mount — $90.89</div></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:12px;padding:10px;background:rgba(212,168,75,.05);border-radius:var(--r1);border:1px solid rgba(212,168,75,.2)">
+          <div style="width:36px;height:36px;border-radius:8px;background:rgba(212,168,75,.15);border:1px solid rgba(212,168,75,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">💳</div>
+          <div><div style="font-size:13px;color:var(--gold);font-weight:600;margin-bottom:2px">Credit Card Strategy</div><div style="font-size:12px;color:var(--t3);line-height:1.55">Cancelling Amex Platinum before annual fee hits. Keeping Chase Sapphire Reserve as primary spend card. Cards opened during Basic Training (active duty waived fees) — no longer active duty.</div></div>
+        </div>
+      </div>
+    </div>
     <div class="card ca d4 sf"><div class="ch"><div class="ct">Spending Donut + All Categories</div><div class="cs">Click to expand · ${totalTxns} total transactions</div></div>
       <div style="display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start">
         <div><div style="position:relative;width:200px;height:200px"><canvas id="donut" width="200" height="200"></canvas><div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none"><div style="font-family:var(--mono);font-size:14px;font-weight:700;color:var(--tx)">$${f.expenses.toFixed(0)}</div><div style="font-family:var(--mono);font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;margin-top:1px">Total Spent</div></div></div></div>
@@ -1239,6 +1298,65 @@ function rCreative(){
   </div>`;
 }
 
+/* ─── REFLECTIONS ─── */
+function rReflections(){
+  return`<div class="cg">
+    <div class="card sf ca" style="border-left:3px solid var(--gold)">
+      <div class="ch"><div class="ct">Reflections — March 2026</div><div class="cs">Looking back and looking ahead</div></div>
+      <p style="font-size:13px;line-height:1.78;color:var(--t2)">March was a productive month across most dimensions — projects shipped, sermons attended, GPA maintained. The financial picture was slightly softer than February due to the Ottawa trip, but savings remain on pace. The areas that need the most honest attention going into April are the plank deficit, the gym days trend, and the tuition funding situation.</p>
+    </div>
+
+    <div class="card ca d1"><div class="ch"><div class="ct" style="color:var(--sky)">Next Month — April</div><div class="cs">ArmyIgnited TA · Clarkson spring semester</div></div>
+      <p style="font-size:13px;line-height:1.75;color:var(--t2);margin-bottom:12px">Working on securing tuition assistance through ArmyIgnited — the US Army's TA program. Eligible for roughly $4,000 per fiscal year. Currently in the process of requesting TA for the two spring semester courses at Clarkson at $750 per course.</p>
+      <div style="padding:12px 14px;background:var(--bg3);border-radius:var(--r2);border:1px solid var(--b0);margin-bottom:10px">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">ArmyIgnited Situation</div>
+        <p style="font-size:12px;line-height:1.65;color:var(--t2)">Graduate TA requires a B or higher or the funding must be paid back. During the SUNY Potsdam fall 2025 semester, one course came in with a C — triggering a recoupment request from ArmyIgnited, even though the TA was never actually received for those courses. Had to acknowledge the request formally in order to open a new funding application for Clarkson. That process is in progress.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="pb-stat"><div class="pb-k">TA per course</div><div class="pb-v" style="color:var(--sage)">$750</div></div>
+        <div class="pb-stat"><div class="pb-k">Courses this spring</div><div class="pb-v">2</div></div>
+        <div class="pb-stat"><div class="pb-k">FY availability</div><div class="pb-v" style="color:var(--sage)">~$4,000</div></div>
+        <div class="pb-stat"><div class="pb-k">Status</div><div class="pb-v" style="color:var(--gold)">In process</div></div>
+      </div>
+    </div>
+
+    <div class="card ca d1"><div class="ch"><div class="ct" style="color:var(--sky)">This Year — Education Funding</div><div class="cs">Clarkson benefit · funding gap · timeline</div></div>
+      <p style="font-size:13px;line-height:1.75;color:var(--t2);margin-bottom:12px">After this spring semester, the Clarkson University tuition benefit will be exhausted for the fiscal year — 12 credits covered per FY as a full-time employee. That means either pausing courses, finding alternative funding, or paying out of pocket to stay on track for a May 2027 graduation target.</p>
+      <div style="padding:12px 14px;background:rgba(204,107,71,.07);border:1px solid rgba(204,107,71,.2);border-radius:var(--r2)">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--rust);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Path to May 2027</div>
+        <p style="font-size:12px;line-height:1.65;color:var(--t2)">The Clarkson benefit covers 4 courses per fiscal year. Getting to May 2027 on schedule may require courses beyond what the benefit covers — which means either ArmyIgnited TA filling the gap, or a funding decision this summer.</p>
+      </div>
+    </div>
+
+    <div class="card ca d2"><div class="ch"><div class="ct" style="color:var(--t2)">Long Term — Career Direction</div><div class="cs">Military vs business · Air Force · contract end June 2027</div></div>
+      <p style="font-size:13px;line-height:1.78;color:var(--t2);margin-bottom:14px">The bigger picture question is still open: lean into the MBA and build the business side, or pursue a military career path as an officer. Both have real merit, and the decision doesn't need to be made yet — but it will need to be made before the Army National Guard contract ends in June 2027.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="padding:14px;background:rgba(90,157,192,.07);border:1px solid rgba(90,157,192,.2);border-radius:var(--r2)">
+          <div style="font-family:var(--mono);font-size:9px;color:var(--sky);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Officer Route</div>
+          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:5px">
+            <li style="font-size:12px;color:var(--t2);line-height:1.5">Air Force or Space Force — better fit temperamentally</li>
+            <li style="font-size:12px;color:var(--t2);line-height:1.5">Officer Training School ~6 months</li>
+            <li style="font-size:12px;color:var(--t2);line-height:1.5">Guaranteed paycheck, pension, benefits</li>
+            <li style="font-size:12px;color:var(--t2);line-height:1.5">ARNG contract ends June 2027 — natural transition point</li>
+          </ul>
+        </div>
+        <div style="padding:14px;background:rgba(192,112,128,.07);border:1px solid rgba(192,112,128,.2);border-radius:var(--r2)">
+          <div style="font-family:var(--mono);font-size:9px;color:var(--rose);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Business Route</div>
+          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:5px">
+            <li style="font-size:12px;color:var(--t2);line-height:1.5">MBA + photography + TaxiZero + production</li>
+            <li style="font-size:12px;color:var(--t2);line-height:1.5">Higher upside, significantly more risk</li>
+            <li style="font-size:12px;color:var(--t2);line-height:1.5">Front-end work and income uncertainty are real barriers</li>
+            <li style="font-size:12px;color:var(--t2);line-height:1.5">Requires sustained execution without a safety net</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top:12px;padding:11px 13px;background:var(--bg3);border-radius:var(--r1);border:1px solid var(--b0)">
+        <p style="font-size:12px;line-height:1.65;color:var(--t3)">Enlisted in Army National Guard on a 3×5 year contract — the original intent was to test the commitment before going full military. The contract ending in 2027 is the natural decision point. No action required now, but worth being deliberate about it rather than letting it arrive by default.</p>
+      </div>
+    </div>
+  </div>`;
+}
+
 /* ─── AFTER RENDER CHARTS ─── */
 function afterRender(){
   if(tab==='financial'){
@@ -1287,20 +1405,13 @@ function afterRender(){
         const alpha=tot>0?Math.min(.9,.15+.75*(tot/maxDay)):0;
         const bg=tot>0?col.replace(')',`,${alpha})`.replace('rgb(','rgba(')):'rgba(255,255,255,.03)';
         const title=tot>0?`Mar ${d}: $${tot.toFixed(0)}`:`Mar ${d}: no spend`;
-        html+=`<div title="${title}" style="aspect-ratio:1;border-radius:3px;background:${col};opacity:${tot>0?(.15+.85*(tot/maxDay)).toFixed(2):'.08'};cursor:default;transition:opacity .15s" onmouseenter="document.getElementById('daySpendLabel').textContent='${title}'" onmouseleave="document.getElementById('daySpendLabel').textContent=''"></div>`;
+        html+=`<div title="${title}" style="aspect-ratio:1;border-radius:3px;background:${col};opacity:${tot>0?(.15+.85*(tot/maxDay)).toFixed(2):'.08'};cursor:default;transition:opacity .15s;display:flex;align-items:flex-end;justify-content:flex-end;padding:1px" onmouseenter="document.getElementById('daySpendTooltip').textContent='${title}'" onmouseleave="document.getElementById('daySpendTooltip').textContent=''"><span style="font-family:var(--mono);font-size:6px;color:rgba(255,255,255,.5);line-height:1">${d}</span></div>`;
       }
-      html+='</div><div id="daySpendLabel" style="font-family:var(--mono);font-size:9px;color:var(--t3);margin-top:5px;min-height:14px"></div>';
+      html+='</div>';
       heatEl.innerHTML=html;
     }
-    // Category cumulative trendlines
-    const ctEl=document.getElementById('catTrendChart');
-    if(ctEl){
-      const days31=Array.from({length:31},(_,i)=>i+1);
-      const catData=D.fin.cats.slice(0,5).map(cat=>{
-        let cum=0;return{label:cat.name,color:cat.color,data:days31.map(d=>{cat.txns.forEach(t=>{if(parseInt(t.d.split('/')[1])===d&&t.a<0)cum+=Math.abs(t.a);});return parseFloat(cum.toFixed(2));})};
-      });
-      charts.push(new Chart(ctEl,{type:'line',data:{labels:days31,datasets:catData.map(c=>({label:c.label,data:c.data,borderColor:c.color,backgroundColor:'transparent',borderWidth:1.5,pointRadius:0,tension:.4}))},options:{plugins:{legend:{display:true,position:'bottom',labels:{color:'#CCC9C3',font:{family:'DM Sans',size:10},boxWidth:14,padding:6}}},tooltip:{callbacks:{label:ctx=>` $${ctx.parsed.y.toFixed(0)}`}},scales:{x:{grid:{display:false},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:9},maxTicksLimit:8},title:{display:true,text:'Day',color:'#5A5754',font:{size:9}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:9},callback:v=>'$'+v},suggestedMin:0}},animation:{duration:700}}}));
-    }
+    // catTrendChart removed
+    // (no chart rendered here)
   }
 
   if(tab==='physical'){
@@ -1347,6 +1458,7 @@ function render(){
   const el=document.getElementById('main');
   if(tab==='overview')el.innerHTML=rOverview();
   if(tab==='spiritual')el.innerHTML=rSpiritual();
+  if(tab==='reflections')el.innerHTML=rReflections();
   if(tab==='physical')el.innerHTML=rPhysical();
   if(tab==='financial')el.innerHTML=rFinancial();
   if(tab==='intellectual')el.innerHTML=rIntellectual();
