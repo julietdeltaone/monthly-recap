@@ -43,10 +43,29 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .hdr-r{display:flex;gap:8px}
 .pill{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.7px;text-transform:uppercase;padding:6px 14px;border:1px solid var(--b1);border-radius:40px;background:var(--bg3);color:var(--t3);cursor:pointer;transition:all .18s;box-shadow:var(--sh1)}
 .pill:hover{color:var(--tx);border-color:var(--b2);background:var(--bg4)}
-.tabs{display:flex;gap:2px;padding:18px 0 0;flex-wrap:wrap}
-.tab{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;padding:7px 16px;border:1px solid transparent;border-radius:40px;background:none;color:var(--t3);cursor:pointer;transition:all .18s}
+.tabs{display:flex;gap:2px;padding:14px 0 0;flex-wrap:wrap;position:sticky;top:0;z-index:100;background:var(--bg);padding-bottom:10px;margin-bottom:-10px;border-bottom:1px solid var(--b0)}
+.tab{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;padding:7px 16px;border:1px solid transparent;border-radius:40px;background:none;color:var(--t3);cursor:pointer;transition:all .18s;position:relative}
 .tab:hover{color:var(--t2);border-color:var(--b1);background:rgba(255,255,255,.03)}
 .tab.on{color:var(--tx);border-color:var(--b2);background:var(--bg4);box-shadow:var(--sh1)}
+/* tab color accents when active */
+.tab[data-t="spiritual"].on{border-color:rgba(212,168,75,.4);color:var(--gold)}
+.tab[data-t="physical"].on{border-color:rgba(90,157,192,.4);color:var(--sky)}
+.tab[data-t="financial"].on{border-color:rgba(92,184,114,.4);color:var(--sage)}
+.tab[data-t="intellectual"].on{border-color:rgba(90,157,192,.4);color:var(--sky)}
+.tab[data-t="creative"].on{border-color:rgba(192,112,128,.4);color:var(--rose)}
+/* back to top */
+#btt{position:fixed;bottom:28px;right:28px;width:40px;height:40px;border-radius:50%;background:var(--bg4);border:1px solid var(--b2);color:var(--t2);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s,transform .2s,box-shadow .2s;box-shadow:var(--sh2);z-index:500}
+#btt.show{opacity:1}
+#btt:hover{transform:translateY(-2px);box-shadow:var(--sh3);color:var(--tx);border-color:var(--b3)}
+/* loading flash on tab switch */
+@keyframes tabFade{from{opacity:.4}to{opacity:1}}
+.content.switching{animation:tabFade .22s ease}
+/* sidebar section quick links */
+.sqlink{display:block;font-family:var(--mono);font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;padding:5px 0;border-bottom:1px solid var(--b0);cursor:pointer;transition:color .15s}
+.sqlink:last-child{border-bottom:none}
+.sqlink:hover{color:var(--tx)}
+/* keyboard shortcut hint */
+.kbhint{font-family:var(--mono);font-size:9px;color:var(--t4);background:var(--bg3);border:1px solid var(--b0);border-radius:3px;padding:1px 5px;display:inline-block}
 .dash{display:grid;grid-template-columns:250px 1fr;gap:24px;margin-top:26px;align-items:start}
 @media(max-width:860px){.dash{grid-template-columns:1fr}.side{order:2}.content{order:1}}
 .side{display:flex;flex-direction:column;gap:14px;position:sticky;top:20px}
@@ -271,6 +290,23 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .mnav-btn:hover{color:var(--tx);border-color:var(--b2);background:var(--bg4)}
 .mnav-sep{font-family:var(--mono);font-size:10px;color:var(--t4)}
 
+/* KEYBOARD HINT TOOLTIP */
+#kbhint-panel{position:fixed;bottom:80px;right:28px;background:var(--bg3);border:1px solid var(--b2);border-radius:var(--r3);padding:14px 16px;font-family:var(--mono);font-size:10px;color:var(--t2);z-index:500;box-shadow:var(--sh3);opacity:0;transform:translateY(6px);transition:opacity .2s,transform .2s;pointer-events:none;min-width:180px}
+#kbhint-panel.show{opacity:1;transform:translateY(0);pointer-events:auto}
+.kbrow{display:flex;justify-content:space-between;gap:16px;padding:3px 0;border-bottom:1px solid var(--b0)}
+.kbrow:last-child{border-bottom:none}
+.kbkey{background:var(--bg4);border:1px solid var(--b2);border-radius:3px;padding:1px 6px;font-size:9px;color:var(--tx)}
+
+/* PRINT */
+@media print{
+  .side,.tabs,#btt,.mnav,#kbhint-panel,#schedTip,#hmtip,.calExpandOverlay,.muscle-modal-overlay,.overlay{display:none!important}
+  .dash{grid-template-columns:1fr!important}
+  .card{break-inside:avoid;box-shadow:none!important;border:1px solid #ddd!important;margin-bottom:12px}
+  body{background:#fff!important;color:#000!important}
+  .shell{padding:16px!important}
+  canvas{max-height:300px}
+}
+
 /* SCHEDULE CALENDAR */
 .sched-cell{border-radius:var(--r1);padding:5px 6px;cursor:default;transition:background .15s,border-color .15s,transform .15s;min-height:44px}
 .sched-cell:hover{transform:scale(1.06);z-index:10;box-shadow:var(--sh2)}
@@ -284,6 +320,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
     <div class="hdr-l">
       <h1>JD Monthly Recap</h1>
       <span class="mlbl" id="mlbl">—</span>
+      <span style="font-family:var(--mono);font-size:9px;color:var(--t4);letter-spacing:.5px">Updated Mar 31</span>
     </div>
     <div class="hdr-r">
       <nav class="mnav">
@@ -292,6 +329,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
         <a class="mnav-btn" href="index.html">All Months</a>
         <span class="mnav-sep">|</span>
         <span class="mnav-btn" style="opacity:.35;cursor:default">Apr →</span>
+        <button class="mnav-btn" onclick="window.print()" title="Print this tab" style="gap:4px">Print</button>
+        <button class="mnav-btn" id="kbToggle" onclick="toggleKb()" title="Keyboard shortcuts" style="letter-spacing:0;font-size:13px;padding:5px 10px">⌨</button>
       </nav>
     </div>
   </header>
@@ -303,6 +342,20 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 </div>
 
 <div id="hmtip"></div>
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
+
+<div id="kbhint-panel">
+  <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Keyboard Shortcuts</div>
+  <div class="kbrow"><span>Overview</span><span class="kbkey">1</span></div>
+  <div class="kbrow"><span>Spiritual</span><span class="kbkey">2</span></div>
+  <div class="kbrow"><span>Physical</span><span class="kbkey">3</span></div>
+  <div class="kbrow"><span>Financial</span><span class="kbkey">4</span></div>
+  <div class="kbrow"><span>Intellectual</span><span class="kbkey">5</span></div>
+  <div class="kbrow"><span>Creative</span><span class="kbkey">6</span></div>
+  <div class="kbrow" style="margin-top:4px"><span>Prev / Next tab</span><span style="display:flex;gap:3px"><span class="kbkey">←</span><span class="kbkey">→</span></span></div>
+  <div class="kbrow"><span>Close modal</span><span class="kbkey">Esc</span></div>
+  <div class="kbrow"><span>Print tab</span><span class="kbkey">Ctrl+P</span></div>
+</div>
 <div id="schedTip" style="position:fixed;background:var(--bg4);border:1px solid var(--b2);border-radius:var(--r1);padding:9px 13px;font-family:var(--mono);font-size:10px;color:var(--tx);pointer-events:none;z-index:10001;opacity:0;transition:opacity .12s;max-width:340px;white-space:normal;line-height:1.6;box-shadow:var(--sh3)"></div>
 
 <!-- Expanded Calendar Overlay -->
@@ -463,11 +516,11 @@ const D={
     spendingCumJan:[45.90,58.14,241.74,267.23,333.53,382.49,413.09,469.19,560.99,815.98,851.68,894.52,950.62,1037.32,1363.71,1404.51,1460.61,1537.11,1634.01,1766.61,1817.61,1886.96,1973.66,2096.06,2300.06,2396.95,2458.15,2504.05,2560.15,2598.91,2647.87],
     spendingCumFeb:[50.87,77.41,490.25,525.09,554.12,611.01,623.46,634.07,678.06,932.25,956.60,1497.24,1607.87,1625.15,1674.37,1684.24,1684.24,1815.01,1989.13,2095.85,2095.85,2327.38,2335.37,2342.92,2487.60,2497.31,2510.27,2524.26,2524.26,2524.26,2524.26],
     incomeSources:[
-      {label:"Clarkson University (2×)",amt:2327.24,color:"#5A9DC0"},
-      {label:"DFAS Army RC (Mar)",amt:520.97,color:"#5CB872"},
-      {label:"DFAS Army RC (Feb)",amt:269.32,color:"#8B7EC8"},
-      {label:"RAISER misc",amt:140.67,color:"#47B0AB"},
-      {label:"Square / Photography",amt:72.90,color:"#D4A84B"},
+      {label:"Clarkson University",amt:2327.24,color:"#5A9DC0"},
+      {label:"US Army National Guard",amt:520.97,color:"#5CB872"},
+      {label:"US Army National Guard (Feb adj.)",amt:269.32,color:"#8B7EC8"},
+      {label:"Uber (RAISER)",amt:140.67,color:"#47B0AB"},
+      {label:"Taxi Zero (Square)",amt:72.90,color:"#D4A84B"},
       {label:"Interest / Apple Cash",amt:58.60,color:"#CC6B47"}
     ],
     cats:[
@@ -629,7 +682,10 @@ const SCHED={
 };
 
 const TABS=['overview','spiritual','physical','financial','intellectual','creative'];
-let tab='overview',charts=[];
+// Restore tab from URL hash on load
+const _hash=window.location.hash.replace('#','');
+let tab=TABS.includes(_hash)?_hash:'overview';
+let charts=[];
 
 const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target);}});},{threshold:.06});
 function observe(){document.querySelectorAll('.ca').forEach(el=>{el.classList.remove('vis');io.observe(el);});}
@@ -658,8 +714,12 @@ function progressBand(items){
 /* ─── CHROME ─── */
 function chrome(){
   document.getElementById('mlbl').textContent=D.label;
-  document.getElementById('tabs').innerHTML=TABS.map(t=>`<button class="tab${t===tab?' on':''}" onclick="sw('${t}')">${t[0].toUpperCase()+t.slice(1)}</button>`).join('');
-  // Sidebar: delta stats vs last month (no "at a glance" card)
+  document.getElementById('tabs').innerHTML=TABS.map(t=>{
+    const labels={overview:'Overview',spiritual:'Spiritual',physical:'Physical',financial:'Financial',intellectual:'Intellectual',creative:'Creative'};
+    return`<button class="tab${t===tab?' on':''}" data-t="${t}" onclick="sw('${t}')">${labels[t]||t}</button>`;
+  }).join('');
+
+  // Sidebar: delta stats + quick links for current tab
   const deltas=[
     {k:"Net",cur:D.fin.net,prev:HIST.feb.net,fmt:v=>'$'+Math.round(v),higher:true},
     {k:"Expenses",cur:D.fin.expenses,prev:HIST.feb.expenses,fmt:v=>'$'+Math.round(v),higher:false},
@@ -672,17 +732,29 @@ function chrome(){
   const dRows=deltas.map(d=>{
     let indicator='';
     if(d.prev!==null){
-      const diff=d.cur-d.prev;
-      const pct=Math.abs((diff/d.prev)*100).toFixed(0);
-      const up=d.higher?diff>=0:diff<=0;
-      const eq=diff===0;
+      const diff=d.cur-d.prev,pct=Math.abs((diff/d.prev)*100).toFixed(0);
+      const up=d.higher?diff>=0:diff<=0,eq=diff===0;
       const cls=eq?'delta-eq':up?'delta-up':'delta-dn';
       const arrow=eq?'—':diff>0?'▲':'▼';
       indicator=`<span class="${cls}" style="font-family:var(--mono);font-size:10px">${arrow}${pct}%</span>`;
     }
     return`<div class="si"><span class="sk">${d.k}</span><span class="sv" style="display:flex;align-items:baseline;gap:6px">${d.fmt(d.cur)}${indicator}</span></div>`;
   }).join('');
-  document.getElementById('sidebar').innerHTML=`<div class="sc ca"><div class="sgt">vs February</div>${dRows}</div>`;
+
+  // Quick links per tab
+  const quickLinks={
+    overview:['Schedule Calendar','3-Month Trends','Section Summaries'],
+    spiritual:['Sermon Dashboard','Luke Study — Theme 1','Luke Study — Theme 2','Luke Study — Theme 3'],
+    physical:['Heatmap','AFT Progress','Volume by Group','Cardio'],
+    financial:['Spending Overview','Subscriptions','Savings Progress','Category Breakdown'],
+    intellectual:['Focus Plan','Clarkson GPA','MMCS Notes'],
+    creative:['Projects','Booking Pipeline'],
+  };
+  const links=(quickLinks[tab]||[]).map(l=>`<div class="sqlink" onclick="document.querySelector('.content').scrollIntoView({behavior:'smooth'})">${l}</div>`).join('');
+  const quickSec=links?`<div class="sc ca d2" style="padding:13px 15px"><div class="sgt">This Section</div>${links}</div>`:'';
+
+  document.getElementById('sidebar').innerHTML=
+    `<div class="sc ca"><div class="sgt">vs February</div>${dRows}</div>${quickSec}`;
 }
 
 /* ─── OVERVIEW ─── */
@@ -762,13 +834,32 @@ function rOverview(){
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">${schedLegend}</div>
     </div>`;
 
+  // Sidebar: sparkline-style trend for net/gym/expenses
+  requestAnimationFrame(()=>{
+    const sb=document.getElementById('sidebar');
+    if(sb){
+      const tItems=[
+        {k:'Net',vals:[812,1094,887],colors:['#fff','#5CB872','#D4A84B'],higher:true},
+        {k:'Gym Days',vals:[22,19,18],colors:['#fff','#5A9DC0','#D4A84B'],higher:true},
+        {k:'Expenses',vals:[2288,2486,2501],colors:['#fff','#CC6B47','#D4A84B'],higher:false},
+      ];
+      const bars=tItems.map(t=>{
+        const max=Math.max(...t.vals);
+        const b=['Jan','Feb','Mar'].map((m,i)=>`<div style="display:flex;flex-direction:column;align-items:center;gap:3px;flex:1"><div style="width:100%;background:rgba(255,255,255,.05);border-radius:2px;height:36px;display:flex;align-items:flex-end;overflow:hidden"><div style="width:100%;background:${t.colors[i]};opacity:.8;height:${Math.round(t.vals[i]/max*100)}%;transition:height .8s;border-radius:2px"></div></div><div style="font-family:var(--mono);font-size:7px;color:var(--t4)">${m}</div><div style="font-family:var(--mono);font-size:8px;color:var(--t2)">${t.vals[i]}</div></div>`).join('');
+        const trend=t.vals[2]>t.vals[0]?(t.higher?'delta-up':'delta-dn'):(t.higher?'delta-dn':'delta-up');
+        const pct=Math.abs((t.vals[2]-t.vals[1])/t.vals[1]*100).toFixed(0);
+        const arrow=t.vals[2]>=t.vals[1]?'▲':'▼';
+        return`<div style="background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r1);padding:10px 10px 8px;margin-bottom:6px"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px"><span style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px">${t.k}</span><span class="${trend}" style="font-family:var(--mono);font-size:9px">${arrow}${pct}% vs Feb</span></div><div style="display:flex;gap:4px;align-items:flex-end">${b}</div></div>`;
+      }).join('');
+      sb.innerHTML=`<div class="sc ca"><div class="sgt">3-Month Trend</div>${bars}</div>`;
+    }
+  });
   return`<div style="display:flex;flex-direction:column;gap:12px">
     <div class="ovb ca"><div><div class="ovbm">March 2026</div><div class="ovbs">JD Meyers · Spiritual · Physical · Financial · Intellectual · Creative</div></div><div class="kpis">${kpis}</div></div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px" class="ca d1">${trendCards}</div>
     ${schedCalHTML}
     <div class="ovcols">
-      <div class="ovcol">${mks('Spiritual','var(--gold)',ov.spiritual,' d1','spiritual')}${mks('Physical','var(--sage)',ov.physical,' d2','physical')}${mks('Financial','var(--gold)',ov.financial,' d3','financial')}</div>
-      <div class="ovcol">${mks('Intellectual','var(--sky)',ov.intellectual,' d1','intellectual')}${mks('Creative','var(--rose)',ov.creative,' d2','creative')}<div class="ovs ca d3" onclick="" style="cursor:default"><div class="ovsl" style="color:var(--teal)">Key Events</div>${evts}</div></div>
+      <div class="ovcol">${mks('Spiritual','var(--gold)',[{k:'Attendance',v:'4 sermons',cls:'ok'},{k:'Series',v:'Acts · 1 Cor',cls:''},{k:'Luke Study',v:'Themes 1–3',cls:'ok'}],' d1','spiritual')}${mks('Physical','var(--sky)',[{k:'Gym Days',v:'18',cls:''},{k:'Bench PR',v:'215 lb',cls:'ok'},{k:'Squat PR',v:'225 lb × 8',cls:'ok'},{k:'AFT Avg',v:'71%',cls:'warn'}],' d2','physical')}${mks('Financial','var(--sage)',[{k:'Income',v:'$3,389.70',cls:'ok'},{k:'Expenses',v:'$2,501.44',cls:'warn'},{k:'Net',v:'+$887.26',cls:'ok'},{k:'Tithe',v:'$250.00',cls:'ok'}],' d3','financial')}</div>
+      <div class="ovcol">${mks('Intellectual','var(--sky)',[{k:'MMCS Memo',v:'Complete',cls:'ok'},{k:'GPA',v:'3.83',cls:'ok'},{k:'HTML/API',v:'Applied learning',cls:'ok'}],' d1','intellectual')}${mks('Creative','var(--rose)',[{k:'LMSW Video',v:'Complete',cls:'ok'},{k:'Website + Form',v:'Complete',cls:'ok'},{k:'TaxiZero App',v:'Live on GitHub',cls:'ok'},{k:'Weddings Signed',v:'3',cls:'ok'}],' d2','creative')}</div>
     </div>
   </div>`;
 }
@@ -784,11 +875,7 @@ function rSpiritual(){
     return`<div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:${isSerm?'var(--gold)':'var(--t4)'};font-weight:${isSerm?'700':'400'};background:${isSerm?'rgba(212,168,75,.12)':'transparent'};border-radius:3px">${d}</div>`;
   }).join('');
 
-  const prog=progressBand([
-    `<div class="pb-stat"><div class="pb-k">Attendance</div><div class="pb-v">4</div><div class="pb-d"><span class="delta-eq">— Same as Jan & Feb</span></div></div>`,
-    `<div class="pb-stat"><div class="pb-k">Series</div><div class="pb-v">Acts · 1 Cor</div><div class="pb-d">Acts ongoing since Jan</div></div>`,
-    `<div class="pb-stat"><div class="pb-k">Reading</div><div class="pb-v">Luke 1–19</div><div class="pb-d">March themes 1–3 complete</div></div>`
-  ].join(''));
+
 
   // Luke study notes from the attached notes
   const lukeMarch=`
@@ -831,20 +918,17 @@ function rSpiritual(){
       <span style="color:var(--gold)">APRIL PREVIEW</span> — Themes 4–6: The Marginalized, Discipleship Costs, Holy Spirit Empowers Mission. Luke 4:16–21 · 9:23 · 14:25–33 · 24:44–49
     </div>`;
 
+  // Sidebar: compact sermon calendar + series list
+  requestAnimationFrame(()=>{
+    const sb=document.getElementById('sidebar');
+    if(sb){
+      const sermonList=sp.sermons.map(s=>`<div style="padding:5px 0;border-bottom:1px solid var(--b0)"><div style="font-family:var(--mono);font-size:9px;color:var(--t4)">${s.date.split(',')[0]}</div><div style="font-size:11px;color:var(--t2);margin-top:2px;line-height:1.3">${s.title}</div></div>`).join('');
+      sb.innerHTML=`<div class="sc ca" style="border-top:2px solid var(--gold)"><div class="sgt">March Sermons</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:8px">${dows}${days}</div><div style="font-family:var(--mono);font-size:9px;color:var(--t4);margin-bottom:10px">Gold = sermon Sunday</div>${sermonList}</div>`;
+    }
+  });
   return`<div class="cg">
-    <div class="card sf ca">${prog}</div>
-    <div class="cg sf ca d1" style="grid-template-columns:200px 1fr;gap:16px;display:grid">
-      <div style="display:flex;flex-direction:column;gap:12px">
-        <div class="card" style="padding:14px">
-          <div style="font-family:var(--mono);font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">March Sermons</div>
-          <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:6px">${dows}${days}</div>
-          <div style="font-family:var(--mono);font-size:9px;color:var(--t4);margin-top:6px">Gold = sermon Sunday</div>
-        </div>
-        <div class="card" style="padding:14px">
-          <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Series</div>
-          ${sp.sermons.map(s=>`<div style="padding:5px 0;border-bottom:1px solid var(--b0)"><div style="font-family:var(--mono);font-size:9px;color:var(--t4)">${s.date.split(',')[0]}</div><div style="font-size:11px;color:var(--t2);margin-top:2px;line-height:1.3">${s.title}</div></div>`).join('')}
-        </div>
-      </div>
+    <div class="cg sf ca" style="grid-template-columns:1fr;gap:16px;display:grid">
+      <div>
       <div style="display:flex;flex-direction:column;gap:12px">
         <div class="card" style="padding:16px">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
@@ -896,6 +980,15 @@ function rPhysical(){
   const aftList=ph.aft.map((a,i)=>`<div class="aftrow" onclick="openMuscleDetail(${i})"><span class="aftn">${a.event}<br><span style="font-family:var(--mono);font-size:10px;color:var(--t3)">${a.cur} → ${a.goal}</span></span><div class="aftbw"><div class="aftbf" style="width:${a.pct}%;background:${a.color}"></div></div><span class="aftp" style="color:${a.color}">${a.pct||'—'}%</span></div>`).join('');
   const cardio=ph.cardio.map(c=>`<div class="si"><span class="sk">${c.date}</span><span class="sv" style="font-size:11px">${c.desc}</span></div>`).join('');
 
+  // Inject AFT radial into sidebar
+  requestAnimationFrame(()=>{
+    const sb=document.getElementById('sidebar');
+    if(sb){
+      const svgRings=ph.aft.map((a,i)=>{const r=84-i*15,circ=2*Math.PI*r,dash=a.pct/100*circ;return`<circle fill="none" stroke="rgba(255,255,255,.05)" stroke-width="9" cx="100" cy="100" r="${r}"/><circle fill="none" stroke="${a.color}" stroke-width="9" cx="100" cy="100" r="${r}" stroke-linecap="round" style="stroke-dasharray:${dash} ${circ};transform:rotate(-90deg);transform-origin:100px 100px;transition:stroke-dasharray 1.2s ease ${i*.1}s"/>`;}).join('');
+      const listRows=ph.aft.map((a,i)=>`<div style="display:grid;grid-template-columns:1fr 40px 28px;align-items:center;gap:6px;padding:4px 0;border-bottom:1px solid var(--b0)"><span style="font-size:11px;color:var(--t2)">${a.event}</span><div style="height:3px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden"><div style="height:100%;width:${a.pct}%;background:${a.color};border-radius:2px"></div></div><span style="font-family:var(--mono);font-size:9px;text-align:right;color:${a.color}">${a.pct||'—'}%</span></div>`).join('');
+      sb.innerHTML=`<div class="sc ca" style="border-top:2px solid var(--sky)"><div class="sgt">AFT Progress</div><div style="position:relative;width:160px;height:160px;margin:0 auto 12px"><svg width="160" height="160" viewBox="0 0 200 200">${svgRings}</svg><div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center"><span style="font-family:var(--mono);font-size:16px;font-weight:700;color:var(--tx)">${avgPct}%</span><span style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase">avg to std</span></div></div>${listRows}<div style="margin-top:8px;font-family:var(--mono);font-size:9px;color:var(--t4)">Click rows in main panel for Jan/Feb/Mar detail</div></div>`;
+    }
+  });
   // delta progress band — honest deltas only
   const gymDelta=18-HIST.feb.gymDays, volDelta=115890-HIST.feb.volume;
   const gymCls=gymDelta>=0?'delta-up':'delta-dn', gymArrow=gymDelta>=0?'▲':'▼';
@@ -916,11 +1009,10 @@ function rPhysical(){
   const commNote=`<div class="comm-note"><span class="cnl">Physical — Commentary</span>Goals for 100 points: <b style="color:var(--tx)">MDL 350 lbs · HRP 61 reps · SDC 1:30 · Plank 3:35 · 2-Mile 13:25</b><br><br>18 gym days. Plank is the critical gap — 1:40 vs 3:35 goal. Bench 215lb twice, Squat 225lb × 8 Mar 26, Trap Bar DL 285lb × 5 Mar 17. 4 cardio sessions. AFT avg across scored events: ${avgPct}%.</div>`;
 
   return`<div class="cg">
-    <div class="card sf ca" style="border-left:3px solid var(--sky)"><div style="font-family:var(--mono);font-size:9px;color:var(--sky);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:9px;display:flex;align-items:center;gap:7px"><span style="width:6px;height:6px;background:var(--sky);border-radius:50%;display:inline-block"></span>vs February</div>${deltaCards}</div>
     <div class="card ca d1" style="grid-column:1/-1"><div class="ch"><div class="ct">Muscle Group Training Heatmap</div><div class="cs">18 sessions · hover for detail · daily spend underlay available when CSV updated</div></div><div style="max-width:300px"><div class="hmg"><div></div>${dows}${heatRows}</div><div class="hmleg" style="margin-top:8px">${legend}<div class="hmlgi"><div class="hmlgb" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07)"></div>Rest</div></div></div></div>
-    <div class="card ca d2"><div class="ch"><div class="ct">AFT Radial Progress</div><div class="cs">Goal: 100 pts · avg ${avgPct}% · click row for Jan/Feb/Mar detail</div></div><div class="aftrw"><svg width="200" height="200" viewBox="0 0 200 200">${rings}</svg><div class="aftrc"><div class="aftrv">${avgPct}%</div><div class="aftrk">Avg to std</div></div></div><div>${aftList}</div>${commNote}</div>
+    <div class="card ca d2"><div class="ch"><div class="ct">AFT Detail</div><div class="cs">Click any event for Jan/Feb/Mar breakdown</div></div><div>${aftList}</div>${commNote}</div>
     <div class="card ca d2"><div class="ch"><div class="ct">AFT Radar — Jan · Feb · Mar</div><div class="cs">3-month progression by event</div></div><canvas id="radarChart" height="240"></canvas></div>
-    <div class="card ca d3"><div class="ch"><div class="ct">Volume by Muscle Group</div><div class="cs">Session count per group — March vs Jan/Feb</div></div><canvas id="muscleChart" height="180"></canvas></div>
+    <div class="card sf ca d3"><div class="ch"><div class="ct">Key Exercise Trends — Jan · Feb · Mar</div><div class="cs">Bench · Lat Pulldown · Squat · Curl · Tricep Cable · Treadmill Sprint</div></div><canvas id="exerciseTrendChart" height="220"></canvas></div>
     <div class="card ca d3"><div class="ch"><div class="ct">Cardio</div><div class="cs">4 sessions tracked</div></div>${cardio}<canvas id="cardioChart" height="130" style="margin-top:12px"></canvas></div>
   </div>`;
 }
@@ -960,8 +1052,7 @@ function rFinancial(){
     <div style="padding:0 14px 14px"><div style="font-family:var(--mono);font-size:9px;color:var(--rust);text-transform:uppercase;letter-spacing:.8px;padding:6px 0 4px;border-top:1px solid var(--b0)">Inactive / Cancelled (${inactiveSubs.length})</div>${subRows(inactiveSubs)}</div>
   </div></div>`;
 
-  // Ottawa commentary note
-  const commNote=`<div class="comm-note"><span class="cnl">Financial — Ottawa Trip Note</span>Ottawa trip Mar 9-10: Fairmont Chateau Laurier ($416 gross, $313 net after travel credit), parking, tolls, and $59 parking penalty. Total travel: $433.11. Net +$887 positive — below $1,000 monthly target, partially attributable to Ottawa trip cost. Savings on pace: $2,794 of $10,000 goal (27.9%).</div>`;
+  const commNote='';
 
   // progress
   const prog=progressBand([
@@ -973,6 +1064,14 @@ function rFinancial(){
     `<div class="pb-stat"><div class="pb-k">Savings Total</div><div class="pb-v" style="color:var(--sage)">$2,794</div><div class="pb-d">27.9% of $10k goal</div></div>`
   ].join(''));
 
+  // Inject income breakdown into sidebar
+  requestAnimationFrame(()=>{
+    const sb=document.getElementById('sidebar');
+    if(sb){
+      const srcRows=D.fin.incomeSources.filter(s=>!s.label.includes('Feb adj.')).map(s=>`<div class="si"><span class="sk" style="display:flex;align-items:center;gap:6px"><span style="width:6px;height:6px;border-radius:50%;background:${s.color};flex-shrink:0"></span>${s.label}</span><span class="sv" style="color:var(--sage)">$${s.amt.toFixed(2)}</span></div>`).join('');
+      sb.innerHTML=`<div class="sc ca" style="border-top:2px solid var(--sage)"><div class="sgt">Income — March</div>${srcRows}<div class="si" style="margin-top:4px"><span class="sk" style="font-weight:600">Total</span><span class="sv" style="color:var(--sage);font-size:13px">$${D.fin.income.toFixed(2)}</span></div></div>`;
+    }
+  });
   return`<div class="cg">
     <!-- CUMULATIVE SPENDING at top — screenshot style -->
     <div class="card sf ca" style="background:var(--bg2);border-left:3px solid var(--sky);padding:0;overflow:hidden">
@@ -997,7 +1096,7 @@ function rFinancial(){
         </div>
       </div>
       <div style="padding:16px 22px">
-        <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Cumulative Spending — Jan · Feb · Mar vs $2,500 Budget</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Cumulative Spending — Feb vs Mar vs $2,500 Budget</div>
         <canvas id="spendCompChart" height="140"></canvas>
       </div>
     </div>
@@ -1029,8 +1128,8 @@ function rFinancial(){
     <div class="card ca d2"><div class="ch"><div class="ct">Annual Savings</div><div class="cs">Target $10,000</div></div>${kpis}${sav}</div>
     <!-- Charts row -->
     <div class="card ca d2"><div class="ch"><div class="ct">3-Month Comparison</div><div class="cs">Income · Expenses · Net</div></div><canvas id="monthlyNetChart" height="160"></canvas></div>
-    <div class="card ca d3"><div class="ch"><div class="ct">Weekly Spending</div><div class="cs">Distribution across March</div></div><canvas id="weeklyChart" height="150"></canvas></div>
-    <div class="card ca d3"><div class="ch"><div class="ct">Category Comparison</div><div class="cs">Jan vs Feb vs Mar</div></div><canvas id="catCompareChart" height="180"></canvas></div>
+    <div class="card ca d3"><div class="ch"><div class="ct">Daily Spending Heatmap</div><div class="cs">March — color = top category for that day</div></div><div id="dailySpendHeat" style="margin-top:4px"></div><div style="margin-top:8px;font-family:var(--mono);font-size:9px;color:var(--t4)">Hover cell for day total</div></div>
+    <div class="card ca d3"><div class="ch"><div class="ct">Category Trend Lines</div><div class="cs">Cumulative spend per category — March</div></div><canvas id="catTrendChart" height="180"></canvas></div>
     <div class="card ca d4 sf"><div class="ch"><div class="ct">Spending Donut + All Categories</div><div class="cs">Click to expand · ${totalTxns} total transactions</div></div>
       <div style="display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start">
         <div><div style="position:relative;width:200px;height:200px"><canvas id="donut" width="200" height="200"></canvas><div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none"><div style="font-family:var(--mono);font-size:14px;font-weight:700;color:var(--tx)">$${f.expenses.toFixed(0)}</div><div style="font-family:var(--mono);font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;margin-top:1px">Total Spent</div></div></div></div>
@@ -1052,59 +1151,57 @@ function rIntellectual(){
   }).join('');
   const courses=intel.courses.map(c=>`<div class="si"><span class="sk">${c.code} — ${c.name}</span><span class="sv">${c.grade}</span></div>`).join('');
 
-  const commNote=`<div class="comm-note"><span class="cnl">Intellectual — Amendment Note</span>Original March goal was U.S./World History. Changed to ARNG: MMCS operator notes, JCR, Radio Classes, Casualty Packets. February STEM goal was not completed — acknowledged. The amendment was mission-relevant and the MMCS operator summary was produced and verified against the actual system in the field. 2-of-3 months completed. February miss remains on record.</div>`;
+  // Sidebar HTML injected via chrome override for this tab
+  const sidebarHTML=`
+    <div class="sc ca" style="border-top:2px solid var(--sky)">
+      <div class="sgt">Clarkson University</div>
+      <div style="font-family:var(--serif);font-size:28px;font-weight:700;font-style:italic;color:var(--sky);line-height:1">${intel.gpa}</div>
+      <div style="font-family:var(--mono);font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;margin:4px 0 10px">Term GPA · Good Standing</div>
+      ${courses}
+      <div style="margin-top:10px;padding:8px 10px;background:var(--gbg);border:1px solid rgba(212,168,75,.2);border-radius:var(--r1);font-size:11px;color:var(--t2);line-height:1.5">First Clarkson term. Good Academic Standing maintained.</div>
+    </div>
+    <div class="sc ca d1">
+      <div class="sgt">2026 Focus Plan</div>
+      ${rows}
+    </div>`;
+  // Inject sidebar after render
+  requestAnimationFrame(()=>{
+    const sb=document.getElementById('sidebar');
+    if(sb)sb.innerHTML=sidebarHTML;
+  });
 
-  const summaryNote=`<div class="comm-note" style="border-left-color:var(--sky)"><span class="cnl" style="color:var(--sky)">3-Month Summary — Claude's Note</span>
-    <b style="color:var(--tx)">Jan:</b> Leadership / Military Leadership — Complete. Strong start. Mission-relevant topic, thorough execution.<br><br>
-    <b style="color:var(--tx)">Feb:</b> STEM / Technology Concepts — Missed. First miss of the year. No output recorded. Acknowledged and carried forward as a permanent record.<br><br>
-    <b style="color:var(--tx)">Mar:</b> MMCS / Army Digital C2 (Amended) — Complete. The amendment from History to MMCS reflects good situational awareness about what's actually actionable. An operator memo was produced and cross-verified in the field — that's a meaningful output, not just study.<br><br>
-    <i style="color:var(--t3)">Pattern to watch: The intellectual track is 2/3 — solid, but the February miss means the year opened with a gap. April (History) will show whether that was a one-time miss or a habit forming. GPA 3.83 in first Clarkson term is a clear win.</i>
+  const commNote=`<div class="comm-note"><span class="cnl">Amendment Note</span>Original March goal was U.S./World History. Changed to ARNG: MMCS operator notes, JCR, Radio Classes, Casualty Packets. February STEM goal was not completed — acknowledged. The amendment was mission-relevant and the MMCS operator summary was produced and verified against the actual system in the field.</div>`;
+
+  const htmlLearning=`<div class="card ca sf" style="border-left:3px solid var(--teal)">
+    <div class="ch"><div class="ct">Applied Learning — HTML, Hosting & Tooling</div><div class="cs">Ongoing skill development alongside Claude</div></div>
+    <p style="font-size:13px;line-height:1.78;color:var(--t2);margin-bottom:12px">Beyond the formal MMCS study, March involved hands-on applied learning in web development and deployment. Working through real projects — rather than tutorials — built practical fluency with HTML structure, CSS layout, JavaScript logic, and iterative debugging. Projects were taken from concept to live deployment on GitHub Pages, which required understanding version control, file organization, and the publish cycle.</p>
+    <p style="font-size:13px;line-height:1.78;color:var(--t2);margin-bottom:12px">Work also involved integrating third-party APIs — learning how keys work, how to structure requests, and how to handle authentication without exposing credentials. Proxy-based key security was explored as a practical solution for protecting sensitive keys in client-side apps.</p>
+    <p style="font-size:13px;line-height:1.78;color:var(--t2)">The method throughout was learning by building: identifying a real need, attempting an implementation, debugging what breaks, and shipping something functional. That cycle repeated many times across the month and compounded significantly.</p>
   </div>`;
 
-  const prog=progressBand([
-    `<div class="pb-stat"><div class="pb-k">Topics Completed</div><div class="pb-v">2 / 3</div><div class="pb-d">Jan ✓ · Feb ✗ · Mar ✓</div></div>`,
-    `<div class="pb-stat"><div class="pb-k">GPA</div><div class="pb-v" style="color:var(--sage)">3.83</div><div class="pb-d">First Clarkson term — Good Standing</div></div>`,
-    `<div class="pb-stat"><div class="pb-k">Output</div><div class="pb-v">MMCS Memo</div><div class="pb-d">Verified in field Mar 2026</div></div>`
-  ].join(''));
-
   return`<div class="cg">
-    <div class="card sf ca">${prog}</div>
-    <div class="card ca d1"><div class="ch"><div class="ct">Monthly Focus Plan</div><div class="cs">2026 intellectual development track</div></div>${rows}</div>
-    <div class="card ca d1"><div class="ch"><div class="ct">Clarkson University</div><div class="cs">Winter Quarter 2026 · Graduate Module</div></div><div style="margin-bottom:15px"><div style="font-family:var(--serif);font-size:34px;font-weight:700;font-style:italic;color:var(--sky)">${intel.gpa}</div><div style="font-family:var(--mono);font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;margin-top:3px">Term GPA · Good Academic Standing</div></div>${courses}<div style="margin-top:13px;padding:10px 13px;background:var(--gbg);border:1px solid rgba(212,168,75,.25);border-radius:var(--r1);font-size:11px;color:var(--t2);line-height:1.6"><span style="font-family:var(--mono);font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:3px">Cumulative GPA</span>3.83 — first term on record. Good Academic Standing maintained.</div></div>
-    <div class="card sf ca d2"><div class="ch"><div class="ct">MMCS — Operator Summary Notes</div><div class="cs">Mounted Mission Command Software · March intellectual focus (amended from U.S./World History)</div></div><div style="font-size:13px;line-height:1.8;color:var(--t2)">${intel.mmcs}</div><div style="margin-top:16px;padding:12px 15px;border-left:3px solid var(--sky);background:var(--kdim);border-radius:0 var(--r1) var(--r1) 0;font-size:12px;color:var(--t3);line-height:1.65"><span style="font-family:var(--mono);font-size:9px;color:var(--sky);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:3px">Status</span>Operator summary memo produced · Verified against actual system in field · <b style="color:var(--sage)">Complete — March intellectual goal</b></div></div>
-    <div class="card sf ca d3">${commNote}${summaryNote}</div>
+    <div class="card sf ca"><div class="ch"><div class="ct">MMCS — Operator Summary Notes</div><div class="cs">Mounted Mission Command Software · March intellectual focus (amended from U.S./World History)</div></div><div style="font-size:13px;line-height:1.8;color:var(--t2)">${intel.mmcs}</div><div style="margin-top:16px;padding:12px 15px;border-left:3px solid var(--sky);background:var(--kdim);border-radius:0 var(--r1) var(--r1) 0;font-size:12px;color:var(--t3);line-height:1.65"><span style="font-family:var(--mono);font-size:9px;color:var(--sky);text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:3px">Status</span>Operator summary memo produced · Verified against actual system in field · <b style="color:var(--sage)">Complete — March intellectual goal</b></div>${commNote}</div>
+    ${htmlLearning}
   </div>`;
 }
 
 /* ─── CREATIVE ─── */
 function rCreative(){
   const cr=D.creative;
-  const projects=cr.projects.map(p=>`<div class="pjcard"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:7px"><div><div style="font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;color:var(--tx)">${p.title}</div><div style="font-family:var(--mono);font-size:9px;color:var(--rose);text-transform:uppercase;letter-spacing:1px;margin-top:3px">${p.type}${p.collab?' · w/ '+p.collab:''}</div></div><span class="sbadge" style="background:var(--sbg);color:var(--sage);flex-shrink:0">Complete</span></div><p style="font-size:13px;line-height:1.67;color:var(--t2)">${p.desc}</p></div>`).join('');
   const sm={'cancelled':['rgba(255,255,255,.04)','var(--t4)','Cancelled'],'contract-sent':['var(--kbg)','var(--sky)','Contract Sent'],'signed':['var(--sbg)','var(--sage)','Signed'],'lead':['var(--gbg)','var(--gold)','Lead']};
-  const rows=cr.pipeline.map(p=>{const[bg,fg,lbl]=sm[p.status]||['rgba(0,0,0,.05)','var(--t4)','—'];return`<tr ${p.status==='cancelled'?'class="dm"':''}><td style="font-weight:600;color:var(--tx)">${p.client}</td><td style="color:var(--t2)">${p.service}</td><td style="font-family:var(--mono);font-size:11px;color:var(--t3);white-space:nowrap">${p.date}</td><td style="font-size:12px;color:var(--t3)">${p.loc}</td><td><span class="sbadge" style="background:${bg};color:${fg}">${lbl}</span></td></tr>`;}).join('');
+  const rows=cr.pipeline.map(p=>{const[bg,fg,lbl]=sm[p.status]||['rgba(0,0,0,.05)','var(--t4)','---'];return`<tr ${p.status==='cancelled'?'class="dm"':''}><td style="font-weight:600;color:var(--tx)">${p.client}</td><td style="color:var(--t2)">${p.service}</td><td style="font-family:var(--mono);font-size:11px;color:var(--t3);white-space:nowrap">${p.date}</td><td style="font-size:12px;color:var(--t3)">${p.loc}</td><td><span class="sbadge" style="background:${bg};color:${fg}">${lbl}</span></td></tr>`;}).join('');
   const signed=cr.pipeline.filter(p=>p.status==='signed').length,leads=cr.pipeline.filter(p=>p.status==='lead').length,sent=cr.pipeline.filter(p=>p.status==='contract-sent').length;
-
-  const commNote=`<div class="comm-note"><span class="cnl">Creative — Commentary</span>Two projects completed this month: the LMSW video with M. Maurer and the JD Meyers Productions website refresh using Squarespace with custom Claude-assisted HTML. Both represent meaningful outputs. On the booking side, 3 weddings signed is strong against a goal of 3-4. Two new leads are in contract-writing stage — if either converts, the shooting schedule is essentially full for the summer. The Wagner graduation portraits (Apr 28) are the next confirmed booking. Maintain pipeline contact cadence through April.</div>`;
-
-  const summaryNote=`<div class="comm-note" style="border-left-color:var(--rose)"><span class="cnl" style="color:var(--rose)">3-Month Summary — Claude's Note</span>
-    <b style="color:var(--tx)">Jan:</b> No confirmed output on record for creative work this month.<br><br>
-    <b style="color:var(--tx)">Feb:</b> No confirmed output on record. Pipeline in early formation.<br><br>
-    <b style="color:var(--tx)">Mar:</b> Two complete projects (LMSW documentary short + website rebuild). Pipeline meaningful: 3 signed, 2 leads, 1 contract-sent. This is the first month with documented creative output for 2026.<br><br>
-    <i style="color:var(--t3)">The ramp from Jan/Feb silence to two March completions is a notable shift. The photography pipeline is the more structurally important piece — 3 signed weddings provides summer income certainty. The website and video work demonstrate production capability outside shooting. April should show whether the creative output was a March surge or a new baseline.</i>
-  </div>`;
-
-  const prog=progressBand([
-    `<div class="pb-stat"><div class="pb-k">Projects Completed</div><div class="pb-v">2</div><div class="pb-d">First documented creative month</div></div>`,
-    `<div class="pb-stat"><div class="pb-k">Signed Bookings</div><div class="pb-v" style="color:var(--sage)">3 Weddings</div><div class="pb-d">Goal: 3-4 for year</div></div>`,
-    `<div class="pb-stat"><div class="pb-k">Pipeline Total</div><div class="pb-v">7 entries</div><div class="pb-d">Signed + leads + sent</div></div>`,
-    `<div class="pb-stat"><div class="pb-k">Next Booking</div><div class="pb-v">Apr 28</div><div class="pb-d">H. Wagner — Graduation</div></div>`
-  ].join(''));
-
+  requestAnimationFrame(()=>{
+    const sb=document.getElementById('sidebar');
+    if(sb)sb.innerHTML=`<div class="sc ca" style="border-top:2px solid var(--rose)"><div class="sgt">March Output</div><div class="si"><span class="sk">Projects</span><span class="sv" style="color:var(--sage)">4 complete</span></div><div class="si"><span class="sk">Signed Bookings</span><span class="sv" style="color:var(--sage)">3 Weddings</span></div><div class="si"><span class="sk">Leads Active</span><span class="sv" style="color:var(--gold)">2 in contract</span></div><div class="si"><span class="sk">Pipeline Total</span><span class="sv">7 entries</span></div><div class="si"><span class="sk">Next Booking</span><span class="sv">Apr 28</span></div><div style="margin-top:10px;padding:8px 10px;background:var(--sdim);border:1px solid rgba(92,184,114,.2);border-radius:var(--r1);font-size:11px;color:var(--t3)">Goal: 3-4 weddings for 2026</div></div>`;
+  });
   return`<div class="cg">
-    <div class="card sf ca">${prog}</div>
-    <div class="sf ca d1"><div class="secdiv"><div class="secacc" style="background:var(--rose)"></div><div class="sectit">March Creative Output</div></div>${projects}</div>
-    <div class="card sf ca d2"><div class="ch"><div class="ct">Full Booking Pipeline</div><div class="cs">All 2026 bookings, leads & cancelled</div></div><div style="overflow-x:auto"><table class="ptbl"><thead><tr><th>Client</th><th>Service</th><th>Date</th><th>Location</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table></div><div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;text-align:center">${[['Signed',signed,'var(--sage)','var(--sbg)'],['Leads',leads,'var(--gold)','var(--gbg)'],['Contract Sent',sent,'var(--sky)','var(--kbg)'],['Goal','3-4','var(--t2)','rgba(255,255,255,.04)']].map(([k,v,c,bg])=>`<div style="background:${bg};border:1px solid rgba(255,255,255,.07);border-radius:var(--r1);padding:10px 8px"><div style="font-family:var(--mono);font-size:18px;font-weight:700;color:${c}">${v}</div><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-top:3px">${k}</div></div>`).join('')}</div><div style="margin-top:11px;font-size:12px;color:var(--t3);line-height:1.65">Next confirmed: <b style="color:var(--tx)">H. Wagner</b> graduation portraits Apr 28. Two new leads in contract-writing stage.</div></div>
-    <div class="card sf ca d3">${commNote}${summaryNote}</div>
+    <div class="sf ca"><div class="secdiv"><div class="secacc" style="background:var(--rose)"></div><div class="sectit">March Creative Output</div></div>
+      <div class="pjcard"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:7px"><div><div style="font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;color:var(--tx)">LMSW Video Project</div><div style="font-family:var(--mono);font-size:9px;color:var(--rose);text-transform:uppercase;letter-spacing:1px;margin-top:3px">10-Minute Documentary Short · w/ M. Maurer</div></div><span class="sbadge" style="background:var(--sbg);color:var(--sage);flex-shrink:0">Complete</span></div><p style="font-size:13px;line-height:1.7;color:var(--t2)">Collaborated with several friends across multiple locations to capture the vision M. Maurer needed for her LMSW licensure project. Highlighted systemic issues with volunteer driver verification and accountability for transporting young children. We took her script, recorded dialogue across the locations, and combined it with a slide deck to produce the final piece.</p></div>
+      <div class="pjcard"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:7px"><div><div style="font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;color:var(--tx)">JD Meyers Productions Website + Intake Form</div><div style="font-family:var(--mono);font-size:9px;color:var(--rose);text-transform:uppercase;letter-spacing:1px;margin-top:3px">Website Refresh · Custom Form · Email Integration</div></div><span class="sbadge" style="background:var(--sbg);color:var(--sage);flex-shrink:0">Complete</span></div><p style="font-size:13px;line-height:1.7;color:var(--t2)">Rebuilt the JD Meyers Productions website on Squarespace using custom HTML blocks developed with Claude. Also coded a new intake form customized to each service — wedding photography, wedding video, portraits — programmed to send a formatted email notification on every submission.</p></div>
+      <div class="pjcard" style="border-color:rgba(71,176,171,.3);background:rgba(71,176,171,.04)"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:7px"><div><div style="font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;color:var(--tx)">TaxiZero Fare Estimator</div><div style="font-family:var(--mono);font-size:9px;color:var(--teal);text-transform:uppercase;letter-spacing:1px;margin-top:3px">Web App · HTML/JS · Google Maps API · Live</div></div><a href="https://txizero.github.io/fair-estimate/" target="_blank" style="font-family:var(--mono);font-size:10px;padding:5px 12px;border:1px solid rgba(71,176,171,.4);border-radius:40px;background:rgba(71,176,171,.1);color:var(--teal);text-decoration:none;white-space:nowrap;flex-shrink:0">Try It Live</a></div><p style="font-size:13px;line-height:1.7;color:var(--t2)">Built a fare estimator web app for Taxi Zero and deployed live on GitHub Pages. Integrates the Google Maps API for real distance calculations — required learning how API keys work, how to structure authenticated requests, and how to secure keys client-side using a proxy to prevent credential exposure. Built entirely with HTML, CSS, and JavaScript.</p></div>
+    </div>
+    <div class="card sf ca d1"><div class="ch"><div class="ct">Full Booking Pipeline</div><div class="cs">All 2026 bookings, leads & cancelled</div></div><div style="overflow-x:auto"><table class="ptbl"><thead><tr><th>Client</th><th>Service</th><th>Date</th><th>Location</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table></div><div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;text-align:center">${[['Signed',signed,'var(--sage)','var(--sbg)'],['Leads',leads,'var(--gold)','var(--gbg)'],['Contract Sent',sent,'var(--sky)','var(--kbg)'],['Goal','3-4','var(--t2)','rgba(255,255,255,.04)']].map(([k,v,c,bg])=>`<div style="background:${bg};border:1px solid rgba(255,255,255,.07);border-radius:var(--r1);padding:10px 8px"><div style="font-family:var(--mono);font-size:18px;font-weight:700;color:${c}">${v}</div><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-top:3px">${k}</div></div>`).join('')}</div><div style="margin-top:11px;font-size:12px;color:var(--t3);line-height:1.65">Next confirmed: <b style="color:var(--tx)">H. Wagner</b> graduation portraits Apr 28.</div></div>
   </div>`;
 }
 
@@ -1124,36 +1221,51 @@ function afterRender(){
     const mnc=document.getElementById('monthlyNetChart');
     if(mnc){charts.push(new Chart(mnc,{type:'bar',data:{labels:['January','February','March'],datasets:[{label:'Income',data:[HIST.jan.income,HIST.feb.income,D.fin.income],backgroundColor:'rgba(92,184,114,.55)',borderColor:'#5CB872',borderWidth:1,borderRadius:4},{label:'Expenses',data:[HIST.jan.expenses,HIST.feb.expenses,D.fin.expenses],backgroundColor:'rgba(204,107,71,.55)',borderColor:'#CC6B47',borderWidth:1,borderRadius:4},{label:'Net',data:[HIST.jan.net,HIST.feb.net,D.fin.net],backgroundColor:'rgba(90,157,192,.55)',borderColor:'#5A9DC0',borderWidth:1,borderRadius:4}]},options:{plugins:{legend:{display:true,position:'bottom',labels:{color:'#B2AEA8',font:{family:'JetBrains Mono',size:10},boxWidth:12,padding:8}}},scales:{x:{grid:{display:false},ticks:{color:'#B2AEA8',font:{family:'JetBrains Mono',size:10}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#6E6B67',font:{family:'JetBrains Mono',size:9},callback:v=>'$'+v}}},animation:{duration:800}}}));}
 
-    // category compare - more contrast
-    const cc=document.getElementById('catCompareChart');
-    if(cc){
-      const cats=['Dining','Shopping','Travel','Groceries','Auto','Entertainment'];
-      const janVals=[HIST.jan.cats.dining,HIST.jan.cats.shopping,HIST.jan.cats.travel,HIST.jan.cats.groceries,HIST.jan.cats.auto,HIST.jan.cats.entertainment];
-      const febVals=[HIST.feb.cats.dining,HIST.feb.cats.shopping,HIST.feb.cats.travel,HIST.feb.cats.groceries,HIST.feb.cats.auto,HIST.feb.cats.entertainment];
-      const marVals=[476,474,433,237,197,70];
-      charts.push(new Chart(cc,{type:'bar',data:{labels:cats,datasets:[
-        {label:'Jan',data:janVals,backgroundColor:'rgba(255,255,255,.22)',borderColor:'rgba(255,255,255,.5)',borderWidth:1.5,borderRadius:3},
-        {label:'Feb',data:febVals,backgroundColor:'rgba(90,157,192,.5)',borderColor:'#5A9DC0',borderWidth:1.5,borderRadius:3},
-        {label:'Mar',data:marVals,backgroundColor:'rgba(212,168,75,.75)',borderColor:'#D4A84B',borderWidth:1.5,borderRadius:3}
-      ]},options:{plugins:{legend:{display:true,position:'bottom',labels:{color:'#CCC9C3',font:{family:'JetBrains Mono',size:10},boxWidth:10,padding:8}}},scales:{x:{grid:{display:false},ticks:{color:'#CCC9C3',font:{family:'JetBrains Mono',size:9}}},y:{grid:{color:'rgba(255,255,255,.06)'},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:9},callback:v=>'$'+v}}},animation:{duration:800}}}));
-    }
+    // catCompareChart replaced by catTrendChart line chart
 
     // cumulative spending comparison
     const sc=document.getElementById('spendCompChart');
     if(sc){
       const days=Array.from({length:31},(_,i)=>i+1);
       charts.push(new Chart(sc,{type:'line',data:{labels:days,datasets:[
-        {label:'January',data:D.fin.spendingCumJan,borderColor:'rgba(255,255,255,.35)',backgroundColor:'transparent',borderWidth:1.5,borderDash:[5,4],pointRadius:0,tension:.4},
-        {label:'February',data:D.fin.spendingCumFeb,borderColor:'rgba(90,157,192,.7)',backgroundColor:'rgba(90,157,192,.04)',borderWidth:1.5,borderDash:[3,3],pointRadius:0,tension:.4,fill:true},
-        {label:'March',data:D.fin.spendingCumMar,borderColor:'#D4A84B',backgroundColor:'rgba(212,168,75,.08)',borderWidth:2.5,pointRadius:0,tension:.4,fill:true},
-        {label:'$2,500 Budget',data:Array(31).fill(2500),borderColor:'rgba(204,107,71,.55)',backgroundColor:'transparent',borderWidth:1,borderDash:[6,4],pointRadius:0}
+        {label:'February',data:D.fin.spendingCumFeb,borderColor:'rgba(90,157,192,.6)',backgroundColor:'transparent',borderWidth:1.5,borderDash:[4,3],pointRadius:0,tension:.4},
+        {label:'March',data:D.fin.spendingCumMar,borderColor:'#D4A84B',backgroundColor:'rgba(212,168,75,.07)',borderWidth:2.5,pointRadius:0,tension:.4,fill:true},
+        {label:'$2,500 Budget',data:Array(31).fill(2500),borderColor:'rgba(204,107,71,.5)',backgroundColor:'transparent',borderWidth:1,borderDash:[6,4],pointRadius:0}
       ]},options:{responsive:true,maintainAspectRatio:true,
-        plugins:{legend:{labels:{color:'#CCC9C3',font:{family:'DM Sans',size:11},boxWidth:20}},tooltip:{callbacks:{label:ctx=>' $'+ctx.parsed.y.toFixed(0)}}},
+        plugins:{legend:{labels:{color:'#CCC9C3',font:{family:'DM Sans',size:11},boxWidth:18}},tooltip:{callbacks:{label:ctx=>' $'+ctx.parsed.y.toFixed(0)}}},
         scales:{
           x:{grid:{display:false},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:10},maxTicksLimit:10},border:{display:false},title:{display:true,text:'Day of month',color:'#5A5754',font:{size:10}}},
-          y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:10},callback:v=>'$'+v.toLocaleString()},border:{display:false},max:3000}
+          y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:10},callback:v=>'$'+v.toLocaleString()},border:{display:false},max:2800,suggestedMin:0}
         }
       }}));
+    }
+    // Daily spending heatmap (SVG inline)
+    const heatEl=document.getElementById('dailySpendHeat');
+    if(heatEl){
+      const dayTotals={};const dayCat={};
+      D.fin.cats.forEach(cat=>{cat.txns.forEach(t=>{if(t.a<0){const d=parseInt(t.d.split('/')[1]);dayTotals[d]=(dayTotals[d]||0)+Math.abs(t.a);if(!dayCat[d]||Math.abs(t.a)>(dayCat[d].v||0))dayCat[d]={c:cat.color,v:Math.abs(t.a)};}});});
+      const maxDay=Math.max(...Object.values(dayTotals),1);
+      const dows2=['Su','Mo','Tu','We','Th','Fr','Sa'];
+      let html='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px">';
+      dows2.forEach(d=>html+=`<div style="text-align:center;font-family:var(--mono);font-size:8px;color:var(--t4);padding:2px 0">${d}</div>`);
+      for(let i=0;i<31;i++){
+        const d=i+1;const tot=dayTotals[d]||0;const col=dayCat[d]?dayCat[d].c:'rgba(255,255,255,.03)';
+        const alpha=tot>0?Math.min(.9,.15+.75*(tot/maxDay)):0;
+        const bg=tot>0?col.replace(')',`,${alpha})`.replace('rgb(','rgba(')):'rgba(255,255,255,.03)';
+        const title=tot>0?`Mar ${d}: $${tot.toFixed(0)}`:`Mar ${d}: no spend`;
+        html+=`<div title="${title}" style="aspect-ratio:1;border-radius:3px;background:${col};opacity:${tot>0?(.15+.85*(tot/maxDay)).toFixed(2):'.08'};cursor:default;transition:opacity .15s" onmouseenter="document.getElementById('daySpendLabel').textContent='${title}'" onmouseleave="document.getElementById('daySpendLabel').textContent=''"></div>`;
+      }
+      html+='</div><div id="daySpendLabel" style="font-family:var(--mono);font-size:9px;color:var(--t3);margin-top:5px;min-height:14px"></div>';
+      heatEl.innerHTML=html;
+    }
+    // Category cumulative trendlines
+    const ctEl=document.getElementById('catTrendChart');
+    if(ctEl){
+      const days31=Array.from({length:31},(_,i)=>i+1);
+      const catData=D.fin.cats.slice(0,5).map(cat=>{
+        let cum=0;return{label:cat.name,color:cat.color,data:days31.map(d=>{cat.txns.forEach(t=>{if(parseInt(t.d.split('/')[1])===d&&t.a<0)cum+=Math.abs(t.a);});return parseFloat(cum.toFixed(2));})};
+      });
+      charts.push(new Chart(ctEl,{type:'line',data:{labels:days31,datasets:catData.map(c=>({label:c.label,data:c.data,borderColor:c.color,backgroundColor:'transparent',borderWidth:1.5,pointRadius:0,tension:.4}))},options:{plugins:{legend:{display:true,position:'bottom',labels:{color:'#CCC9C3',font:{family:'DM Sans',size:10},boxWidth:14,padding:6}}},tooltip:{callbacks:{label:ctx=>` $${ctx.parsed.y.toFixed(0)}`}},scales:{x:{grid:{display:false},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:9},maxTicksLimit:8},title:{display:true,text:'Day',color:'#5A5754',font:{size:9}}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:9},callback:v=>'$'+v},suggestedMin:0}},animation:{duration:700}}}));
     }
   }
 
@@ -1167,25 +1279,24 @@ function afterRender(){
         {label:'Mar',data:a.map(x=>x.pct),backgroundColor:'rgba(92,184,114,.13)',borderColor:'#5CB872',borderWidth:2,pointBackgroundColor:'#5CB872',pointRadius:4,pointHoverRadius:6}
       ]},options:{plugins:{legend:{display:true,position:'bottom',labels:{color:'#CCC9C3',font:{family:'JetBrains Mono',size:10},boxWidth:12,padding:10}}},scales:{r:{min:0,max:100,grid:{color:'rgba(255,255,255,.06)'},angleLines:{color:'rgba(255,255,255,.06)'},ticks:{color:'#6E6B67',font:{family:'JetBrains Mono',size:9},backdropColor:'transparent',stepSize:25},pointLabels:{color:'#CCC9C3',font:{family:'JetBrains Mono',size:9}}}},animation:{duration:900}}}));
     }
-    // volume by muscle group — Jan/Feb/Mar comparison
-    const mc2=document.getElementById('muscleChart');
-    if(mc2){
-      const groups=['Chest','Back','Legs','Shoulders','Biceps','Triceps','Abs'];
-      // Estimated volumes per group (sessions × avg weight)
-      const marVols=[4*190,5*200,4*185,3*125,3*75,3*90,3*80].map(v=>Math.round(v));
-      const febVols=[4*175,5*185,3*175,3*115,2*65,3*80,2*70].map(v=>Math.round(v));
-      const janVols=[4*165,5*175,3*160,3*105,2*60,3*75,2*65].map(v=>Math.round(v));
-      charts.push(new Chart(mc2,{type:'bar',data:{labels:groups,datasets:[
-        {label:'Jan',data:janVols,backgroundColor:'rgba(255,255,255,.18)',borderColor:'rgba(255,255,255,.4)',borderWidth:1.5,borderRadius:3},
-        {label:'Feb',data:febVols,backgroundColor:'rgba(90,157,192,.45)',borderColor:'#5A9DC0',borderWidth:1.5,borderRadius:3},
-        {label:'Mar',data:marVols,backgroundColor:'rgba(92,184,114,.6)',borderColor:'#5CB872',borderWidth:1.5,borderRadius:3}
-      ]},options:{plugins:{legend:{display:true,position:'bottom',labels:{color:'#CCC9C3',font:{family:'JetBrains Mono',size:10},boxWidth:10,padding:8}}},scales:{x:{grid:{display:false},ticks:{color:'#CCC9C3',font:{family:'JetBrains Mono',size:9}}},y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:9},callback:v=>v+'lb'}}},animation:{duration:800}}}));
+    // muscleChart removed — replaced by exerciseTrendChart
+    // Exercise trendlines chart
+    const etEl=document.getElementById('exerciseTrendChart');
+    if(etEl){
+      const months=['Jan','Feb','Mar'];
+      charts.push(new Chart(etEl,{type:'line',data:{labels:months,datasets:[
+        {label:'Flat Bench (lb)',data:[185,205,215],borderColor:'#5A9DC0',backgroundColor:'rgba(90,157,192,.08)',borderWidth:2.5,pointRadius:5,pointBackgroundColor:'#5A9DC0',tension:.3,fill:false},
+        {label:'Lat Pulldown (lb)',data:[130,145,170],borderColor:'#5CB872',backgroundColor:'transparent',borderWidth:2.5,pointRadius:5,pointBackgroundColor:'#5CB872',tension:.3},
+        {label:'Squat (lb)',data:[155,175,225],borderColor:'#D4A84B',backgroundColor:'transparent',borderWidth:2.5,pointRadius:5,pointBackgroundColor:'#D4A84B',tension:.3},
+        {label:'DB Curl (lb)',data:[60,70,80],borderColor:'#47B0AB',backgroundColor:'transparent',borderWidth:2,pointRadius:4,pointBackgroundColor:'#47B0AB',tension:.3,borderDash:[4,2]},
+        {label:'Tricep Cable (lb)',data:[75,85,100],borderColor:'#8B7EC8',backgroundColor:'transparent',borderWidth:2,pointRadius:4,pointBackgroundColor:'#8B7EC8',tension:.3,borderDash:[4,2]},
+        {label:'Sprint Dist. (mi)',data:[0,0,2.55],borderColor:'#CC6B47',backgroundColor:'transparent',borderWidth:2,pointRadius:4,pointBackgroundColor:'#CC6B47',tension:.3,borderDash:[2,3],yAxisID:'y2'}
+      ]},options:{plugins:{legend:{display:true,position:'bottom',labels:{color:'#CCC9C3',font:{family:'DM Sans',size:10},boxWidth:14,padding:6}},tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: ${ctx.parsed.y}${ctx.datasetIndex===5?' mi':' lb'}`}}},scales:{x:{grid:{display:false},ticks:{color:'#CCC9C3',font:{family:'JetBrains Mono',size:11}}},y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:9},callback:v=>v+'lb'},title:{display:true,text:'Weight (lb)',color:'#5A5754',font:{size:9}},position:'left',min:0},y2:{grid:{display:false},ticks:{color:'#CC6B47',font:{family:'JetBrains Mono',size:9},callback:v=>v+'mi'},position:'right',min:0,max:8,title:{display:true,text:'Sprint (mi)',color:'#CC6B47',font:{size:9}}}},animation:{duration:900}}}));
     }
     // cardio bar chart
-    const cc=document.getElementById('cardioChart');
-    if(cc){
-      charts.push(new Chart(cc,{type:'bar',data:{
-        labels:['Mar 4','Mar 7','Mar 20','Mar 27'],
+    const ccc=document.getElementById('cardioChart');
+    if(ccc){
+      charts.push(new Chart(ccc,{type:'bar',data:{
         datasets:[{label:'Distance (mi)',data:[6.0,3.1,2.45,2.65],backgroundColor:['rgba(92,184,114,.7)','rgba(92,184,114,.7)','rgba(90,157,192,.6)','rgba(90,157,192,.6)'],borderColor:['#5CB872','#5CB872','#5A9DC0','#5A9DC0'],borderWidth:1.5,borderRadius:5}]
       },options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>`${x.raw} mi`}}},scales:{x:{grid:{display:false},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:9}}},y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:9},callback:v=>v+'mi'},max:8}},animation:{duration:700}}}));
     }
@@ -1214,7 +1325,7 @@ function render(){
 }
 
 /* ─── GLOBAL HANDLERS ─── */
-window.sw=t=>{tab=t;render();window.scrollTo({top:0,behavior:'smooth'});};
+// sw() defined below with tab animation
 window.toggleSerm=id=>{document.getElementById(id)?.classList.toggle('open');};
 window.toggleFin=id=>{
   const el=document.getElementById(id);
@@ -1260,6 +1371,7 @@ window.openMuscleDetail=idx=>{
   document.getElementById('muscleOverlay').classList.add('show');
 };
 window.closeMuscle=()=>document.getElementById('muscleOverlay').classList.remove('show');
+window.toggleKb=()=>{const p=document.getElementById('kbhint-panel');if(p)p.classList.toggle('show');};
 window.showTip=(e,el)=>{const t=document.getElementById('hmtip');t.textContent=el.dataset.lbl;const x=Math.min(e.clientX+16,window.innerWidth-340);const y=Math.min(e.clientY-10,window.innerHeight-80);t.style.left=x+'px';t.style.top=y+'px';t.classList.add('show');};
 window.hideTip=()=>document.getElementById('hmtip').classList.remove('show');
 window.showSchedTip=(e,el)=>{
@@ -1334,7 +1446,39 @@ window.closeCalExpand=()=>{
 
 render();
 document.getElementById('calExpandOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeCalExpand();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeCalExpand();document.getElementById('overlay')?.classList.remove('show');document.getElementById('muscleOverlay')?.classList.remove('show');}});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    closeCalExpand();
+    document.getElementById('overlay')?.classList.remove('show');
+    document.getElementById('muscleOverlay')?.classList.remove('show');
+    document.getElementById('kbhint-panel')?.classList.remove('show');
+  }
+  // Keyboard tab shortcuts: 1-6
+  if(!e.ctrlKey&&!e.metaKey&&!e.altKey&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){
+    const keys={'1':'overview','2':'spiritual','3':'physical','4':'financial','5':'intellectual','6':'creative'};
+    if(keys[e.key]){sw(keys[e.key]);}
+    // Arrow keys for prev/next tab
+    if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
+      const idx=TABS.indexOf(tab);
+      const next=e.key==='ArrowRight'?Math.min(idx+1,TABS.length-1):Math.max(idx-1,0);
+      if(next!==idx)sw(TABS[next]);
+    }
+  }
+});
+// Back to top button visibility
+window.addEventListener('scroll',()=>{
+  const btt=document.getElementById('btt');
+  if(btt)btt.classList.toggle('show',window.scrollY>300);
+},{passive:true});
+// Tab switch content fade + URL hash update
+window.sw=t=>{
+  tab=t;
+  history.replaceState(null,'','#'+t);
+  const c=document.getElementById('main');
+  if(c){c.classList.add('switching');setTimeout(()=>c.classList.remove('switching'),250);}
+  render();
+  window.scrollTo({top:0,behavior:'smooth'});
+};
 })();
 </script>
 </body>
