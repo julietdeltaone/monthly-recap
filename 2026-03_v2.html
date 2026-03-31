@@ -131,6 +131,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .ove:last-child{border-bottom:none}
 .oved{font-family:var(--mono);font-size:10px;color:var(--t4);white-space:nowrap;flex-shrink:0;width:58px;padding-top:1px}
 .ovet{color:var(--t2);line-height:1.4}.ovet b{color:var(--tx);font-weight:600}
+@keyframes fadeSlideIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+@keyframes growBar{from{width:0}to{}}
 @media(max-width:640px){.ovcols{grid-template-columns:1fr}.ovb{flex-direction:column}.kpis{justify-content:space-between;width:100%}.kpi{align-items:flex-start}}
 
 /* CALENDAR */
@@ -395,12 +397,12 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 
 /* ─── HISTORICAL DATA (Jan & Feb for comparison) ─── */
 const HIST={
-  jan:{gymDays:22,volume:128400,net:812.44,income:3100,expenses:2287.56,
+  jan:{gymDays:17,volume:128400,net:812.44,income:3100,expenses:2287.56,
        sermons:4,gpa:null,
        aft:{mdl:70,hrp:68,sdc:78,plk:38,run:0},
        cats:{dining:398,shopping:312,travel:0,tithe:250,groceries:198,auto:145,entertainment:45,subscriptions:38,health:82}
   },
-  feb:{gymDays:19,volume:119200,net:1094.28,income:3580,expenses:2485.72,
+  feb:{gymDays:18,volume:119200,net:1094.28,income:3580,expenses:2485.72,
        sermons:4,gpa:null,
        aft:{mdl:78,hrp:71,sdc:80,plk:42,run:0},
        cats:{dining:422,shopping:388,travel:0,tithe:250,groceries:215,auto:167,entertainment:62,subscriptions:40,health:75}
@@ -419,14 +421,14 @@ const D={
     {label:"Drill Weekend · Fort Drum",color:"var(--teal)"}
   ],
   sidebar:[
-    {k:"Month",v:"March 2026"},{k:"Gym Days",v:"18 / 31"},{k:"Volume",v:"115,890 lb"},
+    {k:"Month",v:"March 2026"},{k:"Gym Days",v:"20 / 31"},{k:"Volume",v:"115,890 lb"},
     {k:"Income",v:"$3,389.70"},{k:"Expenses",v:"$2,501.44"},{k:"Net",v:"+$887.26"},
     {k:"Tithe",v:"$250.00"},{k:"Sermons",v:"4 / 4"},{k:"Term GPA",v:"3.83"}
   ],
   ov:{
     kpis:[
       {v:"+$887",k:"Net Cash",cls:"ok",tab:"financial"},
-      {v:"18",k:"Gym Days",cls:"",tab:"physical"},
+      {v:"20",k:"Gym Days",cls:"",tab:"physical"},
       {v:"4/4",k:"Sermons",cls:"ok",tab:"spiritual"},
       {v:"3.83",k:"GPA",cls:"ok",tab:"intellectual"}
     ],
@@ -681,6 +683,7 @@ const SCHED={
   29:{gym:["Abs","Back"]}
 };
 
+const CSV_SESSIONS={"2026-01-06":[{"ex":"Cable Raise","sets":"25.0lb\u00d712, 20.0lb\u00d712","maxW":25.0},{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d75, 175.0lb\u00d712, 175.0lb\u00d78, 155.0lb\u00d75","maxW":175.0},{"ex":"Incline Treadmill","sets":"10:00","maxW":15.0},{"ex":"Tricep Cable","sets":"30.0lb\u00d78, 45.0lb\u00d78, 45.0lb\u00d78, 45.0lb\u00d78","maxW":45.0}],"2026-01-07":[{"ex":"Dumbbell Curl","sets":"70.0lb\u00d78, 70.0lb\u00d78, 70.0lb\u00d74","maxW":70.0},{"ex":"Lat Pulldown","sets":"100.0lb\u00d75, 137.5lb\u00d79, 137.5lb\u00d76, 125.0lb\u00d78, 125.0lb\u00d76","maxW":137.5},{"ex":"Smith Machine Row","sets":"145.0lb\u00d710, 145.0lb\u00d710, 135.0lb\u00d75","maxW":145.0}],"2026-01-08":[{"ex":"Barbell Squat","sets":"135.0lb\u00d75, 185.0lb\u00d73, 245.0lb\u00d73, 225.0lb\u00d75, 195.0lb\u00d710","maxW":245.0},{"ex":"Cable Crunch","sets":"80.0lb\u00d78, 150.0lb\u00d78, 140.0lb\u00d76, 130.0lb\u00d75","maxW":150.0},{"ex":"Plank","sets":"01:00, 02:10","maxW":0}],"2026-01-09":[{"ex":"Running (Outdoor)","sets":"1:00:36","maxW":0}],"2026-01-12":[{"ex":"Cable Pushdown","sets":"80.0lb\u00d78, 100.0lb\u00d710, 100.0lb\u00d710, 100.0lb\u00d78","maxW":100.0},{"ex":"Chest Dips","sets":"\u00d75, 25.0lb\u00d74, 45.0lb\u00d75, 25.0lb\u00d76","maxW":45.0},{"ex":"Lateral Dumbbell Raise","sets":"40.0lb\u00d720, 40.0lb\u00d715","maxW":40.0},{"ex":"Standing Barbell Press","sets":"135.0lb\u00d71, 105.0lb\u00d75, 95.0lb\u00d76, 95.0lb\u00d74","maxW":135.0}],"2026-01-19":[{"ex":"DB OH Tricep Ext","sets":"50.0lb\u00d77, 50.0lb\u00d78, 50.0lb\u00d77","maxW":50.0},{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d75, 185.0lb\u00d78, 175.0lb\u00d78, 175.0lb\u00d78","maxW":185.0},{"ex":"Lateral Dumbbell Raise","sets":"50.0lb\u00d710, 50.0lb\u00d710, 50.0lb\u00d710","maxW":50.0}],"2026-01-21":[{"ex":"Chin Up","sets":"\u00d74, 25.0lb\u00d73, 25.0lb\u00d73, \u00d76, \u00d75","maxW":25.0},{"ex":"Dumbbell Curl","sets":"50.0lb\u00d710, 50.0lb\u00d710, 50.0lb\u00d77","maxW":50.0},{"ex":"Rope Pullover","sets":"70.0lb\u00d78, 110.0lb\u00d77, 100.0lb\u00d77, 90.0lb\u00d76","maxW":110.0}],"2026-01-22":[{"ex":"Deadlift","sets":"135.0lb\u00d75, 225.0lb\u00d75, 225.0lb\u00d75, 225.0lb\u00d75, 225.0lb\u00d75","maxW":225.0},{"ex":"Leg Extension","sets":"50.0lb\u00d79, 90.0lb\u00d78, 90.0lb\u00d78, 90.0lb\u00d77","maxW":90.0}],"2026-01-23":[{"ex":"Hanging Leg Raise","sets":"\u00d710, \u00d78, \u00d77","maxW":0},{"ex":"Leg Tuck & Twist","sets":"25.0lb\u00d712, 25.0lb\u00d712, 25.0lb\u00d710","maxW":25.0},{"ex":"Oblique Cable","sets":"30.0lb\u00d79, 70.0lb\u00d75, 55.0lb\u00d75, 45.0lb\u00d75","maxW":70.0},{"ex":"Pushup","sets":"\u00d720, \u00d720, \u00d75","maxW":0}],"2026-01-24":[{"ex":"Lat Pulldown","sets":"75.0lb\u00d710, 150.0lb\u00d710, 137.5lb\u00d78, 125.0lb\u00d76","maxW":150.0},{"ex":"Standing Barbell Press","sets":"85.0lb\u00d75, 100.0lb\u00d710, 100.0lb\u00d75","maxW":100.0}],"2026-01-25":[{"ex":"Incline Smith Press","sets":"95.0lb\u00d78, 135.0lb\u00d75, 185.0lb\u00d77, 165.0lb\u00d78, 165.0lb\u00d75","maxW":185.0},{"ex":"Leg Press","sets":"135.0lb\u00d712, 135.0lb\u00d712, 225.0lb\u00d710","maxW":225.0},{"ex":"Low Cable Row","sets":"40.0lb\u00d78, 60.0lb\u00d79, 50.0lb\u00d78","maxW":60.0}],"2026-01-26":[{"ex":"EZ-Bar Skullcrusher","sets":"40.0lb\u00d714, 40.0lb\u00d79, 40.0lb\u00d710","maxW":40.0},{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d75, 190.0lb\u00d78, 180.0lb\u00d78, 175.0lb\u00d77, 155.0lb\u00d73","maxW":190.0},{"ex":"Lateral Dumbbell Raise","sets":"50.0lb\u00d712, 50.0lb\u00d712, 50.0lb\u00d710","maxW":50.0}],"2026-01-27":[{"ex":"Plank","sets":"01:25, 01:00","maxW":45.0},{"ex":"Rope Pullover","sets":"75.0lb\u00d78, 105.0lb\u00d78, 100.0lb\u00d78, 100.0lb\u00d78","maxW":105.0},{"ex":"Seated Incline Dumbbell Curl","sets":"60.0lb\u00d78, 60.0lb\u00d78, 60.0lb\u00d77","maxW":60.0}],"2026-01-28":[{"ex":"Barbell Squat","sets":"135.0lb\u00d75, 155.0lb\u00d75, 175.0lb\u00d75, 185.0lb\u00d75","maxW":185.0},{"ex":"Plate Calf","sets":"55.0lb\u00d710, 55.0lb\u00d710","maxW":55.0}],"2026-01-29":[{"ex":"EZ Preacher Curl","sets":"40.0lb\u00d78, 40.0lb\u00d75, 40.0lb\u00d75","maxW":40.0},{"ex":"Treadmill Sprint","sets":"01:00, 01:00, 01:00, 01:00","maxW":12.0}],"2026-01-30":[{"ex":"Chest Dips","sets":"\u00d75, 45.0lb\u00d76, 45.0lb\u00d75, \u00d75","maxW":45.0},{"ex":"Pushup","sets":"\u00d710, \u00d710, \u00d710","maxW":0},{"ex":"Standing Barbell Press","sets":"95.0lb\u00d75, 105.0lb\u00d79, 95.0lb\u00d74, 95.0lb\u00d75","maxW":105.0}],"2026-01-31":[{"ex":"Plank","sets":"01:10, 01:30, 00:45","maxW":0},{"ex":"Pull Up","sets":"\u00d77, \u00d73, \u00d73, \u00d73","maxW":0},{"ex":"Trap Bar Deadlift","sets":"175.0lb\u00d75, 265.0lb\u00d74, 315.0lb\u00d74, 175.0lb\u00d710","maxW":315.0}],"2026-02-01":[{"ex":"Close Grip Lat Pulldown","sets":"100.0lb\u00d75, 180.0lb\u00d77, 170.0lb\u00d76, 150.0lb\u00d77","maxW":180.0},{"ex":"Dumbbell Curl","sets":"50.0lb\u00d77, 40.0lb\u00d710, 40.0lb\u00d714","maxW":50.0},{"ex":"Treadmill Sprint","sets":"01:10, 01:00, 01:30","maxW":10.0},{"ex":"Wide Grip Row","sets":"70.0lb\u00d710, 115.0lb\u00d78, 105.0lb\u00d710, 95.0lb\u00d710","maxW":115.0}],"2026-02-02":[{"ex":"Cable Raise","sets":"20.0lb\u00d75, 35.0lb\u00d77, 30.0lb\u00d78","maxW":35.0},{"ex":"DB OH Tricep Ext","sets":"50.0lb\u00d75, 50.0lb\u00d713, 50.0lb\u00d79","maxW":50.0},{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d76, 185.0lb\u00d78, 175.0lb\u00d710, 175.0lb\u00d78","maxW":185.0}],"2026-02-03":[{"ex":"Cable Curl","sets":"70.0lb\u00d76, 90.0lb\u00d710, 90.0lb\u00d710, 70.0lb\u00d76","maxW":90.0},{"ex":"Lat Pulldown","sets":"75.0lb\u00d710, 162.5lb\u00d710, 150.0lb\u00d76, 125.0lb\u00d715","maxW":162.5},{"ex":"Smith Machine Row","sets":"150.0lb\u00d710, 135.0lb\u00d715, 135.0lb\u00d710","maxW":150.0}],"2026-02-04":[{"ex":"Barbell Squat","sets":"135.0lb\u00d75, 165.0lb\u00d75, 175.0lb\u00d75, 165.0lb\u00d77","maxW":175.0},{"ex":"Leg Curl","sets":"55.0lb\u00d710, 130.0lb\u00d714, 100.0lb\u00d710","maxW":130.0},{"ex":"Plate Calf","sets":"100.0lb\u00d714, 100.0lb\u00d710","maxW":100.0}],"2026-02-10":[{"ex":"Incline Dumbbell Bench Press","sets":"100.0lb\u00d710, 100.0lb\u00d710, 100.0lb\u00d710","maxW":100.0}],"2026-02-11":[{"ex":"Running (Outdoor)","sets":"25:24","maxW":0}],"2026-02-13":[{"ex":"Treadmill Sprint","sets":"01:00, 01:00, 01:00, 01:00","maxW":12.0},{"ex":"Zone 2 Cardio","sets":"30:50","maxW":0}],"2026-02-14":[{"ex":"DB OH Tricep Ext","sets":"70.0lb\u00d73, 60.0lb\u00d76, 60.0lb\u00d75, 40.0lb\u00d78","maxW":70.0},{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d76, 205.0lb\u00d76, 185.0lb\u00d79, 185.0lb\u00d75","maxW":205.0},{"ex":"Lateral Dumbbell Raise","sets":"70.0lb\u00d78, 70.0lb\u00d78, 70.0lb\u00d75","maxW":70.0},{"ex":"Standing Barbell Press","sets":"85.0lb\u00d75, 120.0lb\u00d74, 100.0lb\u00d75, 95.0lb\u00d76","maxW":120.0}],"2026-02-15":[{"ex":"Chin Up","sets":"\u00d74, \u00d78, \u00d78, \u00d77, \u00d74","maxW":0},{"ex":"Lat Pulldown","sets":"115.0lb\u00d76, 185.0lb\u00d75, 130.0lb\u00d78, 120.0lb\u00d76, 120.0lb\u00d76","maxW":185.0},{"ex":"Rear Delt Cable","sets":"25.0lb\u00d77, 25.0lb\u00d77","maxW":25.0}],"2026-02-16":[{"ex":"Incline Dumbbell Bench Press","sets":"70.0lb\u00d79, 110.0lb\u00d716, 110.0lb\u00d78, 110.0lb\u00d78","maxW":110.0},{"ex":"Lateral Dumbbell Raise","sets":"60.0lb\u00d716, 60.0lb\u00d710, 60.0lb\u00d78","maxW":60.0},{"ex":"Plank","sets":"01:20, 01:30, 01:00","maxW":0}],"2026-02-18":[{"ex":"Barbell Squat","sets":"135.0lb\u00d75, 175.0lb\u00d75, 185.0lb\u00d75, 165.0lb\u00d77","maxW":185.0},{"ex":"Leg Curl","sets":"60.0lb\u00d710, 140.0lb\u00d712, 100.0lb\u00d711","maxW":140.0},{"ex":"Plate Calf","sets":"115.0lb\u00d78, 90.0lb\u00d710","maxW":115.0}],"2026-02-19":[{"ex":"Treadmill Sprint","sets":"01:00, 01:00, 01:00, 01:00","maxW":12.0},{"ex":"Zone 2 Cardio","sets":"26:07","maxW":0}],"2026-02-23":[{"ex":"DB OH Tricep Ext","sets":"50.0lb\u00d714, 50.0lb\u00d710, 50.0lb\u00d77","maxW":50.0},{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d75, 185.0lb\u00d711, 165.0lb\u00d710, 165.0lb\u00d710","maxW":185.0},{"ex":"Standing Barbell Press","sets":"85.0lb\u00d75, 95.0lb\u00d78, 95.0lb\u00d76","maxW":95.0}],"2026-02-24":[{"ex":"Dumbbell Curl","sets":"70.0lb\u00d710, 70.0lb\u00d78, 70.0lb\u00d74","maxW":70.0},{"ex":"Plank","sets":"01:30, 01:30, 01:00","maxW":0},{"ex":"Seated Cable Row","sets":"70.0lb\u00d710, 110.0lb\u00d710, 100.0lb\u00d710, 100.0lb\u00d77","maxW":110.0},{"ex":"Trap Bar Deadlift","sets":"175.0lb\u00d75, 265.0lb\u00d75, 265.0lb\u00d75, 265.0lb\u00d75","maxW":265.0}],"2026-02-25":[{"ex":"Barbell Squat","sets":"135.0lb\u00d75, 175.0lb\u00d75, 222.0lb\u00d75, 175.0lb\u00d77","maxW":222.0},{"ex":"Leg Curl","sets":"70.0lb\u00d710, 120.0lb\u00d710, 120.0lb\u00d710","maxW":120.0},{"ex":"Leg Press","sets":"405.0lb\u00d77, 495.0lb\u00d74","maxW":495.0}],"2026-02-26":[{"ex":"Zone 2 Cardio","sets":"51:51","maxW":0}],"2026-02-27":[{"ex":"Cable Fly","sets":"50.0lb\u00d710, 40.0lb\u00d710, 40.0lb\u00d78, 40.0lb\u00d78","maxW":50.0},{"ex":"Cable Raise","sets":"20.0lb\u00d78, 30.0lb\u00d710, 30.0lb\u00d78","maxW":30.0},{"ex":"Elevated Push Up","sets":"\u00d710, \u00d77, \u00d712","maxW":0},{"ex":"Hand Release Push Up","sets":"\u00d744","maxW":0},{"ex":"Tricep Cable","sets":"30.0lb\u00d78, 55.0lb\u00d75, 50.0lb\u00d712, 40.0lb\u00d77","maxW":55.0}],"2026-02-28":[{"ex":"Cable Crunch","sets":"90.0lb\u00d78, 160.0lb\u00d77, 140.0lb\u00d76, 130.0lb\u00d75","maxW":160.0},{"ex":"Good Morning","sets":"45.0lb\u00d75, 65.0lb\u00d75, 85.0lb\u00d75","maxW":85.0},{"ex":"Hanging Leg Raise","sets":"\u00d711, \u00d76, \u00d75","maxW":0},{"ex":"Oblique Cable","sets":"30.0lb\u00d79, 60.0lb\u00d76, 50.0lb\u00d76, 50.0lb\u00d76","maxW":60.0}],"2026-03-01":[{"ex":"Leg Extension","sets":"70.0lb\u00d710, 110.0lb\u00d714, 190.0lb\u00d77, 150.0lb\u00d75","maxW":190.0},{"ex":"Romanian Deadlift","sets":"130.0lb\u00d79, 130.0lb\u00d77","maxW":130.0},{"ex":"Smith Machine Row","sets":"135.0lb\u00d78, 185.0lb\u00d76, 165.0lb\u00d78, 135.0lb\u00d77","maxW":185.0},{"ex":"Standing Calf Raise","sets":"40.0lb\u00d78, 110.0lb\u00d78, 170.0lb\u00d75","maxW":170.0}],"2026-03-02":[{"ex":"Cable Pushdown","sets":"80.0lb\u00d78, 100.0lb\u00d710, 100.0lb\u00d710, 100.0lb\u00d710","maxW":100.0},{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d75, 215.0lb\u00d73, 205.0lb\u00d73, 205.0lb\u00d73, 195.0lb\u00d75, 185.0lb\u00d76","maxW":215.0},{"ex":"Standing Barbell Press","sets":"85.0lb\u00d75, 115.0lb\u00d77, 105.0lb\u00d75","maxW":115.0}],"2026-03-03":[{"ex":"Dumbbell Curl","sets":"80.0lb\u00d76, 80.0lb\u00d74, 60.0lb\u00d79","maxW":80.0},{"ex":"Lat Pulldown","sets":"90.0lb\u00d710, 150.0lb\u00d711, 150.0lb\u00d710, 150.0lb\u00d76","maxW":150.0},{"ex":"Seated Cable Row","sets":"70.0lb\u00d710, 115.0lb\u00d710, 105.0lb\u00d710, 105.0lb\u00d77","maxW":115.0}],"2026-03-04":[{"ex":"Running (Outdoor)","sets":"56:22","maxW":0}],"2026-03-06":[{"ex":"Chest Dips","sets":"\u00d75, 45.0lb\u00d77, 45.0lb\u00d75, \u00d76","maxW":45.0},{"ex":"EZ-Bar Skullcrusher","sets":"50.0lb\u00d711, 50.0lb\u00d712, 50.0lb\u00d710","maxW":50.0},{"ex":"Standing Barbell Press","sets":"85.0lb\u00d75, 135.0lb\u00d73, 115.0lb\u00d75, 95.0lb\u00d76","maxW":135.0}],"2026-03-07":[{"ex":"Running (Outdoor)","sets":"27:31","maxW":0}],"2026-03-10":[{"ex":"Elevated Push Up","sets":"\u00d711, \u00d77, \u00d76, \u00d712","maxW":0},{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d76, 175.0lb\u00d710, 165.0lb\u00d712, 165.0lb\u00d710","maxW":175.0}],"2026-03-11":[{"ex":"Dumbbell Curl","sets":"70.0lb\u00d711, 70.0lb\u00d77, 70.0lb\u00d75","maxW":70.0},{"ex":"Good Morning","sets":"45.0lb\u00d76, 85.0lb\u00d76, 85.0lb\u00d75","maxW":85.0},{"ex":"Leg Extension Isometric","sets":"00:10, 00:10, 00:15","maxW":250.0},{"ex":"Split Glute","sets":"50.0lb\u00d75, 50.0lb\u00d75","maxW":50.0},{"ex":"Wide Grip Lat Pulldown","sets":"85.0lb\u00d715, 150.0lb\u00d78, 130.0lb\u00d710, 120.0lb\u00d710, 120.0lb\u00d75","maxW":150.0}],"2026-03-16":[{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d75, 185.0lb\u00d712, 165.0lb\u00d710, 165.0lb\u00d710","maxW":185.0},{"ex":"Hammer Isometric","sets":"00:30, 00:40, 00:30","maxW":225.0},{"ex":"Leg Extension Isometric","sets":"00:20, 00:20, 00:20","maxW":170.0},{"ex":"Split Glute","sets":"50.0lb\u00d78, 50.0lb\u00d77","maxW":50.0}],"2026-03-17":[{"ex":"Chin Up","sets":"\u00d74, \u00d710, \u00d77, \u00d75","maxW":0},{"ex":"Plank","sets":"01:40, 01:30, 01:00","maxW":0},{"ex":"Trap Bar Deadlift","sets":"175.0lb\u00d75, 285.0lb\u00d75, 285.0lb\u00d75, 285.0lb\u00d75","maxW":285.0}],"2026-03-19":[{"ex":"Barbell Squat","sets":"135.0lb\u00d75, 185.0lb\u00d75, 185.0lb\u00d75, 185.0lb\u00d75","maxW":185.0},{"ex":"Leg Curl","sets":"110.0lb\u00d77, 90.0lb\u00d77","maxW":110.0},{"ex":"Leg Extension","sets":"70.0lb\u00d715, 90.0lb\u00d76, 70.0lb\u00d78","maxW":90.0},{"ex":"Split Glute","sets":"50.0lb\u00d75","maxW":50.0}],"2026-03-20":[{"ex":"Cable OH Tricep","sets":"30.0lb\u00d76, 40.0lb\u00d78, 30.0lb\u00d76","maxW":40.0},{"ex":"Elevated Push Up","sets":"\u00d713, \u00d76, \u00d76, \u00d77","maxW":0},{"ex":"Hand Release Push Up","sets":"\u00d745","maxW":0},{"ex":"Hip Abduction","sets":"70.0lb\u00d78, 90.0lb\u00d75, 70.0lb\u00d75","maxW":90.0},{"ex":"Treadmill Sprint","sets":"01:40, 01:10, 01:00, 01:00","maxW":12.0}],"2026-03-21":[{"ex":"Cable Crunch","sets":"90.0lb\u00d78, 160.0lb\u00d78, 145.0lb\u00d76, 130.0lb\u00d75","maxW":160.0},{"ex":"Decline Crunch","sets":"\u00d710, 45.0lb\u00d75, 25.0lb\u00d712","maxW":45.0},{"ex":"Good Morning","sets":"45.0lb\u00d75, 65.0lb\u00d75, 95.0lb\u00d75","maxW":95.0},{"ex":"Hanging Leg Raise","sets":"\u00d714, \u00d76, \u00d75","maxW":0}],"2026-03-23":[{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d78, 215.0lb\u00d74, 205.0lb\u00d76, 205.0lb\u00d76, 205.0lb\u00d74","maxW":215.0},{"ex":"Front Lean DB","sets":"20.0lb\u00d710, 20.0lb\u00d74, 20.0lb\u00d74","maxW":20.0},{"ex":"Standing Barbell Press","sets":"85.0lb\u00d75, 135.0lb\u00d72, 115.0lb\u00d76, 115.0lb\u00d75","maxW":135.0},{"ex":"Tricep Cable","sets":"30.0lb\u00d78, 60.0lb\u00d78, 50.0lb\u00d77, 45.0lb\u00d76","maxW":60.0}],"2026-03-24":[{"ex":"Dumbbell Curl","sets":"70.0lb\u00d78, 70.0lb\u00d77, 60.0lb\u00d76, 50.0lb\u00d76","maxW":70.0},{"ex":"Forearm Curl","sets":"15.0lb\u00d78, 30.0lb\u00d74, 25.0lb\u00d74","maxW":30.0},{"ex":"Lat Pulldown","sets":"80.0lb\u00d710, 170.0lb\u00d77, 160.0lb\u00d76, 140.0lb\u00d77","maxW":170.0},{"ex":"Rope Pullover","sets":"70.0lb\u00d79, 110.0lb\u00d78, 100.0lb\u00d79, 100.0lb\u00d78","maxW":110.0}],"2026-03-26":[{"ex":"Barbell Squat","sets":"135.0lb\u00d75, 225.0lb\u00d78, 185.0lb\u00d78","maxW":225.0},{"ex":"Bosu KB","sets":"30.0lb\u00d73, 15.0lb\u00d75, \u00d76","maxW":30.0},{"ex":"Hip Abduction","sets":"80.0lb\u00d78, 80.0lb\u00d78","maxW":80.0},{"ex":"Leg Extension","sets":"70.0lb\u00d710, 210.0lb\u00d77, 190.0lb\u00d77, 150.0lb\u00d75","maxW":210.0}],"2026-03-27":[{"ex":"DB OH Tricep Ext","sets":"60.0lb\u00d76, 10.0lb\u00d710, 10.0lb\u00d79","maxW":60.0},{"ex":"Dumbbell Curl","sets":"80.0lb\u00d75, 60.0lb\u00d78, 60.0lb\u00d76","maxW":80.0},{"ex":"Flat Dumbbell Bench Press","sets":"80.0lb\u00d76, 170.0lb\u00d76, 150.0lb\u00d78, 140.0lb\u00d76","maxW":170.0},{"ex":"Treadmill Sprint","sets":"02:00, 01:10, 01:00, 01:30","maxW":12.0}],"2026-03-29":[{"ex":"Cable Crunch","sets":"100.0lb\u00d716, 100.0lb\u00d715","maxW":100.0},{"ex":"Good Morning","sets":"45.0lb\u00d75, 55.0lb\u00d77, 95.0lb\u00d76","maxW":95.0},{"ex":"Hanging Leg Raise","sets":"\u00d710, \u00d75, \u00d75","maxW":0},{"ex":"Plank","sets":"01:10, 01:00","maxW":45.0}],"2026-03-30":[{"ex":"Cable Pushdown","sets":"70.0lb\u00d710, 135.0lb\u00d78, 120.0lb\u00d78, 110.0lb\u00d76","maxW":135.0},{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d78, 175.0lb\u00d713, 175.0lb\u00d78, 175.0lb\u00d78","maxW":175.0},{"ex":"Lateral Dumbbell Raise","sets":"70.0lb\u00d711, 70.0lb\u00d78, 70.0lb\u00d75","maxW":70.0}],"2026-03-31":[{"ex":"Dumbbell Curl","sets":"80.0lb\u00d76, 70.0lb\u00d75, 70.0lb\u00d75, 70.0lb\u00d75","maxW":80.0},{"ex":"Lat Pulldown","sets":"80.0lb\u00d710, 155.0lb\u00d714, 140.0lb\u00d78, 130.0lb\u00d77","maxW":155.0},{"ex":"Leg Extension Isometric","sets":"00:30, 00:30, 01:00","maxW":170.0},{"ex":"Rear Delt Cable","sets":"30.0lb\u00d75, 30.0lb\u00d76, 25.0lb\u00d76","maxW":30.0},{"ex":"Seated Cable Row","sets":"70.0lb\u00d710, 130.0lb\u00d75, 120.0lb\u00d78, 110.0lb\u00d76","maxW":130.0}]};
 const TABS=['overview','spiritual','physical','financial','intellectual','creative','reflections'];
 // Restore tab from URL hash on load
 const _hash=window.location.hash.replace('#','');
@@ -781,7 +784,7 @@ function buildSidebar(){
       if(!sess)return`<div style="aspect-ratio:1;border-radius:2px;background:rgba(255,255,255,.04)"></div>`;
       const ms=sess.muscles,c1=ph.mc[ms[0]]||'#888',c2=ms[1]?(ph.mc[ms[1]]||'#888'):null;
       const bg=c2?`linear-gradient(135deg,${c1} 50%,${c2} 50%)`:c1;
-      return`<div style="aspect-ratio:1;border-radius:2px;background:${bg}" title="Mar ${d}: ${sess.label}"></div>`;
+      return`<div style="aspect-ratio:1;border-radius:2px;background:${bg};cursor:pointer" title="Mar ${d}: ${sess.label}" onclick="openWorkout('2026-03-'+String(${d}).padStart(2,'0'))"></div>`;
     }).join('')).join('');
     const sbHeatHTML=`<div class="sc ca" style="padding:10px 12px;border-top:2px solid var(--sky)"><div class="sgt" style="margin-bottom:6px">Training Heatmap</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px">${sbDows}${sbCells}</div></div>`;
     const validPcts=ph.aft.filter(a=>a.pct>0);
@@ -884,7 +887,7 @@ function buildSidebar(){
     return`<div class="sc ca" style="border-top:2px solid var(--gold)">
       <div class="sgt">March Snapshot</div>
       <div class="si"><span class="sk">Net Cash</span><span class="sv" style="color:var(--sage)">+$887</span></div>
-      <div class="si"><span class="sk">Gym Days</span><span class="sv">18</span></div>
+      <div class="si"><span class="sk">Gym Days</span><span class="sv">20</span></div>
       <div class="si"><span class="sk">Sermons</span><span class="sv" style="color:var(--gold)">4 / 4</span></div>
       <div class="si"><span class="sk">GPA</span><span class="sv" style="color:var(--sky)">3.83</span></div>
       <div class="si"><span class="sk">Projects</span><span class="sv" style="color:var(--sage)">4 complete</span></div>
@@ -907,7 +910,7 @@ function rOverview(){
   // mini 3-month trend bars
   const trendData=[
     {lbl:"Net",vals:[812,1094,887],color:"var(--sage)",fmt:"$"},
-    {lbl:"Gym Days",vals:[22,19,18],color:"var(--sky)",fmt:""},
+    {lbl:"Gym Days",vals:[17,18,20],color:"var(--sky)",fmt:""},
     {lbl:"Expenses",vals:[2288,2486,2501],color:"var(--rust)",fmt:"$"},
   ];
   const trendCards=trendData.map(t=>{
@@ -1076,7 +1079,7 @@ function rPhysical(){
       if(!sess)return`<div class="hmc rest"></div>`;
       const ms=sess.muscles,c1=ph.mc[ms[0]]||'#888',c2=ms[1]?(ph.mc[ms[1]]||'#888'):null,c3=ms[2]?(ph.mc[ms[2]]||'#888'):null;
       const bg=c3?`linear-gradient(135deg,${c1} 33%,${c2} 33%,${c2} 66%,${c3} 66%)`:c2?`linear-gradient(135deg,${c1} 50%,${c2} 50%)`:c1;
-      return`<div class="hmc" style="background:${bg}" data-lbl="Mar ${d}: ${sess.label}" onmouseenter="showTip(event,this)" onmouseleave="hideTip()"></div>`;
+      return`<div class="hmc" style="background:${bg}" data-lbl="Mar ${d}: ${sess.label}" onmouseenter="showTip(event,this)" onmouseleave="hideTip()" onclick="openWorkout('2026-03-'+String(${d}).padStart(2,'0'))" style="cursor:pointer"></div>`;
     }).join('');
     return`<div class="hmwk" style="font-size:7px">${w.l}</div>${cells}`;
   }).join('');
@@ -1121,10 +1124,10 @@ function rPhysical(){
 
   const insightData=[
     {label:"What's Working",color:"var(--sage)",dot:"#5CB872",rows:[
-      {text:"Bench: 185→205→215 lb — linear progression",spark:spark([185,205,215],'#5CB872')},
-      {text:"Squat: 155→175→225 lb — biggest jump in Q1",spark:spark([155,175,225],'#D4A84B')},
-      {text:"Trap Bar DL: 245→265→285 lb — MDL tracking",spark:spark([245,265,285],'#5A9DC0')},
-      {text:"Lat Pulldown: 130→145→170 lb — best rate of gain",spark:spark([130,145,170],'#47B0AB')},
+      {text:"Bench: 190→205→215 lb — linear progression",spark:spark([190,205,215],'#5CB872')},
+      {text:"Squat: 245→222→225 lb — consistency focus",spark:spark([245,222,225],'#D4A84B')},
+      {text:"Trap Bar DL: 315→265→285 lb — recovering from Jan peak",spark:spark([315,265,285],'#5A9DC0')},
+      {text:"Lat Pulldown: 150→185→170 lb — Feb peak, held Mar",spark:spark([150,185,170],'#47B0AB')},
     ]},
     {label:"Not Improving",color:"var(--gold)",dot:"#D4A84B",rows:[
       {text:"HRP: 47→47→45 reps — slight regression",spark:spark([47,47,45],'#D4A84B')},
@@ -1140,35 +1143,38 @@ function rPhysical(){
   const insightCards=insightData.map(g=>`<div class="card ca" style="border-top:2px solid ${g.color};padding:13px 14px"><div style="font-family:var(--mono);font-size:9px;color:${g.color};text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:${g.dot};display:inline-block"></span>${g.label}</div><div style="display:flex;flex-direction:column;gap:6px">${g.rows.map(r=>`<div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font-size:11px;color:var(--t2);line-height:1.4;flex:1">${r.text}</span>${r.spark}</div>`).join('')}</div></div>`).join('');
 
   // ─── EXERCISE FREQUENCY TABLE data ───
+  // Real CSV-derived exercise frequency table
   const exTable=[
-    {name:'Bench Press',       count:5, score:.92, notes:'215lb × 4, 185lb × 12'},
-    {name:'Squat',             count:3, score:.95, notes:'225lb × 8 PR'},
-    {name:'Trap Bar Deadlift', count:1, score:.90, notes:'285lb × 5'},
-    {name:'OHP',               count:3, score:.80, notes:'135lb × sets'},
-    {name:'Lat Pulldown',      count:3, score:.78, notes:'170lb × 7'},
-    {name:'Seated Row',        count:1, score:.75, notes:'115lb'},
-    {name:'Smith Row',         count:1, score:.82, notes:'185lb'},
-    {name:'Chin-ups',          count:1, score:.70, notes:'bodyweight'},
-    {name:'Rope Pullover',     count:1, score:.65, notes:'110lb'},
-    {name:'DB Curl',           count:3, score:.55, notes:'70–80lb'},
-    {name:'EZ Skullcrusher',   count:1, score:.68, notes:'50lb'},
-    {name:'Tricep Cable/Push', count:3, score:.62, notes:'100lb'},
-    {name:'Leg Extension',     count:3, score:.60, notes:'190–210lb × reps'},
-    {name:'RDL',               count:1, score:.72, notes:'130lb'},
-    {name:'Good Morning',      count:2, score:.65, notes:'85–95lb'},
-    {name:'Split Glute',       count:2, score:.40, notes:'bodyweight/assisted'},
-    {name:'Hammer Iso',        count:1, score:.55, notes:'225lb × 40s'},
-    {name:'Hip Abduction',     count:1, score:.22, notes:'machine'},
-    {name:'Elevated Push-ups', count:1, score:.30, notes:'bodyweight'},
-    {name:'HRPU (45)',         count:1, score:.35, notes:'45 reps'},
-    {name:'Plank',             count:2, score:.42, notes:'45lb × 1:40'},
-    {name:'HLR',               count:2, score:.38, notes:'×10–14 reps'},
-    {name:'Cable Crunch',      count:2, score:.45, notes:'100–160lb'},
-    {name:'Treadmill Sprints', count:2, score:.30, notes:'2.45–2.65 mi'},
-    {name:'Outdoor Run',       count:2, score:.18, notes:'6.0 mi, 5.0 km'},
-    {name:'Calf Raise',        count:1, score:.28, notes:'bodyweight'},
-    {name:'Bosu KB',           count:1, score:.35, notes:'stability'},
-    {name:'Leg Curl',          count:1, score:.50, notes:'machine'},
+    {name:'Flat Barbell Bench Press', count:23, score:.92, notes:'215lb×4 PR · +92% vs Feb', delta:92, deltaUp:true},
+    {name:'Dumbbell Curl',            count:17, score:.55, notes:'80lb max · +183% vs Feb',  delta:183, deltaUp:true},
+    {name:'Lat Pulldown',             count:12, score:.78, notes:'170lb max · +33% vs Feb',  delta:33,  deltaUp:true},
+    {name:'Leg Extension',            count:11, score:.60, notes:'210lb max · new Mar',       delta:null, deltaUp:true},
+    {name:'Standing Barbell Press',   count:11, score:.82, notes:'135lb max · +57% vs Feb',  delta:57,  deltaUp:true},
+    {name:'Good Morning',             count:9,  score:.65, notes:'95lb max · +200% vs Feb',  delta:200, deltaUp:true},
+    {name:'Leg Ext Isometric',        count:9,  score:.60, notes:'250lb hold · new Mar',      delta:null, deltaUp:true},
+    {name:'Cable Pushdown',           count:8,  score:.68, notes:'135lb max · new Mar',       delta:null, deltaUp:true},
+    {name:'Seated Cable Row',         count:8,  score:.75, notes:'130lb max · +100% vs Feb',  delta:100, deltaUp:true},
+    {name:'Elevated Push Up',         count:8,  score:.30, notes:'BW · +167% vs Feb',         delta:167, deltaUp:true},
+    {name:'Treadmill Sprint',         count:8,  score:.30, notes:'12mph peak · -27% vs Feb',  delta:27,  deltaUp:false},
+    {name:'Barbell Squat',            count:7,  score:.95, notes:'225lb×8 PR · -42% vs Feb',  delta:42,  deltaUp:false},
+    {name:'Hanging Leg Raise',        count:6,  score:.38, notes:'BW · +100% vs Feb',         delta:100, deltaUp:true},
+    {name:'Cable Crunch',             count:6,  score:.45, notes:'160lb max · +50% vs Feb',   delta:50,  deltaUp:true},
+    {name:'Wide Grip Lat Pulldown',   count:5,  score:.78, notes:'150lb max · new Mar',        delta:null, deltaUp:true},
+    {name:'Split Glute',              count:5,  score:.40, notes:'50lb · new Mar',             delta:null, deltaUp:true},
+    {name:'Hip Abduction',            count:5,  score:.22, notes:'90lb · new Mar',             delta:null, deltaUp:true},
+    {name:'Plank',                    count:5,  score:.42, notes:'45lb · -17% vs Feb',         delta:17,  deltaUp:false},
+    {name:'Smith Machine Row',        count:4,  score:.82, notes:'185lb max · +33% vs Feb',   delta:33,  deltaUp:true},
+    {name:'Chest Dips',               count:4,  score:.70, notes:'+45lb · new Mar',            delta:null, deltaUp:true},
+    {name:'Trap Bar Deadlift',        count:4,  score:.90, notes:'285lb×5 · flat vs Feb',      delta:0,   deltaUp:true},
+    {name:'Tricep Cable',             count:4,  score:.68, notes:'60lb max · flat vs Feb',     delta:0,   deltaUp:true},
+    {name:'Rope Pullover',            count:4,  score:.65, notes:'110lb · new Mar',             delta:null, deltaUp:true},
+    {name:'Flat Dumbbell Bench',      count:4,  score:.85, notes:'170lb×6 · new Mar',          delta:null, deltaUp:true},
+    {name:'DB OH Tricep Ext',         count:3,  score:.60, notes:'60lb max · -70% vs Feb',     delta:70,  deltaUp:false},
+    {name:'Lateral DB Raise',         count:3,  score:.55, notes:'70lb max · -50% vs Feb',     delta:50,  deltaUp:false},
+    {name:'EZ-Bar Skullcrusher',      count:3,  score:.68, notes:'50lb · new Mar',             delta:null, deltaUp:true},
+    {name:'Leg Curl',                 count:2,  score:.60, notes:'110lb · -78% vs Feb',        delta:78,  deltaUp:false},
+    {name:'Running (Outdoor)',        count:2,  score:.18, notes:'6mi / 5km runs',             delta:100, deltaUp:true},
+    {name:'Chin Up',                  count:4,  score:.70, notes:'BW · -20% vs Feb',           delta:20,  deltaUp:false},
   ].sort((a,b)=>b.count-a.count||b.score-a.score);
 
   function scoreToColor(s){
@@ -1188,12 +1194,18 @@ function rPhysical(){
   const exRows=exTable.map(e=>{
     const bg=scoreToColor(e.score);
     const border=scoreToBorder(e.score);
-    const barW=Math.round(e.count/5*100);
-    return`<div style="display:grid;grid-template-columns:160px 28px 1fr 120px;gap:8px;align-items:center;padding:5px 8px;border-radius:4px;background:${bg};border-left:2px solid ${border};margin-bottom:2px">
-      <div style="font-size:11px;color:var(--tx);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${e.name}</div>
+    const barW=Math.round(e.count/23*100);
+    let deltaBadge='';
+    if(e.delta!==null){
+      const sign=e.deltaUp?'+':'-';
+      const cls=e.deltaUp?'#5CB872':'#CC6B47';
+      deltaBadge=`<span style="font-family:var(--mono);font-size:8px;padding:1px 4px;border-radius:10px;background:${e.deltaUp?'rgba(92,184,114,.15)':'rgba(204,107,71,.15)'};color:${cls};margin-left:4px">${sign}${e.delta}%</span>`;
+    }
+    return`<div style="display:grid;grid-template-columns:155px 24px 1fr 110px;gap:6px;align-items:center;padding:4px 7px;border-radius:4px;background:${bg};border-left:2px solid ${border};margin-bottom:2px;animation:fadeSlideIn .4s ease both;animation-delay:${exTable.indexOf(e)*.025}s">
+      <div style="font-size:11px;color:var(--tx);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${e.name}${deltaBadge}</div>
       <div style="font-family:var(--mono);font-size:10px;color:var(--t2);text-align:center">${e.count}×</div>
-      <div style="background:rgba(255,255,255,.06);border-radius:2px;height:4px;overflow:hidden"><div style="height:100%;width:${barW}%;background:${border};border-radius:2px"></div></div>
-      <div style="font-size:10px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${e.notes}</div>
+      <div style="background:rgba(255,255,255,.06);border-radius:2px;height:4px;overflow:hidden"><div style="width:${barW}%;height:100%;background:${border};border-radius:2px;animation:growBar .6s ease both;animation-delay:${exTable.indexOf(e)*.025+.1}s"></div></div>
+      <div style="font-size:9px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${e.notes}</div>
     </div>`;
   }).join('');
 
@@ -1203,13 +1215,14 @@ function rPhysical(){
 
   // ─── COMPACT SLOPE CHART for lifts (inline SVG, no canvas) ───
   const slopeData=[
-    {name:'Squat',      vals:[155,175,225], color:'#D4A84B'},
-    {name:'Bench',      vals:[185,205,215], color:'#5A9DC0'},
-    {name:'Lat PD',     vals:[130,145,170], color:'#5CB872'},
-    {name:'Tricep',     vals:[75,85,100],   color:'#8B7EC8'},
-    {name:'Curl',       vals:[60,70,80],    color:'#47B0AB'},
+    {name:'Squat',   vals:[245,222,225], color:'#D4A84B'},
+    {name:'Bench',   vals:[190,205,215], color:'#5A9DC0'},
+    {name:'Lat PD',  vals:[150,185,170], color:'#5CB872'},
+    {name:'TrapDL',  vals:[315,265,285], color:'#CC6B47'},
+    {name:'Curl',    vals:[70,70,80],    color:'#47B0AB'},
+    {name:'Tricep',  vals:[45,55,60],    color:'#8B7EC8'},
   ];
-  const SW=480,SH=120,leftM=44,rightM=44,topM=18,botM=20;
+  const SW=460,SH=100,leftM=44,rightM=44,topM=14,botM=18;
   const allVals=slopeData.flatMap(d=>d.vals);
   const minV=Math.min(...allVals),maxV=Math.max(...allVals);
   const ym=v=>topM+(1-(v-minV)/(maxV-minV))*(SH-topM-botM);
@@ -1229,7 +1242,7 @@ function rPhysical(){
     // label on left
     svgLines+=`<text x="${pts[0].x-5}" y="${pts[0].y+3.5}" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="rgba(255,255,255,.35)">${d.vals[0]}</text>`;
   });
-  const slopeChart=`<svg width="100%" viewBox="0 0 ${SW} ${SH}" style="overflow:visible;display:block">${svgLines}</svg>`;
+  const slopeChart=`<svg width="100%" viewBox="0 0 ${SW} ${SH}" style="overflow:visible;display:block;max-width:100%">${svgLines}</svg>`;
 
   // ─── CARDIO inline SVG bar chart ───
   const cardioSessions=[
@@ -1279,7 +1292,7 @@ function rPhysical(){
     <div class="sf">${insightCards}</div>
 
     <!-- Slope chart: Strength Progress (compact) -->
-    <div class="card ca d3" style="padding:10px 12px">
+    <div class="card ca d3" style="padding:10px 12px;min-height:0">
       <div class="ch" style="margin-bottom:6px"><div class="ct" style="font-size:12px">Strength Progression</div><div class="cs" style="font-size:9px">Jan → Feb → Mar · working max</div></div>
       ${slopeChart}
     </div>
@@ -1725,6 +1738,35 @@ window.openFinOverlay=(type)=>{
   ov.style.display='block';
   document.body.style.overflow='hidden';
 };
+window.openWorkout=(dateStr)=>{
+  const ov=document.getElementById('workoutOverlay');
+  const body=document.getElementById('woBody');
+  const dateEl=document.getElementById('woDate');
+  const subEl=document.getElementById('woSub');
+  if(!ov||!body)return;
+  const data=CSV_SESSIONS[dateStr]||[];
+  // Format date
+  const d=new Date(dateStr+'T12:00:00');
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  dateEl.textContent=`${days[d.getDay()]}, ${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+  subEl.textContent=`${data.length} exercise${data.length!==1?'s':''}`;
+  if(data.length===0){
+    body.innerHTML='<div style="font-size:13px;color:var(--t3);padding:12px 0">No exercise data for this date.</div>';
+  } else {
+    body.innerHTML=data.map(ex=>`<div style="margin-bottom:12px;padding:10px 12px;background:var(--bg3);border-radius:var(--r1);border-left:2px solid rgba(92,184,114,.4)">
+      <div style="font-size:13px;color:var(--tx);font-weight:600;margin-bottom:5px">${ex.ex}${ex.maxW>0?`<span style="font-family:var(--mono);font-size:9px;color:var(--sage);margin-left:8px;font-weight:400">${ex.maxW}lb max</span>`:''}
+      </div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--t3);line-height:1.7">${ex.sets}</div>
+    </div>`).join('');
+  }
+  ov.style.display='block';
+  document.body.style.overflow='hidden';
+};
+window.closeWorkoutOverlay=()=>{
+  const ov=document.getElementById('workoutOverlay');
+  if(ov){ov.style.display='none';document.body.style.overflow='';}
+};
 window.closeFinOverlay=()=>{
   const ov=document.getElementById('finOverlay');
   if(ov){ov.style.display='none';document.body.style.overflow='';}
@@ -1811,6 +1853,7 @@ document.addEventListener('keydown',e=>{
     document.getElementById('muscleOverlay')?.classList.remove('show');
     document.getElementById('kbhint-panel')?.classList.remove('show');
     closeFinOverlay();
+    closeWorkoutOverlay();
   }
   // Keyboard tab shortcuts: 1-6
   if(!e.ctrlKey&&!e.metaKey&&!e.altKey&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){
@@ -1849,6 +1892,17 @@ window.sw=t=>{
       <button onclick="closeFinOverlay()" style="font-family:var(--mono);font-size:11px;padding:7px 16px;border:1px solid var(--b2);border-radius:40px;background:var(--bg4);color:var(--t2);cursor:pointer;transition:all .15s">Close ×</button>
     </div>
     <div id="finOverlayBody"></div>
+  </div>
+</div>
+
+<!-- Workout Detail Overlay -->
+<div id="workoutOverlay" style="display:none;position:fixed;inset:0;background:rgba(6,7,9,.93);backdrop-filter:blur(18px);z-index:9999;overflow-y:auto;padding:28px 20px" onclick="if(event.target===this)closeWorkoutOverlay()">
+  <div style="max-width:600px;margin:0 auto;background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r3);overflow:hidden;box-shadow:var(--sh3)">
+    <div style="padding:16px 20px;border-bottom:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between">
+      <div><div id="woDate" style="font-family:var(--serif);font-size:16px;font-weight:700;font-style:italic;color:var(--tx)">—</div><div id="woSub" style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-top:2px">—</div></div>
+      <button onclick="closeWorkoutOverlay()" style="font-family:var(--mono);font-size:11px;padding:5px 12px;border:1px solid var(--b2);border-radius:20px;background:none;color:var(--t3);cursor:pointer">Close ×</button>
+    </div>
+    <div id="woBody" style="padding:16px 20px"></div>
   </div>
 </div>
 </body>
