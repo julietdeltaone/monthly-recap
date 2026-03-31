@@ -123,6 +123,11 @@
     transition: all .15s ease;
   }
   .pill:hover { border-color: var(--border-hover); color: var(--text-soft); }
+  
+  .mnav-link{font-family:var(--mono);font-size:10px;padding:5px 11px;border:1px solid var(--border);border-radius:var(--r-sm);color:var(--text-muted);text-decoration:none;transition:all .15s;white-space:nowrap}
+  .mnav-link:hover{border-color:var(--border-hover);color:var(--text-soft)}
+  .mnav-link.dim{opacity:.4;pointer-events:none}
+  .mnav-sep{font-family:var(--mono);font-size:10px;color:var(--text-faint);padding:0 2px}
   .pill.on {
     background: var(--accent);
     border-color: var(--accent);
@@ -310,7 +315,7 @@
   .cal-day.hl-sermon {
     color: #fff;
     font-weight: 600;
-    cursor: pointer;
+    cursor: default;
   }
   .cal-day.hl-sermon .cal-num {
     display: inline-flex;
@@ -1477,7 +1482,13 @@
       <h1>JD Monthly Recap</h1>
       <span class="month-label" id="monthLabel">—</span>
     </div>
-    <div class="hdr-right">
+    <div class="hdr-right" style="display:flex;align-items:center;gap:8px">
+      <nav style="display:flex;align-items:center;gap:4px">
+        <a class="mnav-link" href="index.html">All Months</a>
+        <span class="mnav-sep">|</span>
+        <a class="mnav-link" href="2026-01.html">← Jan</a>
+        <a class="mnav-link" href="2026-03_v2.html">Mar →</a>
+      </nav>
       <button class="pill" id="commentaryBtn" style="margin-right:10px;background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.3);color:#C084FC;font-size:11px;letter-spacing:.5px;padding:5px 14px;border-radius:20px;cursor:pointer;font-family:var(--mono);transition:all .2s;" onclick="toggleCommentary()">COMMENTARY</button>
       <div id="monthBtns"></div>
     </div>
@@ -2185,36 +2196,19 @@
       let dataAttr = '';
       if (sermons.includes(d)) {
         cls += ' hl-sermon';
-        if (sermonIdMap[d]) dataAttr = ` data-scroll-to="${sermonIdMap[d]}"`;
+
       }
       else if (readings.includes(d)) cls += ' hl-reading';
       html += `<div class="${cls}"${dataAttr}><span class="cal-num">${d}</span></div>`;
     }
     html += '</div>';
     html += '<div class="cal-legend">';
-    html += '<span class="cal-legend-item"><span class="ldot ldot-sermon"></span> Sermon <span style="color:var(--text-faint);font-style:italic;margin-left:2px">(click to jump)</span></span>';
+    html += '<span class="cal-legend-item"><span class="ldot ldot-sermon"></span> Sermon Sunday</span>';
     html += '<span class="cal-legend-item"><span class="ldot ldot-reading"></span> Reading Mark</span>';
     html += '</div>';
     container.innerHTML = html;
 
-    // Attach click listeners to sermon dates
-    container.querySelectorAll('.hl-sermon[data-scroll-to]').forEach(el => {
-      el.addEventListener('click', () => {
-        const targetId = el.dataset.scrollTo;
-        const target = document.getElementById(targetId);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          // Brief highlight flash
-          target.style.transition = 'background .2s, border-color .2s';
-          target.style.background = 'var(--accent-bg)';
-          target.style.borderColor = 'rgba(59,130,246,.4)';
-          setTimeout(() => {
-            target.style.background = '';
-            target.style.borderColor = '';
-          }, 1500);
-        }
-      });
-    });
+    // Sermon date clicks removed — see embedded dashboard
   }
 
   // ===== RENDER =====
