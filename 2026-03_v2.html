@@ -809,10 +809,33 @@ function buildSidebar(){
       const w=Math.round(s.amt/maxInc*100);
       return`<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px"><span style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:${s.color};flex-shrink:0"></span>${s.label}</span><span style="font-family:var(--mono);font-size:10px;color:var(--sage)">$${s.amt.toFixed(0)}</span></div><div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden"><div style="width:${w}%;height:100%;background:${s.color};border-radius:2px;transition:width .8s ease"></div></div></div>`;
     }).join('');
+    // Category color strip for spending widget
+    const catStrip=D.fin.cats.slice(0,5).map(c=>{const w=(c.amt/D.fin.expenses*100).toFixed(1);return`<div style="flex:${w};height:100%;background:${c.color}" title="${c.name}: $${c.amt.toFixed(0)}"></div>`;}).join('');
+    // Top sub pills
+    const subPills=D.subscriptions.filter(s=>s.status==='Active').slice(0,4).map(s=>`<span style="font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:10px;background:var(--vbg);color:var(--vio);border:1px solid rgba(139,126,200,.18)">${s.name.split(' ')[0]}</span>`).join('');
+    const activeCt=D.subscriptions.filter(s=>s.status==='Active').length;
+    const moCost=D.subscriptions.filter(s=>s.status==='Active').reduce((a,s)=>a+(s.freq==='Monthly'?s.amt:s.amt/12),0);
     return`<div class="sc ca" style="border-top:2px solid var(--sage)">
       <div class="sgt">Income — March</div>
       ${incRows}
       <div style="display:flex;justify-content:space-between;padding:8px 0 0;margin-top:4px;border-top:1px solid var(--b0)"><span style="font-size:12px;color:var(--t2);font-weight:600">Total</span><span style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--sage)">$${D.fin.income.toFixed(2)}</span></div>
+    </div>
+    <div class="sc ca d1" style="padding:13px 14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div class="sgt" style="margin:0">Spending</div>
+        <button onclick="openFinOverlay('spending')" style="font-family:var(--mono);font-size:9px;padding:3px 8px;border:1px solid var(--b1);border-radius:20px;background:none;color:var(--t3);cursor:pointer;transition:all .15s" onmouseover="this.style.color='var(--tx)'" onmouseout="this.style.color='var(--t3)'">Expand ↗</button>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px"><span style="font-family:var(--serif);font-size:18px;font-weight:700;font-style:italic;color:var(--tx)">$${D.fin.expenses.toFixed(0)}</span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">total spent</span></div>
+      <div style="display:flex;height:5px;border-radius:3px;overflow:hidden;gap:1px;margin-bottom:6px">${catStrip}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:3px">${D.fin.cats.slice(0,5).map(c=>`<div style="display:flex;align-items:center;gap:3px"><span style="width:5px;height:5px;border-radius:50%;background:${c.color};flex-shrink:0"></span><span style="font-family:var(--mono);font-size:8px;color:var(--t4)">${c.name.split(' ')[0]}</span></div>`).join('')}</div>
+    </div>
+    <div class="sc ca d1" style="padding:13px 14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div class="sgt" style="margin:0">Subscriptions</div>
+        <button onclick="openFinOverlay('subscriptions')" style="font-family:var(--mono);font-size:9px;padding:3px 8px;border:1px solid var(--b1);border-radius:20px;background:none;color:var(--t3);cursor:pointer;transition:all .15s" onmouseover="this.style.color='var(--tx)'" onmouseout="this.style.color='var(--t3)'">Expand ↗</button>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px"><span style="font-family:var(--serif);font-size:17px;font-weight:700;font-style:italic;color:var(--vio)">$${moCost.toFixed(0)}<span style="font-size:11px;font-style:normal;color:var(--t3)">/mo</span></span><span style="font-family:var(--mono);font-size:9px;color:var(--t4)">${activeCt} active</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:3px">${subPills}<span style="font-family:var(--mono);font-size:9px;color:var(--t4);align-self:center">+${activeCt-4} more</span></div>
     </div>`;
   }
 
@@ -1255,12 +1278,59 @@ function rPhysical(){
     <!-- Insight cards with sparklines -->
     <div class="sf">${insightCards}</div>
 
-    <!-- Slope chart: Strength Progress -->
-    <div class="card sf ca d2" style="padding:13px 16px">
-      <div class="ch" style="margin-bottom:10px"><div class="ct">Strength Progression — Jan · Feb · Mar</div><div class="cs">Working max by lift · slope = rate of gain</div></div>
+    <!-- Slope chart: Strength Progress (compact) -->
+    <div class="card ca d3" style="padding:10px 12px">
+      <div class="ch" style="margin-bottom:6px"><div class="ct" style="font-size:12px">Strength Progression</div><div class="cs" style="font-size:9px">Jan → Feb → Mar · working max</div></div>
       ${slopeChart}
     </div>
 
+    <!-- Sprint History Card -->
+    <div class="card ca d3 sf" style="padding:13px 15px">
+      <div class="ch" style="margin-bottom:10px"><div class="ct">Treadmill Sprint History</div><div class="cs">Jan–Mar 2026 · interval progression</div></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px">
+        <div class="pb-stat"><div class="pb-k">Sessions</div><div class="pb-v">6</div><div class="pb-d">Jan: 2 · Feb: 3 · Mar: 2</div></div>
+        <div class="pb-stat"><div class="pb-k">Peak Speed</div><div class="pb-v" style="color:var(--gold)">12.0 mph</div><div class="pb-d">Consistent since Jan 29</div></div>
+        <div class="pb-stat"><div class="pb-k">Longest Interval</div><div class="pb-v" style="color:var(--sage)">2:00</div><div class="pb-d">Mar 27 — new PR</div></div>
+      </div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:11px">
+          <thead><tr>${['Date','Dist','Peak mph','Intervals','Top Int.','Notes'].map(h=>`<th style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.6px;text-align:left;padding:4px 8px;border-bottom:1px solid var(--b0)">${h}</th>`).join('')}</tr></thead>
+          <tbody>
+            ${[
+              {date:'Jan 29',dist:'2.65 mi',peak:'12.0',ints:4,top:'1:30',note:'Form OK on Int 3 · Int 4 @ 12.0 cold'},
+              {date:'Feb 1',dist:'—',peak:'10.0',ints:3,top:'1:30',note:'Only 3 intervals · top speed lower'},
+              {date:'Feb 13',dist:'~2.3 mi',peak:'12.0',ints:4,top:'1:00',note:'1.69 mi @ 17:20 · cool-down finish'},
+              {date:'Feb 19',dist:'2.5 mi',peak:'12.0',ints:4,top:'1:00',note:'Int 3–4 both @ 12.0 · cool-down finish'},
+              {date:'Mar 20',dist:'2.45 mi',peak:'12.0',ints:4,top:'1:40',note:'Int 3 form degraded · Int 4 controlled'},
+              {date:'Mar 27',dist:'2.65 mi',peak:'12.0',ints:4,top:'2:00',note:'Best interval duration yet · form held'},
+            ].map((r,i)=>`<tr style="background:${i===5?'rgba(212,168,75,.05)':'transparent'}">
+              <td style="font-family:var(--mono);font-size:10px;color:${i>=4?'var(--gold)':'var(--t3)'};padding:6px 8px;border-bottom:1px solid var(--b0)">${r.date}</td>
+              <td style="font-family:var(--mono);font-size:10px;color:var(--t2);padding:6px 8px;border-bottom:1px solid var(--b0)">${r.dist}</td>
+              <td style="font-family:var(--mono);font-size:10px;color:var(--tx);padding:6px 8px;border-bottom:1px solid var(--b0);font-weight:600">${r.peak}</td>
+              <td style="font-family:var(--mono);font-size:10px;color:var(--t2);padding:6px 8px;border-bottom:1px solid var(--b0);text-align:center">${r.ints}</td>
+              <td style="font-family:var(--mono);font-size:10px;color:var(--sage);padding:6px 8px;border-bottom:1px solid var(--b0)">${r.top}</td>
+              <td style="font-size:10px;color:var(--t3);padding:6px 8px;border-bottom:1px solid var(--b0)">${r.note}</td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:12px">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px">Longest Interval Per Session</div>
+        ${[
+          {label:'Jan 29',val:90,max:120},
+          {label:'Feb 1', val:90,max:120},
+          {label:'Feb 13',val:60,max:120},
+          {label:'Feb 19',val:60,max:120},
+          {label:'Mar 20',val:100,max:120,cur:true},
+          {label:'Mar 27',val:120,max:120,cur:true},
+        ].map(s=>`<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
+          <div style="font-family:var(--mono);font-size:9px;color:${s.cur?'var(--gold)':'var(--t4)'};width:40px;flex-shrink:0">${s.label}</div>
+          <div style="flex:1;background:rgba(255,255,255,.05);border-radius:2px;height:10px;overflow:hidden"><div style="width:${(s.val/s.max*100).toFixed(0)}%;height:100%;background:${s.cur?'var(--gold)':'rgba(90,157,192,.5)'};border-radius:2px"></div></div>
+          <div style="font-family:var(--mono);font-size:9px;color:${s.cur?'var(--gold)':'var(--t2)'};width:28px;text-align:right">${Math.floor(s.val/60)}:${String(s.val%60).padStart(2,'0')}</div>
+        </div>`).join('')}
+        <div style="margin-top:8px;padding:8px 10px;background:rgba(92,184,114,.06);border:1px solid rgba(92,184,114,.18);border-radius:var(--r1);font-family:var(--mono);font-size:9px;color:var(--sage);line-height:1.5">Longest interval improved from 1:30 (Jan) to 2:00 (Mar 27) — 33% gain. Peak speed locked at 12.0 mph since Jan 29. Next target: hold 2+ intervals at 12.0 without form degradation.</div>
+      </div>
+    </div>
     <!-- Compact Cardio -->
     <div class="card ca d3" style="padding:13px 14px">
       <div class="ch" style="margin-bottom:8px"><div class="ct">Cardio</div><div class="cs">4 sessions · 14.2 mi total</div></div>
@@ -1348,34 +1418,7 @@ function rFinancial(){
         <canvas id="spendCompChart" height="140"></canvas>
       </div>
     </div>
-    <!-- Subscriptions preview -->
-    <div class="card sf ca d1">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
-        <div>
-          <div style="font-family:var(--mono);font-size:9px;color:var(--vio);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px">Subscriptions</div>
-          <div style="display:flex;gap:20px;align-items:baseline;flex-wrap:wrap">
-            <div><div style="font-family:var(--serif);font-size:26px;font-weight:700;font-style:italic;color:var(--vio)">$${monthlyCost.toFixed(0)}<span style="font-size:13px;font-style:normal;color:var(--t3)">/mo</span></div><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;margin-top:2px">Active monthly</div></div>
-            <div><div style="font-family:var(--serif);font-size:20px;font-weight:700;font-style:italic;color:var(--rust)">$${annualCost.toFixed(0)}<span style="font-size:11px;font-style:normal;color:var(--t3)">/yr</span></div><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;margin-top:2px">Annual equiv.</div></div>
-            <div><div style="font-family:var(--serif);font-size:20px;font-weight:700;font-style:italic;color:var(--tx)">${activeSubs.length}</div><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;margin-top:2px">Active · ${inactiveSubs.length} inactive</div></div>
-          </div>
-          <div style="margin-top:10px;display:flex;gap:5px;flex-wrap:wrap">${activeSubs.slice(0,6).map(s=>`<span style="font-family:var(--mono);font-size:9px;padding:2px 7px;border-radius:20px;background:var(--vbg);color:var(--vio);border:1px solid rgba(139,126,200,.2)">${s.name.split(' ')[0]}</span>`).join('')}<span style="font-family:var(--mono);font-size:9px;color:var(--t4);align-self:center">+${activeSubs.length-6} more</span></div>
-        </div>
-        <button onclick="toggleFin('fc-subs-top')" style="font-family:var(--mono);font-size:10px;padding:7px 16px;border:1px solid rgba(139,126,200,.4);border-radius:40px;background:var(--vbg);color:var(--vio);cursor:pointer;transition:all .18s;white-space:nowrap">View All</button>
-      </div>
-      <div class="fcatb" id="fc-subs-top" style="margin-top:14px;max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1)">
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px">
-          <div class="pb-stat"><div class="pb-k">Monthly</div><div class="pb-v" style="color:var(--rust)">$${monthlyCost.toFixed(2)}</div></div>
-          <div class="pb-stat"><div class="pb-k">Annual</div><div class="pb-v" style="color:var(--rust)">$${annualCost.toFixed(0)}</div></div>
-          <div class="pb-stat"><div class="pb-k">Active</div><div class="pb-v">${activeSubs.length}</div></div>
-        </div>
-        <div><div style="font-family:var(--mono);font-size:9px;color:var(--sage);text-transform:uppercase;letter-spacing:.8px;padding:4px 0 6px;border-bottom:1px solid var(--b0);margin-bottom:4px">Active (${activeSubs.length})</div>${subRows(activeSubs)}</div>
-        <div style="margin-top:10px"><div style="font-family:var(--mono);font-size:9px;color:var(--rust);text-transform:uppercase;letter-spacing:.8px;padding:4px 0 6px;border-bottom:1px solid var(--b0);margin-bottom:4px">Inactive / Cancelled (${inactiveSubs.length})</div>${subRows(inactiveSubs)}</div>
-      </div>
-    </div>
-    <!-- Savings progress -->
-    <div class="card ca d2"><div class="ch"><div class="ct">Annual Savings</div><div class="cs">Target $10,000</div></div>${kpis}${sav}</div>
-    <!-- Charts row -->
-    <div class="card ca d2"><div class="ch"><div class="ct">3-Month Comparison</div><div class="cs">Income · Expenses · Net</div></div><canvas id="monthlyNetChart" height="160"></canvas></div>
+        <div class="card ca d2"><div class="ch"><div class="ct">3-Month Comparison</div><div class="cs">Income · Expenses · Net</div></div><canvas id="monthlyNetChart" height="160"></canvas></div>
     <div class="card ca d3"><div class="ch"><div class="ct">Daily Spending Heatmap — March 2026</div><div class="cs">Each cell = 1 day · color = largest category · intensity = total spend</div></div><div id="dailySpendHeat" style="margin-top:6px"></div><div id="daySpendTooltip" style="font-family:var(--mono);font-size:10px;color:var(--t2);margin-top:6px;min-height:16px;padding:4px 0;border-top:1px solid var(--b0)"></div></div>
     <div class="card ca d3"><div class="ch"><div class="ct">Notable Purchases</div><div class="cs">March spending highlights</div></div>
       <div style="display:flex;flex-direction:column;gap:10px">
@@ -1392,13 +1435,6 @@ function rFinancial(){
           <div><div style="font-size:13px;color:var(--gold);font-weight:600;margin-bottom:2px">Credit Card Strategy</div><div style="font-size:12px;color:var(--t3);line-height:1.55">Cancelling Amex Platinum before annual fee hits. Keeping Chase Sapphire Reserve as primary spend card. Cards opened during Basic Training (active duty waived fees) — no longer active duty.</div></div>
         </div>
       </div>
-    </div>
-    <div class="card ca d4 sf"><div class="ch"><div class="ct">Spending Donut + All Categories</div><div class="cs">Click to expand · ${totalTxns} total transactions</div></div>
-      <div style="display:grid;grid-template-columns:200px 1fr;gap:20px;align-items:start">
-        <div><div style="position:relative;width:200px;height:200px"><canvas id="donut" width="200" height="200"></canvas><div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none"><div style="font-family:var(--mono);font-size:14px;font-weight:700;color:var(--tx)">$${f.expenses.toFixed(0)}</div><div style="font-family:var(--mono);font-size:8px;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;margin-top:1px">Total Spent</div></div></div></div>
-        <div><canvas id="barchart" height="50" style="margin-bottom:15px"></canvas><div>${cats}</div></div>
-      </div>
-      ${commNote}
     </div>
   </div>`;
 }
@@ -1566,7 +1602,7 @@ function afterRender(){
         const alpha=tot>0?Math.min(.9,.15+.75*(tot/maxDay)):0;
         const bg=tot>0?col.replace(')',`,${alpha})`.replace('rgb(','rgba(')):'rgba(255,255,255,.03)';
         const title=tot>0?`Mar ${d}: $${tot.toFixed(0)}`:`Mar ${d}: no spend`;
-        html+=`<div title="${title}" style="aspect-ratio:1;border-radius:3px;background:${col};opacity:${tot>0?(.15+.85*(tot/maxDay)).toFixed(2):'.08'};cursor:default;transition:opacity .15s;display:flex;align-items:flex-end;justify-content:flex-end;padding:1px" onmouseenter="document.getElementById('daySpendTooltip').textContent='${title}'" onmouseleave="document.getElementById('daySpendTooltip').textContent=''"><span style="font-family:var(--mono);font-size:6px;color:rgba(255,255,255,.5);line-height:1">${d}</span></div>`;
+        html+=`<div title="${title}" style="aspect-ratio:1;border-radius:3px;background:${col};opacity:${tot>0?(.15+.85*(tot/maxDay)).toFixed(2):'.08'};cursor:default;transition:opacity .15s;position:relative;min-height:22px" onmouseenter="document.getElementById('daySpendTooltip').textContent='${title}'" onmouseleave="document.getElementById('daySpendTooltip').textContent=''"><span style="position:absolute;top:2px;left:3px;font-family:var(--mono);font-size:7px;color:rgba(255,255,255,.4);line-height:1">${d}</span></div>`;
       }
       html+='</div>';
       heatEl.innerHTML=html;
@@ -1662,6 +1698,37 @@ window.openMuscleDetail=idx=>{
   document.getElementById('muscleOverlay').classList.add('show');
 };
 window.closeMuscle=()=>document.getElementById('muscleOverlay').classList.remove('show');
+window.openFinOverlay=(type)=>{
+  const ov=document.getElementById('finOverlay');
+  const title=document.getElementById('finOverlayTitle');
+  const body=document.getElementById('finOverlayBody');
+  if(!ov||!body)return;
+  if(type==='spending'){
+    title.textContent='Spending Breakdown — March 2026';
+    const f=D.fin;
+    const max=Math.max(...f.cats.map(c=>c.amt));
+    const cats=f.cats.map((cat,i)=>{
+      const sp=(cat.amt/f.expenses*100).toFixed(1);
+      const txns=cat.txns.map(t=>`<div style="display:grid;grid-template-columns:60px 1fr 70px;gap:8px;padding:5px 0;border-bottom:1px solid var(--b0)"><span style="font-family:var(--mono);font-size:10px;color:var(--t4)">${t.d}</span><span style="font-size:12px;color:var(--t2)">${t.n}</span><span style="font-family:var(--mono);font-size:11px;text-align:right;color:${t.a>0?'var(--sage)':'var(--rust)'}">${t.a>0?'+':''}$${Math.abs(t.a).toFixed(2)}</span></div>`).join('');
+      return`<div style="margin-bottom:6px"><div onclick="this.nextElementSibling.style.display=this.nextElementSibling.style.display?'':'block'" style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bg3);border-radius:var(--r1);cursor:pointer;border-left:3px solid ${cat.color}"><div style="display:flex;align-items:center;gap:8px"><span style="font-size:12px;color:var(--tx);font-weight:500">${cat.name}</span><span style="font-family:var(--mono);font-size:9px;color:var(--t4)">${cat.txns.length} txn</span></div><div style="display:flex;align-items:center;gap:10px"><span style="font-family:var(--mono);font-size:11px;color:var(--t3)">${sp}%</span><span style="font-family:var(--mono);font-size:12px;font-weight:600;color:var(--tx)">$${cat.amt.toFixed(2)}</span></div></div><div style="display:none;padding:8px 12px 4px;background:var(--bg2);border-radius:0 0 var(--r1) var(--r1);border:1px solid var(--b0);border-top:none">${txns}</div></div>`;
+    }).join('');
+    body.innerHTML=`<div style="display:flex;gap:6px;height:8px;border-radius:4px;overflow:hidden;margin-bottom:16px">${f.cats.map(c=>`<div style="flex:${c.amt};background:${c.color}" title="${c.name}"></div>`).join('')}</div>${cats}`;
+  } else if(type==='subscriptions'){
+    title.textContent='Subscriptions Dashboard';
+    const active=D.subscriptions.filter(s=>s.status==='Active');
+    const inactive=D.subscriptions.filter(s=>s.status!=='Active');
+    const moCost=active.reduce((a,s)=>a+(s.freq==='Monthly'?s.amt:s.amt/12),0);
+    const anCost=active.reduce((a,s)=>a+(s.freq==='Annual'?s.amt:s.amt*12),0);
+    const mkRows=arr=>arr.map(s=>`<div style="display:grid;grid-template-columns:1fr 80px 60px 70px;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--b0)"><div><div style="font-size:12px;color:var(--tx);font-weight:500">${s.name}</div><div style="font-family:var(--mono);font-size:9px;color:var(--t4);margin-top:2px">${s.card}${s.notes?' · '+s.notes:''}</div></div><div style="font-family:var(--mono);font-size:10px;color:var(--t3)">${s.freq}<br><span style="font-size:9px">${s.date}</span></div><div style="font-family:var(--mono);font-size:11px;color:var(--tx);text-align:right">$${s.amt}</div><div style="text-align:right"><span style="font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:10px;background:${s.status==='Active'?'var(--sbg)':'rgba(255,255,255,.04)'};color:${s.status==='Active'?'var(--sage)':'var(--t4)'}">${s.status}</span></div></div>`).join('');
+    body.innerHTML=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px"><div style="padding:12px;background:var(--bg3);border-radius:var(--r1);text-align:center"><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">Monthly</div><div style="font-family:var(--mono);font-size:16px;font-weight:700;color:var(--rust)">$${moCost.toFixed(2)}</div></div><div style="padding:12px;background:var(--bg3);border-radius:var(--r1);text-align:center"><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">Annual equiv.</div><div style="font-family:var(--mono);font-size:16px;font-weight:700;color:var(--rust)">$${anCost.toFixed(0)}</div></div><div style="padding:12px;background:var(--bg3);border-radius:var(--r1);text-align:center"><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">Active</div><div style="font-family:var(--mono);font-size:16px;font-weight:700;color:var(--tx)">${active.length}</div></div></div><div style="font-family:var(--mono);font-size:9px;color:var(--sage);text-transform:uppercase;letter-spacing:.8px;padding:6px 0 8px;border-bottom:1px solid var(--b0);margin-bottom:4px">Active (${active.length})</div>${mkRows(active)}<div style="font-family:var(--mono);font-size:9px;color:var(--rust);text-transform:uppercase;letter-spacing:.8px;padding:14px 0 8px;border-bottom:1px solid var(--b0);margin-bottom:4px">Inactive / Cancelled (${inactive.length})</div>${mkRows(inactive)}`;
+  }
+  ov.style.display='block';
+  document.body.style.overflow='hidden';
+};
+window.closeFinOverlay=()=>{
+  const ov=document.getElementById('finOverlay');
+  if(ov){ov.style.display='none';document.body.style.overflow='';}
+};
 window.toggleKb=()=>{const p=document.getElementById('kbhint-panel');if(p)p.classList.toggle('show');};
 window.showTip=(e,el)=>{const t=document.getElementById('hmtip');t.textContent=el.dataset.lbl;const x=Math.min(e.clientX+16,window.innerWidth-340);const y=Math.min(e.clientY-10,window.innerHeight-80);t.style.left=x+'px';t.style.top=y+'px';t.classList.add('show');};
 window.hideTip=()=>document.getElementById('hmtip').classList.remove('show');
@@ -1743,6 +1810,7 @@ document.addEventListener('keydown',e=>{
     document.getElementById('overlay')?.classList.remove('show');
     document.getElementById('muscleOverlay')?.classList.remove('show');
     document.getElementById('kbhint-panel')?.classList.remove('show');
+    closeFinOverlay();
   }
   // Keyboard tab shortcuts: 1-6
   if(!e.ctrlKey&&!e.metaKey&&!e.altKey&&!['INPUT','TEXTAREA'].includes(document.activeElement.tagName)){
@@ -1772,5 +1840,16 @@ window.sw=t=>{
 };
 })();
 </script>
+
+<!-- Financial Detail Overlay -->
+<div id="finOverlay" style="display:none;position:fixed;inset:0;background:rgba(6,7,9,.93);backdrop-filter:blur(18px);z-index:9999;overflow-y:auto;padding:32px 24px">
+  <div style="max-width:860px;margin:0 auto">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px">
+      <div id="finOverlayTitle" style="font-family:var(--serif);font-size:20px;font-weight:700;font-style:italic;color:var(--tx)">Details</div>
+      <button onclick="closeFinOverlay()" style="font-family:var(--mono);font-size:11px;padding:7px 16px;border:1px solid var(--b2);border-radius:40px;background:var(--bg4);color:var(--t2);cursor:pointer;transition:all .15s">Close ×</button>
+    </div>
+    <div id="finOverlayBody"></div>
+  </div>
+</div>
 </body>
 </html>
