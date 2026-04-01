@@ -933,28 +933,19 @@ function buildSidebar(){
   if(tab==='financial'){
     const f=D.fin;
     const spendMonths=[
-      {m:'Jan',done:true,amt:HIST.jan.expenses,budget:2500,net:HIST.jan.net,col:'var(--sage)'},
-      {m:'Feb',done:true,amt:HIST.feb.expenses,budget:2500,net:HIST.feb.net,col:'var(--sage)'},
-      {m:'Mar',cur:true, amt:f.expenses,       budget:2500,net:f.net,       col:'var(--gold)'},
+      {m:'Jan',done:true, amt:HIST.jan.expenses,budget:2500,net:HIST.jan.net, col:'var(--sage)'},
+      {m:'Feb',done:true, amt:HIST.feb.expenses,budget:2500,net:HIST.feb.net, col:'var(--sage)'},
+      {m:'Mar',cur:true,  amt:f.expenses,        budget:2500,net:f.net,        col:'var(--gold)'},
       {m:'Apr',done:false},{m:'May',done:false},{m:'Jun',done:false},
       {m:'Jul',done:false},{m:'Aug',done:false},{m:'Sep',done:false},
       {m:'Oct',done:false},{m:'Nov',done:false},{m:'Dec',done:false},
     ];
     const tlFin=spendMonths.map((item,i)=>{
-      const under=item.amt&&item.amt<item.budget;
+      const under=item.amt&&item.amt<=item.budget;
       const col=item.cur?'var(--gold)':item.done?'var(--sage)':'var(--t5)';
-      return`<div class="tl-item"><div class="tl-rail" style="color:${col}"><div class="tl-dot${item.cur?' cur':item.done?' done':' future'}"></div>${i<11?`<div class="tl-line${item.done&&!item.cur?' done':''}"></div>`:''}</div><div class="tl-content"><div class="tl-month" style="color:${col}">${item.m}</div>${item.done||item.cur?`<div class="tl-label" style="color:${item.cur?'var(--tx)':'var(--t2)'};font-weight:${item.cur?600:400}">$${Math.round(item.amt).toLocaleString()} spent</div><div class="tl-sub" style="color:${under?'var(--sage)':'var(--rust)'}">${under?'Under':'Over'} budget · Net +$${Math.round(item.net)}</div>`:''}</div></div>`;
+      return`<div class="tl-item"><div class="tl-rail" style="color:${col}"><div class="tl-dot${item.cur?' cur':item.done?' done':' future'}"></div>${i<11?`<div class="tl-line${item.done&&!item.cur?' done':''}"></div>`:''}</div><div class="tl-content"><div class="tl-month" style="color:${col}">${item.m}</div>${item.done||item.cur?`<div class="tl-label" style="color:${item.cur?'var(--tx)':'var(--t2)'};font-weight:${item.cur?600:400}">$${Math.round(item.amt).toLocaleString()} spent</div><div class="tl-sub" style="color:${under?'var(--sage)':'var(--rust)'}">${under?'Under':'Over'} · Net +$${Math.round(item.net)}</div>`:''}</div></div>`;
     }).join('');
-    // Income mini bars
-    const marchIncome=f.incomeSources.filter(s=>!s.label.includes('Feb adj.'));
-    const maxInc=Math.max(...marchIncome.map(s=>s.amt));
-    const incRows=marchIncome.map(s=>`<div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px"><span style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:4px"><span style="width:5px;height:5px;border-radius:50%;background:${s.color};flex-shrink:0"></span>${s.label}</span><span style="font-family:var(--mono);font-size:10px;color:var(--sage)">$${s.amt.toFixed(0)}</span></div><div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden"><div style="width:${Math.round(s.amt/maxInc*100)}%;height:100%;background:${s.color};border-radius:2px"></div></div></div>`).join('');
     return`<div class="sc ca" style="border-top:2px solid var(--sage)">
-      <div class="sgt">Income — March</div>
-      ${incRows}
-      <div style="display:flex;justify-content:space-between;padding:6px 0 0;margin-top:3px;border-top:1px solid var(--b0)"><span style="font-size:11px;color:var(--t2);font-weight:600">Total</span><span style="font-family:var(--mono);font-size:12px;font-weight:700;color:var(--sage)">$${f.income.toFixed(2)}</span></div>
-    </div>
-    <div class="sc ca d1" style="border-top:2px solid var(--sage)">
       <div class="sgt">2026 Spending</div>
       <div class="tl">${tlFin}</div>
     </div>`;
@@ -1519,98 +1510,78 @@ function rFinancial(){
 
   return`<div class="cg">
 
-    <!-- ── HEADER STRIP: Income | Cap+QuickStats | 3-Month ── -->
+    <!-- HEADER: Income | Quick Stats | 3-Month -->
     <div class="card sf ca" style="padding:0;overflow:hidden;border-left:3px solid var(--sky)">
-      <div style="display:grid;grid-template-columns:220px 1fr 260px;min-height:0">
+      <div style="display:grid;grid-template-columns:220px 1fr 280px">
 
-        <!-- Income sources -->
-        <div style="padding:16px 18px;border-right:1px solid var(--b0)">
+        <div style="padding:15px 18px;border-right:1px solid var(--b0)">
           <div style="font-family:var(--mono);font-size:9px;color:var(--sage);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Income — March</div>
           ${f.incomeSources.filter(s=>!s.label.includes('Feb adj.')).map(s=>{
-            const w=Math.round(s.amt/Math.max(...f.incomeSources.filter(x=>!x.label.includes('Feb adj.')).map(x=>x.amt))*100);
-            return`<div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:10px;color:var(--t2);display:flex;align-items:center;gap:4px"><span style="width:5px;height:5px;border-radius:50%;background:${s.color};flex-shrink:0"></span>${s.label}</span><span style="font-family:var(--mono);font-size:9px;color:var(--sage)">$${s.amt.toFixed(0)}</span></div><div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden"><div style="width:${w}%;height:100%;background:${s.color};border-radius:2px"></div></div></div>`;
+            const maxI=Math.max(...f.incomeSources.filter(x=>!x.label.includes('Feb adj.')).map(x=>x.amt));
+            return`<div style="margin-bottom:6px"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:10px;color:var(--t2);display:flex;align-items:center;gap:4px"><span style="width:5px;height:5px;border-radius:50%;background:${s.color};flex-shrink:0"></span>${s.label}</span><span style="font-family:var(--mono);font-size:9px;color:var(--sage)">$${s.amt.toFixed(0)}</span></div><div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden"><div style="width:${Math.round(s.amt/maxI*100)}%;height:100%;background:${s.color};border-radius:2px"></div></div></div>`;
           }).join('')}
-          <div style="display:flex;justify-content:space-between;padding:6px 0 0;border-top:1px solid var(--b0);margin-top:4px"><span style="font-size:11px;color:var(--t2);font-weight:600">Total</span><span style="font-family:var(--mono);font-size:12px;font-weight:700;color:var(--sage)">$${f.income.toFixed(2)}</span></div>
+          <div style="display:flex;justify-content:space-between;padding:6px 0 0;border-top:1px solid var(--b0);margin-top:3px"><span style="font-size:11px;color:var(--t2);font-weight:600">Total</span><span style="font-family:var(--mono);font-size:12px;font-weight:700;color:var(--sage)">$${f.income.toFixed(2)}</span></div>
         </div>
 
-        <!-- Cap status + Quick Stats -->
-        <div style="padding:16px 20px;border-right:1px solid var(--b0)">
-          <div style="font-family:var(--serif);font-size:13px;font-weight:700;font-style:italic;color:var(--tx);margin-bottom:2px">Financial · March 2026</div>
-          <div style="font-size:11px;color:var(--t3);margin-bottom:12px">Spending cap $2,500 · <span style="color:${f.expenses<=2500?'var(--sage)':'var(--rust)'}">${f.expenses<=2500?'Under by $'+(2500-f.expenses).toFixed(2):'Over by $'+(f.expenses-2500).toFixed(2)}</span></div>
-          ${[['Net','+$'+f.net.toFixed(2),'var(--sage)',f.net,HIST.feb.net,true],['Income','$'+f.income.toFixed(2),'var(--tx)',f.income,HIST.feb.income,true],['Expenses','$'+f.expenses.toFixed(2),'var(--tx)',f.expenses,HIST.feb.expenses,false],['Tithe','$250.00','var(--t2)',null,null,true]].map(([k,v,c,cur,prev,h])=>{
+        <div style="padding:15px 20px;border-right:1px solid var(--b0)">
+          <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:10px">
+            <div style="font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;color:var(--tx)">Financial · March 2026</div>
+            <div style="font-size:11px;color:${f.expenses<=2500?'var(--sage)':'var(--rust)'}">Cap $2,500 · ${f.expenses<=2500?'Under by $'+(2500-f.expenses).toFixed(2):'Over by $'+(f.expenses-2500).toFixed(2)}</div>
+          </div>
+          ${[['Net','+$'+f.net.toFixed(2),'var(--sage)',f.net,HIST.feb.net,true],
+             ['Income','$'+f.income.toFixed(2),'var(--tx)',f.income,HIST.feb.income,true],
+             ['Expenses','$'+f.expenses.toFixed(2),'var(--tx)',f.expenses,HIST.feb.expenses,false],
+             ['Tithe','$250.00','var(--t2)',null,null,true]
+          ].map(([k,v,c,cur,prev,h])=>{
             let delta='';
             if(cur!==null&&prev!==null){const d=cur-prev,pct=Math.abs(d/prev*100).toFixed(0);const up=h?d>=0:d<=0;delta=`<span style="font-family:var(--mono);font-size:9px;color:${up?'var(--sage)':'var(--rust)'}">${d>=0?'▲':'▼'}${pct}%</span>`;}
             return`<div style="display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--b0)"><span style="font-size:12px;color:var(--t2)">${k}</span><span style="font-family:var(--mono);font-size:12px;font-weight:600;color:${c};display:flex;align-items:baseline;gap:6px">${v}${delta}</span></div>`;
           }).join('')}
         </div>
 
-        <!-- 3-Month Comparison chart -->
-        <div style="padding:14px 16px">
+        <div style="padding:13px 16px">
           <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">3-Month Comparison</div>
-          <canvas id="monthlyNetChart" height="100" style="display:block;width:100%"></canvas>
+          <canvas id="monthlyNetChart" height="105" style="display:block;width:100%"></canvas>
         </div>
-
       </div>
     </div>
 
-    <!-- ── MAIN ROW: Spending accordions (hero) | Side widgets ── -->
-    <div style="display:grid;grid-template-columns:1fr 260px;gap:12px;align-items:start">
+    <!-- MAIN: Spending hero | Subscriptions + Cumulative -->
+    <div style="display:grid;grid-template-columns:1fr 280px;gap:12px;align-items:start">
 
-      <!-- Spending Breakdown — hero feature -->
       <div class="card ca" style="padding:14px 16px">
         <div class="ch" style="margin-bottom:12px">
           <div class="ct">Spending Breakdown</div>
           <div class="cs">${totalTxns} transactions · ${f.cats.length} categories · click to expand</div>
         </div>
         ${cats}
-        ${subSection}
       </div>
 
-      <!-- Side column: Cumulative chart + Subscriptions summary -->
       <div style="display:flex;flex-direction:column;gap:10px">
-
-        <!-- Cumulative spending mini widget -->
+        ${subSection}
         <div class="card ca" style="padding:12px 14px">
-          <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Cumulative Spending</div>
-          <div style="font-size:10px;color:var(--t3);margin-bottom:6px">Feb vs Mar vs $2,500 budget</div>
-          <canvas id="spendCompChart" height="110" style="display:block;width:100%"></canvas>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">Cumulative Spending</div>
+          <div style="font-size:10px;color:var(--t3);margin-bottom:8px">Feb vs Mar vs $2,500 budget</div>
+          <canvas id="spendCompChart" height="120" style="display:block;width:100%"></canvas>
         </div>
-
       </div>
     </div>
 
-    <!-- ── BOTTOM ROW: Heatmap | Notable Purchases ── -->
+    <!-- BOTTOM: Heatmap | Notable Purchases -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-
-      <!-- Daily Spending Heatmap -->
       <div class="card ca" style="padding:14px 16px">
-        <div class="ch" style="margin-bottom:10px">
-          <div class="ct">Daily Spending Heatmap</div>
-          <div class="cs">March 2026 · each cell = 1 day</div>
-        </div>
+        <div class="ch" style="margin-bottom:10px"><div class="ct">Daily Spending Heatmap</div><div class="cs">March 2026 · each cell = 1 day</div></div>
         <div id="dailySpendHeat"></div>
         <div id="daySpendTooltip" style="font-family:var(--mono);font-size:10px;color:var(--t2);margin-top:8px;min-height:16px;padding:4px 0;border-top:1px solid var(--b0)"></div>
       </div>
-
-      <!-- Notable Purchases -->
       <div class="card ca" style="padding:14px 16px">
         <div class="ch" style="margin-bottom:10px"><div class="ct">Notable Purchases</div><div class="cs">March highlights</div></div>
         <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:var(--bg3);border-radius:var(--r1);border:1px solid var(--b0)">
-            <div style="width:32px;height:32px;border-radius:7px;background:rgba(90,157,192,.15);border:1px solid rgba(90,157,192,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px">👟</div>
-            <div><div style="font-size:12px;color:var(--tx);font-weight:600;margin-bottom:1px">Nike Pegasus Plus</div><div style="font-size:11px;color:var(--t3)">Running shoe upgrade — $123.11</div></div>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:var(--bg3);border-radius:var(--r1);border:1px solid var(--b0)">
-            <div style="width:32px;height:32px;border-radius:7px;background:rgba(71,176,171,.15);border:1px solid rgba(71,176,171,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px">🔌</div>
-            <div><div style="font-size:12px;color:var(--tx);font-weight:600;margin-bottom:1px">Wireless Car Charger</div><div style="font-size:11px;color:var(--t3)">Replaced melting adhesive mount — $90.89</div></div>
-          </div>
-          <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:rgba(212,168,75,.05);border-radius:var(--r1);border:1px solid rgba(212,168,75,.2)">
-            <div style="width:32px;height:32px;border-radius:7px;background:rgba(212,168,75,.15);border:1px solid rgba(212,168,75,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px">💳</div>
-            <div><div style="font-size:12px;color:var(--gold);font-weight:600;margin-bottom:1px">Credit Card Strategy</div><div style="font-size:11px;color:var(--t3);line-height:1.5">Cancelling Amex Platinum before annual fee hits. Keeping Chase Sapphire Reserve as primary spend card.</div></div>
-          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:var(--bg3);border-radius:var(--r1);border:1px solid var(--b0)"><div style="width:32px;height:32px;border-radius:7px;background:rgba(90,157,192,.15);border:1px solid rgba(90,157,192,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px">👟</div><div><div style="font-size:12px;color:var(--tx);font-weight:600;margin-bottom:1px">Nike Pegasus Plus</div><div style="font-size:11px;color:var(--t3)">Running shoe upgrade — $123.11</div></div></div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:var(--bg3);border-radius:var(--r1);border:1px solid var(--b0)"><div style="width:32px;height:32px;border-radius:7px;background:rgba(71,176,171,.15);border:1px solid rgba(71,176,171,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px">🔌</div><div><div style="font-size:12px;color:var(--tx);font-weight:600;margin-bottom:1px">Wireless Car Charger</div><div style="font-size:11px;color:var(--t3)">Replaced melting adhesive mount — $90.89</div></div></div>
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:10px;background:rgba(212,168,75,.05);border-radius:var(--r1);border:1px solid rgba(212,168,75,.2)"><div style="width:32px;height:32px;border-radius:7px;background:rgba(212,168,75,.15);border:1px solid rgba(212,168,75,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px">💳</div><div><div style="font-size:12px;color:var(--gold);font-weight:600;margin-bottom:1px">Credit Card Strategy</div><div style="font-size:11px;color:var(--t3);line-height:1.5">Cancelling Amex Platinum before annual fee. Keeping Chase Sapphire Reserve.</div></div></div>
         </div>
       </div>
-
     </div>
   </div>`;
 }
@@ -1789,58 +1760,7 @@ function afterRender(){
     // (no chart rendered here)
   }
 
-  if(tab==='financial'){
-    const marchIncome=D.fin.incomeSources.filter(s=>!s.label.includes('Feb adj.'));
-    const maxInc=Math.max(...marchIncome.map(s=>s.amt));
-    const incRows=marchIncome.map(s=>{
-      const w=Math.round(s.amt/maxInc*100);
-      return`<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px"><span style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:${s.color};flex-shrink:0"></span>${s.label}</span><span style="font-family:var(--mono);font-size:10px;color:var(--sage)">$${s.amt.toFixed(0)}</span></div><div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden"><div style="width:${w}%;height:100%;background:${s.color};border-radius:2px;transition:width .8s ease"></div></div></div>`;
-    }).join('');
-    const catStrip=D.fin.cats.slice(0,5).map(c=>{const w=(c.amt/D.fin.expenses*100).toFixed(1);return`<div style="flex:${w};height:100%;background:${c.color}" title="${c.name}: $${c.amt.toFixed(0)}"></div>`;}).join('');
-    const activeCt=D.subscriptions.filter(s=>s.status==='Active').length;
-    const moCost=D.subscriptions.filter(s=>s.status==='Active').reduce((a,s)=>a+(s.freq==='Monthly'?s.amt:s.amt/12),0);
-    const subPills=D.subscriptions.filter(s=>s.status==='Active').slice(0,4).map(s=>`<span style="font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:10px;background:var(--vbg);color:var(--vio);border:1px solid rgba(139,126,200,.18)">${s.name.split(' ')[0]}</span>`).join('');
-    return`<div class="sc ca" style="border-top:2px solid var(--sage)">
-      <div class="sgt">Income — March</div>
-      ${incRows}
-      <div style="display:flex;justify-content:space-between;padding:8px 0 0;margin-top:4px;border-top:1px solid var(--b0)"><span style="font-size:12px;color:var(--t2);font-weight:600">Total</span><span style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--sage)">$${D.fin.income.toFixed(2)}</span></div>
-    </div>
-    <div class="sc ca d1" style="padding:13px 14px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div class="sgt" style="margin:0">Spending</div>
-        <button onclick="openFinOverlay('spending')" style="font-family:var(--mono);font-size:9px;padding:3px 8px;border:1px solid var(--b1);border-radius:20px;background:none;color:var(--t3);cursor:pointer">Expand ↗</button>
-      </div>
-      <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px"><span style="font-family:var(--serif);font-size:18px;font-weight:700;font-style:italic;color:var(--tx)">$${D.fin.expenses.toFixed(0)}</span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">total spent</span></div>
-      <div style="display:flex;height:5px;border-radius:3px;overflow:hidden;gap:1px;margin-bottom:6px">${catStrip}</div>
-      <div style="display:flex;flex-wrap:wrap;gap:3px">${D.fin.cats.slice(0,5).map(c=>`<div style="display:flex;align-items:center;gap:3px"><span style="width:5px;height:5px;border-radius:50%;background:${c.color};flex-shrink:0"></span><span style="font-family:var(--mono);font-size:8px;color:var(--t4)">${c.name.split(' ')[0]}</span></div>`).join('')}</div>
-    </div>
-    <div class="sc ca d1" style="padding:13px 14px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div class="sgt" style="margin:0">Subscriptions</div>
-        <button onclick="openFinOverlay('subscriptions')" style="font-family:var(--mono);font-size:9px;padding:3px 8px;border:1px solid var(--b1);border-radius:20px;background:none;color:var(--t3);cursor:pointer">Expand ↗</button>
-      </div>
-      <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px"><span style="font-family:var(--serif);font-size:17px;font-weight:700;font-style:italic;color:var(--vio)">$${moCost.toFixed(0)}<span style="font-size:11px;font-style:normal;color:var(--t3)">/mo</span></span><span style="font-family:var(--mono);font-size:9px;color:var(--t4)">${activeCt} active</span></div>
-      <div style="display:flex;flex-wrap:wrap;gap:3px">${subPills}<span style="font-family:var(--mono);font-size:9px;color:var(--t4);align-self:center">+${activeCt-4} more</span></div>
-    </div>`;
-  }
-
-  if(tab==='physical'){
-    // Muscle Group Radar — March only
-    const mrc=document.getElementById('muscleRadarChart');
-    if(mrc){
-      charts.push(new Chart(mrc,{type:'radar',data:{
-        labels:['Chest','Back','Legs','Shoulders','Arms','Core','Cardio'],
-        datasets:[{label:'March',data:[80,100,100,60,120,80,80].map(v=>Math.min(v,100)),
-          backgroundColor:'rgba(92,184,114,.12)',borderColor:'#5CB872',borderWidth:2,
-          pointBackgroundColor:'#5CB872',pointRadius:4,pointHoverRadius:6}]
-      },options:{plugins:{legend:{display:false}},scales:{r:{min:0,max:100,
-        grid:{color:'rgba(255,255,255,.07)'},angleLines:{color:'rgba(255,255,255,.07)'},
-        ticks:{display:false,stepSize:25},
-        pointLabels:{color:'#CCC9C3',font:{family:'JetBrains Mono',size:9}}}},
-        animation:{duration:900}}}));
-    }
-  }
-
+  
   if(tab==='creative'){
     // pipeline pie and goals bar removed per user request
   }
