@@ -936,14 +936,11 @@ function buildSidebar(){
       {m:'Jan',done:true, amt:HIST.jan.expenses,budget:2500,net:HIST.jan.net, col:'var(--sage)'},
       {m:'Feb',done:true, amt:HIST.feb.expenses,budget:2500,net:HIST.feb.net, col:'var(--sage)'},
       {m:'Mar',cur:true,  amt:f.expenses,        budget:2500,net:f.net,        col:'var(--gold)'},
-      {m:'Apr',done:false},{m:'May',done:false},{m:'Jun',done:false},
-      {m:'Jul',done:false},{m:'Aug',done:false},{m:'Sep',done:false},
-      {m:'Oct',done:false},{m:'Nov',done:false},{m:'Dec',done:false},
     ];
     const tlFin=spendMonths.map((item,i)=>{
       const under=item.amt&&item.amt<=item.budget;
       const col=item.cur?'var(--gold)':item.done?'var(--sage)':'var(--t5)';
-      return`<div class="tl-item"><div class="tl-rail" style="color:${col}"><div class="tl-dot${item.cur?' cur':item.done?' done':' future'}"></div>${i<11?`<div class="tl-line${item.done&&!item.cur?' done':''}"></div>`:''}</div><div class="tl-content"><div class="tl-month" style="color:${col}">${item.m}</div>${item.done||item.cur?`<div class="tl-label" style="color:${item.cur?'var(--tx)':'var(--t2)'};font-weight:${item.cur?600:400}">$${Math.round(item.amt).toLocaleString()} spent</div><div class="tl-sub" style="color:${under?'var(--sage)':'var(--rust)'}">${under?'Under':'Over'} · Net +$${Math.round(item.net)}</div>`:''}</div></div>`;
+      return`<div class="tl-item"><div class="tl-rail" style="color:${col}"><div class="tl-dot${item.cur?' cur':item.done?' done':' future'}"></div>${i<2?`<div class="tl-line${item.done&&!item.cur?' done':''}"></div>`:''}</div><div class="tl-content"><div class="tl-month" style="color:${col}">${item.m}</div>${item.done||item.cur?`<div class="tl-label" style="color:${item.cur?'var(--tx)':'var(--t2)'};font-weight:${item.cur?600:400}">$${Math.round(item.amt).toLocaleString()} spent</div><div class="tl-sub" style="color:${under?'var(--sage)':'var(--rust)'}">${under?'Under':'Over'} · Net +$${Math.round(item.net)}</div>`:''}</div></div>`;
     }).join('');
     return`<div class="sc ca" style="border-top:2px solid var(--sage)">
       <div class="sgt">2026 Spending</div>
@@ -1558,12 +1555,45 @@ function rFinancial(){
       </div>
 
       <div style="display:flex;flex-direction:column;gap:10px">
-        ${subSection}
+
+        <!-- Subscriptions card — open by default, expand for full list -->
+        <div class="card ca" style="padding:14px 16px;border-top:2px solid var(--vio)">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+            <div>
+              <div style="font-family:var(--mono);font-size:9px;color:var(--vio);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px">Subscriptions</div>
+              <div style="font-family:var(--serif);font-size:22px;font-weight:700;font-style:italic;color:var(--vio)">$${monthlyCost.toFixed(0)}<span style="font-size:12px;font-style:normal;color:var(--t3)">/mo</span></div>
+              <div style="font-family:var(--mono);font-size:9px;color:var(--t4);margin-top:2px">${activeSubs.length} active · $${annualCost.toFixed(0)}/yr equiv</div>
+            </div>
+            <button onclick="toggleFin('fc-subs-card')" style="font-family:var(--mono);font-size:9px;padding:5px 12px;border:1px solid rgba(139,126,200,.4);border-radius:20px;background:rgba(139,126,200,.08);color:var(--vio);cursor:pointer">View All ↗</button>
+          </div>
+          <!-- Top 5 active subs preview -->
+          <div style="display:flex;flex-direction:column;gap:3px;margin-bottom:8px">
+            ${activeSubs.slice(0,5).map(s=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid var(--b0)"><span style="font-size:11px;color:var(--t2)">${s.name}</span><span style="font-family:var(--mono);font-size:10px;color:var(--t3)">$${s.amt}</span></div>`).join('')}
+            <div style="font-family:var(--mono);font-size:9px;color:var(--t4);padding-top:4px">+${activeSubs.length-5} more active</div>
+          </div>
+          <!-- Expandable full list -->
+          <div id="fc-subs-card" style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1)">
+            <div style="border-top:1px solid var(--b0);padding-top:10px;margin-top:2px">
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px">
+                <div class="pb-stat"><div class="pb-k">Monthly</div><div class="pb-v" style="color:var(--rust)">$${monthlyCost.toFixed(2)}</div></div>
+                <div class="pb-stat"><div class="pb-k">Annual</div><div class="pb-v" style="color:var(--rust)">$${annualCost.toFixed(0)}</div></div>
+                <div class="pb-stat"><div class="pb-k">Active</div><div class="pb-v">${activeSubs.length}</div></div>
+              </div>
+              <div style="font-family:var(--mono);font-size:9px;color:var(--sage);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px">Active (${activeSubs.length})</div>
+              ${subRows(activeSubs)}
+              <div style="font-family:var(--mono);font-size:9px;color:var(--rust);text-transform:uppercase;letter-spacing:.7px;margin:8px 0 4px">Inactive / Cancelled (${inactiveSubs.length})</div>
+              ${subRows(inactiveSubs)}
+            </div>
+          </div>
+        </div>
+
+        <!-- Cumulative spending mini chart -->
         <div class="card ca" style="padding:12px 14px">
           <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">Cumulative Spending</div>
           <div style="font-size:10px;color:var(--t3);margin-bottom:8px">Feb vs Mar vs $2,500 budget</div>
           <canvas id="spendCompChart" height="120" style="display:block;width:100%"></canvas>
         </div>
+
       </div>
     </div>
 
@@ -1790,9 +1820,11 @@ window.toggleSerm=id=>{document.getElementById(id)?.classList.toggle('open');};
 window.toggleFin=id=>{
   const el=document.getElementById(id);
   if(!el)return;
-  // fc-subs-top is a raw fcatb div (no fcat wrapper), toggle display directly
-  if(id==='fc-subs-top'){el.style.maxHeight=el.style.maxHeight?'':'3000px';}
-  else el.classList.toggle('open');
+  if(id==='fc-subs-top'||id==='fc-subs-card'){
+    el.style.maxHeight=el.style.maxHeight?'':'3000px';
+    const btn=el.closest('.card')?.querySelector('button');
+    if(btn)btn.textContent=el.style.maxHeight?'Close ✕':'View All ↗';
+  } else el.classList.toggle('open');
 };
 window.openMod=id=>{
   const s=D.spiritual.sermons.find(x=>x.id===id);if(!s)return;
