@@ -973,7 +973,10 @@ function buildSidebar(){
       if(!sess)return`<div style="aspect-ratio:1;border-radius:2px;background:rgba(255,255,255,.04)"></div>`;
       const ms=sess.muscles,c1=ph.mc[ms[0]]||'#888',c2=ms[1]?(ph.mc[ms[1]]||'#888'):null;
       const bg=c2?`linear-gradient(135deg,${c1} 50%,${c2} 50%)`:c1;
-      return`<div style="aspect-ratio:1;border-radius:2px;background:${bg};cursor:pointer" title="Mar ${d}" onclick="openWorkout('2026-03-'+String(${d}).padStart(2,'0'))"></div>`;
+      const sk='2026-03-'+String(d).padStart(2,'0');
+      const csvD=CSV_SESSIONS[sk]||[];
+      const richH=csvD.length>0?csvD.map(ex=>`<div style="margin-bottom:4px"><span style="font-size:10px;color:var(--tx);font-weight:600">${ex.ex}</span>${ex.maxW>0?`<span style="font-family:var(--mono);font-size:9px;color:var(--sage);margin-left:6px">${ex.maxW}lb</span>`:''}<div style="font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:1px;line-height:1.4">${ex.sets}</div></div>`).join(''):'Rest day';
+      return`<div style="aspect-ratio:1;border-radius:3px;background:${bg};cursor:pointer;min-height:20px" data-lbl="Mar ${d}: ${sess.label}" data-rich="${encodeURIComponent(richH)}" data-date="Mar ${d}" onmouseenter="showHeatTip(event,this)" onmouseleave="hideHeatTip()"></div>`;
     }).join('')).join('');
     // AFT rings
     const rings=ph.aft.map((a,i)=>{const r=84-i*15,circ=2*Math.PI*r,dash=a.pct/100*circ;return`<circle fill="none" stroke="rgba(255,255,255,.05)" stroke-width="9" cx="100" cy="100" r="${r}"/><circle fill="none" stroke="${a.color}" stroke-width="9" cx="100" cy="100" r="${r}" stroke-linecap="round" style="stroke-dasharray:${dash} ${circ};transform:rotate(-90deg);transform-origin:100px 100px;transition:stroke-dasharray 1.2s ease ${i*.1}s"/>`;}).join('');
@@ -997,9 +1000,13 @@ function buildSidebar(){
         <div style="position:absolute;left:0;top:-1px;height:7px;width:${p.targetPct||Math.min(96,p.pctNow+12)}%;border-right:1.5px dashed rgba(255,255,255,.3)"></div>
       </div>
     </div>`).join('');
-    return`<div class="sc ca" style="padding:10px 12px;border-top:2px solid var(--sky)">
-      <div class="sgt" style="margin-bottom:6px">Training Heatmap</div>
-      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px">${sbDows}${sbCells}</div>
+    return`<div class="sc ca" style="padding:12px 14px;border-top:2px solid var(--sky)">
+      <div class="sgt" style="margin-bottom:8px">Training Heatmap · March</div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:8px">${sbDows}${sbCells}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px 8px;margin-top:2px">
+        ${Object.entries(ph.mc).map(([m,c])=>`<div style="display:flex;align-items:center;gap:3px"><div style="width:8px;height:8px;border-radius:2px;background:${c};flex-shrink:0"></div><span style="font-family:var(--mono);font-size:8px;color:var(--t4)">${m}</span></div>`).join('')}
+        <div style="display:flex;align-items:center;gap:3px"><div style="width:8px;height:8px;border-radius:2px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);flex-shrink:0"></div><span style="font-family:var(--mono);font-size:8px;color:var(--t5)">Rest</span></div>
+      </div>
     </div>
     <div class="sc ca" style="border-top:2px solid var(--sky)">
       <div class="sgt">AFT Progress · ${avgPct}% avg</div>
@@ -1195,24 +1202,7 @@ function rSpiritual(){
 /* ─── PHYSICAL ─── */
 function rPhysical(){
   const ph=D.physical;
-  const weeks=[{l:'W1',d:[1,2,3,4,5,6,7]},{l:'W2',d:[8,9,10,11,12,13,14]},{l:'W3',d:[15,16,17,18,19,20,21]},{l:'W4',d:[22,23,24,25,26,27,28]},{l:'W5',d:[29,30,31,null,null,null,null]}];
-  const dows=['Su','Mo','Tu','We','Th','Fr','Sa'].map(d=>`<div class="hmdow" style="font-size:7px">${d}</div>`).join('');
-  const heatRows=weeks.map(w=>{
-    const cells=w.d.map(d=>{
-      if(!d)return`<div class="hmc emp"></div>`;
-      const sess=ph.sessions[d];
-      if(!sess)return`<div class="hmc rest"></div>`;
-      const ms=sess.muscles,c1=ph.mc[ms[0]]||'#888',c2=ms[1]?(ph.mc[ms[1]]||'#888'):null,c3=ms[2]?(ph.mc[ms[2]]||'#888'):null;
-      const bg=c3?`linear-gradient(135deg,${c1} 33%,${c2} 33%,${c2} 66%,${c3} 66%)`:c2?`linear-gradient(135deg,${c1} 50%,${c2} 50%)`:c1;
-      // Build rich hover content from CSV_SESSIONS
-      const dateKey='2026-03-'+String(d).padStart(2,'0');
-      const csvDay=CSV_SESSIONS[dateKey]||[];
-      const richHtml=csvDay.length>0?csvDay.map(ex=>`<div style="margin-bottom:4px"><span style="font-size:10px;color:var(--tx);font-weight:600">${ex.ex}</span>${ex.maxW>0?`<span style="font-family:var(--mono);font-size:9px;color:var(--sage);margin-left:6px">${ex.maxW}lb</span>`:''}<div style="font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:1px;line-height:1.4">${ex.sets}</div></div>`).join(''):'No data';
-      return`<div class="hmc" style="background:${bg};cursor:default" data-lbl="Mar ${d}: ${sess.label}" data-rich="${encodeURIComponent(richHtml)}" data-date="Mar ${d}" onmouseenter="showHeatTip(event,this)" onmouseleave="hideHeatTip()"></div>`;
-    }).join('');
-    return`<div class="hmwk" style="font-size:7px">${w.l}</div>${cells}`;
-  }).join('');
-  const legend=Object.entries(ph.mc).map(([m,c])=>`<div class="hmlgi" style="font-size:9px"><div class="hmlgb" style="background:${c}"></div>${m}</div>`).join('');
+  // (heatmap moved to sidebar — main content computation removed)
 
   const validPcts=ph.aft.filter(a=>a.pct>0);
   const avgPct=Math.round(validPcts.reduce((s,a)=>s+a.pct,0)/validPcts.length);
@@ -1380,25 +1370,6 @@ function rPhysical(){
   const mgVals=Object.values(mgNorm);
 
   return`<div class="cg">
-    <!-- HEATMAP with legend -->
-    <div class="card sf ca" style="padding:12px 16px">
-      <div class="ch" style="margin-bottom:10px"><div class="ct">Muscle Group Training Heatmap</div><div class="cs">20 sessions · hover any day for full workout detail</div></div>
-      <div style="display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start">
-        <div>
-          <div class="hmg"><div></div>${dows}${heatRows}</div>
-          <div class="hmleg" style="margin-top:6px">${legend}<div class="hmlgi" style="font-size:9px"><div class="hmlgb" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)"></div>Rest</div></div>
-        </div>
-        <div>
-          <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Color Key</div>
-          <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:10px">
-            ${Object.entries(ph.mc).map(([m,c])=>`<div style="display:flex;align-items:center;gap:8px"><div style="width:11px;height:11px;border-radius:3px;background:${c};flex-shrink:0"></div><span style="font-size:11px;color:var(--t2)">${m}</span></div>`).join('')}
-            <div style="display:flex;align-items:center;gap:8px"><div style="width:11px;height:11px;border-radius:3px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);flex-shrink:0"></div><span style="font-size:11px;color:var(--t4)">Rest / no session</span></div>
-          </div>
-          <div style="padding:8px 10px;background:var(--bg3);border-radius:var(--r1);border:1px solid var(--b0);font-size:11px;color:var(--t3);line-height:1.55">Split-gradient = multiple groups. Hover any day for the full workout log.</div>
-        </div>
-      </div>
-    </div>
-
     <!-- HERO: Exercise Frequency Table -->
     <div class="card sf ca" style="padding:14px 16px">
       <div class="ch" style="margin-bottom:10px"><div class="ct">Exercise Frequency — March 2026</div><div class="cs">28 movements · color = strength↔endurance spectrum · hover for detail</div></div>
