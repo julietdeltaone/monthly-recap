@@ -1539,14 +1539,6 @@ function rPhysical(){
   }).join('');
   const cardioLegend=`<div style="display:flex;gap:10px;margin-bottom:8px"><div style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:50%;background:#5CB872;display:inline-block"></span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">Outdoor Run</span></div><div style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:50%;background:#5A9DC0;display:inline-block"></span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">Treadmill Sprint</span></div></div>`;
 
-  // ─── MUSCLE GROUP RADAR data (March session-count based) ───
-  // Chest:4 Back:5 Legs:5 Shoulders:3 Arms:6 Core:4 Cardio:4 — normalize to 0-100
-  const mgScores={Chest:4,Back:5,Legs:5,Shoulders:3,Arms:6,Core:4,Cardio:4};
-  const mgMax=Math.max(...Object.values(mgScores));
-  const mgNorm=Object.fromEntries(Object.entries(mgScores).map(([k,v])=>[k,Math.round(v/mgMax*100)]));
-  const mgLabels=Object.keys(mgNorm);
-  const mgVals=Object.values(mgNorm);
-
   return`<div class="cg">
     <!-- HERO: Exercise Frequency Table -->
     <div class="card sf ca" style="padding:14px 16px">
@@ -1565,57 +1557,158 @@ function rPhysical(){
     <!-- AFT Detail -->
     <div class="card ca d1" style="padding:13px 14px"><div class="ch" style="margin-bottom:8px"><div class="ct">AFT Events</div><div class="cs">Click for detail</div></div><div>${aftList}</div>${commNote}</div>
 
-    <!-- Muscle Group Radar (March only) -->
-    <div class="card ca d1" style="padding:13px 14px"><div class="ch" style="margin-bottom:8px"><div class="ct">Muscle Group Volume</div><div class="cs">March · sessions per group</div></div><canvas id="muscleRadarChart" height="190"></canvas></div>
+
+    <!-- AFT Infographic -->
+    <div class="card ca d1" style="padding:16px 18px">
+      <div class="ch" style="margin-bottom:14px">
+        <div class="ct">Army Combat Fitness Test</div>
+        <div class="cs">What it is · ARNG schedule · JD's current status</div>
+      </div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--sky);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px">What Is the ACFT</div>
+      <p style="font-size:11px;color:var(--t2);line-height:1.65;margin-bottom:12px">Replaced the APFT in 2022 as the Army's official fitness standard. Tests 6 events designed to mirror real combat: muscular strength, endurance, anaerobic power, explosive power, agility, and aerobic endurance. Passing is mandatory for retention and promotion.</p>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--sky);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px">The 6 Events</div>
+      <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:14px">
+        ${[
+          {abbr:'MDL',name:'3-Rep Max Deadlift',what:'Hex bar · 3 reps max · lower body + grip strength',cur:'285 lb',goal:'350 lb',pct:81,col:'#62C97A'},
+          {abbr:'SPT',name:'Standing Power Throw',what:'Backward overhead throw of 10 lb medicine ball · explosive power',cur:'—',goal:'—',pct:null,col:'#9A8FD8'},
+          {abbr:'HRP',name:'Hand-Release Push-Up',what:'Full chest release each rep · upper body muscular endurance',cur:'45 reps',goal:'61 reps',pct:74,col:'#5FADD4'},
+          {abbr:'SDC',name:'Sprint-Drag-Carry',what:'50m course: sprint, sled drag, shuffle, farmer carry, sprint · anaerobic capacity',cur:'~1:50',goal:'1:30',pct:83,col:'#E0B44E'},
+          {abbr:'PLK',name:'Plank',what:'Forearm plank, strict form · core muscular endurance',cur:'1:40',goal:'3:35',pct:47,col:'#D9714E'},
+          {abbr:'2MR',name:'2-Mile Run',what:'Timed 2-mile run · aerobic endurance',cur:'TBD',goal:'13:25',pct:null,col:'#4BBDB8'},
+        ].map(e=>`<div style="display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:start;padding:7px 10px;background:var(--bg3);border-radius:var(--r1);border-left:2px solid ${e.col}">
+          <div><div style="font-family:var(--mono);font-size:11px;font-weight:700;color:${e.col}">${e.abbr}</div>${e.pct!==null?`<div style="font-family:var(--mono);font-size:9px;color:${e.pct<60?'var(--rust)':e.pct<80?'var(--gold)':'var(--sage)'};margin-top:2px">${e.pct}%</div>`:`<div style="font-family:var(--mono);font-size:9px;color:var(--t5);margin-top:2px">—</div>`}</div>
+          <div><div style="font-size:11px;color:var(--tx);font-weight:600;margin-bottom:2px">${e.name}</div><div style="font-size:10px;color:var(--t3);line-height:1.45;margin-bottom:4px">${e.what}</div>${e.pct!==null?`<div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;margin-bottom:3px"><div style="height:100%;width:${e.pct}%;background:${e.col};border-radius:2px;transition:width 1s ease"></div></div><div style="font-family:var(--mono);font-size:9px;color:var(--t4)">${e.cur} <span style="color:var(--t5)">→</span> goal ${e.goal}</div>`:`<div style="font-family:var(--mono);font-size:9px;color:var(--t5)">No test data recorded yet</div>`}</div>
+        </div>`).join('')}
+      </div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--gold);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px">ARNG Testing Schedule</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+        ${[
+          {label:'Frequency',val:'Twice per year',sub:'Minimum NG requirement'},
+          {label:'Typical Windows',val:'Apr–May & Oct–Nov',sub:'Unit-dependent scheduling'},
+          {label:'Failing Consequence',val:'Flagged / Counseled',sub:'Retest within 90 days'},
+          {label:'Passing Score',val:'60+ pts per event',sub:'100 pts max per event'},
+        ].map(s=>`<div style="padding:8px 10px;background:var(--bg3);border-radius:var(--r1);border:1px solid var(--b0)"><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">${s.label}</div><div style="font-size:12px;color:var(--tx);font-weight:600">${s.val}</div><div style="font-size:10px;color:var(--t4);margin-top:1px">${s.sub}</div></div>`).join('')}
+      </div>
+      <div style="padding:9px 12px;background:rgba(224,180,78,.06);border:1px solid rgba(224,180,78,.18);border-radius:var(--r1);font-family:var(--mono);font-size:9px;color:var(--t3);line-height:1.6"><span style="color:var(--gold)">STATUS</span> — Next ACFT likely <b style="color:var(--tx)">April–May 2026</b> window. Plank at 47% is the only event below the 60-pt passing threshold. All others progressing toward standard.</div>
+    </div>
 
     <!-- Insight cards with sparklines -->
     <div class="sf">${insightCards}</div>
 
-    <!-- Sprint History Card -->
-    <div class="card ca d3 sf" style="padding:13px 15px">
-      <div class="ch" style="margin-bottom:10px"><div class="ct">Treadmill Sprint History</div><div class="cs">Jan–Mar 2026 · interval progression</div></div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px">
-        <div class="pb-stat"><div class="pb-k">Sessions</div><div class="pb-v">6</div><div class="pb-d">Jan: 2 · Feb: 3 · Mar: 2</div></div>
-        <div class="pb-stat"><div class="pb-k">Peak Speed</div><div class="pb-v" style="color:var(--gold)">12.0 mph</div><div class="pb-d">Consistent since Jan 29</div></div>
-        <div class="pb-stat"><div class="pb-k">Longest Interval</div><div class="pb-v" style="color:var(--sage)">2:00</div><div class="pb-d">Mar 27 — new PR</div></div>
+    <!-- Sprint History Card — deep analysis -->
+    <div class="card ca d3 sf" style="padding:16px 18px">
+      <div class="ch" style="margin-bottom:14px">
+        <div class="ct">Treadmill Sprint History</div>
+        <div class="cs">6 sessions · Jan–Mar 2026 · full interval-level analysis</div>
       </div>
-      <div style="overflow-x:auto">
-        <table style="width:100%;border-collapse:collapse;font-size:11px">
-          <thead><tr>${['Date','Dist','Peak mph','Intervals','Top Int.','Notes'].map(h=>`<th style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.6px;text-align:left;padding:4px 8px;border-bottom:1px solid var(--b0)">${h}</th>`).join('')}</tr></thead>
-          <tbody>
-            ${[
-              {date:'Jan 29',dist:'2.65 mi',peak:'12.0',ints:4,top:'1:30',note:'Form OK on Int 3 · Int 4 @ 12.0 cold'},
-              {date:'Feb 1',dist:'—',peak:'10.0',ints:3,top:'1:30',note:'Only 3 intervals · top speed lower'},
-              {date:'Feb 13',dist:'~2.3 mi',peak:'12.0',ints:4,top:'1:00',note:'1.69 mi @ 17:20 · cool-down finish'},
-              {date:'Feb 19',dist:'2.5 mi',peak:'12.0',ints:4,top:'1:00',note:'Int 3–4 both @ 12.0 · cool-down finish'},
-              {date:'Mar 20',dist:'2.45 mi',peak:'12.0',ints:4,top:'1:40',note:'Int 3 form degraded · Int 4 controlled'},
-              {date:'Mar 27',dist:'2.65 mi',peak:'12.0',ints:4,top:'2:00',note:'Best interval duration yet · form held'},
-            ].map((r,i)=>`<tr style="background:${i===5?'rgba(212,168,75,.05)':'transparent'}">
-              <td style="font-family:var(--mono);font-size:10px;color:${i>=4?'var(--gold)':'var(--t3)'};padding:6px 8px;border-bottom:1px solid var(--b0)">${r.date}</td>
-              <td style="font-family:var(--mono);font-size:10px;color:var(--t2);padding:6px 8px;border-bottom:1px solid var(--b0)">${r.dist}</td>
-              <td style="font-family:var(--mono);font-size:10px;color:var(--tx);padding:6px 8px;border-bottom:1px solid var(--b0);font-weight:600">${r.peak}</td>
-              <td style="font-family:var(--mono);font-size:10px;color:var(--t2);padding:6px 8px;border-bottom:1px solid var(--b0);text-align:center">${r.ints}</td>
-              <td style="font-family:var(--mono);font-size:10px;color:var(--sage);padding:6px 8px;border-bottom:1px solid var(--b0)">${r.top}</td>
-              <td style="font-size:10px;color:var(--t3);padding:6px 8px;border-bottom:1px solid var(--b0)">${r.note}</td>
-            </tr>`).join('')}
-          </tbody>
-        </table>
-      </div>
-      <div style="margin-top:12px">
-        <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px">Longest Interval Per Session</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:18px">
         ${[
-          {label:'Jan 29',val:90,max:120},
-          {label:'Feb 1', val:90,max:120},
-          {label:'Feb 13',val:60,max:120},
-          {label:'Feb 19',val:60,max:120},
-          {label:'Mar 20',val:100,max:120,cur:true},
-          {label:'Mar 27',val:120,max:120,cur:true},
-        ].map(s=>`<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
-          <div style="font-family:var(--mono);font-size:9px;color:${s.cur?'var(--gold)':'var(--t4)'};width:40px;flex-shrink:0">${s.label}</div>
-          <div style="flex:1;background:rgba(255,255,255,.05);border-radius:2px;height:10px;overflow:hidden"><div style="width:${(s.val/s.max*100).toFixed(0)}%;height:100%;background:${s.cur?'var(--gold)':'rgba(90,157,192,.5)'};border-radius:2px"></div></div>
-          <div style="font-family:var(--mono);font-size:9px;color:${s.cur?'var(--gold)':'var(--t2)'};width:28px;text-align:right">${Math.floor(s.val/60)}:${String(s.val%60).padStart(2,'0')}</div>
-        </div>`).join('')}
-        <div style="margin-top:8px;padding:8px 10px;background:rgba(92,184,114,.06);border:1px solid rgba(92,184,114,.18);border-radius:var(--r1);font-family:var(--mono);font-size:9px;color:var(--sage);line-height:1.5">Longest interval improved from 1:30 (Jan) to 2:00 (Mar 27) — 33% gain. Peak speed locked at 12.0 mph since Jan 29. Next target: hold 2+ intervals at 12.0 without form degradation.</div>
+          {k:'Sessions',v:'6',sub:'Jan 29 → Mar 27',col:'var(--sky)'},
+          {k:'Peak Speed',v:'12.0 mph',sub:'Held since Jan 29',col:'var(--sage)'},
+          {k:'Best Interval',v:'2:00',sub:'Mar 27 — +33% vs Jan',col:'var(--gold)'},
+          {k:'Total Intervals',v:'23',sub:'Across all sessions',col:'var(--t2)'},
+        ].map(s=>`<div style="padding:10px 12px;background:var(--bg3);border-radius:var(--r2);border:1px solid var(--b0)"><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px;margin-bottom:5px">${s.k}</div><div style="font-family:var(--mono);font-size:16px;font-weight:700;color:${s.col};line-height:1">${s.v}</div><div style="font-size:10px;color:var(--t4);margin-top:3px">${s.sub}</div></div>`).join('')}
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px">
+        <!-- Session log -->
+        <div>
+          <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">Session Log — All Intervals</div>
+          ${[
+            {date:'Jan 29',isMar:false,intervals:[{n:1,spd:10.0,dur:60,note:'Warm-up pace'},{n:2,spd:11.0,dur:60,note:'Form degraded'},{n:3,spd:10.0,dur:90,note:'Form controlled'},{n:4,spd:12.0,dur:60,note:'Peak speed cold'}],dist:'2.65 mi',tot:25},
+            {date:'Feb 1', isMar:false,intervals:[{n:1,spd:10.0,dur:70,note:''},{n:2,spd:10.0,dur:60,note:''},{n:3,spd:10.0,dur:90,note:'Best of session'}],dist:'—',tot:null},
+            {date:'Feb 13',isMar:false,intervals:[{n:1,spd:10.0,dur:60,note:''},{n:2,spd:11.0,dur:60,note:''},{n:3,spd:12.0,dur:60,note:'Peak hit'},{n:4,spd:11.0,dur:60,note:'Cool-down'}],dist:'~2.3 mi',tot:null},
+            {date:'Feb 19',isMar:false,intervals:[{n:1,spd:10.0,dur:60,note:''},{n:2,spd:12.0,dur:60,note:''},{n:3,spd:12.0,dur:60,note:''},{n:4,spd:11.0,dur:60,note:'Cool-down'}],dist:'2.5 mi',tot:null},
+            {date:'Mar 20',isMar:true, intervals:[{n:1,spd:10.0,dur:100,note:'Best warm-up yet'},{n:2,spd:12.0,dur:70,note:'Dismount at speed'},{n:3,spd:9.9,dur:60,note:'Form degraded'},{n:4,spd:10.0,dur:60,note:'Controlled finish'}],dist:'2.45 mi',tot:25},
+            {date:'Mar 27',isMar:true, intervals:[{n:1,spd:10.0,dur:120,note:'New record 2:00'},{n:2,spd:12.0,dur:70,note:'Dismount at speed'},{n:3,spd:10.0,dur:60,note:'Form degraded'},{n:4,spd:10.0,dur:90,note:'Controlled finish'}],dist:'2.65 mi',tot:25},
+          ].map(sess=>{
+            const maxDur=120;
+            const intRows=sess.intervals.map(iv=>{
+              const col=iv.spd>=12?'var(--rust)':iv.spd>=11?'var(--gold)':iv.spd>=10?'var(--sky)':'var(--t3)';
+              const dist_m=(iv.spd*iv.dur/3600).toFixed(3);
+              return`<div style="display:flex;align-items:center;gap:5px;margin-bottom:3px">
+                <div style="font-family:var(--mono);font-size:8px;color:var(--t5);width:12px;flex-shrink:0">${iv.n}</div>
+                <div style="width:28px;flex-shrink:0;font-family:var(--mono);font-size:9px;font-weight:700;color:${col}">${iv.spd}</div>
+                <div style="flex:1;background:rgba(255,255,255,.05);border-radius:2px;height:8px;overflow:hidden"><div style="width:${(iv.dur/maxDur*100).toFixed(0)}%;height:100%;background:${col};opacity:.75;border-radius:2px"></div></div>
+                <div style="font-family:var(--mono);font-size:8px;color:var(--t3);width:26px;text-align:right;flex-shrink:0">${Math.floor(iv.dur/60)}:${String(iv.dur%60).padStart(2,'0')}</div>
+                <div style="font-family:var(--mono);font-size:8px;color:var(--t5);width:32px;text-align:right;flex-shrink:0">${dist_m}mi</div>
+              </div>`;
+            }).join('');
+            return`<div style="margin-bottom:10px;padding:10px 11px;background:${sess.isMar?'rgba(224,180,78,.04)':'rgba(255,255,255,.015)'};border-radius:var(--r1);border-left:2px solid ${sess.isMar?'var(--gold)':'var(--b1)'}">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+                <div style="font-family:var(--mono);font-size:10px;font-weight:700;color:${sess.isMar?'var(--gold)':'var(--t2)'}">${sess.date}</div>
+                <div style="font-family:var(--mono);font-size:8px;color:var(--t4)">${sess.dist}${sess.tot?' · '+sess.tot+'min':''}</div>
+              </div>
+              <div style="display:flex;gap:4px;font-family:var(--mono);font-size:7px;color:var(--t5);margin-bottom:4px;padding-left:18px"><span style="width:28px">mph</span><span style="flex:1">duration</span><span style="width:26px;text-align:right">time</span><span style="width:32px;text-align:right">dist</span></div>
+              ${intRows}
+            </div>`;
+          }).join('')}
+        </div>
+        <!-- Right column: analysis -->
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div>
+            <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Longest Interval Per Session</div>
+            ${[{l:'Jan 29',v:90,m:false},{l:'Feb 1',v:90,m:false},{l:'Feb 13',v:60,m:false},{l:'Feb 19',v:60,m:false},{l:'Mar 20',v:100,m:true},{l:'Mar 27',v:120,m:true}].map(s=>`<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><div style="font-family:var(--mono);font-size:9px;color:${s.m?'var(--gold)':'var(--t4)'};width:40px;flex-shrink:0">${s.l}</div><div style="flex:1;background:rgba(255,255,255,.05);border-radius:2px;height:10px;overflow:hidden"><div style="width:${(s.v/120*100).toFixed(0)}%;height:100%;background:${s.m?'var(--gold)':'rgba(95,173,212,.5)'};border-radius:2px"></div></div><div style="font-family:var(--mono);font-size:9px;color:${s.m?'var(--gold)':'var(--t2)'};width:30px;text-align:right">${Math.floor(s.v/60)}:${String(s.v%60).padStart(2,'0')}</div></div>`).join('')}
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Intensity Score (Speed × Seconds)</div>
+            <div style="font-size:10px;color:var(--t4);margin-bottom:8px">Total speed-weighted work per session — higher = more output</div>
+            ${(()=>{
+              const sess=[
+                {l:'Jan 29',m:false,s:10*60+11*60+10*90+12*60},
+                {l:'Feb 1', m:false,s:10*70+10*60+10*90},
+                {l:'Feb 13',m:false,s:10*60+11*60+12*60+11*60},
+                {l:'Feb 19',m:false,s:10*60+12*60+12*60+11*60},
+                {l:'Mar 20',m:true, s:10*100+12*70+9.9*60+10*60},
+                {l:'Mar 27',m:true, s:10*120+12*70+10*60+10*90},
+              ];
+              const mx=Math.max(...sess.map(x=>x.s));
+              return sess.map(s=>`<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><div style="font-family:var(--mono);font-size:9px;color:${s.m?'var(--gold)':'var(--t4)'};width:40px;flex-shrink:0">${s.l}</div><div style="flex:1;background:rgba(255,255,255,.05);border-radius:2px;height:10px;overflow:hidden"><div style="width:${(s.s/mx*100).toFixed(0)}%;height:100%;background:${s.m?'rgba(224,180,78,.7)':'rgba(95,173,212,.5)'};border-radius:2px"></div></div><div style="font-family:var(--mono);font-size:9px;color:${s.m?'var(--gold)':'var(--t2)'};width:38px;text-align:right">${s.s.toLocaleString()}</div></div>`).join('');
+            })()}
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Est. Distance by Speed Tier — All Sessions</div>
+            ${(()=>{
+              const all=[{s:10,d:60},{s:11,d:60},{s:10,d:90},{s:12,d:60},{s:10,d:70},{s:10,d:60},{s:10,d:90},{s:10,d:60},{s:11,d:60},{s:12,d:60},{s:11,d:60},{s:10,d:60},{s:12,d:60},{s:12,d:60},{s:11,d:60},{s:10,d:100},{s:12,d:70},{s:9.9,d:60},{s:10,d:60},{s:10,d:120},{s:12,d:70},{s:10,d:60},{s:10,d:90}];
+              const totalSec=all.reduce((a,i)=>a+i.d,0);
+              return[
+                {label:'12.0 mph — peak speed',min:12,col:'var(--rust)'},
+                {label:'10–11 mph — work pace',min:10,max:11.99,col:'var(--sky)'},
+                {label:'< 10 mph — threshold',min:0,max:9.99,col:'var(--t3)'},
+              ].map(t=>{
+                const ints=all.filter(i=>i.s>=t.min&&(t.max===undefined||i.s<=t.max));
+                const sec=ints.reduce((a,i)=>a+i.d,0);
+                const dist=(ints.reduce((a,i)=>a+(i.s*i.d/3600),0)).toFixed(2);
+                return`<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px"><span style="font-size:10px;color:var(--t2)">${t.label}</span><span style="font-family:var(--mono);font-size:9px;color:${t.col}">${dist}mi · ${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')} · ${ints.length} int.</span></div><div style="height:5px;background:rgba(255,255,255,.05);border-radius:3px;overflow:hidden"><div style="width:${(sec/totalSec*100).toFixed(0)}%;height:100%;background:${t.col};opacity:.8;border-radius:3px"></div></div></div>`;
+              }).join('');
+            })()}
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Form Quality Per Session</div>
+            ${[
+              {l:'Jan 29',good:3,deg:1,m:false,note:'Int 2 degraded, recovered'},
+              {l:'Feb 1', good:3,deg:0,m:false,note:'Clean — lower peak speed'},
+              {l:'Feb 13',good:4,deg:0,m:false,note:'All intervals controlled'},
+              {l:'Feb 19',good:4,deg:0,m:false,note:'Best Feb session'},
+              {l:'Mar 20',good:3,deg:1,m:true, note:'Int 3 degraded at 9.9 mph'},
+              {l:'Mar 27',good:3,deg:1,m:true, note:'Int 3 degraded, 4 recovered'},
+            ].map(s=>{
+              const dots=Array.from({length:s.good+s.deg},(_,i)=>`<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${i<s.good?'var(--sage)':'var(--rust)'};margin-right:3px"></span>`).join('');
+              return`<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px"><div style="font-family:var(--mono);font-size:9px;color:${s.m?'var(--gold)':'var(--t4)'};width:40px;flex-shrink:0">${s.l}</div><div style="display:flex;align-items:center">${dots}</div><div style="font-size:9px;color:var(--t3);flex:1">${s.note}</div></div>`;
+            }).join('')}
+          </div>
+        </div>
+      </div>
+      <!-- Insight callout -->
+      <div style="padding:12px 14px;background:rgba(95,173,212,.05);border:1px solid rgba(95,173,212,.2);border-radius:var(--r2)">
+        <div style="font-family:var(--mono);font-size:8px;color:var(--sky);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px">Key Takeaways — Jan to Mar</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          ${[
+            {label:'Intensity score',val:'+31% Jan→Mar',detail:'Mar 27 (4,240 pts) vs Jan 29 (3,240) — significantly more total work',col:'var(--sage)'},
+            {label:'Longest interval',val:'+33% gain',detail:'1:30 in Jan → 2:00 on Mar 27. Warm-up interval hit the new record',col:'var(--sage)'},
+            {label:'Peak speed',val:'Locked at 12.0',detail:'Maintained every session since Jan 29. Volume at 12.0 is now growing',col:'var(--gold)'},
+            {label:'Form rate',val:'75% clean (17/23)',detail:'Goal: hold form on Int 3 at 10+ mph — the recurring failure point',col:'var(--sky)'},
+          ].map(t=>`<div style="padding:8px 10px;background:rgba(255,255,255,.02);border-radius:var(--r1);border-left:2px solid ${t.col}"><div style="font-family:var(--mono);font-size:9px;color:${t.col};margin-bottom:3px">${t.label}</div><div style="font-size:12px;color:var(--tx);font-weight:600;margin-bottom:2px">${t.val}</div><div style="font-size:10px;color:var(--t3);line-height:1.45">${t.detail}</div></div>`).join('')}
+        </div>
       </div>
     </div>
     <!-- Expanded Cardio Card -->
