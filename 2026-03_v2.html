@@ -358,7 +358,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
   <div class="kbrow"><span>Close modal</span><span class="kbkey">Esc</span></div>
   <div class="kbrow"><span>Print tab</span><span class="kbkey">Ctrl+P</span></div>
 </div>
-<div id="schedTip" style="position:fixed;background:var(--bg4);border:1px solid var(--b2);border-radius:var(--r1);padding:9px 13px;font-family:var(--mono);font-size:10px;color:var(--tx);pointer-events:none;z-index:10001;opacity:0;transition:opacity .12s;max-width:340px;white-space:normal;line-height:1.6;box-shadow:var(--sh3)"></div>
+<div id="schedTip" style="position:fixed;background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r3);padding:0;pointer-events:none;z-index:10001;opacity:0;transition:opacity .15s,transform .15s;max-width:300px;box-shadow:var(--sh3);transform:translateY(4px)"></div>
 
 <!-- Expanded Calendar Overlay -->
 <div id="calExpandOverlay" style="display:none;position:fixed;inset:0;background:rgba(6,7,9,.9);backdrop-filter:blur(16px);z-index:9998;overflow-y:auto;padding:40px 20px">
@@ -441,7 +441,7 @@ const D={
       {date:"Mar 1",desc:"<b>Church</b> — Stephen, Acts 6-7"},
       {date:"Mar 4",desc:"<b>6mi run</b> — 56:22 outdoor"},
       {date:"Mar 8",desc:"<b>Church</b> — Acts 8, Simon Sorcerer"},
-      {date:"Mar 9-10",desc:"<b>Ottawa trip</b> — Fairmont Chateau Laurier"},
+      {date:"Mar 9",desc:"<b>Day Trip</b> — Ogdensburg / Ottawa area"},
       {date:"Mar 22",desc:"<b>Church</b> — Acts 9, Saul's conversion"},
       {date:"Mar 25",desc:"<b>Army pay</b> — DFAS $520.97"},
       {date:"Mar 28",desc:"<b>Kodak Center</b> — Rochester"},
@@ -639,13 +639,13 @@ const D={
        desc:"Rebuilt the JD Meyers Productions website on Squarespace using custom HTML blocks vibe-coded with Claude, giving the brand a refined visual facelift.",status:"complete"}
     ],
     pipeline:[
-      {client:"E. Waugg",service:"Wedding Photography",date:"01/10/2026",loc:"Living Hope Ministries, Glenfield NY",status:"cancelled"},
-      {client:"H. Wagner",service:"Graduation Pictures",date:"04/28/2026",loc:"Potsdam, NY",status:"contract-sent"},
-      {client:"B. McGrath",service:"Wedding Photography",date:"06/06/2026",loc:"The Stables at Windy Point",status:"signed"},
-      {client:"C. Niles",service:"Wedding Video",date:"06/27/2026",loc:"Rapid View Venue, Chase Mills NY",status:"signed"},
-      {client:"C. Choate",service:"Wedding Photography",date:"08/01/2026",loc:"Shindigz on the River",status:"lead"},
-      {client:"M. Eddy",service:"Wedding Video",date:"08/22/2026",loc:"The Stables at Windy Point",status:"signed"},
-      {client:"F. Mnenula +3",service:"Senior Photos",date:"05/10/2026",loc:"St. Lawrence University",status:"lead"}
+      {client:"E. Waugg",service:"Wedding Photography",date:"01/10/2026",loc:"Living Hope Ministries, Glenfield NY",status:"cancelled",change:"Cancelled Jan"},
+      {client:"H. Wagner",service:"Graduation Pictures",date:"04/28/2026",loc:"Potsdam, NY",status:"contract-sent",change:"Contract sent Mar"},
+      {client:"B. McGrath",service:"Wedding Photography",date:"06/06/2026",loc:"The Stables at Windy Point",status:"signed",change:"Signed Mar"},
+      {client:"C. Niles",service:"Wedding Video",date:"06/27/2026",loc:"Rapid View Venue, Chase Mills NY",status:"signed",change:"Signed Mar"},
+      {client:"C. Choate",service:"Wedding Photography",date:"08/01/2026",loc:"Shindigz on the River",status:"lead",change:"Lead — contract in progress"},
+      {client:"M. Eddy",service:"Wedding Video",date:"08/22/2026",loc:"The Stables at Windy Point",status:"signed",change:"Signed Mar"},
+      {client:"F. Mnenula +3",service:"Senior Photos",date:"05/10/2026",loc:"St. Lawrence University",status:"lead",change:"Lead — contract in progress"}
     ]
   }
 };
@@ -657,7 +657,7 @@ const SCHED={
   6: {work:"4PM–4AM (12hr)",gym:["Chest","Shoulders","Triceps"]},
   7: {work:"4PM–4AM (12hr)",gym:["Cardio"]},
   8: {work:"2PM–2AM (12hr)"},
-  9: {special:"Tesla Appt — 845 Carling Ave, Ottawa, ON"},
+  9: {},
   11:{work:"2PM–2AM (12hr)",gym:["Back","Biceps","Legs"]},
   12:{work:"2PM–2AM (12hr)"},
   13:{drill:"ARNG Drill begins 0700",note:"Fort Drum, NY"},
@@ -683,6 +683,7 @@ const SCHED={
   29:{gym:["Abs","Back"]}
 };
 
+const DAILY_SPEND={1: 48, 2: 65, 3: 78, 4: 10, 5: 30, 6: 11, 7: 24, 8: 22, 9: 375, 10: 298, 11: 19, 12: 36, 16: 74, 17: 13, 19: 79, 20: 344, 21: 11, 22: 27, 23: 57, 24: 19, 25: 373, 26: 20, 27: 130, 28: 84, 29: 60};
 const CSV_SESSIONS={"2026-01-06":[{"ex":"Cable Raise","sets":"25.0lb\u00d712, 20.0lb\u00d712","maxW":25.0},{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d75, 175.0lb\u00d712, 175.0lb\u00d78, 155.0lb\u00d75","maxW":175.0},{"ex":"Incline Treadmill","sets":"10:00","maxW":15.0},{"ex":"Tricep Cable","sets":"30.0lb\u00d78, 45.0lb\u00d78, 45.0lb\u00d78, 45.0lb\u00d78","maxW":45.0}],"2026-01-07":[{"ex":"Dumbbell Curl","sets":"70.0lb\u00d78, 70.0lb\u00d78, 70.0lb\u00d74","maxW":70.0},{"ex":"Lat Pulldown","sets":"100.0lb\u00d75, 137.5lb\u00d79, 137.5lb\u00d76, 125.0lb\u00d78, 125.0lb\u00d76","maxW":137.5},{"ex":"Smith Machine Row","sets":"145.0lb\u00d710, 145.0lb\u00d710, 135.0lb\u00d75","maxW":145.0}],"2026-01-08":[{"ex":"Barbell Squat","sets":"135.0lb\u00d75, 185.0lb\u00d73, 245.0lb\u00d73, 225.0lb\u00d75, 195.0lb\u00d710","maxW":245.0},{"ex":"Cable Crunch","sets":"80.0lb\u00d78, 150.0lb\u00d78, 140.0lb\u00d76, 130.0lb\u00d75","maxW":150.0},{"ex":"Plank","sets":"01:00, 02:10","maxW":0}],"2026-01-09":[{"ex":"Running (Outdoor)","sets":"1:00:36","maxW":0}],"2026-01-12":[{"ex":"Cable Pushdown","sets":"80.0lb\u00d78, 100.0lb\u00d710, 100.0lb\u00d710, 100.0lb\u00d78","maxW":100.0},{"ex":"Chest Dips","sets":"\u00d75, 25.0lb\u00d74, 45.0lb\u00d75, 25.0lb\u00d76","maxW":45.0},{"ex":"Lateral Dumbbell Raise","sets":"40.0lb\u00d720, 40.0lb\u00d715","maxW":40.0},{"ex":"Standing Barbell Press","sets":"135.0lb\u00d71, 105.0lb\u00d75, 95.0lb\u00d76, 95.0lb\u00d74","maxW":135.0}],"2026-01-19":[{"ex":"DB OH Tricep Ext","sets":"50.0lb\u00d77, 50.0lb\u00d78, 50.0lb\u00d77","maxW":50.0},{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d75, 185.0lb\u00d78, 175.0lb\u00d78, 175.0lb\u00d78","maxW":185.0},{"ex":"Lateral Dumbbell Raise","sets":"50.0lb\u00d710, 50.0lb\u00d710, 50.0lb\u00d710","maxW":50.0}],"2026-01-21":[{"ex":"Chin Up","sets":"\u00d74, 25.0lb\u00d73, 25.0lb\u00d73, \u00d76, \u00d75","maxW":25.0},{"ex":"Dumbbell Curl","sets":"50.0lb\u00d710, 50.0lb\u00d710, 50.0lb\u00d77","maxW":50.0},{"ex":"Rope Pullover","sets":"70.0lb\u00d78, 110.0lb\u00d77, 100.0lb\u00d77, 90.0lb\u00d76","maxW":110.0}],"2026-01-22":[{"ex":"Deadlift","sets":"135.0lb\u00d75, 225.0lb\u00d75, 225.0lb\u00d75, 225.0lb\u00d75, 225.0lb\u00d75","maxW":225.0},{"ex":"Leg Extension","sets":"50.0lb\u00d79, 90.0lb\u00d78, 90.0lb\u00d78, 90.0lb\u00d77","maxW":90.0}],"2026-01-23":[{"ex":"Hanging Leg Raise","sets":"\u00d710, \u00d78, \u00d77","maxW":0},{"ex":"Leg Tuck & Twist","sets":"25.0lb\u00d712, 25.0lb\u00d712, 25.0lb\u00d710","maxW":25.0},{"ex":"Oblique Cable","sets":"30.0lb\u00d79, 70.0lb\u00d75, 55.0lb\u00d75, 45.0lb\u00d75","maxW":70.0},{"ex":"Pushup","sets":"\u00d720, \u00d720, \u00d75","maxW":0}],"2026-01-24":[{"ex":"Lat Pulldown","sets":"75.0lb\u00d710, 150.0lb\u00d710, 137.5lb\u00d78, 125.0lb\u00d76","maxW":150.0},{"ex":"Standing Barbell Press","sets":"85.0lb\u00d75, 100.0lb\u00d710, 100.0lb\u00d75","maxW":100.0}],"2026-01-25":[{"ex":"Incline Smith Press","sets":"95.0lb\u00d78, 135.0lb\u00d75, 185.0lb\u00d77, 165.0lb\u00d78, 165.0lb\u00d75","maxW":185.0},{"ex":"Leg Press","sets":"135.0lb\u00d712, 135.0lb\u00d712, 225.0lb\u00d710","maxW":225.0},{"ex":"Low Cable Row","sets":"40.0lb\u00d78, 60.0lb\u00d79, 50.0lb\u00d78","maxW":60.0}],"2026-01-26":[{"ex":"EZ-Bar Skullcrusher","sets":"40.0lb\u00d714, 40.0lb\u00d79, 40.0lb\u00d710","maxW":40.0},{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d75, 190.0lb\u00d78, 180.0lb\u00d78, 175.0lb\u00d77, 155.0lb\u00d73","maxW":190.0},{"ex":"Lateral Dumbbell Raise","sets":"50.0lb\u00d712, 50.0lb\u00d712, 50.0lb\u00d710","maxW":50.0}],"2026-01-27":[{"ex":"Plank","sets":"01:25, 01:00","maxW":45.0},{"ex":"Rope Pullover","sets":"75.0lb\u00d78, 105.0lb\u00d78, 100.0lb\u00d78, 100.0lb\u00d78","maxW":105.0},{"ex":"Seated Incline Dumbbell Curl","sets":"60.0lb\u00d78, 60.0lb\u00d78, 60.0lb\u00d77","maxW":60.0}],"2026-01-28":[{"ex":"Barbell Squat","sets":"135.0lb\u00d75, 155.0lb\u00d75, 175.0lb\u00d75, 185.0lb\u00d75","maxW":185.0},{"ex":"Plate Calf","sets":"55.0lb\u00d710, 55.0lb\u00d710","maxW":55.0}],"2026-01-29":[{"ex":"EZ Preacher Curl","sets":"40.0lb\u00d78, 40.0lb\u00d75, 40.0lb\u00d75","maxW":40.0},{"ex":"Treadmill Sprint","sets":"01:00, 01:00, 01:00, 01:00","maxW":12.0}],"2026-01-30":[{"ex":"Chest Dips","sets":"\u00d75, 45.0lb\u00d76, 45.0lb\u00d75, \u00d75","maxW":45.0},{"ex":"Pushup","sets":"\u00d710, \u00d710, \u00d710","maxW":0},{"ex":"Standing Barbell Press","sets":"95.0lb\u00d75, 105.0lb\u00d79, 95.0lb\u00d74, 95.0lb\u00d75","maxW":105.0}],"2026-01-31":[{"ex":"Plank","sets":"01:10, 01:30, 00:45","maxW":0},{"ex":"Pull Up","sets":"\u00d77, \u00d73, \u00d73, \u00d73","maxW":0},{"ex":"Trap Bar Deadlift","sets":"175.0lb\u00d75, 265.0lb\u00d74, 315.0lb\u00d74, 175.0lb\u00d710","maxW":315.0}],"2026-02-01":[{"ex":"Close Grip Lat Pulldown","sets":"100.0lb\u00d75, 180.0lb\u00d77, 170.0lb\u00d76, 150.0lb\u00d77","maxW":180.0},{"ex":"Dumbbell Curl","sets":"50.0lb\u00d77, 40.0lb\u00d710, 40.0lb\u00d714","maxW":50.0},{"ex":"Treadmill Sprint","sets":"01:10, 01:00, 01:30","maxW":10.0},{"ex":"Wide Grip Row","sets":"70.0lb\u00d710, 115.0lb\u00d78, 105.0lb\u00d710, 95.0lb\u00d710","maxW":115.0}],"2026-02-02":[{"ex":"Cable Raise","sets":"20.0lb\u00d75, 35.0lb\u00d77, 30.0lb\u00d78","maxW":35.0},{"ex":"DB OH Tricep Ext","sets":"50.0lb\u00d75, 50.0lb\u00d713, 50.0lb\u00d79","maxW":50.0},{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d76, 185.0lb\u00d78, 175.0lb\u00d710, 175.0lb\u00d78","maxW":185.0}],"2026-02-03":[{"ex":"Cable Curl","sets":"70.0lb\u00d76, 90.0lb\u00d710, 90.0lb\u00d710, 70.0lb\u00d76","maxW":90.0},{"ex":"Lat Pulldown","sets":"75.0lb\u00d710, 162.5lb\u00d710, 150.0lb\u00d76, 125.0lb\u00d715","maxW":162.5},{"ex":"Smith Machine Row","sets":"150.0lb\u00d710, 135.0lb\u00d715, 135.0lb\u00d710","maxW":150.0}],"2026-02-04":[{"ex":"Barbell Squat","sets":"135.0lb\u00d75, 165.0lb\u00d75, 175.0lb\u00d75, 165.0lb\u00d77","maxW":175.0},{"ex":"Leg Curl","sets":"55.0lb\u00d710, 130.0lb\u00d714, 100.0lb\u00d710","maxW":130.0},{"ex":"Plate Calf","sets":"100.0lb\u00d714, 100.0lb\u00d710","maxW":100.0}],"2026-02-10":[{"ex":"Incline Dumbbell Bench Press","sets":"100.0lb\u00d710, 100.0lb\u00d710, 100.0lb\u00d710","maxW":100.0}],"2026-02-11":[{"ex":"Running (Outdoor)","sets":"25:24","maxW":0}],"2026-02-13":[{"ex":"Treadmill Sprint","sets":"01:00, 01:00, 01:00, 01:00","maxW":12.0},{"ex":"Zone 2 Cardio","sets":"30:50","maxW":0}],"2026-02-14":[{"ex":"DB OH Tricep Ext","sets":"70.0lb\u00d73, 60.0lb\u00d76, 60.0lb\u00d75, 40.0lb\u00d78","maxW":70.0},{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d76, 205.0lb\u00d76, 185.0lb\u00d79, 185.0lb\u00d75","maxW":205.0},{"ex":"Lateral Dumbbell Raise","sets":"70.0lb\u00d78, 70.0lb\u00d78, 70.0lb\u00d75","maxW":70.0},{"ex":"Standing Barbell Press","sets":"85.0lb\u00d75, 120.0lb\u00d74, 100.0lb\u00d75, 95.0lb\u00d76","maxW":120.0}],"2026-02-15":[{"ex":"Chin Up","sets":"\u00d74, \u00d78, \u00d78, \u00d77, \u00d74","maxW":0},{"ex":"Lat Pulldown","sets":"115.0lb\u00d76, 185.0lb\u00d75, 130.0lb\u00d78, 120.0lb\u00d76, 120.0lb\u00d76","maxW":185.0},{"ex":"Rear Delt Cable","sets":"25.0lb\u00d77, 25.0lb\u00d77","maxW":25.0}],"2026-02-16":[{"ex":"Incline Dumbbell Bench Press","sets":"70.0lb\u00d79, 110.0lb\u00d716, 110.0lb\u00d78, 110.0lb\u00d78","maxW":110.0},{"ex":"Lateral Dumbbell Raise","sets":"60.0lb\u00d716, 60.0lb\u00d710, 60.0lb\u00d78","maxW":60.0},{"ex":"Plank","sets":"01:20, 01:30, 01:00","maxW":0}],"2026-02-18":[{"ex":"Barbell Squat","sets":"135.0lb\u00d75, 175.0lb\u00d75, 185.0lb\u00d75, 165.0lb\u00d77","maxW":185.0},{"ex":"Leg Curl","sets":"60.0lb\u00d710, 140.0lb\u00d712, 100.0lb\u00d711","maxW":140.0},{"ex":"Plate Calf","sets":"115.0lb\u00d78, 90.0lb\u00d710","maxW":115.0}],"2026-02-19":[{"ex":"Treadmill Sprint","sets":"01:00, 01:00, 01:00, 01:00","maxW":12.0},{"ex":"Zone 2 Cardio","sets":"26:07","maxW":0}],"2026-02-23":[{"ex":"DB OH Tricep Ext","sets":"50.0lb\u00d714, 50.0lb\u00d710, 50.0lb\u00d77","maxW":50.0},{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d75, 185.0lb\u00d711, 165.0lb\u00d710, 165.0lb\u00d710","maxW":185.0},{"ex":"Standing Barbell Press","sets":"85.0lb\u00d75, 95.0lb\u00d78, 95.0lb\u00d76","maxW":95.0}],"2026-02-24":[{"ex":"Dumbbell Curl","sets":"70.0lb\u00d710, 70.0lb\u00d78, 70.0lb\u00d74","maxW":70.0},{"ex":"Plank","sets":"01:30, 01:30, 01:00","maxW":0},{"ex":"Seated Cable Row","sets":"70.0lb\u00d710, 110.0lb\u00d710, 100.0lb\u00d710, 100.0lb\u00d77","maxW":110.0},{"ex":"Trap Bar Deadlift","sets":"175.0lb\u00d75, 265.0lb\u00d75, 265.0lb\u00d75, 265.0lb\u00d75","maxW":265.0}],"2026-02-25":[{"ex":"Barbell Squat","sets":"135.0lb\u00d75, 175.0lb\u00d75, 222.0lb\u00d75, 175.0lb\u00d77","maxW":222.0},{"ex":"Leg Curl","sets":"70.0lb\u00d710, 120.0lb\u00d710, 120.0lb\u00d710","maxW":120.0},{"ex":"Leg Press","sets":"405.0lb\u00d77, 495.0lb\u00d74","maxW":495.0}],"2026-02-26":[{"ex":"Zone 2 Cardio","sets":"51:51","maxW":0}],"2026-02-27":[{"ex":"Cable Fly","sets":"50.0lb\u00d710, 40.0lb\u00d710, 40.0lb\u00d78, 40.0lb\u00d78","maxW":50.0},{"ex":"Cable Raise","sets":"20.0lb\u00d78, 30.0lb\u00d710, 30.0lb\u00d78","maxW":30.0},{"ex":"Elevated Push Up","sets":"\u00d710, \u00d77, \u00d712","maxW":0},{"ex":"Hand Release Push Up","sets":"\u00d744","maxW":0},{"ex":"Tricep Cable","sets":"30.0lb\u00d78, 55.0lb\u00d75, 50.0lb\u00d712, 40.0lb\u00d77","maxW":55.0}],"2026-02-28":[{"ex":"Cable Crunch","sets":"90.0lb\u00d78, 160.0lb\u00d77, 140.0lb\u00d76, 130.0lb\u00d75","maxW":160.0},{"ex":"Good Morning","sets":"45.0lb\u00d75, 65.0lb\u00d75, 85.0lb\u00d75","maxW":85.0},{"ex":"Hanging Leg Raise","sets":"\u00d711, \u00d76, \u00d75","maxW":0},{"ex":"Oblique Cable","sets":"30.0lb\u00d79, 60.0lb\u00d76, 50.0lb\u00d76, 50.0lb\u00d76","maxW":60.0}],"2026-03-01":[{"ex":"Leg Extension","sets":"70.0lb\u00d710, 110.0lb\u00d714, 190.0lb\u00d77, 150.0lb\u00d75","maxW":190.0},{"ex":"Romanian Deadlift","sets":"130.0lb\u00d79, 130.0lb\u00d77","maxW":130.0},{"ex":"Smith Machine Row","sets":"135.0lb\u00d78, 185.0lb\u00d76, 165.0lb\u00d78, 135.0lb\u00d77","maxW":185.0},{"ex":"Standing Calf Raise","sets":"40.0lb\u00d78, 110.0lb\u00d78, 170.0lb\u00d75","maxW":170.0}],"2026-03-02":[{"ex":"Cable Pushdown","sets":"80.0lb\u00d78, 100.0lb\u00d710, 100.0lb\u00d710, 100.0lb\u00d710","maxW":100.0},{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d75, 215.0lb\u00d73, 205.0lb\u00d73, 205.0lb\u00d73, 195.0lb\u00d75, 185.0lb\u00d76","maxW":215.0},{"ex":"Standing Barbell Press","sets":"85.0lb\u00d75, 115.0lb\u00d77, 105.0lb\u00d75","maxW":115.0}],"2026-03-03":[{"ex":"Dumbbell Curl","sets":"80.0lb\u00d76, 80.0lb\u00d74, 60.0lb\u00d79","maxW":80.0},{"ex":"Lat Pulldown","sets":"90.0lb\u00d710, 150.0lb\u00d711, 150.0lb\u00d710, 150.0lb\u00d76","maxW":150.0},{"ex":"Seated Cable Row","sets":"70.0lb\u00d710, 115.0lb\u00d710, 105.0lb\u00d710, 105.0lb\u00d77","maxW":115.0}],"2026-03-04":[{"ex":"Running (Outdoor)","sets":"56:22","maxW":0}],"2026-03-06":[{"ex":"Chest Dips","sets":"\u00d75, 45.0lb\u00d77, 45.0lb\u00d75, \u00d76","maxW":45.0},{"ex":"EZ-Bar Skullcrusher","sets":"50.0lb\u00d711, 50.0lb\u00d712, 50.0lb\u00d710","maxW":50.0},{"ex":"Standing Barbell Press","sets":"85.0lb\u00d75, 135.0lb\u00d73, 115.0lb\u00d75, 95.0lb\u00d76","maxW":135.0}],"2026-03-07":[{"ex":"Running (Outdoor)","sets":"27:31","maxW":0}],"2026-03-10":[{"ex":"Elevated Push Up","sets":"\u00d711, \u00d77, \u00d76, \u00d712","maxW":0},{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d76, 175.0lb\u00d710, 165.0lb\u00d712, 165.0lb\u00d710","maxW":175.0}],"2026-03-11":[{"ex":"Dumbbell Curl","sets":"70.0lb\u00d711, 70.0lb\u00d77, 70.0lb\u00d75","maxW":70.0},{"ex":"Good Morning","sets":"45.0lb\u00d76, 85.0lb\u00d76, 85.0lb\u00d75","maxW":85.0},{"ex":"Leg Extension Isometric","sets":"00:10, 00:10, 00:15","maxW":250.0},{"ex":"Split Glute","sets":"50.0lb\u00d75, 50.0lb\u00d75","maxW":50.0},{"ex":"Wide Grip Lat Pulldown","sets":"85.0lb\u00d715, 150.0lb\u00d78, 130.0lb\u00d710, 120.0lb\u00d710, 120.0lb\u00d75","maxW":150.0}],"2026-03-16":[{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d75, 185.0lb\u00d712, 165.0lb\u00d710, 165.0lb\u00d710","maxW":185.0},{"ex":"Hammer Isometric","sets":"00:30, 00:40, 00:30","maxW":225.0},{"ex":"Leg Extension Isometric","sets":"00:20, 00:20, 00:20","maxW":170.0},{"ex":"Split Glute","sets":"50.0lb\u00d78, 50.0lb\u00d77","maxW":50.0}],"2026-03-17":[{"ex":"Chin Up","sets":"\u00d74, \u00d710, \u00d77, \u00d75","maxW":0},{"ex":"Plank","sets":"01:40, 01:30, 01:00","maxW":0},{"ex":"Trap Bar Deadlift","sets":"175.0lb\u00d75, 285.0lb\u00d75, 285.0lb\u00d75, 285.0lb\u00d75","maxW":285.0}],"2026-03-19":[{"ex":"Barbell Squat","sets":"135.0lb\u00d75, 185.0lb\u00d75, 185.0lb\u00d75, 185.0lb\u00d75","maxW":185.0},{"ex":"Leg Curl","sets":"110.0lb\u00d77, 90.0lb\u00d77","maxW":110.0},{"ex":"Leg Extension","sets":"70.0lb\u00d715, 90.0lb\u00d76, 70.0lb\u00d78","maxW":90.0},{"ex":"Split Glute","sets":"50.0lb\u00d75","maxW":50.0}],"2026-03-20":[{"ex":"Cable OH Tricep","sets":"30.0lb\u00d76, 40.0lb\u00d78, 30.0lb\u00d76","maxW":40.0},{"ex":"Elevated Push Up","sets":"\u00d713, \u00d76, \u00d76, \u00d77","maxW":0},{"ex":"Hand Release Push Up","sets":"\u00d745","maxW":0},{"ex":"Hip Abduction","sets":"70.0lb\u00d78, 90.0lb\u00d75, 70.0lb\u00d75","maxW":90.0},{"ex":"Treadmill Sprint","sets":"01:40, 01:10, 01:00, 01:00","maxW":12.0}],"2026-03-21":[{"ex":"Cable Crunch","sets":"90.0lb\u00d78, 160.0lb\u00d78, 145.0lb\u00d76, 130.0lb\u00d75","maxW":160.0},{"ex":"Decline Crunch","sets":"\u00d710, 45.0lb\u00d75, 25.0lb\u00d712","maxW":45.0},{"ex":"Good Morning","sets":"45.0lb\u00d75, 65.0lb\u00d75, 95.0lb\u00d75","maxW":95.0},{"ex":"Hanging Leg Raise","sets":"\u00d714, \u00d76, \u00d75","maxW":0}],"2026-03-23":[{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d78, 215.0lb\u00d74, 205.0lb\u00d76, 205.0lb\u00d76, 205.0lb\u00d74","maxW":215.0},{"ex":"Front Lean DB","sets":"20.0lb\u00d710, 20.0lb\u00d74, 20.0lb\u00d74","maxW":20.0},{"ex":"Standing Barbell Press","sets":"85.0lb\u00d75, 135.0lb\u00d72, 115.0lb\u00d76, 115.0lb\u00d75","maxW":135.0},{"ex":"Tricep Cable","sets":"30.0lb\u00d78, 60.0lb\u00d78, 50.0lb\u00d77, 45.0lb\u00d76","maxW":60.0}],"2026-03-24":[{"ex":"Dumbbell Curl","sets":"70.0lb\u00d78, 70.0lb\u00d77, 60.0lb\u00d76, 50.0lb\u00d76","maxW":70.0},{"ex":"Forearm Curl","sets":"15.0lb\u00d78, 30.0lb\u00d74, 25.0lb\u00d74","maxW":30.0},{"ex":"Lat Pulldown","sets":"80.0lb\u00d710, 170.0lb\u00d77, 160.0lb\u00d76, 140.0lb\u00d77","maxW":170.0},{"ex":"Rope Pullover","sets":"70.0lb\u00d79, 110.0lb\u00d78, 100.0lb\u00d79, 100.0lb\u00d78","maxW":110.0}],"2026-03-26":[{"ex":"Barbell Squat","sets":"135.0lb\u00d75, 225.0lb\u00d78, 185.0lb\u00d78","maxW":225.0},{"ex":"Bosu KB","sets":"30.0lb\u00d73, 15.0lb\u00d75, \u00d76","maxW":30.0},{"ex":"Hip Abduction","sets":"80.0lb\u00d78, 80.0lb\u00d78","maxW":80.0},{"ex":"Leg Extension","sets":"70.0lb\u00d710, 210.0lb\u00d77, 190.0lb\u00d77, 150.0lb\u00d75","maxW":210.0}],"2026-03-27":[{"ex":"DB OH Tricep Ext","sets":"60.0lb\u00d76, 10.0lb\u00d710, 10.0lb\u00d79","maxW":60.0},{"ex":"Dumbbell Curl","sets":"80.0lb\u00d75, 60.0lb\u00d78, 60.0lb\u00d76","maxW":80.0},{"ex":"Flat Dumbbell Bench Press","sets":"80.0lb\u00d76, 170.0lb\u00d76, 150.0lb\u00d78, 140.0lb\u00d76","maxW":170.0},{"ex":"Treadmill Sprint","sets":"02:00, 01:10, 01:00, 01:30","maxW":12.0}],"2026-03-29":[{"ex":"Cable Crunch","sets":"100.0lb\u00d716, 100.0lb\u00d715","maxW":100.0},{"ex":"Good Morning","sets":"45.0lb\u00d75, 55.0lb\u00d77, 95.0lb\u00d76","maxW":95.0},{"ex":"Hanging Leg Raise","sets":"\u00d710, \u00d75, \u00d75","maxW":0},{"ex":"Plank","sets":"01:10, 01:00","maxW":45.0}],"2026-03-30":[{"ex":"Cable Pushdown","sets":"70.0lb\u00d710, 135.0lb\u00d78, 120.0lb\u00d78, 110.0lb\u00d76","maxW":135.0},{"ex":"Flat Barbell Bench Press","sets":"135.0lb\u00d78, 175.0lb\u00d713, 175.0lb\u00d78, 175.0lb\u00d78","maxW":175.0},{"ex":"Lateral Dumbbell Raise","sets":"70.0lb\u00d711, 70.0lb\u00d78, 70.0lb\u00d75","maxW":70.0}],"2026-03-31":[{"ex":"Dumbbell Curl","sets":"80.0lb\u00d76, 70.0lb\u00d75, 70.0lb\u00d75, 70.0lb\u00d75","maxW":80.0},{"ex":"Lat Pulldown","sets":"80.0lb\u00d710, 155.0lb\u00d714, 140.0lb\u00d78, 130.0lb\u00d77","maxW":155.0},{"ex":"Leg Extension Isometric","sets":"00:30, 00:30, 01:00","maxW":170.0},{"ex":"Rear Delt Cable","sets":"30.0lb\u00d75, 30.0lb\u00d76, 25.0lb\u00d76","maxW":30.0},{"ex":"Seated Cable Row","sets":"70.0lb\u00d710, 130.0lb\u00d75, 120.0lb\u00d78, 110.0lb\u00d76","maxW":130.0}]};
 const TABS=['overview','spiritual','physical','financial','intellectual','creative','reflections'];
 // Restore tab from URL hash on load
@@ -745,7 +746,7 @@ function buildSidebar(){
       </div>
       <div style="margin-bottom:12px">
         <div style="font-family:var(--mono);font-size:9px;color:var(--sky);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:var(--sky);display:inline-block"></span>Improvements</div>
-        <div style="font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:5px">Net dropped $207 from February's high of $1,094. The Ottawa trip was a one-time cost, but dining at $476 — the single largest spending category — has room to compress month over month.</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:5px">Net dropped $207 from February's high of $1,094. Dining at $476 — the single largest spending category — has room to compress month over month.</div>
         <div style="font-size:12px;color:var(--t2);line-height:1.6">Gym days dropped from 22 → 19 → 18 across the three months. The trend is small but consistent. Worth watching before it becomes a pattern.</div>
       </div>
       <div>
@@ -757,88 +758,47 @@ function buildSidebar(){
   }
 
   if(tab==='spiritual'){
-    // Compact March sermon calendar + series list
     const sp=D.spiritual;
+    const readDays=[3,16,25,30];
     const dows=['Su','Mo','Tu','We','Th','Fr','Sa'].map(d=>`<div style="text-align:center;font-family:var(--mono);font-size:8px;color:var(--t4);padding:2px 0">${d}</div>`).join('');
     const days=Array.from({length:31},(_,i)=>{
-      const d=i+1,isSerm=sp.sermonDays.includes(d);
-      return`<div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:${isSerm?'var(--gold)':'var(--t4)'};font-weight:${isSerm?'700':'400'};background:${isSerm?'rgba(212,168,75,.12)':'transparent'};border-radius:3px">${d}</div>`;
+      const d=i+1,isSerm=sp.sermonDays.includes(d),isRead=readDays.includes(d);
+      let col='var(--t4)',fw='400',bg='transparent';
+      if(isSerm){bg='rgba(212,168,75,.15)';col='var(--gold)';fw='700';}
+      else if(isRead){bg='rgba(90,157,192,.12)';col='var(--sky)';fw='600';}
+      return`<div title="${isSerm?'Sermon':isRead?'Bible Reading':''}" style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:${col};font-weight:${fw};background:${bg};border-radius:3px">${d}</div>`;
     }).join('');
-    const sermonList=sp.sermons.map(s=>`<div style="padding:6px 0;border-bottom:1px solid var(--b0)"><div style="font-family:var(--mono);font-size:9px;color:var(--t4)">${s.date.split(',')[0]}</div><div style="font-size:11px;color:var(--t2);margin-top:2px;line-height:1.3">${s.title}</div></div>`).join('');
+    const sermonList=sp.sermons.map(s=>`<div style="padding:5px 0;border-bottom:1px solid var(--b0)"><div style="font-family:var(--mono);font-size:9px;color:var(--t4)">${s.date.split(',')[0]}</div><div style="font-size:11px;color:var(--t2);margin-top:2px;line-height:1.3">${s.title}</div></div>`).join('');
+    const readPlan=[
+      {months:'Jan–Feb',book:'Mark',done:true,cur:false},
+      {months:'Mar–Apr',book:'Luke',done:false,cur:true},
+      {months:'May–Jun',book:'Romans',done:false,cur:false},
+      {months:'Jul–Aug',book:'2 Corinthians',done:false,cur:false},
+      {months:'Sep–Oct',book:'1 Timothy',done:false,cur:false},
+      {months:'Nov–Dec',book:'2 Timothy',done:false,cur:false},
+    ];
+    const timelineItems=readPlan.map((r,i)=>`<div style="display:flex;gap:8px;align-items:flex-start;padding:5px 0;${i<readPlan.length-1?'border-bottom:1px solid var(--b0)':''}">
+      <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0;padding-top:3px">
+        <div style="width:9px;height:9px;border-radius:50%;border:1.5px solid ${r.done?'var(--sage)':r.cur?'var(--gold)':'var(--t5)'};background:${r.done?'var(--sage)':r.cur?'rgba(212,168,75,.3)':'transparent'}"></div>
+        ${i<readPlan.length-1?`<div style="width:1px;height:20px;background:${r.done?'var(--sage)':'var(--b1)'};margin-top:2px"></div>`:''}
+      </div>
+      <div style="padding-bottom:2px">
+        <div style="font-family:var(--mono);font-size:8px;color:${r.cur?'var(--gold)':'var(--t4)'};text-transform:uppercase;letter-spacing:.8px">${r.months}</div>
+        <div style="font-size:11px;color:${r.done?'var(--sage)':r.cur?'var(--tx)':'var(--t3)'};font-weight:${r.cur?'600':'400'};margin-top:1px">${r.book}${r.done?' ✓':r.cur?' ← current':''}</div>
+      </div>
+    </div>`).join('');
     return`<div class="sc ca" style="border-top:2px solid var(--gold)">
-      <div class="sgt">March Sermons</div>
-      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:8px">${dows}${days}</div>
-      <div style="font-family:var(--mono);font-size:9px;color:var(--t4);margin-bottom:10px">Gold = sermon Sunday</div>
+      <div class="sgt">March Sermons + Reading</div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:6px">${dows}${days}</div>
+      <div style="display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;border-radius:50%;background:var(--gold);display:inline-block"></span><span style="font-family:var(--mono);font-size:8px;color:var(--t4)">Sermon</span></div>
+        <div style="display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;border-radius:50%;background:var(--sky);display:inline-block"></span><span style="font-family:var(--mono);font-size:8px;color:var(--t4)">Bible Reading</span></div>
+      </div>
       ${sermonList}
-    </div>`;
-  }
-
-  if(tab==='physical'){
-    // Build compact sidebar heatmap HTML (no canvas, pure inline)
-    const ph=D.physical;
-    const sbWeeks=[{l:'W1',d:[1,2,3,4,5,6,7]},{l:'W2',d:[8,9,10,11,12,13,14]},{l:'W3',d:[15,16,17,18,19,20,21]},{l:'W4',d:[22,23,24,25,26,27,28]},{l:'W5',d:[29,30,31,null,null,null,null]}];
-    const sbDows=['Su','Mo','Tu','We','Th','Fr','Sa'].map(d=>`<div style="text-align:center;font-family:var(--mono);font-size:7px;color:var(--t4)">${d}</div>`).join('');
-    const sbCells=sbWeeks.map(w=>w.d.map(d=>{
-      if(!d)return`<div style="aspect-ratio:1;border-radius:2px;background:transparent"></div>`;
-      const sess=ph.sessions[d];
-      if(!sess)return`<div style="aspect-ratio:1;border-radius:2px;background:rgba(255,255,255,.04)"></div>`;
-      const ms=sess.muscles,c1=ph.mc[ms[0]]||'#888',c2=ms[1]?(ph.mc[ms[1]]||'#888'):null;
-      const bg=c2?`linear-gradient(135deg,${c1} 50%,${c2} 50%)`:c1;
-      return`<div style="aspect-ratio:1;border-radius:2px;background:${bg};cursor:pointer" title="Mar ${d}: ${sess.label}" onclick="openWorkout('2026-03-'+String(${d}).padStart(2,'0'))"></div>`;
-    }).join('')).join('');
-    const sbHeatHTML=`<div class="sc ca" style="padding:10px 12px;border-top:2px solid var(--sky)"><div class="sgt" style="margin-bottom:6px">Training Heatmap</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px">${sbDows}${sbCells}</div></div>`;
-    const validPcts=ph.aft.filter(a=>a.pct>0);
-    const avgPct=Math.round(validPcts.reduce((s,a)=>s+a.pct,0)/validPcts.length);
-    const rings=ph.aft.map((a,i)=>{const r=84-i*15,circ=2*Math.PI*r,dash=a.pct/100*circ;return`<circle fill="none" stroke="rgba(255,255,255,.05)" stroke-width="9" cx="100" cy="100" r="${r}"/><circle fill="none" stroke="${a.color}" stroke-width="9" cx="100" cy="100" r="${r}" stroke-linecap="round" style="stroke-dasharray:${dash} ${circ};transform:rotate(-90deg);transform-origin:100px 100px;transition:stroke-dasharray 1.2s ease ${i*.1}s"/>`;}).join('');
-    const listRows=ph.aft.map((a,i)=>`<div style="display:grid;grid-template-columns:1fr 44px 28px;align-items:center;gap:5px;padding:5px 0;border-bottom:1px solid var(--b0);cursor:pointer" onclick="openMuscleDetail(${i})"><span style="font-size:11px;color:var(--t2)">${a.event}</span><div style="height:3px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden"><div style="height:100%;width:${a.pct}%;background:${a.color};border-radius:2px"></div></div><span style="font-family:var(--mono);font-size:9px;text-align:right;color:${a.color}">${a.pct||'—'}%</span></div>`).join('');
-    return sbHeatHTML+`<div class="sc ca" style="border-top:2px solid var(--sky)">
-      <div class="sgt">AFT Progress · ${avgPct}% avg</div>
-      <div style="position:relative;width:140px;height:140px;margin:8px auto 12px">
-        <svg width="140" height="140" viewBox="0 0 200 200">${rings}</svg>
-        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
-          <span style="font-family:var(--mono);font-size:16px;font-weight:700;color:var(--tx)">${avgPct}%</span>
-          <span style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase">avg to std</span>
-        </div>
-      </div>
-      ${listRows}
-      <div style="margin-top:8px;font-family:var(--mono);font-size:9px;color:var(--t4)">Click row for Jan/Feb/Mar detail</div>
-    </div>`;
-  }
-
-  if(tab==='financial'){
-    const marchIncome=D.fin.incomeSources.filter(s=>!s.label.includes('Feb adj.'));
-    const maxInc=Math.max(...marchIncome.map(s=>s.amt));
-    const incRows=marchIncome.map(s=>{
-      const w=Math.round(s.amt/maxInc*100);
-      return`<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px"><span style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:${s.color};flex-shrink:0"></span>${s.label}</span><span style="font-family:var(--mono);font-size:10px;color:var(--sage)">$${s.amt.toFixed(0)}</span></div><div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden"><div style="width:${w}%;height:100%;background:${s.color};border-radius:2px;transition:width .8s ease"></div></div></div>`;
-    }).join('');
-    // Category color strip for spending widget
-    const catStrip=D.fin.cats.slice(0,5).map(c=>{const w=(c.amt/D.fin.expenses*100).toFixed(1);return`<div style="flex:${w};height:100%;background:${c.color}" title="${c.name}: $${c.amt.toFixed(0)}"></div>`;}).join('');
-    // Top sub pills
-    const subPills=D.subscriptions.filter(s=>s.status==='Active').slice(0,4).map(s=>`<span style="font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:10px;background:var(--vbg);color:var(--vio);border:1px solid rgba(139,126,200,.18)">${s.name.split(' ')[0]}</span>`).join('');
-    const activeCt=D.subscriptions.filter(s=>s.status==='Active').length;
-    const moCost=D.subscriptions.filter(s=>s.status==='Active').reduce((a,s)=>a+(s.freq==='Monthly'?s.amt:s.amt/12),0);
-    return`<div class="sc ca" style="border-top:2px solid var(--sage)">
-      <div class="sgt">Income — March</div>
-      ${incRows}
-      <div style="display:flex;justify-content:space-between;padding:8px 0 0;margin-top:4px;border-top:1px solid var(--b0)"><span style="font-size:12px;color:var(--t2);font-weight:600">Total</span><span style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--sage)">$${D.fin.income.toFixed(2)}</span></div>
     </div>
-    <div class="sc ca d1" style="padding:13px 14px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div class="sgt" style="margin:0">Spending</div>
-        <button onclick="openFinOverlay('spending')" style="font-family:var(--mono);font-size:9px;padding:3px 8px;border:1px solid var(--b1);border-radius:20px;background:none;color:var(--t3);cursor:pointer;transition:all .15s" onmouseover="this.style.color='var(--tx)'" onmouseout="this.style.color='var(--t3)'">Expand ↗</button>
-      </div>
-      <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px"><span style="font-family:var(--serif);font-size:18px;font-weight:700;font-style:italic;color:var(--tx)">$${D.fin.expenses.toFixed(0)}</span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">total spent</span></div>
-      <div style="display:flex;height:5px;border-radius:3px;overflow:hidden;gap:1px;margin-bottom:6px">${catStrip}</div>
-      <div style="display:flex;flex-wrap:wrap;gap:3px">${D.fin.cats.slice(0,5).map(c=>`<div style="display:flex;align-items:center;gap:3px"><span style="width:5px;height:5px;border-radius:50%;background:${c.color};flex-shrink:0"></span><span style="font-family:var(--mono);font-size:8px;color:var(--t4)">${c.name.split(' ')[0]}</span></div>`).join('')}</div>
-    </div>
-    <div class="sc ca d1" style="padding:13px 14px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div class="sgt" style="margin:0">Subscriptions</div>
-        <button onclick="openFinOverlay('subscriptions')" style="font-family:var(--mono);font-size:9px;padding:3px 8px;border:1px solid var(--b1);border-radius:20px;background:none;color:var(--t3);cursor:pointer;transition:all .15s" onmouseover="this.style.color='var(--tx)'" onmouseout="this.style.color='var(--t3)'">Expand ↗</button>
-      </div>
-      <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px"><span style="font-family:var(--serif);font-size:17px;font-weight:700;font-style:italic;color:var(--vio)">$${moCost.toFixed(0)}<span style="font-size:11px;font-style:normal;color:var(--t3)">/mo</span></span><span style="font-family:var(--mono);font-size:9px;color:var(--t4)">${activeCt} active</span></div>
-      <div style="display:flex;flex-wrap:wrap;gap:3px">${subPills}<span style="font-family:var(--mono);font-size:9px;color:var(--t4);align-self:center">+${activeCt-4} more</span></div>
+    <div class="sc ca d1">
+      <div class="sgt">2026 Reading Plan</div>
+      ${timelineItems}
     </div>`;
   }
 
@@ -893,6 +853,102 @@ function buildSidebar(){
       <div class="si"><span class="sk">Projects</span><span class="sv" style="color:var(--sage)">4 complete</span></div>
       <div class="si"><span class="sk">Savings YTD</span><span class="sv">$2,794</span></div>
       <div style="margin-top:10px;padding:9px 10px;background:rgba(212,168,75,.07);border:1px solid rgba(212,168,75,.15);border-radius:var(--r1);font-size:11px;color:var(--t3);line-height:1.55">ARNG contract ends June 2027. Decision window is open.</div>
+    </div>`;
+  }
+
+  if(tab==='financial'){
+    const marchIncome=D.fin.incomeSources.filter(s=>!s.label.includes('Feb adj.'));
+    const maxInc=Math.max(...marchIncome.map(s=>s.amt));
+    const incRows=marchIncome.map(s=>{
+      const w=Math.round(s.amt/maxInc*100);
+      return`<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px"><span style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:${s.color};flex-shrink:0"></span>${s.label}</span><span style="font-family:var(--mono);font-size:10px;color:var(--sage)">$${s.amt.toFixed(0)}</span></div><div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden"><div style="width:${w}%;height:100%;background:${s.color};border-radius:2px;transition:width .8s ease"></div></div></div>`;
+    }).join('');
+    const catStrip=D.fin.cats.slice(0,5).map(c=>{const w=(c.amt/D.fin.expenses*100).toFixed(1);return`<div style="flex:${w};height:100%;background:${c.color}" title="${c.name}: $${c.amt.toFixed(0)}"></div>`;}).join('');
+    const activeCt=D.subscriptions.filter(s=>s.status==='Active').length;
+    const moCost=D.subscriptions.filter(s=>s.status==='Active').reduce((a,s)=>a+(s.freq==='Monthly'?s.amt:s.amt/12),0);
+    const subPills=D.subscriptions.filter(s=>s.status==='Active').slice(0,4).map(s=>`<span style="font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:10px;background:var(--vbg);color:var(--vio);border:1px solid rgba(139,126,200,.18)">${s.name.split(' ')[0]}</span>`).join('');
+    return`<div class="sc ca" style="border-top:2px solid var(--sage)">
+      <div class="sgt">Income — March</div>
+      ${incRows}
+      <div style="display:flex;justify-content:space-between;padding:8px 0 0;margin-top:4px;border-top:1px solid var(--b0)"><span style="font-size:12px;color:var(--t2);font-weight:600">Total</span><span style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--sage)">$${D.fin.income.toFixed(2)}</span></div>
+    </div>
+    <div class="sc ca d1" style="padding:13px 14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div class="sgt" style="margin:0">Spending</div>
+        <button onclick="openFinOverlay('spending')" style="font-family:var(--mono);font-size:9px;padding:3px 8px;border:1px solid var(--b1);border-radius:20px;background:none;color:var(--t3);cursor:pointer">Expand ↗</button>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px"><span style="font-family:var(--serif);font-size:18px;font-weight:700;font-style:italic;color:var(--tx)">$${D.fin.expenses.toFixed(0)}</span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">total spent</span></div>
+      <div style="display:flex;height:5px;border-radius:3px;overflow:hidden;gap:1px;margin-bottom:6px">${catStrip}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:3px">${D.fin.cats.slice(0,5).map(c=>`<div style="display:flex;align-items:center;gap:3px"><span style="width:5px;height:5px;border-radius:50%;background:${c.color};flex-shrink:0"></span><span style="font-family:var(--mono);font-size:8px;color:var(--t4)">${c.name.split(' ')[0]}</span></div>`).join('')}</div>
+    </div>
+    <div class="sc ca d1" style="padding:13px 14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div class="sgt" style="margin:0">Subscriptions</div>
+        <button onclick="openFinOverlay('subscriptions')" style="font-family:var(--mono);font-size:9px;padding:3px 8px;border:1px solid var(--b1);border-radius:20px;background:none;color:var(--t3);cursor:pointer">Expand ↗</button>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px"><span style="font-family:var(--serif);font-size:17px;font-weight:700;font-style:italic;color:var(--vio)">$${moCost.toFixed(0)}<span style="font-size:11px;font-style:normal;color:var(--t3)">/mo</span></span><span style="font-family:var(--mono);font-size:9px;color:var(--t4)">${activeCt} active</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:3px">${subPills}<span style="font-family:var(--mono);font-size:9px;color:var(--t4);align-self:center">+${activeCt-4} more</span></div>
+    </div>`;
+  }
+
+  if(tab==='physical'){
+    const ph=D.physical;
+    const validPcts=ph.aft.filter(a=>a.pct>0);
+    const avgPct=Math.round(validPcts.reduce((s,a)=>s+a.pct,0)/validPcts.length);
+    // Compact sidebar heatmap
+    const sbWeeks=[{d:[1,2,3,4,5,6,7]},{d:[8,9,10,11,12,13,14]},{d:[15,16,17,18,19,20,21]},{d:[22,23,24,25,26,27,28]},{d:[29,30,31,null,null,null,null]}];
+    const sbDows=['Su','Mo','Tu','We','Th','Fr','Sa'].map(d=>`<div style="text-align:center;font-family:var(--mono);font-size:7px;color:var(--t4)">${d}</div>`).join('');
+    const sbCells=sbWeeks.map(w=>w.d.map(d=>{
+      if(!d)return`<div style="aspect-ratio:1;border-radius:2px"></div>`;
+      const sess=ph.sessions[d];
+      if(!sess)return`<div style="aspect-ratio:1;border-radius:2px;background:rgba(255,255,255,.04)"></div>`;
+      const ms=sess.muscles,c1=ph.mc[ms[0]]||'#888',c2=ms[1]?(ph.mc[ms[1]]||'#888'):null;
+      const bg=c2?`linear-gradient(135deg,${c1} 50%,${c2} 50%)`:c1;
+      return`<div style="aspect-ratio:1;border-radius:2px;background:${bg};cursor:pointer" title="Mar ${d}" onclick="openWorkout('2026-03-'+String(${d}).padStart(2,'0'))"></div>`;
+    }).join('')).join('');
+    // AFT rings
+    const rings=ph.aft.map((a,i)=>{const r=84-i*15,circ=2*Math.PI*r,dash=a.pct/100*circ;return`<circle fill="none" stroke="rgba(255,255,255,.05)" stroke-width="9" cx="100" cy="100" r="${r}"/><circle fill="none" stroke="${a.color}" stroke-width="9" cx="100" cy="100" r="${r}" stroke-linecap="round" style="stroke-dasharray:${dash} ${circ};transform:rotate(-90deg);transform-origin:100px 100px;transition:stroke-dasharray 1.2s ease ${i*.1}s"/>`;}).join('');
+    const listRows=ph.aft.map((a,i)=>`<div style="display:grid;grid-template-columns:1fr 44px 28px;align-items:center;gap:5px;padding:5px 0;border-bottom:1px solid var(--b0);cursor:pointer" onclick="openMuscleDetail(${i})"><span style="font-size:11px;color:var(--t2)">${a.event}</span><div style="height:3px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden"><div style="height:100%;width:${a.pct}%;background:${a.color};border-radius:2px"></div></div><span style="font-family:var(--mono);font-size:9px;text-align:right;color:${a.color}">${a.pct||'—'}%</span></div>`).join('');
+    // Projection timeline data (computed, not displayed as math)
+    const projections=[
+      {ex:'Bench Press', now:215, target:245, color:'#5A9DC0', pctNow:Math.round(215/245*100)},
+      {ex:'Barbell Squat', now:225, target:265, color:'#D4A84B', pctNow:Math.round(225/265*100)},
+      {ex:'Trap Bar DL', now:285, target:325, color:'#CC6B47', pctNow:Math.round(285/325*100)},
+      {ex:'Lat Pulldown', now:170, target:195, color:'#5CB872', pctNow:Math.round(170/195*100)},
+      {ex:'Plank', now:'1:40', target:'3:00', color:'#CC6B47', pctNow:47, targetPct:84},
+      {ex:'2-Mile Run', now:'—', target:'13:25', color:'#47B0AB', pctNow:0, targetPct:65},
+    ];
+    const projRows=projections.map(p=>`<div style="margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px">
+        <span style="font-size:10px;color:var(--t2)">${p.ex}</span>
+        <span style="font-family:var(--mono);font-size:9px;color:var(--t4)">${p.now} → <span style="color:${p.color}">${p.target}</span></span>
+      </div>
+      <div style="position:relative;height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:visible">
+        <div style="position:absolute;left:0;top:0;height:100%;width:${p.pctNow}%;background:${p.color};opacity:.9;border-radius:3px"></div>
+        <div style="position:absolute;left:0;top:-1px;height:7px;width:${p.targetPct||Math.min(96,p.pctNow+12)}%;border-right:1.5px dashed rgba(255,255,255,.3)"></div>
+      </div>
+    </div>`).join('');
+    return`<div class="sc ca" style="padding:10px 12px;border-top:2px solid var(--sky)">
+      <div class="sgt" style="margin-bottom:6px">Training Heatmap</div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px">${sbDows}${sbCells}</div>
+    </div>
+    <div class="sc ca" style="border-top:2px solid var(--sky)">
+      <div class="sgt">AFT Progress · ${avgPct}% avg</div>
+      <div style="position:relative;width:140px;height:140px;margin:8px auto 12px">
+        <svg width="140" height="140" viewBox="0 0 200 200">${rings}</svg>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">
+          <span style="font-family:var(--mono);font-size:16px;font-weight:700;color:var(--tx)">${avgPct}%</span>
+          <span style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase">avg to std</span>
+        </div>
+      </div>
+      ${listRows}
+      <div style="margin-top:6px;font-family:var(--mono);font-size:9px;color:var(--t4)">Click row for detail</div>
+    </div>
+    <div class="sc ca" style="border-top:2px solid var(--vio)">
+      <div class="sgt" style="color:var(--vio)">2026 Lift Projections</div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-bottom:10px;line-height:1.4">Based on Q1 trajectory · 25yo · 3–4×/wk since 2021</div>
+      ${projRows}
+      <div style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-top:4px;border-top:1px solid var(--b0);padding-top:6px">Solid = current · Dashed = year-end target</div>
     </div>`;
   }
 
@@ -982,7 +1038,7 @@ function rOverview(){
     <div class="ovb ca"><div><div class="ovbm">March 2026</div><div class="ovbs">JD Meyers · Spiritual · Physical · Financial · Intellectual · Creative</div></div><div class="kpis">${kpis}</div></div>
     ${schedCalHTML}
     <div class="ovcols">
-      <div class="ovcol">${mks('Spiritual','var(--gold)',[{k:'Attendance',v:'4 sermons',cls:'ok'},{k:'Series',v:'Acts · 1 Cor',cls:''},{k:'Luke Study',v:'Themes 1–3',cls:'ok'}],' d1','spiritual')}${mks('Physical','var(--sky)',[{k:'Gym Days',v:'18',cls:''},{k:'Bench PR',v:'215 lb',cls:'ok'},{k:'Squat PR',v:'225 lb × 8',cls:'ok'},{k:'AFT Avg',v:'71%',cls:'warn'}],' d2','physical')}${mks('Financial','var(--sage)',[{k:'Income',v:'$3,389.70',cls:'ok'},{k:'Expenses',v:'$2,501.44',cls:'warn'},{k:'Net',v:'+$887.26',cls:'ok'},{k:'Tithe',v:'$250.00',cls:'ok'}],' d3','financial')}</div>
+      <div class="ovcol">${mks('Spiritual','var(--gold)',[{k:'Attendance',v:'4 sermons',cls:'ok'},{k:'Series',v:'Acts · 1 Cor',cls:''},{k:'Luke Study',v:'Themes 1–3',cls:'ok'}],' d1','spiritual')}${mks('Physical','var(--sky)',[{k:'Gym Days',v:'20',cls:''},{k:'Bench PR',v:'215 lb',cls:'ok'},{k:'Squat PR',v:'225 lb × 8',cls:'ok'},{k:'AFT Avg',v:'71%',cls:'warn'}],' d2','physical')}${mks('Financial','var(--sage)',[{k:'Income',v:'$3,389.70',cls:'ok'},{k:'Expenses',v:'$2,501.44',cls:'warn'},{k:'Net',v:'+$887.26',cls:'ok'},{k:'Tithe',v:'$250.00',cls:'ok'}],' d3','financial')}</div>
       <div class="ovcol">${mks('Intellectual','var(--sky)',[{k:'MMCS Memo',v:'Complete',cls:'ok'},{k:'GPA',v:'3.83',cls:'ok'},{k:'HTML/API',v:'Applied learning',cls:'ok'}],' d1','intellectual')}${mks('Creative','var(--rose)',[{k:'LMSW Video',v:'Complete',cls:'ok'},{k:'Website + Form',v:'Complete',cls:'ok'},{k:'TaxiZero App',v:'Live on GitHub',cls:'ok'},{k:'Weddings Signed',v:'3',cls:'ok'}],' d2','creative')}</div>
     </div>
   </div>`;
@@ -1291,9 +1347,6 @@ function rPhysical(){
     <!-- Insight cards with sparklines -->
     <div class="sf">${insightCards}</div>
 
-    <!-- Slope chart: Strength Progress (compact) -->
-    <div class="card ca d3" style="padding:10px 12px;min-height:0">
-      <div class="ch" style="margin-bottom:6px"><div class="ct" style="font-size:12px">Strength Progression</div><div class="cs" style="font-size:9px">Jan → Feb → Mar · working max</div></div>
       ${slopeChart}
     </div>
 
@@ -1344,11 +1397,32 @@ function rPhysical(){
         <div style="margin-top:8px;padding:8px 10px;background:rgba(92,184,114,.06);border:1px solid rgba(92,184,114,.18);border-radius:var(--r1);font-family:var(--mono);font-size:9px;color:var(--sage);line-height:1.5">Longest interval improved from 1:30 (Jan) to 2:00 (Mar 27) — 33% gain. Peak speed locked at 12.0 mph since Jan 29. Next target: hold 2+ intervals at 12.0 without form degradation.</div>
       </div>
     </div>
-    <!-- Compact Cardio -->
-    <div class="card ca d3" style="padding:13px 14px">
-      <div class="ch" style="margin-bottom:8px"><div class="ct">Cardio</div><div class="cs">4 sessions · 14.2 mi total</div></div>
-      ${cardioLegend}
-      ${cardioBars}
+    <!-- Expanded Cardio Card -->
+    <div class="card ca sf" style="padding:14px 18px">
+      <div class="ch" style="margin-bottom:12px"><div class="ct">Cardio — March 2026</div><div class="cs">4 sessions · 14.2 mi total · outdoor runs + treadmill sprints</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Distance by Session</div>
+          ${cardioLegend}
+          ${cardioBars}
+        </div>
+        <div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Session Detail</div>
+          ${ph.cardio.map(c=>`<div style="padding:7px 10px;margin-bottom:5px;background:var(--bg3);border-radius:var(--r1);border-left:2px solid ${c.desc.toLowerCase().includes('sprint')?'var(--sky)':'var(--sage)'}">
+            <div style="font-family:var(--mono);font-size:9px;color:${c.desc.toLowerCase().includes('sprint')?'var(--sky)':'var(--sage)'};text-transform:uppercase;letter-spacing:.6px;margin-bottom:3px">${c.desc.toLowerCase().includes('sprint')?'Treadmill Sprint':'Outdoor Run'}</div>
+            <div style="font-size:12px;color:var(--tx);font-weight:600">${c.date}</div>
+            <div style="font-size:11px;color:var(--t2);margin-top:2px">${c.desc}</div>
+          </div>`).join('')}
+        </div>
+      </div>
+      <div style="margin-top:12px;padding:10px 12px;background:rgba(92,184,114,.06);border:1px solid rgba(92,184,114,.18);border-radius:var(--r1)">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px">2026 AFT Cardio Goal</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+          <div><div style="font-family:var(--mono);font-size:9px;color:var(--t4);margin-bottom:2px">2-Mile Goal</div><div style="font-size:12px;color:var(--gold);font-weight:600">13:25</div></div>
+          <div><div style="font-family:var(--mono);font-size:9px;color:var(--t4);margin-bottom:2px">Best Outdoor Run</div><div style="font-size:12px;color:var(--sage);font-weight:600">6.0 mi / 56:22</div></div>
+          <div><div style="font-family:var(--mono);font-size:9px;color:var(--t4);margin-bottom:2px">Sprint Peak</div><div style="font-size:12px;color:var(--sky);font-weight:600">12.0 mph · 2:00</div></div>
+        </div>
+      </div>
     </div>
   </div>`;
 }
@@ -1394,7 +1468,7 @@ function rFinancial(){
   const prog=progressBand([
     `<div class="pb-stat"><div class="pb-k">Net</div><div class="pb-v" style="color:var(--rust)">$887</div><div class="pb-d"><span class="delta-dn">▼ $207 vs Feb ($1,094)</span></div></div>`,
     `<div class="pb-stat"><div class="pb-k">Income</div><div class="pb-v">$3,390</div><div class="pb-d"><span class="delta-dn">▼ $190 vs Feb</span></div></div>`,
-    `<div class="pb-stat"><div class="pb-k">Expenses</div><div class="pb-v" style="color:var(--rust)">$2,501</div><div class="pb-d"><span class="delta-dn">▲ $16 vs Feb</span> — Ottawa trip</div></div>`,
+    `<div class="pb-stat"><div class="pb-k">Expenses</div><div class="pb-v" style="color:var(--rust)">$2,501</div><div class="pb-d"><span class="delta-dn">▲ $16 vs Feb</span></div></div>`,
     `<div class="pb-stat"><div class="pb-k">Dining</div><div class="pb-v">$476</div><div class="pb-d"><span class="delta-dn">▲ $54 vs Feb</span></div></div>`,
     `<div class="pb-stat"><div class="pb-k">Travel</div><div class="pb-v" style="color:var(--rust)">$433</div><div class="pb-d"><span class="delta-dn">▲ $433 vs Feb ($0)</span></div></div>`,
     `<div class="pb-stat"><div class="pb-k">Savings Total</div><div class="pb-v" style="color:var(--sage)">$2,794</div><div class="pb-d">27.9% of $10k goal</div></div>`
@@ -1417,13 +1491,28 @@ function rFinancial(){
           }).join('')}
         </div>
         <div style="padding:18px 22px">
-          <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px">Annual Savings Progress</div>
-          <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px"><span style="font-family:var(--serif);font-size:28px;font-weight:700;font-style:italic;color:var(--sage)">$${tot.toFixed(0)}</span><span style="font-family:var(--mono);font-size:10px;color:var(--t3)">${pct.toFixed(1)}% of $10k goal</span></div>
-          <div style="height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;margin-bottom:12px"><div style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--sage),rgba(92,184,114,.6));border-radius:3px;transition:width 1s ease"></div></div>
-          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--b0)"><span style="font-size:12px;color:var(--t3)">Jan</span><span style="font-family:var(--mono);font-size:11px;color:var(--sage)">+$${f.sJan.toFixed(0)}</span></div>
-          <div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--b0)"><span style="font-size:12px;color:var(--t3)">Feb</span><span style="font-family:var(--mono);font-size:11px;color:var(--sage)">+$${f.sFeb.toFixed(0)}</span></div>
-          <div style="display:flex;justify-content:space-between;padding:5px 0;background:rgba(212,168,75,.05);margin:0 -4px;padding:5px 4px;border-radius:4px"><span style="font-size:12px;color:var(--gold);font-weight:600">Mar</span><span style="font-family:var(--mono);font-size:11px;color:var(--gold)">+$${f.sMar.toFixed(0)}</span></div>
-          <div style="display:flex;justify-content:space-between;padding:8px 0 0;margin-top:4px"><span style="font-size:12px;color:var(--t3)">Remaining</span><span style="font-family:var(--mono);font-size:11px;color:var(--t2)">$${(f.sGoal-tot).toFixed(0)}</span></div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">2026 Savings Timeline</div>
+          ${(()=>{
+            const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            const actuals={Jan:f.sJan,Feb:f.sFeb,Mar:f.sMar};
+            const monthlyTarget=f.sGoal/12;
+            return months.map((m,i)=>{
+              const isCur=m==='Mar';const isDone=i<3;
+              const actual=actuals[m]||0;
+              const bar=isDone?Math.round(actual/monthlyTarget*100):0;
+              return`<div style="display:flex;align-items:center;gap:7px;margin-bottom:5px">
+                <div style="font-family:var(--mono);font-size:9px;color:${isCur?'var(--gold)':isDone?'var(--sage)':'var(--t5)'};width:24px;flex-shrink:0">${m}</div>
+                <div style="flex:1;background:rgba(255,255,255,.05);border-radius:2px;height:8px;overflow:hidden;position:relative">
+                  ${isDone?`<div style="height:100%;width:${bar}%;background:${isCur?'var(--gold)':'var(--sage)'};opacity:.85;border-radius:2px"></div>`:''}
+                </div>
+                <div style="font-family:var(--mono);font-size:8px;color:${isCur?'var(--gold)':isDone?'var(--sage)':'var(--t5)'};width:38px;text-align:right">${isDone?`+$${Math.round(actual)}`:''}</div>
+              </div>`;
+            }).join('');
+          })()}
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;padding-top:7px;border-top:1px solid var(--b0)">
+            <span style="font-size:12px;color:var(--t2)">YTD Total</span>
+            <span style="font-family:var(--mono);font-size:13px;color:var(--sage);font-weight:700">$${tot.toFixed(0)} <span style="font-size:9px;color:var(--t3)">${pct.toFixed(0)}%</span></span>
+          </div>
         </div>
       </div>
       <div style="padding:16px 22px">
@@ -1496,7 +1585,7 @@ function rIntellectual(){
 function rCreative(){
   const cr=D.creative;
   const sm={'cancelled':['rgba(255,255,255,.04)','var(--t4)','Cancelled'],'contract-sent':['var(--kbg)','var(--sky)','Contract Sent'],'signed':['var(--sbg)','var(--sage)','Signed'],'lead':['var(--gbg)','var(--gold)','Lead']};
-  const rows=cr.pipeline.map(p=>{const[bg,fg,lbl]=sm[p.status]||['rgba(0,0,0,.05)','var(--t4)','---'];return`<tr ${p.status==='cancelled'?'class="dm"':''}><td style="font-weight:600;color:var(--tx)">${p.client}</td><td style="color:var(--t2)">${p.service}</td><td style="font-family:var(--mono);font-size:11px;color:var(--t3);white-space:nowrap">${p.date}</td><td style="font-size:12px;color:var(--t3)">${p.loc}</td><td><span class="sbadge" style="background:${bg};color:${fg}">${lbl}</span></td></tr>`;}).join('');
+  const rows=cr.pipeline.map(p=>{const[bg,fg,lbl]=sm[p.status]||['rgba(0,0,0,.05)','var(--t4)','---'];const changeCol=p.change&&p.change.includes('Mar')?'var(--gold)':'var(--t4)';return`<tr ${p.status==='cancelled'?'class="dm"':''}><td style="font-weight:600;color:var(--tx)">${p.client}</td><td style="color:var(--t2)">${p.service}</td><td style="font-family:var(--mono);font-size:11px;color:var(--t3);white-space:nowrap">${p.date}</td><td style="font-size:12px;color:var(--t3)">${p.loc}</td><td><span class="sbadge" style="background:${bg};color:${fg}">${lbl}</span></td><td style="font-family:var(--mono);font-size:9px;color:${changeCol}">${p.change||''}</td></tr>`;}).join('');
   const signed=cr.pipeline.filter(p=>p.status==='signed').length,leads=cr.pipeline.filter(p=>p.status==='lead').length,sent=cr.pipeline.filter(p=>p.status==='contract-sent').length;
   return`<div class="cg">
     <div class="sf ca"><div class="secdiv"><div class="secacc" style="background:var(--rose)"></div><div class="sectit">March Creative Output</div></div>
@@ -1504,7 +1593,7 @@ function rCreative(){
       <div class="pjcard"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:7px"><div><div style="font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;color:var(--tx)">JD Meyers Productions Website + Intake Form</div><div style="font-family:var(--mono);font-size:9px;color:var(--rose);text-transform:uppercase;letter-spacing:1px;margin-top:3px">Website Refresh · Custom Form · Email Integration</div></div><span class="sbadge" style="background:var(--sbg);color:var(--sage);flex-shrink:0">Complete</span></div><p style="font-size:13px;line-height:1.7;color:var(--t2)">Rebuilt the JD Meyers Productions website on Squarespace using custom HTML blocks developed with Claude. Also coded a new intake form customized to each service — wedding photography, wedding video, portraits — programmed to send a formatted email notification on every submission.</p></div>
       <div class="pjcard" style="border-color:rgba(71,176,171,.3);background:rgba(71,176,171,.04)"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:7px"><div><div style="font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;color:var(--tx)">TaxiZero Fare Estimator</div><div style="font-family:var(--mono);font-size:9px;color:var(--teal);text-transform:uppercase;letter-spacing:1px;margin-top:3px">Web App · HTML/JS · Google Maps API · Live</div></div><a href="https://txizero.github.io/fair-estimate/" target="_blank" style="font-family:var(--mono);font-size:10px;padding:5px 12px;border:1px solid rgba(71,176,171,.4);border-radius:40px;background:rgba(71,176,171,.1);color:var(--teal);text-decoration:none;white-space:nowrap;flex-shrink:0">Try It Live</a></div><p style="font-size:13px;line-height:1.7;color:var(--t2)">Built a fare estimator web app for Taxi Zero and deployed live on GitHub Pages. Integrates the Google Maps API for real distance calculations — required learning how API keys work, how to structure authenticated requests, and how to secure keys client-side using a proxy to prevent credential exposure. Built entirely with HTML, CSS, and JavaScript.</p></div>
     </div>
-    <div class="card sf ca d1"><div class="ch"><div class="ct">Full Booking Pipeline</div><div class="cs">All 2026 bookings, leads & cancelled</div></div><div style="overflow-x:auto"><table class="ptbl"><thead><tr><th>Client</th><th>Service</th><th>Date</th><th>Location</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table></div><div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;text-align:center">${[['Signed',signed,'var(--sage)','var(--sbg)'],['Leads',leads,'var(--gold)','var(--gbg)'],['Contract Sent',sent,'var(--sky)','var(--kbg)'],['Goal','3-4','var(--t2)','rgba(255,255,255,.04)']].map(([k,v,c,bg])=>`<div style="background:${bg};border:1px solid rgba(255,255,255,.07);border-radius:var(--r1);padding:10px 8px"><div style="font-family:var(--mono);font-size:18px;font-weight:700;color:${c}">${v}</div><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-top:3px">${k}</div></div>`).join('')}</div><div style="margin-top:11px;font-size:12px;color:var(--t3);line-height:1.65">Next confirmed: <b style="color:var(--tx)">H. Wagner</b> graduation portraits Apr 28.</div></div>
+    <div class="card sf ca d1"><div class="ch"><div class="ct">Full Booking Pipeline</div><div class="cs">All 2026 bookings, leads & cancelled</div></div><div style="overflow-x:auto"><table class="ptbl"><thead><tr><th>Client</th><th>Service</th><th>Date</th><th>Location</th><th>Status</th><th>Changes</th></tr></thead><tbody>${rows}</tbody></table></div><div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;text-align:center">${[['Signed',signed,'var(--sage)','var(--sbg)'],['Leads',leads,'var(--gold)','var(--gbg)'],['Contract Sent',sent,'var(--sky)','var(--kbg)'],['Goal','3-4','var(--t2)','rgba(255,255,255,.04)']].map(([k,v,c,bg])=>`<div style="background:${bg};border:1px solid rgba(255,255,255,.07);border-radius:var(--r1);padding:10px 8px"><div style="font-family:var(--mono);font-size:18px;font-weight:700;color:${c}">${v}</div><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-top:3px">${k}</div></div>`).join('')}</div><div style="margin-top:11px;font-size:12px;color:var(--t3);line-height:1.65">Next confirmed: <b style="color:var(--tx)">H. Wagner</b> graduation portraits Apr 28.</div></div>
   </div>`;
 }
 
@@ -1513,7 +1602,7 @@ function rReflections(){
   return`<div class="cg">
     <div class="card sf ca" style="border-left:3px solid var(--gold)">
       <div class="ch"><div class="ct">Reflections — March 2026</div><div class="cs">Looking back and looking ahead</div></div>
-      <p style="font-size:13px;line-height:1.78;color:var(--t2)">March was a productive month across most dimensions — projects shipped, sermons attended, GPA maintained. The financial picture was slightly softer than February due to the Ottawa trip, but savings remain on pace. The areas that need the most honest attention going into April are the plank deficit, the gym days trend, and the tuition funding situation.</p>
+      <p style="font-size:13px;line-height:1.78;color:var(--t2)">March was a productive month across most dimensions — projects shipped, sermons attended, GPA maintained. The financial picture was slightly softer than February, though savings remain on pace. The areas that need the most honest attention going into April are the plank deficit, the gym days trend, and the tuition funding situation.</p>
     </div>
 
     <div class="card ca d1"><div class="ch"><div class="ct" style="color:var(--sky)">Next Month — April</div><div class="cs">ArmyIgnited TA · Clarkson spring semester</div></div>
@@ -1615,13 +1704,50 @@ function afterRender(){
         const alpha=tot>0?Math.min(.9,.15+.75*(tot/maxDay)):0;
         const bg=tot>0?col.replace(')',`,${alpha})`.replace('rgb(','rgba(')):'rgba(255,255,255,.03)';
         const title=tot>0?`Mar ${d}: $${tot.toFixed(0)}`:`Mar ${d}: no spend`;
-        html+=`<div title="${title}" style="aspect-ratio:1;border-radius:3px;background:${col};opacity:${tot>0?(.15+.85*(tot/maxDay)).toFixed(2):'.08'};cursor:default;transition:opacity .15s;position:relative;min-height:22px" onmouseenter="document.getElementById('daySpendTooltip').textContent='${title}'" onmouseleave="document.getElementById('daySpendTooltip').textContent=''"><span style="position:absolute;top:2px;left:3px;font-family:var(--mono);font-size:7px;color:rgba(255,255,255,.4);line-height:1">${d}</span></div>`;
+        const knownAmt=DAILY_SPEND[d]||0;
+        const amtLabel=tot>0?(tot>99?`$${Math.round(tot)}`:`$${tot.toFixed(0)}`):(knownAmt>0?`$${knownAmt}`:'');
+        html+=`<div title="${title}" style="aspect-ratio:1;border-radius:3px;background:${col};opacity:${tot>0?(.15+.85*(tot/maxDay)).toFixed(2):knownAmt>0?'.18':'.06'};cursor:default;transition:opacity .15s;position:relative;min-height:28px;display:flex;flex-direction:column;justify-content:space-between;padding:2px 2px 1px" onmouseenter="document.getElementById('daySpendTooltip').textContent='${title}'" onmouseleave="document.getElementById('daySpendTooltip').textContent=''"><span style="font-family:var(--mono);font-size:6px;color:rgba(255,255,255,.45);line-height:1">${d}</span>${amtLabel?`<span style="font-family:var(--mono);font-size:7px;color:rgba(255,255,255,.75);line-height:1;text-align:right">${amtLabel}</span>`:''}</div>`;
       }
       html+='</div>';
       heatEl.innerHTML=html;
     }
     // catTrendChart removed
     // (no chart rendered here)
+  }
+
+  if(tab==='financial'){
+    const marchIncome=D.fin.incomeSources.filter(s=>!s.label.includes('Feb adj.'));
+    const maxInc=Math.max(...marchIncome.map(s=>s.amt));
+    const incRows=marchIncome.map(s=>{
+      const w=Math.round(s.amt/maxInc*100);
+      return`<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px"><span style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:${s.color};flex-shrink:0"></span>${s.label}</span><span style="font-family:var(--mono);font-size:10px;color:var(--sage)">$${s.amt.toFixed(0)}</span></div><div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden"><div style="width:${w}%;height:100%;background:${s.color};border-radius:2px;transition:width .8s ease"></div></div></div>`;
+    }).join('');
+    const catStrip=D.fin.cats.slice(0,5).map(c=>{const w=(c.amt/D.fin.expenses*100).toFixed(1);return`<div style="flex:${w};height:100%;background:${c.color}" title="${c.name}: $${c.amt.toFixed(0)}"></div>`;}).join('');
+    const activeCt=D.subscriptions.filter(s=>s.status==='Active').length;
+    const moCost=D.subscriptions.filter(s=>s.status==='Active').reduce((a,s)=>a+(s.freq==='Monthly'?s.amt:s.amt/12),0);
+    const subPills=D.subscriptions.filter(s=>s.status==='Active').slice(0,4).map(s=>`<span style="font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:10px;background:var(--vbg);color:var(--vio);border:1px solid rgba(139,126,200,.18)">${s.name.split(' ')[0]}</span>`).join('');
+    return`<div class="sc ca" style="border-top:2px solid var(--sage)">
+      <div class="sgt">Income — March</div>
+      ${incRows}
+      <div style="display:flex;justify-content:space-between;padding:8px 0 0;margin-top:4px;border-top:1px solid var(--b0)"><span style="font-size:12px;color:var(--t2);font-weight:600">Total</span><span style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--sage)">$${D.fin.income.toFixed(2)}</span></div>
+    </div>
+    <div class="sc ca d1" style="padding:13px 14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div class="sgt" style="margin:0">Spending</div>
+        <button onclick="openFinOverlay('spending')" style="font-family:var(--mono);font-size:9px;padding:3px 8px;border:1px solid var(--b1);border-radius:20px;background:none;color:var(--t3);cursor:pointer">Expand ↗</button>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px"><span style="font-family:var(--serif);font-size:18px;font-weight:700;font-style:italic;color:var(--tx)">$${D.fin.expenses.toFixed(0)}</span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">total spent</span></div>
+      <div style="display:flex;height:5px;border-radius:3px;overflow:hidden;gap:1px;margin-bottom:6px">${catStrip}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:3px">${D.fin.cats.slice(0,5).map(c=>`<div style="display:flex;align-items:center;gap:3px"><span style="width:5px;height:5px;border-radius:50%;background:${c.color};flex-shrink:0"></span><span style="font-family:var(--mono);font-size:8px;color:var(--t4)">${c.name.split(' ')[0]}</span></div>`).join('')}</div>
+    </div>
+    <div class="sc ca d1" style="padding:13px 14px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div class="sgt" style="margin:0">Subscriptions</div>
+        <button onclick="openFinOverlay('subscriptions')" style="font-family:var(--mono);font-size:9px;padding:3px 8px;border:1px solid var(--b1);border-radius:20px;background:none;color:var(--t3);cursor:pointer">Expand ↗</button>
+      </div>
+      <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px"><span style="font-family:var(--serif);font-size:17px;font-weight:700;font-style:italic;color:var(--vio)">$${moCost.toFixed(0)}<span style="font-size:11px;font-style:normal;color:var(--t3)">/mo</span></span><span style="font-family:var(--mono);font-size:9px;color:var(--t4)">${activeCt} active</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:3px">${subPills}<span style="font-family:var(--mono);font-size:9px;color:var(--t4);align-self:center">+${activeCt-4} more</span></div>
+    </div>`;
   }
 
   if(tab==='physical'){
@@ -1776,12 +1902,23 @@ window.showTip=(e,el)=>{const t=document.getElementById('hmtip');t.textContent=e
 window.hideTip=()=>document.getElementById('hmtip').classList.remove('show');
 window.showSchedTip=(e,el)=>{
   const t=document.getElementById('schedTip');if(!t)return;
-  t.textContent=el.dataset.tip;
-  const x=Math.min(e.clientX+18,window.innerWidth-360);
-  const y=Math.max(10,Math.min(e.clientY-14,window.innerHeight-120));
-  t.style.left=x+'px';t.style.top=y+'px';t.style.opacity='1';
+  const tip=el.dataset.tip||'';
+  const parts=tip.split(' · ');
+  const dayLabel=parts[0];
+  const items=parts.slice(1);
+  // Build pill-style items
+  const pillColors={'Church':'#D4A84B','ARNG':'#8B7EC8','CU Security':'#5CB872','Gym':'#5A9DC0','Run':'#47B0AB','Sprint':'#47B0AB','Day Trip':'#47B0AB'};
+  const pills=items.map(item=>{
+    let col='#9A9590';
+    for(const[k,v] of Object.entries(pillColors)){if(item.includes(k)){col=v;break;}}
+    return`<div style="display:flex;align-items:flex-start;gap:6px;margin-bottom:5px"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${col};margin-top:3px;flex-shrink:0"></span><span style="font-size:11px;color:var(--t2);line-height:1.45">${item}</span></div>`;
+  }).join('');
+  t.innerHTML=`<div style="padding:8px 12px;border-bottom:1px solid var(--b0)"><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px">March ${dayLabel.replace('Mar ','')}</div></div><div style="padding:10px 12px">${pills||'<div style="font-size:11px;color:var(--t4)">No events</div>'}</div>`;
+  const x=Math.min(e.clientX+16,window.innerWidth-320);
+  const y=Math.max(10,Math.min(e.clientY-10,window.innerHeight-200));
+  t.style.left=x+'px';t.style.top=y+'px';t.style.opacity='1';t.style.transform='translateY(0)';
 };
-window.hideSchedTip=()=>{const t=document.getElementById('schedTip');if(t)t.style.opacity='0';};
+window.hideSchedTip=()=>{const t=document.getElementById('schedTip');if(t){t.style.opacity='0';t.style.transform='translateY(4px)';}};
 
 window.toggleSchedExpand=()=>{
   const ov=document.getElementById('calExpandOverlay');
