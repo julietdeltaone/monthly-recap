@@ -2117,32 +2117,37 @@ function rReflections(){
               {pos:10.0,label:'Last Semester',     sub:'Spring 2027',      col:'#5FADD4', shape:'dot',     side:'down', tier:2},
             ];
 
-            const stemH={up:{1:22,2:44,3:68},down:{1:22,2:44}};
+            const stemH={up:{1:30,2:62,3:96},down:{1:30,2:62}};
 
-            const renderEvent=(e)=>{
+            const renderEvent=(e,idx)=>{
               const lft=`${(e.pos/total*100).toFixed(2)}%`;
               const isFlag=e.shape==='flag';
               const isDiamond=e.shape==='diamond';
-              const h=stemH[e.side][e.tier]||28;
-              const dotSize=isFlag?12:isDiamond?10:8;
+              const h=stemH[e.side][e.tier]||30;
+              const dotSize=isFlag?13:isDiamond?11:9;
               const dotStyle=isFlag
                 ?`width:${dotSize}px;height:${dotSize}px;background:${e.col};clip-path:polygon(0 0,100% 0,100% 70%,50% 100%,0 70%);flex-shrink:0`
                 :isDiamond
                 ?`width:${dotSize}px;height:${dotSize}px;background:${e.col};transform:rotate(45deg);flex-shrink:0`
                 :`width:${dotSize}px;height:${dotSize}px;border-radius:50%;background:${e.col};flex-shrink:0`;
               const isUp=e.side==='up';
-              // label offset from track edge: stem + dot + 4px gap
-              const lblOffset=h+dotSize+6;
-              const align=e.pos<=.5?'left':e.pos>=10.8?'right':'center';
+              const lblOffset=h+dotSize+5;
+              const align=e.pos<=.6?'left':e.pos>=10.6?'right':'center';
               const xOff=align==='left'?'0':align==='right'?'-100%':'-50%';
-              const lblStyle=`position:absolute;left:${lft};transform:translateX(${xOff});${isUp?`bottom:${lblOffset}px`:`top:${lblOffset}px`};white-space:nowrap;text-align:${align}`;
+              const delay=`${(idx*0.055).toFixed(2)}s`;
+              const animUp=`@keyframes tlFadeUp${idx}{from{opacity:0;transform:translateX(${xOff==='0'?'0':xOff}) translateY(8px)}to{opacity:1;transform:translateX(${xOff==='0'?'0':xOff}) translateY(0)}}`;
+              const animDown=`@keyframes tlFadeDown${idx}{from{opacity:0;transform:translateX(${xOff==='0'?'0':xOff}) translateY(-8px)}to{opacity:1;transform:translateX(${xOff==='0'?'0':xOff}) translateY(0)}}`;
+              const lblAnim=isUp?`tlFadeUp${idx}`:`tlFadeDown${idx}`;
+              const lblStyle=`position:absolute;left:${lft};transform:translateX(${xOff});${isUp?`bottom:${lblOffset}px`:`top:${lblOffset}px`};white-space:nowrap;text-align:${align};opacity:0;animation:${lblAnim} .5s cubic-bezier(.22,.68,0,1.1) ${delay} both`;
               const dotWrapStyle=`position:absolute;left:${lft};transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;${isUp?`bottom:0`:`top:0`}`;
-              const stem=`<div style="width:1px;height:${h}px;background:rgba(255,255,255,.14)"></div>`;
-              const dot=`<div style="${dotStyle};box-shadow:0 0 7px ${e.col}66"></div>`;
-              return`
+              const stemAnim=`opacity:0;animation:fadeIn .4s ease ${delay} both`;
+              const dotAnim=`opacity:0;animation:scaleIn .4s cubic-bezier(.34,1.4,.64,1) ${(idx*0.055+.12).toFixed(2)}s both`;
+              const stem=`<div style="width:1px;height:${h}px;background:linear-gradient(${isUp?'to top':'to bottom'},rgba(255,255,255,.18),rgba(255,255,255,.04));${stemAnim}"></div>`;
+              const dot=`<div style="${dotStyle};box-shadow:0 0 8px ${e.col}77;${dotAnim}"></div>`;
+              return`<style>${animUp}${animDown}</style>
                 <div style="${lblStyle}">
-                  <div style="font-family:var(--mono);font-size:9px;font-weight:600;color:${e.col};line-height:1.2">${e.label}</div>
-                  <div style="font-family:var(--mono);font-size:7.5px;color:var(--t4);line-height:1.3">${e.sub}</div>
+                  <div style="font-family:var(--mono);font-size:9px;font-weight:600;color:${e.col};line-height:1.3">${e.label}</div>
+                  <div style="font-family:var(--mono);font-size:7.5px;color:var(--t4);line-height:1.4">${e.sub}</div>
                 </div>
                 <div style="${dotWrapStyle}">
                   ${isUp?stem+dot:dot+stem}
@@ -2151,30 +2156,30 @@ function rReflections(){
 
             const upEvents=events.filter(e=>e.side==='up');
             const dnEvents=events.filter(e=>e.side==='down');
-            const upH=96; // enough for 3 tiers
-            const dnH=76;
+            const upH=130;
+            const dnH=96;
 
             return`
               <!-- Top zone -->
-              <div style="position:relative;height:${upH}px">
-                ${upEvents.map(e=>renderEvent(e)).join('')}
+              <div style="position:relative;height:${upH}px;overflow:visible">
+                ${upEvents.map((e,i)=>renderEvent(e,i)).join('')}
               </div>
 
               <!-- Center track -->
-              <div style="position:relative;height:20px">
+              <div style="position:relative;height:22px">
                 ${months.map((m,i)=>`
                   <div style="position:absolute;left:${pct(i)};top:0;bottom:0;width:1px;background:rgba(255,255,255,.05)"></div>
                   <div style="position:absolute;left:${midPct(i)};top:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:8px;color:var(--t5);letter-spacing:.4px">${m.label}</div>
                 `).join('')}
-                <div style="position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,rgba(255,255,255,.07),rgba(255,255,255,.18),rgba(255,255,255,.07));transform:translateY(-50%);border-radius:1px"></div>
-                <div style="position:absolute;left:0;top:-5px;bottom:-5px;width:2px;background:var(--gold);border-radius:1px;box-shadow:0 0 8px rgba(224,180,78,.6)">
-                  <div style="position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:7px;color:var(--gold);white-space:nowrap;background:var(--bg2);padding:1px 5px;border-radius:3px;border:1px solid rgba(224,180,78,.3)">NOW</div>
+                <div style="position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,rgba(255,255,255,.06),rgba(255,255,255,.2),rgba(255,255,255,.06));transform:translateY(-50%);border-radius:1px"></div>
+                <div style="position:absolute;left:0;top:-6px;bottom:-6px;width:2px;background:var(--gold);border-radius:1px;box-shadow:0 0 10px rgba(224,180,78,.7)">
+                  <div style="position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:7px;color:var(--gold);white-space:nowrap;background:var(--bg2);padding:2px 6px;border-radius:3px;border:1px solid rgba(224,180,78,.35);letter-spacing:.8px">NOW</div>
                 </div>
               </div>
 
               <!-- Bottom zone -->
-              <div style="position:relative;height:${dnH}px">
-                ${dnEvents.map(e=>renderEvent(e)).join('')}
+              <div style="position:relative;height:${dnH}px;overflow:visible">
+                ${dnEvents.map((e,i)=>renderEvent(e,upEvents.length+i)).join('')}
               </div>
             `;
           })()}
@@ -2185,7 +2190,7 @@ function rReflections(){
 
     <!-- DECISION CARDS ROW -->
     <div class="card ca d2">
-      <div class="ch"><div class="ct" style="color:var(--gold)">⚡ Near-Term Decisions</div><div class="cs">Things that require an actual choice in the next 90 days</div></div>
+      <div class="ch"><div class="ct" style="color:var(--gold)">Near-Term Decisions</div><div class="cs">Things that require an actual choice in the next 90 days</div></div>
       <div style="display:flex;flex-direction:column;gap:8px">
         ${[
           {title:'ArmyIgnited TA — close the loop',urgency:'April',col:'#E0B44E',body:'The acknowledgment of the SUNY Potsdam recoupment is in progress. This needs to clear before the Clarkson TA application can go through. Two courses × $750 = $1,500 on the line. Failing to resolve it means paying out of pocket for spring.'},
@@ -2202,7 +2207,7 @@ function rReflections(){
     </div>
 
     <div class="card ca d2">
-      <div class="ch"><div class="ct" style="color:var(--sky)">🎓 Education Funding Map</div><div class="cs">Clarkson benefit · ArmyIgnited · path to May 2027</div></div>
+      <div class="ch"><div class="ct" style="color:var(--sky)">Education Funding Map</div><div class="cs">Clarkson benefit · ArmyIgnited · path to May 2027</div></div>
       <p style="font-size:13px;line-height:1.75;color:var(--t2);margin-bottom:12px">The Clarkson tuition benefit covers 12 credits per fiscal year as a full-time employee. Spring 2026 uses the remaining FY26 credits. Fall 2026 starts a new FY — benefit resets. The real gap question is whether ArmyIgnited TA can supplement beyond what Clarkson covers to close the May 2027 graduation without a funding pause.</p>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
         ${[
@@ -2215,7 +2220,7 @@ function rReflections(){
     </div>
 
     <div class="card ca d2">
-      <div class="ch"><div class="ct" style="color:var(--t2)">🪖 The June 2027 Question</div><div class="cs">ARNG contract end · officer route vs business route · decision architecture</div></div>
+      <div class="ch"><div class="ct" style="color:var(--t2)">The June 2027 Question</div><div class="cs">ARNG contract end · officer route vs business route · decision architecture</div></div>
       <p style="font-size:13px;line-height:1.78;color:var(--t2);margin-bottom:14px">The Army National Guard contract ends June 2027. That's 15 months from now — enough time to prepare either path, not enough time to drift into one by accident. The decision window that actually matters is probably <b style="color:var(--tx)">late 2026 / early 2027</b>, because OTS applications and the civilian job market both require lead time.</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
         <div style="padding:14px;background:rgba(95,173,212,.07);border:1px solid rgba(95,173,212,.2);border-radius:var(--r2)">
