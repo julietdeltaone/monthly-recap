@@ -2094,91 +2094,87 @@ function rReflections(){
             const pct=i=>`${(i/total*100).toFixed(2)}%`;
             const midPct=i=>`${((i+.5)/total*100).toFixed(2)}%`;
 
-            // Events: position (0=Apr26, 11=Summer27), label, sublabel, color, shape (dot|diamond|flag), row (1|2|3 — stagger)
+            // Trimmed to key events only — tier controls stem height to stagger labels
+            // Above track: tier 1=short(28px), tier 2=medium(52px), tier 3=tall(78px)
+            // Below track: tier 1=short(28px), tier 2=medium(52px)
             const events=[
-              // row 1 — top
-              {pos:.3,  label:'AFT Window',      sub:'Apr–May · Plank is risk',  col:'#9A8FD8', shape:'diamond', row:1},
-              {pos:.65, label:'ArmyIgnited TA',  sub:'$1,500 if approved',       col:'#5FADD4', shape:'dot',     row:1},
-              {pos:1.0, label:'H. Wagner Shoot', sub:'Apr 28 · Graduation',      col:'#CC7888', shape:'dot',     row:1},
-              {pos:1.3, label:'SLU Seniors',     sub:'May 10 · F. Mnenula +3',   col:'#CC7888', shape:'dot',     row:1},
-              {pos:1.7, label:'Clarkson FY Cap', sub:'12 credits exhausted',     col:'#D9714E', shape:'diamond', row:1},
-              {pos:2.05,label:'B. McGrath Wed.', sub:'Jun 6 · Photo',            col:'#CC7888', shape:'dot',     row:1},
-              {pos:2.45,label:'C. Niles Wed.',   sub:'Jun 27 · Video',           col:'#CC7888', shape:'dot',     row:1},
-              {pos:2.1, label:'NG AFT Deadline', sub:'Jun 1 · 350 combat std',   col:'#9A8FD8', shape:'diamond', row:1},
-              {pos:4.05,label:'C. Choate Wed.',  sub:'Aug 1 · Photo',            col:'#CC7888', shape:'dot',     row:1},
-              {pos:4.45,label:'M. Eddy Wed.',    sub:'Aug 22 · Video',           col:'#CC7888', shape:'dot',     row:1},
-              {pos:5.3, label:'Next AFT',        sub:'Oct–Nov window',           col:'#9A8FD8', shape:'diamond', row:1},
-              {pos:10.5,label:'MBA Graduation',  sub:'May 2027 target',          col:'#62C97A', shape:'flag',    row:1},
-              {pos:11.3,label:'ARNG Contract',   sub:'Jun 2027 · ENDS',          col:'#E0B44E', shape:'flag',    row:1},
+              // ABOVE track
+              {pos:.35, label:'AFT Window',       sub:'Apr–May',          col:'#9A8FD8', shape:'diamond', side:'up',   tier:2},
+              {pos:1.0, label:'H. Wagner',         sub:'Apr 28 · Grad shoot', col:'#CC7888', shape:'dot', side:'up',   tier:1},
+              {pos:1.7, label:'Clarkson FY Cap',   sub:'May · FY26 credits done', col:'#D9714E', shape:'diamond', side:'up', tier:3},
+              {pos:2.25,label:'June Weddings',     sub:'McGrath Jun 6 · Niles Jun 27', col:'#CC7888', shape:'dot', side:'up', tier:1},
+              {pos:4.25,label:'Aug Bookings',      sub:'Choate Aug 1 · Eddy Aug 22', col:'#CC7888', shape:'dot', side:'up', tier:2},
+              {pos:5.3, label:'Next AFT',          sub:'Oct–Nov window',   col:'#9A8FD8', shape:'diamond', side:'up',  tier:1},
+              {pos:10.5,label:'MBA Graduation',    sub:'May 2027',         col:'#62C97A', shape:'flag',    side:'up',  tier:2},
+              {pos:11.2,label:'ARNG Ends',         sub:'Jun 2027',         col:'#E0B44E', shape:'flag',    side:'up',  tier:1},
 
-              // row 2 — bottom
-              {pos:.5,  label:'Tuition Decision',  sub:'TA gap or out-of-pocket?', col:'#E0B44E', shape:'diamond', row:2},
-              {pos:1.5, label:'Summer Funding',    sub:'Fill gap or pause courses',col:'#E0B44E', shape:'diamond', row:2},
-              {pos:3.5, label:'Savings Check',     sub:'On pace for $10k?',        col:'#D9714E', shape:'dot',     row:2},
-              {pos:5.5, label:'New Clarkson FY',   sub:'Benefit resets',           col:'#5FADD4', shape:'dot',     row:2},
-              {pos:6.0, label:'Next Clarkson Sem.',sub:'Fall 2026 courses',        col:'#5FADD4', shape:'dot',     row:2},
-              {pos:8.5, label:'Year Review',       sub:'2026 close · savings final',col:'#62C97A',shape:'dot',    row:2},
-              {pos:9.0, label:'OTS Application?',  sub:'If officer route chosen',  col:'#E0B44E', shape:'diamond', row:2},
-              {pos:9.5, label:'Last Clarkson Sem.',sub:'Spring 2027 · final push', col:'#5FADD4', shape:'dot',     row:2},
-              {pos:10.0,label:'ARNG Decision',     sub:'Officer vs business — commit', col:'#E0B44E', shape:'diamond', row:2},
+              // BELOW track
+              {pos:.5,  label:'Tuition Decision',  sub:'ArmyIgnited TA?',  col:'#E0B44E', shape:'diamond', side:'down', tier:1},
+              {pos:1.5, label:'Summer Funding',    sub:'Gap decision',     col:'#E0B44E', shape:'diamond', side:'down', tier:2},
+              {pos:3.5, label:'Savings Check',     sub:'On pace for $10k?',col:'#D9714E', shape:'dot',     side:'down', tier:1},
+              {pos:5.8, label:'New Clarkson FY',   sub:'Fall 2026 · benefit resets', col:'#5FADD4', shape:'dot', side:'down', tier:2},
+              {pos:9.0, label:'Officer Decision?', sub:'Q1\'27 · OTS or business', col:'#E0B44E', shape:'diamond', side:'down', tier:1},
+              {pos:10.0,label:'Last Semester',     sub:'Spring 2027',      col:'#5FADD4', shape:'dot',     side:'down', tier:2},
             ];
 
-            const r1=events.filter(e=>e.row===1);
-            const r2=events.filter(e=>e.row===2);
+            const stemH={up:{1:22,2:44,3:68},down:{1:22,2:44}};
 
-            const renderDot=(e,rowDir)=>{
+            const renderEvent=(e)=>{
               const lft=`${(e.pos/total*100).toFixed(2)}%`;
               const isFlag=e.shape==='flag';
               const isDiamond=e.shape==='diamond';
+              const h=stemH[e.side][e.tier]||28;
+              const dotSize=isFlag?12:isDiamond?10:8;
               const dotStyle=isFlag
-                ?`width:12px;height:12px;background:${e.col};clip-path:polygon(0 0,100% 0,100% 70%,50% 100%,0 70%);`
+                ?`width:${dotSize}px;height:${dotSize}px;background:${e.col};clip-path:polygon(0 0,100% 0,100% 70%,50% 100%,0 70%);flex-shrink:0`
                 :isDiamond
-                ?`width:10px;height:10px;background:${e.col};transform:rotate(45deg);`
-                :`width:9px;height:9px;border-radius:50%;background:${e.col};`;
-              const stemDir=rowDir==='up'?'bottom':'top';
-              return`<div style="position:absolute;left:${lft};transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0;${rowDir==='up'?'bottom:8px':'top:8px'}">
-                ${rowDir==='down'?`<div style="width:1px;height:14px;background:rgba(255,255,255,.12)"></div>`:''}
-                <div style="${dotStyle}flex-shrink:0;box-shadow:0 0 8px ${e.col}55"></div>
-                ${rowDir==='up'?`<div style="width:1px;height:14px;background:rgba(255,255,255,.12)"></div>`:''}
-              </div>`;
+                ?`width:${dotSize}px;height:${dotSize}px;background:${e.col};transform:rotate(45deg);flex-shrink:0`
+                :`width:${dotSize}px;height:${dotSize}px;border-radius:50%;background:${e.col};flex-shrink:0`;
+              const isUp=e.side==='up';
+              // label offset from track edge: stem + dot + 4px gap
+              const lblOffset=h+dotSize+6;
+              const align=e.pos<=.5?'left':e.pos>=10.8?'right':'center';
+              const xOff=align==='left'?'0':align==='right'?'-100%':'-50%';
+              const lblStyle=`position:absolute;left:${lft};transform:translateX(${xOff});${isUp?`bottom:${lblOffset}px`:`top:${lblOffset}px`};white-space:nowrap;text-align:${align}`;
+              const dotWrapStyle=`position:absolute;left:${lft};transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;${isUp?`bottom:0`:`top:0`}`;
+              const stem=`<div style="width:1px;height:${h}px;background:rgba(255,255,255,.14)"></div>`;
+              const dot=`<div style="${dotStyle};box-shadow:0 0 7px ${e.col}66"></div>`;
+              return`
+                <div style="${lblStyle}">
+                  <div style="font-family:var(--mono);font-size:9px;font-weight:600;color:${e.col};line-height:1.2">${e.label}</div>
+                  <div style="font-family:var(--mono);font-size:7.5px;color:var(--t4);line-height:1.3">${e.sub}</div>
+                </div>
+                <div style="${dotWrapStyle}">
+                  ${isUp?stem+dot:dot+stem}
+                </div>`;
             };
 
-            const renderLabel=(e,rowDir)=>{
-              const lft=`${(e.pos/total*100).toFixed(2)}%`;
-              const align=e.pos<1?'left':e.pos>10.5?'right':'center';
-              const xOff=align==='left'?'0':align==='right'?'-100%':'-50%';
-              return`<div style="position:absolute;left:${lft};transform:translateX(${xOff});${rowDir==='up'?'bottom:30px':'top:30px'};white-space:nowrap;text-align:${align}">
-                <div style="font-family:var(--mono);font-size:9px;font-weight:600;color:${e.col};line-height:1.2">${e.label}</div>
-                <div style="font-family:var(--mono);font-size:8px;color:var(--t4);line-height:1.3">${e.sub}</div>
-              </div>`;
-            };
+            const upEvents=events.filter(e=>e.side==='up');
+            const dnEvents=events.filter(e=>e.side==='down');
+            const upH=96; // enough for 3 tiers
+            const dnH=76;
 
             return`
-              <!-- Top row labels -->
-              <div style="position:relative;height:68px;margin-bottom:0">
-                ${r1.map(e=>renderLabel(e,'up')).join('')}
-                ${r1.map(e=>renderDot(e,'up')).join('')}
+              <!-- Top zone -->
+              <div style="position:relative;height:${upH}px">
+                ${upEvents.map(e=>renderEvent(e)).join('')}
               </div>
 
               <!-- Center track -->
               <div style="position:relative;height:20px">
-                <!-- Month dividers and labels -->
                 ${months.map((m,i)=>`
-                  <div style="position:absolute;left:${pct(i)};top:0;bottom:0;width:1px;background:rgba(255,255,255,.06)"></div>
-                  <div style="position:absolute;left:${midPct(i)};transform:translateX(-50%);top:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:8px;color:var(--t5);letter-spacing:.5px">${m.label}</div>
+                  <div style="position:absolute;left:${pct(i)};top:0;bottom:0;width:1px;background:rgba(255,255,255,.05)"></div>
+                  <div style="position:absolute;left:${midPct(i)};top:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:8px;color:var(--t5);letter-spacing:.4px">${m.label}</div>
                 `).join('')}
-                <!-- Main track line -->
-                <div style="position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,rgba(255,255,255,.08),rgba(255,255,255,.18),rgba(255,255,255,.08));transform:translateY(-50%);border-radius:1px"></div>
-                <!-- Today marker -->
-                <div style="position:absolute;left:0;top:-4px;bottom:-4px;width:2px;background:var(--gold);border-radius:1px;box-shadow:0 0 8px rgba(224,180,78,.6)">
-                  <div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:7px;color:var(--gold);white-space:nowrap;background:var(--bg2);padding:1px 4px;border-radius:3px;border:1px solid rgba(224,180,78,.3)">NOW</div>
+                <div style="position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,rgba(255,255,255,.07),rgba(255,255,255,.18),rgba(255,255,255,.07));transform:translateY(-50%);border-radius:1px"></div>
+                <div style="position:absolute;left:0;top:-5px;bottom:-5px;width:2px;background:var(--gold);border-radius:1px;box-shadow:0 0 8px rgba(224,180,78,.6)">
+                  <div style="position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:7px;color:var(--gold);white-space:nowrap;background:var(--bg2);padding:1px 5px;border-radius:3px;border:1px solid rgba(224,180,78,.3)">NOW</div>
                 </div>
               </div>
 
-              <!-- Bottom row labels -->
-              <div style="position:relative;height:68px;margin-top:0">
-                ${r2.map(e=>renderDot(e,'down')).join('')}
-                ${r2.map(e=>renderLabel(e,'down')).join('')}
+              <!-- Bottom zone -->
+              <div style="position:relative;height:${dnH}px">
+                ${dnEvents.map(e=>renderEvent(e)).join('')}
               </div>
             `;
           })()}
