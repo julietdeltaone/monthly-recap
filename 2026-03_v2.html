@@ -377,7 +377,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
   </div>
 </div>
 
-<div id="hmtip"></div>
+<div id="hmtip" style="position:fixed;background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r3);padding:0;pointer-events:none;z-index:9999;opacity:0;transition:opacity .15s;min-width:220px;max-width:300px;box-shadow:var(--sh3)"></div>
 <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">↑</button>
 
 <div id="kbhint-panel">
@@ -1204,7 +1204,11 @@ function rPhysical(){
       if(!sess)return`<div class="hmc rest"></div>`;
       const ms=sess.muscles,c1=ph.mc[ms[0]]||'#888',c2=ms[1]?(ph.mc[ms[1]]||'#888'):null,c3=ms[2]?(ph.mc[ms[2]]||'#888'):null;
       const bg=c3?`linear-gradient(135deg,${c1} 33%,${c2} 33%,${c2} 66%,${c3} 66%)`:c2?`linear-gradient(135deg,${c1} 50%,${c2} 50%)`:c1;
-      return`<div class="hmc" style="background:${bg}" data-lbl="Mar ${d}: ${sess.label}" onmouseenter="showTip(event,this)" onmouseleave="hideTip()" onclick="openWorkout('2026-03-'+String(${d}).padStart(2,'0'))" style="cursor:pointer"></div>`;
+      // Build rich hover content from CSV_SESSIONS
+      const dateKey='2026-03-'+String(d).padStart(2,'0');
+      const csvDay=CSV_SESSIONS[dateKey]||[];
+      const richHtml=csvDay.length>0?csvDay.map(ex=>`<div style="margin-bottom:4px"><span style="font-size:10px;color:var(--tx);font-weight:600">${ex.ex}</span>${ex.maxW>0?`<span style="font-family:var(--mono);font-size:9px;color:var(--sage);margin-left:6px">${ex.maxW}lb</span>`:''}<div style="font-family:var(--mono);font-size:8px;color:var(--t3);margin-top:1px;line-height:1.4">${ex.sets}</div></div>`).join(''):'No data';
+      return`<div class="hmc" style="background:${bg};cursor:default" data-lbl="Mar ${d}: ${sess.label}" data-rich="${encodeURIComponent(richHtml)}" data-date="Mar ${d}" onmouseenter="showHeatTip(event,this)" onmouseleave="hideHeatTip()"></div>`;
     }).join('');
     return`<div class="hmwk" style="font-size:7px">${w.l}</div>${cells}`;
   }).join('');
@@ -1316,21 +1320,27 @@ function rPhysical(){
     return'rgba(204,107,71,.6)';
   }
 
-  const exRows=exTable.map(e=>{
+  const exRows=exTable.map((e,idx)=>{
     const bg=scoreToColor(e.score);
     const border=scoreToBorder(e.score);
     const barW=Math.round(e.count/23*100);
-    let deltaBadge='';
-    if(e.delta!==null){
-      const sign=e.deltaUp?'+':'-';
-      const cls=e.deltaUp?'#5CB872':'#CC6B47';
-      deltaBadge=`<span style="font-family:var(--mono);font-size:8px;padding:1px 4px;border-radius:10px;background:${e.deltaUp?'rgba(92,184,114,.15)':'rgba(204,107,71,.15)'};color:${cls};margin-left:4px">${sign}${e.delta}%</span>`;
+    let deltaCell='';
+    if(e.delta===null){
+      deltaCell=`<div style="font-family:var(--mono);font-size:9px;color:var(--t5)">new</div>`;
+    } else if(e.delta===0){
+      deltaCell=`<div style="font-family:var(--mono);font-size:9px;color:var(--t4)">—</div>`;
+    } else {
+      const arrow=e.deltaUp?'▲':'▼';
+      const col=e.deltaUp?'var(--sage)':'var(--rust)';
+      deltaCell=`<div style="font-family:var(--mono);font-size:9px;color:${col};white-space:nowrap">${arrow}${e.delta}%</div>`;
     }
-    return`<div style="display:grid;grid-template-columns:155px 24px 1fr 110px;gap:6px;align-items:center;padding:4px 7px;border-radius:4px;background:${bg};border-left:2px solid ${border};margin-bottom:2px;animation:fadeSlideIn .4s ease both;animation-delay:${exTable.indexOf(e)*.025}s">
-      <div style="font-size:11px;color:var(--tx);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${e.name}${deltaBadge}</div>
-      <div style="font-family:var(--mono);font-size:10px;color:var(--t2);text-align:center">${e.count}×</div>
-      <div style="background:rgba(255,255,255,.06);border-radius:2px;height:4px;overflow:hidden"><div style="width:${barW}%;height:100%;background:${border};border-radius:2px;animation:growBar .6s ease both;animation-delay:${exTable.indexOf(e)*.025+.1}s"></div></div>
-      <div style="font-size:9px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${e.notes}</div>
+    const cleanNote=e.notes.split(' · ').filter(n=>!n.match(/^[+\-]\d+%/)&&!n.match(/^new Mar/)).join(' · ').trim();
+    return`<div style="display:grid;grid-template-columns:1fr 22px 80px 42px 90px;gap:5px;align-items:center;padding:5px 8px;border-radius:4px;background:${bg};border-left:2px solid ${border};margin-bottom:2px;animation:fadeSlideIn .4s ease both;animation-delay:${idx*.022}s">
+      <div style="font-size:11px;color:var(--tx);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${e.name}</div>
+      <div style="font-family:var(--mono);font-size:10px;color:var(--t3);text-align:center">${e.count}</div>
+      <div style="background:rgba(255,255,255,.06);border-radius:2px;height:4px;overflow:hidden"><div style="width:${barW}%;height:100%;background:${border};border-radius:2px;animation:growBar .6s ease both;animation-delay:${idx*.022+.1}s"></div></div>
+      ${deltaCell}
+      <div style="font-size:9px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${cleanNote}</div>
     </div>`;
   }).join('');
 
@@ -1338,38 +1348,8 @@ function rPhysical(){
     ${[['Strength (heavy/low-rep)','rgba(204,107,71,.7)'],['Hypertrophy (balanced)','rgba(212,168,75,.6)'],['Endurance (high-rep/cardio)','rgba(71,176,171,.6)']].map(([l,c])=>`<div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:${c};display:inline-block"></span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">${l}</span></div>`).join('')}
   </div>`;
 
-  // ─── COMPACT SLOPE CHART for lifts (inline SVG, no canvas) ───
-  const slopeData=[
-    {name:'Squat',   vals:[245,222,225], color:'#D4A84B'},
-    {name:'Bench',   vals:[190,205,215], color:'#5A9DC0'},
-    {name:'Lat PD',  vals:[150,185,170], color:'#5CB872'},
-    {name:'TrapDL',  vals:[315,265,285], color:'#CC6B47'},
-    {name:'Curl',    vals:[70,70,80],    color:'#47B0AB'},
-    {name:'Tricep',  vals:[45,55,60],    color:'#8B7EC8'},
-  ];
-  const SW=460,SH=100,leftM=44,rightM=44,topM=14,botM=18;
-  const allVals=slopeData.flatMap(d=>d.vals);
-  const minV=Math.min(...allVals),maxV=Math.max(...allVals);
-  const ym=v=>topM+(1-(v-minV)/(maxV-minV))*(SH-topM-botM);
-  const xm=i=>leftM+i*((SW-leftM-rightM)/2);
-  const months=['Jan','Feb','Mar'];
-  let svgLines=months.map((m,i)=>`<text x="${xm(i)}" y="${SH-4}" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#5A5754">${m}</text>`).join('');
-  svgLines+=`<line x1="${xm(0)}" y1="${topM}" x2="${xm(0)}" y2="${SH-botM}" stroke="rgba(255,255,255,.06)" stroke-width="1"/>`;
-  svgLines+=`<line x1="${xm(1)}" y1="${topM}" x2="${xm(1)}" y2="${SH-botM}" stroke="rgba(255,255,255,.06)" stroke-width="1"/>`;
-  svgLines+=`<line x1="${xm(2)}" y1="${topM}" x2="${xm(2)}" y2="${SH-botM}" stroke="rgba(255,255,255,.06)" stroke-width="1"/>`;
-  slopeData.forEach(d=>{
-    const pts=d.vals.map((v,i)=>({x:xm(i),y:ym(v)}));
-    svgLines+=pts.slice(0,-1).map((_,i)=>`<line x1="${pts[i].x}" y1="${pts[i].y}" x2="${pts[i+1].x}" y2="${pts[i+1].y}" stroke="${d.color}" stroke-width="2" stroke-linecap="round" opacity=".9"/>`).join('');
-    svgLines+=pts.map(p=>`<circle cx="${p.x}" cy="${p.y}" r="3.5" fill="${d.color}"/>`).join('');
-    // label on right
-    const last=pts[pts.length-1];
-    svgLines+=`<text x="${last.x+6}" y="${last.y+3.5}" font-family="JetBrains Mono" font-size="9" fill="${d.color}">${d.name} ${d.vals[2]}lb</text>`;
-    // label on left
-    svgLines+=`<text x="${pts[0].x-5}" y="${pts[0].y+3.5}" text-anchor="end" font-family="JetBrains Mono" font-size="9" fill="rgba(255,255,255,.35)">${d.vals[0]}</text>`;
-  });
-  const slopeChart=`<svg width="100%" viewBox="0 0 ${SW} ${SH}" style="overflow:visible;display:block;max-width:100%">${svgLines}</svg>`;
-
-  // ─── CARDIO inline SVG bar chart ───
+  // (slope chart removed)
+    // ─── CARDIO inline SVG bar chart ───
   const cardioSessions=[
     {label:'Mar 4',mi:6.0,  type:'run',   note:'Outdoor 6.0 mi / 56:22'},
     {label:'Mar 7',mi:3.11, type:'run',   note:'Outdoor 5.0 km / 27:31'},
@@ -1400,11 +1380,37 @@ function rPhysical(){
   const mgVals=Object.values(mgNorm);
 
   return`<div class="cg">
+    <!-- HEATMAP with legend -->
+    <div class="card sf ca" style="padding:12px 16px">
+      <div class="ch" style="margin-bottom:10px"><div class="ct">Muscle Group Training Heatmap</div><div class="cs">20 sessions · hover any day for full workout detail</div></div>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start">
+        <div>
+          <div class="hmg"><div></div>${dows}${heatRows}</div>
+          <div class="hmleg" style="margin-top:6px">${legend}<div class="hmlgi" style="font-size:9px"><div class="hmlgb" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)"></div>Rest</div></div>
+        </div>
+        <div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px">Color Key</div>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:10px">
+            ${Object.entries(ph.mc).map(([m,c])=>`<div style="display:flex;align-items:center;gap:8px"><div style="width:11px;height:11px;border-radius:3px;background:${c};flex-shrink:0"></div><span style="font-size:11px;color:var(--t2)">${m}</span></div>`).join('')}
+            <div style="display:flex;align-items:center;gap:8px"><div style="width:11px;height:11px;border-radius:3px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);flex-shrink:0"></div><span style="font-size:11px;color:var(--t4)">Rest / no session</span></div>
+          </div>
+          <div style="padding:8px 10px;background:var(--bg3);border-radius:var(--r1);border:1px solid var(--b0);font-size:11px;color:var(--t3);line-height:1.55">Split-gradient = multiple groups. Hover any day for the full workout log.</div>
+        </div>
+      </div>
+    </div>
+
     <!-- HERO: Exercise Frequency Table -->
     <div class="card sf ca" style="padding:14px 16px">
-      <div class="ch" style="margin-bottom:10px"><div class="ct">Exercise Frequency — March 2026</div><div class="cs">28 distinct movements · color = strength↔endurance spectrum</div></div>
+      <div class="ch" style="margin-bottom:10px"><div class="ct">Exercise Frequency — March 2026</div><div class="cs">28 movements · color = strength↔endurance spectrum · hover for detail</div></div>
       ${legend2}
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 16px">${exRows}</div>
+      <div style="display:grid;grid-template-columns:1fr 22px 80px 42px 90px;gap:5px;padding:3px 8px 5px;border-bottom:1px solid var(--b0);margin-bottom:4px">
+        <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px">Exercise</div>
+        <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-align:center">Sets</div>
+        <div style="font-family:var(--mono);font-size:8px;color:var(--t4)">Frequency</div>
+        <div style="font-family:var(--mono);font-size:8px;color:var(--t4)">vs Feb</div>
+        <div style="font-family:var(--mono);font-size:8px;color:var(--t4)">Max</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr;gap:0">${exRows}</div>
     </div>
 
     <!-- AFT Detail -->
@@ -1415,9 +1421,6 @@ function rPhysical(){
 
     <!-- Insight cards with sparklines -->
     <div class="sf">${insightCards}</div>
-
-      ${slopeChart}
-    </div>
 
     <!-- Sprint History Card -->
     <div class="card ca d3 sf" style="padding:13px 15px">
@@ -1947,8 +1950,20 @@ window.closeFinOverlay=()=>{
   if(ov){ov.style.display='none';document.body.style.overflow='';}
 };
 window.toggleKb=()=>{const p=document.getElementById('kbhint-panel');if(p)p.classList.toggle('show');};
-window.showTip=(e,el)=>{const t=document.getElementById('hmtip');t.textContent=el.dataset.lbl;const x=Math.min(e.clientX+16,window.innerWidth-340);const y=Math.min(e.clientY-10,window.innerHeight-80);t.style.left=x+'px';t.style.top=y+'px';t.classList.add('show');};
-window.hideTip=()=>document.getElementById('hmtip').classList.remove('show');
+window.showHeatTip=(e,el)=>{
+  const t=document.getElementById('hmtip');if(!t)return;
+  const rich=el.dataset.rich?decodeURIComponent(el.dataset.rich):'';
+  const dateLabel=el.dataset.date||'';
+  const muscles=el.dataset.lbl||'';
+  const muscleStr=muscles.split(': ').slice(1).join(': ');
+  t.innerHTML=`<div style="padding:8px 12px;border-bottom:1px solid var(--b1)"><div style="font-family:var(--mono);font-size:10px;font-weight:600;color:var(--gold)">${dateLabel}</div><div style="font-family:var(--mono);font-size:9px;color:var(--t3);margin-top:1px">${muscleStr}</div></div><div style="padding:10px 12px;max-height:280px;overflow-y:auto">${rich}</div>`;
+  const x=Math.min(e.clientX+14,window.innerWidth-320);
+  const y=Math.max(10,Math.min(e.clientY-20,window.innerHeight-320));
+  t.style.left=x+'px';t.style.top=y+'px';t.style.opacity='1';
+};
+window.hideHeatTip=()=>{const t=document.getElementById('hmtip');if(t)t.style.opacity='0';};
+window.showTip=(e,el)=>window.showHeatTip(e,el);
+window.hideTip=()=>window.hideHeatTip();
 window.showSchedTip=(e,el)=>{
   const t=document.getElementById('schedTip');if(!t)return;
   const tip=el.dataset.tip||'';
