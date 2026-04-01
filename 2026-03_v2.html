@@ -1064,7 +1064,7 @@ function buildSidebar(){
     <div class="sc ca" style="border-top:2px solid var(--vio);padding:14px 16px">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
         <div class="sgt" style="margin:0">Subscriptions</div>
-        <button onclick="toggleFin('sb-subs-expand')" id="sb-subs-btn" style="font-family:var(--mono);font-size:8px;padding:3px 8px;border:1px solid rgba(139,126,200,.35);border-radius:12px;background:rgba(139,126,200,.08);color:var(--vio);cursor:pointer;transition:all .15s">View All</button>
+        <button onclick="sbSubsToggle()" id="sb-subs-btn" style="font-family:var(--mono);font-size:8px;padding:3px 8px;border:1px solid rgba(154,143,216,.35);border-radius:12px;background:rgba(154,143,216,.08);color:var(--vio);cursor:pointer;transition:all .15s">View All</button>
       </div>
       <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:8px">
         <span style="font-family:var(--serif);font-size:24px;font-weight:700;font-style:italic;color:var(--vio)">$${monthlyCost.toFixed(0)}</span>
@@ -1072,11 +1072,11 @@ function buildSidebar(){
       </div>
       ${activeSubs.slice(0,4).map(s=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid var(--b0)"><span style="font-size:11px;color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px">${s.name}</span><span style="font-family:var(--mono);font-size:10px;color:var(--t3);flex-shrink:0">$${s.amt}</span></div>`).join('')}
       <div style="font-family:var(--mono);font-size:9px;color:var(--t4);padding-top:6px">+${activeSubs.length-4} more · $${annualCost.toFixed(0)}/yr</div>
-      <div id="sb-subs-expand" style="max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1);margin-top:0">
+      <div id="sb-subs-expand" data-open="0" style="max-height:0;overflow:hidden;opacity:0;transition:max-height .52s cubic-bezier(.4,0,.2,1),opacity .3s ease;margin-top:0">
         <div style="border-top:1px solid var(--b0);padding-top:8px;margin-top:8px">
           <div style="font-family:var(--mono);font-size:8px;color:var(--sage);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px">Active (${activeSubs.length})</div>
           ${subRowsHTML(activeSubs)}
-          <div style="font-family:var(--mono);font-size:8px;color:var(--rust);text-transform:uppercase;letter-spacing:.8px;margin:8px 0 4px">Inactive (${inactiveSubs.length})</div>
+          <div style="font-family:var(--mono);font-size:8px;color:var(--rust);text-transform:uppercase;letter-spacing:.8px;margin:8px 0 4px">Inactive / Cancelled (${inactiveSubs.length})</div>
           ${subRowsHTML(inactiveSubs)}
         </div>
       </div>
@@ -1084,7 +1084,7 @@ function buildSidebar(){
     <div class="sc ca" style="border-top:2px solid var(--sky);padding:14px 16px">
       <div class="sgt">Daily Spending Heatmap</div>
       <div id="dailySpendHeatSb"></div>
-      <div id="daySpendTooltipSb" style="font-family:var(--mono);font-size:9px;color:var(--t2);margin-top:6px;min-height:14px;padding:3px 0;border-top:1px solid var(--b0)"></div>
+      <div id="daySpendTooltipSb" style="font-family:var(--mono);font-size:9px;color:var(--t2);margin-top:8px;min-height:60px;padding:8px 10px;border:1px solid var(--b0);border-radius:var(--r1);background:var(--bg3);line-height:1.7;transition:opacity .15s"><span style="color:var(--t5)">Hover a day to see transactions</span></div>
     </div>
     <div class="sc ca" style="border-top:2px solid var(--gold);padding:14px 16px">
       <div class="sgt">Notable Purchases</div>
@@ -1652,7 +1652,7 @@ function rPhysical(){
 function rFinancial(){
   const f=D.fin,tot=f.sJan+f.sFeb+f.sMar,pct=Math.min(100,tot/f.sGoal*100),totalTxns=f.cats.reduce((s,c)=>s+c.txns.length,0);
   const kpis=`<div class="fsg"><div class="fkpi ca"><div class="fkpiv" style="color:var(--sage)">$${f.income.toFixed(2)}</div><div class="fkpik">Income</div></div><div class="fkpi ca d1"><div class="fkpiv" style="color:var(--rust)">$${f.expenses.toFixed(2)}</div><div class="fkpik">Expenses</div></div><div class="fkpi ca d2"><div class="fkpiv" style="color:var(--sage)">+$${f.net.toFixed(2)}</div><div class="fkpik">Net</div></div></div>`;
-  const sav=`<div style="padding:14px 16px;background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r2);margin-bottom:14px"><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Annual Savings — Target $10,000</div><div style="display:flex;align-items:baseline;gap:10px"><span style="font-family:var(--serif);font-size:26px;font-weight:700;font-style:italic;color:var(--sage)">$${tot.toFixed(2)}</span><span style="font-family:var(--mono);font-size:11px;color:var(--t3)">${pct.toFixed(1)}% of goal</span></div><div class="savout"><div class="savin" style="width:${pct}%"></div></div><div class="savm"><span class="savc">Jan +$${f.sJan.toFixed(2)}</span><span class="savc">Feb +$${f.sFeb.toFixed(2)}</span><span class="savc cur">Mar +$${f.sMar.toFixed(2)}</span><span style="font-family:var(--mono);font-size:10px;color:var(--t4);margin-left:auto">$${(f.sGoal-tot).toFixed(0)} remaining</span></div></div>`;
+  const sav=`<div style="padding:14px 16px;background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r2);margin-bottom:14px"><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">2026 Annual Savings — Target $10,000</div><div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px"><span style="font-family:var(--serif);font-size:26px;font-weight:700;font-style:italic;color:var(--sage)">$${tot.toFixed(2)}</span><span style="font-family:var(--mono);font-size:11px;color:var(--t3)">${pct.toFixed(1)}% of $10,000 goal</span></div><div class="savout"><div class="savin" style="width:${pct}%"></div></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center"><span style="font-family:var(--mono);font-size:10px;color:var(--sage)">Jan +$${f.sJan.toFixed(2)}</span><span style="font-family:var(--mono);font-size:9px;color:var(--t5)">·</span><span style="font-family:var(--mono);font-size:10px;color:var(--sage)">Feb +$${f.sFeb.toFixed(2)}</span><span style="font-family:var(--mono);font-size:9px;color:var(--t5)">·</span><span style="font-family:var(--mono);font-size:10px;color:var(--gold)">Mar +$${f.sMar.toFixed(2)}</span><span style="font-family:var(--mono);font-size:9px;color:var(--t5)">·</span>${['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].map(m=>`<span style="font-family:var(--mono);font-size:10px;color:var(--t5)">${m} —</span>`).join('<span style="font-family:var(--mono);font-size:9px;color:var(--t5)">·</span>')}<span style="font-family:var(--mono);font-size:10px;color:var(--t4);margin-left:auto">$${(f.sGoal-tot).toFixed(0)} to go</span></div></div>`;
   const max=Math.max(...f.cats.map(c=>c.amt));
   const cats=f.cats.map((cat,i)=>{
     const sp=(cat.amt/f.expenses*100).toFixed(1);
@@ -1702,8 +1702,9 @@ function rFinancial(){
       <!-- Income sources -->
       <div class="fin-header-col">
         <div style="font-family:var(--mono);font-size:9px;color:var(--sage);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px">Income — March</div>
-        ${f.incomeSources.filter(s=>!s.label.includes('Feb adj.')).map(s=>{
-          const maxI=Math.max(...f.incomeSources.filter(x=>!x.label.includes('Feb adj.')).map(x=>x.amt));
+        ${f.incomeSources.filter(s=>!s.label.includes('RAISER')&&!s.label.includes('Square')).map(s=>{
+          const filteredSources=f.incomeSources.filter(x=>!x.label.includes('RAISER')&&!x.label.includes('Square'));
+          const maxI=Math.max(...filteredSources.map(x=>x.amt));
           return`<div style="margin-bottom:8px">
             <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px">
               <span style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:5px">
@@ -1712,7 +1713,7 @@ function rFinancial(){
               <span style="font-family:var(--mono);font-size:11px;font-weight:600;color:var(--sage)">$${s.amt.toFixed(0)}</span>
             </div>
             <div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden">
-              <div style="width:${Math.round(s.amt/Math.max(...f.incomeSources.filter(x=>!x.label.includes('Feb adj.')).map(x=>x.amt))*100)}%;height:100%;background:${s.color};border-radius:2px;transition:width .7s ease"></div>
+              <div style="width:${Math.round(s.amt/maxI*100)}%;height:100%;background:${s.color};border-radius:2px;transition:width .7s ease"></div>
             </div>
           </div>`;
         }).join('')}
@@ -1746,8 +1747,8 @@ function rFinancial(){
 
       <!-- 3-Month Comparison -->
       <div class="fin-header-col" style="min-width:280px">
-        <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:12px">3-Month Comparison</div>
-        <canvas id="monthlyNetChart" height="118" style="display:block;width:100%"></canvas>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px">3-Month Comparison</div>
+        <canvas id="monthlyNetChart" height="155" style="display:block;width:100%"></canvas>
       </div>
     </div>
 
@@ -1936,21 +1937,32 @@ function afterRender(){
     const heatElMain=document.getElementById('dailySpendHeat');
     const heatTarget=heatEl||heatElMain;
     if(heatTarget){
-      const dayTotals={};const dayCat={};
-      D.fin.cats.forEach(cat=>{cat.txns.forEach(t=>{if(t.a<0){const d=parseInt(t.d.split('/')[1]);dayTotals[d]=(dayTotals[d]||0)+Math.abs(t.a);if(!dayCat[d]||Math.abs(t.a)>(dayCat[d].v||0))dayCat[d]={c:cat.color,v:Math.abs(t.a)};}});});
+      // Build per-day transaction lookup
+      const dayTotals={};const dayCat={};const dayTxns={};
+      D.fin.cats.forEach(cat=>{cat.txns.forEach(t=>{if(t.a<0){
+        const d=parseInt(t.d.split('/')[1]);
+        dayTotals[d]=(dayTotals[d]||0)+Math.abs(t.a);
+        if(!dayCat[d]||Math.abs(t.a)>(dayCat[d].v||0))dayCat[d]={c:cat.color,v:Math.abs(t.a)};
+        if(!dayTxns[d])dayTxns[d]=[];
+        dayTxns[d].push({n:t.n,a:t.a,cat:cat.name,col:cat.color});
+      }});});
       const maxDay=Math.max(...Object.values(dayTotals),1);
+      // Build tooltip HTML for each day and store encoded on tile
+      const tooltipFor=(d)=>{
+        const txns=dayTxns[d];const tot=dayTotals[d]||0;
+        if(!txns)return`<span style="color:var(--t5)">Mar ${d} — no spend recorded</span>`;
+        const rows=txns.map(t=>`<div style="display:flex;justify-content:space-between;gap:8px;padding:2px 0;border-bottom:1px solid rgba(255,255,255,.05)"><span style="color:var(--t2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px">${t.n}</span><span style="color:var(--rust);flex-shrink:0;font-weight:600">-$${Math.abs(t.a).toFixed(2)}</span></div>`).join('');
+        return`<div style="font-size:10px;color:var(--gold);font-weight:700;margin-bottom:5px;padding-bottom:4px;border-bottom:1px solid var(--b1)">Mar ${d} · $${tot.toFixed(2)} spent · ${txns.length} txn${txns.length!==1?'s':''}</div>${rows}`;
+      };
       const dows2=['Su','Mo','Tu','We','Th','Fr','Sa'];
       let html='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px">';
       dows2.forEach(d=>html+=`<div style="text-align:center;font-family:var(--mono);font-size:8px;color:var(--t4);padding:2px 0">${d}</div>`);
       for(let i=0;i<31;i++){
         const d=i+1;const tot=dayTotals[d]||0;const col=dayCat[d]?dayCat[d].c:'rgba(255,255,255,.03)';
-        const alpha=tot>0?Math.min(.9,.15+.75*(tot/maxDay)):0;
-        const bg=tot>0?col.replace(')',`,${alpha})`.replace('rgb(','rgba(')):'rgba(255,255,255,.03)';
-        const title=tot>0?`Mar ${d}: $${tot.toFixed(0)}`:`Mar ${d}: no spend`;
         const knownAmt=DAILY_SPEND[d]||0;
-        const amtLabel=tot>0?(tot>99?`$${Math.round(tot)}`:`$${tot.toFixed(0)}`):(knownAmt>0?`$${knownAmt}`:'');
         const tileAmt=tot>0?`$${tot>99?Math.round(tot):tot.toFixed(0)}`:(knownAmt>0?`$${knownAmt}`:'');
-        html+=`<div title="${title}" class="fheat-tile" style="background:${col};opacity:${tot>0?(.25+.75*(tot/maxDay)).toFixed(2):knownAmt>0?'.22':'.07'}" onmouseenter="(document.getElementById('daySpendTooltipSb')||document.getElementById('daySpendTooltip')||{}).textContent='${title}'" onmouseleave="(document.getElementById('daySpendTooltipSb')||document.getElementById('daySpendTooltip')||{}).textContent=''"><span style="font-family:var(--mono);font-size:${tileAmt.length>3?'8':'9'}px;font-weight:800;color:rgba(255,255,255,.92);line-height:1;text-align:center">${tileAmt}</span></div>`;
+        const tipHTML=encodeURIComponent(tooltipFor(d));
+        html+=`<div class="fheat-tile" style="background:${col};opacity:${tot>0?(.25+.75*(tot/maxDay)).toFixed(2):knownAmt>0?'.22':'.07'}" onmouseenter="showDayTip('${tipHTML}')" onmouseleave="clearDayTip()"><span style="font-family:var(--mono);font-size:${tileAmt.length>3?'8':'9'}px;font-weight:800;color:rgba(255,255,255,.92);line-height:1;text-align:center">${tileAmt}</span></div>`;
       }
       html+='</div>';
       heatTarget.innerHTML=html;
@@ -1985,15 +1997,37 @@ function render(){
 
 /* ─── GLOBAL HANDLERS ─── */
 // sw() defined below with tab animation
+window.showDayTip=(encoded)=>{
+  const el=document.getElementById('daySpendTooltipSb')||document.getElementById('daySpendTooltip');
+  if(el){el.innerHTML=decodeURIComponent(encoded);}
+};
+window.clearDayTip=()=>{
+  const el=document.getElementById('daySpendTooltipSb')||document.getElementById('daySpendTooltip');
+  if(el){el.innerHTML='<span style="color:var(--t5)">Hover a day to see transactions</span>';}
+};
 window.toggleSerm=id=>{document.getElementById(id)?.classList.toggle('open');};
+window.sbSubsToggle=()=>{
+  const el=document.getElementById('sb-subs-expand');
+  const btn=document.getElementById('sb-subs-btn');
+  if(!el)return;
+  const isOpen=el.dataset.open==='1';
+  if(isOpen){
+    el.style.maxHeight='';el.style.opacity='0';
+    el.dataset.open='0';
+    if(btn)btn.textContent='View All';
+  } else {
+    el.style.maxHeight='3000px';el.style.opacity='1';
+    el.dataset.open='1';
+    if(btn)btn.textContent='Close ✕';
+  }
+};
 window.toggleFin=id=>{
   const el=document.getElementById(id);
   if(!el)return;
-  if(id==='fc-subs-top'||id==='fc-subs-card'||id==='sb-subs-expand'){
-    const isOpen=!!el.style.maxHeight;
+  if(id==='fc-subs-top'||id==='fc-subs-card'){
+    const isOpen=el.dataset.open==='1';
     el.style.maxHeight=isOpen?'':'3000px';
-    const btn=document.getElementById('sb-subs-btn')||el.closest('.card,div[class*="sc"]')?.querySelector('button');
-    if(btn)btn.textContent=isOpen?'View All':'Close ✕';
+    el.dataset.open=isOpen?'0':'1';
   } else el.classList.toggle('open');
 };
 window.openMod=id=>{
