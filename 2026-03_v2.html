@@ -1106,24 +1106,6 @@ function buildSidebar(){
     const rings=ph.aft.map((a,i)=>{const r=84-i*15,circ=2*Math.PI*r,dash=a.pct/100*circ;return`<circle fill="none" stroke="rgba(255,255,255,.05)" stroke-width="9" cx="100" cy="100" r="${r}"/><circle fill="none" stroke="${a.color}" stroke-width="9" cx="100" cy="100" r="${r}" stroke-linecap="round" style="stroke-dasharray:${dash} ${circ};transform:rotate(-90deg);transform-origin:100px 100px;transition:stroke-dasharray 1.2s ease ${i*.1}s"/>`;}).join('');
     const listRows=ph.aft.map((a,i)=>`<div style="display:grid;grid-template-columns:1fr 44px 28px;align-items:center;gap:5px;padding:5px 0;border-bottom:1px solid var(--b0);cursor:pointer" onclick="openMuscleDetail(${i})"><span style="font-size:11px;color:var(--t2)">${a.event}</span><div style="height:3px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden"><div style="height:100%;width:${a.pct}%;background:${a.color};border-radius:2px"></div></div><span style="font-family:var(--mono);font-size:9px;text-align:right;color:${a.color}">${a.pct||'—'}%</span></div>`).join('');
     // Projection timeline data (computed, not displayed as math)
-    const projections=[
-      {ex:'Bench Press', now:215, target:245, color:'#5A9DC0', pctNow:Math.round(215/245*100)},
-      {ex:'Barbell Squat', now:225, target:265, color:'#D4A84B', pctNow:Math.round(225/265*100)},
-      {ex:'Trap Bar DL', now:285, target:325, color:'#CC6B47', pctNow:Math.round(285/325*100)},
-      {ex:'Lat Pulldown', now:170, target:195, color:'#5CB872', pctNow:Math.round(170/195*100)},
-      {ex:'Plank', now:'1:40', target:'3:00', color:'#CC6B47', pctNow:47, targetPct:84},
-      {ex:'2-Mile Run', now:'—', target:'13:25', color:'#47B0AB', pctNow:0, targetPct:65},
-    ];
-    const projRows=projections.map(p=>`<div style="margin-bottom:8px">
-      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px">
-        <span style="font-size:10px;color:var(--t2)">${p.ex}</span>
-        <span style="font-family:var(--mono);font-size:9px;color:var(--t4)">${p.now} → <span style="color:${p.color}">${p.target}</span></span>
-      </div>
-      <div style="position:relative;height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:visible">
-        <div style="position:absolute;left:0;top:0;height:100%;width:${p.pctNow}%;background:${p.color};opacity:.9;border-radius:3px"></div>
-        <div style="position:absolute;left:0;top:-1px;height:7px;width:${p.targetPct||Math.min(96,p.pctNow+12)}%;border-right:1.5px dashed rgba(255,255,255,.3)"></div>
-      </div>
-    </div>`).join('');
     return`<div class="sc ca" style="padding:12px 14px;border-top:2px solid var(--sky)">
       <div class="sgt" style="margin-bottom:8px">Training Heatmap · March</div>
       <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:8px">${sbDows}${sbCells}</div>
@@ -1144,12 +1126,7 @@ function buildSidebar(){
       ${listRows}
       <div style="margin-top:6px;font-family:var(--mono);font-size:9px;color:var(--t4)">Click row for detail</div>
     </div>
-    <div class="sc ca" style="border-top:2px solid var(--vio)">
-      <div class="sgt" style="color:var(--vio)">2026 Lift Projections</div>
-      <div style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-bottom:10px;line-height:1.4">Based on Q1 trajectory · 25yo · 3–4×/wk since 2021</div>
-      ${projRows}
-      <div style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-top:4px;border-top:1px solid var(--b0);padding-top:6px">Solid = current · Dashed = year-end target</div>
-    </div>`;
+    ${projHTML}`;
   }
 
   // Fallback: empty
@@ -1466,8 +1443,27 @@ function rPhysical(){
     {name:'Chin Up',                  count:4,  score:.70, notes:'BW · -20% vs Feb',           delta:20,  deltaUp:false},
   ].sort((a,b)=>b.count-a.count||b.score-a.score);
 
+  // Muscle group color map
+  const MG={
+    Chest:'#5FADD4',Back:'#62C97A',Legs:'#E0B44E',Shoulders:'#CC7888',
+    Triceps:'#9A8FD8',Biceps:'#4BBDB8',Core:'#D9714E',Cardio:'#A09A93',Glutes:'#E0B44E'
+  };
+
+  // Assign primary muscle group per exercise
+  const mgMap={
+    'Flat Barbell Bench Press':'Chest','Dumbbell Curl':'Biceps','Lat Pulldown':'Back',
+    'Leg Extension':'Legs','Standing Barbell Press':'Shoulders','Good Morning':'Back',
+    'Leg Ext Isometric':'Legs','Cable Pushdown':'Triceps','Seated Cable Row':'Back',
+    'Elevated Push Up':'Chest','Treadmill Sprint':'Cardio','Barbell Squat':'Legs',
+    'Hanging Leg Raise':'Core','Cable Crunch':'Core','Wide Grip Lat Pulldown':'Back',
+    'Split Glute':'Glutes','Hip Abduction':'Glutes','Plank':'Core',
+    'Smith Machine Row':'Back','Chest Dips':'Chest','Trap Bar Deadlift':'Back',
+    'Tricep Cable':'Triceps','Rope Pullover':'Back','Flat Dumbbell Bench':'Chest',
+    'DB OH Tricep Ext':'Triceps','Lateral DB Raise':'Shoulders','EZ-Bar Skullcrusher':'Triceps',
+    'Leg Curl':'Legs','Running (Outdoor)':'Cardio','Chin Up':'Back',
+  };
+
   function scoreToColor(s){
-    // 0=blue(endurance), 0.5=teal, 1=orange/red(strength)
     if(s<.35)return`rgba(71,176,171,${.25+s*.5})`;
     if(s<.6)return`rgba(90,157,192,${.2+s*.4})`;
     if(s<.8)return`rgba(212,168,75,${.25+s*.35})`;
@@ -1484,28 +1480,88 @@ function rPhysical(){
     const bg=scoreToColor(e.score);
     const border=scoreToBorder(e.score);
     const barW=Math.round(e.count/23*100);
+    const mg=mgMap[e.name]||'Core';
+    const mgCol=MG[mg]||'#888';
+
     let deltaCell='';
     if(e.delta===null){
-      deltaCell=`<div style="font-family:var(--mono);font-size:9px;color:var(--t5)">new</div>`;
+      deltaCell=`<div style="font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.55);background:rgba(255,255,255,.07);border-radius:3px;padding:1px 5px;text-align:center">new</div>`;
     } else if(e.delta===0){
-      deltaCell=`<div style="font-family:var(--mono);font-size:9px;color:var(--t4)">—</div>`;
+      deltaCell=`<div style="font-family:var(--mono);font-size:9px;color:rgba(255,255,255,.4);background:rgba(255,255,255,.06);border-radius:3px;padding:1px 5px;text-align:center">—</div>`;
     } else {
       const arrow=e.deltaUp?'▲':'▼';
-      const col=e.deltaUp?'var(--sage)':'var(--rust)';
-      deltaCell=`<div style="font-family:var(--mono);font-size:9px;color:${col};white-space:nowrap">${arrow}${e.delta}%</div>`;
+      const col=e.deltaUp?'rgba(98,201,122,.9)':'rgba(217,113,78,.9)';
+      const bgDelta=e.deltaUp?'rgba(98,201,122,.12)':'rgba(217,113,78,.12)';
+      deltaCell=`<div style="font-family:var(--mono);font-size:9px;color:${col};background:${bgDelta};border-radius:3px;padding:1px 5px;text-align:center;white-space:nowrap">${arrow}${e.delta}%</div>`;
     }
+
     const cleanNote=e.notes.split(' · ').filter(n=>!n.match(/^[+\-]\d+%/)&&!n.match(/^new Mar/)).join(' · ').trim();
-    return`<div style="display:grid;grid-template-columns:1fr 22px 80px 42px 90px;gap:5px;align-items:center;padding:5px 8px;border-radius:4px;background:${bg};border-left:2px solid ${border};margin-bottom:2px;animation:fadeSlideIn .4s ease both;animation-delay:${idx*.022}s">
-      <div style="font-size:11px;color:var(--tx);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${e.name}</div>
-      <div style="font-family:var(--mono);font-size:10px;color:var(--t3);text-align:center">${e.count}</div>
-      <div style="background:rgba(255,255,255,.06);border-radius:2px;height:4px;overflow:hidden"><div style="width:${barW}%;height:100%;background:${border};border-radius:2px;animation:growBar .6s ease both;animation-delay:${idx*.022+.1}s"></div></div>
-      ${deltaCell}
-      <div style="font-size:9px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${cleanNote}</div>
+
+    return`<div style="display:grid;grid-template-columns:1fr 36px 90px 52px 16px 100px;gap:0;align-items:center;border-radius:4px;background:${bg};border-left:2px solid ${border};margin-bottom:2px;animation:fadeSlideIn .4s ease both;animation-delay:${idx*.022}s;overflow:hidden">
+      <div style="padding:4px 8px;font-size:11px;color:var(--tx);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${e.name}</div>
+      <div style="padding:4px 4px;background:rgba(0,0,0,.22);border-left:1px solid rgba(255,255,255,.06);text-align:center;font-family:var(--mono);font-size:10px;font-weight:600;color:rgba(255,255,255,.9);align-self:stretch;display:flex;align-items:center;justify-content:center">${e.count}</div>
+      <div style="padding:4px 8px;background:rgba(0,0,0,.18);border-left:1px solid rgba(255,255,255,.06);align-self:stretch;display:flex;align-items:center">
+        <div style="width:100%;background:rgba(255,255,255,.08);border-radius:2px;height:5px;overflow:hidden">
+          <div style="width:${barW}%;height:100%;background:${border};border-radius:2px;animation:growBar .6s ease both;animation-delay:${idx*.022+.1}s"></div>
+        </div>
+      </div>
+      <div style="padding:4px 6px;background:rgba(0,0,0,.22);border-left:1px solid rgba(255,255,255,.06);align-self:stretch;display:flex;align-items:center;justify-content:center">${deltaCell}</div>
+      <div style="padding:2px;background:rgba(0,0,0,.18);border-left:1px solid rgba(255,255,255,.06);align-self:stretch;display:flex;align-items:center;justify-content:center" title="${mg}">
+        <div style="width:6px;height:6px;border-radius:50%;background:${mgCol};box-shadow:0 0 4px ${mgCol}66"></div>
+      </div>
+      <div style="padding:4px 8px;background:rgba(0,0,0,.14);border-left:1px solid rgba(255,255,255,.06);font-size:9px;color:rgba(255,255,255,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;align-self:stretch;display:flex;align-items:center">${cleanNote}</div>
     </div>`;
   }).join('');
 
-  const legend2=`<div style="display:flex;gap:12px;margin-bottom:10px;flex-wrap:wrap">
-    ${[['Strength (heavy/low-rep)','rgba(204,107,71,.7)'],['Hypertrophy (balanced)','rgba(212,168,75,.6)'],['Endurance (high-rep/cardio)','rgba(71,176,171,.6)']].map(([l,c])=>`<div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:${c};display:inline-block"></span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">${l}</span></div>`).join('')}
+  const legend2=`<div style="display:flex;gap:14px;margin-bottom:6px;flex-wrap:wrap;align-items:center">
+    <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px">Intensity →</div>
+    ${[['Endurance','rgba(71,176,171,.7)'],['Hypertrophy','rgba(90,157,192,.7)'],['Strength','rgba(212,168,75,.65)'],['Max Strength','rgba(204,107,71,.7)']].map(([l,c])=>`<div style="display:flex;align-items:center;gap:5px"><span style="width:10px;height:10px;border-radius:2px;background:${c};display:inline-block"></span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">${l}</span></div>`).join('')}
+    <div style="width:1px;height:12px;background:var(--b1);flex-shrink:0"></div>
+    <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px">Muscle →</div>
+    ${Object.entries(MG).map(([m,c])=>`<div style="display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;border-radius:50%;background:${c};display:inline-block;box-shadow:0 0 4px ${c}66"></span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">${m}</span></div>`).join('')}
+  </div>`;
+
+  // Full-year lift projections
+  const projections=[
+    {ex:'Bench Press',   jan:190, feb:205, mar:215, q2:230, q3:240, yr:250, color:'#5FADD4', unit:'lb'},
+    {ex:'Barbell Squat', jan:245, feb:222, mar:225, q2:245, q3:260, yr:275, color:'#E0B44E', unit:'lb'},
+    {ex:'Trap Bar DL',   jan:315, feb:265, mar:285, q2:315, q3:330, yr:350, color:'#D9714E', unit:'lb'},
+    {ex:'Lat Pulldown',  jan:150, feb:185, mar:170, q2:185, q3:200, yr:210, color:'#62C97A', unit:'lb'},
+    {ex:'OHP',           jan:105, feb:120, mar:135, q2:145, q3:155, yr:165, color:'#CC7888', unit:'lb'},
+    {ex:'Plank',         jan:85,  feb:100, mar:100, q2:150, q3:200, yr:215, color:'#D9714E', unit:'sec', fmtFn:(v)=>`${Math.floor(v/60)}:${String(v%60).padStart(2,'0')}`},
+  ];
+
+  const projRows=projections.map(p=>{
+    const fmt=p.fmtFn||(v=>`${v}`);
+    const pts=[p.jan,p.feb,p.mar,p.q2,p.q3,p.yr];
+    const maxV=Math.max(...pts);
+    const minV=Math.min(...pts);
+    const range=maxV-minV||1;
+    const barPct=v=>Math.max(4,Math.round((v-minV)/range*100));
+    const labels=[['Jan',p.jan,false],['Feb',p.feb,false],['Mar',p.mar,true],['Q2',p.q2,false],['Q3',p.q3,false],['Year',p.yr,false]];
+    const bars=labels.map(([l,v,isCur])=>`<div style="display:flex;flex-direction:column;align-items:center;gap:2px;flex:1">
+      <div style="font-family:var(--mono);font-size:8px;font-weight:${isCur?'700':'400'};color:${isCur?p.color:'var(--t3)'};line-height:1">${fmt(v)}${p.unit==='lb'&&!p.fmtFn?'':''}${p.unit==='lb'&&!p.fmtFn?'':''}</div>
+      <div style="width:100%;background:rgba(255,255,255,.05);border-radius:2px 2px 0 0;height:28px;display:flex;align-items:flex-end;overflow:hidden;${isCur?`box-shadow:0 0 6px ${p.color}44`:''};position:relative">
+        <div style="width:100%;height:${barPct(v)}%;background:${isCur?p.color:'rgba(255,255,255,.15)'};border-radius:2px 2px 0 0;transition:height .8s ease;${l==='Year'?`background:rgba(255,255,255,.08);border-top:1px dashed rgba(255,255,255,.25)`:''}"></div>
+      </div>
+      <div style="font-family:var(--mono);font-size:7px;color:${isCur?'var(--gold)':l==='Year'?'rgba(255,255,255,.3)':'var(--t5)'};line-height:1">${l}</div>
+    </div>`).join('');
+    return`<div style="margin-bottom:10px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px">
+        <span style="font-size:10px;color:var(--t2);font-weight:500">${p.ex}</span>
+        <span style="font-family:var(--mono);font-size:8px;color:var(--t4)">${fmt(p.mar)}${p.unit==='lb'?'lb':''} now → <span style="color:${p.color}">${fmt(p.yr)}${p.unit==='lb'?'lb':''} target</span></span>
+      </div>
+      <div style="display:flex;gap:3px;align-items:flex-end">${bars}</div>
+    </div>`;
+  }).join('');
+
+  const projHTML=`<div class="sc ca" style="border-top:2px solid var(--vio)">
+    <div class="sgt" style="color:var(--vio)">2026 Lift Projections</div>
+    <div style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-bottom:10px;line-height:1.4">Q1 actuals · Q2–Q3 projected · Year-end targets · 25yo · 3–4×/wk</div>
+    ${projRows}
+    <div style="display:flex;gap:10px;margin-top:4px;padding-top:6px;border-top:1px solid var(--b0);flex-wrap:wrap">
+      ${[['Solid','Current (Mar)'],['Light','Projected'],['Dashed top','Year-end target']].map(([s,l])=>`<div style="font-family:var(--mono);font-size:8px;color:var(--t4)">${s} = ${l}</div>`).join('')}
+    </div>
   </div>`;
 
   // (slope chart removed)
@@ -1534,14 +1590,15 @@ function rPhysical(){
   return`<div class="cg">
     <!-- HERO: Exercise Frequency Table -->
     <div class="card sf ca" style="padding:14px 16px">
-      <div class="ch" style="margin-bottom:10px"><div class="ct">Exercise Frequency — March 2026</div><div class="cs">28 movements · color = strength↔endurance spectrum · hover for detail</div></div>
+      <div class="ch" style="margin-bottom:8px"><div class="ct">Exercise Frequency — March 2026</div><div class="cs">28 movements · row color = intensity · dot = muscle group</div></div>
       ${legend2}
-      <div style="display:grid;grid-template-columns:1fr 22px 80px 42px 90px;gap:5px;padding:3px 8px 5px;border-bottom:1px solid var(--b0);margin-bottom:4px">
-        <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px">Exercise</div>
-        <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-align:center">Sets</div>
-        <div style="font-family:var(--mono);font-size:8px;color:var(--t4)">Frequency</div>
-        <div style="font-family:var(--mono);font-size:8px;color:var(--t4)">vs Feb</div>
-        <div style="font-family:var(--mono);font-size:8px;color:var(--t4)">Max</div>
+      <div style="display:grid;grid-template-columns:1fr 36px 90px 52px 16px 100px;gap:0;padding:3px 0 5px;border-bottom:1px solid var(--b0);margin-bottom:4px;border-radius:4px 4px 0 0;overflow:hidden">
+        <div style="padding:2px 8px;font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px">Exercise</div>
+        <div style="padding:2px 4px;font-family:var(--mono);font-size:8px;color:rgba(255,255,255,.7);text-align:center;background:rgba(0,0,0,.22);border-left:1px solid rgba(255,255,255,.06)">Sets</div>
+        <div style="padding:2px 8px;font-family:var(--mono);font-size:8px;color:rgba(255,255,255,.7);background:rgba(0,0,0,.18);border-left:1px solid rgba(255,255,255,.06)">Frequency</div>
+        <div style="padding:2px 6px;font-family:var(--mono);font-size:8px;color:rgba(255,255,255,.7);background:rgba(0,0,0,.22);border-left:1px solid rgba(255,255,255,.06)">vs Feb</div>
+        <div style="padding:2px 2px;font-family:var(--mono);font-size:8px;color:rgba(255,255,255,.5);background:rgba(0,0,0,.18);border-left:1px solid rgba(255,255,255,.06)"></div>
+        <div style="padding:2px 8px;font-family:var(--mono);font-size:8px;color:rgba(255,255,255,.7);background:rgba(0,0,0,.14);border-left:1px solid rgba(255,255,255,.06)">Max</div>
       </div>
       <div style="display:grid;grid-template-columns:1fr;gap:0">${exRows}</div>
     </div>
