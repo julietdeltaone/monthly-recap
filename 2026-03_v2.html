@@ -2070,59 +2070,205 @@ function rCreative(){
 /* ─── REFLECTIONS ─── */
 function rReflections(){
   return`<div class="cg">
+
+    <!-- HEADER -->
     <div class="card sf ca" style="border-left:3px solid var(--gold)">
-      <div class="ch"><div class="ct">Reflections — March 2026</div><div class="cs">Looking back and looking ahead</div></div>
-      <p style="font-size:13px;line-height:1.78;color:var(--t2)">March was a productive month across most dimensions — projects shipped, sermons attended, GPA maintained. The financial picture was slightly softer than February, though savings remain on pace. The areas that need the most honest attention going into April are the plank deficit, the gym days trend, and the tuition funding situation.</p>
+      <div class="ch"><div class="ct">Reflections — March 2026</div><div class="cs">Looking back · looking ahead · decision map through summer 2027</div></div>
+      <p style="font-size:13px;line-height:1.78;color:var(--t2)">March was productive across most dimensions — projects shipped, sermons consistent, GPA held, savings on track. The honest gaps are the plank deficit, a slow gym days trend, and the education funding situation that needs a decision this summer. The bigger question — military vs business — sits on the horizon at June 2027. Nothing forces a move yet, but deliberate beats default.</p>
     </div>
 
-    <div class="card ca d1"><div class="ch"><div class="ct" style="color:var(--sky)">Next Month — April</div><div class="cs">ArmyIgnited TA · Clarkson spring semester</div></div>
-      <p style="font-size:13px;line-height:1.75;color:var(--t2);margin-bottom:12px">Working on securing tuition assistance through ArmyIgnited — the US Army's TA program. Eligible for roughly $4,000 per fiscal year. Currently in the process of requesting TA for the two spring semester courses at Clarkson at $750 per course.</p>
-      <div style="padding:12px 14px;background:var(--bg3);border-radius:var(--r2);border:1px solid var(--b0);margin-bottom:10px">
-        <div style="font-family:var(--mono);font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">ArmyIgnited Situation</div>
-        <p style="font-size:12px;line-height:1.65;color:var(--t2)">Graduate TA requires a B or higher or the funding must be paid back. During the SUNY Potsdam fall 2025 semester, one course came in with a C — triggering a recoupment request from ArmyIgnited, even though the TA was never actually received for those courses. Had to acknowledge the request formally in order to open a new funding application for Clarkson. That process is in progress.</p>
+    <!-- WIDE HORIZONTAL TIMELINE -->
+    <div class="card sf ca d1" style="padding:22px 24px;overflow:hidden">
+      <div class="ch" style="margin-bottom:20px">
+        <div class="ct">Road Map — April 2026 → Summer 2027</div>
+        <div class="cs">Confirmed events · decision windows · milestones synthesized from all data</div>
       </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <div class="pb-stat"><div class="pb-k">TA per course</div><div class="pb-v" style="color:var(--sage)">$750</div></div>
-        <div class="pb-stat"><div class="pb-k">Courses this spring</div><div class="pb-v">2</div></div>
-        <div class="pb-stat"><div class="pb-k">FY availability</div><div class="pb-v" style="color:var(--sage)">~$4,000</div></div>
-        <div class="pb-stat"><div class="pb-k">Status</div><div class="pb-v" style="color:var(--gold)">In process</div></div>
-      </div>
-    </div>
 
-    <div class="card ca d1"><div class="ch"><div class="ct" style="color:var(--sky)">This Year — Education Funding</div><div class="cs">Clarkson benefit · funding gap · timeline</div></div>
-      <p style="font-size:13px;line-height:1.75;color:var(--t2);margin-bottom:12px">After this spring semester, the Clarkson University tuition benefit will be exhausted for the fiscal year — 12 credits covered per FY as a full-time employee. That means either pausing courses, finding alternative funding, or paying out of pocket to stay on track for a May 2027 graduation target.</p>
-      <div style="padding:12px 14px;background:rgba(204,107,71,.07);border:1px solid rgba(204,107,71,.2);border-radius:var(--r2)">
-        <div style="font-family:var(--mono);font-size:9px;color:var(--rust);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Path to May 2027</div>
-        <p style="font-size:12px;line-height:1.65;color:var(--t2)">The Clarkson benefit covers 4 courses per fiscal year. Getting to May 2027 on schedule may require courses beyond what the benefit covers — which means either ArmyIgnited TA filling the gap, or a funding decision this summer.</p>
+      <!-- Legend -->
+      <div style="display:flex;gap:16px;margin-bottom:18px;flex-wrap:wrap">
+        ${[
+          ['#E0B44E','Decision / Choice required'],
+          ['#62C97A','Confirmed milestone'],
+          ['#5FADD4','Education / Career'],
+          ['#CC7888','Creative / Business'],
+          ['#9A8FD8','Military / ARNG'],
+          ['#D9714E','Financial / Risk'],
+        ].map(([c,l])=>`<div style="display:flex;align-items:center;gap:5px"><span style="width:9px;height:9px;border-radius:50%;background:${c};flex-shrink:0"></span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">${l}</span></div>`).join('')}
       </div>
-    </div>
 
-    <div class="card ca d2"><div class="ch"><div class="ct" style="color:var(--t2)">Long Term — Career Direction</div><div class="cs">Military vs business · Air Force · contract end June 2027</div></div>
-      <p style="font-size:13px;line-height:1.78;color:var(--t2);margin-bottom:14px">The bigger picture question is still open: lean into the MBA and build the business side, or pursue a military career path as an officer. Both have real merit, and the decision doesn't need to be made yet — but it will need to be made before the Army National Guard contract ends in June 2027.</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <div style="padding:14px;background:rgba(90,157,192,.07);border:1px solid rgba(90,157,192,.2);border-radius:var(--r2)">
-          <div style="font-family:var(--mono);font-size:9px;color:var(--sky);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Officer Route</div>
-          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:5px">
-            <li style="font-size:12px;color:var(--t2);line-height:1.5">Air Force or Space Force — better fit temperamentally</li>
-            <li style="font-size:12px;color:var(--t2);line-height:1.5">Officer Training School ~6 months</li>
-            <li style="font-size:12px;color:var(--t2);line-height:1.5">Guaranteed paycheck, pension, benefits</li>
-            <li style="font-size:12px;color:var(--t2);line-height:1.5">ARNG contract ends June 2027 — natural transition point</li>
-          </ul>
+      <!-- Timeline track -->
+      <div style="position:relative;overflow-x:auto;padding-bottom:8px">
+        <div style="min-width:900px">
+
+          <!-- Month labels + track -->
+          ${(()=>{
+            const months=[
+              {label:'APR 26',x:0},
+              {label:'MAY 26',x:1},
+              {label:'JUN 26',x:2},
+              {label:'JUL 26',x:3},
+              {label:'AUG 26',x:4},
+              {label:'SEP 26',x:5},
+              {label:'OCT 26',x:6},
+              {label:'NOV 26',x:7},
+              {label:'DEC 26',x:8},
+              {label:'Q1 27',x:9},
+              {label:'Q2 27',x:10},
+              {label:'SUM 27',x:11},
+            ];
+            const total=12;
+            const pct=i=>`${(i/total*100).toFixed(2)}%`;
+            const midPct=i=>`${((i+.5)/total*100).toFixed(2)}%`;
+
+            // Events: position (0=Apr26, 11=Summer27), label, sublabel, color, shape (dot|diamond|flag), row (1|2|3 — stagger)
+            const events=[
+              // row 1 — top
+              {pos:.3,  label:'AFT Window',      sub:'Apr–May · Plank is risk',  col:'#9A8FD8', shape:'diamond', row:1},
+              {pos:.65, label:'ArmyIgnited TA',  sub:'$1,500 if approved',       col:'#5FADD4', shape:'dot',     row:1},
+              {pos:1.0, label:'H. Wagner Shoot', sub:'Apr 28 · Graduation',      col:'#CC7888', shape:'dot',     row:1},
+              {pos:1.3, label:'SLU Seniors',     sub:'May 10 · F. Mnenula +3',   col:'#CC7888', shape:'dot',     row:1},
+              {pos:1.7, label:'Clarkson FY Cap', sub:'12 credits exhausted',     col:'#D9714E', shape:'diamond', row:1},
+              {pos:2.05,label:'B. McGrath Wed.', sub:'Jun 6 · Photo',            col:'#CC7888', shape:'dot',     row:1},
+              {pos:2.45,label:'C. Niles Wed.',   sub:'Jun 27 · Video',           col:'#CC7888', shape:'dot',     row:1},
+              {pos:2.1, label:'NG AFT Deadline', sub:'Jun 1 · 350 combat std',   col:'#9A8FD8', shape:'diamond', row:1},
+              {pos:4.05,label:'C. Choate Wed.',  sub:'Aug 1 · Photo',            col:'#CC7888', shape:'dot',     row:1},
+              {pos:4.45,label:'M. Eddy Wed.',    sub:'Aug 22 · Video',           col:'#CC7888', shape:'dot',     row:1},
+              {pos:5.3, label:'Next AFT',        sub:'Oct–Nov window',           col:'#9A8FD8', shape:'diamond', row:1},
+              {pos:10.5,label:'MBA Graduation',  sub:'May 2027 target',          col:'#62C97A', shape:'flag',    row:1},
+              {pos:11.3,label:'ARNG Contract',   sub:'Jun 2027 · ENDS',          col:'#E0B44E', shape:'flag',    row:1},
+
+              // row 2 — bottom
+              {pos:.5,  label:'Tuition Decision',  sub:'TA gap or out-of-pocket?', col:'#E0B44E', shape:'diamond', row:2},
+              {pos:1.5, label:'Summer Funding',    sub:'Fill gap or pause courses',col:'#E0B44E', shape:'diamond', row:2},
+              {pos:3.5, label:'Savings Check',     sub:'On pace for $10k?',        col:'#D9714E', shape:'dot',     row:2},
+              {pos:5.5, label:'New Clarkson FY',   sub:'Benefit resets',           col:'#5FADD4', shape:'dot',     row:2},
+              {pos:6.0, label:'Next Clarkson Sem.',sub:'Fall 2026 courses',        col:'#5FADD4', shape:'dot',     row:2},
+              {pos:8.5, label:'Year Review',       sub:'2026 close · savings final',col:'#62C97A',shape:'dot',    row:2},
+              {pos:9.0, label:'OTS Application?',  sub:'If officer route chosen',  col:'#E0B44E', shape:'diamond', row:2},
+              {pos:9.5, label:'Last Clarkson Sem.',sub:'Spring 2027 · final push', col:'#5FADD4', shape:'dot',     row:2},
+              {pos:10.0,label:'ARNG Decision',     sub:'Officer vs business — commit', col:'#E0B44E', shape:'diamond', row:2},
+            ];
+
+            const r1=events.filter(e=>e.row===1);
+            const r2=events.filter(e=>e.row===2);
+
+            const renderDot=(e,rowDir)=>{
+              const lft=`${(e.pos/total*100).toFixed(2)}%`;
+              const isFlag=e.shape==='flag';
+              const isDiamond=e.shape==='diamond';
+              const dotStyle=isFlag
+                ?`width:12px;height:12px;background:${e.col};clip-path:polygon(0 0,100% 0,100% 70%,50% 100%,0 70%);`
+                :isDiamond
+                ?`width:10px;height:10px;background:${e.col};transform:rotate(45deg);`
+                :`width:9px;height:9px;border-radius:50%;background:${e.col};`;
+              const stemDir=rowDir==='up'?'bottom':'top';
+              return`<div style="position:absolute;left:${lft};transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0;${rowDir==='up'?'bottom:8px':'top:8px'}">
+                ${rowDir==='down'?`<div style="width:1px;height:14px;background:rgba(255,255,255,.12)"></div>`:''}
+                <div style="${dotStyle}flex-shrink:0;box-shadow:0 0 8px ${e.col}55"></div>
+                ${rowDir==='up'?`<div style="width:1px;height:14px;background:rgba(255,255,255,.12)"></div>`:''}
+              </div>`;
+            };
+
+            const renderLabel=(e,rowDir)=>{
+              const lft=`${(e.pos/total*100).toFixed(2)}%`;
+              const align=e.pos<1?'left':e.pos>10.5?'right':'center';
+              const xOff=align==='left'?'0':align==='right'?'-100%':'-50%';
+              return`<div style="position:absolute;left:${lft};transform:translateX(${xOff});${rowDir==='up'?'bottom:30px':'top:30px'};white-space:nowrap;text-align:${align}">
+                <div style="font-family:var(--mono);font-size:9px;font-weight:600;color:${e.col};line-height:1.2">${e.label}</div>
+                <div style="font-family:var(--mono);font-size:8px;color:var(--t4);line-height:1.3">${e.sub}</div>
+              </div>`;
+            };
+
+            return`
+              <!-- Top row labels -->
+              <div style="position:relative;height:68px;margin-bottom:0">
+                ${r1.map(e=>renderLabel(e,'up')).join('')}
+                ${r1.map(e=>renderDot(e,'up')).join('')}
+              </div>
+
+              <!-- Center track -->
+              <div style="position:relative;height:20px">
+                <!-- Month dividers and labels -->
+                ${months.map((m,i)=>`
+                  <div style="position:absolute;left:${pct(i)};top:0;bottom:0;width:1px;background:rgba(255,255,255,.06)"></div>
+                  <div style="position:absolute;left:${midPct(i)};transform:translateX(-50%);top:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:8px;color:var(--t5);letter-spacing:.5px">${m.label}</div>
+                `).join('')}
+                <!-- Main track line -->
+                <div style="position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,rgba(255,255,255,.08),rgba(255,255,255,.18),rgba(255,255,255,.08));transform:translateY(-50%);border-radius:1px"></div>
+                <!-- Today marker -->
+                <div style="position:absolute;left:0;top:-4px;bottom:-4px;width:2px;background:var(--gold);border-radius:1px;box-shadow:0 0 8px rgba(224,180,78,.6)">
+                  <div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:7px;color:var(--gold);white-space:nowrap;background:var(--bg2);padding:1px 4px;border-radius:3px;border:1px solid rgba(224,180,78,.3)">NOW</div>
+                </div>
+              </div>
+
+              <!-- Bottom row labels -->
+              <div style="position:relative;height:68px;margin-top:0">
+                ${r2.map(e=>renderDot(e,'down')).join('')}
+                ${r2.map(e=>renderLabel(e,'down')).join('')}
+              </div>
+            `;
+          })()}
+
         </div>
-        <div style="padding:14px;background:rgba(192,112,128,.07);border:1px solid rgba(192,112,128,.2);border-radius:var(--r2)">
-          <div style="font-family:var(--mono);font-size:9px;color:var(--rose);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Business Route</div>
-          <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:5px">
-            <li style="font-size:12px;color:var(--t2);line-height:1.5">MBA + photography + TaxiZero + production</li>
-            <li style="font-size:12px;color:var(--t2);line-height:1.5">Higher upside, significantly more risk</li>
-            <li style="font-size:12px;color:var(--t2);line-height:1.5">Front-end work and income uncertainty are real barriers</li>
-            <li style="font-size:12px;color:var(--t2);line-height:1.5">Requires sustained execution without a safety net</li>
-          </ul>
-        </div>
-      </div>
-      <div style="margin-top:12px;padding:11px 13px;background:var(--bg3);border-radius:var(--r1);border:1px solid var(--b0)">
-        <p style="font-size:12px;line-height:1.65;color:var(--t3)">Enlisted in Army National Guard on a 3×5 year contract — the original intent was to test the commitment before going full military. The contract ending in 2027 is the natural decision point. No action required now, but worth being deliberate about it rather than letting it arrive by default.</p>
       </div>
     </div>
+
+    <!-- DECISION CARDS ROW -->
+    <div class="card ca d2">
+      <div class="ch"><div class="ct" style="color:var(--gold)">⚡ Near-Term Decisions</div><div class="cs">Things that require an actual choice in the next 90 days</div></div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        ${[
+          {title:'ArmyIgnited TA — close the loop',urgency:'April',col:'#E0B44E',body:'The acknowledgment of the SUNY Potsdam recoupment is in progress. This needs to clear before the Clarkson TA application can go through. Two courses × $750 = $1,500 on the line. Failing to resolve it means paying out of pocket for spring.'},
+          {title:'AFT — scheduled trial dates for PLK and 2MR',urgency:'April',col:'#9A8FD8',body:'Plank is at 47% of standard — the only event below passing. The 2-Mile run has no recorded test date at all. The window is Apr–May. Both events need actual practice sets on a schedule before then, not gym sets as an afterthought.'},
+          {title:'Amex Platinum cancellation',urgency:'Before renewal',col:'#D9714E',body:'Decision to cancel was noted in March. The card carries a high annual fee. Execute the cancellation before the next annual charge hits. Confirm which benefits transfer to Chase Sapphire Reserve before cutting it.'},
+        ].map(d=>`<div style="padding:11px 13px;background:var(--bg3);border-radius:var(--r2);border-left:3px solid ${d.col}">
+          <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">
+            <div style="font-size:12px;color:var(--tx);font-weight:600">${d.title}</div>
+            <div style="font-family:var(--mono);font-size:8px;color:${d.col};background:rgba(255,255,255,.05);padding:1px 6px;border-radius:10px;flex-shrink:0">${d.urgency}</div>
+          </div>
+          <div style="font-size:12px;color:var(--t2);line-height:1.65">${d.body}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+
+    <div class="card ca d2">
+      <div class="ch"><div class="ct" style="color:var(--sky)">🎓 Education Funding Map</div><div class="cs">Clarkson benefit · ArmyIgnited · path to May 2027</div></div>
+      <p style="font-size:13px;line-height:1.75;color:var(--t2);margin-bottom:12px">The Clarkson tuition benefit covers 12 credits per fiscal year as a full-time employee. Spring 2026 uses the remaining FY26 credits. Fall 2026 starts a new FY — benefit resets. The real gap question is whether ArmyIgnited TA can supplement beyond what Clarkson covers to close the May 2027 graduation without a funding pause.</p>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+        ${[
+          {label:'Clarkson/yr',val:'12 credits',sub:'4 courses free · FY resets fall',col:'var(--sky)'},
+          {label:'ArmyIgnited',val:'~$4,000/yr',sub:'$750/course · B required',col:'var(--sage)'},
+          {label:'Graduation',val:'May 2027',sub:'Target · stay on pace',col:'var(--gold)'},
+          {label:'Funding gap',val:'TBD',sub:'Summer decision needed',col:'var(--rust)'},
+        ].map(s=>`<div style="padding:10px 11px;background:var(--bg3);border-radius:var(--r2);border:1px solid var(--b0)"><div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px">${s.label}</div><div style="font-size:14px;font-weight:700;color:${s.col};font-family:var(--mono);margin-bottom:2px">${s.val}</div><div style="font-size:10px;color:var(--t4);line-height:1.4">${s.sub}</div></div>`).join('')}
+      </div>
+    </div>
+
+    <div class="card ca d2">
+      <div class="ch"><div class="ct" style="color:var(--t2)">🪖 The June 2027 Question</div><div class="cs">ARNG contract end · officer route vs business route · decision architecture</div></div>
+      <p style="font-size:13px;line-height:1.78;color:var(--t2);margin-bottom:14px">The Army National Guard contract ends June 2027. That's 15 months from now — enough time to prepare either path, not enough time to drift into one by accident. The decision window that actually matters is probably <b style="color:var(--tx)">late 2026 / early 2027</b>, because OTS applications and the civilian job market both require lead time.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div style="padding:14px;background:rgba(95,173,212,.07);border:1px solid rgba(95,173,212,.2);border-radius:var(--r2)">
+          <div style="font-family:var(--mono);font-size:9px;color:var(--sky);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Officer Route (Air Force / Space Force)</div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            ${['Temperamentally better fit than Army infantry','OTS application → ~6 month school','Guaranteed salary, healthcare, pension at 20 yrs','MBA useful for officer career (logistics, acquisition)','Decision by Q4 2026 to allow application lead time','ARNG contract end is natural transition point'].map(t=>`<div style="font-size:11px;color:var(--t2);line-height:1.45;display:flex;gap:6px"><span style="color:var(--sky);flex-shrink:0">›</span>${t}</div>`).join('')}
+          </div>
+        </div>
+        <div style="padding:14px;background:rgba(204,120,136,.07);border:1px solid rgba(204,120,136,.2);border-radius:var(--r2)">
+          <div style="font-family:var(--mono);font-size:9px;color:var(--rose);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Business Route (MBA + Portfolio)</div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            ${['MBA from Clarkson + 3 years experience','Photography pipeline shows real revenue traction','TaxiZero and production demonstrate execution','Higher ceiling, no guaranteed floor — real income risk','Requires sustained hustle without institutional backing','Summer 2026 bookings are a proof-of-concept window'].map(t=>`<div style="font-size:11px;color:var(--t2);line-height:1.45;display:flex;gap:6px"><span style="color:var(--rose);flex-shrink:0">›</span>${t}</div>`).join('')}
+          </div>
+        </div>
+      </div>
+      <div style="padding:11px 13px;background:var(--bg3);border-radius:var(--r1);border:1px solid var(--b0)">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px">What the next 15 months should answer</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          ${['Can the photography business replace one full income stream by Dec 2026?','Does the officer path feel like a calling or just a safety net?','Is the MBA teaching something you\'re actually applying — or is it resume padding?','What does the ARNG obligation feel like at month 27 vs month 1?'].map(q=>`<div style="font-size:11px;color:var(--t2);line-height:1.5;padding:7px 9px;background:rgba(255,255,255,.03);border-radius:5px;border-left:2px solid rgba(224,180,78,.3)">${q}</div>`).join('')}
+        </div>
+      </div>
+    </div>
+
   </div>`;
 }
 
