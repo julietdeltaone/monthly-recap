@@ -2094,36 +2094,46 @@ function rReflections(){
             const pct=i=>`${(i/total*100).toFixed(2)}%`;
             const midPct=i=>`${((i+.5)/total*100).toFixed(2)}%`;
 
-            // Trimmed to key events only — tier controls stem height to stagger labels
-            // Above track: tier 1=short(28px), tier 2=medium(52px), tier 3=tall(78px)
-            // Below track: tier 1=short(28px), tier 2=medium(52px)
-            const events=[
-              // ABOVE track
-              {pos:.35, label:'AFT Window',       sub:'Apr–May',          col:'#9A8FD8', shape:'diamond', side:'up',   tier:2},
-              {pos:1.0, label:'H. Wagner',         sub:'Apr 28 · Grad shoot', col:'#CC7888', shape:'dot', side:'up',   tier:1},
-              {pos:1.7, label:'Clarkson FY Cap',   sub:'May · FY26 credits done', col:'#D9714E', shape:'diamond', side:'up', tier:3},
-              {pos:2.25,label:'June Weddings',     sub:'McGrath Jun 6 · Niles Jun 27', col:'#CC7888', shape:'dot', side:'up', tier:1},
-              {pos:4.25,label:'Aug Bookings',      sub:'Choate Aug 1 · Eddy Aug 22', col:'#CC7888', shape:'dot', side:'up', tier:2},
-              {pos:5.3, label:'Next AFT',          sub:'Oct–Nov window',   col:'#9A8FD8', shape:'diamond', side:'up',  tier:1},
-              {pos:10.5,label:'MBA Graduation',    sub:'May 2027',         col:'#62C97A', shape:'flag',    side:'up',  tier:2},
-              {pos:11.2,label:'ARNG Ends',         sub:'Jun 2027',         col:'#E0B44E', shape:'flag',    side:'up',  tier:1},
+            // Color for MBA courses
+            const MBA_DONE='#4BBDB8';   // teal — completed
+            const MBA_NOW='#E0B44E';    // gold — in progress now
+            const MBA_FUTURE='#62C97A'; // sage — upcoming
 
-              // BELOW track
-              {pos:.5,  label:'Tuition Decision',  sub:'ArmyIgnited TA?',  col:'#E0B44E', shape:'diamond', side:'down', tier:1},
-              {pos:1.5, label:'Summer Funding',    sub:'Gap decision',     col:'#E0B44E', shape:'diamond', side:'down', tier:2},
-              {pos:3.5, label:'Savings Check',     sub:'On pace for $10k?',col:'#D9714E', shape:'dot',     side:'down', tier:1},
-              {pos:5.8, label:'New Clarkson FY',   sub:'Fall 2026 · benefit resets', col:'#5FADD4', shape:'dot', side:'down', tier:2},
-              {pos:9.0, label:'Officer Decision?', sub:'Q1\'27 · OTS or business', col:'#E0B44E', shape:'diamond', side:'down', tier:1},
-              {pos:10.0,label:'Last Semester',     sub:'Spring 2027',      col:'#5FADD4', shape:'dot',     side:'down', tier:2},
+            // Trimmed key events — tier controls stem height
+            // Above: tier 1=32px, 2=68px, 3=108px
+            // Below: tier 1=32px, 2=68px, 3=108px
+            const events=[
+              // ABOVE track — life/career events
+              {pos:.35, label:'AFT Window',      sub:'Apr–May',                    col:'#9A8FD8', shape:'diamond', side:'up', tier:2},
+              {pos:1.0, label:'H. Wagner',        sub:'Apr 28 · Grad shoot',        col:'#CC7888', shape:'dot',     side:'up', tier:1},
+              {pos:1.7, label:'Clarkson FY Cap',  sub:'May · FY26 credits done',    col:'#D9714E', shape:'diamond', side:'up', tier:3},
+              {pos:2.25,label:'June Weddings',    sub:'McGrath Jun 6 · Niles Jun 27',col:'#CC7888',shape:'dot',    side:'up', tier:1},
+              {pos:4.25,label:'Aug Bookings',     sub:'Choate Aug 1 · Eddy Aug 22', col:'#CC7888', shape:'dot',    side:'up', tier:2},
+              {pos:5.3, label:'Next AFT',         sub:'Oct–Nov window',             col:'#9A8FD8', shape:'diamond', side:'up', tier:1},
+              {pos:10.5,label:'MBA Graduation',   sub:'May 2027',                   col:'#62C97A', shape:'flag',    side:'up', tier:2},
+              {pos:11.2,label:'ARNG Ends',        sub:'Jun 2027',                   col:'#E0B44E', shape:'flag',    side:'up', tier:1},
+
+              // BELOW track — education + decisions
+              // MBA courses — done (teal)
+              {pos:-.05,label:'AC604 · OM607',    sub:'W\'26 · Done',               col:MBA_DONE,  shape:'dot', side:'down', tier:1},
+              // MBA courses — in progress now (gold)
+              {pos:.5,  label:'OS603 · MK610',    sub:'SP\'26 · In progress',       col:MBA_NOW,   shape:'dot', side:'down', tier:2},
+              // MBA courses — upcoming
+              {pos:3.0, label:'IS606',             sub:'SU\'26 · Business Info Sys', col:MBA_FUTURE,shape:'dot', side:'down', tier:1},
+              {pos:4.5, label:'OM603 · FN608',    sub:'FL\'26 · Supply Chain · Fin Mgmt', col:MBA_FUTURE,shape:'dot',side:'down',tier:2},
+              {pos:5.8, label:'New Clarkson FY',  sub:'Fall 2026 · benefit resets', col:'#5FADD4', shape:'dot',     side:'down', tier:3},
+              {pos:8.5, label:'SB610 · EC605',    sub:'W\'27 · Ethics · Econ',      col:MBA_FUTURE,shape:'dot', side:'down', tier:1},
+              {pos:9.0, label:'Officer Decision?',sub:'Q1\'27 · OTS or business',   col:'#E0B44E', shape:'diamond', side:'down', tier:2},
+              {pos:10.0,label:'OS681 Capstone',   sub:'SP\'27 · Strategic Planning', col:MBA_FUTURE,shape:'dot', side:'down', tier:3},
             ];
 
-            const stemH={up:{1:30,2:62,3:96},down:{1:30,2:62}};
+            const stemH={up:{1:32,2:68,3:108},down:{1:32,2:68,3:108}};
 
             const renderEvent=(e,idx)=>{
-              const lft=`${(e.pos/total*100).toFixed(2)}%`;
+              const lft=`${Math.max(0,e.pos/total*100).toFixed(2)}%`;
               const isFlag=e.shape==='flag';
               const isDiamond=e.shape==='diamond';
-              const h=stemH[e.side][e.tier]||30;
+              const h=stemH[e.side][e.tier]||32;
               const dotSize=isFlag?13:isDiamond?11:9;
               const dotStyle=isFlag
                 ?`width:${dotSize}px;height:${dotSize}px;background:${e.col};clip-path:polygon(0 0,100% 0,100% 70%,50% 100%,0 70%);flex-shrink:0`
@@ -2131,23 +2141,24 @@ function rReflections(){
                 ?`width:${dotSize}px;height:${dotSize}px;background:${e.col};transform:rotate(45deg);flex-shrink:0`
                 :`width:${dotSize}px;height:${dotSize}px;border-radius:50%;background:${e.col};flex-shrink:0`;
               const isUp=e.side==='up';
-              const lblOffset=h+dotSize+5;
-              const align=e.pos<=.6?'left':e.pos>=10.6?'right':'center';
-              const xOff=align==='left'?'0':align==='right'?'-100%':'-50%';
-              const delay=`${(idx*0.055).toFixed(2)}s`;
-              const animUp=`@keyframes tlFadeUp${idx}{from{opacity:0;transform:translateX(${xOff==='0'?'0':xOff}) translateY(8px)}to{opacity:1;transform:translateX(${xOff==='0'?'0':xOff}) translateY(0)}}`;
-              const animDown=`@keyframes tlFadeDown${idx}{from{opacity:0;transform:translateX(${xOff==='0'?'0':xOff}) translateY(-8px)}to{opacity:1;transform:translateX(${xOff==='0'?'0':xOff}) translateY(0)}}`;
-              const lblAnim=isUp?`tlFadeUp${idx}`:`tlFadeDown${idx}`;
-              const lblStyle=`position:absolute;left:${lft};transform:translateX(${xOff});${isUp?`bottom:${lblOffset}px`:`top:${lblOffset}px`};white-space:nowrap;text-align:${align};opacity:0;animation:${lblAnim} .5s cubic-bezier(.22,.68,0,1.1) ${delay} both`;
+              const lblOffset=h+dotSize+6;
+              const isLeft=e.pos<=.6;
+              const isRight=e.pos>=10.6;
+              const align=isLeft?'left':isRight?'right':'center';
+              const xOff=isLeft?'0':isRight?'-100%':'-50%';
+              const delay=`${(idx*0.06).toFixed(2)}s`;
+              const animName=`tlAnim${idx}`;
+              const fromY=isUp?'6px':'-6px';
+              const lblStyle=`position:absolute;left:${lft};transform:translateX(${xOff});${isUp?`bottom:${lblOffset}px`:`top:${lblOffset}px`};white-space:nowrap;text-align:${align};opacity:0;animation:${animName} .5s cubic-bezier(.22,.68,0,1.1) ${delay} both`;
               const dotWrapStyle=`position:absolute;left:${lft};transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;${isUp?`bottom:0`:`top:0`}`;
-              const stemAnim=`opacity:0;animation:fadeIn .4s ease ${delay} both`;
-              const dotAnim=`opacity:0;animation:scaleIn .4s cubic-bezier(.34,1.4,.64,1) ${(idx*0.055+.12).toFixed(2)}s both`;
-              const stem=`<div style="width:1px;height:${h}px;background:linear-gradient(${isUp?'to top':'to bottom'},rgba(255,255,255,.18),rgba(255,255,255,.04));${stemAnim}"></div>`;
-              const dot=`<div style="${dotStyle};box-shadow:0 0 8px ${e.col}77;${dotAnim}"></div>`;
-              return`<style>${animUp}${animDown}</style>
+              const stemAnim=`opacity:0;animation:fadeIn .5s ease ${delay} both`;
+              const dotAnim=`opacity:0;animation:scaleIn .45s cubic-bezier(.34,1.4,.64,1) ${(idx*0.06+.1).toFixed(2)}s both`;
+              const stem=`<div style="width:1px;height:${h}px;background:linear-gradient(${isUp?'to top':'to bottom'},rgba(255,255,255,.2),rgba(255,255,255,.03));${stemAnim}"></div>`;
+              const dot=`<div style="${dotStyle};box-shadow:0 0 9px ${e.col}88;${dotAnim}"></div>`;
+              return`<style>@keyframes ${animName}{from{opacity:0;transform:translateX(${xOff}) translateY(${fromY})}to{opacity:1;transform:translateX(${xOff}) translateY(0)}}</style>
                 <div style="${lblStyle}">
                   <div style="font-family:var(--mono);font-size:9px;font-weight:600;color:${e.col};line-height:1.3">${e.label}</div>
-                  <div style="font-family:var(--mono);font-size:7.5px;color:var(--t4);line-height:1.4">${e.sub}</div>
+                  <div style="font-family:var(--mono);font-size:7.5px;color:var(--t3);line-height:1.4">${e.sub}</div>
                 </div>
                 <div style="${dotWrapStyle}">
                   ${isUp?stem+dot:dot+stem}
@@ -2156,8 +2167,14 @@ function rReflections(){
 
             const upEvents=events.filter(e=>e.side==='up');
             const dnEvents=events.filter(e=>e.side==='down');
-            const upH=130;
-            const dnH=96;
+            const upH=150;
+            const dnH=140;
+
+            // MBA legend entries
+            const mbaLegend=`<div style="display:flex;gap:14px;margin-top:12px;padding-top:10px;border-top:1px solid var(--b0);flex-wrap:wrap">
+              <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;align-self:center">MBA →</div>
+              ${[[MBA_DONE,'Completed (W\'26)'],[MBA_NOW,'In Progress (SP\'26)'],[MBA_FUTURE,'Upcoming']].map(([c,l])=>`<div style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:50%;background:${c};display:inline-block;box-shadow:0 0 5px ${c}88"></span><span style="font-family:var(--mono);font-size:8px;color:var(--t3)">${l}</span></div>`).join('')}
+            </div>`;
 
             return`
               <!-- Top zone -->
@@ -2166,14 +2183,14 @@ function rReflections(){
               </div>
 
               <!-- Center track -->
-              <div style="position:relative;height:22px">
+              <div style="position:relative;height:26px;margin:2px 0">
                 ${months.map((m,i)=>`
-                  <div style="position:absolute;left:${pct(i)};top:0;bottom:0;width:1px;background:rgba(255,255,255,.05)"></div>
-                  <div style="position:absolute;left:${midPct(i)};top:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:8px;color:var(--t5);letter-spacing:.4px">${m.label}</div>
+                  <div style="position:absolute;left:${pct(i)};top:0;bottom:0;width:1px;background:rgba(255,255,255,.15)"></div>
+                  <div style="position:absolute;left:${midPct(i)};top:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:8.5px;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.5px">${m.label}</div>
                 `).join('')}
-                <div style="position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,rgba(255,255,255,.06),rgba(255,255,255,.2),rgba(255,255,255,.06));transform:translateY(-50%);border-radius:1px"></div>
-                <div style="position:absolute;left:0;top:-6px;bottom:-6px;width:2px;background:var(--gold);border-radius:1px;box-shadow:0 0 10px rgba(224,180,78,.7)">
-                  <div style="position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:7px;color:var(--gold);white-space:nowrap;background:var(--bg2);padding:2px 6px;border-radius:3px;border:1px solid rgba(224,180,78,.35);letter-spacing:.8px">NOW</div>
+                <div style="position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,rgba(255,255,255,.06),rgba(255,255,255,.25),rgba(255,255,255,.06));transform:translateY(-50%);border-radius:1px"></div>
+                <div style="position:absolute;left:0;top:-8px;bottom:-8px;width:2px;background:var(--gold);border-radius:1px;box-shadow:0 0 12px rgba(224,180,78,.8)">
+                  <div style="position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:7.5px;font-weight:600;color:var(--gold);white-space:nowrap;background:var(--bg2);padding:2px 7px;border-radius:3px;border:1px solid rgba(224,180,78,.4);letter-spacing:1px">NOW</div>
                 </div>
               </div>
 
@@ -2181,6 +2198,8 @@ function rReflections(){
               <div style="position:relative;height:${dnH}px;overflow:visible">
                 ${dnEvents.map((e,i)=>renderEvent(e,upEvents.length+i)).join('')}
               </div>
+
+              ${mbaLegend}
             `;
           })()}
 
@@ -2232,7 +2251,7 @@ function rReflections(){
         <div style="padding:14px;background:rgba(204,120,136,.07);border:1px solid rgba(204,120,136,.2);border-radius:var(--r2)">
           <div style="font-family:var(--mono);font-size:9px;color:var(--rose);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Business Route (MBA + Portfolio)</div>
           <div style="display:flex;flex-direction:column;gap:5px">
-            ${['MBA from Clarkson + 3 years experience','Photography pipeline shows real revenue traction','TaxiZero and production demonstrate execution','Higher ceiling, no guaranteed floor — real income risk','Requires sustained hustle without institutional backing','Summer 2026 bookings are a proof-of-concept window'].map(t=>`<div style="font-size:11px;color:var(--t2);line-height:1.45;display:flex;gap:6px"><span style="color:var(--rose);flex-shrink:0">›</span>${t}</div>`).join('')}
+            ${['MBA from Clarkson + 3 years work experience','Photography pipeline shows real revenue traction','Higher ceiling, no guaranteed floor — real income risk','Requires sustained hustle without institutional backing','Summer 2026 bookings are a proof-of-concept window','Production work adds media/content dimension'].map(t=>`<div style="font-size:11px;color:var(--t2);line-height:1.45;display:flex;gap:6px"><span style="color:var(--rose);flex-shrink:0">›</span>${t}</div>`).join('')}
           </div>
         </div>
       </div>
