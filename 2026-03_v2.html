@@ -1106,6 +1106,23 @@ function buildSidebar(){
     const rings=ph.aft.map((a,i)=>{const r=84-i*15,circ=2*Math.PI*r,dash=a.pct/100*circ;return`<circle fill="none" stroke="rgba(255,255,255,.05)" stroke-width="9" cx="100" cy="100" r="${r}"/><circle fill="none" stroke="${a.color}" stroke-width="9" cx="100" cy="100" r="${r}" stroke-linecap="round" style="stroke-dasharray:${dash} ${circ};transform:rotate(-90deg);transform-origin:100px 100px;transition:stroke-dasharray 1.2s ease ${i*.1}s"/>`;}).join('');
     const listRows=ph.aft.map((a,i)=>`<div style="display:grid;grid-template-columns:1fr 44px 28px;align-items:center;gap:5px;padding:5px 0;border-bottom:1px solid var(--b0);cursor:pointer" onclick="openMuscleDetail(${i})"><span style="font-size:11px;color:var(--t2)">${a.event}</span><div style="height:3px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden"><div style="height:100%;width:${a.pct}%;background:${a.color};border-radius:2px"></div></div><span style="font-family:var(--mono);font-size:9px;text-align:right;color:${a.color}">${a.pct||'—'}%</span></div>`).join('');
     // Projection timeline data (computed, not displayed as math)
+    const _projData=[
+      {ex:'Bench Press',   jan:190, feb:205, mar:215, q2:230, q3:240, yr:250, color:'#5FADD4', unit:'lb'},
+      {ex:'Barbell Squat', jan:245, feb:222, mar:225, q2:245, q3:260, yr:275, color:'#E0B44E', unit:'lb'},
+      {ex:'Trap Bar DL',   jan:315, feb:265, mar:285, q2:315, q3:330, yr:350, color:'#D9714E', unit:'lb'},
+      {ex:'Lat Pulldown',  jan:150, feb:185, mar:170, q2:185, q3:200, yr:210, color:'#62C97A', unit:'lb'},
+      {ex:'OHP',           jan:105, feb:120, mar:135, q2:145, q3:155, yr:165, color:'#CC7888', unit:'lb'},
+      {ex:'Plank',         jan:85,  feb:100, mar:100, q2:150, q3:200, yr:215, color:'#D9714E', unit:'sec', fmtFn:(v)=>`${Math.floor(v/60)}:${String(v%60).padStart(2,'0')}`},
+    ];
+    const _projRowsHTML=_projData.map(p=>{
+      const fmt=p.fmtFn||(v=>`${v}`);
+      const pts=[p.jan,p.feb,p.mar,p.q2,p.q3,p.yr];
+      const maxV=Math.max(...pts),minV=Math.min(...pts),range=maxV-minV||1;
+      const bPct=v=>Math.max(4,Math.round((v-minV)/range*100));
+      const bars=[['Jan',p.jan,false],['Feb',p.feb,false],['Mar',p.mar,true],['Q2',p.q2,false],['Q3',p.q3,false],['Year',p.yr,false]].map(([l,v,isCur])=>`<div style="display:flex;flex-direction:column;align-items:center;gap:2px;flex:1"><div style="font-family:var(--mono);font-size:8px;font-weight:${isCur?'700':'400'};color:${isCur?p.color:'var(--t3)'};line-height:1">${fmt(v)}</div><div style="width:100%;background:rgba(255,255,255,.05);border-radius:2px 2px 0 0;height:28px;display:flex;align-items:flex-end;overflow:hidden"><div style="width:100%;height:${bPct(v)}%;background:${isCur?p.color:l==='Year'?'rgba(255,255,255,.08)':'rgba(255,255,255,.15)'};border-radius:2px 2px 0 0;${l==='Year'?'border-top:1px dashed rgba(255,255,255,.25)':''}"></div></div><div style="font-family:var(--mono);font-size:7px;color:${isCur?'var(--gold)':l==='Year'?'rgba(255,255,255,.3)':'var(--t5)'};line-height:1">${l}</div></div>`).join('');
+      return`<div style="margin-bottom:10px"><div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px"><span style="font-size:10px;color:var(--t2);font-weight:500">${p.ex}</span><span style="font-family:var(--mono);font-size:8px;color:var(--t4)">${fmt(p.mar)}${p.unit==='lb'?'lb':''} now → <span style="color:${p.color}">${fmt(p.yr)}${p.unit==='lb'?'lb':''}</span></span></div><div style="display:flex;gap:3px;align-items:flex-end">${bars}</div></div>`;
+    }).join('');
+    const projHTML=`<div class="sc ca" style="border-top:2px solid var(--vio)"><div class="sgt" style="color:var(--vio)">2026 Lift Projections</div><div style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-bottom:10px;line-height:1.4">Q1 actuals · Q2–Q3 projected · Year-end targets · 25yo · 3–4×/wk</div>${_projRowsHTML}<div style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-top:4px;padding-top:6px;border-top:1px solid var(--b0)">Solid = current (Mar) · Light = projected · Dashed top = year-end</div></div>`;
     return`<div class="sc ca" style="padding:12px 14px;border-top:2px solid var(--sky)">
       <div class="sgt" style="margin-bottom:8px">Training Heatmap · March</div>
       <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:8px">${sbDows}${sbCells}</div>
@@ -1519,49 +1536,6 @@ function rPhysical(){
     <div style="width:1px;height:12px;background:var(--b1);flex-shrink:0"></div>
     <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px">Muscle →</div>
     ${Object.entries(MG).map(([m,c])=>`<div style="display:flex;align-items:center;gap:4px"><span style="width:7px;height:7px;border-radius:50%;background:${c};display:inline-block;box-shadow:0 0 4px ${c}66"></span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">${m}</span></div>`).join('')}
-  </div>`;
-
-  // Full-year lift projections
-  const projections=[
-    {ex:'Bench Press',   jan:190, feb:205, mar:215, q2:230, q3:240, yr:250, color:'#5FADD4', unit:'lb'},
-    {ex:'Barbell Squat', jan:245, feb:222, mar:225, q2:245, q3:260, yr:275, color:'#E0B44E', unit:'lb'},
-    {ex:'Trap Bar DL',   jan:315, feb:265, mar:285, q2:315, q3:330, yr:350, color:'#D9714E', unit:'lb'},
-    {ex:'Lat Pulldown',  jan:150, feb:185, mar:170, q2:185, q3:200, yr:210, color:'#62C97A', unit:'lb'},
-    {ex:'OHP',           jan:105, feb:120, mar:135, q2:145, q3:155, yr:165, color:'#CC7888', unit:'lb'},
-    {ex:'Plank',         jan:85,  feb:100, mar:100, q2:150, q3:200, yr:215, color:'#D9714E', unit:'sec', fmtFn:(v)=>`${Math.floor(v/60)}:${String(v%60).padStart(2,'0')}`},
-  ];
-
-  const projRows=projections.map(p=>{
-    const fmt=p.fmtFn||(v=>`${v}`);
-    const pts=[p.jan,p.feb,p.mar,p.q2,p.q3,p.yr];
-    const maxV=Math.max(...pts);
-    const minV=Math.min(...pts);
-    const range=maxV-minV||1;
-    const barPct=v=>Math.max(4,Math.round((v-minV)/range*100));
-    const labels=[['Jan',p.jan,false],['Feb',p.feb,false],['Mar',p.mar,true],['Q2',p.q2,false],['Q3',p.q3,false],['Year',p.yr,false]];
-    const bars=labels.map(([l,v,isCur])=>`<div style="display:flex;flex-direction:column;align-items:center;gap:2px;flex:1">
-      <div style="font-family:var(--mono);font-size:8px;font-weight:${isCur?'700':'400'};color:${isCur?p.color:'var(--t3)'};line-height:1">${fmt(v)}${p.unit==='lb'&&!p.fmtFn?'':''}${p.unit==='lb'&&!p.fmtFn?'':''}</div>
-      <div style="width:100%;background:rgba(255,255,255,.05);border-radius:2px 2px 0 0;height:28px;display:flex;align-items:flex-end;overflow:hidden;${isCur?`box-shadow:0 0 6px ${p.color}44`:''};position:relative">
-        <div style="width:100%;height:${barPct(v)}%;background:${isCur?p.color:'rgba(255,255,255,.15)'};border-radius:2px 2px 0 0;transition:height .8s ease;${l==='Year'?`background:rgba(255,255,255,.08);border-top:1px dashed rgba(255,255,255,.25)`:''}"></div>
-      </div>
-      <div style="font-family:var(--mono);font-size:7px;color:${isCur?'var(--gold)':l==='Year'?'rgba(255,255,255,.3)':'var(--t5)'};line-height:1">${l}</div>
-    </div>`).join('');
-    return`<div style="margin-bottom:10px">
-      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px">
-        <span style="font-size:10px;color:var(--t2);font-weight:500">${p.ex}</span>
-        <span style="font-family:var(--mono);font-size:8px;color:var(--t4)">${fmt(p.mar)}${p.unit==='lb'?'lb':''} now → <span style="color:${p.color}">${fmt(p.yr)}${p.unit==='lb'?'lb':''} target</span></span>
-      </div>
-      <div style="display:flex;gap:3px;align-items:flex-end">${bars}</div>
-    </div>`;
-  }).join('');
-
-  const projHTML=`<div class="sc ca" style="border-top:2px solid var(--vio)">
-    <div class="sgt" style="color:var(--vio)">2026 Lift Projections</div>
-    <div style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-bottom:10px;line-height:1.4">Q1 actuals · Q2–Q3 projected · Year-end targets · 25yo · 3–4×/wk</div>
-    ${projRows}
-    <div style="display:flex;gap:10px;margin-top:4px;padding-top:6px;border-top:1px solid var(--b0);flex-wrap:wrap">
-      ${[['Solid','Current (Mar)'],['Light','Projected'],['Dashed top','Year-end target']].map(([s,l])=>`<div style="font-family:var(--mono);font-size:8px;color:var(--t4)">${s} = ${l}</div>`).join('')}
-    </div>
   </div>`;
 
   // (slope chart removed)
