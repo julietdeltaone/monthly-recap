@@ -8,32 +8,44 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
 :root{
-  --bg:#131416;--bg2:#1A1B1F;--bg3:#222328;--bg4:#2A2B30;--bg5:#313338;
-  --b0:rgba(255,255,255,.045);--b1:rgba(255,255,255,.09);--b2:rgba(255,255,255,.16);--b3:rgba(255,255,255,.24);
-  --tx:#F4F2EE;--t2:#CCC9C3;--t3:#9A9590;--t4:#5A5754;--t5:#2E2C2A;
-  --gold:#D4A84B;--gbg:rgba(212,168,75,.12);--gdim:rgba(212,168,75,.06);
-  --sage:#5CB872;--sbg:rgba(92,184,114,.12);--sdim:rgba(92,184,114,.06);
-  --rust:#CC6B47;--rbg:rgba(204,107,71,.12);
-  --sky:#5A9DC0;--kbg:rgba(90,157,192,.12);--kdim:rgba(90,157,192,.06);
-  --vio:#8B7EC8;--vbg:rgba(139,126,200,.12);
-  --rose:#C07080;--robg:rgba(192,112,128,.12);
-  --teal:#47B0AB;--tbg:rgba(71,176,171,.12);
+  --bg:#0A0B0C;--bg2:#111214;--bg3:#18191D;--bg4:#1F2025;--bg5:#272830;
+  --b0:rgba(255,255,255,.05);--b1:rgba(255,255,255,.10);--b2:rgba(255,255,255,.20);--b3:rgba(255,255,255,.32);
+  --tx:#F7F5F0;--t2:#D8D4CC;--t3:#A09A93;--t4:#5E5A56;--t5:#2A2826;
+  --gold:#E0B44E;--gbg:rgba(224,180,78,.14);--gdim:rgba(224,180,78,.07);
+  --sage:#62C97A;--sbg:rgba(98,201,122,.14);--sdim:rgba(98,201,122,.07);
+  --rust:#D9714E;--rbg:rgba(217,113,78,.14);
+  --sky:#5FADD4;--kbg:rgba(95,173,212,.14);--kdim:rgba(95,173,212,.07);
+  --vio:#9A8FD8;--vbg:rgba(154,143,216,.14);
+  --rose:#CC7888;--robg:rgba(204,120,136,.14);
+  --teal:#4BBDB8;--tbg:rgba(75,189,184,.14);
   --serif:'Libre Baskerville',Georgia,serif;
   --sans:'DM Sans',-apple-system,sans-serif;
   --mono:'JetBrains Mono',monospace;
   --r1:6px;--r2:10px;--r3:16px;--r4:20px;
-  --sh1:0 1px 8px rgba(0,0,0,.65);
-  --sh2:0 4px 32px rgba(0,0,0,.8);
-  --sh3:0 16px 64px rgba(0,0,0,.9);
+  --sh1:0 2px 12px rgba(0,0,0,.8);
+  --sh2:0 6px 40px rgba(0,0,0,.92);
+  --sh3:0 20px 80px rgba(0,0,0,.98);
+  --glow-gold:0 0 24px rgba(224,180,78,.18);
+  --glow-sage:0 0 24px rgba(98,201,122,.18);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100vh;-webkit-font-smoothing:antialiased}
 
-@keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-.ca{opacity:0;transform:translateY(18px)}.ca.vis{animation:slideUp .48s cubic-bezier(.22,.68,0,1.15) both}
-.ca.vis.d1{animation-delay:.07s}.ca.vis.d2{animation-delay:.14s}.ca.vis.d3{animation-delay:.21s}
-.ca.vis.d4{animation-delay:.28s}.ca.vis.d5{animation-delay:.35s}
+@keyframes slideUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 0 rgba(224,180,78,0)}50%{box-shadow:0 0 28px rgba(224,180,78,.15)}}
+@keyframes shimmer{from{background-position:-200% 0}to{background-position:200% 0}}
+.ca{opacity:0;transform:translateY(22px)}.ca.vis{animation:slideUp .52s cubic-bezier(.22,.68,0,1.1) both}
+.ca.vis.d1{animation-delay:.08s}.ca.vis.d2{animation-delay:.16s}.ca.vis.d3{animation-delay:.24s}
+.ca.vis.d4{animation-delay:.32s}.ca.vis.d5{animation-delay:.40s}
+/* Scale-in variant for dashboard tiles */
+.ca-scale{opacity:0;transform:scale(.95)}.ca-scale.vis{animation:scaleIn .42s cubic-bezier(.34,1.2,.64,1) both}
+.ca-scale.vis.d1{animation-delay:.06s}.ca-scale.vis.d2{animation-delay:.12s}
+.ca-scale.vis.d3{animation-delay:.18s}.ca-scale.vis.d4{animation-delay:.24s}
+.ca-scale.vis.d5{animation-delay:.30s}.ca-scale.vis.d6{animation-delay:.36s}
 
 .shell{max-width:1340px;margin:0 auto;padding:40px 28px 100px}
 .hdr{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-bottom:22px;border-bottom:1px solid var(--b1)}
@@ -44,9 +56,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .pill{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.7px;text-transform:uppercase;padding:6px 14px;border:1px solid var(--b1);border-radius:40px;background:var(--bg3);color:var(--t3);cursor:pointer;transition:all .18s;box-shadow:var(--sh1)}
 .pill:hover{color:var(--tx);border-color:var(--b2);background:var(--bg4)}
 .tabs{display:flex;gap:2px;padding:14px 0 0;flex-wrap:wrap;position:sticky;top:0;z-index:100;background:var(--bg);padding-bottom:10px;margin-bottom:-10px;border-bottom:1px solid var(--b0)}
-.tab{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;padding:7px 16px;border:1px solid transparent;border-radius:40px;background:none;color:var(--t3);cursor:pointer;transition:all .18s;position:relative}
-.tab:hover{color:var(--t2);border-color:var(--b1);background:rgba(255,255,255,.03)}
-.tab.on{color:var(--tx);border-color:var(--b2);background:var(--bg4);box-shadow:var(--sh1)}
+.tab{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;padding:7px 16px;border:1px solid transparent;border-radius:40px;background:none;color:var(--t4);cursor:pointer;transition:color .22s ease,border-color .22s ease,background .22s ease,transform .18s cubic-bezier(.34,1.2,.64,1);position:relative}
+.tab:hover{color:var(--t2);border-color:var(--b1);background:rgba(255,255,255,.04);transform:translateY(-1px)}
+.tab.on{color:var(--tx);border-color:var(--b2);background:var(--bg4);box-shadow:var(--sh1);transform:translateY(-1px)}
 /* tab color accents when active */
 .tab[data-t="spiritual"].on{border-color:rgba(212,168,75,.4);color:var(--gold)}
 .tab[data-t="physical"].on{border-color:rgba(90,157,192,.4);color:var(--sky)}
@@ -69,8 +81,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .dash{display:grid;grid-template-columns:250px 1fr;gap:24px;margin-top:26px;align-items:start}
 @media(max-width:860px){.dash{grid-template-columns:1fr}.side{order:2}.content{order:1}}
 .side{display:flex;flex-direction:column;gap:14px;position:sticky;top:20px}
-.sc{background:var(--bg2);border:1px solid var(--b0);border-radius:var(--r3);padding:17px;box-shadow:var(--sh1);transition:border-color .2s}
-.sc:hover{border-color:var(--b1)}
+.sc{background:var(--bg2);border:1px solid var(--b0);border-radius:var(--r3);padding:17px;box-shadow:var(--sh1);transition:border-color .28s ease,transform .24s cubic-bezier(.34,1.2,.64,1)}
+.sc:hover{border-color:var(--b2);transform:translateY(-1px)}
 .sgt{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:1.6px;text-transform:uppercase;color:var(--t4);margin-bottom:11px}
 .si{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid var(--b0)}
 .si:last-child{border-bottom:none}
@@ -82,8 +94,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .cg{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:860px){.cg{grid-template-columns:1fr}}
 .sf{grid-column:1/-1}
-.card{background:var(--bg2);border:1px solid var(--b0);border-radius:var(--r3);padding:22px;box-shadow:var(--sh1);transition:border-color .25s,box-shadow .25s,transform .22s}
-.card:hover{border-color:var(--b2);box-shadow:var(--sh2);transform:translateY(-1px)}
+.card{background:var(--bg2);border:1px solid var(--b0);border-radius:var(--r3);padding:22px;box-shadow:var(--sh1);transition:border-color .32s ease,box-shadow .32s ease,transform .28s cubic-bezier(.34,1.2,.64,1)}
+.card:hover{border-color:var(--b2);box-shadow:var(--sh2);transform:translateY(-2px)}
 .ch{margin-bottom:15px}
 .ct{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--tx);font-style:italic}
 .cs{font-size:11px;color:var(--t3);margin-top:3px}
@@ -106,10 +118,44 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .comm-note{margin-top:14px;padding:14px 16px;border-left:3px solid var(--gold);background:var(--gdim);border-radius:0 var(--r1) var(--r1) 0;font-size:13px;line-height:1.72;color:var(--t2)}
 .comm-note .cnl{font-style:normal;font-family:var(--mono);font-size:9px;letter-spacing:.8px;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px;font-weight:500}
 
+/* OVERVIEW DASHBOARD */
+.ov-dash{display:flex;flex-direction:column;gap:20px}
+.ov-30sec{background:linear-gradient(135deg,rgba(224,180,78,.07) 0%,rgba(95,173,212,.05) 100%);border:1px solid rgba(224,180,78,.2);border-radius:var(--r4);padding:22px 28px;position:relative;overflow:hidden}
+.ov-30sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 0% 0%,rgba(224,180,78,.06) 0%,transparent 60%);pointer-events:none}
+.ov-30sec-lbl{font-family:var(--mono);font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:1.4px;margin-bottom:12px;display:flex;align-items:center;gap:7px}
+.ov-30sec-lbl::before{content:'';display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--gold)}
+.ov-bullets{display:flex;flex-direction:column;gap:7px}
+.ov-bullet{font-size:13.5px;color:var(--t2);line-height:1.5;display:flex;align-items:baseline;gap:10px}
+.ov-bullet b{color:var(--tx)}
+.ov-bullet::before{content:'—';font-family:var(--mono);font-size:10px;color:var(--t5);flex-shrink:0}
+/* Big stat tiles */
+.ov-kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:700px){.ov-kpi-row{grid-template-columns:repeat(2,1fr)}}
+.ov-kpi-tile{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r3);padding:20px 18px;cursor:pointer;transition:border-color .28s ease,transform .24s cubic-bezier(.34,1.2,.64,1),box-shadow .28s ease;position:relative;overflow:hidden}
+.ov-kpi-tile:hover{border-color:var(--b3);transform:translateY(-3px);box-shadow:var(--sh2)}
+.ov-kpi-tile::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;border-radius:0 0 var(--r3) var(--r3)}
+.ov-kpi-tile.c-gold::after{background:var(--gold)}
+.ov-kpi-tile.c-sage::after{background:var(--sage)}
+.ov-kpi-tile.c-sky::after{background:var(--sky)}
+.ov-kpi-tile.c-rose::after{background:var(--rose)}
+.ov-kpi-v{font-family:var(--mono);font-size:30px;font-weight:700;line-height:1;margin-bottom:4px}
+.ov-kpi-k{font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.ov-kpi-sub{font-size:11px;color:var(--t3);line-height:1.4}
+/* Charts row */
+.ov-charts-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+@media(max-width:860px){.ov-charts-row{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.ov-charts-row{grid-template-columns:1fr}}
+.ov-chart-card{background:var(--bg2);border:1px solid var(--b0);border-radius:var(--r3);padding:18px;transition:border-color .28s ease}
+.ov-chart-card:hover{border-color:var(--b2)}
+.ov-chart-lbl{font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+/* Timeline at bottom */
+.ov-timeline-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:700px){.ov-timeline-row{grid-template-columns:1fr}}
+
 /* OVERVIEW */
 .ovb{display:flex;align-items:center;justify-content:space-between;padding:26px 30px;background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r4);gap:20px;flex-wrap:wrap;box-shadow:var(--sh2);position:relative;overflow:hidden}
-.ovb::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%,rgba(212,168,75,.07) 0%,transparent 50%),radial-gradient(ellipse at 100% 50%,rgba(90,157,192,.05) 0%,transparent 50%);pointer-events:none}
-.ovb::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(212,168,75,.28),transparent);pointer-events:none}
+.ovb::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 0% 50%,rgba(224,180,78,.07) 0%,transparent 50%),radial-gradient(ellipse at 100% 50%,rgba(95,173,212,.05) 0%,transparent 50%);pointer-events:none}
+.ovb::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(224,180,78,.32),transparent);pointer-events:none}
 .ovbm{font-family:var(--serif);font-size:34px;font-weight:700;font-style:italic;color:var(--tx);line-height:1.1;position:relative}
 .ovbs{font-family:var(--mono);font-size:10px;color:var(--t3);margin-top:7px;letter-spacing:.5px;text-transform:uppercase;position:relative}
 .kpis{display:flex;gap:32px;flex-shrink:0;position:relative}
@@ -174,8 +220,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .stitle{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--tx);line-height:1.3;font-style:italic}
 .schev{font-size:12px;color:var(--t4);transition:transform .28s,color .18s;flex-shrink:0;margin-top:4px}
 .sblk.open .schev{transform:rotate(180deg);color:var(--gold)}
-.sbody{max-height:0;overflow:hidden;transition:max-height .42s cubic-bezier(.4,0,.2,1)}
-.sblk.open .sbody{max-height:3000px}
+.sbody{max-height:0;overflow:hidden;transition:max-height .56s cubic-bezier(.4,0,.2,1),opacity .32s ease}
+.sblk.open .sbody{max-height:3000px;opacity:1}
+.sblk:not(.open) .sbody{opacity:0}
 .sbodyi{padding:20px 22px;font-size:13px;line-height:1.8;color:var(--t2)}
 .sbodyi h4{font-family:var(--serif);font-size:13px;font-weight:700;color:var(--tx);margin:16px 0 5px;font-style:italic}
 .sbodyi h4:first-child{margin-top:0}
@@ -216,7 +263,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 /* MUSCLE DETAIL MODAL */
 .muscle-modal-overlay{position:fixed;inset:0;background:rgba(8,9,11,.88);backdrop-filter:blur(16px);display:none;align-items:center;justify-content:center;z-index:10000}
 .muscle-modal-overlay.show{display:flex}
-.muscle-modal{background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r4);width:min(620px,calc(100vw - 32px));max-height:82vh;overflow:hidden;box-shadow:var(--sh3);animation:slideUp .24s cubic-bezier(.22,.68,0,1.15) both}
+.muscle-modal{background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r4);width:min(620px,calc(100vw - 32px));max-height:82vh;overflow:hidden;box-shadow:var(--sh3);animation:modalIn .32s cubic-bezier(.22,.68,0,1.15) both}
 .mmod-hdr{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--b0)}
 .mmod-body{padding:22px;overflow-y:auto;max-height:calc(82vh - 70px);scrollbar-width:thin;scrollbar-color:var(--bg4) transparent}
 
@@ -247,8 +294,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .fcatamt{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--tx)}
 .fcatbar{height:2px;background:rgba(255,255,255,.04)}
 .fcatbf{height:100%;transition:width .8s cubic-bezier(.22,.68,0,1.2)}
-.fcatb{max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.4,0,.2,1)}
-.fcat.open .fcatb{max-height:2000px}
+.fcatb{max-height:0;overflow:hidden;transition:max-height .55s cubic-bezier(.4,0,.2,1),opacity .3s ease;opacity:0}
+.fcat.open .fcatb{max-height:2000px;opacity:1}
 .ftx{display:grid;grid-template-columns:46px 1fr auto;gap:8px;padding:6px 14px;border-bottom:1px solid var(--b0);font-size:12px;align-items:center}
 .ftx:last-child{border-bottom:none}
 .ftx:hover{background:rgba(255,255,255,.04);padding:5px 14px}
@@ -291,9 +338,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .inamt{font-family:var(--mono);font-size:11px;color:var(--tx);font-weight:500}
 
 /* MODAL */
-.overlay{position:fixed;inset:0;background:rgba(6,7,9,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);display:none;align-items:center;justify-content:center;z-index:9999}
+.overlay{position:fixed;inset:0;background:rgba(4,5,6,.92);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);display:none;align-items:center;justify-content:center;z-index:9999;animation:fadeIn .22s ease both}
 .overlay.show{display:flex}
-.modal{background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r4);width:min(680px,calc(100vw - 32px));max-height:84vh;overflow:hidden;box-shadow:var(--sh3);animation:slideUp .24s cubic-bezier(.22,.68,0,1.15) both}
+.modal{background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r4);width:min(680px,calc(100vw - 32px));max-height:84vh;overflow:hidden;box-shadow:var(--sh3);animation:modalIn .32s cubic-bezier(.22,.68,0,1.15) both}
+@keyframes modalIn{from{opacity:0;transform:translateY(28px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
 .mhdr{display:flex;justify-content:space-between;align-items:flex-start;padding:22px;border-bottom:1px solid var(--b0)}
 .mhdr h3{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--tx);font-style:italic;line-height:1.3}
 .mhdr p{font-size:11px;color:var(--t3);margin-top:3px;font-family:var(--mono)}
@@ -376,8 +424,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .fcatamt{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--tx)}
 .fcatbar{height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;margin:0 4px 4px}
 .fcatbf{height:100%;border-radius:2px;transition:width .6s cubic-bezier(.22,.68,0,1.2)}
-.fcatb{max-height:0;overflow:hidden;transition:max-height .38s cubic-bezier(.4,0,.2,1)}
-.fcat.open .fcatb{max-height:2000px}
+.fcatb{max-height:0;overflow:hidden;transition:max-height .55s cubic-bezier(.4,0,.2,1),opacity .3s ease;opacity:0}
+.fcat.open .fcatb{max-height:2000px;opacity:1}
 .fcat.open .fcata{transform:rotate(90deg)}
 .ftx{display:grid;grid-template-columns:44px 1fr 80px;gap:6px;padding:5px 4px;font-size:11px;border-bottom:1px solid var(--b0);align-items:baseline}
 .ftx:last-child{border-bottom:none}
@@ -775,7 +823,10 @@ let tab=TABS.includes(_hash)?_hash:'overview';
 let charts=[];
 
 const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target);}});},{threshold:.06});
-function observe(){document.querySelectorAll('.ca').forEach(el=>{el.classList.remove('vis');io.observe(el);});}
+function observe(){
+  document.querySelectorAll('.ca').forEach(el=>{el.classList.remove('vis');io.observe(el);});
+  document.querySelectorAll('.ca-scale').forEach(el=>{el.classList.remove('vis');io.observe(el);});
+}
 function killCharts(){charts.forEach(c=>{try{c.destroy();}catch(e){}});charts=[];}
 
 /* ─── HELPERS ─── */
@@ -832,25 +883,25 @@ function buildSidebar(){
     ];
     const tlOv=ovMonths.map((item,i)=>`<div class="tl-item"><div class="tl-rail" style="color:${item.col}"><div class="tl-dot${item.cur?' cur':item.done?' done':' future'}"></div>${i<11?`<div class="tl-line${item.done&&!item.cur?' done':''}"></div>`:''}</div><div class="tl-content"><div class="tl-month" style="color:${item.cur?'var(--gold)':item.done?'var(--sage)':'var(--t5)'}">${item.m}</div>${item.label?`<div class="tl-label" style="color:${item.cur?'var(--tx)':item.done?'var(--t2)':'var(--t5)'};font-weight:${item.cur?600:400}">${item.label}</div>`:''} ${item.sub?`<div class="tl-sub">${item.sub}</div>`:''}</div></div>`).join('');
     return`<div class="sc ca" style="border-top:2px solid var(--gold)">
-      <div class="sgt">2026 Overview</div>
+      <div class="sgt">2026 Year Progress</div>
       <div class="tl">${tlOv}</div>
     </div>
     <div class="sc ca d1" style="border-top:2px solid var(--gold)">
-      <div class="sgt" style="color:var(--gold)">March Review</div>
+      <div class="sgt" style="color:var(--gold)">March Self-Assessment</div>
       <div style="margin-bottom:12px">
         <div style="font-family:var(--mono);font-size:9px;color:var(--sage);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:var(--sage);display:inline-block"></span>Keep Doing</div>
         <div style="font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:5px">Consistent church attendance — 4 for 4, third month running. That rhythm is building something worth protecting.</div>
         <div style="font-size:12px;color:var(--t2);line-height:1.6">Shipping real projects. The TaxiZero app, intake form, and LMSW video are all completed outputs — not just started ones. The bias toward finishing is the right instinct.</div>
       </div>
       <div style="margin-bottom:12px">
-        <div style="font-family:var(--mono);font-size:9px;color:var(--sky);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:var(--sky);display:inline-block"></span>Improvements</div>
-        <div style="font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:5px">Net dropped $207 from February's high of $1,094. Dining at $476 — the single largest spending category — has room to compress month over month.</div>
-        <div style="font-size:12px;color:var(--t2);line-height:1.6">Gym days dropped from 22 → 19 → 18 across the three months. The trend is small but consistent. Worth watching before it becomes a pattern.</div>
+        <div style="font-family:var(--mono);font-size:9px;color:var(--sky);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:var(--sky);display:inline-block"></span>Improve</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:5px">Net dropped $207 from February's high of $1,094. Dining at $476 — the single largest spending category — has room to compress.</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.6">Gym days dropped from 22 → 19 → 18 across Q1. Small but consistent. Worth watching before it becomes a pattern.</div>
       </div>
       <div>
         <div style="font-family:var(--mono);font-size:9px;color:var(--rust);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:var(--rust);display:inline-block"></span>Correct</div>
-        <div style="font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:5px">Plank is at 47% of the AFT standard — the only event trending backwards relative to what's needed. It needs dedicated daily work, not occasional gym sets. Nothing else will close that gap.</div>
-        <div style="font-size:12px;color:var(--t2);line-height:1.6">February's intellectual miss is still the only unresolved gap in the year. April's focus is History — completing it cleanly would reset the record at 3-for-4 and show the February miss was an anomaly, not a habit.</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:5px">Plank at 47% of the AFT standard — the only event trending backwards. Needs dedicated daily work, not occasional gym sets.</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.6">Feb intellectual miss still unresolved. April's History focus would reset the record at 3-for-4 and confirm Feb was an anomaly.</div>
       </div>
     </div>`;
   }
@@ -1116,27 +1167,73 @@ function buildSidebar(){
 /* ─── OVERVIEW ─── */
 function rOverview(){
   const ov=D.ov;
-  const kpis=ov.kpis.map(k=>`<div class="kpi" onclick="sw('${k.tab}')" title="Go to ${k.tab}"><div class="kpiv ${k.cls}">${k.v}</div><div class="kpik">${k.k} →</div></div>`).join('');
-  const mks=(lbl,col,rows,d='',tabTarget='')=>`<div class="ovs ca${d}" onclick="sw('${tabTarget}')" title="View ${tabTarget} details"><div class="ovsl" style="color:${col}">${lbl} →</div>${rows.map(r=>`<div class="ovr"><span class="ovrk">${r.k}</span><span class="ovrv ${r.cls||''}">${r.v}</span></div>`).join('')}</div>`;
-  const evts=ov.events.map(e=>`<div class="ove"><span class="oved">${e.date}</span><span class="ovet">${e.desc}</span></div>`).join('');
+  const f=D.fin;
 
-  // mini 3-month trend bars
-  const trendData=[
-    {lbl:"Net",vals:[812,1094,887],color:"var(--sage)",fmt:"$"},
-    {lbl:"Gym Days",vals:[17,18,20],color:"var(--sky)",fmt:""},
-    {lbl:"Expenses",vals:[2288,2486,2501],color:"var(--rust)",fmt:"$"},
+  // ── 30-SECOND READ ──
+  const thirtySecHTML=`<div class="ov-30sec ca">
+    <div class="ov-30sec-lbl">March 2026 — 30 Second Read</div>
+    <div class="ov-bullets">
+      <div class="ov-bullet"><b>Financially solid:</b> Brought in $3,389 · saved $887 · tithed $250 · under budget for the month.</div>
+      <div class="ov-bullet"><b>Physically consistent:</b> 20 gym days · bench hit 215 lb twice · 6-mile outdoor run. Plank is still the gap at 47% of the AFT standard.</div>
+      <div class="ov-bullet"><b>Spiritually engaged:</b> 4 of 4 Sundays at Calvary. Acts series through chapter 9 plus 1 Corinthians 1. Personal commentary on each sermon in the Spiritual tab.</div>
+      <div class="ov-bullet"><b>Shipped real work:</b> LMSW documentary, JD Meyers website rebuild, TaxiZero fare estimator app — all live, not just started.</div>
+      <div class="ov-bullet"><b>Academically strong:</b> 3.83 GPA at Clarkson (A / A-). MMCS Army digital C2 certified at Drill weekend, Fort Drum.</div>
+    </div>
+  </div>`;
+
+  // ── BIG KPI TILES ──
+  const kpiDefs=[
+    {v:'+$887',k:'Net Savings',sub:'$3,389 in · $2,501 out',color:'var(--sage)',cls:'c-sage',tab:'financial'},
+    {v:'20',k:'Gym Days',sub:'115,890 lb volume · 4 cardio',color:'var(--sky)',cls:'c-sky',tab:'physical'},
+    {v:'4 / 4',k:'Sermons',sub:'Calvary Baptist · Acts series',color:'var(--gold)',cls:'c-gold',tab:'spiritual'},
+    {v:'3.83',k:'Term GPA',sub:'AC 604 A · OM 607 A–',color:'var(--rose)',cls:'c-rose',tab:'intellectual'},
   ];
-  const trendCards=trendData.map(t=>{
-    const max=Math.max(...t.vals);
-    const bars=['Jan','Feb','Mar'].map((m,i)=>`<div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1"><div style="width:100%;background:rgba(255,255,255,.05);border-radius:3px;height:40px;display:flex;align-items:flex-end;overflow:hidden"><div style="width:100%;border-radius:3px;background:${t.color};opacity:.8;height:${(t.vals[i]/max*100).toFixed(0)}%;transition:height .8s"></div></div><div style="font-family:var(--mono);font-size:8px;color:var(--t4)">${m}</div><div style="font-family:var(--mono);font-size:10px;color:var(--t2)">${t.fmt}${t.vals[i]}</div></div>`).join('');
-    return`<div style="background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r2);padding:12px"><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px">${t.lbl}</div><div style="display:flex;gap:6px;align-items:flex-end">${bars}</div></div>`;
-  }).join('');
+  const kpiTilesHTML=`<div class="ov-kpi-row">
+    ${kpiDefs.map((k,i)=>`<div class="ov-kpi-tile ${k.cls} ca-scale d${i+1}" onclick="sw('${k.tab}')" title="Go to ${k.tab}">
+      <div class="ov-kpi-k">${k.k} →</div>
+      <div class="ov-kpi-v" style="color:${k.color}">${k.v}</div>
+      <div class="ov-kpi-sub">${k.sub}</div>
+    </div>`).join('')}
+  </div>`;
+
+  // ── 3-MONTH MINI CHARTS ──
+  function miniBar(vals,color,labels,fmtFn){
+    const max=Math.max(...vals);
+    return vals.map((v,i)=>`<div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1">
+      <div style="width:100%;background:rgba(255,255,255,.06);border-radius:3px 3px 0 0;height:44px;display:flex;align-items:flex-end;overflow:hidden">
+        <div style="width:100%;background:${color};opacity:${.5+.5*(v/max)};height:${Math.max(8,(v/max*100)).toFixed(0)}%;transition:height 1s cubic-bezier(.22,.68,0,1.2);border-radius:3px 3px 0 0"></div>
+      </div>
+      <div style="font-family:var(--mono);font-size:9px;color:var(--t3)">${fmtFn(v)}</div>
+      <div style="font-family:var(--mono);font-size:8px;color:var(--t5)">${labels[i]}</div>
+    </div>`).join('');
+  }
+
+  const chartCardsHTML=`<div class="ov-charts-row ca d2">
+    <div class="ov-chart-card">
+      <div class="ov-chart-lbl">Net Savings — Q1</div>
+      <div style="display:flex;gap:5px;align-items:flex-end">${miniBar([812,1094,887],'var(--sage)',['Jan','Feb','Mar'],v=>'$'+v)}</div>
+    </div>
+    <div class="ov-chart-card">
+      <div class="ov-chart-lbl">Gym Days — Q1</div>
+      <div style="display:flex;gap:5px;align-items:flex-end">${miniBar([17,18,20],'var(--sky)',['Jan','Feb','Mar'],v=>v+' days')}</div>
+    </div>
+    <div class="ov-chart-card">
+      <div class="ov-chart-lbl">AFT Progress — March</div>
+      <div style="display:flex;flex-direction:column;gap:5px">
+        ${D.physical.aft.map(a=>`<div style="display:flex;align-items:center;gap:8px;cursor:pointer" onclick="sw('physical')">
+          <div style="font-size:10px;color:var(--t3);width:36px;flex-shrink:0;font-family:var(--mono)">${a.event.split(' ')[0]}</div>
+          <div style="flex:1;height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden">
+            <div style="height:100%;width:${a.pct||0}%;background:${a.color};border-radius:3px;transition:width 1.2s cubic-bezier(.22,.68,0,1.2)"></div>
+          </div>
+          <div style="font-family:var(--mono);font-size:9px;color:${a.color};width:26px;text-align:right">${a.pct?a.pct+'%':'—'}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+  </div>`;
 
   // ── SCHEDULE CALENDAR ──
   const mc=D.physical.mc;
-  // March 1 2026 = Sunday = col 0
   const dowHeader=['Su','Mo','Tu','We','Th','Fr','Sa'].map(d=>`<div style="text-align:center;font-family:var(--mono);font-size:8px;color:var(--t4);letter-spacing:.6px;text-transform:uppercase;padding:4px 0">${d}</div>`).join('');
-
   const calDays=Array.from({length:31},(_,i)=>{
     const d=i+1;
     const s=SCHED[d]||{};
@@ -1145,58 +1242,58 @@ function rOverview(){
     const isWork=!!s.work;
     const isGym=s.gym&&s.gym.length>0;
     const isSpecial=!!s.special;
-
-    // pip dots
     let dots='';
-    if(isWork)dots+=`<span style="width:5px;height:5px;border-radius:50%;background:#5CB872;flex-shrink:0;display:inline-block"></span>`;
-    if(isDrill)dots+=`<span style="width:5px;height:5px;border-radius:50%;background:#8B7EC8;flex-shrink:0;display:inline-block"></span>`;
+    if(isWork)dots+=`<span style="width:5px;height:5px;border-radius:50%;background:#62C97A;flex-shrink:0;display:inline-block"></span>`;
+    if(isDrill)dots+=`<span style="width:5px;height:5px;border-radius:50%;background:#9A8FD8;flex-shrink:0;display:inline-block"></span>`;
     if(isGym){const c=mc[s.gym[0]]||'#888';dots+=`<span style="width:5px;height:5px;border-radius:50%;background:${c};flex-shrink:0;display:inline-block"></span>`;}
-    if(isSermon)dots+=`<span style="width:5px;height:5px;border-radius:50%;background:#D4A84B;flex-shrink:0;display:inline-block"></span>`;
-    if(isSpecial)dots+=`<span style="width:5px;height:5px;border-radius:50%;background:#47B0AB;flex-shrink:0;display:inline-block"></span>`;
-
-    // tooltip text
+    if(isSermon)dots+=`<span style="width:5px;height:5px;border-radius:50%;background:#E0B44E;flex-shrink:0;display:inline-block"></span>`;
+    if(isSpecial)dots+=`<span style="width:5px;height:5px;border-radius:50%;background:#4BBDB8;flex-shrink:0;display:inline-block"></span>`;
     let tip=`Mar ${d}`;
     if(isSermon)tip+=` · Church (Acts)`;
     if(isDrill)tip+=` · ARNG Drill ${s.drill}${s.note?' ('+s.note+')':''}`;
     if(isWork)tip+=` · CU Security ${s.work}${s.note?' — '+s.note:''}`;
     if(isGym)tip+=` · Gym: ${s.gym.join(', ')}`;
     if(isSpecial)tip+=` · ${s.special}`;
-
-    // Work is now green (Clarkson), Drill stays purple
-    const bg=isDrill?'rgba(139,126,200,.18)':isWork?'rgba(92,184,114,.1)':'transparent';
-    const border=isDrill?'1px solid rgba(139,126,200,.35)':isSermon?'1px solid rgba(212,168,75,.3)':isWork?'1px solid rgba(92,184,114,.25)':'1px solid transparent';
-
+    const bg=isDrill?'rgba(154,143,216,.18)':isWork?'rgba(98,201,122,.1)':'transparent';
+    const border=isDrill?'1px solid rgba(154,143,216,.35)':isSermon?'1px solid rgba(224,180,78,.3)':isWork?'1px solid rgba(98,201,122,.25)':'1px solid transparent';
     return`<div class="sched-cell" data-tip="${tip.replace(/"/g,'&quot;')}" style="background:${bg};border:${border}" onmouseenter="showSchedTip(event,this)" onmouseleave="hideSchedTip()">
       <div style="font-family:var(--mono);font-size:10px;font-weight:${isSermon?'700':'400'};color:${isSermon?'var(--gold)':isDrill?'var(--vio)':'var(--t3)'};">${d}</div>
       <div style="display:flex;gap:2px;flex-wrap:wrap;margin-top:3px">${dots}</div>
     </div>`;
   }).join('');
-
   const schedLegend=[
-    {c:'#5CB872',l:'CU Security (Clarkson)'},
-    {c:'#8B7EC8',l:'ARNG Drill'},
-    {c:'#5CB872',l:'Gym',outline:true},
-    {c:'#D4A84B',l:'Church / Sermon'},
-    {c:'#47B0AB',l:'Special Event'},
-  ].map(x=>`<div style="display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9px;color:var(--t3)"><span style="width:7px;height:7px;border-radius:50%;background:${x.c};flex-shrink:0${x.outline?';border:1px solid rgba(255,255,255,.3)':''}"></span>${x.l}</div>`).join('');
+    {c:'#62C97A',l:'CU Security'},{c:'#9A8FD8',l:'ARNG Drill'},{c:'#5FADD4',l:'Gym'},
+    {c:'#E0B44E',l:'Church'},{c:'#4BBDB8',l:'Special'},
+  ].map(x=>`<div style="display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9px;color:var(--t4)"><span style="width:7px;height:7px;border-radius:50%;background:${x.c};flex-shrink:0"></span>${x.l}</div>`).join('');
 
-  const schedCalHTML=`
-    <div class="card ca d2 sf" style="position:relative">
+  // ── EVENTS + SECTION SUMMARIES ──
+  const evts=ov.events.map(e=>`<div class="ove"><span class="oved">${e.date}</span><span class="ovet">${e.desc}</span></div>`).join('');
+
+  const mks=(lbl,col,rows,d='',tabTarget='')=>`<div class="ovs ca${d}" onclick="sw('${tabTarget}')" title="View ${tabTarget}"><div class="ovsl" style="color:${col}">${lbl} →</div>${rows.map(r=>`<div class="ovr"><span class="ovrk">${r.k}</span><span class="ovrv ${r.cls||''}">${r.v}</span></div>`).join('')}</div>`;
+
+  return`<div class="ov-dash">
+    ${thirtySecHTML}
+    ${kpiTilesHTML}
+    ${chartCardsHTML}
+
+    <div class="card ca d3 sf" style="position:relative">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap">
-        <div class="ch" style="margin-bottom:0"><div class="ct">March 2026 — Full Schedule</div><div class="cs">CU Security · ARNG Drill · Workouts · Church · hover any day for detail · click to expand</div></div>
-        <button onclick="toggleSchedExpand()" id="schedExpandBtn" style="font-family:var(--mono);font-size:10px;padding:5px 14px;border:1px solid var(--b1);border-radius:40px;background:var(--bg4);color:var(--t3);cursor:pointer;transition:all .18s;white-space:nowrap">Expand ↗</button>
+        <div class="ch" style="margin-bottom:0"><div class="ct">March 2026 — Full Schedule</div><div class="cs">CU Security · ARNG Drill · Workouts · Church · hover any day for detail</div></div>
+        <button onclick="toggleSchedExpand()" style="font-family:var(--mono);font-size:10px;padding:5px 14px;border:1px solid var(--b1);border-radius:40px;background:var(--bg4);color:var(--t3);cursor:pointer;transition:all .22s;white-space:nowrap">Expand ↗</button>
       </div>
       <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:8px">${dowHeader}${calDays}</div>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">${schedLegend}</div>
-    </div>`;
+    </div>
 
-  // Sidebar: sparkline-style trend for net/gym/expenses
-  return`<div style="display:flex;flex-direction:column;gap:12px">
-    <div class="ovb ca"><div><div class="ovbm">March 2026</div><div class="ovbs">JD Meyers · Spiritual · Physical · Financial · Intellectual · Creative</div></div><div class="kpis">${kpis}</div></div>
-    ${schedCalHTML}
-    <div class="ovcols">
-      <div class="ovcol">${mks('Spiritual','var(--gold)',[{k:'Attendance',v:'4 sermons',cls:'ok'},{k:'Series',v:'Acts · 1 Cor',cls:''},{k:'Luke Study',v:'Themes 1–3',cls:'ok'}],' d1','spiritual')}${mks('Physical','var(--sky)',[{k:'Gym Days',v:'20',cls:''},{k:'Bench PR',v:'215 lb',cls:'ok'},{k:'Squat PR',v:'225 lb × 8',cls:'ok'},{k:'AFT Avg',v:'71%',cls:'warn'}],' d2','physical')}${mks('Financial','var(--sage)',[{k:'Income',v:'$3,389.70',cls:'ok'},{k:'Expenses',v:'$2,501.44',cls:'warn'},{k:'Net',v:'+$887.26',cls:'ok'},{k:'Tithe',v:'$250.00',cls:'ok'}],' d3','financial')}</div>
-      <div class="ovcol">${mks('Intellectual','var(--sky)',[{k:'MMCS Memo',v:'Complete',cls:'ok'},{k:'GPA',v:'3.83',cls:'ok'},{k:'HTML/API',v:'Applied learning',cls:'ok'}],' d1','intellectual')}${mks('Creative','var(--rose)',[{k:'LMSW Video',v:'Complete',cls:'ok'},{k:'Website + Form',v:'Complete',cls:'ok'},{k:'TaxiZero App',v:'Live on GitHub',cls:'ok'},{k:'Weddings Signed',v:'3',cls:'ok'}],' d2','creative')}</div>
+    <div class="ov-timeline-row">
+      <div class="card ca d4">
+        <div class="ch"><div class="ct">Key Events This Month</div></div>
+        ${evts}
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        ${mks('Financial','var(--sage)',[{k:'Income',v:'$3,389.70',cls:'ok'},{k:'Expenses',v:'$2,501.44',cls:'warn'},{k:'Net',v:'+$887.26',cls:'ok'},{k:'YTD Savings',v:'$2,794',cls:'ok'}],' d4','financial')}
+        ${mks('Creative','var(--rose)',[{k:'Projects Shipped',v:'4',cls:'ok'},{k:'Weddings Signed',v:'3',cls:'ok'},{k:'Active Leads',v:'2',cls:'warn'},{k:'Next Booking',v:'Apr 28',cls:''}],' d5','creative')}
+      </div>
     </div>
   </div>`;
 }
