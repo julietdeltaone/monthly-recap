@@ -1377,7 +1377,7 @@ function rPhysical(){
   const validPcts=ph.aft.filter(a=>a.pct>0);
   const avgPct=Math.round(validPcts.reduce((s,a)=>s+a.pct,0)/validPcts.length);
   const aftList=ph.aft.map((a,i)=>`<div class="aftrow" onclick="openMuscleDetail(${i})" style="padding:5px 0"><span class="aftn" style="font-size:11px">${a.event}<br><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">${a.cur} → ${a.goal}</span></span><div class="aftbw"><div class="aftbf" style="width:${a.pct}%;background:${a.color}"></div></div><span class="aftp" style="color:${a.color};font-size:10px">${a.pct||'—'}%</span></div>`).join('');
-  const commNote=`<div class="comm-note" style="margin-top:10px;font-size:11px"><span class="cnl">Commentary</span>Goals: MDL 350lb · HRP 61 · SDC 1:30 · Plank 3:35 · 2-Mile 13:25. Plank is the critical gap at 47%. Bench hit 215lb twice. Squat 225×8 Mar 26.</div>`;
+  const commNote=`<div class="comm-note" style="margin-top:10px;font-size:11px"><span class="cnl">Commentary</span>AFT goals (5 events): MDL 350lb · HRP 61 · SDC 1:30 · PLK 3:35 · 2MR 13:25. SPT removed from test as of Jun 2025. Plank is the critical gap at 47%. Bench hit 215lb twice. Squat 225×8 Mar 26.</div>`;
   const cardio=ph.cardio.map(c=>`<div style="display:flex;justify-content:space-between;padding:3px 0;border-bottom:1px solid var(--b0)"><span style="font-family:var(--mono);font-size:9px;color:var(--t4)">${c.date}</span><span style="font-size:10px;color:var(--t2)">${c.desc}</span></div>`).join('');
 
   // ─── INLINE SPARK SVG helper ───
@@ -1546,42 +1546,80 @@ function rPhysical(){
       <div style="display:grid;grid-template-columns:1fr;gap:0">${exRows}</div>
     </div>
 
-    <!-- AFT Detail -->
-    <div class="card ca d1" style="padding:13px 14px"><div class="ch" style="margin-bottom:8px"><div class="ct">AFT Events</div><div class="cs">Click for detail</div></div><div>${aftList}</div>${commNote}</div>
+    <!-- AFT — unified full-width card, compact, no dead space -->
+    <div class="card ca d1 sf" style="padding:14px 16px">
+      <div style="display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--b0)">
+        <div>
+          <div class="ct">Army Fitness Test (AFT)</div>
+          <div class="cs">Replaced ACFT as test of record Jun 1 2025 · 5 events · ARNG schedule · JD's status</div>
+        </div>
+        <div style="font-family:var(--mono);font-size:10px;color:var(--sky);background:rgba(95,173,212,.1);border:1px solid rgba(95,173,212,.25);border-radius:20px;padding:3px 10px">AFT · Jun 2025</div>
+      </div>
 
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
 
-    <!-- AFT Infographic -->
-    <div class="card ca d1" style="padding:16px 18px">
-      <div class="ch" style="margin-bottom:14px">
-        <div class="ct">Army Combat Fitness Test</div>
-        <div class="cs">What it is · ARNG schedule · JD's current status</div>
+        <!-- Left: 5 events with progress -->
+        <div>
+          <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px">5 Events — JD's Progress</div>
+          <div style="display:flex;flex-direction:column;gap:3px">
+            ${[
+              {abbr:'MDL',name:'3-Rep Max Deadlift',what:'Hex bar · lower body strength',cur:'285 lb',goal:'350 lb',pct:81,col:'#62C97A'},
+              {abbr:'HRP',name:'Hand-Release Push-Up',what:'Full chest release · upper body endurance',cur:'45 reps',goal:'61 reps',pct:74,col:'#5FADD4'},
+              {abbr:'SDC',name:'Sprint-Drag-Carry',what:'50m multi-event · anaerobic power',cur:'~1:50',goal:'1:30',pct:83,col:'#E0B44E'},
+              {abbr:'PLK',name:'Plank',what:'Forearm plank strict · core endurance',cur:'1:40',goal:'3:35',pct:47,col:'#D9714E'},
+              {abbr:'2MR',name:'2-Mile Run',what:'Timed outdoor · aerobic endurance',cur:'TBD',goal:'13:25',pct:null,col:'#4BBDB8'},
+            ].map(e=>`<div style="display:grid;grid-template-columns:32px 1fr;gap:8px;align-items:center;padding:6px 8px;background:var(--bg3);border-radius:6px;border-left:2px solid ${e.col}">
+              <div style="text-align:center">
+                <div style="font-family:var(--mono);font-size:10px;font-weight:700;color:${e.col};line-height:1.1">${e.abbr}</div>
+                <div style="font-family:var(--mono);font-size:8px;color:${e.pct===null?'var(--t5)':e.pct<60?'var(--rust)':e.pct<80?'var(--gold)':'var(--sage)'};margin-top:1px">${e.pct!==null?e.pct+'%':'—'}</div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px">
+                  <span style="font-size:10px;color:var(--tx);font-weight:600">${e.name}</span>
+                  <span style="font-family:var(--mono);font-size:8px;color:var(--t4)">${e.cur}→${e.goal}</span>
+                </div>
+                ${e.pct!==null
+                  ?`<div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden"><div style="height:100%;width:${e.pct}%;background:${e.col};border-radius:2px;transition:width 1s ease"></div></div>`
+                  :`<div style="height:3px;background:rgba(255,255,255,.04);border-radius:2px"></div>`}
+                <div style="font-size:9px;color:var(--t4);margin-top:2px">${e.what}</div>
+              </div>
+            </div>`).join('')}
+          </div>
+          <!-- Commentary -->
+          <div style="margin-top:8px;padding:7px 9px;border-left:2px solid var(--gold);background:var(--gdim);border-radius:0 4px 4px 0;font-size:10px;color:var(--t2);line-height:1.6">Goals: MDL 350 · HRP 61 · SDC 1:30 · PLK 3:35 · 2MR 13:25. <span style="color:var(--rust)">Plank at 47% is the only event below the 60-pt passing floor.</span> Bench 215 twice. Squat 225×8 Mar 26.</div>
+        </div>
+
+        <!-- Right: What is the AFT + schedule -->
+        <div style="display:flex;flex-direction:column;gap:10px">
+
+          <div>
+            <div style="font-family:var(--mono);font-size:8px;color:var(--sky);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">What Is the AFT</div>
+            <p style="font-size:10px;color:var(--t2);line-height:1.6;margin:0">The <b style="color:var(--tx)">Army Fitness Test</b> replaced the ACFT on <b style="color:var(--tx)">June 1, 2025</b> as the official test of record for all Soldiers. It drops the Standing Power Throw (removed for low readiness value and injury risk) and now consists of 5 events. The SPT removal brings the max score from 600 to 500 pts. Informed by 18 months of analysis and nearly 1 million ACFT records.</p>
+          </div>
+
+          <div>
+            <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">SPT Removed — Why It Matters</div>
+            <div style="padding:7px 9px;background:var(--bg3);border-radius:6px;border:1px solid var(--b0);font-size:10px;color:var(--t3);line-height:1.55">Standing Power Throw <span style="color:var(--rust)">(SPT)</span> was eliminated because it didn't effectively promote fitness or readiness, favored height and technique over actual power, and presented elevated overuse injury risk. <span style="color:var(--sage)">Not tracked in JD's data — correctly so.</span></div>
+          </div>
+
+          <div>
+            <div style="font-family:var(--mono);font-size:8px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">ARNG Testing Schedule</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+              ${[
+                {label:'Frequency',val:'2× per year',sub:'NG minimum'},
+                {label:'Windows',val:'Apr–May · Oct–Nov',sub:'Unit dependent'},
+                {label:'Pass threshold',val:'60+ pts / event',sub:'300 total (general)'},
+                {label:'NG combat MOS',val:'350 total',sub:'Sex-neutral · age-normed · Jun 2026'},
+              ].map(s=>`<div style="padding:6px 8px;background:var(--bg3);border-radius:6px;border:1px solid var(--b0)"><div style="font-family:var(--mono);font-size:7px;color:var(--t4);text-transform:uppercase;letter-spacing:.6px;margin-bottom:2px">${s.label}</div><div style="font-size:11px;color:var(--tx);font-weight:600;line-height:1.2">${s.val}</div><div style="font-size:9px;color:var(--t4);margin-top:1px">${s.sub}</div></div>`).join('')}
+            </div>
+          </div>
+
+          <div style="padding:7px 10px;background:rgba(224,180,78,.06);border:1px solid rgba(224,180,78,.18);border-radius:6px;font-family:var(--mono);font-size:9px;color:var(--t3);line-height:1.6">
+            <span style="color:var(--gold)">STATUS</span> — Next AFT likely <b style="color:var(--tx)">Apr–May 2026</b>. ARNG combat MOS standard (350 total) takes effect <b style="color:var(--tx)">Jun 1, 2026</b>. Plank is the only event below passing threshold.
+          </div>
+
+        </div>
       </div>
-      <div style="font-family:var(--mono);font-size:8px;color:var(--sky);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px">What Is the ACFT</div>
-      <p style="font-size:11px;color:var(--t2);line-height:1.65;margin-bottom:12px">Replaced the APFT in 2022 as the Army's official fitness standard. Tests 6 events designed to mirror real combat: muscular strength, endurance, anaerobic power, explosive power, agility, and aerobic endurance. Passing is mandatory for retention and promotion.</p>
-      <div style="font-family:var(--mono);font-size:8px;color:var(--sky);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px">The 6 Events</div>
-      <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:14px">
-        ${[
-          {abbr:'MDL',name:'3-Rep Max Deadlift',what:'Hex bar · 3 reps max · lower body + grip strength',cur:'285 lb',goal:'350 lb',pct:81,col:'#62C97A'},
-          {abbr:'SPT',name:'Standing Power Throw',what:'Backward overhead throw of 10 lb medicine ball · explosive power',cur:'—',goal:'—',pct:null,col:'#9A8FD8'},
-          {abbr:'HRP',name:'Hand-Release Push-Up',what:'Full chest release each rep · upper body muscular endurance',cur:'45 reps',goal:'61 reps',pct:74,col:'#5FADD4'},
-          {abbr:'SDC',name:'Sprint-Drag-Carry',what:'50m course: sprint, sled drag, shuffle, farmer carry, sprint · anaerobic capacity',cur:'~1:50',goal:'1:30',pct:83,col:'#E0B44E'},
-          {abbr:'PLK',name:'Plank',what:'Forearm plank, strict form · core muscular endurance',cur:'1:40',goal:'3:35',pct:47,col:'#D9714E'},
-          {abbr:'2MR',name:'2-Mile Run',what:'Timed 2-mile run · aerobic endurance',cur:'TBD',goal:'13:25',pct:null,col:'#4BBDB8'},
-        ].map(e=>`<div style="display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:start;padding:7px 10px;background:var(--bg3);border-radius:var(--r1);border-left:2px solid ${e.col}">
-          <div><div style="font-family:var(--mono);font-size:11px;font-weight:700;color:${e.col}">${e.abbr}</div>${e.pct!==null?`<div style="font-family:var(--mono);font-size:9px;color:${e.pct<60?'var(--rust)':e.pct<80?'var(--gold)':'var(--sage)'};margin-top:2px">${e.pct}%</div>`:`<div style="font-family:var(--mono);font-size:9px;color:var(--t5);margin-top:2px">—</div>`}</div>
-          <div><div style="font-size:11px;color:var(--tx);font-weight:600;margin-bottom:2px">${e.name}</div><div style="font-size:10px;color:var(--t3);line-height:1.45;margin-bottom:4px">${e.what}</div>${e.pct!==null?`<div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;margin-bottom:3px"><div style="height:100%;width:${e.pct}%;background:${e.col};border-radius:2px;transition:width 1s ease"></div></div><div style="font-family:var(--mono);font-size:9px;color:var(--t4)">${e.cur} <span style="color:var(--t5)">→</span> goal ${e.goal}</div>`:`<div style="font-family:var(--mono);font-size:9px;color:var(--t5)">No test data recorded yet</div>`}</div>
-        </div>`).join('')}
-      </div>
-      <div style="font-family:var(--mono);font-size:8px;color:var(--gold);text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px">ARNG Testing Schedule</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
-        ${[
-          {label:'Frequency',val:'Twice per year',sub:'Minimum NG requirement'},
-          {label:'Typical Windows',val:'Apr–May & Oct–Nov',sub:'Unit-dependent scheduling'},
-          {label:'Failing Consequence',val:'Flagged / Counseled',sub:'Retest within 90 days'},
-          {label:'Passing Score',val:'60+ pts per event',sub:'100 pts max per event'},
-        ].map(s=>`<div style="padding:8px 10px;background:var(--bg3);border-radius:var(--r1);border:1px solid var(--b0)"><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">${s.label}</div><div style="font-size:12px;color:var(--tx);font-weight:600">${s.val}</div><div style="font-size:10px;color:var(--t4);margin-top:1px">${s.sub}</div></div>`).join('')}
-      </div>
-      <div style="padding:9px 12px;background:rgba(224,180,78,.06);border:1px solid rgba(224,180,78,.18);border-radius:var(--r1);font-family:var(--mono);font-size:9px;color:var(--t3);line-height:1.6"><span style="color:var(--gold)">STATUS</span> — Next ACFT likely <b style="color:var(--tx)">April–May 2026</b> window. Plank at 47% is the only event below the 60-pt passing threshold. All others progressing toward standard.</div>
     </div>
 
     <!-- Insight cards with sparklines -->
