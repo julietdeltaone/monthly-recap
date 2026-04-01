@@ -133,6 +133,23 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .ovet{color:var(--t2);line-height:1.4}.ovet b{color:var(--tx);font-weight:600}
 @keyframes fadeSlideIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
 @keyframes growBar{from{width:0}to{}}
+
+/* VERTICAL TIMELINE — shared across all tab sidebars */
+.tl{display:flex;flex-direction:column;gap:0}
+.tl-item{display:flex;gap:8px;align-items:flex-start}
+.tl-rail{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:14px;padding-top:3px}
+.tl-dot{width:9px;height:9px;border-radius:50%;border:1.5px solid currentColor;flex-shrink:0}
+.tl-dot.done{background:currentColor}
+.tl-dot.cur{background:rgba(212,168,75,.35);border-color:var(--gold)}
+.tl-dot.future{background:transparent;border-color:var(--t5)}
+.tl-line{width:1px;flex:1;min-height:14px;background:var(--b1);margin:2px 0}
+.tl-line.done{background:var(--sage)}
+.tl-content{padding-bottom:8px;flex:1;min-width:0}
+.tl-month{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.8px;margin-bottom:2px}
+.tl-label{font-size:11px;line-height:1.35}
+.tl-sub{font-family:var(--mono);font-size:9px;color:var(--t4);margin-top:1px}
+.tl-badge{display:inline-block;font-family:var(--mono);font-size:8px;padding:1px 5px;border-radius:10px;margin-top:2px}
+
 @media(max-width:640px){.ovcols{grid-template-columns:1fr}.ovb{flex-direction:column}.kpis{justify-content:space-between;width:100%}.kpi{align-items:flex-start}}
 
 /* CALENDAR */
@@ -312,6 +329,23 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 /* SCHEDULE CALENDAR */
 .sched-cell{border-radius:var(--r1);padding:5px 6px;cursor:default;transition:background .15s,border-color .15s,transform .15s;min-height:44px}
 .sched-cell:hover{transform:scale(1.06);z-index:10;box-shadow:var(--sh2)}
+
+
+/* VERTICAL TIMELINE — shared across all tab sidebars */
+.tl{display:flex;flex-direction:column;gap:0}
+.tl-item{display:flex;gap:8px;align-items:flex-start}
+.tl-rail{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:14px;padding-top:3px}
+.tl-dot{width:9px;height:9px;border-radius:50%;border:1.5px solid currentColor;flex-shrink:0}
+.tl-dot.done{background:currentColor}
+.tl-dot.cur{background:rgba(212,168,75,.35);border-color:var(--gold)}
+.tl-dot.future{background:transparent;border-color:var(--t5)}
+.tl-line{width:1px;flex:1;min-height:14px;background:var(--b1);margin:2px 0}
+.tl-line.done{background:var(--sage)}
+.tl-content{padding-bottom:8px;flex:1;min-width:0}
+.tl-month{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.8px;margin-bottom:2px}
+.tl-label{font-size:11px;line-height:1.35}
+.tl-sub{font-family:var(--mono);font-size:9px;color:var(--t4);margin-top:1px}
+.tl-badge{display:inline-block;font-family:var(--mono);font-size:8px;padding:1px 5px;border-radius:10px;margin-top:2px}
 
 @media(max-width:640px){.shell{padding:16px 14px 60px}.hdr h1{font-size:19px}.cg{gap:12px}.fsg{grid-template-columns:1fr 1fr}canvas{max-height:220px!important}.sf{grid-column:span 1}.sub-row{grid-template-columns:1fr 60px}}
 </style>
@@ -737,7 +771,22 @@ function buildSidebar(){
   const row=(k,v,cls='',delta='')=>`<div class="si"><span class="sk">${k}</span><span class="sv ${cls}" style="display:flex;align-items:baseline;gap:4px">${v}${delta}</span></div>`;
 
   if(tab==='overview'){
+    const ovMonths=[
+      {m:'Jan',done:true,cur:false,col:'var(--sage)',label:'Complete',sub:'Net +$812 · 17 gym days · 3 sermons'},
+      {m:'Feb',done:true,cur:false,col:'var(--sage)',label:'Complete',sub:'Net +$1,094 · 18 gym days · 3 sermons'},
+      {m:'Mar',done:false,cur:true,col:'var(--gold)',label:'Current month',sub:'Net +$887 · 20 gym days · 4 sermons'},
+      {m:'Apr',done:false,cur:false,col:'var(--t5)',label:'Upcoming',sub:''},
+      {m:'May',done:false,cur:false,col:'var(--t5)',label:'',sub:''},{m:'Jun',done:false,cur:false,col:'var(--t5)',label:'',sub:''},
+      {m:'Jul',done:false,cur:false,col:'var(--t5)',label:'',sub:''},{m:'Aug',done:false,cur:false,col:'var(--t5)',label:'',sub:''},
+      {m:'Sep',done:false,cur:false,col:'var(--t5)',label:'',sub:''},{m:'Oct',done:false,cur:false,col:'var(--t5)',label:'',sub:''},
+      {m:'Nov',done:false,cur:false,col:'var(--t5)',label:'',sub:''},{m:'Dec',done:false,cur:false,col:'var(--t5)',label:'',sub:''},
+    ];
+    const tlOv=ovMonths.map((item,i)=>`<div class="tl-item"><div class="tl-rail" style="color:${item.col}"><div class="tl-dot${item.cur?' cur':item.done?' done':' future'}"></div>${i<11?`<div class="tl-line${item.done&&!item.cur?' done':''}"></div>`:''}</div><div class="tl-content"><div class="tl-month" style="color:${item.cur?'var(--gold)':item.done?'var(--sage)':'var(--t5)'}">${item.m}</div>${item.label?`<div class="tl-label" style="color:${item.cur?'var(--tx)':item.done?'var(--t2)':'var(--t5)'};font-weight:${item.cur?600:400}">${item.label}</div>`:''} ${item.sub?`<div class="tl-sub">${item.sub}</div>`:''}</div></div>`).join('');
     return`<div class="sc ca" style="border-top:2px solid var(--gold)">
+      <div class="sgt">2026 Overview</div>
+      <div class="tl">${tlOv}</div>
+    </div>
+    <div class="sc ca d1" style="border-top:2px solid var(--gold)">
       <div class="sgt" style="color:var(--gold)">March Review</div>
       <div style="margin-bottom:12px">
         <div style="font-family:var(--mono);font-size:9px;color:var(--sage);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:var(--sage);display:inline-block"></span>Keep Doing</div>
@@ -803,7 +852,6 @@ function buildSidebar(){
   }
 
   if(tab==='intellectual'){
-    // Clarkson card + Focus Plan
     const intel=D.intel;
     const courses=intel.courses.map(c=>`<div class="si"><span class="sk">${c.code} — ${c.name}</span><span class="sv">${c.grade}</span></div>`).join('');
     const rows=intel.plan.map(r=>{
@@ -812,34 +860,60 @@ function buildSidebar(){
       const cur=r.m==='Mar';
       return`<div style="display:grid;grid-template-columns:28px 1fr 18px;gap:4px;padding:4px 0;border-bottom:1px solid var(--b0);align-items:center"><span style="font-family:var(--mono);font-size:9px;color:${cur?'var(--gold)':'var(--t4)'}">${r.m}</span><span style="font-size:11px;color:${cur?'var(--tx)':'var(--t3)'};line-height:1.3;${cur?'font-weight:600':''}">${r.topic.split(' ').slice(0,3).join(' ')}</span><span style="font-family:var(--mono);font-size:9px;color:${fg};text-align:right">${lbl}</span></div>`;
     }).join('');
+    const tlItems=[
+      {m:'Jan',done:true, col:'var(--sage)',label:'Leadership & Military',sub:'Complete · memo produced'},
+      {m:'Feb',done:true, col:'var(--rust)',label:'STEM / Technology',sub:'Missed — acknowledged'},
+      {m:'Mar',cur:true,  col:'var(--gold)',label:'MMCS / Army C2',sub:'Complete · field-verified'},
+      {m:'Apr',done:false,col:'var(--t5)',  label:'U.S. History',sub:'Upcoming'},
+      {m:'May',done:false,col:'var(--t5)',  label:'',sub:''},{m:'Jun',done:false,col:'var(--t5)',label:'',sub:''},
+      {m:'Jul',done:false,col:'var(--t5)',  label:'',sub:''},{m:'Aug',done:false,col:'var(--t5)',label:'',sub:''},
+      {m:'Sep',done:false,col:'var(--t5)',  label:'',sub:''},{m:'Oct',done:false,col:'var(--t5)',label:'',sub:''},
+      {m:'Nov',done:false,col:'var(--t5)',  label:'',sub:''},{m:'Dec',done:false,col:'var(--t5)',label:'',sub:''},
+    ];
+    const tlIntel=tlItems.map((item,i)=>`<div class="tl-item"><div class="tl-rail" style="color:${item.col}"><div class="tl-dot${item.cur?' cur':item.done?' done':' future'}"></div>${i<11?`<div class="tl-line${item.done&&!item.cur?' done':''}"></div>`:''}</div><div class="tl-content"><div class="tl-month" style="color:${item.col}">${item.m}</div>${item.label?`<div class="tl-label" style="color:${item.cur?'var(--tx)':item.done&&item.col==='var(--sage)'?'var(--t2)':'var(--t3)'};font-weight:${item.cur?600:400}">${item.label}</div>`:''} ${item.sub?`<div class="tl-sub">${item.sub}</div>`:''}</div></div>`).join('');
     return`<div class="sc ca" style="border-top:2px solid var(--sky)">
       <div class="sgt">Clarkson University</div>
       <div style="font-family:var(--serif);font-size:26px;font-weight:700;font-style:italic;color:var(--sky);line-height:1">${intel.gpa}</div>
-      <div style="font-family:var(--mono);font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;margin:3px 0 10px">Term GPA · Good Standing</div>
+      <div style="font-family:var(--mono);font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.6px;margin:3px 0 8px">Term GPA · Good Standing</div>
       ${courses}
     </div>
-    <div class="sc ca d1">
-      <div class="sgt">2026 Focus Plan</div>
-      ${rows}
+    <div class="sc ca d1" style="border-top:2px solid var(--sky)">
+      <div class="sgt">2026 Study Plan</div>
+      <div class="tl">${tlIntel}</div>
     </div>`;
   }
 
   if(tab==='creative'){
-    // Progress vs previous month
     const cr=D.creative;
     const signed=cr.pipeline.filter(p=>p.status==='signed').length;
     const leads=cr.pipeline.filter(p=>p.status==='lead').length;
     const sent=cr.pipeline.filter(p=>p.status==='contract-sent').length;
+    const bookingTimeline=[
+      {m:'Jan',done:true, col:'var(--t4)',   label:'No confirmed output',   sub:'Pipeline forming'},
+      {m:'Feb',done:true, col:'var(--t4)',   label:'No confirmed output',   sub:'Pipeline growing'},
+      {m:'Mar',cur:true,  col:'var(--gold)', label:'4 projects complete',   sub:'3 weddings signed · 2 leads'},
+      {m:'Apr',done:false,col:'var(--t5)',   label:'H. Wagner graduation',  sub:'Apr 28 · Potsdam NY'},
+      {m:'May',done:false,col:'var(--t5)',   label:'F. Mnenula +3 seniors', sub:'May 10 · SLU'},
+      {m:'Jun',done:false,col:'var(--t5)',   label:'2 weddings',            sub:'Jun 6 · Jun 27'},
+      {m:'Jul',done:false,col:'var(--t5)',   label:'',                      sub:''},
+      {m:'Aug',done:false,col:'var(--t5)',   label:'2 bookings',            sub:'Aug 1 · Aug 22'},
+      {m:'Sep',done:false,col:'var(--t5)',   label:'',                      sub:''},
+      {m:'Oct',done:false,col:'var(--t5)',   label:'',                      sub:''},
+      {m:'Nov',done:false,col:'var(--t5)',   label:'',                      sub:''},
+      {m:'Dec',done:false,col:'var(--t5)',   label:'',                      sub:''},
+    ];
+    const tlCr=bookingTimeline.map((item,i)=>`<div class="tl-item"><div class="tl-rail" style="color:${item.col}"><div class="tl-dot${item.cur?' cur':item.done?' done':' future'}"></div>${i<11?`<div class="tl-line${item.done&&!item.cur?' done':''}"></div>`:''}</div><div class="tl-content"><div class="tl-month" style="color:${item.cur?'var(--gold)':item.done?'var(--t4)':'var(--t5)'}">${item.m}</div>${item.label?`<div class="tl-label" style="color:${item.cur?'var(--tx)':item.done?'var(--t3)':'var(--t5)'};font-weight:${item.cur?600:400}">${item.label}</div>`:''} ${item.sub?`<div class="tl-sub">${item.sub}</div>`:''}</div></div>`).join('');
     return`<div class="sc ca" style="border-top:2px solid var(--rose)">
+      <div class="sgt">2026 Bookings</div>
+      <div class="tl">${tlCr}</div>
+    </div>
+    <div class="sc ca d1" style="border-top:2px solid var(--rose)">
       <div class="sgt">March Output</div>
-      ${row('Projects','4','ok')}
-      ${row('vs February','+4','delta-up')}
-      ${row('Weddings Signed','3','ok')}
-      ${row('Leads in Contract','2','warn')}
-      ${row('Contract Sent','1','')}
-      ${row('Next Booking','Apr 28','')}
-      <div style="margin-top:10px;padding:8px 10px;background:var(--sdim);border:1px solid rgba(92,184,114,.2);border-radius:var(--r1);font-size:11px;color:var(--t3);line-height:1.5">Goal: 3–4 weddings for 2026. On track.</div>
-      <a href="https://txizero.github.io/fair-estimate/" target="_blank" style="display:block;margin-top:10px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--teal);text-decoration:none;padding:6px 0;border-top:1px solid var(--b0)">TaxiZero App — Live ↗</a>
+      <div class="si"><span class="sk">Projects</span><span class="sv" style="color:var(--sage)">4 complete</span></div>
+      <div class="si"><span class="sk">Weddings Signed</span><span class="sv" style="color:var(--sage)">3</span></div>
+      <div class="si"><span class="sk">Leads Active</span><span class="sv" style="color:var(--gold)">${leads}</span></div>
+      <div class="si"><span class="sk">Next Booking</span><span class="sv">Apr 28</span></div>
+      <a href="https://txizero.github.io/fair-estimate/" target="_blank" style="display:block;margin-top:8px;font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--teal);text-decoration:none;padding:5px 0;border-top:1px solid var(--b0)">TaxiZero App — Live ↗</a>
     </div>`;
   }
 
@@ -857,37 +931,32 @@ function buildSidebar(){
   }
 
   if(tab==='financial'){
-    const marchIncome=D.fin.incomeSources.filter(s=>!s.label.includes('Feb adj.'));
-    const maxInc=Math.max(...marchIncome.map(s=>s.amt));
-    const incRows=marchIncome.map(s=>{
-      const w=Math.round(s.amt/maxInc*100);
-      return`<div style="margin-bottom:8px"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:3px"><span style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:${s.color};flex-shrink:0"></span>${s.label}</span><span style="font-family:var(--mono);font-size:10px;color:var(--sage)">$${s.amt.toFixed(0)}</span></div><div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden"><div style="width:${w}%;height:100%;background:${s.color};border-radius:2px;transition:width .8s ease"></div></div></div>`;
+    const f=D.fin;
+    const spendMonths=[
+      {m:'Jan',done:true,amt:HIST.jan.expenses,budget:2500,net:HIST.jan.net,col:'var(--sage)'},
+      {m:'Feb',done:true,amt:HIST.feb.expenses,budget:2500,net:HIST.feb.net,col:'var(--sage)'},
+      {m:'Mar',cur:true, amt:f.expenses,       budget:2500,net:f.net,       col:'var(--gold)'},
+      {m:'Apr',done:false},{m:'May',done:false},{m:'Jun',done:false},
+      {m:'Jul',done:false},{m:'Aug',done:false},{m:'Sep',done:false},
+      {m:'Oct',done:false},{m:'Nov',done:false},{m:'Dec',done:false},
+    ];
+    const tlFin=spendMonths.map((item,i)=>{
+      const under=item.amt&&item.amt<item.budget;
+      const col=item.cur?'var(--gold)':item.done?'var(--sage)':'var(--t5)';
+      return`<div class="tl-item"><div class="tl-rail" style="color:${col}"><div class="tl-dot${item.cur?' cur':item.done?' done':' future'}"></div>${i<11?`<div class="tl-line${item.done&&!item.cur?' done':''}"></div>`:''}</div><div class="tl-content"><div class="tl-month" style="color:${col}">${item.m}</div>${item.done||item.cur?`<div class="tl-label" style="color:${item.cur?'var(--tx)':'var(--t2)'};font-weight:${item.cur?600:400}">$${Math.round(item.amt).toLocaleString()} spent</div><div class="tl-sub" style="color:${under?'var(--sage)':'var(--rust)'}">${under?'Under':'Over'} budget · Net +$${Math.round(item.net)}</div>`:''}</div></div>`;
     }).join('');
-    const catStrip=D.fin.cats.slice(0,5).map(c=>{const w=(c.amt/D.fin.expenses*100).toFixed(1);return`<div style="flex:${w};height:100%;background:${c.color}" title="${c.name}: $${c.amt.toFixed(0)}"></div>`;}).join('');
-    const activeCt=D.subscriptions.filter(s=>s.status==='Active').length;
-    const moCost=D.subscriptions.filter(s=>s.status==='Active').reduce((a,s)=>a+(s.freq==='Monthly'?s.amt:s.amt/12),0);
-    const subPills=D.subscriptions.filter(s=>s.status==='Active').slice(0,4).map(s=>`<span style="font-family:var(--mono);font-size:9px;padding:2px 6px;border-radius:10px;background:var(--vbg);color:var(--vio);border:1px solid rgba(139,126,200,.18)">${s.name.split(' ')[0]}</span>`).join('');
+    // Income mini bars
+    const marchIncome=f.incomeSources.filter(s=>!s.label.includes('Feb adj.'));
+    const maxInc=Math.max(...marchIncome.map(s=>s.amt));
+    const incRows=marchIncome.map(s=>`<div style="margin-bottom:7px"><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px"><span style="font-size:11px;color:var(--t2);display:flex;align-items:center;gap:4px"><span style="width:5px;height:5px;border-radius:50%;background:${s.color};flex-shrink:0"></span>${s.label}</span><span style="font-family:var(--mono);font-size:10px;color:var(--sage)">$${s.amt.toFixed(0)}</span></div><div style="height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden"><div style="width:${Math.round(s.amt/maxInc*100)}%;height:100%;background:${s.color};border-radius:2px"></div></div></div>`).join('');
     return`<div class="sc ca" style="border-top:2px solid var(--sage)">
       <div class="sgt">Income — March</div>
       ${incRows}
-      <div style="display:flex;justify-content:space-between;padding:8px 0 0;margin-top:4px;border-top:1px solid var(--b0)"><span style="font-size:12px;color:var(--t2);font-weight:600">Total</span><span style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--sage)">$${D.fin.income.toFixed(2)}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:6px 0 0;margin-top:3px;border-top:1px solid var(--b0)"><span style="font-size:11px;color:var(--t2);font-weight:600">Total</span><span style="font-family:var(--mono);font-size:12px;font-weight:700;color:var(--sage)">$${f.income.toFixed(2)}</span></div>
     </div>
-    <div class="sc ca d1" style="padding:13px 14px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div class="sgt" style="margin:0">Spending</div>
-        <button onclick="openFinOverlay('spending')" style="font-family:var(--mono);font-size:9px;padding:3px 8px;border:1px solid var(--b1);border-radius:20px;background:none;color:var(--t3);cursor:pointer">Expand ↗</button>
-      </div>
-      <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px"><span style="font-family:var(--serif);font-size:18px;font-weight:700;font-style:italic;color:var(--tx)">$${D.fin.expenses.toFixed(0)}</span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">total spent</span></div>
-      <div style="display:flex;height:5px;border-radius:3px;overflow:hidden;gap:1px;margin-bottom:6px">${catStrip}</div>
-      <div style="display:flex;flex-wrap:wrap;gap:3px">${D.fin.cats.slice(0,5).map(c=>`<div style="display:flex;align-items:center;gap:3px"><span style="width:5px;height:5px;border-radius:50%;background:${c.color};flex-shrink:0"></span><span style="font-family:var(--mono);font-size:8px;color:var(--t4)">${c.name.split(' ')[0]}</span></div>`).join('')}</div>
-    </div>
-    <div class="sc ca d1" style="padding:13px 14px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-        <div class="sgt" style="margin:0">Subscriptions</div>
-        <button onclick="openFinOverlay('subscriptions')" style="font-family:var(--mono);font-size:9px;padding:3px 8px;border:1px solid var(--b1);border-radius:20px;background:none;color:var(--t3);cursor:pointer">Expand ↗</button>
-      </div>
-      <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px"><span style="font-family:var(--serif);font-size:17px;font-weight:700;font-style:italic;color:var(--vio)">$${moCost.toFixed(0)}<span style="font-size:11px;font-style:normal;color:var(--t3)">/mo</span></span><span style="font-family:var(--mono);font-size:9px;color:var(--t4)">${activeCt} active</span></div>
-      <div style="display:flex;flex-wrap:wrap;gap:3px">${subPills}<span style="font-family:var(--mono);font-size:9px;color:var(--t4);align-self:center">+${activeCt-4} more</span></div>
+    <div class="sc ca d1" style="border-top:2px solid var(--sage)">
+      <div class="sgt">2026 Spending</div>
+      <div class="tl">${tlFin}</div>
     </div>`;
   }
 
@@ -1490,29 +1559,9 @@ function rFinancial(){
             return`<div style="display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--b0)"><span style="font-size:13px;color:var(--t2)">${k}</span><span style="font-family:var(--mono);font-size:13px;font-weight:600;color:${c};display:flex;align-items:baseline;gap:6px">${v}${delta}</span></div>`;
           }).join('')}
         </div>
-        <div style="padding:18px 22px">
-          <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">2026 Savings Timeline</div>
-          ${(()=>{
-            const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-            const actuals={Jan:f.sJan,Feb:f.sFeb,Mar:f.sMar};
-            const monthlyTarget=f.sGoal/12;
-            return months.map((m,i)=>{
-              const isCur=m==='Mar';const isDone=i<3;
-              const actual=actuals[m]||0;
-              const bar=isDone?Math.round(actual/monthlyTarget*100):0;
-              return`<div style="display:flex;align-items:center;gap:7px;margin-bottom:5px">
-                <div style="font-family:var(--mono);font-size:9px;color:${isCur?'var(--gold)':isDone?'var(--sage)':'var(--t5)'};width:24px;flex-shrink:0">${m}</div>
-                <div style="flex:1;background:rgba(255,255,255,.05);border-radius:2px;height:8px;overflow:hidden;position:relative">
-                  ${isDone?`<div style="height:100%;width:${bar}%;background:${isCur?'var(--gold)':'var(--sage)'};opacity:.85;border-radius:2px"></div>`:''}
-                </div>
-                <div style="font-family:var(--mono);font-size:8px;color:${isCur?'var(--gold)':isDone?'var(--sage)':'var(--t5)'};width:38px;text-align:right">${isDone?`+$${Math.round(actual)}`:''}</div>
-              </div>`;
-            }).join('');
-          })()}
-          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;padding-top:7px;border-top:1px solid var(--b0)">
-            <span style="font-size:12px;color:var(--t2)">YTD Total</span>
-            <span style="font-family:var(--mono);font-size:13px;color:var(--sage);font-weight:700">$${tot.toFixed(0)} <span style="font-size:9px;color:var(--t3)">${pct.toFixed(0)}%</span></span>
-          </div>
+        <div style="padding:16px 22px">
+          <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px">3-Month Comparison</div>
+          <canvas id="monthlyNetChart" height="120" style="display:block"></canvas>
         </div>
       </div>
       <div style="padding:16px 22px">
