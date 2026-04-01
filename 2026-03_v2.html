@@ -1589,101 +1589,87 @@ function rPhysical(){
           <div style="margin-top:8px;padding:7px 9px;border-left:2px solid var(--gold);background:var(--gdim);border-radius:0 4px 4px 0;font-size:10px;color:var(--t2);line-height:1.6">Goals: MDL 350 · HRP 61 · SDC 1:30 · PLK 3:35 · 2MR 13:25. <span style="color:var(--rust)">Plank at 47% is the only event below the 60-pt passing floor.</span> Bench 215 twice. Squat 225×8 Mar 26.</div>
         </div>
 
-        <!-- Right: Past test scores graphic -->
-        <div>
-          <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px">Official AFT Scores — Getting Back & Beyond</div>
+        <!-- Right: What is the AFT + schedule -->
+        <div style="display:flex;flex-direction:column;gap:10px">
 
-          ${(()=>{
-            // Per-event data: label, unit, higherBetter, [AIT, ARNG, Now, Goal]
-            // For time events lower=better, so we invert the bar fill logic
-            const evts=[
-              {abbr:'MDL',col:'#62C97A',unit:'lb',hi:true,
-               ait:300,arng:310,now:285,goal:350,
-               aitLabel:'300 lb',arngLabel:'310 lb',nowLabel:'285 lb',goalLabel:'350 lb'},
-              {abbr:'HRP',col:'#5FADD4',unit:'reps',hi:true,
-               ait:57,arng:52,now:45,goal:61,
-               aitLabel:'57 reps',arngLabel:'52 reps',nowLabel:'45 reps',goalLabel:'61 reps'},
-              {abbr:'SDC',col:'#E0B44E',unit:'time',hi:false,
-               // Convert mm:ss to seconds for bar math, lower=better
-               ait:85,arng:92,now:110,goal:90,
-               aitLabel:'1:25',arngLabel:'1:32',nowLabel:'~1:50',goalLabel:'1:30'},
-              {abbr:'PLK',col:'#D9714E',unit:'time',hi:true,
-               // seconds, higher=better
-               ait:221,arng:180,now:100,goal:215,
-               aitLabel:'3:41',arngLabel:'3:00',nowLabel:'1:40',goalLabel:'3:35'},
-              {abbr:'2MR',col:'#4BBDB8',unit:'time',hi:false,
-               // seconds, lower=better
-               ait:780,arng:880,now:null,goal:805,
-               aitLabel:'13:00',arngLabel:'14:40',nowLabel:'TBD',goalLabel:'13:25'},
-            ];
+          <div>
+            <div style="font-family:var(--mono);font-size:8px;color:var(--sky);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">What Is the AFT</div>
+            <p style="font-size:10px;color:var(--t2);line-height:1.6;margin:0">The <b style="color:var(--tx)">Army Fitness Test</b> replaced the ACFT on <b style="color:var(--tx)">June 1, 2025</b> as the official test of record for all Soldiers. It drops the Standing Power Throw and now consists of 5 events. Max score 500 pts. Informed by 18 months of analysis and nearly 1 million ACFT records.</p>
+          </div>
 
-            return evts.map(e=>{
-              // For bar width: normalize relative to goal as 100%
-              // Higher-better: width = val/goal*100, capped at 115%
-              // Lower-better (time): width = goal/val*100, capped at 115%
-              const barPct=(v,hi,goal)=>{
-                if(v===null)return 0;
-                const raw=hi?(v/goal*100):((goal/v)*100);
-                return Math.min(115,Math.max(0,raw)).toFixed(0);
-              };
-
-              const dots=[
-                {label:'AIT',sublabel:'Apr 2025',val:e.ait,display:e.aitLabel,col:'#9A8FD8'},
-                {label:'ARNG',sublabel:'Sep 2025',val:e.arng,display:e.arngLabel,col:'#5FADD4'},
-                {label:'Mar 26',sublabel:'Current',val:e.now,display:e.nowLabel,col:e.now===null?'#3C3A38':e.col},
-                {label:'Goal',sublabel:'AFT std',val:e.goal,display:e.goalLabel,col:'#E0B44E'},
-              ];
-
-              // Determine status: is current above/below both past scores?
-              const nowV=e.now;
-              const aitV=e.ait;
-              const arngV=e.arng;
-              let statusColor='var(--rust)';
-              let statusText='Below past scores';
-              if(nowV===null){statusColor='var(--t4)';statusText='No Mar data yet';}
-              else if(e.hi){
-                if(nowV>=aitV&&nowV>=arngV){statusColor='var(--sage)';statusText='Above both past scores';}
-                else if(nowV>=arngV){statusColor='var(--gold)';statusText='Above ARNG, below AIT';}
-                else{statusColor='var(--rust)';statusText='Below both past scores';}
-              } else {
-                // lower is better
-                if(nowV<=aitV&&nowV<=arngV){statusColor='var(--sage)';statusText='Faster than both past scores';}
-                else if(nowV<=arngV){statusColor='var(--gold)';statusText='Faster than ARNG, slower than AIT';}
-                else{statusColor='var(--rust)';statusText='Slower than both past scores';}
-              }
-
-              return`<div style="margin-bottom:8px;padding:8px 10px;background:var(--bg3);border-radius:6px;border-left:2px solid ${e.col}">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-                  <div style="display:flex;align-items:center;gap:6px">
-                    <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:${e.col}">${e.abbr}</span>
-                    <span style="font-family:var(--mono);font-size:8px;color:${statusColor};background:rgba(255,255,255,.05);padding:1px 6px;border-radius:10px">${statusText}</span>
-                  </div>
-                  <span style="font-family:var(--mono);font-size:8px;color:var(--t4)">goal: ${e.goalLabel}</span>
-                </div>
-                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px">
-                  ${dots.map(d=>{
-                    const pct=barPct(d.val,e.hi,e.goal);
-                    const isGoal=d.label==='Goal';
-                    const isCurrent=d.label==='Mar 26';
-                    return`<div>
-                      <div style="background:rgba(255,255,255,.05);border-radius:3px;height:28px;display:flex;align-items:flex-end;overflow:hidden;position:relative;${isGoal?'border:1px dashed rgba(224,180,78,.3)':''}">
-                        ${d.val!==null?`<div style="width:100%;height:${pct}%;background:${isGoal?'rgba(224,180,78,.25)':isCurrent?d.col:'rgba(255,255,255,.12)'};border-radius:2px 2px 0 0;transition:height 1s ease;min-height:2px"></div>`:''}
-                      </div>
-                      <div style="font-family:var(--mono);font-size:8px;font-weight:${isCurrent?'700':'400'};color:${isCurrent?e.col:isGoal?'var(--gold)':'var(--t3)'};text-align:center;margin-top:3px;line-height:1.2">${d.display}</div>
-                      <div style="font-family:var(--mono);font-size:7px;color:var(--t5);text-align:center">${d.label}</div>
-                    </div>`;
-                  }).join('')}
-                </div>
-              </div>`;
-            }).join('');
-          })()}
+          <div>
+            <div style="font-family:var(--mono);font-size:8px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">ARNG Testing Schedule</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px">
+              ${[
+                {label:'Frequency',val:'2× per year',sub:'NG minimum'},
+                {label:'Windows',val:'Apr–May · Oct–Nov',sub:'Unit dependent'},
+                {label:'Pass threshold',val:'60+ pts / event',sub:'300 total (general)'},
+                {label:'NG combat MOS',val:'350 total',sub:'Sex-neutral · age-normed · Jun 2026'},
+              ].map(s=>`<div style="padding:6px 8px;background:var(--bg3);border-radius:6px;border:1px solid var(--b0)"><div style="font-family:var(--mono);font-size:7px;color:var(--t4);text-transform:uppercase;letter-spacing:.6px;margin-bottom:2px">${s.label}</div><div style="font-size:11px;color:var(--tx);font-weight:600;line-height:1.2">${s.val}</div><div style="font-size:9px;color:var(--t4);margin-top:1px">${s.sub}</div></div>`).join('')}
+            </div>
+          </div>
 
           <div style="padding:7px 10px;background:rgba(224,180,78,.06);border:1px solid rgba(224,180,78,.18);border-radius:6px;font-family:var(--mono);font-size:9px;color:var(--t3);line-height:1.6">
-            <span style="color:var(--gold)">CONTEXT</span> — AIT scores (Apr 2025) represent peak condition post-training. ARNG scores (Sep 2025) show some regression. Mar 2026 current reflects a rebuilding phase — MDL and SDC are close, HRP and especially PLK need work. Next AFT likely <b style="color:var(--tx)">Apr–May 2026</b>.
+            <span style="color:var(--gold)">STATUS</span> — Next AFT likely <b style="color:var(--tx)">Apr–May 2026</b>. ARNG combat MOS standard (350 total) takes effect <b style="color:var(--tx)">Jun 1, 2026</b>. Plank is the only event below passing threshold.
           </div>
+
         </div>
       </div>
-    </div>
+
+      <!-- Past AFT Scores — compact reference strip -->
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--b0)">
+        <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Past Official Scores — Getting Back &amp; Beyond</div>
+        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px">
+          ${[
+            {abbr:'MDL', col:'#62C97A', hi:true,  perfect:400,
+             scores:[{label:'AIT Apr\'25',v:300},{label:'ARNG Sep\'25',v:310},{label:'Mar \'26',v:285},{label:'AFT goal',v:350,goal:true}]},
+            {abbr:'HRP', col:'#5FADD4', hi:true,  perfect:80,
+             scores:[{label:'AIT Apr\'25',v:57},{label:'ARNG Sep\'25',v:52},{label:'Mar \'26',v:45},{label:'AFT goal',v:61,goal:true}]},
+            {abbr:'SDC', col:'#E0B44E', hi:false, perfect:60,
+             scores:[{label:'AIT Apr\'25',v:85},{label:'ARNG Sep\'25',v:92},{label:'Mar \'26',v:110},{label:'AFT goal',v:90,goal:true}],
+             labels:['1:25','1:32','~1:50','1:30']},
+            {abbr:'PLK', col:'#D9714E', hi:true,  perfect:300,
+             scores:[{label:'AIT Apr\'25',v:221},{label:'ARNG Sep\'25',v:180},{label:'Mar \'26',v:100},{label:'AFT goal',v:215,goal:true}],
+             labels:['3:41','3:00','1:40','3:35']},
+            {abbr:'2MR', col:'#4BBDB8', hi:false, perfect:720,
+             scores:[{label:'AIT Apr\'25',v:780},{label:'ARNG Sep\'25',v:880},{label:'Mar \'26',v:null},{label:'AFT goal',v:805,goal:true}],
+             labels:['13:00','14:40','TBD','13:25']},
+          ].map((e,ei)=>{
+            const maxV=e.perfect;
+            const barH=(v,hi)=>{
+              if(v===null)return 0;
+              const r=hi?(v/maxV*100):((maxV/v)*80);
+              return Math.min(100,Math.max(4,r)).toFixed(0);
+            };
+            return`<div style="background:var(--bg3);border:1px solid var(--b0);border-radius:8px;padding:8px;border-top:2px solid ${e.col}">
+              <div style="font-family:var(--mono);font-size:10px;font-weight:700;color:${e.col};margin-bottom:7px">${e.abbr}</div>
+              <div style="display:flex;gap:3px;align-items:flex-end;height:44px;margin-bottom:5px">
+                ${e.scores.map((s,i)=>{
+                  const h=barH(s.v,e.hi);
+                  const isGoal=s.goal;
+                  const isCur=i===2;
+                  const bg=isGoal?'rgba(224,180,78,.35)':isCur?e.col:'rgba(255,255,255,.14)';
+                  const border=isGoal?'1px dashed rgba(224,180,78,.5)':'none';
+                  return`<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:44px">
+                    <div style="width:100%;background:${bg};border-radius:2px 2px 0 0;height:${h}%;min-height:${s.v!==null?'3px':'0'};transition:height .9s ease;border:${border}"></div>
+                  </div>`;
+                }).join('')}
+              </div>
+              <div style="display:flex;gap:3px">
+                ${e.scores.map((s,i)=>{
+                  const isGoal=s.goal;
+                  const isCur=i===2;
+                  const lbl=e.labels?e.labels[i]:(s.v!==null?String(s.v)+(ei===0?' lb':ei===1?' r':''):'—');
+                  return`<div style="flex:1;text-align:center;font-family:var(--mono);font-size:7px;color:${isCur?e.col:isGoal?'var(--gold)':'var(--t4)'};font-weight:${isCur||isGoal?'700':'400'};line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${lbl}</div>`;
+                }).join('')}
+              </div>
+              <div style="display:flex;gap:3px;margin-top:1px">
+                ${e.scores.map((s,i)=>`<div style="flex:1;text-align:center;font-family:var(--mono);font-size:6px;color:var(--t5);overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${i===0?'AIT':i===1?'ARNG':i===2?'Now':'Goal'}</div>`).join('')}
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>
 
     <!-- Insight cards with sparklines -->
     <div class="sf">${insightCards}</div>
