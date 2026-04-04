@@ -1042,6 +1042,14 @@ function buildSidebar(){
   }
 
   if(tab==='reflections'){
+    const rfSections=[
+      {id:'ref-header',label:'Overview'},
+      {id:'ref-roadmap',label:'Road Map 2026–27'},
+      {id:'ref-decisions',label:'Near-Term Decisions'},
+      {id:'ref-edu',label:'Education Funding'},
+      {id:'ref-june27',label:'June 2027 Question'},
+      {id:'ref-mba',label:'MBA Funding Plan'},
+    ];
     return`<div class="sc ca" style="border-top:2px solid var(--gold)">
       <div class="sgt">March Snapshot</div>
       <div class="si"><span class="sk">Net Cash</span><span class="sv" style="color:var(--sage)">+$1,444</span></div>
@@ -1051,6 +1059,15 @@ function buildSidebar(){
       <div class="si"><span class="sk">Projects</span><span class="sv" style="color:var(--sage)">4 complete</span></div>
       <div class="si"><span class="sk">Savings YTD</span><span class="sv">$2735</span></div>
       <div style="margin-top:10px;padding:9px 10px;background:rgba(212,168,75,.07);border:1px solid rgba(212,168,75,.15);border-radius:var(--r1);font-size:11px;color:var(--t3);line-height:1.55">ARNG contract ends June 2027. Decision window is open.</div>
+    </div>
+    <div class="sc ca d1" style="border-top:2px solid var(--t4)">
+      <div class="sgt">On This Page</div>
+      <div style="display:flex;flex-direction:column;gap:1px">
+        ${rfSections.map((sec,i)=>`<button onclick="document.getElementById('${sec.id}')?.scrollIntoView({behavior:'smooth',block:'start'})" style="font-family:var(--mono);font-size:10px;color:var(--t3);background:none;border:none;cursor:pointer;text-align:left;padding:5px 8px;border-radius:var(--r1);transition:all .15s;display:flex;align-items:center;gap:7px" onmouseover="this.style.background='rgba(255,255,255,.05)';this.style.color='var(--tx)'" onmouseout="this.style.background='none';this.style.color='var(--t3)'">
+          <span style="font-family:var(--mono);font-size:8px;color:var(--t5);width:14px;flex-shrink:0">${String(i+1).padStart(2,'0')}</span>
+          ${sec.label}
+        </button>`).join('')}
+      </div>
     </div>`;
   }
 
@@ -2202,10 +2219,10 @@ function rCreative(){
   const rows=cr.pipeline.map(p=>{const[bg,fg,lbl]=sm[p.status]||['rgba(0,0,0,.05)','var(--t4)','---'];const changeCol=p.change&&p.change.includes('Mar')?'var(--gold)':'var(--t4)';return`<tr ${p.status==='cancelled'?'class="dm"':''}><td style="font-weight:600;color:var(--tx)">${p.client}</td><td style="color:var(--t2)">${p.service}</td><td style="font-family:var(--mono);font-size:11px;color:var(--t3);white-space:nowrap">${p.date}</td><td style="font-size:12px;color:var(--t3)">${p.loc}</td><td><span class="sbadge" style="background:${bg};color:${fg}">${lbl}</span></td><td style="font-family:var(--mono);font-size:9px;color:${changeCol}">${p.change||''}</td></tr>`;}).join('');
   const signed=cr.pipeline.filter(p=>p.status==='signed').length,leads=cr.pipeline.filter(p=>p.status==='lead').length,sent=cr.pipeline.filter(p=>p.status==='contract-sent').length;
   return`<div class="cg">
-    <div class="sf ca"><div class="secdiv"><div class="secacc" style="background:var(--rose)"></div><div class="sectit">March Creative Output</div></div>
-      <div class="pjcard"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:7px"><div><div style="font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;color:var(--tx)">LMSW Video Project</div><div style="font-family:var(--mono);font-size:9px;color:var(--rose);text-transform:uppercase;letter-spacing:1px;margin-top:3px">10-Minute Documentary Short · w/ M. Maurer</div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0"><span class="sbadge" style="background:var(--sbg);color:var(--sage)">Complete</span><a href="https://www.youtube.com/watch?v=8ap-Vevbu8g" target="_blank" style="font-family:var(--mono);font-size:9px;color:var(--teal);text-decoration:none;padding:3px 9px;border:1px solid rgba(75,189,184,.3);border-radius:10px;background:rgba(75,189,184,.07);transition:border-color .15s" onmouseover="this.style.borderColor='rgba(75,189,184,.6)'" onmouseout="this.style.borderColor='rgba(75,189,184,.3)'">Watch ↗</a></div></div><p style="font-size:13px;line-height:1.7;color:var(--t2)">Collaborated with several friends across multiple locations to capture the vision M. Maurer needed for her LMSW licensure project. Highlighted systemic issues with volunteer driver verification and accountability for transporting young children. We took her script, recorded dialogue across the locations, and combined it with a slide deck to produce the final piece.</p></div>
-      <div class="pjcard"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:7px"><div><div style="font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;color:var(--tx)">JD Meyers Productions Website + Intake Form</div><div style="font-family:var(--mono);font-size:9px;color:var(--rose);text-transform:uppercase;letter-spacing:1px;margin-top:3px">Website Refresh · Custom Form · Email Integration</div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0"><span class="sbadge" style="background:var(--sbg);color:var(--sage)">Complete</span><a href="https://jdmeyersjr-stlaw.github.io/w-day-planning/" target="_blank" style="font-family:var(--mono);font-size:9px;color:var(--teal);text-decoration:none;padding:3px 9px;border:1px solid rgba(75,189,184,.3);border-radius:10px;background:rgba(75,189,184,.07);transition:border-color .15s" onmouseover="this.style.borderColor='rgba(75,189,184,.6)'" onmouseout="this.style.borderColor='rgba(75,189,184,.3)'">View Intake Form ↗</a></div></div><p style="font-size:13px;line-height:1.7;color:var(--t2)">Rebuilt the JD Meyers Productions website on Squarespace using custom HTML blocks developed with Claude. Also coded a new intake form customized to each service  wedding photography, wedding video, portraits  programmed to send a formatted email notification on every submission.</p></div>
-      <div class="pjcard" style="border-color:rgba(71,176,171,.3);background:rgba(71,176,171,.04)"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:7px"><div><div style="font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;color:var(--tx)">TaxiZero Fare Estimator</div><div style="font-family:var(--mono);font-size:9px;color:var(--teal);text-transform:uppercase;letter-spacing:1px;margin-top:3px">Web App · HTML/JS · Google Maps API · Live</div></div><a href="https://txizero.github.io/fair-estimate/" target="_blank" style="font-family:var(--mono);font-size:10px;padding:5px 12px;border:1px solid rgba(71,176,171,.4);border-radius:40px;background:rgba(71,176,171,.1);color:var(--teal);text-decoration:none;white-space:nowrap;flex-shrink:0">Try It Live</a></div><p style="font-size:13px;line-height:1.7;color:var(--t2)">Built a fare estimator web app for Taxi Zero and deployed live on GitHub Pages. Integrates the Google Maps API for real distance calculations  required learning how API keys work, how to structure authenticated requests, and how to secure keys client-side using a proxy to prevent credential exposure. Built entirely with HTML, CSS, and JavaScript.</p></div>
+    <div class="sf ca" style="display:flex;flex-direction:column;gap:12px"><div class="secdiv"><div class="secacc" style="background:var(--rose)"></div><div class="sectit">March Creative Output</div></div>
+      <div class="pjcard" style="min-width:0;overflow:hidden"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:7px"><div style="min-width:0;overflow:hidden"><div style="font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;color:var(--tx)">LMSW Video Project</div><div style="font-family:var(--mono);font-size:9px;color:var(--rose);text-transform:uppercase;letter-spacing:1px;margin-top:3px">10-Minute Documentary Short · w/ M. Maurer</div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0"><span class="sbadge" style="background:var(--sbg);color:var(--sage)">Complete</span><a href="https://www.youtube.com/watch?v=8ap-Vevbu8g" target="_blank" style="font-family:var(--mono);font-size:9px;color:var(--teal);text-decoration:none;padding:3px 9px;border:1px solid rgba(75,189,184,.3);border-radius:10px;background:rgba(75,189,184,.07);transition:border-color .15s" onmouseover="this.style.borderColor='rgba(75,189,184,.6)'" onmouseout="this.style.borderColor='rgba(75,189,184,.3)'">Watch ↗</a></div></div><p style="font-size:13px;line-height:1.7;color:var(--t2)">Collaborated with several friends across multiple locations to capture the vision M. Maurer needed for her LMSW licensure project. Highlighted systemic issues with volunteer driver verification and accountability for transporting young children. We took her script, recorded dialogue across the locations, and combined it with a slide deck to produce the final piece.</p></div>
+      <div class="pjcard" style="min-width:0;overflow:hidden"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:7px"><div style="min-width:0;overflow:hidden"><div style="font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;color:var(--tx)">JD Meyers Productions Website + Intake Form</div><div style="font-family:var(--mono);font-size:9px;color:var(--rose);text-transform:uppercase;letter-spacing:1px;margin-top:3px">Website Refresh · Custom Form · Email Integration</div></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex-shrink:0"><span class="sbadge" style="background:var(--sbg);color:var(--sage)">Complete</span><a href="https://jdmeyersjr-stlaw.github.io/w-day-planning/" target="_blank" style="font-family:var(--mono);font-size:9px;color:var(--teal);text-decoration:none;padding:3px 9px;border:1px solid rgba(75,189,184,.3);border-radius:10px;background:rgba(75,189,184,.07);transition:border-color .15s" onmouseover="this.style.borderColor='rgba(75,189,184,.6)'" onmouseout="this.style.borderColor='rgba(75,189,184,.3)'">View Intake Form ↗</a></div></div><p style="font-size:13px;line-height:1.7;color:var(--t2)">Rebuilt the JD Meyers Productions website on Squarespace using custom HTML blocks developed with Claude. Also coded a new intake form customized to each service  wedding photography, wedding video, portraits  programmed to send a formatted email notification on every submission.</p></div>
+      <div class="pjcard" style="border-color:rgba(71,176,171,.3);background:rgba(71,176,171,.04)"><div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:7px"><div style="min-width:0;overflow:hidden"><div style="font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;color:var(--tx)">TaxiZero Fare Estimator</div><div style="font-family:var(--mono);font-size:9px;color:var(--teal);text-transform:uppercase;letter-spacing:1px;margin-top:3px">Web App · HTML/JS · Google Maps API · Live</div></div><a href="https://txizero.github.io/fair-estimate/" target="_blank" style="font-family:var(--mono);font-size:10px;padding:5px 12px;border:1px solid rgba(71,176,171,.4);border-radius:40px;background:rgba(71,176,171,.1);color:var(--teal);text-decoration:none;white-space:nowrap;flex-shrink:0">Try It Live</a></div><p style="font-size:13px;line-height:1.7;color:var(--t2)">Built a fare estimator web app for Taxi Zero and deployed live on GitHub Pages. Integrates the Google Maps API for real distance calculations  required learning how API keys work, how to structure authenticated requests, and how to secure keys client-side using a proxy to prevent credential exposure. Built entirely with HTML, CSS, and JavaScript.</p></div>
     </div>
     <div class="card sf ca d1"><div class="ch"><div class="ct">Full Booking Pipeline</div><div class="cs">All 2026 bookings, leads & cancelled</div></div><div style="overflow-x:auto"><table class="ptbl"><thead><tr><th>Client</th><th>Service</th><th>Date</th><th>Location</th><th>Status</th><th>Changes</th></tr></thead><tbody>${rows}</tbody></table></div><div style="margin-top:14px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;text-align:center">${[['Signed',signed,'var(--sage)','var(--sbg)'],['Leads',leads,'var(--gold)','var(--gbg)'],['Contract Sent',sent,'var(--sky)','var(--kbg)'],['Goal','3-4','var(--t2)','rgba(255,255,255,.04)']].map(([k,v,c,bg])=>`<div style="background:${bg};border:1px solid rgba(255,255,255,.07);border-radius:var(--r1);padding:10px 8px"><div style="font-family:var(--mono);font-size:18px;font-weight:700;color:${c}">${v}</div><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-top:3px">${k}</div></div>`).join('')}</div><div style="margin-top:11px;font-size:12px;color:var(--t3);line-height:1.65">Next confirmed: <b style="color:var(--tx)">H. Wagner</b> graduation portraits Apr 28.</div></div>
   </div>`;
@@ -2216,27 +2233,25 @@ function rReflections(){
   return`<div class="cg">
 
     <!-- HEADER -->
-    <div class="card sf ca" style="border-left:3px solid var(--gold)">
+    <div class="card sf ca" style="border-left:3px solid var(--gold)" id="ref-header">
       <div class="ch"><div class="ct">Reflections  March 2026</div><div class="cs">Looking back · looking ahead · decision map through summer 2027</div></div>
       <p style="font-size:13px;line-height:1.78;color:var(--t2)">March was productive across most dimensions  projects shipped, sermons consistent, GPA held, savings on track. The honest gaps are the plank deficit, a slow gym days trend, and the education funding situation that needs a decision this summer. The bigger question  military vs business  sits on the horizon at June 2027. Nothing forces a move yet, but deliberate beats default.</p>
     </div>
 
-    <!-- ROADMAP V3: COMPACT DOT STRIP + EXPANDABLE VERTICAL TIMELINE -->
-    <div class="card sf ca d1" style="padding:0;overflow:hidden" id="rmCard">
+    <!-- ROADMAP V4: COMPACT STRIP + CENTER-SPINE TIMELINE -->
+    <div class="card sf ca d1" id="ref-roadmap" style="padding:0;overflow:hidden" id="rmCard" data-refid="ref-roadmap" data-ref="ref-roadmap">
 
-      <!-- COMPACT VIEW (always visible) -->
-      <div style="padding:20px 22px 16px">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+      <!-- COMPACT VIEW -->
+      <div style="padding:20px 22px 18px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap">
           <div>
-            <div class="ct">Road Map — April 2026 → Summer 2027</div>
-            <div class="cs">15 months · bookings · ARNG drill · MBA milestones · decision windows</div>
+            <div class="ct">Road Map — Apr 2026 → Jun 2027</div>
+            <div class="cs">15 months · bookings · ARNG drill · MBA · decision windows</div>
           </div>
-          <button id="rmBtn" onclick="toggleRoadmap()" style="font-family:var(--mono);font-size:10px;padding:6px 16px;border:1px solid var(--b2);border-radius:40px;background:var(--bg4);color:var(--t3);cursor:pointer;transition:all .22s;white-space:nowrap;flex-shrink:0">
-            Full Timeline ↓
-          </button>
+          <button id="rmBtn" onclick="toggleRoadmap()" style="font-family:var(--mono);font-size:10px;padding:6px 16px;border:1px solid var(--b2);border-radius:40px;background:var(--bg4);color:var(--t3);cursor:pointer;transition:all .22s;white-space:nowrap;flex-shrink:0">Full Timeline ↓</button>
         </div>
 
-        <!-- FY Banners -->
+        <!-- FY banners -->
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:16px">
           <div style="padding:6px 10px;background:rgba(95,173,212,.07);border:1px solid rgba(95,173,212,.25);border-radius:var(--r1);display:flex;align-items:center;gap:7px">
             <div style="width:6px;height:6px;border-radius:50%;background:var(--sky);flex-shrink:0"></div>
@@ -2244,158 +2259,130 @@ function rReflections(){
           </div>
           <div style="padding:6px 10px;background:rgba(98,201,122,.07);border:1px solid rgba(98,201,122,.25);border-radius:var(--r1);display:flex;align-items:center;gap:7px">
             <div style="width:6px;height:6px;border-radius:50%;background:var(--sage);flex-shrink:0"></div>
-            <div><div style="font-family:var(--mono);font-size:8px;color:var(--sage);text-transform:uppercase;letter-spacing:.7px">Army IgnITEd FY · Oct 1, 2026</div><div style="font-size:10px;color:var(--t2);margin-top:1px">New $4,500 TA cap · $750/course</div></div>
+            <div><div style="font-family:var(--mono);font-size:8px;color:var(--sage);text-transform:uppercase;letter-spacing:.7px">Army IgnITEd FY · Oct 1, 2026</div><div style="font-size:10px;color:var(--t2);margin-top:1px">New $4,500 cap · $750/course</div></div>
           </div>
         </div>
 
-        <!-- Compact dot timeline strip -->
+        <!-- Compact labeled dot strip -->
         ${(()=>{
-          const months=[
-            {m:'Apr',q:'Q2',col:'var(--sky)',dots:[
-              {col:'#9A8FD8',label:'AFT window'},
-              {col:'#CC7888',label:'H. Wagner shoot'},
-            ]},
-            {m:'May',q:'Q2',col:'var(--sky)',dots:[
-              {col:'#CC7888',label:'Mnenula seniors'},
-              {col:'#5FADD4',label:'MK610+OS603 done'},
-            ]},
-            {m:'Jun',q:'Q2',col:'var(--sky)',dots:[
-              {col:'#CC7888',label:'McGrath wedding'},
-              {col:'#CC7888',label:'Niles video'},
-            ]},
-            {m:'Jul',q:'Q3',col:'var(--gold)',dots:[
-              {col:'#5FADD4',label:'Clarkson FY resets',hi:true},
-              {col:'#5FADD4',label:'Fall courses begin'},
-            ]},
-            {m:'Aug',q:'Q3',col:'var(--gold)',dots:[
-              {col:'#9A8FD8',label:'Annual Training 2wk',hi:true},
-              {col:'#CC7888',label:'Choate · Eddy events'},
-            ]},
-            {m:'Sep',q:'Q3',col:'var(--gold)',dots:[]},
-            {m:'Oct',q:'Q4',col:'var(--vio)',dots:[
-              {col:'#62C97A',label:'IgnITEd FY resets',hi:true},
-              {col:'#9A8FD8',label:'AFT window'},
-              {col:'#E0B44E',label:'Officer decision',hi:true},
-            ]},
-            {m:'Nov',q:'Q4',col:'var(--vio)',dots:[]},
-            {m:'Dec',q:'Q4',col:'var(--vio)',dots:[]},
-            {m:'Jan',q:"Q1'27",col:'var(--rose)',dots:[
-              {col:'#5FADD4',label:'EC605+SB610+OS681'},
-            ]},
-            {m:'Feb',q:"Q1'27",col:'var(--rose)',dots:[]},
-            {m:'Mar',q:"Q1'27",col:'var(--rose)',dots:[]},
-            {m:'Apr',q:"Q2'27",col:'#CC7888',dots:[]},
-            {m:'May',q:"Q2'27",col:'#CC7888',dots:[
-              {col:'#62C97A',label:'MBA graduation',hi:true},
-            ]},
-            {m:'Jun',q:"Q2'27",col:'#CC7888',dots:[
-              {col:'#E0B44E',label:'ARNG contract ends',hi:true},
-            ]},
+          const typeCol={mil:'#9A8FD8',creative:'#CC7888',edu:'#5FADD4',decision:'#E0B44E',financial:'#62C97A'};
+          const compactEvents=[
+            {m:'Apr',label:'AFT Window',type:'mil'},{m:'Apr',label:'H. Wagner shoot',type:'creative'},
+            {m:'May',label:'Mnenula seniors',type:'creative'},{m:'May',label:'Courses end',type:'edu'},
+            {m:'Jun',label:'McGrath wedding',type:'creative'},{m:'Jun',label:'Niles video',type:'creative'},
+            {m:'Jul',label:'Clarkson FY ↻',type:'edu',hi:true},
+            {m:'Aug',label:'Annual Training 2wk',type:'mil',hi:true},{m:'Aug',label:'Choate · Eddy',type:'creative'},
+            {m:'Oct',label:'IgnITEd FY ↻',type:'financial',hi:true},{m:'Oct',label:'Officer decision',type:'decision',hi:true},
+            {m:'May\'27',label:'MBA Graduation',type:'edu',hi:true},
+            {m:'Jun\'27',label:'ARNG ends',type:'decision',hi:true},
           ];
-          return`<div style="overflow-x:auto;padding-bottom:4px">
-            <div style="display:grid;grid-template-columns:repeat(15,minmax(52px,1fr));gap:0;min-width:600px;position:relative">
-              <!-- Connecting line -->
-              <div style="position:absolute;top:14px;left:26px;right:26px;height:1px;background:rgba(255,255,255,.1);z-index:0"></div>
-              ${months.map((mo,i)=>`
-                <div style="display:flex;flex-direction:column;align-items:center;gap:5px;padding:0 2px;position:relative;z-index:1">
-                  <!-- Month dot -->
-                  <div style="width:${mo.dots.some(d=>d.hi)?'12px':'9px'};height:${mo.dots.some(d=>d.hi)?'12px':'9px'};border-radius:50%;background:${mo.dots.length?mo.col:'rgba(255,255,255,.08)'};border:${mo.dots.some(d=>d.hi)?'2px solid white':'none'};flex-shrink:0;box-shadow:${mo.dots.some(d=>d.hi)?'0 0 10px '+mo.col:'none'};transition:transform .15s" title="${mo.dots.map(d=>d.label).join(' · ')||''}"></div>
-                  <!-- Month label -->
-                  <div style="font-family:var(--mono);font-size:8px;color:${mo.dots.length?mo.col:'var(--t5)'};text-align:center;line-height:1.2">${mo.m}</div>
-                  <!-- Event pills -->
+          // Group by month
+          const months=['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec','Jan\'27','Feb\'27','Mar\'27','Apr\'27','May\'27','Jun\'27'];
+          return`<div style="overflow-x:auto;padding-bottom:6px;cursor:default">
+            <div style="display:flex;gap:0;min-width:700px;position:relative;align-items:flex-start">
+              <!-- spine -->
+              <div style="position:absolute;top:5px;left:0;right:0;height:1px;background:rgba(255,255,255,.08)"></div>
+              ${months.map(m=>{
+                const evs=compactEvents.filter(e=>e.m===m);
+                const hasHi=evs.some(e=>e.hi);
+                const firstCol=evs.length?typeCol[evs[0].type]:'rgba(255,255,255,.1)';
+                return`<div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;position:relative;z-index:1;padding:0 2px">
+                  <div style="width:${hasHi?11:7}px;height:${hasHi?11:7}px;border-radius:50%;background:${evs.length?firstCol:'rgba(255,255,255,.08)'};box-shadow:${hasHi?'0 0 10px '+firstCol:'none'};border:${hasHi?'1.5px solid rgba(255,255,255,.4)':'none'};flex-shrink:0;margin-top:${hasHi?0:2}px"></div>
+                  <div style="font-family:var(--mono);font-size:8px;color:${evs.length?'var(--t2)':'var(--t5)'};text-align:center;white-space:nowrap">${m}</div>
                   <div style="display:flex;flex-direction:column;gap:2px;align-items:center;width:100%">
-                    ${mo.dots.slice(0,2).map(d=>`<div style="width:5px;height:5px;border-radius:50%;background:${d.col};opacity:${d.hi?1:.7};box-shadow:${d.hi?'0 0 6px '+d.col:'none'}"></div>`).join('')}
+                    ${evs.map(e=>`<div style="font-family:var(--mono);font-size:7px;color:${typeCol[e.type]};text-align:center;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;padding:1px 3px;background:${typeCol[e.type]}18;border-radius:3px">${e.label}</div>`).join('')}
                   </div>
-                </div>`).join('')}
+                </div>`;
+              }).join('')}
             </div>
           </div>
           <div style="display:flex;gap:10px;margin-top:10px;flex-wrap:wrap;align-items:center">
-            <span style="font-family:var(--mono);font-size:8px;color:var(--t4)">Key</span>
-            ${[['#5FADD4','Education'],['#9A8FD8','Military'],['#CC7888','Creative'],['#E0B44E','Decision'],['#62C97A','FY Reset']].map(([c,l])=>`<div style="display:flex;align-items:center;gap:3px"><div style="width:7px;height:7px;border-radius:50%;background:${c}"></div><span style="font-family:var(--mono);font-size:8px;color:var(--t4)">${l}</span></div>`).join('')}
-            <span style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-left:4px">· glowing = inflection point</span>
+            ${Object.entries(typeCol).map(([t,c])=>`<div style="display:flex;align-items:center;gap:3px"><div style="width:7px;height:7px;border-radius:50%;background:${c}"></div><span style="font-family:var(--mono);font-size:8px;color:var(--t4)">${{mil:'Military',creative:'Creative',edu:'Education',decision:'Decision',financial:'Financial'}[t]}</span></div>`).join('')}
+            <span style="font-family:var(--mono);font-size:8px;color:var(--t5)">· glow = inflection</span>
           </div>`;
         })()}
       </div>
 
-      <!-- EXPANDABLE FULL VERTICAL TIMELINE -->
-      <div id="rmWrap" style="max-height:0;overflow:hidden;transition:max-height .7s cubic-bezier(.4,0,.2,1),opacity .4s ease;opacity:0">
-        <div style="border-top:1px solid var(--b1);padding:0 22px 24px;margin-top:0">
-          <div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1.2px;padding:16px 0 14px">Full timeline · Apr 2026 → Jun 2027</div>
+      <!-- EXPANDABLE CENTER-SPINE TIMELINE -->
+      <div id="rmWrap" style="max-height:0;overflow:hidden;transition:max-height .75s cubic-bezier(.4,0,.2,1),opacity .45s ease;opacity:0">
+        <div style="border-top:1px solid var(--b1);padding:28px 0 32px;background:linear-gradient(180deg,rgba(255,255,255,.015) 0%,transparent 100%)">
+          <div style="text-align:center;font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1.4px;margin-bottom:32px">April 2026 → June 2027 · Complete Timeline</div>
 
           ${(()=>{
-            // All events merged and sorted chronologically
+            const typeCol={mil:'#9A8FD8',creative:'#CC7888',edu:'#5FADD4',decision:'#E0B44E',financial:'#62C97A'};
+            const typeBg={mil:'rgba(154,143,216,.1)',creative:'rgba(204,120,136,.1)',edu:'rgba(95,173,212,.1)',decision:'rgba(224,180,78,.1)',financial:'rgba(98,201,122,.1)'};
+            const typeLbl={mil:'MIL',creative:'PHOTO',edu:'EDU',decision:'DECIDE',financial:'FIN'};
+            // All events in order - alternating left/right
             const events=[
-              // April 2026
-              {date:'Apr 10–12',month:'Apr 2026',type:'mil',icon:'🪖',label:'ARNG Drill — CSTS / Home Station',detail:'Next drill MRW, PMI · Fri–Sun'},
-              {date:'Apr–May',month:'Apr 2026',type:'mil',icon:'🏋',label:'AFT Testing Window',detail:'ARNG semi-annual test cycle · all 5 events'},
-              {date:'Apr 28',month:'Apr 2026',type:'creative',icon:'📸',label:'H. Wagner — Graduation Shoot',detail:'Potsdam, NY · Contract sent'},
-              // May 2026
+              {date:'Apr 10–12',month:'April 2026',type:'mil',icon:'🪖',label:'ARNG Drill',detail:'Home Station · CSTS / PMI · Fri–Sun'},
+              {date:'Apr–May',month:'April 2026',type:'mil',icon:'🏋',label:'AFT Testing Window',detail:'ARNG semi-annual test cycle · all 5 events',hi:true},
+              {date:'Apr 28',month:'April 2026',type:'creative',icon:'📸',label:'H. Wagner — Graduation Shoot',detail:'Potsdam, NY · Contract sent'},
               {date:'May 10',month:'May 2026',type:'creative',icon:'📸',label:'F. Mnenula +3 — Senior Photos',detail:'St. Lawrence University · Lead'},
-              {date:'May 15–17',month:'May 2026',type:'mil',icon:'🪖',label:'ARNG Drill — Fort Drum',detail:'MUTA 6 · Weapons Qualification Tables III–VI · Fri–Sun'},
-              {date:'Late May',month:'May 2026',type:'edu',icon:'🎓',label:'MK610 + OS603 complete',detail:'Spring 2026 done · FY25-26 Clarkson cap fully used'},
-              // June 2026
-              {date:'Jun 6',month:'Jun 2026',type:'creative',icon:'💒',label:'B. McGrath — Wedding Photography',detail:'The Stables at Windy Point · Signed'},
-              {date:'Jun 13–14',month:'Jun 2026',type:'mil',icon:'🪖',label:'ARNG Drill — Home Station',detail:'MUTA 3 · Annual Training prep · PT test (ACFT) · Sat–Sun'},
-              {date:'Jun 27',month:'Jun 2026',type:'creative',icon:'🎥',label:'C. Niles — Wedding Video',detail:'Rapid View Venue, Chase Mills NY · Signed'},
-              // July 2026
-              {date:'Jul 1',month:'Jul 2026',type:'edu',icon:'🔄',label:'Clarkson FY Resets',detail:'New 12-credit benefit available · Fall 2026: FN608 + IS606 + OM603 covered',hi:true},
-              {date:'Jul 2026',month:'Jul 2026',type:'mil',icon:'🪖',label:'No Drill — July',detail:''},
-              // August 2026
-              {date:'Aug 1',month:'Aug 2026',type:'creative',icon:'💒',label:'C. Choate — Wedding Photography',detail:'Shindigz on the River · Lead'},
-              {date:'Aug 6',month:'Aug 2026',type:'mil',icon:'🪖',label:'ARNG — Annual Training Loadout',detail:'Home Station · MUTA 2 · Sat'},
-              {date:'Aug 7–21',month:'Aug 2026',type:'mil',icon:'🪖',label:'Annual Training — Fort Drum',detail:'2 weeks · Weapons qual make-up, crew gunnery, field exercises · CPX I & II',hi:true},
-              {date:'Aug 22',month:'Aug 2026',type:'creative',icon:'🎥',label:'M. Eddy — Wedding Video',detail:'The Stables at Windy Point · Signed'},
-              {date:'Aug 22',month:'Aug 2026',type:'mil',icon:'🪖',label:'ARNG — Annual Training Recovery',detail:'Home Station · MUTA 2 · Sat'},
-              // September 2026
-              {date:'Sep 2026',month:'Sep 2026',type:'mil',icon:'🪖',label:'No Drill — September',detail:''},
-              // October 2026
-              {date:'Oct 1',month:'Oct 2026',type:'mil',icon:'💰',label:'Army IgnITEd FY Resets',detail:'New $4,500 TA cap · $750/course · Winter 2027 courses now eligible',hi:true},
-              {date:'Oct–Nov',month:'Oct 2026',type:'mil',icon:'🏋',label:'AFT Testing Window',detail:'ARNG semi-annual test cycle'},
-              {date:'Q4 2026',month:'Oct 2026',type:'decision',icon:'❓',label:'Officer Path Decision Window',detail:'OTS applications need 6+ months lead time — decide or default',hi:true},
-              // January 2027
-              {date:'Jan 2027',month:'Jan 2027',type:'edu',icon:'📚',label:'EC605 + SB610 + OS681 begin',detail:'Winter 2027 · Army IgnITEd $750/course · OOP $2,368.50/ea'},
-              // May 2027
-              {date:'May 2027',month:'May 2027',type:'edu',icon:'🎓',label:'MBA Graduation',detail:'Clarkson University · Target date · 10 courses complete',hi:true},
-              // June 2027
-              {date:'Jun 2027',month:'Jun 2027',type:'decision',icon:'❓',label:'ARNG Contract Ends',detail:'Re-enlist · ETS · or pursue OTS — this is the inflection point',hi:true},
+              {date:'May 15–17',month:'May 2026',type:'mil',icon:'🪖',label:'ARNG Drill — Fort Drum',detail:'MUTA 6 · Weapons Qual Tables III–VI'},
+              {date:'Late May',month:'May 2026',type:'edu',icon:'🎓',label:'MK610 + OS603 Complete',detail:'Spring 2026 done · FY25-26 Clarkson cap fully used'},
+              {date:'Jun 6',month:'June 2026',type:'creative',icon:'💒',label:'B. McGrath — Wedding Photo',detail:'The Stables at Windy Point · Signed'},
+              {date:'Jun 13–14',month:'June 2026',type:'mil',icon:'🪖',label:'ARNG Drill — Home Station',detail:'MUTA 3 · Annual Training prep · PT test (ACFT)'},
+              {date:'Jun 27',month:'June 2026',type:'creative',icon:'🎥',label:'C. Niles — Wedding Video',detail:'Rapid View Venue, Chase Mills NY · Signed'},
+              {date:'Jul 1',month:'July 2026',type:'edu',icon:'🔄',label:'Clarkson FY Resets',detail:'New 12-credit benefit · FN608 + IS606 + OM603 now covered',hi:true},
+              {date:'Aug 1',month:'August 2026',type:'creative',icon:'💒',label:'C. Choate — Wedding Photo',detail:'Shindigz on the River · Lead'},
+              {date:'Aug 6',month:'August 2026',type:'mil',icon:'🪖',label:'Annual Training Loadout',detail:'Home Station · MUTA 2 · Sat'},
+              {date:'Aug 7–21',month:'August 2026',type:'mil',icon:'🪖',label:'Annual Training — Fort Drum',detail:'2 weeks · Weapons qual, crew gunnery, CPX I & II',hi:true},
+              {date:'Aug 22',month:'August 2026',type:'creative',icon:'🎥',label:'M. Eddy — Wedding Video',detail:'The Stables at Windy Point · Signed'},
+              {date:'Oct 1',month:'October 2026',type:'financial',icon:'💰',label:'Army IgnITEd FY Resets',detail:'New $4,500 cap · $750/course · Winter 2027 eligible',hi:true},
+              {date:'Oct–Nov',month:'October 2026',type:'mil',icon:'🏋',label:'AFT Testing Window',detail:'ARNG semi-annual cycle'},
+              {date:'Q4 2026',month:'October 2026',type:'decision',icon:'❓',label:'Officer Path Decision Window',detail:'OTS applications need 6+ months lead time',hi:true},
+              {date:'Jan 2027',month:'January 2027',type:'edu',icon:'📚',label:'EC605 + SB610 + OS681 Begin',detail:'Winter 2027 · Army IgnITEd $750/course · OOP $2,369/ea'},
+              {date:'May 2027',month:'May 2027',type:'edu',icon:'🎓',label:'MBA Graduation',detail:'Clarkson University · 10 courses · Target date',hi:true},
+              {date:'Jun 2027',month:'June 2027',type:'decision',icon:'❓',label:'ARNG Contract Ends',detail:'Re-enlist · ETS · or pursue OTS — inflection point',hi:true},
             ];
-            const typeCol={edu:'#5FADD4',mil:'#9A8FD8',creative:'#CC7888',financial:'#62C97A',decision:'#E0B44E'};
-            const typeBg={edu:'rgba(95,173,212,.1)',mil:'rgba(154,143,216,.1)',creative:'rgba(204,120,136,.1)',financial:'rgba(98,201,122,.1)',decision:'rgba(224,180,78,.1)'};
-            const typeLbl={edu:'EDU',mil:'MIL',creative:'PHOTO',financial:'FIN',decision:'DECIDE'};
 
             let lastMonth='';
-            return events.map((ev,i)=>{
-              const monthHeader=ev.month!==lastMonth?(lastMonth=ev.month,`<div style="display:flex;align-items:center;gap:10px;margin:${i>0?'20px':'4px'} 0 10px"><div style="font-family:var(--mono);font-size:10px;font-weight:700;color:var(--t2);letter-spacing:.5px">${ev.month}</div><div style="flex:1;height:1px;background:rgba(255,255,255,.08)"></div></div>`):'';
-              const dotGlow=ev.hi?`box-shadow:0 0 12px ${typeCol[ev.type]};border:2px solid ${typeCol[ev.type]};width:12px;height:12px;`:`border:1px solid ${typeCol[ev.type]};width:9px;height:9px;`;
-              return`${monthHeader}<div style="display:flex;gap:0;align-items:stretch;animation:fadeSlideIn .4s ease both;animation-delay:${(i*.03).toFixed(2)}s">
-                <div style="width:20px;flex-shrink:0;display:flex;flex-direction:column;align-items:center">
-                  <div style="border-radius:50%;background:${ev.hi?typeCol[ev.type]:'transparent'};flex-shrink:0;margin-top:3px;${dotGlow}"></div>
-                  ${i<events.length-1?`<div style="width:1px;flex:1;background:rgba(255,255,255,.07);margin-top:3px"></div>`:''}
-                </div>
-                <div style="flex:1;padding:0 0 14px 14px">
-                  <div style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">
-                    <div style="font-size:11px;flex-shrink:0">${ev.icon}</div>
-                    <div style="flex:1;min-width:0;padding:${ev.detail?'8px 10px 8px':'6px 10px'};background:${ev.hi?typeBg[ev.type]:'rgba(255,255,255,.02)'};border:1px solid ${ev.hi?typeCol[ev.type]+'66':'rgba(255,255,255,.05)'};border-radius:var(--r1);${ev.hi?'box-shadow:0 2px 12px '+typeCol[ev.type]+'22;':''}">
-                      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap">
-                        <div style="font-size:12px;font-weight:600;color:${ev.hi?typeCol[ev.type]:'var(--tx)'};line-height:1.3">${ev.label}</div>
-                        <div style="display:flex;align-items:center;gap:6px;flex-shrink:0">
-                          <span style="font-family:var(--mono);font-size:8px;color:${typeCol[ev.type]};padding:1px 5px;border-radius:4px;background:rgba(255,255,255,.05)">${typeLbl[ev.type]}</span>
-                          <span style="font-family:var(--mono);font-size:9px;color:var(--t4)">${ev.date}</span>
+            return`<div style="position:relative;max-width:780px;margin:0 auto;padding:0 20px">
+              <!-- center spine -->
+              <div style="position:absolute;left:50%;top:0;bottom:0;width:2px;background:linear-gradient(180deg,transparent,rgba(255,255,255,.12) 5%,rgba(255,255,255,.12) 95%,transparent);transform:translateX(-50%)"></div>
+
+              ${events.map((ev,i)=>{
+                const isLeft=i%2===0;
+                const col=typeCol[ev.type];
+                const isNewMonth=ev.month!==lastMonth;
+                if(isNewMonth)lastMonth=ev.month;
+                const monthDivider=isNewMonth?`<div style="position:relative;text-align:center;margin:${i>0?'28px':'0'} 0 20px;z-index:2">
+                  <div style="display:inline-block;font-family:var(--mono);font-size:9px;font-weight:700;color:var(--t3);background:var(--bg2);padding:3px 14px;border-radius:20px;border:1px solid var(--b1);letter-spacing:.8px;text-transform:uppercase">${ev.month}</div>
+                </div>`:'';
+
+                return`${monthDivider}<div style="position:relative;display:flex;align-items:center;justify-content:${isLeft?'flex-end':'flex-start'};margin-bottom:12px;animation:fadeSlideIn .45s ease both;animation-delay:${(i*.05).toFixed(2)}s">
+                  <!-- Event card -->
+                  <div style="width:calc(50% - 28px);${isLeft?'margin-right:28px;text-align:right':'margin-left:28px;text-align:left'}">
+                    <div style="display:inline-block;padding:12px 14px;background:${ev.hi?typeBg[ev.type]:'var(--bg3)'};border:1px solid ${ev.hi?col+'55':'rgba(255,255,255,.07)'};border-radius:var(--r2);${ev.hi?'box-shadow:0 4px 20px '+col+'22;':''};text-align:left;max-width:100%">
+                      <div style="display:flex;align-items:flex-start;gap:8px;flex-direction:${isLeft?'row-reverse':'row'}">
+                        <div style="font-size:15px;flex-shrink:0">${ev.icon}</div>
+                        <div style="min-width:0">
+                          <div style="font-size:12px;font-weight:700;color:${ev.hi?col:'var(--tx)'};line-height:1.35;margin-bottom:2px">${ev.label}</div>
+                          <div style="font-family:var(--mono);font-size:9px;color:var(--t3);line-height:1.5">${ev.detail}</div>
+                          <div style="display:flex;gap:5px;margin-top:6px;flex-direction:${isLeft?'row-reverse':'row'}">
+                            <span style="font-family:var(--mono);font-size:8px;color:${col};padding:1px 6px;border-radius:4px;background:${col}18;letter-spacing:.3px">${typeLbl[ev.type]}</span>
+                            <span style="font-family:var(--mono);font-size:8px;color:var(--t5)">${ev.date}</span>
+                          </div>
                         </div>
                       </div>
-                      ${ev.detail?`<div style="font-family:var(--mono);font-size:9px;color:var(--t3);margin-top:3px;line-height:1.5">${ev.detail}</div>`:''}
                     </div>
                   </div>
-                </div>
-              </div>`;
-            }).join('');
+                  <!-- Center dot + connector -->
+                  <div style="position:absolute;left:50%;transform:translateX(-50%);z-index:2;display:flex;align-items:center;justify-content:center">
+                    <div style="width:${ev.hi?14:10}px;height:${ev.hi?14:10}px;border-radius:50%;background:${ev.hi?col:'var(--bg4)'};border:2px solid ${col};box-shadow:${ev.hi?'0 0 16px '+col+',0 0 32px '+col+'44':'none'};transition:transform .2s" onmouseenter="this.style.transform='scale(1.4)'" onmouseleave="this.style.transform='scale(1)'"></div>
+                  </div>
+                  <!-- Connector line from dot to card -->
+                  <div style="position:absolute;left:50%;${isLeft?'right:calc(50% + '+14+'px)':'left:calc(50% + '+14+'px)'};top:50%;height:1px;width:calc(50% - 42px);background:linear-gradient(${isLeft?'to left':'to right'},${col}66,transparent);${isLeft?'transform:translateX(-100%)':''};pointer-events:none"></div>
+                </div>`;
+              }).join('')}
+            </div>`;
           })()}
         </div>
       </div>
     </div>
 
     <!-- DECISION CARDS ROW -->
-    <div class="card ca d2 sf" style="padding:20px 22px;border-top:2px solid var(--sky)">
+    <div class="card ca d2 sf" style="padding:20px 22px;border-top:2px solid var(--sky)" id="ref-mba">
       <div class="ch" style="margin-bottom:16px">
         <div class="ct" style="color:var(--sky)">MBA Funding Plan — Clarkson University</div>
         <div class="cs">10 courses · May 2027 graduation target · three funding sources</div>
@@ -2475,7 +2462,7 @@ function rReflections(){
         <span style="color:var(--vio)">NOTE</span> · Winter 2027 out-of-pocket: $7,105.50 total (3 × $2,368.50). Army IgnITEd covers $750/course — FY resets Oct 1, Winter 2027 uses FY26–27 cap. Clarkson benefit fully exhausted after Fall 2026.
       </div>
     </div>
-    <div class="card ca d2">
+    <div class="card ca d2" id="ref-decisions">
       <div class="ch"><div class="ct" style="color:var(--gold)">Near-Term Decisions</div><div class="cs">Things that require an actual choice in the next 90 days</div></div>
       <div style="display:flex;flex-direction:column;gap:8px">
         ${[
@@ -2492,7 +2479,7 @@ function rReflections(){
       </div>
     </div>
 
-    <div class="card ca d2">
+    <div class="card ca d2" id="ref-edu">
       <div class="ch"><div class="ct" style="color:var(--sky)">Education Funding Map</div><div class="cs">Clarkson benefit · ArmyIgnited · path to May 2027</div></div>
       <p style="font-size:13px;line-height:1.75;color:var(--t2);margin-bottom:12px">The Clarkson tuition benefit covers 12 credits per fiscal year as a full-time employee. Spring 2026 uses the remaining FY26 credits. Fall 2026 starts a new FY  benefit resets. The real gap question is whether ArmyIgnited TA can supplement beyond what Clarkson covers to close the May 2027 graduation without a funding pause.</p>
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
@@ -2505,7 +2492,7 @@ function rReflections(){
       </div>
     </div>
 
-    <div class="card ca d2">
+    <div class="card ca d2" id="ref-june27">
       <div class="ch"><div class="ct" style="color:var(--t2)">The June 2027 Question</div><div class="cs">ARNG contract end · officer route vs business route · decision architecture</div></div>
       <p style="font-size:13px;line-height:1.78;color:var(--t2);margin-bottom:14px">The Army National Guard contract ends June 2027. That's 15 months from now  enough time to prepare either path, not enough time to drift into one by accident. The decision window that actually matters is probably <b style="color:var(--tx)">late 2026 / early 2027</b>, because OTS applications and the civilian job market both require lead time.</p>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
