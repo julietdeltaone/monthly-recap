@@ -659,7 +659,7 @@ const D={
       {label:"Interest / Apple Cash",amt:58.60,color:"#CC6B47"}
     ],
     cats:[
-      {name:"Drinks & Dining",amt:526.83,color:"#CC6B47",txns:[
+      {name:"Drinks & Dining",amt:610.6,color:"#CC6B47",txns:[
         {d:"3/28",n:"Jake Hafner's Restaurant Tavern",a:-50.32},{d:"3/10",n:"Cindy's Restaurant",a:-35.94},
         {d:"3/29",n:"Wendy's",a:-18.23},{d:"3/29",n:"Burger King",a:-9.22},{d:"3/29",n:"Dunkin'",a:-4.16},
         {d:"3/29",n:"Love's Travel Stop",a:-1.88},{d:"3/27",n:"Grasse River Grind",a:-8.37},
@@ -678,7 +678,16 @@ const D={
         {d:"3/4",n:"McDonald's",a:-9.72},{d:"3/3",n:"Sunoco (Apple Card)",a:-14.80},
         {d:"3/2",n:"McDonald's PlayPlace",a:-4.85},{d:"3/1",n:"Tim Hortons + Jernabi",a:-7.68},
         {d:"3/31",n:"Sunoco",a:-16.56},{d:"3/31",n:"7-Eleven via DoorDash",a:-16.22},
-        {d:"3/30",n:"Sunoco",a:-9.41},{d:"3/30",n:"Burger King",a:-8.64}
+        {d:"3/30",n:"Sunoco",a:-9.41},{d:"3/30",n:"Burger King",a:-8.64},
+        {d:"3/3",n:"Sunoco",a:-9.41},
+        {d:"3/13",n:"Panda Express",a:-15.34},
+        {d:"3/13",n:"Stewart's Shops",a:-2.8},
+        {d:"3/14",n:"Avanti Markets Vending",a:-3.01},
+        {d:"3/14",n:"Market at Work",a:-9.1},
+        {d:"3/15",n:"Chipotle",a:-17.01},
+        {d:"3/15",n:"Starbucks",a:-6.97},
+        {d:"3/15",n:"Lyric Cafe and Tearoom",a:-14.9},
+        {d:"3/22",n:"Dunkin'",a:-5.23}
       ]},
       {name:"Shopping",amt:474.13,color:"#7A90A8",txns:[
         {d:"3/25",n:"Al's Sporting Goods",a:-123.11},{d:"3/25",n:"Amazon MKTPLACE",a:-98.77},
@@ -693,7 +702,7 @@ const D={
         {d:"3/22",n:"Fairmont travel credit back",a:102.67},{d:"3/9",n:"Ottawa parking penalty",a:-59.16},
         {d:"3/9",n:"Indigo parking (×3)",a:-38.00},{d:"3/10",n:"Ogdensburg Bridge",a:-3.25},
         {d:"3/9",n:"Ogdensburg Bridge",a:-3.25},{d:"3/13",n:"Uber (credited)",a:0.00},
-        {d:"3/9",n:"Paymentus service fee",a:-1.15},{d:"3/15",n:"Tesla Supercharger",a:-5.17}
+        {d:"3/9",n:"Paymentus service fee",a:-1.15}
       ]},
       {name:"Tithe",amt:250.00,color:"#E9E7E2",txns:[
         {d:"3/10",n:"Calvary Baptist Church Online",a:-250.00}
@@ -705,7 +714,7 @@ const D={
       {name:"Auto & Transport",amt:202.45,color:"#5A9DC0",txns:[
         {d:"3/25",n:"Tesla Service Center",a:-106.92},{d:"3/9",n:"Tesla Motors",a:-52.37},
         {d:"3/29",n:"Tesla Supercharger",a:-14.89},{d:"3/29",n:"Tesla Supercharger",a:-11.20},
-        {d:"3/28",n:"Tesla Supercharger",a:-11.92},{d:"3/9",n:"Paymentus service fee",a:-1.15},{d:"3/15",n:"Tesla Supercharger",a:-5.17}
+        {d:"3/28",n:"Tesla Supercharger",a:-11.92},{d:"3/9",n:"Paymentus service fee",a:-1.15}
       ]},
       {name:"Entertainment",amt:70.00,color:"#C07080",txns:[
         {d:"3/28",n:"Kodak Center for Performing Arts",a:-15.00},{d:"3/28",n:"Kodak Center (concessions)",a:-7.00},
@@ -1306,8 +1315,7 @@ function rSpiritual(){
 
   // Luke study notes from the attached notes
   const lukeMarch=`
-    <div style="font-family:var(--mono);font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:1.3px;margin-bottom:10px">Gospel of Luke  March Study</div>
-    <p style="font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:12px">Themes 13 for March. Luke is built around journeys  especially the long journey to Jerusalem (9:5119:44). Themes 13 cluster in the early and middle sections. Zacchaeus (Luke 19) touches all three March themes at once.</p>
+    <p style="font-size:12px;color:var(--t2);line-height:1.65;margin-bottom:12px">Themes 1–3 for March. Luke is built around journeys  especially the long journey to Jerusalem (9:5119:44). Themes 13 cluster in the early and middle sections. Zacchaeus (Luke 19) touches all three March themes at once.</p>
 
     <div style="border-left:2px solid var(--gold);padding-left:12px;margin-bottom:14px">
       <div style="font-family:var(--serif);font-size:13px;font-weight:700;font-style:italic;color:var(--tx);margin-bottom:6px">Theme 1  Jesus Seeks the Lost</div>
@@ -1341,9 +1349,7 @@ function rSpiritual(){
       </div>
     </div>
 
-    <div style="margin-top:12px;padding:10px 12px;background:var(--gdim);border:1px solid rgba(212,168,75,.15);border-radius:var(--r1);font-family:var(--mono);font-size:9px;color:var(--t3);line-height:1.6">
-      <span style="color:var(--gold)">APRIL PREVIEW</span>  Themes 46: The Marginalized, Discipleship Costs, Holy Spirit Empowers Mission. Luke 4:1621 · 9:23 · 14:2533 · 24:4449
-    </div>`;
+    `;
 
   return`<div class="cg">
     <div class="cg sf ca" style="grid-template-columns:1fr;gap:16px;display:grid">
@@ -1979,13 +1985,21 @@ function rFinancial(){
 
       <!-- Cumulative spending full width -->
       <div class="card" style="padding:18px 22px">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
           <div>
             <div class="ct">Cumulative Spending</div>
-            <div class="cs">Feb vs Mar vs $2,500 budget  day by day</div>
+            <div class="cs">Day-by-day · hover any day for detail · Feb vs Mar vs $2,500 cap</div>
+          </div>
+          <div style="display:flex;gap:16px;align-items:center">
+            <div style="display:flex;align-items:center;gap:6px"><div style="width:22px;height:2.5px;background:#D4A84B;border-radius:2px"></div><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">March</span></div>
+            <div style="display:flex;align-items:center;gap:6px"><div style="width:22px;height:0;border-top:2px dashed rgba(95,173,212,.7)"></div><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">February</span></div>
+            <div style="display:flex;align-items:center;gap:6px"><div style="width:22px;height:0;border-top:2px dashed rgba(204,107,71,.55)"></div><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">$2,500 cap</span></div>
           </div>
         </div>
-        <canvas id="spendCompChart" height="100" style="display:block;width:100%"></canvas>
+        <div id="spendChartWrap" style="position:relative;width:100%;height:260px">
+          <canvas id="spendCompChart" style="display:block;width:100%;height:260px"></canvas>
+          <div id="spendTooltip" style="position:absolute;background:var(--bg2);border:1px solid var(--b2);border-radius:var(--r2);padding:10px 13px;font-family:var(--mono);font-size:10px;pointer-events:none;opacity:0;transition:opacity .15s;min-width:190px;box-shadow:var(--sh2);z-index:50;line-height:1.6"></div>
+        </div>
       </div>
 
     </div>
@@ -2196,8 +2210,8 @@ function rReflections(){
                   <div style="position:absolute;left:${midPct(i)};top:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:8.5px;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.5px">${m.label}</div>
                 `).join('')}
                 <div style="position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,rgba(255,255,255,.06),rgba(255,255,255,.25),rgba(255,255,255,.06));transform:translateY(-50%);border-radius:1px"></div>
-                <div style="position:absolute;left:0;top:-8px;bottom:-8px;width:2px;background:var(--gold);border-radius:1px;box-shadow:0 0 12px rgba(224,180,78,.8)">
-                  <div style="position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:7.5px;font-weight:600;color:var(--gold);white-space:nowrap;background:var(--bg2);padding:2px 7px;border-radius:3px;border:1px solid rgba(224,180,78,.4);letter-spacing:1px">NOW</div>
+                <div style="position:absolute;left:2px;top:-8px;bottom:-8px;width:2px;background:var(--gold);border-radius:1px;box-shadow:0 0 12px rgba(224,180,78,.8)">
+                  <div style="position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:7.5px;font-weight:600;color:var(--gold);white-space:nowrap;background:var(--bg2);padding:2px 7px;border-radius:3px;border:1px solid rgba(224,180,78,.4);letter-spacing:1px;box-shadow:0 0 8px rgba(224,180,78,.3)">▸ NOW</div>
                 </div>
               </div>
 
@@ -2215,6 +2229,91 @@ function rReflections(){
     </div>
 
     <!-- DECISION CARDS ROW -->
+    <div class="card ca d2 sf" style="padding:20px 22px;border-top:2px solid var(--sky)">
+      <div class="ch" style="margin-bottom:16px">
+        <div class="ct" style="color:var(--sky)">MBA Funding Plan — Clarkson University</div>
+        <div class="cs">10 courses · May 2027 graduation target · three funding sources</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px">
+        <div style="padding:10px 12px;background:var(--bg3);border-radius:var(--r2);border:1px solid var(--b0);border-left:2px solid #5FADD4">
+          <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">Clarkson Benefit</div>
+          <div style="font-family:var(--mono);font-size:15px;font-weight:700;color:#5FADD4">$21,830</div>
+          <div style="font-size:10px;color:var(--t4);margin-top:2px">7 of 10 courses covered</div>
+        </div>
+        <div style="padding:10px 12px;background:var(--bg3);border-radius:var(--r2);border:1px solid var(--b0);border-left:2px solid #62C97A">
+          <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">Army IgnITEd</div>
+          <div style="font-family:var(--mono);font-size:15px;font-weight:700;color:#62C97A">$9,000</div>
+          <div style="font-size:10px;color:var(--t4);margin-top:2px">$4,500/yr · 2 FY cycles</div>
+        </div>
+        <div style="padding:10px 12px;background:var(--bg3);border-radius:var(--r2);border:1px solid var(--b0);border-left:2px solid var(--vio)">
+          <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">Parent (Tentative)</div>
+          <div style="font-family:var(--mono);font-size:15px;font-weight:700;color:var(--vio)">$15,000</div>
+          <div style="font-size:10px;color:var(--t4);margin-top:2px">$1,500/course all terms</div>
+        </div>
+        <div style="padding:10px 12px;background:var(--bg3);border-radius:var(--r2);border:1px solid var(--b0);border-left:2px solid var(--rust)">
+          <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">Out of Pocket</div>
+          <div style="font-family:var(--mono);font-size:15px;font-weight:700;color:var(--rust)">$355.50</div>
+          <div style="font-size:10px;color:var(--t4);margin-top:2px">Winter 2027 only (w/ parent)</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:14px;margin-bottom:10px;flex-wrap:wrap;align-items:center">
+        <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px">Funding bar→</div>
+        <div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;border-radius:2px;background:#5FADD4;opacity:.8"></div><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">Clarkson</span></div><div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;border-radius:2px;background:#62C97A;opacity:.8"></div><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">Army IgnITEd</span></div><div style="display:flex;align-items:center;gap:4px"><div style="width:10px;height:10px;border-radius:2px;background:#D9714E;opacity:.8"></div><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">Out of Pocket</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:52px 1fr 86px 108px;gap:0;align-items:center">
+        <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px;padding-bottom:5px;border-bottom:1px solid var(--b1)">Code</div>
+        <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px;padding-bottom:5px;border-bottom:1px solid var(--b1)">Course</div>
+        <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px;padding-bottom:5px;border-bottom:1px solid var(--b1)">Status</div>
+        <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px;padding-bottom:5px;border-bottom:1px solid var(--b1)">Coverage / OOP</div>
+        <div style="grid-column:1/-1;font-family:var(--mono);font-size:8px;color:#5FADD4;text-transform:uppercase;letter-spacing:1.2px;padding:8px 0 4px;border-bottom:1px solid rgba(255,255,255,.06);margin-top:0">Winter 2026</div>
+<div style="font-family:var(--mono);font-size:10px;color:var(--gold);padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)">AC604</div>
+<div style="font-size:11px;color:var(--t2);padding:5px 8px 2px 0;border-bottom:1px solid rgba(255,255,255,.04)">Financial & Managerial Accounting</div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)"><span style="font-family:var(--mono);font-size:8px;padding:2px 6px;border-radius:10px;background:rgba(92,184,114,.15);color:var(--sage)">Completed</span></div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;display:flex"><div style="height:100%;width:100%;background:#5FADD4;opacity:.8"></div></div><span style="color:var(--sage);font-family:var(--mono);font-size:10px">$0</span></div>
+<div style="font-family:var(--mono);font-size:10px;color:var(--gold);padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)">OM607</div>
+<div style="font-size:11px;color:var(--t2);padding:5px 8px 2px 0;border-bottom:1px solid rgba(255,255,255,.04)">Global Supply Chain Management</div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)"><span style="font-family:var(--mono);font-size:8px;padding:2px 6px;border-radius:10px;background:rgba(92,184,114,.15);color:var(--sage)">Completed</span></div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;display:flex"><div style="height:100%;width:100%;background:#5FADD4;opacity:.8"></div></div><span style="color:var(--sage);font-family:var(--mono);font-size:10px">$0</span></div>
+<div style="grid-column:1/-1;font-family:var(--mono);font-size:8px;color:#62C97A;text-transform:uppercase;letter-spacing:1.2px;padding:8px 0 4px;border-bottom:1px solid rgba(255,255,255,.06);margin-top:6px">Spring 2026</div>
+<div style="font-family:var(--mono);font-size:10px;color:var(--gold);padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)">MK610</div>
+<div style="font-size:11px;color:var(--t2);padding:5px 8px 2px 0;border-bottom:1px solid rgba(255,255,255,.04)">Marketing Management</div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)"><span style="font-family:var(--mono);font-size:8px;padding:2px 6px;border-radius:10px;background:rgba(212,168,75,.12);color:var(--gold)">In Progress</span></div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;display:flex"><div style="height:100%;width:100%;background:#5FADD4;opacity:.8"></div><div style="height:100%;width:24%;background:#62C97A;opacity:.8"></div></div><span style="color:var(--sage);font-family:var(--mono);font-size:10px">$0</span></div>
+<div style="font-family:var(--mono);font-size:10px;color:var(--gold);padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)">OS603</div>
+<div style="font-size:11px;color:var(--t2);padding:5px 8px 2px 0;border-bottom:1px solid rgba(255,255,255,.04)">Leadership & Org Behavior</div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)"><span style="font-family:var(--mono);font-size:8px;padding:2px 6px;border-radius:10px;background:rgba(212,168,75,.12);color:var(--gold)">In Progress</span></div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;display:flex"><div style="height:100%;width:100%;background:#5FADD4;opacity:.8"></div><div style="height:100%;width:24%;background:#62C97A;opacity:.8"></div></div><span style="color:var(--sage);font-family:var(--mono);font-size:10px">$0</span></div>
+<div style="grid-column:1/-1;font-family:var(--mono);font-size:8px;color:#E0B44E;text-transform:uppercase;letter-spacing:1.2px;padding:8px 0 4px;border-bottom:1px solid rgba(255,255,255,.06);margin-top:6px">Fall 2026</div>
+<div style="font-family:var(--mono);font-size:10px;color:var(--gold);padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)">FN608</div>
+<div style="font-size:11px;color:var(--t2);padding:5px 8px 2px 0;border-bottom:1px solid rgba(255,255,255,.04)">Financial Management</div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)"><span style="font-family:var(--mono);font-size:8px;padding:2px 6px;border-radius:10px;background:rgba(255,255,255,.04);color:var(--t4)">Planned</span></div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;display:flex"><div style="height:100%;width:100%;background:#5FADD4;opacity:.8"></div><div style="height:100%;width:32%;background:#62C97A;opacity:.8"></div></div><span style="color:var(--sage);font-family:var(--mono);font-size:10px">$0</span></div>
+<div style="font-family:var(--mono);font-size:10px;color:var(--gold);padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)">IS606</div>
+<div style="font-size:11px;color:var(--t2);padding:5px 8px 2px 0;border-bottom:1px solid rgba(255,255,255,.04)">Business Information Systems</div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)"><span style="font-family:var(--mono);font-size:8px;padding:2px 6px;border-radius:10px;background:rgba(255,255,255,.04);color:var(--t4)">Planned</span></div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;display:flex"><div style="height:100%;width:100%;background:#5FADD4;opacity:.8"></div><div style="height:100%;width:32%;background:#62C97A;opacity:.8"></div></div><span style="color:var(--sage);font-family:var(--mono);font-size:10px">$0</span></div>
+<div style="font-family:var(--mono);font-size:10px;color:var(--gold);padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)">OM603</div>
+<div style="font-size:11px;color:var(--t2);padding:5px 8px 2px 0;border-bottom:1px solid rgba(255,255,255,.04)">Decision Analysis & Supply Chain</div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)"><span style="font-family:var(--mono);font-size:8px;padding:2px 6px;border-radius:10px;background:rgba(255,255,255,.04);color:var(--t4)">Planned</span></div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;display:flex"><div style="height:100%;width:100%;background:#5FADD4;opacity:.8"></div><div style="height:100%;width:32%;background:#62C97A;opacity:.8"></div></div><span style="color:var(--sage);font-family:var(--mono);font-size:10px">$0</span></div>
+<div style="grid-column:1/-1;font-family:var(--mono);font-size:8px;color:#9A8FD8;text-transform:uppercase;letter-spacing:1.2px;padding:8px 0 4px;border-bottom:1px solid rgba(255,255,255,.06);margin-top:6px">Winter 2027</div>
+<div style="font-family:var(--mono);font-size:10px;color:var(--gold);padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)">EC605</div>
+<div style="font-size:11px;color:var(--t2);padding:5px 8px 2px 0;border-bottom:1px solid rgba(255,255,255,.04)">Managerial Economics</div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)"><span style="font-family:var(--mono);font-size:8px;padding:2px 6px;border-radius:10px;background:rgba(255,255,255,.04);color:var(--t4)">Planned</span></div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;display:flex"><div style="height:100%;width:48%;background:#62C97A;opacity:.8"></div><div style="height:100%;width:3%;background:#D9714E;opacity:.9"></div></div><span style="color:var(--rust);font-weight:700;font-family:var(--mono);font-size:10px">$118</span></div>
+<div style="font-family:var(--mono);font-size:10px;color:var(--gold);padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)">SB610</div>
+<div style="font-size:11px;color:var(--t2);padding:5px 8px 2px 0;border-bottom:1px solid rgba(255,255,255,.04)">Corporate Ethics & Social Resp.</div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)"><span style="font-family:var(--mono);font-size:8px;padding:2px 6px;border-radius:10px;background:rgba(255,255,255,.04);color:var(--t4)">Planned</span></div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;display:flex"><div style="height:100%;width:48%;background:#62C97A;opacity:.8"></div><div style="height:100%;width:3%;background:#D9714E;opacity:.9"></div></div><span style="color:var(--rust);font-weight:700;font-family:var(--mono);font-size:10px">$118</span></div>
+<div style="font-family:var(--mono);font-size:10px;color:var(--gold);padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)">OS681</div>
+<div style="font-size:11px;color:var(--t2);padding:5px 8px 2px 0;border-bottom:1px solid rgba(255,255,255,.04)">Strategic Planning (Capstone)</div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)"><span style="font-family:var(--mono);font-size:8px;padding:2px 6px;border-radius:10px;background:rgba(255,255,255,.04);color:var(--t4)">Planned</span></div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;display:flex"><div style="height:100%;width:48%;background:#62C97A;opacity:.8"></div><div style="height:100%;width:3%;background:#D9714E;opacity:.9"></div></div><span style="color:var(--rust);font-weight:700;font-family:var(--mono);font-size:10px">$118</span></div>
+      </div>
+      <div style="margin-top:12px;padding:9px 12px;background:rgba(154,143,216,.07);border:1px solid rgba(154,143,216,.2);border-radius:var(--r1);font-family:var(--mono);font-size:9px;color:var(--t3);line-height:1.6">
+        <span style="color:var(--vio)">NOTE</span> · Winter 2027 OOP is $355.50 total (3 × $118.50) <em>with</em> parent contribution. Without it: $7,105.50. Army IgnITEd resets Oct 1 — Winter 2027 uses FY26–27 cap. Clarkson benefit exhausted after Fall 2026.
+      </div>
+    </div>
     <div class="card ca d2">
       <div class="ch"><div class="ct" style="color:var(--gold)">Near-Term Decisions</div><div class="cs">Things that require an actual choice in the next 90 days</div></div>
       <div style="display:flex;flex-direction:column;gap:8px">
@@ -2295,17 +2394,42 @@ function afterRender(){
     const sc=document.getElementById('spendCompChart');
     if(sc){
       const days=Array.from({length:31},(_,i)=>i+1);
-      charts.push(new Chart(sc,{type:'line',data:{labels:days,datasets:[
-        {label:'February',data:D.fin.spendingCumFeb,borderColor:'rgba(90,157,192,.6)',backgroundColor:'transparent',borderWidth:1.5,borderDash:[4,3],pointRadius:0,tension:.4},
-        {label:'March',data:D.fin.spendingCumMar,borderColor:'#D4A84B',backgroundColor:'rgba(212,168,75,.07)',borderWidth:2.5,pointRadius:0,tension:.4,fill:true},
-        {label:'$2,500 Budget',data:Array(31).fill(2500),borderColor:'rgba(204,107,71,.5)',backgroundColor:'transparent',borderWidth:1,borderDash:[6,4],pointRadius:0}
-      ]},options:{responsive:true,maintainAspectRatio:true,
-        plugins:{legend:{labels:{color:'#CCC9C3',font:{family:'DM Sans',size:11},boxWidth:18}},tooltip:{callbacks:{label:ctx=>' $'+ctx.parsed.y.toFixed(0)}}},
+      const spendChart=new Chart(sc,{type:'line',data:{labels:days,datasets:[
+        {label:'February',data:D.fin.spendingCumFeb,borderColor:'rgba(95,173,212,.7)',backgroundColor:'transparent',borderWidth:1.5,borderDash:[5,3],pointRadius:3,pointBackgroundColor:'rgba(95,173,212,.7)',pointBorderColor:'transparent',pointHoverRadius:7,pointHoverBackgroundColor:'#5FADD4',tension:.35},
+        {label:'March',data:D.fin.spendingCumMar,borderColor:'#D4A84B',backgroundColor:'rgba(212,168,75,.06)',borderWidth:2.5,pointRadius:3,pointBackgroundColor:'rgba(212,168,75,.85)',pointBorderColor:'transparent',pointHoverRadius:7,pointHoverBackgroundColor:'#E0B44E',tension:.35,fill:true},
+        {label:'$2,500 Budget',data:Array(31).fill(2500),borderColor:'rgba(204,107,71,.55)',backgroundColor:'transparent',borderWidth:1.5,borderDash:[8,5],pointRadius:0,pointHoverRadius:0}
+      ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+        plugins:{legend:{display:false},tooltip:{enabled:false,external:(ctx)=>{
+          const tip=document.getElementById('spendTooltip');
+          if(!tip)return;
+          if(ctx.tooltip.opacity===0){tip.style.opacity='0';return;}
+          const day=ctx.tooltip.dataPoints[0].label;
+          const mar=ctx.tooltip.dataPoints.find(p=>p.dataset.label==='March');
+          const feb=ctx.tooltip.dataPoints.find(p=>p.dataset.label==='February');
+          const marV=mar?mar.parsed.y:0;const febV=feb?feb.parsed.y:0;
+          const diff=marV-febV;const diffStr=diff>=0?'+$'+diff.toFixed(0):'-$'+Math.abs(diff).toFixed(0);
+          const diffCol=diff<=0?'var(--sage)':'var(--rust)';
+          const overCapHtml=marV>2500?'<div style="margin-top:5px;color:var(--rust);font-size:9px">\u25b2 $'+(marV-2500).toFixed(0)+' over cap</div>':'';
+          tip.innerHTML='<div style="font-family:var(--mono);font-size:9px;color:var(--gold);margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid var(--b1)">Mar '+day+'</div>'
+            +'<div style="display:flex;justify-content:space-between;gap:12px;margin-bottom:3px"><span style="color:var(--gold)">March</span><span style="color:var(--tx);font-weight:700">$'+marV.toFixed(0)+'</span></div>'
+            +'<div style="display:flex;justify-content:space-between;gap:12px;margin-bottom:6px"><span style="color:rgba(95,173,212,.8)">February</span><span style="color:var(--t2)">$'+febV.toFixed(0)+'</span></div>'
+            +'<div style="display:flex;justify-content:space-between;gap:12px;padding-top:5px;border-top:1px solid var(--b1)"><span style="color:var(--t3)">vs Feb</span><span style="color:'+diffCol+';font-weight:600">'+diffStr+'</span></div>'
+            +overCapHtml;
+          const wrap=document.getElementById('spendChartWrap');
+          const wRect=wrap?wrap.getBoundingClientRect():{left:0,top:0};
+          const cRect=sc.getBoundingClientRect();
+          const x=ctx.tooltip.caretX;const y=ctx.tooltip.caretY;
+          const tipW=190;
+          tip.style.left=(x+tipW>cRect.width-20?x-tipW-10:x+14)+'px';
+          tip.style.top=Math.max(0,y-40)+'px';
+          tip.style.opacity='1';
+        }}},
         scales:{
-          x:{grid:{display:false},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:10},maxTicksLimit:10},border:{display:false},title:{display:true,text:'Day of month',color:'#5A5754',font:{size:10}}},
-          y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:10},callback:v=>'$'+v.toLocaleString()},border:{display:false},max:2800,suggestedMin:0}
+          x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:10},maxTicksLimit:16,callback:(v,i)=>i%2===0?i+1:''},border:{display:false}},
+          y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'#9A9590',font:{family:'JetBrains Mono',size:10},callback:v=>'$'+v.toLocaleString(),maxTicksLimit:7},border:{display:false},max:3000,suggestedMin:0}
         }
-      }}));
+      }});
+      charts.push(spendChart);
     }
     // Daily spending heatmap (SVG inline)
     // Build heatmap in sidebar div (dailySpendHeatSb)
