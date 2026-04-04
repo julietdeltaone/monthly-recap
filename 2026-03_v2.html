@@ -527,6 +527,11 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 (()=>{
 
 /* ─ ─ ─  HISTORICAL DATA (Jan & Feb for comparison) ─ ─ ─  */
+const FEB_CATS={
+  'Drinks & Dining':476.51,'Shopping':9.39,'Travel & Vacation':142.31,'Tithe':250.00,
+  'Groceries':253.31,'Auto & Transport':310.50,'Entertainment':31.37,
+  'Subscriptions':52.39,'Healthcare / Personal':87.88,'Education':0
+};
 const HIST={
   jan:{gymDays:17,volume:128400,net:812.44,income:3100,expenses:2287.56,
        sermons:4,gpa:null,
@@ -659,8 +664,8 @@ const D={
       {label:"Interest / Apple Cash",amt:58.60,color:"#CC6B47"}
     ],
     cats:[
-      {name:"Drinks & Dining",amt:610.6,color:"#CC6B47",txns:[
-        {d:"3/28",n:"Jake Hafner's Restaurant Tavern",a:-50.32},{d:"3/10",n:"Cindy's Restaurant",a:-35.94},
+      {name:"Drinks & Dining",amt:476.51,color:"#CC6B47",txns:[
+        {d:"3/28",n:"Jake Hafner's Restaurant Tavern",a:-50.32},{d:"3/28",n:"Platinum Resy Credit",a:50.32},{d:"3/10",n:"Cindy's Restaurant",a:-35.94},
         {d:"3/29",n:"Wendy's",a:-18.23},{d:"3/29",n:"Burger King",a:-9.22},{d:"3/29",n:"Dunkin'",a:-4.16},
         {d:"3/29",n:"Love's Travel Stop",a:-1.88},{d:"3/27",n:"Grasse River Grind",a:-8.37},
         {d:"3/27",n:"Subway",a:-7.55},{d:"3/26",n:"Taco Bell",a:-7.54},{d:"3/26",n:"Sunoco",a:-10.02},
@@ -689,20 +694,20 @@ const D={
         {d:"3/15",n:"Lyric Cafe and Tearoom",a:-14.9},
         {d:"3/22",n:"Dunkin'",a:-5.23}
       ]},
-      {name:"Shopping",amt:474.13,color:"#7A90A8",txns:[
+      {name:"Shopping",amt:487.27,color:"#7A90A8",txns:[
         {d:"3/25",n:"Al's Sporting Goods",a:-123.11},{d:"3/25",n:"Amazon MKTPLACE",a:-98.77},
         {d:"3/20",n:"Magbak Store",a:-90.89},{d:"3/16",n:"Saks Direct",a:-64.74},
         {d:"3/16",n:"Platinum Saks Credit",a:50.00},{d:"3/23",n:"Amazon MKTPLACE",a:-28.72},
         {d:"3/27",n:"Floxtop.com",a:-19.99},{d:"3/24",n:"Amazon.com",a:-14.12},
         {d:"3/24",n:"Anthropic (API usage)",a:-5.20},{d:"3/9",n:"Amazon MKTPLACE",a:-10.25},
-        {d:"3/3",n:"Anthropic",a:-5.20},{d:"3/1",n:"Apple Store (×2)",a:-40.66}
+        {d:"3/13",n:"Army Exchange",a:-13.14},{d:"3/3",n:"Anthropic",a:-5.20},{d:"3/1",n:"Apple Store (×2)",a:-40.66}
       ]},
-      {name:"Travel & Vacation",amt:433.11,color:"#D4A84B",txns:[
-        {d:"3/9",n:"Fairmont Chateau Laurier",a:-205.95},{d:"3/20",n:"Fairmont Chateau Laurier",a:-210.67},
-        {d:"3/22",n:"Fairmont travel credit back",a:102.67},{d:"3/9",n:"Ottawa parking penalty",a:-59.16},
-        {d:"3/9",n:"Indigo parking (×3)",a:-38.00},{d:"3/10",n:"Ogdensburg Bridge",a:-3.25},
-        {d:"3/9",n:"Ogdensburg Bridge",a:-3.25},{d:"3/13",n:"Uber (credited)",a:0.00},
-        {d:"3/9",n:"Paymentus service fee",a:-1.15}
+      {name:"Travel & Vacation",amt:115.83,color:"#D4A84B",txns:[
+        {d:"3/20",n:"Fairmont Chateau Laurier",a:-210.67},{d:"3/9",n:"Fairmont Chateau Laurier",a:-205.95},
+        {d:"3/13",n:"Fairmont — credit refund",a:204.62},{d:"3/22",n:"Fairmont — travel credit",a:102.67},
+        {d:"3/9",n:"Ottawa parking penalty",a:-59.16},
+        {d:"3/9",n:"Ogdensburg Bridge",a:-3.25},{d:"3/10",n:"Ogdensburg Bridge",a:-3.25},
+        {d:"3/13",n:"Uber",a:-9.99},{d:"3/13",n:"Uber credit",a:9.99}
       ]},
       {name:"Tithe",amt:250.00,color:"#E9E7E2",txns:[
         {d:"3/10",n:"Calvary Baptist Church Online",a:-250.00}
@@ -711,20 +716,23 @@ const D={
         {d:"3/27",n:"Walmart",a:-73.15},{d:"3/19",n:"Walmart Supercenter",a:-73.87},
         {d:"3/2",n:"Walmart",a:-58.58},{d:"3/5",n:"Walmart",a:-30.25},{d:"3/2",n:"Walmart",a:-1.60}
       ]},
-      {name:"Auto & Transport",amt:202.45,color:"#5A9DC0",txns:[
+      {name:"Auto & Transport",amt:240.46,color:"#5A9DC0",txns:[
         {d:"3/25",n:"Tesla Service Center",a:-106.92},{d:"3/9",n:"Tesla Motors",a:-52.37},
         {d:"3/29",n:"Tesla Supercharger",a:-14.89},{d:"3/29",n:"Tesla Supercharger",a:-11.20},
-        {d:"3/28",n:"Tesla Supercharger",a:-11.92},{d:"3/9",n:"Paymentus service fee",a:-1.15}
+        {d:"3/28",n:"Tesla Supercharger",a:-11.92},{d:"3/15",n:"Tesla Supercharger",a:-5.17},
+        {d:"3/9",n:"Indigo parking (×3)",a:-38.00}
       ]},
-      {name:"Entertainment",amt:70.00,color:"#C07080",txns:[
-        {d:"3/28",n:"Kodak Center for Performing Arts",a:-15.00},{d:"3/28",n:"Kodak Center (concessions)",a:-7.00},
+      {name:"Entertainment",amt:31.37,color:"#C07080",txns:[
+        {d:"3/14",n:"StubHub (Rochester show)",a:-157.36},{d:"3/14",n:"StubHub refund",a:150.00},{d:"3/28",n:"Kodak Center for Performing Arts",a:-15.00},{d:"3/28",n:"Kodak Center (concessions)",a:-7.00},
         {d:"3/23",n:"Roxy Theater",a:-10.00},{d:"3/20",n:"Ebookbasic PayPal",a:-29.99},
         {d:"3/23",n:"YouTube Premium",a:-7.99},{d:"3/23",n:"Plat. Digital Entertainment Credit",a:7.99}
       ]},
-      {name:"Subscriptions",amt:79.18,color:"#8B7EC8",txns:[
-        {d:"3/27",n:"Claude.ai Subscription",a:-21.40},{d:"3/25",n:"Apple Subscription",a:-9.99},
-        {d:"3/10",n:"Apple Subscription (Apple Card)",a:-4.31},{d:"3/26",n:"Nayax",a:-2.10},
-        {d:"3/8",n:"Nayax",a:-3.85},{d:"3/30",n:"Walmart+ Monthly",a:-13.99},{d:"3/13",n:"OpenAI (ChatGPT)",a:-21.60}
+      {name:"Subscriptions",amt:71.24,color:"#8B7EC8",txns:[
+        {d:"3/27",n:"Claude.ai Subscription",a:-21.40},{d:"3/13",n:"OpenAI (ChatGPT)",a:-21.60},
+        {d:"3/25",n:"Apple Subscription",a:-9.99},{d:"3/10",n:"Apple Subscription (Apple Card)",a:-4.31},
+        {d:"3/30",n:"Walmart+ Monthly",a:-13.99},{d:"3/30",n:"Walmart+ credit",a:13.99},
+        {d:"3/23",n:"YouTube Premium",a:-7.99},{d:"3/23",n:"Plat. Digital Entertainment Credit",a:7.99},
+        {d:"3/26",n:"Nayax",a:-2.10},{d:"3/8",n:"Nayax",a:-3.85}
       ]},
       {name:"Healthcare / Personal",amt:87.88,color:"#47B0AB",txns:[
         {d:"3/3",n:"TRICARE Select (National Guard)",a:-57.88},
@@ -1872,8 +1880,11 @@ function rFinancial(){
   const max=Math.max(...f.cats.map(c=>c.amt));
   const cats=f.cats.map((cat,i)=>{
     const sp=(cat.amt/f.expenses*100).toFixed(1);
-    const txns=cat.txns.map(t=>`<div class="ftx"><span class="ftxd">${t.d}</span><span class="ftxn">${t.n}</span><span class="ftxa ${t.a>0?'pos':'neg'}">${t.a>0?'+':''}$${Math.abs(t.a).toFixed(2)}</span></div>`).join('');
-    return`<div class="fcat" id="fc${i}"><div class="fcath" onclick="toggleFin('fc${i}')"><div class="fcatl"><span class="fcatdot" style="background:${cat.color}"></span><span class="fcatn">${cat.name}</span><span class="fcatnt">${cat.txns.length} txn</span></div><div class="fcatr"><span class="fcatp">${sp}%</span><span class="fcata">></span><span class="fcatamt">$${cat.amt.toFixed(2)}</span></div></div><div class="fcatbar"><div class="fcatbf" style="width:${(cat.amt/max*100).toFixed(0)}%;background:${cat.color}"></div></div><div class="fcatb">${txns}</div></div>`;
+    const febAmt=FEB_CATS[cat.name]||0;
+    const pctChg=febAmt>0?((cat.amt-febAmt)/febAmt*100):null;
+    const chgBadge=pctChg!==null?`<span style="font-family:var(--mono);font-size:9px;font-weight:600;padding:1px 6px;border-radius:10px;margin-left:6px;background:${pctChg<=0?'rgba(98,201,122,.15)':'rgba(217,113,78,.15)'};color:${pctChg<=0?'var(--sage)':'var(--rust)'}">${pctChg<=0?'▼':'&#9650;'}${Math.abs(pctChg).toFixed(0)}%</span>`:'';
+    const txns=cat.txns.map(t=>`<div class="ftx"><span class="ftxd">${t.d}</span><span class="ftxn">${t.n}</span><span class="ftxa ${t.a>0?'pos':'neg'}">${t.a>0?'+':'-'}$${Math.abs(t.a).toFixed(2)}</span></div>`).join('');
+    return`<div class="fcat" id="fc${i}"><div class="fcath" onclick="toggleFin('fc${i}')"><div class="fcatl"><span class="fcatdot" style="background:${cat.color}"></span><span class="fcatn">${cat.name}</span>${chgBadge}<span class="fcatnt">${cat.txns.length} txn</span></div><div class="fcatr"><span class="fcatp">${sp}%</span><span class="fcata">></span><span class="fcatamt">$${cat.amt.toFixed(2)}</span></div></div><div class="fcatbar"><div class="fcatbf" style="width:${(cat.amt/max*100).toFixed(0)}%;background:${cat.color}"></div></div><div class="fcatb">${txns}</div></div>`;
   }).join('');
   const incRows=f.incomeSources.map(s=>`<div class="inrow"><span class="inlbl"><span class="indot" style="background:${s.color}"></span>${s.label}</span><span class="inamt">$${s.amt.toFixed(2)}</span></div>`).join('');
 
@@ -2092,7 +2103,7 @@ function rReflections(){
       </div>
 
       <!-- Timeline track -->
-      <div style="position:relative;overflow-x:auto;padding-bottom:8px">
+      <div style="position:relative;overflow-x:auto;padding-bottom:8px;padding-left:6px">
         <div style="min-width:900px">
 
           <!-- Month labels + track -->
@@ -2210,7 +2221,7 @@ function rReflections(){
                   <div style="position:absolute;left:${midPct(i)};top:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:8.5px;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.5px">${m.label}</div>
                 `).join('')}
                 <div style="position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,rgba(255,255,255,.06),rgba(255,255,255,.25),rgba(255,255,255,.06));transform:translateY(-50%);border-radius:1px"></div>
-                <div style="position:absolute;left:2px;top:-8px;bottom:-8px;width:2px;background:var(--gold);border-radius:1px;box-shadow:0 0 12px rgba(224,180,78,.8)">
+                <div style="position:absolute;left:6px;top:-8px;bottom:-8px;width:2px;background:var(--gold);border-radius:1px;box-shadow:0 0 12px rgba(224,180,78,.8)">
                   <div style="position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:7.5px;font-weight:600;color:var(--gold);white-space:nowrap;background:var(--bg2);padding:2px 7px;border-radius:3px;border:1px solid rgba(224,180,78,.4);letter-spacing:1px;box-shadow:0 0 8px rgba(224,180,78,.3)">▸ NOW</div>
                 </div>
               </div>
@@ -2245,15 +2256,10 @@ function rReflections(){
           <div style="font-family:var(--mono);font-size:15px;font-weight:700;color:#62C97A">$9,000</div>
           <div style="font-size:10px;color:var(--t4);margin-top:2px">$4,500/yr · 2 FY cycles</div>
         </div>
-        <div style="padding:10px 12px;background:var(--bg3);border-radius:var(--r2);border:1px solid var(--b0);border-left:2px solid var(--vio)">
-          <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">Parent (Tentative)</div>
-          <div style="font-family:var(--mono);font-size:15px;font-weight:700;color:var(--vio)">$15,000</div>
-          <div style="font-size:10px;color:var(--t4);margin-top:2px">$1,500/course all terms</div>
-        </div>
         <div style="padding:10px 12px;background:var(--bg3);border-radius:var(--r2);border:1px solid var(--b0);border-left:2px solid var(--rust)">
           <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">Out of Pocket</div>
-          <div style="font-family:var(--mono);font-size:15px;font-weight:700;color:var(--rust)">$355.50</div>
-          <div style="font-size:10px;color:var(--t4);margin-top:2px">Winter 2027 only (w/ parent)</div>
+          <div style="font-family:var(--mono);font-size:15px;font-weight:700;color:var(--rust)">$4,855.50</div>
+          <div style="font-size:10px;color:var(--t4);margin-top:2px">Winter 2027 · 3 courses</div>
         </div>
       </div>
       <div style="display:flex;gap:14px;margin-bottom:10px;flex-wrap:wrap;align-items:center">
@@ -2300,18 +2306,18 @@ function rReflections(){
 <div style="font-family:var(--mono);font-size:10px;color:var(--gold);padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)">EC605</div>
 <div style="font-size:11px;color:var(--t2);padding:5px 8px 2px 0;border-bottom:1px solid rgba(255,255,255,.04)">Managerial Economics</div>
 <div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)"><span style="font-family:var(--mono);font-size:8px;padding:2px 6px;border-radius:10px;background:rgba(255,255,255,.04);color:var(--t4)">Planned</span></div>
-<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;display:flex"><div style="height:100%;width:48%;background:#62C97A;opacity:.8"></div><div style="height:100%;width:3%;background:#D9714E;opacity:.9"></div></div><span style="color:var(--rust);font-weight:700;font-family:var(--mono);font-size:10px">$118</span></div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;display:flex"><div style="height:100%;width:48%;background:#62C97A;opacity:.8"></div><div style="height:100%;width:51%;background:#D9714E;opacity:.9"></div></div><span style="color:var(--rust);font-family:var(--mono);font-size:10px;font-weight:700">$1618</span></div>
 <div style="font-family:var(--mono);font-size:10px;color:var(--gold);padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)">SB610</div>
 <div style="font-size:11px;color:var(--t2);padding:5px 8px 2px 0;border-bottom:1px solid rgba(255,255,255,.04)">Corporate Ethics & Social Resp.</div>
 <div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)"><span style="font-family:var(--mono);font-size:8px;padding:2px 6px;border-radius:10px;background:rgba(255,255,255,.04);color:var(--t4)">Planned</span></div>
-<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;display:flex"><div style="height:100%;width:48%;background:#62C97A;opacity:.8"></div><div style="height:100%;width:3%;background:#D9714E;opacity:.9"></div></div><span style="color:var(--rust);font-weight:700;font-family:var(--mono);font-size:10px">$118</span></div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;display:flex"><div style="height:100%;width:48%;background:#62C97A;opacity:.8"></div><div style="height:100%;width:51%;background:#D9714E;opacity:.9"></div></div><span style="color:var(--rust);font-family:var(--mono);font-size:10px;font-weight:700">$1618</span></div>
 <div style="font-family:var(--mono);font-size:10px;color:var(--gold);padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)">OS681</div>
 <div style="font-size:11px;color:var(--t2);padding:5px 8px 2px 0;border-bottom:1px solid rgba(255,255,255,.04)">Strategic Planning (Capstone)</div>
 <div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04)"><span style="font-family:var(--mono);font-size:8px;padding:2px 6px;border-radius:10px;background:rgba(255,255,255,.04);color:var(--t4)">Planned</span></div>
-<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;display:flex"><div style="height:100%;width:48%;background:#62C97A;opacity:.8"></div><div style="height:100%;width:3%;background:#D9714E;opacity:.9"></div></div><span style="color:var(--rust);font-weight:700;font-family:var(--mono);font-size:10px">$118</span></div>
-      </div>
+<div style="padding:5px 0 2px;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;display:flex"><div style="height:100%;width:48%;background:#62C97A;opacity:.8"></div><div style="height:100%;width:51%;background:#D9714E;opacity:.9"></div></div><span style="color:var(--rust);font-family:var(--mono);font-size:10px;font-weight:700">$1618</span></div>
+      </div></div>
       <div style="margin-top:12px;padding:9px 12px;background:rgba(154,143,216,.07);border:1px solid rgba(154,143,216,.2);border-radius:var(--r1);font-family:var(--mono);font-size:9px;color:var(--t3);line-height:1.6">
-        <span style="color:var(--vio)">NOTE</span> · Winter 2027 OOP is $355.50 total (3 × $118.50) <em>with</em> parent contribution. Without it: $7,105.50. Army IgnITEd resets Oct 1 — Winter 2027 uses FY26–27 cap. Clarkson benefit exhausted after Fall 2026.
+        <span style="color:var(--vio)">NOTE</span> · Winter 2027 out-of-pocket: $4,855.50 total (3 × $1,618.50). Army IgnITEd covers $1,500/course — FY resets Oct 1, Winter 2027 uses FY26–27 cap. Clarkson benefit fully exhausted after Fall 2026.
       </div>
     </div>
     <div class="card ca d2">
@@ -2337,9 +2343,9 @@ function rReflections(){
       <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
         ${[
           {label:'Clarkson/yr',val:'12 credits',sub:'4 courses free · FY resets fall',col:'var(--sky)'},
-          {label:'ArmyIgnited',val:'~$4,000/yr',sub:'$750/course · B required',col:'var(--sage)'},
-          {label:'Graduation',val:'May 2027',sub:'Target · stay on pace',col:'var(--gold)'},
-          {label:'Funding gap',val:'TBD',sub:'Summer decision needed',col:'var(--rust)'},
+          {label:'ArmyIgnited',val:'$4,500/yr',sub:'$1,500/course Winter 2027',col:'var(--sage)'},
+          {label:'Graduation',val:'May 2027',sub:'Target · on pace',col:'var(--gold)'},
+          {label:'OOP',val:'$4,856',sub:'Winter 2027 · 3 courses',col:'var(--rust)'},
         ].map(s=>`<div style="padding:10px 11px;background:var(--bg3);border-radius:var(--r2);border:1px solid var(--b0)"><div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px">${s.label}</div><div style="font-size:14px;font-weight:700;color:${s.col};font-family:var(--mono);margin-bottom:2px">${s.val}</div><div style="font-size:10px;color:var(--t4);line-height:1.4">${s.sub}</div></div>`).join('')}
       </div>
     </div>
