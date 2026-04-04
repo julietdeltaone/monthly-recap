@@ -2507,7 +2507,7 @@ function buildRoadmap(){
     </div>`;
   }).join('');
 
-  el.innerHTML=`<div class="card sf ca d1" style="padding:0;overflow:hidden" id="rmCard">
+  el.innerHTML=`<div class="card sf d1" style="padding:0;overflow:hidden;opacity:1;transform:none" id="rmCard">
     <div style="padding:20px 22px 18px">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap">
         <div>
@@ -2680,7 +2680,7 @@ function afterRender(){
   if(tab==='creative'){
     // pipeline pie and goals bar removed per user request
   }
-  if(tab==='reflections'){buildRoadmap();}
+  if(tab==='reflections'){buildRoadmap();observe();}
 }
 
 /* ─ ─ ─  RENDER ─ ─ ─  */
