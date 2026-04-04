@@ -2241,6 +2241,61 @@ function rReflections(){
     <div id="rmOuter"></div>
 
     <!-- DECISION CARDS ROW -->
+    <div class="card ca d2" id="ref-decisions">
+      <div class="ch"><div class="ct" style="color:var(--gold)">Near-Term Decisions</div><div class="cs">Things that require an actual choice in the next 90 days</div></div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        ${[
+          {title:'ArmyIgnited TA  close the loop',urgency:'April',col:'#E0B44E',body:'The acknowledgment of the SUNY Potsdam recoupment is in progress. This needs to clear before the Clarkson TA application can go through. Two courses × $750 = $1,500 on the line. Failing to resolve it means paying out of pocket for spring.'},
+          {title:'AFT  scheduled trial dates for PLK and 2MR',urgency:'April',col:'#9A8FD8',body:'Plank is at 47% of standard  the only event below passing. The 2-Mile run has no recorded test date at all. The window is AprMay. Both events need actual practice sets on a schedule before then, not gym sets as an afterthought.'},
+          {title:'Amex Platinum cancellation',urgency:'Before renewal',col:'#D9714E',body:'Decision to cancel was noted in March. The card carries a high annual fee. Execute the cancellation before the next annual charge hits. Confirm which benefits transfer to Chase Sapphire Reserve before cutting it.'},
+        ].map(d=>`<div style="padding:11px 13px;background:var(--bg3);border-radius:var(--r2);border-left:3px solid ${d.col}">
+          <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">
+            <div style="font-size:12px;color:var(--tx);font-weight:600">${d.title}</div>
+            <div style="font-family:var(--mono);font-size:8px;color:${d.col};background:rgba(255,255,255,.05);padding:1px 6px;border-radius:10px;flex-shrink:0">${d.urgency}</div>
+          </div>
+          <div style="font-size:12px;color:var(--t2);line-height:1.65">${d.body}</div>
+        </div>`).join('')}
+      </div>
+    </div>
+
+    <div class="card ca d2" id="ref-edu">
+      <div class="ch"><div class="ct" style="color:var(--sky)">Education Funding Map</div><div class="cs">Clarkson benefit · ArmyIgnited · path to May 2027</div></div>
+      <p style="font-size:13px;line-height:1.75;color:var(--t2);margin-bottom:12px">The Clarkson tuition benefit covers 12 credits per fiscal year as a full-time employee. Spring 2026 uses the remaining FY26 credits. Fall 2026 starts a new FY  benefit resets. The real gap question is whether ArmyIgnited TA can supplement beyond what Clarkson covers to close the May 2027 graduation without a funding pause.</p>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+        ${[
+          {label:'Clarkson/yr',val:'12 credits',sub:'4 courses free · FY resets fall',col:'var(--sky)'},
+          {label:'ArmyIgnited',val:'$4,500/yr',sub:'$750/course · cap $4,500/yr',col:'var(--sage)'},
+          {label:'Graduation',val:'May 2027',sub:'Target · on pace',col:'var(--gold)'},
+          {label:'OOP',val:'$4,856',sub:'Winter 2027 · 3 courses',col:'var(--rust)'},
+        ].map(s=>`<div style="padding:10px 11px;background:var(--bg3);border-radius:var(--r2);border:1px solid var(--b0)"><div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px">${s.label}</div><div style="font-size:14px;font-weight:700;color:${s.col};font-family:var(--mono);margin-bottom:2px">${s.val}</div><div style="font-size:10px;color:var(--t4);line-height:1.4">${s.sub}</div></div>`).join('')}
+      </div>
+    </div>
+
+    <div class="card ca d2" id="ref-june27">
+      <div class="ch"><div class="ct" style="color:var(--t2)">The June 2027 Question</div><div class="cs">ARNG contract end · officer route vs business route · decision architecture</div></div>
+      <p style="font-size:13px;line-height:1.78;color:var(--t2);margin-bottom:14px">The Army National Guard contract ends June 2027. That's 15 months from now  enough time to prepare either path, not enough time to drift into one by accident. The decision window that actually matters is probably <b style="color:var(--tx)">late 2026 / early 2027</b>, because OTS applications and the civilian job market both require lead time.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <div style="padding:14px;background:rgba(95,173,212,.07);border:1px solid rgba(95,173,212,.2);border-radius:var(--r2)">
+          <div style="font-family:var(--mono);font-size:9px;color:var(--sky);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Officer Route (Air Force / Space Force)</div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            ${['Temperamentally better fit than Army infantry','OTS application →  ~6 month school','Guaranteed salary, healthcare, pension at 20 yrs','MBA useful for officer career (logistics, acquisition)','Decision by Q4 2026 to allow application lead time','ARNG contract end is natural transition point'].map(t=>`<div style="font-size:11px;color:var(--t2);line-height:1.45;display:flex;gap:6px"><span style="color:var(--sky);flex-shrink:0"></span>${t}</div>`).join('')}
+          </div>
+        </div>
+        <div style="padding:14px;background:rgba(204,120,136,.07);border:1px solid rgba(204,120,136,.2);border-radius:var(--r2)">
+          <div style="font-family:var(--mono);font-size:9px;color:var(--rose);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Business Route (MBA + Portfolio)</div>
+          <div style="display:flex;flex-direction:column;gap:5px">
+            ${['MBA from Clarkson + 3 years work experience','Photography pipeline shows real revenue traction','Higher ceiling, no guaranteed floor  real income risk','Requires sustained hustle without institutional backing','Summer 2026 bookings are a proof-of-concept window','Production work adds media/content dimension'].map(t=>`<div style="font-size:11px;color:var(--t2);line-height:1.45;display:flex;gap:6px"><span style="color:var(--rose);flex-shrink:0"></span>${t}</div>`).join('')}
+          </div>
+        </div>
+      </div>
+      <div style="padding:11px 13px;background:var(--bg3);border-radius:var(--r1);border:1px solid var(--b0)">
+        <div style="font-family:var(--mono);font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px">What the next 15 months should answer</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+          ${['Can the photography business replace one full income stream by Dec 2026?','Does the officer path feel like a calling or just a safety net?','Is the MBA teaching something you\'re actually applying — or is it resume padding?','What does the ARNG obligation feel like at month 27 vs month 1?'].map(q=>`<div style="font-size:11px;color:var(--t2);line-height:1.5;padding:7px 9px;background:rgba(255,255,255,.03);border-radius:5px;border-left:2px solid rgba(224,180,78,.3)">${q}</div>`).join('')}
+        </div>
+      </div>
+    </div>
+
     <div class="card ca d2 sf" style="padding:20px 22px;border-top:2px solid var(--sky)" id="ref-mba">
       <div class="ch" style="margin-bottom:16px">
         <div class="ct" style="color:var(--sky)">MBA Funding Plan — Clarkson University</div>
@@ -2319,60 +2374,6 @@ function rReflections(){
       </div></div>
       <div style="margin-top:12px;padding:9px 12px;background:rgba(154,143,216,.07);border:1px solid rgba(154,143,216,.2);border-radius:var(--r1);font-family:var(--mono);font-size:9px;color:var(--t3);line-height:1.6">
         <span style="color:var(--vio)">NOTE</span> · Winter 2027 out-of-pocket: $7,105.50 total (3 × $2,368.50). Army IgnITEd covers $750/course — FY resets Oct 1, Winter 2027 uses FY26–27 cap. Clarkson benefit fully exhausted after Fall 2026.
-      </div>
-    </div>
-    <div class="card ca d2" id="ref-decisions">
-      <div class="ch"><div class="ct" style="color:var(--gold)">Near-Term Decisions</div><div class="cs">Things that require an actual choice in the next 90 days</div></div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        ${[
-          {title:'ArmyIgnited TA  close the loop',urgency:'April',col:'#E0B44E',body:'The acknowledgment of the SUNY Potsdam recoupment is in progress. This needs to clear before the Clarkson TA application can go through. Two courses × $750 = $1,500 on the line. Failing to resolve it means paying out of pocket for spring.'},
-          {title:'AFT  scheduled trial dates for PLK and 2MR',urgency:'April',col:'#9A8FD8',body:'Plank is at 47% of standard  the only event below passing. The 2-Mile run has no recorded test date at all. The window is AprMay. Both events need actual practice sets on a schedule before then, not gym sets as an afterthought.'},
-          {title:'Amex Platinum cancellation',urgency:'Before renewal',col:'#D9714E',body:'Decision to cancel was noted in March. The card carries a high annual fee. Execute the cancellation before the next annual charge hits. Confirm which benefits transfer to Chase Sapphire Reserve before cutting it.'},
-        ].map(d=>`<div style="padding:11px 13px;background:var(--bg3);border-radius:var(--r2);border-left:3px solid ${d.col}">
-          <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">
-            <div style="font-size:12px;color:var(--tx);font-weight:600">${d.title}</div>
-            <div style="font-family:var(--mono);font-size:8px;color:${d.col};background:rgba(255,255,255,.05);padding:1px 6px;border-radius:10px;flex-shrink:0">${d.urgency}</div>
-          </div>
-          <div style="font-size:12px;color:var(--t2);line-height:1.65">${d.body}</div>
-        </div>`).join('')}
-      </div>
-    </div>
-
-    <div class="card ca d2" id="ref-edu">
-      <div class="ch"><div class="ct" style="color:var(--sky)">Education Funding Map</div><div class="cs">Clarkson benefit · ArmyIgnited · path to May 2027</div></div>
-      <p style="font-size:13px;line-height:1.75;color:var(--t2);margin-bottom:12px">The Clarkson tuition benefit covers 12 credits per fiscal year as a full-time employee. Spring 2026 uses the remaining FY26 credits. Fall 2026 starts a new FY  benefit resets. The real gap question is whether ArmyIgnited TA can supplement beyond what Clarkson covers to close the May 2027 graduation without a funding pause.</p>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
-        ${[
-          {label:'Clarkson/yr',val:'12 credits',sub:'4 courses free · FY resets fall',col:'var(--sky)'},
-          {label:'ArmyIgnited',val:'$4,500/yr',sub:'$750/course · cap $4,500/yr',col:'var(--sage)'},
-          {label:'Graduation',val:'May 2027',sub:'Target · on pace',col:'var(--gold)'},
-          {label:'OOP',val:'$4,856',sub:'Winter 2027 · 3 courses',col:'var(--rust)'},
-        ].map(s=>`<div style="padding:10px 11px;background:var(--bg3);border-radius:var(--r2);border:1px solid var(--b0)"><div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px;margin-bottom:4px">${s.label}</div><div style="font-size:14px;font-weight:700;color:${s.col};font-family:var(--mono);margin-bottom:2px">${s.val}</div><div style="font-size:10px;color:var(--t4);line-height:1.4">${s.sub}</div></div>`).join('')}
-      </div>
-    </div>
-
-    <div class="card ca d2" id="ref-june27">
-      <div class="ch"><div class="ct" style="color:var(--t2)">The June 2027 Question</div><div class="cs">ARNG contract end · officer route vs business route · decision architecture</div></div>
-      <p style="font-size:13px;line-height:1.78;color:var(--t2);margin-bottom:14px">The Army National Guard contract ends June 2027. That's 15 months from now  enough time to prepare either path, not enough time to drift into one by accident. The decision window that actually matters is probably <b style="color:var(--tx)">late 2026 / early 2027</b>, because OTS applications and the civilian job market both require lead time.</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
-        <div style="padding:14px;background:rgba(95,173,212,.07);border:1px solid rgba(95,173,212,.2);border-radius:var(--r2)">
-          <div style="font-family:var(--mono);font-size:9px;color:var(--sky);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Officer Route (Air Force / Space Force)</div>
-          <div style="display:flex;flex-direction:column;gap:5px">
-            ${['Temperamentally better fit than Army infantry','OTS application →  ~6 month school','Guaranteed salary, healthcare, pension at 20 yrs','MBA useful for officer career (logistics, acquisition)','Decision by Q4 2026 to allow application lead time','ARNG contract end is natural transition point'].map(t=>`<div style="font-size:11px;color:var(--t2);line-height:1.45;display:flex;gap:6px"><span style="color:var(--sky);flex-shrink:0"></span>${t}</div>`).join('')}
-          </div>
-        </div>
-        <div style="padding:14px;background:rgba(204,120,136,.07);border:1px solid rgba(204,120,136,.2);border-radius:var(--r2)">
-          <div style="font-family:var(--mono);font-size:9px;color:var(--rose);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Business Route (MBA + Portfolio)</div>
-          <div style="display:flex;flex-direction:column;gap:5px">
-            ${['MBA from Clarkson + 3 years work experience','Photography pipeline shows real revenue traction','Higher ceiling, no guaranteed floor  real income risk','Requires sustained hustle without institutional backing','Summer 2026 bookings are a proof-of-concept window','Production work adds media/content dimension'].map(t=>`<div style="font-size:11px;color:var(--t2);line-height:1.45;display:flex;gap:6px"><span style="color:var(--rose);flex-shrink:0"></span>${t}</div>`).join('')}
-          </div>
-        </div>
-      </div>
-      <div style="padding:11px 13px;background:var(--bg3);border-radius:var(--r1);border:1px solid var(--b0)">
-        <div style="font-family:var(--mono);font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px">What the next 15 months should answer</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-          ${['Can the photography business replace one full income stream by Dec 2026?','Does the officer path feel like a calling or just a safety net?','Is the MBA teaching something you\'re actually applying — or is it resume padding?','What does the ARNG obligation feel like at month 27 vs month 1?'].map(q=>`<div style="font-size:11px;color:var(--t2);line-height:1.5;padding:7px 9px;background:rgba(255,255,255,.03);border-radius:5px;border-left:2px solid rgba(224,180,78,.3)">${q}</div>`).join('')}
-        </div>
       </div>
     </div>
 
