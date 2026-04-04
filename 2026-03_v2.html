@@ -1068,22 +1068,96 @@ function buildSidebar(){
     </div>`).join('');
     // Notable purchases HTML
     const notables=[
-      {icon:'  ',title:'Nike Pegasus Plus',desc:'Running shoe upgrade  $123.11',color:'rgba(90,157,192,.15)',border:'rgba(90,157,192,.25)'},
-      {icon:'  ',title:'Wireless Car Charger',desc:'Replaced melting adhesive mount  $90.89',color:'rgba(71,176,171,.15)',border:'rgba(71,176,171,.25)'},
-      {icon:'  ',title:'Credit Card Strategy',desc:'Cancelling Amex Platinum. Keeping Chase Sapphire Reserve.',color:'rgba(212,168,75,.05)',border:'rgba(212,168,75,.2)',titleColor:'var(--gold)'},
-    ].map(n=>`<div style="display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid var(--b0)"><div style="width:28px;height:28px;border-radius:6px;background:${n.color};border:1px solid ${n.border};display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:13px">${n.icon}</div><div><div style="font-size:11px;color:${n.titleColor||'var(--tx)'};font-weight:600;margin-bottom:1px">${n.title}</div><div style="font-size:10px;color:var(--t3);line-height:1.4">${n.desc}</div></div></div>`).join('');
+      {icon:'👟',title:'Nike Pegasus Plus',desc:'Running shoe upgrade · $123.11',color:'rgba(90,157,192,.15)',border:'rgba(90,157,192,.25)'},
+      {icon:'⚡',title:'Magbak Wireless Car Charger',desc:'Replaced melting adhesive mount · $90.89',color:'rgba(71,176,171,.15)',border:'rgba(71,176,171,.25)'},
+      {icon:'🏛️',title:'Fairmont Château Laurier',desc:'Ottawa overnight · $210.67 (credit $102.67 back)',color:'rgba(212,168,75,.08)',border:'rgba(212,168,75,.25)'},
+      {icon:'🎵',title:'Kodak Center — Rochester',desc:'Live show Mar 28 · $22.00',color:'rgba(204,120,136,.12)',border:'rgba(204,120,136,.25)'},
+      {icon:'💳',title:'Credit Card Strategy',desc:'Cancelling Amex Platinum. Keeping Chase Sapphire Reserve.',color:'rgba(212,168,75,.05)',border:'rgba(212,168,75,.2)',titleColor:'var(--gold)'},
+    ].map(n=>`<div style="display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid var(--b0)"><div style="width:36px;height:36px;border-radius:8px;background:${n.color};border:1px solid ${n.border};display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px">${n.icon}</div><div><div style="font-size:11px;color:${n.titleColor||'var(--tx)'};font-weight:600;margin-bottom:1px">${n.title}</div><div style="font-size:10px;color:var(--t3);line-height:1.4">${n.desc}</div></div></div>`).join('');
 
     return`<div class="sc ca" style="border-top:2px solid var(--sage);padding:14px 16px">
-      <div class="sgt">2026 Spending</div>
-      ${[
-        {m:'Jan',done:true, amt:HIST.jan.expenses,net:HIST.jan.net,col:'var(--sage)'},
-        {m:'Feb',done:true, amt:HIST.feb.expenses,net:HIST.feb.net,col:'var(--sage)'},
-        {m:'Mar',done:false,cur:true,amt:f.expenses,net:f.net,col:'var(--gold)'},
-      ].map((item,i,arr)=>{
-        const under=item.amt<=2500;
-        const col=item.cur?'var(--gold)':'var(--sage)';
-        return`<div class="tl-item"><div class="tl-rail" style="color:${col}"><div class="tl-dot${item.cur?' cur':' done'}"></div>${i<arr.length-1?`<div class="tl-line done"></div>`:''}</div><div class="tl-content"><div class="tl-month" style="color:${col}">${item.m}</div><div class="tl-label" style="color:${item.cur?'var(--tx)':'var(--t2)'};font-weight:${item.cur?600:400}">$${Math.round(item.amt).toLocaleString()} spent</div><div class="tl-sub" style="color:${under?'var(--sage)':'var(--rust)'}">${under?'Under':'Over'} · Net +$${Math.round(item.net)}</div></div></div>`;
-      }).join('')}
+      <div class="sgt">2026 Savings Goal</div>
+      <!-- Big progress ring -->
+      ${(()=>{
+        const saved=f.sJan+f.sFeb+f.sMar;
+        const goal=f.sGoal;
+        const pct=Math.min(100,saved/goal*100);
+        const r=54;const circ=2*Math.PI*r;
+        const dash=(pct/100)*circ;
+        const remaining=goal-saved;
+        const months=[
+          {m:'Jan',net:f.sJan,col:'var(--sage)',done:true},
+          {m:'Feb',net:f.sFeb,col:'var(--sage)',done:true},
+          {m:'Mar',net:f.sMar,col:'var(--gold)',done:false,cur:true},
+          {m:'Apr',net:null,col:'var(--t5)',done:false},
+          {m:'May',net:null,col:'var(--t5)',done:false},
+          {m:'Jun',net:null,col:'var(--t5)',done:false},
+          {m:'Jul',net:null,col:'var(--t5)',done:false},
+          {m:'Aug',net:null,col:'var(--t5)',done:false},
+          {m:'Sep',net:null,col:'var(--t5)',done:false},
+          {m:'Oct',net:null,col:'var(--t5)',done:false},
+          {m:'Nov',net:null,col:'var(--t5)',done:false},
+          {m:'Dec',net:null,col:'var(--t5)',done:false},
+        ];
+        const avgNet=(f.sJan+f.sFeb+f.sMar)/3;
+        const projFull=Math.min(goal,saved+avgNet*9);
+        const projPct=Math.min(100,projFull/goal*100);
+        const projDash=(projPct/100)*circ;
+        return`
+        <!-- Ring -->
+        <div style="display:flex;flex-direction:column;align-items:center;margin:6px 0 14px">
+          <div style="position:relative;width:130px;height:130px">
+            <svg width="130" height="130" viewBox="0 0 130 130">
+              <!-- Track -->
+              <circle cx="65" cy="65" r="${r}" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="10"/>
+              <!-- Projected (lighter) -->
+              <circle cx="65" cy="65" r="${r}" fill="none" stroke="rgba(98,201,122,.2)" stroke-width="10"
+                stroke-dasharray="${projDash} ${circ}" stroke-linecap="round"
+                transform="rotate(-90 65 65)"/>
+              <!-- Actual saved -->
+              <circle cx="65" cy="65" r="${r}" fill="none" stroke="var(--sage)" stroke-width="10"
+                stroke-dasharray="${dash} ${circ}" stroke-linecap="round"
+                transform="rotate(-90 65 65)" style="transition:stroke-dasharray 1.2s cubic-bezier(.22,.68,0,1.2)"/>
+            </svg>
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px">
+              <div style="font-family:var(--mono);font-size:18px;font-weight:700;color:var(--sage);line-height:1">${pct.toFixed(1)}%</div>
+              <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px">of $10k</div>
+            </div>
+          </div>
+          <div style="font-family:var(--mono);font-size:13px;font-weight:700;color:var(--sage);margin-top:4px">$${saved.toFixed(2)}</div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--t4);margin-top:2px">$${remaining.toFixed(0)} remaining</div>
+          <!-- Progress bar -->
+          <div style="width:100%;background:rgba(255,255,255,.06);border-radius:4px;height:5px;margin-top:10px;overflow:hidden">
+            <div style="height:100%;width:${pct}%;background:linear-gradient(90deg,var(--sky),var(--sage));border-radius:4px;transition:width 1.2s ease"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;width:100%;margin-top:3px">
+            <span style="font-family:var(--mono);font-size:8px;color:var(--t4)">$0</span>
+            <span style="font-family:var(--mono);font-size:8px;color:var(--t4)">$10,000</span>
+          </div>
+        </div>
+        <!-- Month rows -->
+        <div style="display:flex;flex-direction:column;gap:0">
+          ${months.map((mo,i)=>{
+            const hasSaved=mo.net!==null;
+            const col=mo.cur?'var(--gold)':mo.done?'var(--sage)':'var(--t5)';
+            return`<div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid rgba(255,255,255,.04)">
+              <div style="font-family:var(--mono);font-size:9px;color:${col};width:26px;flex-shrink:0">${mo.m}</div>
+              <div style="flex:1;height:4px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden">
+                ${hasSaved?`<div style="height:100%;width:${Math.min(100,mo.net/500*100).toFixed(0)}%;background:${mo.cur?'var(--gold)':'var(--sage)'};border-radius:2px;opacity:.85"></div>`:''}
+              </div>
+              <div style="font-family:var(--mono);font-size:9px;width:46px;text-align:right;color:${hasSaved?col:'var(--t5)'}">
+                ${hasSaved?'+$'+Math.round(mo.net):'—'}
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+        <!-- Pace note -->
+        <div style="margin-top:10px;padding:7px 9px;background:rgba(98,201,122,.06);border:1px solid rgba(98,201,122,.15);border-radius:var(--r1)">
+          <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px;margin-bottom:3px">Pace check</div>
+          <div style="font-size:10px;color:var(--t2);line-height:1.5">Avg $${Math.round(avgNet)}/mo · need $${Math.round(remaining/9)}/mo for remaining 9 months</div>
+          <div style="font-family:var(--mono);font-size:9px;color:${avgNet>=(remaining/9)?'var(--sage)':'var(--gold)'};margin-top:3px">${avgNet>=(remaining/9)?'On pace ✓':'Below pace — needs increase'}</div>
+        </div>`;
+      })()}
     </div>
     <div class="sc ca" style="border-top:2px solid var(--vio);padding:14px 16px">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
@@ -1876,7 +1950,55 @@ function rPhysical(){
 function rFinancial(){
   const f=D.fin,tot=f.sJan+f.sFeb+f.sMar,pct=Math.min(100,tot/f.sGoal*100),totalTxns=f.cats.reduce((s,c)=>s+c.txns.length,0);
   const kpis=`<div class="fsg"><div class="fkpi ca"><div class="fkpiv" style="color:var(--sage)">$${f.income.toFixed(2)}</div><div class="fkpik">Income</div></div><div class="fkpi ca d1"><div class="fkpiv" style="color:var(--rust)">$${f.expenses.toFixed(2)}</div><div class="fkpik">Expenses</div></div><div class="fkpi ca d2"><div class="fkpiv" style="color:var(--sage)">+$${f.net.toFixed(2)}</div><div class="fkpik">Net</div></div></div>`;
-  const sav=`<div style="padding:14px 16px;background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r2);margin-bottom:14px"><div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">2026 Annual Savings  Target $10,000</div><div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px"><span style="font-family:var(--serif);font-size:26px;font-weight:700;font-style:italic;color:var(--sage)">$${tot.toFixed(2)}</span><span style="font-family:var(--mono);font-size:11px;color:var(--t3)">${pct.toFixed(1)}% of $10,000 goal</span></div><div class="savout"><div class="savin" style="width:${pct}%"></div></div><div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center"><span style="font-family:var(--mono);font-size:10px;color:var(--sage)">Jan +$${f.sJan.toFixed(2)}</span><span style="font-family:var(--mono);font-size:9px;color:var(--t5)">·</span><span style="font-family:var(--mono);font-size:10px;color:var(--sage)">Feb +$${f.sFeb.toFixed(2)}</span><span style="font-family:var(--mono);font-size:9px;color:var(--t5)">·</span><span style="font-family:var(--mono);font-size:10px;color:var(--gold)">Mar +$${f.sMar.toFixed(2)}</span><span style="font-family:var(--mono);font-size:9px;color:var(--t5)">·</span>${['Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'].map(m=>`<span style="font-family:var(--mono);font-size:10px;color:var(--t5)">${m} </span>`).join('<span style="font-family:var(--mono);font-size:9px;color:var(--t5)">·</span>')}<span style="font-family:var(--mono);font-size:10px;color:var(--t4);margin-left:auto">$${(f.sGoal-tot).toFixed(0)} to go</span></div></div>`;
+  const months2026=[
+    {m:'Jan',saved:f.sJan,done:true},{m:'Feb',saved:f.sFeb,done:true},{m:'Mar',saved:f.sMar,done:true,cur:true},
+    {m:'Apr',saved:0,done:false},{m:'May',saved:0,done:false},{m:'Jun',saved:0,done:false},
+    {m:'Jul',saved:0,done:false},{m:'Aug',saved:0,done:false},{m:'Sep',saved:0,done:false},
+    {m:'Oct',saved:0,done:false},{m:'Nov',saved:0,done:false},{m:'Dec',saved:0,done:false},
+  ];
+  const avgSaved=tot/3;
+  const projectedTotal=Math.min(10000,tot+avgSaved*9);
+  const projPct=Math.min(100,(projectedTotal/10000*100));
+  const monthBars=months2026.map(mo=>{
+    const barH=mo.done&&mo.saved>0?Math.max(8,Math.round(mo.saved/1200*100)):0;
+    const projH=!mo.done?Math.max(4,Math.round(avgSaved/1200*100)):0;
+    const col=mo.cur?'var(--gold)':mo.done?'var(--sage)':'rgba(255,255,255,.06)';
+    const amtLabel=mo.done&&mo.saved>0?'+$'+Math.round(mo.saved):'';
+    return '<div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1">'
+      +'<div style="font-family:var(--mono);font-size:'+(mo.done&&mo.saved>0?'9':'8')+'px;color:'+(mo.cur?'var(--gold)':mo.done?'var(--sage)':'var(--t5)')+';line-height:1;margin-bottom:2px;white-space:nowrap">'+amtLabel+'</div>'
+      +'<div style="width:100%;background:rgba(255,255,255,.05);border-radius:3px 3px 0 0;height:80px;display:flex;align-items:flex-end;overflow:hidden">'
+      +(mo.done&&mo.saved>0
+        ?'<div style="width:100%;height:'+barH+'%;background:'+col+';border-radius:3px 3px 0 0;transition:height 1s cubic-bezier(.22,.68,0,1.2)"></div>'
+        :'<div style="width:100%;height:'+projH+'%;background:rgba(255,255,255,.07);border-radius:3px 3px 0 0;border-top:1px dashed rgba(255,255,255,.18)"></div>')
+      +'</div>'
+      +'<div style="font-family:var(--mono);font-size:9px;color:'+(mo.cur?'var(--gold)':mo.done?'var(--t3)':'var(--t5)')+';font-weight:'+(mo.cur?700:400)+'">'+mo.m+'</div>'
+      +'</div>';
+  }).join('');
+  const sav='<div style="padding:18px 20px;background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r3);margin-bottom:14px">'
+    +'<div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px;flex-wrap:wrap;gap:6px">'
+    +'<div>'
+    +'<div style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px">2026 Savings Goal</div>'
+    +'<div style="display:flex;align-items:baseline;gap:8px">'
+    +'<span style="font-family:var(--serif);font-size:28px;font-weight:700;font-style:italic;color:var(--sage)">$'+tot.toFixed(2)+'</span>'
+    +'<span style="font-family:var(--mono);font-size:11px;color:var(--t3)">of $10,000</span>'
+    +'</div></div>'
+    +'<div style="text-align:right">'
+    +'<div style="font-family:var(--mono);font-size:18px;font-weight:700;color:var(--sage)">'+pct.toFixed(1)+'%</div>'
+    +'<div style="font-family:var(--mono);font-size:9px;color:var(--t4);margin-top:2px">$'+(f.sGoal-tot).toFixed(0)+' to go</div>'
+    +'</div></div>'
+    +'<div style="height:8px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;margin:10px 0 4px">'
+    +'<div style="height:100%;width:'+pct+'%;background:linear-gradient(90deg,var(--sky),var(--sage));border-radius:4px;transition:width 1.2s cubic-bezier(.22,.68,0,1.2)"></div>'
+    +'</div>'
+    +'<div style="display:flex;justify-content:flex-end;margin-bottom:14px">'
+    +'<span style="font-family:var(--mono);font-size:9px;color:var(--t4)">proj. '+projPct.toFixed(0)+'% by Dec at current avg</span>'
+    +'</div>'
+    +'<div style="display:flex;gap:3px;align-items:flex-end">'+monthBars+'</div>'
+    +'<div style="display:flex;gap:14px;margin-top:8px">'
+    +'<div style="display:flex;align-items:center;gap:4px"><div style="width:8px;height:8px;border-radius:2px;background:var(--sage)"></div><span style="font-family:var(--mono);font-size:8px;color:var(--t4)">Saved</span></div>'
+    +'<div style="display:flex;align-items:center;gap:4px"><div style="width:8px;height:8px;border-radius:2px;background:var(--gold)"></div><span style="font-family:var(--mono);font-size:8px;color:var(--t4)">Current month</span></div>'
+    +'<div style="display:flex;align-items:center;gap:4px"><div style="width:8px;height:8px;border-radius:2px;border:1px dashed rgba(255,255,255,.2);background:rgba(255,255,255,.07)"></div><span style="font-family:var(--mono);font-size:8px;color:var(--t4)">Projected avg</span></div>'
+    +'</div>'
+    +'</div>';
   const max=Math.max(...f.cats.map(c=>c.amt));
   const cats=f.cats.map((cat,i)=>{
     const sp=(cat.amt/f.expenses*100).toFixed(1);
