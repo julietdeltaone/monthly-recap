@@ -549,7 +549,7 @@ const HIST={
 const D={
   label:"March 2026",
   highlights:[
-    {label:"Net +$827.97",color:"var(--sage)"},
+    {label:"Net +$1,444.32",color:"var(--sage)"},
     {label:"20 gym days · 137,105 lb",color:"var(--sky)"},
     {label:"4 of 4 Sermons",color:"var(--gold)"},
     {label:"MMCS Army Digital C2",color:"var(--vio)"},
@@ -558,19 +558,19 @@ const D={
   ],
   sidebar:[
     {k:"Month",v:"March 2026"},{k:"Gym Days",v:"20 / 31"},{k:"Volume",v:"137,105 lb"},
-    {k:"Income",v:"$3,492.00"},{k:"Expenses",v:"$2,664.03"},{k:"Net",v:"+$827.97"},
+    {k:"Income",v:"$3,492.00"},{k:"Expenses",v:"$2637.26"},{k:"Net",v:"+$1444.32"},
     {k:"Tithe",v:"$250.00"},{k:"Sermons",v:"4 / 4"},{k:"Term GPA",v:"3.83"}
   ],
   ov:{
     kpis:[
-      {v:"+$828",k:"Net Cash",cls:"ok",tab:"financial"},
+      {v:"+$1,444",k:"Net Cash",cls:"ok",tab:"financial"},
       {v:"20",k:"Gym Days",cls:"",tab:"physical"},
       {v:"4/4",k:"Sermons",cls:"ok",tab:"spiritual"},
       {v:"3.83",k:"GPA",cls:"ok",tab:"intellectual"}
     ],
     spiritual:[{k:"Attendance",v:"4 / 4 Sundays",cls:"ok"},{k:"Series",v:"Acts · 1 Cor 1",cls:""},{k:"Scripture",v:"Ongoing",cls:"dim"}],
     physical:[{k:"Gym days",v:"20",cls:"ok"},{k:"Volume",v:"137,105 lb",cls:"ok"},{k:"Cardio",v:"4 sessions",cls:"ok"},{k:"Plank PR",v:"1:40 w/ 45lb",cls:"warn"}],
-    financial:[{k:"Income",v:"$3,492.00",cls:"ok"},{k:"Expenses",v:"$2,664.03",cls:"warn"},{k:"Net",v:"+$827.97",cls:"ok"},{k:"Tithe",v:"$250.00",cls:"ok"}],
+    financial:[{k:"Income",v:"$3,492.00",cls:"ok"},{k:"Expenses",v:"$2637.26",cls:"warn"},{k:"Net",v:"+$1444.32",cls:"ok"},{k:"Tithe",v:"$250.00",cls:"ok"}],
     intellectual:[{k:"Focus",v:"MMCS / Army C2",cls:"ok"},{k:"GPA",v:"3.83 (A, A-)",cls:"ok"}],
     creative:[{k:"Video project",v:"M. Maurer LMSW",cls:"ok"},{k:"Website refresh",v:"JD Meyers Prod.",cls:"ok"},{k:"New leads",v:"2 (writing contract)",cls:"warn"}],
     events:[
@@ -649,8 +649,8 @@ const D={
     ]
   },
   fin:{
-    income:3492.00,expenses:2664.03,net:827.97,
-    sJan:812.44,sFeb:1094.28,sMar:827.97,sGoal:10000,
+    income:3492.00,expenses:2637.26,net:1444.32,
+    sJan:812.44,sFeb:1094.28,sMar:1444.32,sGoal:10000,
     // Daily cumulative spending (running total by day of month)
     spendingCumMar:[7.68,73.13,145.81,155.53,185.78,196.82,240.73,259.90,457.49,497.43,530.72,537.20,537.20,537.20,537.20,562.71,603.37,603.37,612.77,689.96,703.10,718.51,732.43,808.08,1048.13,1060.38,1153.96,1225.28,1275.28,1275.28,1275.28],
     spendingCumJan:[45.90,58.14,241.74,267.23,333.53,382.49,413.09,469.19,560.99,815.98,851.68,894.52,950.62,1037.32,1363.71,1404.51,1460.61,1537.11,1634.01,1766.61,1817.61,1886.96,1973.66,2096.06,2300.06,2396.95,2458.15,2504.05,2560.15,2598.91,2647.87],
@@ -898,7 +898,7 @@ function buildSidebar(){
     const ovMonths=[
       {m:'Jan',done:true,cur:false,col:'var(--sage)',label:'Complete',sub:'Net +$812 · 17 gym days · 3 sermons'},
       {m:'Feb',done:true,cur:false,col:'var(--sage)',label:'Complete',sub:'Net +$1,094 · 18 gym days · 3 sermons'},
-      {m:'Mar',done:false,cur:true,col:'var(--gold)',label:'Current month',sub:'Net +$828 · 20 gym days · 4 sermons'},
+      {m:'Mar',done:false,cur:true,col:'var(--gold)',label:'Current month',sub:'Net +$1,444 · 20 gym days · 4 sermons'},
       {m:'Apr',done:false,cur:false,col:'var(--t5)',label:'Upcoming',sub:''},
       {m:'May',done:false,cur:false,col:'var(--t5)',label:'',sub:''},{m:'Jun',done:false,cur:false,col:'var(--t5)',label:'',sub:''},
       {m:'Jul',done:false,cur:false,col:'var(--t5)',label:'',sub:''},{m:'Aug',done:false,cur:false,col:'var(--t5)',label:'',sub:''},
@@ -919,7 +919,7 @@ function buildSidebar(){
       </div>
       <div style="margin-bottom:12px">
         <div style="font-family:var(--mono);font-size:9px;color:var(--sky);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:var(--sky);display:inline-block"></span>Improve</div>
-        <div style="font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:5px">Net dropped $266 from February's high of $1,094. Dining at $527  the single largest spending category  has room to compress.</div>
+        <div style="font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:5px">Net up $350 from February's high of $1,094. Dining at $527  the single largest spending category  has room to compress.</div>
         <div style="font-size:12px;color:var(--t2);line-height:1.6">Gym days dropped from 22 →  19 →  18 across Q1. Small but consistent. Worth watching before it becomes a pattern.</div>
       </div>
       <div>
@@ -1044,7 +1044,7 @@ function buildSidebar(){
   if(tab==='reflections'){
     return`<div class="sc ca" style="border-top:2px solid var(--gold)">
       <div class="sgt">March Snapshot</div>
-      <div class="si"><span class="sk">Net Cash</span><span class="sv" style="color:var(--sage)">+$828</span></div>
+      <div class="si"><span class="sk">Net Cash</span><span class="sv" style="color:var(--sage)">+$1,444</span></div>
       <div class="si"><span class="sk">Gym Days</span><span class="sv">20</span></div>
       <div class="si"><span class="sk">Sermons</span><span class="sv" style="color:var(--gold)">4 / 4</span></div>
       <div class="si"><span class="sk">GPA</span><span class="sv" style="color:var(--sky)">3.83</span></div>
@@ -1257,7 +1257,7 @@ function rOverview(){
   const thirtySecHTML=`<div class="ov-30sec ca">
     <div class="ov-30sec-lbl">March 2026  30 Second Read</div>
     <div class="ov-bullets">
-      <div class="ov-bullet"><b>Financially solid:</b> Brought in $3,492 · saved $828 · tithed $250 · under budget for the month.</div>
+      <div class="ov-bullet"><b>Financially solid:</b> Brought in $3,492 · saved $1,444 · tithed $250 · under budget for the month.</div>
       <div class="ov-bullet"><b>Physically consistent:</b> 20 gym days · bench hit 215 lb twice · 6-mile outdoor run. Plank is still the gap at 47% of the AFT standard.</div>
       <div class="ov-bullet"><b>Spiritually engaged:</b> 4 of 4 Sundays at Calvary. Acts series through chapter 9 plus 1 Corinthians 1. Personal commentary on each sermon in the Spiritual tab.</div>
       <div class="ov-bullet"><b>Shipped real work:</b> LMSW documentary, JD Meyers website rebuild, TaxiZero fare estimator app  all live, not just started.</div>
@@ -1267,7 +1267,7 @@ function rOverview(){
 
   // ─ ─  BIG KPI TILES ─ ─ 
   const kpiDefs=[
-    {v:'+$828',k:'Net Savings',sub:'$3,492 in · $2,664 out',color:'var(--sage)',cls:'c-sage',tab:'financial'},
+    {v:'+$1,444',k:'Net Savings',sub:'$3,492 in · $2637 out',color:'var(--sage)',cls:'c-sage',tab:'financial'},
     {v:'20',k:'Gym Days',sub:'137,105 lb volume · 4 cardio',color:'var(--sky)',cls:'c-sky',tab:'physical'},
     {v:'4 / 4',k:'Sermons',sub:'Calvary Baptist · Acts series',color:'var(--gold)',cls:'c-gold',tab:'spiritual'},
     {v:'3.83',k:'Term GPA',sub:'AC 604 A · OM 607 A',color:'var(--rose)',cls:'c-rose',tab:'intellectual'},
@@ -1295,7 +1295,7 @@ function rOverview(){
   const chartCardsHTML=`<div class="ov-charts-row ca d2">
     <div class="ov-chart-card">
       <div class="ov-chart-lbl">Net Savings  Q1</div>
-      <div style="display:flex;gap:5px;align-items:flex-end">${miniBar([812,1094,828],'var(--sage)',['Jan','Feb','Mar'],v=>'$'+v)}</div>
+      <div style="display:flex;gap:5px;align-items:flex-end">${miniBar([812,1094,1444],'var(--sage)',['Jan','Feb','Mar'],v=>'$'+v)}</div>
     </div>
     <div class="ov-chart-card">
       <div class="ov-chart-lbl">Gym Days  Q1</div>
@@ -1375,7 +1375,7 @@ function rOverview(){
         ${evts}
       </div>
       <div style="display:flex;flex-direction:column;gap:10px">
-        ${mks('Financial','var(--sage)',[{k:'Income',v:'$3,492.00',cls:'ok'},{k:'Expenses',v:'$2,664.03',cls:'warn'},{k:'Net',v:'+$827.97',cls:'ok'},{k:'YTD Savings',v:'$2735',cls:'ok'}],' d4','financial')}
+        ${mks('Financial','var(--sage)',[{k:'Income',v:'$3,492.00',cls:'ok'},{k:'Expenses',v:'$2637.26',cls:'warn'},{k:'Net',v:'+$1444.32',cls:'ok'},{k:'YTD Savings',v:'$2735',cls:'ok'}],' d4','financial')}
         ${mks('Creative','var(--rose)',[{k:'Projects Shipped',v:'4',cls:'ok'},{k:'Weddings Signed',v:'3',cls:'ok'},{k:'Active Leads',v:'2',cls:'warn'},{k:'Next Booking',v:'Apr 28',cls:''}],' d5','creative')}
       </div>
     </div>
@@ -2036,12 +2036,12 @@ function rFinancial(){
 
   // progress
   const prog=progressBand([
-    `<div class="pb-stat"><div class="pb-k">Net</div><div class="pb-v" style="color:var(--rust)">$828</div><div class="pb-d"><span class="delta-dn">▼  $266 vs Feb ($1,094)</span></div></div>`,
+    `<div class="pb-stat"><div class="pb-k">Net</div><div class="pb-v" style="color:var(--sage)">$1,444</div><div class="pb-d"><span class="delta-dn">▲  $350 vs Feb ($1,094)</span></div></div>`,
     `<div class="pb-stat"><div class="pb-k">Income</div><div class="pb-v">$3,390</div><div class="pb-d"><span class="delta-dn">▼  $190 vs Feb</span></div></div>`,
     `<div class="pb-stat"><div class="pb-k">Expenses</div><div class="pb-v" style="color:var(--rust)">$2,664</div><div class="pb-d"><span class="delta-dn">▲  $16 vs Feb</span></div></div>`,
     `<div class="pb-stat"><div class="pb-k">Dining</div><div class="pb-v">$476</div><div class="pb-d"><span class="delta-dn">▲  $54 vs Feb</span></div></div>`,
     `<div class="pb-stat"><div class="pb-k">Travel</div><div class="pb-v" style="color:var(--rust)">$433</div><div class="pb-d"><span class="delta-dn">▲  $433 vs Feb ($0)</span></div></div>`,
-    `<div class="pb-stat"><div class="pb-k">Savings Total</div><div class="pb-v" style="color:var(--sage)">$2735</div><div class="pb-d">27.3% of $10k goal</div></div>`
+    `<div class="pb-stat"><div class="pb-k">Savings Total</div><div class="pb-v" style="color:var(--sage)">$2735</div><div class="pb-d">33.5% of $10k goal</div></div>`
   ].join(''));
 
   return`<div class="fin-layout">
@@ -2204,159 +2204,83 @@ function rReflections(){
       <p style="font-size:13px;line-height:1.78;color:var(--t2)">March was productive across most dimensions  projects shipped, sermons consistent, GPA held, savings on track. The honest gaps are the plank deficit, a slow gym days trend, and the education funding situation that needs a decision this summer. The bigger question  military vs business  sits on the horizon at June 2027. Nothing forces a move yet, but deliberate beats default.</p>
     </div>
 
-    <!-- WIDE HORIZONTAL TIMELINE -->
-    <div class="card sf ca d1" style="padding:22px 24px;overflow:hidden">
+    <!-- ROADMAP: REBUILT AS CLEAN CARD GRID -->
+    <div class="card sf ca d1" style="padding:22px 24px">
       <div class="ch" style="margin-bottom:20px">
-        <div class="ct">Road Map  April 2026 →  Summer 2027</div>
-        <div class="cs">Confirmed events · decision windows · milestones synthesized from all data</div>
+        <div class="ct">Road Map — April 2026 → Summer 2027</div>
+        <div class="cs">Key milestones, decision windows &amp; fiscal year boundaries</div>
       </div>
-
-      <!-- Legend -->
-      <div style="display:flex;gap:16px;margin-bottom:18px;flex-wrap:wrap">
-        ${[
-          ['#E0B44E','Decision / Choice required'],
-          ['#62C97A','Confirmed milestone'],
-          ['#5FADD4','Education / Career'],
-          ['#CC7888','Creative / Business'],
-          ['#9A8FD8','Military / ARNG'],
-          ['#D9714E','Financial / Risk'],
-        ].map(([c,l])=>`<div style="display:flex;align-items:center;gap:5px"><span style="width:9px;height:9px;border-radius:50%;background:${c};flex-shrink:0"></span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">${l}</span></div>`).join('')}
-      </div>
-
-      <!-- Timeline track -->
-      <div style="position:relative;overflow-x:auto;padding-bottom:8px;padding-left:6px">
-        <div style="min-width:900px">
-
-          <!-- Month labels + track -->
-          ${(()=>{
-            const months=[
-              {label:'APR 26',x:0},
-              {label:'MAY 26',x:1},
-              {label:'JUN 26',x:2},
-              {label:'JUL 26',x:3},
-              {label:'AUG 26',x:4},
-              {label:'SEP 26',x:5},
-              {label:'OCT 26',x:6},
-              {label:'NOV 26',x:7},
-              {label:'DEC 26',x:8},
-              {label:'Q1 27',x:9},
-              {label:'Q2 27',x:10},
-              {label:'SUM 27',x:11},
-            ];
-            const total=12;
-            const pct=i=>`${(i/total*100).toFixed(2)}%`;
-            const midPct=i=>`${((i+.5)/total*100).toFixed(2)}%`;
-
-            // Color for MBA courses
-            const MBA_DONE='#4BBDB8';   // teal  completed
-            const MBA_NOW='#E0B44E';    // gold  in progress now
-            const MBA_FUTURE='#62C97A'; // sage  upcoming
-
-            // Trimmed key events  tier controls stem height
-            // Above: tier 1=32px, 2=68px, 3=108px
-            // Below: tier 1=32px, 2=68px, 3=108px
-            const events=[
-              // ABOVE track  life/career events
-              {pos:.35, label:'AFT Window',      sub:'AprMay',                    col:'#9A8FD8', shape:'diamond', side:'up', tier:2},
-              {pos:1.0, label:'H. Wagner',        sub:'Apr 28 · Grad shoot',        col:'#CC7888', shape:'dot',     side:'up', tier:1},
-              {pos:1.7, label:'Clarkson FY Cap',  sub:'May · FY26 credits done',    col:'#D9714E', shape:'diamond', side:'up', tier:3},
-              {pos:2.25,label:'June Weddings',    sub:'McGrath Jun 6 · Niles Jun 27',col:'#CC7888',shape:'dot',    side:'up', tier:1},
-              {pos:4.25,label:'Aug Bookings',     sub:'Choate Aug 1 · Eddy Aug 22', col:'#CC7888', shape:'dot',    side:'up', tier:2},
-              {pos:5.3, label:'Next AFT',         sub:'OctNov window',             col:'#9A8FD8', shape:'diamond', side:'up', tier:1},
-              {pos:10.5,label:'MBA Graduation',   sub:'May 2027',                   col:'#62C97A', shape:'flag',    side:'up', tier:2},
-              {pos:11.2,label:'ARNG Ends',        sub:'Jun 2027',                   col:'#E0B44E', shape:'flag',    side:'up', tier:1},
-
-              // BELOW track  education + decisions
-              // MBA courses  done (teal)
-              {pos:-.05,label:'AC604 · OM607',    sub:'W\& · Done',               col:MBA_DONE,  shape:'dot', side:'down', tier:1},
-              // MBA courses  in progress now (gold)
-              {pos:.5,  label:'OS603 · MK610',    sub:'SP\& · In progress',       col:MBA_NOW,   shape:'dot', side:'down', tier:2},
-              // MBA courses  upcoming
-              {pos:3.0, label:'IS606',             sub:'SU\& · Business Info Sys', col:MBA_FUTURE,shape:'dot', side:'down', tier:1},
-              {pos:4.5, label:'OM603 · FN608',    sub:'FL\& · Supply Chain · Fin Mgmt', col:MBA_FUTURE,shape:'dot',side:'down',tier:2},
-              {pos:5.8, label:'New Clarkson FY',  sub:'Fall 2026 · benefit resets', col:'#5FADD4', shape:'dot',     side:'down', tier:3},
-              {pos:8.5, label:'SB610 · EC605',    sub:'W\' · Ethics · Econ',      col:MBA_FUTURE,shape:'dot', side:'down', tier:1},
-              {pos:9.0, label:'Officer Decision?',sub:'Q1\' · OTS or business',   col:'#E0B44E', shape:'diamond', side:'down', tier:2},
-              {pos:10.0,label:'OS681 Capstone',   sub:'SP\' · Strategic Planning', col:MBA_FUTURE,shape:'dot', side:'down', tier:3},
-            ];
-
-            const stemH={up:{1:32,2:68,3:108},down:{1:32,2:68,3:108}};
-
-            const renderEvent=(e,idx)=>{
-              const lft=`${Math.max(0,e.pos/total*100).toFixed(2)}%`;
-              const isFlag=e.shape==='flag';
-              const isDiamond=e.shape==='diamond';
-              const h=stemH[e.side][e.tier]||32;
-              const dotSize=isFlag?13:isDiamond?11:9;
-              const dotStyle=isFlag
-                ?`width:${dotSize}px;height:${dotSize}px;background:${e.col};clip-path:polygon(0 0,100% 0,100% 70%,50% 100%,0 70%);flex-shrink:0`
-                :isDiamond
-                ?`width:${dotSize}px;height:${dotSize}px;background:${e.col};transform:rotate(45deg);flex-shrink:0`
-                :`width:${dotSize}px;height:${dotSize}px;border-radius:50%;background:${e.col};flex-shrink:0`;
-              const isUp=e.side==='up';
-              const lblOffset=h+dotSize+6;
-              const isLeft=e.pos<=.6;
-              const isRight=e.pos>=10.6;
-              const align=isLeft?'left':isRight?'right':'center';
-              const xOff=isLeft?'0':isRight?'-100%':'-50%';
-              const delay=`${(idx*0.06).toFixed(2)}s`;
-              const animName=`tlAnim${idx}`;
-              const fromY=isUp?'6px':'-6px';
-              const lblStyle=`position:absolute;left:${lft};transform:translateX(${xOff});${isUp?`bottom:${lblOffset}px`:`top:${lblOffset}px`};white-space:nowrap;text-align:${align};opacity:0;animation:${animName} .5s cubic-bezier(.22,.68,0,1.1) ${delay} both`;
-              const dotWrapStyle=`position:absolute;left:${lft};transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;${isUp?`bottom:0`:`top:0`}`;
-              const stemAnim=`opacity:0;animation:fadeIn .5s ease ${delay} both`;
-              const dotAnim=`opacity:0;animation:scaleIn .45s cubic-bezier(.34,1.4,.64,1) ${(idx*0.06+.1).toFixed(2)}s both`;
-              const stem=`<div style="width:1px;height:${h}px;background:linear-gradient(${isUp?'to top':'to bottom'},rgba(255,255,255,.2),rgba(255,255,255,.03));${stemAnim}"></div>`;
-              const dot=`<div style="${dotStyle};box-shadow:0 0 9px ${e.col}88;${dotAnim}"></div>`;
-              return`<style>@keyframes ${animName}{from{opacity:0;transform:translateX(${xOff}) translateY(${fromY})}to{opacity:1;transform:translateX(${xOff}) translateY(0)}}</style>
-                <div style="${lblStyle}">
-                  <div style="font-family:var(--mono);font-size:9px;font-weight:600;color:${e.col};line-height:1.3">${e.label}</div>
-                  <div style="font-family:var(--mono);font-size:7.5px;color:var(--t3);line-height:1.4">${e.sub}</div>
-                </div>
-                <div style="${dotWrapStyle}">
-                  ${isUp?stem+dot:dot+stem}
-                </div>`;
-            };
-
-            const upEvents=events.filter(e=>e.side==='up');
-            const dnEvents=events.filter(e=>e.side==='down');
-            const upH=150;
-            const dnH=140;
-
-            // MBA legend entries
-            const mbaLegend=`<div style="display:flex;gap:14px;margin-top:12px;padding-top:10px;border-top:1px solid var(--b0);flex-wrap:wrap">
-              <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;align-self:center">MBA → </div>
-              ${[[MBA_DONE,'Completed (W\&)'],[MBA_NOW,'In Progress (SP\&)'],[MBA_FUTURE,'Upcoming']].map(([c,l])=>`<div style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:50%;background:${c};display:inline-block;box-shadow:0 0 5px ${c}88"></span><span style="font-family:var(--mono);font-size:8px;color:var(--t3)">${l}</span></div>`).join('')}
-            </div>`;
-
-            return`
-              <!-- Top zone -->
-              <div style="position:relative;height:${upH}px;overflow:visible">
-                ${upEvents.map((e,i)=>renderEvent(e,i)).join('')}
-              </div>
-
-              <!-- Center track -->
-              <div style="position:relative;height:26px;margin:2px 0">
-                ${months.map((m,i)=>`
-                  <div style="position:absolute;left:${pct(i)};top:0;bottom:0;width:1px;background:rgba(255,255,255,.15)"></div>
-                  <div style="position:absolute;left:${midPct(i)};top:50%;transform:translate(-50%,-50%);font-family:var(--mono);font-size:8.5px;font-weight:500;color:rgba(255,255,255,.45);letter-spacing:.5px">${m.label}</div>
-                `).join('')}
-                <div style="position:absolute;left:0;right:0;top:50%;height:2px;background:linear-gradient(90deg,rgba(255,255,255,.06),rgba(255,255,255,.25),rgba(255,255,255,.06));transform:translateY(-50%);border-radius:1px"></div>
-                <div style="position:absolute;left:6px;top:-8px;bottom:-8px;width:2px;background:var(--gold);border-radius:1px;box-shadow:0 0 12px rgba(224,180,78,.8)">
-                  <div style="position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:7.5px;font-weight:600;color:var(--gold);white-space:nowrap;background:var(--bg2);padding:2px 7px;border-radius:3px;border:1px solid rgba(224,180,78,.4);letter-spacing:1px;box-shadow:0 0 8px rgba(224,180,78,.3)">▸ NOW</div>
-                </div>
-              </div>
-
-              <!-- Bottom zone -->
-              <div style="position:relative;height:${dnH}px;overflow:visible">
-                ${dnEvents.map((e,i)=>renderEvent(e,upEvents.length+i)).join('')}
-              </div>
-
-              ${mbaLegend}
-            `;
-          })()}
-
+      <!-- FY callout strip -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px">
+        <div style="padding:9px 12px;background:rgba(95,173,212,.08);border:1px solid rgba(95,173,212,.25);border-radius:var(--r1);display:flex;align-items:center;gap:8px">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--sky);flex-shrink:0"></div>
+          <div><div style="font-family:var(--mono);font-size:9px;color:var(--sky);text-transform:uppercase;letter-spacing:.8px">Clarkson FY resets</div>
+          <div style="font-size:11px;color:var(--t2);margin-top:1px">July 1, 2026 — new 12-credit benefit available</div></div>
         </div>
+        <div style="padding:9px 12px;background:rgba(98,201,122,.08);border:1px solid rgba(98,201,122,.25);border-radius:var(--r1);display:flex;align-items:center;gap:8px">
+          <div style="width:8px;height:8px;border-radius:50%;background:var(--sage);flex-shrink:0"></div>
+          <div><div style="font-family:var(--mono);font-size:9px;color:var(--sage);text-transform:uppercase;letter-spacing:.8px">Army IgnITEd FY resets</div>
+          <div style="font-size:11px;color:var(--t2);margin-top:1px">Oct 1, 2026 — new $4,500 TA cap available</div></div>
+        </div>
+      </div>
+      <!-- Quarter cards -->
+      ${(()=>{
+        const quarters=[
+          {label:'Q2 2026',period:'Apr – Jun',col:'var(--sky)',items:[
+            {icon:'🏋',label:'AFT Testing Window',sub:'Apr–May · ARNG semi-annual test cycle',type:'mil'},
+            {icon:'📸',label:'H. Wagner graduation shoot',sub:'Apr 28 · Potsdam, NY · Confirmed',type:'creative'},
+            {icon:'📸',label:'F. Mnenula +3 senior photos',sub:'May 10 · St. Lawrence University · Lead',type:'creative'},
+            {icon:'🎓',label:'MK610 + OS603 complete',sub:'Spring 2026 · FY25-26 Clarkson cap fully used',type:'edu'},
+            {icon:'💒',label:'B. McGrath wedding photo',sub:'Jun 6 · The Stables at Windy Point · Signed',type:'creative'},
+            {icon:'🎥',label:'C. Niles wedding video',sub:'Jun 27 · Rapid View Venue, Chase Mills · Signed',type:'creative'},
+          ]},
+          {label:'Q3 2026',period:'Jul – Sep',col:'var(--gold)',items:[
+            {icon:'🔄',label:'Clarkson FY resets — Jul 1',sub:'New 12-credit benefit · Fall 2026 courses now covered',type:'edu',hi:true},
+            {icon:'📚',label:'FN608 + IS606 + OM603',sub:'Fall 2026 · 3 courses · all Clarkson-covered',type:'edu'},
+            {icon:'💒',label:'C. Choate wedding photo',sub:'Aug 1 · Shindigz on the River · Lead',type:'creative'},
+            {icon:'🎥',label:'M. Eddy wedding video',sub:'Aug 22 · The Stables at Windy Point · Signed',type:'creative'},
+          ]},
+          {label:'Q4 2026',period:'Oct – Dec',col:'var(--vio)',items:[
+            {icon:'💰',label:'Army IgnITEd FY resets — Oct 1',sub:'New $4,500 TA cap · Winter 2027 courses now eligible',type:'mil',hi:true},
+            {icon:'🏋',label:'AFT Testing Window',sub:'Oct–Nov · ARNG semi-annual cycle',type:'mil'},
+            {icon:'❓',label:'Officer path decision window',sub:'OTS applications need 6+ months lead time',type:'decision',hi:true},
+            {icon:'💳',label:'Cancel Amex Platinum',sub:'Before renewal · Chase Sapphire Reserve as primary',type:'financial'},
+          ]},
+          {label:'Q1–2 2027',period:'Jan – Jun',col:'var(--rose)',items:[
+            {icon:'📚',label:'EC605 + SB610 + OS681',sub:'Winter 2027 · Army IgnITEd $1,500/course · OOP $1,619/ea',type:'edu'},
+            {icon:'🎓',label:'MBA Graduation',sub:'May 2027 · Clarkson University · Target date',type:'edu',hi:true},
+            {icon:'❓',label:'ARNG contract ends — Jun 2027',sub:'Re-enlist / ETS / pursue OTS · decision required',type:'decision',hi:true},
+          ]},
+        ];
+        const bg={edu:'rgba(95,173,212,.1)',mil:'rgba(154,143,216,.1)',creative:'rgba(204,120,136,.1)',financial:'rgba(98,201,122,.1)',decision:'rgba(224,180,78,.1)'};
+        const bd={edu:'rgba(95,173,212,.35)',mil:'rgba(154,143,216,.35)',creative:'rgba(204,120,136,.35)',financial:'rgba(98,201,122,.35)',decision:'rgba(224,180,78,.5)'};
+        const lbl={edu:'EDU',mil:'MIL',creative:'PHOTO',financial:'FIN',decision:'DECIDE'};
+        const lcol={edu:'var(--sky)',mil:'var(--vio)',creative:'var(--rose)',financial:'var(--sage)',decision:'var(--gold)'};
+        return`<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          ${quarters.map(q=>`
+            <div style="background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r3);overflow:hidden">
+              <div style="padding:11px 14px;background:rgba(255,255,255,.03);border-bottom:1px solid var(--b0);display:flex;align-items:baseline;justify-content:space-between">
+                <div style="font-family:var(--serif);font-size:15px;font-weight:700;font-style:italic;color:${q.col}">${q.label}</div>
+                <div style="font-family:var(--mono);font-size:9px;color:var(--t3)">${q.period}</div>
+              </div>
+              <div style="padding:10px 12px;display:flex;flex-direction:column;gap:6px">
+                ${q.items.map(item=>`
+                  <div style="display:flex;align-items:flex-start;gap:9px;padding:8px 10px;background:${bg[item.type]};border:1px solid ${item.hi?bd[item.type]:'rgba(255,255,255,.05)'};border-radius:var(--r1);${item.hi?'box-shadow:0 2px 8px '+bd[item.type]+';':''}">
+                    <div style="font-size:14px;flex-shrink:0;line-height:1.4">${item.icon}</div>
+                    <div style="flex:1;min-width:0">
+                      <div style="font-size:11px;font-weight:600;color:${item.hi?q.col:'var(--tx)'};line-height:1.3">${item.label}</div>
+                      <div style="font-family:var(--mono);font-size:9px;color:var(--t3);margin-top:2px;line-height:1.4">${item.sub}</div>
+                    </div>
+                    <div style="font-family:var(--mono);font-size:8px;color:${lcol[item.type]};flex-shrink:0;padding:1px 5px;border-radius:5px;background:rgba(255,255,255,.05)">${lbl[item.type]}</div>
+                  </div>`).join('')}
+              </div>
+            </div>`).join('')}
+        </div>`;
+      })()}
+      <!-- Legend -->
+      <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;align-items:center">
+        <span style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.7px">Legend</span>
+        ${[['rgba(95,173,212,.6)','Education'],['rgba(154,143,216,.6)','Military'],['rgba(204,120,136,.6)','Creative'],['rgba(98,201,122,.6)','Financial'],['rgba(224,180,78,.6)','Decision · glowing border = inflection point']].map(([c,l])=>`<div style="display:flex;align-items:center;gap:4px"><div style="width:9px;height:9px;border-radius:2px;background:${c}"></div><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">${l}</span></div>`).join('')}
       </div>
     </div>
 
