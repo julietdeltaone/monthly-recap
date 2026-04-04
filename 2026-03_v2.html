@@ -1360,14 +1360,31 @@ function rOverview(){
     ${kpiTilesHTML}
     ${chartCardsHTML}
 
-    <div class="card ca d3 sf" style="position:relative">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap">
-        <div class="ch" style="margin-bottom:0"><div class="ct">March 2026  Full Schedule</div><div class="cs">CU Security · ARNG Drill · Workouts · Church · hover any day for detail</div></div>
-        <button onclick="toggleSchedExpand()" style="font-family:var(--mono);font-size:10px;padding:5px 14px;border:1px solid var(--b1);border-radius:40px;background:var(--bg4);color:var(--t3);cursor:pointer;transition:all .22s;white-space:nowrap">Expand ↗ </button>
+    <div class="card ca d3 sf" style="position:relative;overflow:hidden" id="calCard">
+      <!-- Compact collapsed header -->
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px;flex-wrap:wrap">
+        <div class="ch" style="margin-bottom:0">
+          <div class="ct">March 2026 — Full Schedule</div>
+          <div class="cs">31 days · CU Security · ARNG Drill · Gym · Church · click any day</div>
+        </div>
+        <button id="calExpandBtn" onclick="toggleCalInline()" style="font-family:var(--mono);font-size:10px;padding:6px 16px;border:1px solid var(--b2);border-radius:40px;background:var(--bg4);color:var(--t3);cursor:pointer;transition:all .22s;white-space:nowrap">
+          Full Timeline ↓
+        </button>
       </div>
+
+      <!-- COMPACT GRID (always visible) -->
       <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:8px">${dowHeader}${calDays}</div>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">${schedLegend}</div>
+
+      <!-- INLINE EXPANDED TIMELINE (hidden by default) -->
+      <div id="calTimelineWrap" style="max-height:0;overflow:hidden;transition:max-height .65s cubic-bezier(.4,0,.2,1),opacity .4s ease;opacity:0">
+        <div style="border-top:1px solid var(--b1);margin-top:18px;padding-top:18px">
+          <div style="font-family:var(--mono);font-size:9px;color:var(--sky);text-transform:uppercase;letter-spacing:1.3px;margin-bottom:16px">Day-by-day · March 2026</div>
+          <div id="calTimelineContent" style="display:flex;flex-direction:column;gap:0"></div>
+        </div>
+      </div>
     </div>
+
 
     <div class="ov-timeline-row">
       <div class="card ca d4">
@@ -2745,6 +2762,91 @@ window.showSchedTip=(e,el)=>{
 };
 window.hideSchedTip=()=>{const t=document.getElementById('schedTip');if(t){t.style.opacity='0';t.style.transform='translateY(4px)';}};
 
+window.toggleCalInline=()=>{
+  const wrap=document.getElementById('calTimelineWrap');
+  const btn=document.getElementById('calExpandBtn');
+  const content=document.getElementById('calTimelineContent');
+  if(!wrap||!btn)return;
+  const isOpen=wrap.style.maxHeight!=='0px'&&wrap.style.maxHeight!=='';
+  if(!isOpen){
+    // Build timeline if not already built
+    if(!content.children.length){
+      const mc=D.physical.mc;
+      const sermonDays=D.spiritual.sermonDays;
+      // Build per-day entries for all 31 days
+      const rows=Array.from({length:31},(_,i)=>{
+        const d=i+1;
+        const s=SCHED[d]||{};
+        const sess=D.physical.sessions[d];
+        const isSermon=sermonDays.includes(d);
+        const isDrill=!!s.drill;
+        const isWork=!!s.work;
+        const isGym=!!sess;
+        const spend=DAILY_SPEND[d]||0;
+
+        // Gather all events for this day
+        const events=[];
+        if(isSermon){const ser=D.spiritual.sermons.find(x=>x.date.includes('March '+d+','));events.push({col:'var(--gold)',icon:'⛪',label:ser?ser.title.split('—')[0].trim():'Church',sub:ser?ser.tags[0]:'Acts series'});}
+        if(isDrill)events.push({col:'var(--vio)',icon:'🪖',label:s.drill,sub:s.note||'Fort Drum, NY'});
+        if(isWork)events.push({col:'var(--sage)',icon:'🏢',label:'CU Security '+s.work,sub:s.note||''});
+        if(isGym){const muscles=sess.muscles;const c=mc[muscles[0]]||'#888';events.push({col:c,icon:'🏋',label:sess.label.split('·')[0].trim(),sub:sess.label.split('·').slice(1).join('·').trim()});}
+        // Add notable events from ov.events
+        D.ov.events.filter(e=>{
+          const evDay=parseInt(e.date.replace('Mar ',''));
+          return evDay===d;
+        }).forEach(e=>{
+          // Only add non-church, non-army-pay events (already covered by other conditions)
+          const desc=e.desc.replace(/<[^>]+>/g,'');
+          if(!isSermon&&!isWork&&!isDrill){
+            const raw=e.desc;
+            const iconMap={'6mi run':'🏃','Day Trip':'🚗','Kodak Center':'🎵','Army pay':'💰'};
+            const icon=Object.entries(iconMap).find(([k])=>raw.includes(k));
+            if(icon)events.push({col:'var(--teal)',icon:icon[1],label:desc.split('—')[0].trim(),sub:desc.split('—')[1]||''});
+          }
+        });
+        if(spend)events.push({col:'rgba(204,107,71,.8)',icon:'💸',label:'$'+spend+' spent',sub:''});
+
+        if(!events.length&&!isWork&&!isDrill&&!isGym&&!isSermon)return'';
+
+        const dow=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+        // March 2026: day 1 is Sunday
+        const dowLabel=dow[(d-1)%7]; // Mar 1=Sun=0, 2=Mon=1, etc
+        const isToday=false;
+        const hasSomething=events.length>0;
+        return`<div class="cal-tl-row" style="display:flex;gap:0;align-items:stretch;animation:fadeSlideIn .35s ease both;animation-delay:${(i*.022).toFixed(3)}s">
+          <!-- Date column -->
+          <div style="width:62px;flex-shrink:0;padding:10px 12px 10px 0;border-right:2px solid ${hasSomething?'rgba(255,255,255,.12)':'rgba(255,255,255,.04)'};display:flex;flex-direction:column;align-items:flex-end;gap:2px">
+            <div style="font-family:var(--mono);font-size:13px;font-weight:700;color:${isSermon?'var(--gold)':isDrill?'var(--vio)':'var(--t2)'};">${d}</div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--t5);text-transform:uppercase">${dowLabel}</div>
+          </div>
+          <!-- Events column -->
+          <div style="flex:1;padding:8px 0 8px 14px;display:flex;flex-direction:column;gap:5px;${i<30?'border-bottom:1px solid rgba(255,255,255,.04)':''}">
+            ${hasSomething?events.map(ev=>`<div style="display:flex;align-items:flex-start;gap:8px">
+              <div style="font-size:12px;flex-shrink:0;line-height:1.5">${ev.icon}</div>
+              <div>
+                <div style="font-size:12px;color:var(--tx);font-weight:500;line-height:1.4">${ev.label}</div>
+                ${ev.sub?`<div style="font-family:var(--mono);font-size:9px;color:var(--t4);margin-top:1px">${ev.sub}</div>`:''}
+              </div>
+              <div style="width:3px;height:3px;border-radius:50%;background:${ev.col};flex-shrink:0;margin-top:6px"></div>
+            </div>`).join(''):'<div style="font-size:11px;color:var(--t5);font-style:italic">Rest</div>'}
+          </div>
+        </div>`;
+      }).filter(Boolean).join('');
+      content.innerHTML=rows;
+    }
+    wrap.style.maxHeight='4000px';
+    wrap.style.opacity='1';
+    btn.textContent='Collapse ↑';
+    btn.style.borderColor='var(--sky)';
+    btn.style.color='var(--sky)';
+  } else {
+    wrap.style.maxHeight='0';
+    wrap.style.opacity='0';
+    btn.textContent='Full Timeline ↓';
+    btn.style.borderColor='';
+    btn.style.color='';
+  }
+};
 window.toggleSchedExpand=()=>{
   const ov=document.getElementById('calExpandOverlay');
   if(!ov)return;
