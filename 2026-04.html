@@ -481,11 +481,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
         <div class="dr"><span>Clarkson University &times;3 paychecks</span><span class="drv g">$3,491</span></div>
         <div class="dr"><span>ArmyIgnitED Reimbursement</span><span class="drv g">$1,250</span></div>
         <div class="dr"><span>IRS Federal Tax Refund</span><span class="drv">$533</span></div>
-        <div class="dr"><span>DFAS &mdash; Army Guard</span><span class="drv">$408</span></div>
-        <div class="dr"><span>Uber / Raiser</span><span class="drv">$151</span></div>
-        <div class="dr"><span>Amex Resy Credit</span><span class="drv">$100</span></div>
+        <div class="dr"><span>National Guard</span><span class="drv">$408</span></div>
+        <div class="dr"><span>Uber</span><span class="drv">$151</span></div>
         <div class="dr"><span>NY State Tax Refund</span><span class="drv">$37</span></div>
-        <div class="dr"><span>Interest / Other / Misc</span><span class="drv dim">$33</span></div>
+        <div class="dr"><span>Savings Interest</span><span class="drv dim">$31</span></div>
         <div class="dr" style="border-top:1px solid var(--b2);margin-top:6px;padding-top:8px"><span style="font-weight:600">Total</span><span class="drv g" style="font-size:15px">$5,963</span></div>
       </div>
       <div class="card ca d2">
@@ -509,7 +508,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
             <div style="font-family:var(--mono);font-size:8px;color:var(--sage);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px">Incoming</div>
             <div class="dr"><span>Apr 7 &mdash; SUNY/IgnitED</span><span class="drv g">+$1,250</span></div>
             <div class="dr"><span>Apr 9 &mdash; IRS Refund</span><span class="drv g">+$533</span></div>
-            <div class="dr"><span>Apr 22 &mdash; DFAS Army</span><span class="drv g">+$408</span></div>
+            <div class="dr"><span>Apr 22 &mdash; National Guard</span><span class="drv g">+$408</span></div>
             <div class="dr"><span>Apr 10 &mdash; NY State Refund</span><span class="drv g">+$37</span></div>
           </div>
           <div>
@@ -571,8 +570,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
           <div class="prog-track"><div class="prog-fill" style="width:56%;background:var(--gold)"></div></div>
         </div>
         <div class="prog-wrap">
-          <div class="prog-row"><span>2MR &mdash; Two Mile Run</span><span style="color:var(--t4)">Base building</span></div>
-          <div class="prog-track"><div class="prog-fill" style="width:15%;background:var(--t4)"></div></div>
+          <div class="prog-row"><span>2MR &mdash; Two Mile Run</span><span style="color:var(--sky)">14:27 Apr 17 &middot; Goal &lt;16:36</span></div>
+          <div class="prog-track"><div class="prog-fill" style="width:87%;background:var(--sky)"></div></div>
         </div>
         <div class="note sage" style="margin-top:10px"><span class="note-lbl">&#9733; Apr 26 Double PR</span>345lb DL &times;3 with chalk + 2:00 floor plank both hit in the same session. DL is up +60lb from January. Plank is a first-time 2-minute bodyweight floor hold.</div>
       </div>
@@ -592,32 +591,105 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
         <div class="note rust" style="margin-top:10px"><span class="note-lbl">Flag</span>Right knee resurfaced Apr 29. Don't compound heading into Annual Training prep. Monitor May runs closely.</div>
       </div>
       <div class="card sf ca d3">
-        <div class="ch"><div class="ct">Treadmill Sprint Sessions &mdash; Full Detail</div></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div class="ch"><div class="ct">Treadmill Sprint Log &mdash; Incremental Progress</div><div class="cs2">2 sessions &middot; Apr 6 &amp; Apr 21 &middot; Target: micro-increments at peak speed and floor speed</div></div>
+
+        <!-- Visual speed comparison bars -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:16px">
           <div>
-            <div style="font-family:var(--mono);font-size:8.5px;color:var(--sky);margin-bottom:8px;letter-spacing:.1em">SESSION 1 &mdash; APR 6 &middot; 2.25 mi / ~22 min</div>
-            <table class="sprint-tbl">
-              <tr><th>Set</th><th>Speed</th><th>Time</th><th>Notes</th></tr>
-              <tr><td>Warm-up</td><td style="color:var(--t3)">6.0 mph</td><td>0.5 mi</td><td style="color:var(--t4)">Ramp, rest 1&ndash;3 min @ 5.0</td></tr>
-              <tr><td>Sprint 1</td><td style="color:var(--sky)">11.0 mph</td><td>1:30</td><td style="color:var(--t4)">Manageable entry</td></tr>
-              <tr><td>Sprint 2</td><td style="color:var(--sky)">12.0 mph</td><td>1:10</td><td style="color:var(--rust)">3 min break &middot; jump to 3.5 &middot; PB muffin pre-session hurt</td></tr>
-              <tr><td>Sprint 3</td><td style="color:var(--t3)">9.0 mph</td><td>2:30</td><td style="color:var(--rust)">5 min break &middot; sloppy form &middot; ramped to 3.5</td></tr>
-            </table>
-            <div class="note" style="margin-top:8px;font-size:11px"><span class="note-lbl">Assessment</span>Food timing killed it. Peanut butter muffin too close to session. Top speed 12mph but form broke down at set 3.</div>
+            <div style="font-family:var(--mono);font-size:8px;color:var(--sky);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">APR 6 &mdash; 2.25 mi &middot; ~22 min</div>
+            <!-- Set 1 -->
+            <div style="margin-bottom:8px">
+              <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--t3);margin-bottom:3px"><span>Sprint 1</span><span style="color:var(--sky)">11.0 mph &middot; 1:30</span></div>
+              <div style="height:12px;background:var(--bg4);border-radius:3px;overflow:hidden;display:flex;align-items:center">
+                <div style="width:91.7%;height:100%;background:rgba(95,173,212,.55);border-radius:3px"></div>
+              </div>
+              <div style="font-size:9px;color:var(--t4);margin-top:2px">Ramp-down after &middot; rest @ 5.0 mph</div>
+            </div>
+            <!-- Set 2 -->
+            <div style="margin-bottom:8px">
+              <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--t3);margin-bottom:3px"><span>Sprint 2</span><span style="color:var(--sky)">12.0 mph &middot; 1:10</span></div>
+              <div style="height:12px;background:var(--bg4);border-radius:3px;overflow:hidden">
+                <div style="width:100%;height:100%;background:var(--sky);border-radius:3px"></div>
+              </div>
+              <div style="font-size:9px;color:var(--rust);margin-top:2px">Jumped off to 3.5 (not 5.0) &middot; PB muffin pre-session</div>
+            </div>
+            <!-- Set 3 -->
+            <div>
+              <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--t3);margin-bottom:3px"><span>Sprint 3</span><span style="color:var(--t3)">9.0 mph &middot; 2:30</span></div>
+              <div style="height:12px;background:var(--bg4);border-radius:3px;overflow:hidden">
+                <div style="width:75%;height:100%;background:rgba(95,173,212,.25);border-radius:3px"></div>
+              </div>
+              <div style="font-size:9px;color:var(--rust);margin-top:2px">5 min break &middot; sloppy form &middot; dropped to 3.5 to finish</div>
+            </div>
           </div>
           <div>
-            <div style="font-family:var(--mono);font-size:8.5px;color:var(--sky);margin-bottom:8px;letter-spacing:.1em">SESSION 2 &mdash; APR 21 &middot; 1.9 mi / ~18 min</div>
-            <table class="sprint-tbl">
-              <tr><th>Set</th><th>Speed</th><th>Time</th><th>Notes</th></tr>
-              <tr><td>Warm-up</td><td style="color:var(--t3)">6.0 mph</td><td>0.5 mi</td><td style="color:var(--t4)">Ramp, rest 1&ndash;3 min @ 5.0</td></tr>
-              <tr><td>Sprint 1</td><td style="color:var(--sky)">10.0 mph</td><td>1:00</td><td style="color:var(--t4)">Conservative start</td></tr>
-              <tr><td>Sprint 2</td><td style="color:var(--sky)">12.0 mph</td><td>1:20</td><td style="color:var(--sage)">Good from start &middot; sloppy finish</td></tr>
-              <tr><td>Sprint 3</td><td style="color:var(--t3)">10.0 mph</td><td>1:00</td><td style="color:var(--rust)">5 min break &middot; sloppy form again</td></tr>
-            </table>
-            <div class="note sage" style="margin-top:8px;font-size:11px"><span class="note-lbl">Assessment</span>Better session. Sprint 2 was longer at 12mph. Same pattern: third set is where it falls apart. Core fatigue is the ceiling right now.</div>
+            <div style="font-family:var(--mono);font-size:8px;color:var(--sage);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">APR 21 &mdash; 1.9 mi &middot; ~18 min</div>
+            <!-- Set 1 -->
+            <div style="margin-bottom:8px">
+              <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--t3);margin-bottom:3px"><span>Sprint 1</span><span style="color:var(--sky)">10.0 mph &middot; 1:00</span></div>
+              <div style="height:12px;background:var(--bg4);border-radius:3px;overflow:hidden">
+                <div style="width:83.3%;height:100%;background:rgba(95,173,212,.5);border-radius:3px"></div>
+              </div>
+              <div style="font-size:9px;color:var(--t4);margin-top:2px">Conservative opener &middot; rest @ 5.0 mph</div>
+            </div>
+            <!-- Set 2 -->
+            <div style="margin-bottom:8px">
+              <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--t3);margin-bottom:3px">
+                <span>Sprint 2</span>
+                <span style="color:var(--sage)">12.0 mph &middot; 1:20 <span style="color:var(--gold)">+10s</span></span>
+              </div>
+              <div style="height:12px;background:var(--bg4);border-radius:3px;overflow:hidden;position:relative">
+                <div style="width:100%;height:100%;background:var(--sky);border-radius:3px"></div>
+                <div style="position:absolute;right:0;top:0;width:14%;height:100%;background:var(--sage);border-radius:0 3px 3px 0"></div>
+              </div>
+              <div style="font-size:9px;color:var(--sage);margin-top:2px">Stayed on at 5.0 between sets &middot; good start &middot; sloppy finish</div>
+            </div>
+            <!-- Set 3 -->
+            <div>
+              <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--t3);margin-bottom:3px">
+                <span>Sprint 3</span>
+                <span style="color:var(--sky)">10.0 mph &middot; 1:00 <span style="color:var(--gold)">+1mph</span></span>
+              </div>
+              <div style="height:12px;background:var(--bg4);border-radius:3px;overflow:hidden">
+                <div style="width:83.3%;height:100%;background:rgba(98,201,122,.45);border-radius:3px"></div>
+              </div>
+              <div style="font-size:9px;color:var(--t3);margin-top:2px">5 min break &middot; held 10 instead of dropping to 9 &middot; sloppy form</div>
+            </div>
           </div>
         </div>
-        <div class="note sky" style="margin-top:12px"><span class="note-lbl">Pattern to Address</span>Both sessions hit 12mph peak but degrade at set 3. The third set is the training frontier &mdash; that's where the work needs to happen in May. Fix: shorter rest between 2 and 3, lighter warm-up meal timing.</div>
+
+        <!-- Delta comparison table -->
+        <div style="background:var(--bg3);border:1px solid var(--b1);border-radius:8px;padding:12px;margin-bottom:12px">
+          <div style="font-family:var(--mono);font-size:8px;color:var(--t4);letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px">Session-to-Session Deltas</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;text-align:center">
+            <div style="padding:8px;background:var(--bg4);border-radius:6px">
+              <div style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-bottom:3px">Peak Speed</div>
+              <div style="font-family:var(--mono);font-size:16px;color:var(--t2)">12 mph</div>
+              <div style="font-size:9px;color:var(--t4)">Held same</div>
+            </div>
+            <div style="padding:8px;background:var(--bg4);border-radius:6px">
+              <div style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-bottom:3px">Time @ 12mph</div>
+              <div style="font-family:var(--mono);font-size:16px;color:var(--sage)">+10s</div>
+              <div style="font-size:9px;color:var(--sage)">1:10 &rarr; 1:20</div>
+            </div>
+            <div style="padding:8px;background:var(--bg4);border-radius:6px">
+              <div style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-bottom:3px">Floor Speed</div>
+              <div style="font-family:var(--mono);font-size:16px;color:var(--sage)">+1mph</div>
+              <div style="font-size:9px;color:var(--sage)">9 &rarr; 10 mph</div>
+            </div>
+            <div style="padding:8px;background:var(--bg4);border-radius:6px">
+              <div style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-bottom:3px">Rest Quality</div>
+              <div style="font-family:var(--mono);font-size:16px;color:var(--sage)">Better</div>
+              <div style="font-size:9px;color:var(--sage)">3.5 &rarr; 5.0 mph</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Synthesis -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div class="note sky"><span class="note-lbl">What the logs actually show</span>The ceiling speed isn't moving yet — 12mph both times — and that's fine. The increments are underneath it: 10 more seconds at peak, 1mph higher on the recovery set, staying at 5.0 between sets instead of jumping off to 3.5. These are exactly the right kind of small wins. The goal isn't a new top speed every session, it's extending how long you can live at 12 and raising the floor you come back to.</div>
+          <div class="note nd"><span class="note-lbl">The consistent pattern</span>Form breaks down on the final set every time — not from speed, but from accumulated fatigue. Apr 6 the culprit was food timing (PB muffin) which tanked set 2's recovery and left nothing for set 3. Apr 21 the session was cleaner but set 3 still degraded. That third set is the adaptation frontier. The rest quality improvement (staying at 5.0 not 3.5) between sets is addressing it directly — more active recovery means a higher floor entering set 3.</div>
+        </div>
       </div>
       <!-- Workout log collapsible -->
       <div class="card sf ca d4">
@@ -840,24 +912,85 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
       </div>
       <div class="card sf ca d1">
         <div class="ch"><div class="ct">Client Pipeline &mdash; JD Meyers Productions</div></div>
+
+        <!-- Service legend -->
+        <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+          <span style="font-family:var(--mono);font-size:8px;padding:3px 10px;border-radius:20px;background:rgba(204,120,136,.15);border:1px solid rgba(204,120,136,.3);color:var(--rose)">&#9679; Wedding Photo</span>
+          <span style="font-family:var(--mono);font-size:8px;padding:3px 10px;border-radius:20px;background:rgba(154,143,216,.15);border:1px solid rgba(154,143,216,.3);color:var(--vio)">&#9679; Wedding Video</span>
+          <span style="font-family:var(--mono);font-size:8px;padding:3px 10px;border-radius:20px;background:rgba(75,189,184,.15);border:1px solid rgba(75,189,184,.3);color:var(--teal)">&#9679; Photoshoot</span>
+        </div>
+
         <table class="pipe-tbl">
-          <thead><tr><th>Client</th><th>Date</th><th>Type</th><th>Deposit</th><th>Total</th><th>Status</th></tr></thead>
+          <thead><tr><th>Client</th><th>Date</th><th>Service</th><th>Deposit</th><th>Balance</th><th>Total</th><th>Status</th></tr></thead>
           <tbody>
-            <tr><td>Brenna McGrath</td><td>Jun 6, 2026</td><td>Wedding Photo</td><td style="color:var(--sage)">$500 paid</td><td>$1,800</td><td><span class="status-pill" style="background:var(--sbg);color:var(--sage);border:1px solid rgba(98,201,122,.2)">Confirmed</span></td></tr>
-            <tr><td>JuliaKia</td><td>Jun 27, 2026</td><td>Wedding Video</td><td style="color:var(--sage)">$500 paid</td><td>$1,771</td><td><span class="status-pill" style="background:var(--sbg);color:var(--sage);border:1px solid rgba(98,201,122,.2)">Confirmed</span></td></tr>
-            <tr><td>Megan Eddy</td><td>Aug 22, 2026</td><td>Wedding Video</td><td style="color:var(--gold)">$500 due</td><td>$2,200</td><td><span class="status-pill" style="background:var(--gbg);color:var(--gold);border:1px solid rgba(224,180,78,.2)">Signed</span></td></tr>
-            <tr><td>Francesca Mnenula</td><td>May 10, 2026</td><td>Photoshoot</td><td style="color:var(--t4)">&mdash;</td><td>$250</td><td><span class="status-pill" style="background:var(--gbg);color:var(--gold);border:1px solid rgba(224,180,78,.2)">Negotiating</span></td></tr>
-            <tr><td>Grace Sheehan</td><td>May 10, 2026</td><td>Photoshoot</td><td style="color:var(--t4)">&mdash;</td><td>$120</td><td><span class="status-pill" style="background:var(--kbg);color:var(--sky);border:1px solid rgba(95,173,212,.2)">Contract Sent</span></td></tr>
-            <tr><td>Zachary Gerow</td><td>May 19, 2026</td><td>Wedding Photo</td><td style="color:var(--t4)">&mdash;</td><td>$1,200</td><td><span class="status-pill" style="background:var(--gbg);color:var(--gold);border:1px solid rgba(224,180,78,.2)">Negotiating</span></td></tr>
-            <tr><td>Clark Choate</td><td>Aug 1, 2026</td><td>Wedding Photo</td><td style="color:var(--t4)">&mdash;</td><td>$1,200</td><td><span class="status-pill" style="background:var(--gbg);color:var(--gold);border:1px solid rgba(224,180,78,.2)">Negotiating</span></td></tr>
-            <tr><td>Haleigh Dunbar</td><td>Oct 10, 2026</td><td>Wedding Photo</td><td style="color:var(--t4)">&mdash;</td><td>TBD</td><td><span class="status-pill" style="background:var(--b0);color:var(--t3);border:1px solid var(--b1)">Awaiting Avail.</span></td></tr>
-            <tr><td>Jenna St. Laurent</td><td>Jul 2027</td><td>Wedding Photo</td><td style="color:var(--t4)">&mdash;</td><td>TBD</td><td><span class="status-pill" style="background:var(--b0);color:var(--t3);border:1px solid var(--b1)">Awaiting Avail.</span></td></tr>
+            <tr style="border-left:2px solid var(--teal)">
+              <td>Francesca Mnenula</td><td>May 10</td>
+              <td><span style="font-family:var(--mono);font-size:7.5px;color:var(--teal)">Photoshoot</span></td>
+              <td style="color:var(--t4)">$0</td><td>$250</td><td>$250</td>
+              <td><span class="status-pill" style="background:var(--gbg);color:var(--gold);border:1px solid rgba(224,180,78,.2)">Negotiating</span></td>
+            </tr>
+            <tr style="border-left:2px solid var(--teal)">
+              <td><strong>Grace Sheehan</strong></td><td>May 10</td>
+              <td><span style="font-family:var(--mono);font-size:7.5px;color:var(--teal)">Photoshoot</span></td>
+              <td style="color:var(--sage)">$50 paid</td><td>$70</td><td>$120</td>
+              <td><span class="status-pill" style="background:var(--sbg);color:var(--sage);border:1px solid rgba(98,201,122,.2)">Signed</span></td>
+            </tr>
+            <tr style="border-left:2px solid var(--rose)">
+              <td>Zachary Gerow</td><td>May 19</td>
+              <td><span style="font-family:var(--mono);font-size:7.5px;color:var(--rose)">Wedding Photo</span></td>
+              <td style="color:var(--t4)">$0</td><td>$1,200</td><td>$1,200</td>
+              <td><span class="status-pill" style="background:var(--gbg);color:var(--gold);border:1px solid rgba(224,180,78,.2)">Negotiating</span></td>
+            </tr>
+            <tr style="border-left:2px solid var(--rose)">
+              <td>Brenna McGrath</td><td>Jun 6</td>
+              <td><span style="font-family:var(--mono);font-size:7.5px;color:var(--rose)">Wedding Photo</span></td>
+              <td style="color:var(--sage)">$500 paid</td><td>$1,300</td><td>$1,800</td>
+              <td><span class="status-pill" style="background:var(--sbg);color:var(--sage);border:1px solid rgba(98,201,122,.2)">Signed</span></td>
+            </tr>
+            <tr style="border-left:2px solid var(--vio)">
+              <td>JuliaKia Photography</td><td>Jun 27</td>
+              <td><span style="font-family:var(--mono);font-size:7.5px;color:var(--vio)">Wedding Video</span></td>
+              <td style="color:var(--sage)">$500 paid</td><td>$1,271</td><td>$1,771</td>
+              <td><span class="status-pill" style="background:var(--sbg);color:var(--sage);border:1px solid rgba(98,201,122,.2)">Signed</span></td>
+            </tr>
+            <tr style="border-left:2px solid var(--rose)">
+              <td>Clark Choate</td><td>Aug 1</td>
+              <td><span style="font-family:var(--mono);font-size:7.5px;color:var(--rose)">Wedding Photo</span></td>
+              <td style="color:var(--t4)">$0</td><td>$1,200</td><td>$1,200</td>
+              <td><span class="status-pill" style="background:var(--gbg);color:var(--gold);border:1px solid rgba(224,180,78,.2)">Negotiating</span></td>
+            </tr>
+            <tr style="border-left:2px solid var(--vio)">
+              <td>Megan Eddy</td><td>Aug 22</td>
+              <td><span style="font-family:var(--mono);font-size:7.5px;color:var(--vio)">Wedding Video</span></td>
+              <td style="color:var(--sage)">$500 paid</td><td>$1,700</td><td>$2,200</td>
+              <td><span class="status-pill" style="background:var(--sbg);color:var(--sage);border:1px solid rgba(98,201,122,.2)">Signed</span></td>
+            </tr>
+            <tr style="border-left:2px solid var(--rose)">
+              <td>Haleigh Dunbar</td><td>Oct 10</td>
+              <td><span style="font-family:var(--mono);font-size:7.5px;color:var(--rose)">Wedding Photo</span></td>
+              <td style="color:var(--t4)">$0</td><td>TBD</td><td>$0</td>
+              <td><span class="status-pill" style="background:var(--b0);color:var(--t3);border:1px solid var(--b1)">Awaiting Avail.</span></td>
+            </tr>
+            <tr style="border-left:2px solid var(--rose)">
+              <td>Jenna St. Laurent</td><td>Jul 2027</td>
+              <td><span style="font-family:var(--mono);font-size:7.5px;color:var(--rose)">Wedding Photo</span></td>
+              <td style="color:var(--t4)">$0</td><td>TBD</td><td>$0</td>
+              <td><span class="status-pill" style="background:var(--b0);color:var(--t3);border:1px solid var(--b1)">Awaiting Avail.</span></td>
+            </tr>
           </tbody>
         </table>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px">
-          <div class="stat-tile" style="text-align:center"><div class="st-k">Contracted</div><div class="st-v" style="color:var(--sage);font-size:16px">$6,771</div><div class="st-d">Deposits paid &middot; 2 events</div></div>
-          <div class="stat-tile" style="text-align:center"><div class="st-k">Dep. Pending</div><div class="st-v" style="color:var(--gold);font-size:16px">$2,200</div><div class="st-d">Megan Eddy &middot; signed</div></div>
-          <div class="stat-tile" style="text-align:center"><div class="st-k">Negotiating</div><div class="st-v" style="color:var(--t3);font-size:16px">$2,520</div><div class="st-d">3 clients active</div></div>
+
+        <!-- Summary stats + mini charts -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+            <div class="stat-tile" style="text-align:center"><div class="st-k">Deposits In</div><div class="st-v" style="color:var(--sage);font-size:15px">$1,550</div><div class="st-d">3 clients paid</div></div>
+            <div class="stat-tile" style="text-align:center"><div class="st-k">Signed Total</div><div class="st-v" style="color:var(--sky);font-size:15px">$7,091</div><div class="st-d">Brenna+Julia+Megan</div></div>
+            <div class="stat-tile" style="text-align:center"><div class="st-k">Negotiating</div><div class="st-v" style="color:var(--gold);font-size:15px">$2,650</div><div class="st-d">Francesca+Zach+Clark</div></div>
+          </div>
+          <div style="position:relative;height:100px">
+            <div style="font-family:var(--mono);font-size:8px;color:var(--t4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Revenue by Service Type</div>
+            <canvas id="pipeServiceChart" style="max-height:80px"></canvas>
+          </div>
         </div>
       </div>
     </div>
@@ -1065,15 +1198,39 @@ new Chart(document.getElementById('overviewGymChart'), {
   options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:7},maxRotation:0}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:8},callback:v=>(v/1000).toFixed(0)+'K'}}}}
 });
 
-// Pipeline donut
+// Pipeline donut (overview)
 new Chart(document.getElementById('overviewPipeChart'), {
   type:'doughnut',
   data:{
-    labels:['Dep. Paid','Signed (dep due)','Negotiating'],
-    datasets:[{data:[6771,2200,2520],backgroundColor:['rgba(98,201,122,.8)','rgba(224,180,78,.7)','rgba(95,173,212,.4)'],borderColor:'#111214',borderWidth:2}]
+    labels:['Signed (dep paid)','Signed (dep due)','Negotiating'],
+    datasets:[{data:[3571,2200,2650],backgroundColor:['rgba(98,201,122,.8)','rgba(95,173,212,.6)','rgba(224,180,78,.6)'],borderColor:'#111214',borderWidth:2}]
   },
   options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{display:true,position:'right',labels:{font:{size:8},padding:8,boxWidth:10}}}}
 });
+
+// Pipeline by service type (creative tab)
+setTimeout(()=>{
+  const ctx = document.getElementById('pipeServiceChart');
+  if(ctx) new Chart(ctx,{
+    type:'bar',
+    data:{
+      labels:['Wedding\nPhoto','Wedding\nVideo','Photoshoot'],
+      datasets:[{
+        data:[4200,3971,370],
+        backgroundColor:['rgba(204,120,136,.7)','rgba(154,143,216,.7)','rgba(75,189,184,.7)'],
+        borderRadius:4
+      }]
+    },
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{grid:{display:false},ticks:{font:{size:8},color:'#5E5A56'}},
+        y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:8},callback:v=>'$'+v.toLocaleString()}}
+      }
+    }
+  });
+},100);
 
 // Financial bar chart (full)
 new Chart(document.getElementById('finBarChart'), {
