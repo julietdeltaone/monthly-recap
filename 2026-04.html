@@ -369,20 +369,20 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 
 <!-- CAREER SPOTLIGHT BANNER -->
 <div class="career-spotlight ca">
-  <div class="cs-eyebrow">2026 Priority</div>
+  <div class="cs-eyebrow">The thing to know about April 2026</div>
   <div class="cs-title">This is the year it locks in.</div>
-  <div class="cs-body">Three career paths are running simultaneously — not as a hedge, but as a strategy. AF Officer Training School, a United Airlines crew scheduler role, and St. Lawrence civil service. Any one of them changes the trajectory. The May drill conversation, the May 9 exam, and the pre-interview process are all live right now.</div>
+  <div class="cs-body">Three career paths are running at the same time right now — Air Force Officer Training School, United Airlines, and St. Lawrence civil service. Any single one of them changes everything. The financial cushion is being built specifically to survive a career transition. The MBA adds credential weight to every application. The fitness work feeds directly into the AFT. None of this is random — it's all pointing at the same goal.</div>
   <div class="cs-paths">
     <div class="cs-path" style="background:rgba(154,143,216,.1);border:1px solid rgba(154,143,216,.2)" onclick="switchTab('career')">
       <div class="cs-path-pct" style="color:var(--vio)">20%</div>
       <div class="cs-path-name" style="color:var(--tx)">Air Force OTS</div>
-      <div class="cs-path-detail">DD-368 routing &middot; May drill buy-in &middot; Board Nov 2026</div>
+      <div class="cs-path-detail">DD-368 routing &middot; May drill conversation &middot; Board Nov 2026</div>
       <div class="cs-path-bar"><div class="cs-path-bar-fill" style="width:20%;background:var(--vio)"></div></div>
     </div>
     <div class="cs-path" style="background:rgba(95,173,212,.1);border:1px solid rgba(95,173,212,.2)" onclick="switchTab('career')">
       <div class="cs-path-pct" style="color:var(--sky)">35%</div>
       <div class="cs-path-name" style="color:var(--tx)">United Airlines</div>
-      <div class="cs-path-detail">Pre-interview active &middot; Chicago &middot; USERRA applies</div>
+      <div class="cs-path-detail">Pre-interview active &middot; internal referral &middot; Chicago</div>
       <div class="cs-path-bar"><div class="cs-path-bar-fill" style="width:35%;background:var(--sky)"></div></div>
     </div>
     <div class="cs-path" style="background:rgba(98,201,122,.1);border:1px solid rgba(98,201,122,.2)" onclick="switchTab('career')">
@@ -392,9 +392,15 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
       <div class="cs-path-bar"><div class="cs-path-bar-fill" style="width:15%;background:var(--sage)"></div></div>
     </div>
   </div>
-  <div class="cs-crunch">
-    <div class="cs-crunch-icon">&#9888;</div>
-    <div class="cs-crunch-text"><strong>July&ndash;August crunch incoming:</strong> OTS pre-application due July 4 &middot; AFT deadline July 26 &middot; Annual Training Aug 6&ndash;21 at Fort Drum. Everything that can be front-loaded needs to start now. <span style="cursor:pointer;text-decoration:underline;color:var(--rust)" onclick="switchTab('career')">See career tab &rarr;</span></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+    <div class="cs-crunch">
+      <div class="cs-crunch-icon">&#9888;</div>
+      <div class="cs-crunch-text"><strong>July&ndash;August crunch:</strong> OTS deadline Jul 4 &middot; AFT Jul 26 &middot; Annual Training Aug 6&ndash;21. Front-loading starts now. <span style="cursor:pointer;text-decoration:underline;color:var(--rust)" onclick="switchTab('career')">Full timeline &rarr;</span></div>
+    </div>
+    <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:var(--r2);padding:12px 14px;display:flex;align-items:flex-start;gap:10px">
+      <div style="font-size:16px;flex-shrink:0">&#128161;</div>
+      <div style="font-size:12px;color:var(--t2);line-height:1.55">Everything else in this dashboard — the savings, the fitness, the MBA, the photography business — is infrastructure for this transition. <strong style="color:var(--tx)">That's the frame.</strong></div>
+    </div>
   </div>
 </div>
 
@@ -445,7 +451,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
       <div class="card sf ca clickable" onclick="switchTab('financial')" style="cursor:pointer" title="Click to open Financial tab">
         <div class="ch">
           <div class="ct">Financial Overview</div>
-          <div class="cs2">Click to explore &rarr; Best net month YTD</div>
+          <div class="cs2">Best net month YTD &mdash; savings buffer being built deliberately for career transition</div>
         </div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
           <div class="stat-tile"><div class="st-k">Income</div><div class="st-v" style="color:var(--sage)">$5,963</div><div class="st-d">3 Clarkson + IgnitED + refunds</div></div>
@@ -454,16 +460,16 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
         </div>
         <div class="chart-container"><canvas id="overviewFinChart"></canvas></div>
         <div class="prog-wrap" style="margin-top:12px">
-          <div class="prog-row"><span>YTD Goal &mdash; $8,793 of $10,000</span><span style="color:var(--sage)">87.9%</span></div>
+          <div class="prog-row"><span>YTD Savings Goal &mdash; $8,793 of $10,000</span><span style="color:var(--sage)">87.9%</span></div>
           <div class="prog-track"><div class="prog-fill" style="width:87.9%;background:linear-gradient(90deg,var(--sage),var(--sky))"></div></div>
         </div>
       </div>
       <!-- Gym chart card -->
       <div class="card ca d1 clickable" onclick="switchTab('physical')" style="cursor:pointer" title="Click to open Physical tab">
-        <div class="ch"><div class="ct">Gym Volume &mdash; April</div><div class="cs2">128,418 lbs &middot; 24 sessions &middot; &#9733; Apr 26 double PR</div></div>
+        <div class="ch"><div class="ct">AFT Training Progress &mdash; April</div><div class="cs2">128,418 lbs &middot; 24 sessions &middot; DL at 98% of AFT goal &middot; &#9733; double PR Apr 26</div></div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
-          <div class="stat-tile"><div class="st-k">DL PR</div><div class="st-v" style="color:var(--sage)">345lb</div><div class="st-d">+60lb from Jan &middot; chalk</div></div>
-          <div class="stat-tile"><div class="st-k">Plank PR</div><div class="st-v" style="color:var(--sage)">2:00</div><div class="st-d">Bodyweight floor</div></div>
+          <div class="stat-tile"><div class="st-k">DL PR &mdash; AFT Event</div><div class="st-v" style="color:var(--sage)">345lb</div><div class="st-d">Goal 350 &middot; 98% there</div></div>
+          <div class="stat-tile"><div class="st-k">2MR &mdash; AFT Event</div><div class="st-v" style="color:var(--sage)">14:27</div><div class="st-d">Under 16:36 passing std.</div></div>
         </div>
         <div class="chart-container"><canvas id="overviewGymChart"></canvas></div>
       </div>
@@ -562,6 +568,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
       <div class="si"><span class="sk">Net Saved</span><span class="sv" style="color:var(--sage)">+$3,999</span></div>
       <div class="si"><span class="sk">Tithe</span><span class="sv" style="color:var(--gold)">$250</span></div>
     </div>
+    <div class="sc" style="border-left:3px solid var(--sage);background:rgba(98,201,122,.06)">
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin-bottom:6px">Why this matters</div>
+      <div style="font-size:12px;line-height:1.62;color:var(--t2)">$8,793 saved with 8 months left. The savings buffer is what makes a career transition possible without panic. This is being built on purpose.</div>
+    </div>
     <div class="sc">
       <div class="sgt">YTD Progress</div>
       <div class="si"><span class="sk">Saved</span><span class="sv" style="color:var(--sage)">$8,793</span></div>
@@ -659,6 +669,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
       <div class="si"><span class="sk">Total Volume</span><span class="sv">128,418 lb</span></div>
       <div class="si"><span class="sk">Outdoor Runs</span><span class="sv">6</span></div>
       <div class="si"><span class="sk">Sprint Sessions</span><span class="sv">2</span></div>
+    </div>
+    <div class="sc" style="border-left:3px solid var(--sky);background:rgba(95,173,212,.06)">
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);margin-bottom:6px">Why this matters</div>
+      <div style="font-size:12px;line-height:1.62;color:var(--t2)">The AFT scores feed directly into the OTS application. DL at 98% of goal. 2-mile run already under the passing standard. This work is not separate from the career push — it is part of it.</div>
     </div>
     <div class="sc">
       <div class="sgt">PRs Hit</div>
@@ -854,6 +868,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
       <div class="si"><span class="sk">United Airlines</span><span class="sv" style="color:var(--sky)">35%</span></div>
       <div class="si"><span class="sk">Civil Service</span><span class="sv" style="color:var(--sage)">15%</span></div>
     </div>
+    <div class="sc" style="border-left:3px solid var(--vio);background:rgba(154,143,216,.06)">
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--vio);margin-bottom:6px">The goal</div>
+      <div style="font-size:12px;line-height:1.62;color:var(--t2)">Get locked in to a career job this year. One of these three lands. The strategy is to keep all three live and let the process resolve itself — not to pick one and hope.</div>
+    </div>
     <div class="sc">
       <div class="sgt">Upcoming Hard Dates</div>
       <div class="si"><span class="sk">May 9</span><span class="sv" style="color:var(--gold)">Exam day</span></div>
@@ -874,8 +892,13 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
       <!-- Career narrative header -->
       <div class="card sf ca" style="border-color:rgba(154,143,216,.2);background:linear-gradient(135deg,rgba(154,143,216,.06),rgba(95,173,212,.04))">
         <div style="font-family:var(--mono);font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:var(--vio);margin-bottom:8px">2026 Priority Objective</div>
-        <div style="font-family:var(--serif);font-size:22px;font-weight:700;font-style:italic;color:var(--tx);margin-bottom:10px;line-height:1.2">Get locked in to a career job this year.</div>
-        <div style="font-size:13px;line-height:1.72;color:var(--t2)">Three paths are running simultaneously &mdash; not as a hedge, but as a deliberate strategy. Any one of them changes the trajectory. The goal isn't to pick one and hope. The goal is to execute everything that can be done right now on all three and let the process resolve itself. The DD-368 conversation at May drill, the exam on May 9, and the pre-interview process are all live at the same time. That's by design.</div>
+        <div style="font-family:var(--serif);font-size:24px;font-weight:700;font-style:italic;color:var(--tx);margin-bottom:10px;line-height:1.2">Get locked in to a career job this year.</div>
+        <div style="font-size:13px;line-height:1.72;color:var(--t2);margin-bottom:14px">Three paths are running simultaneously — not as a hedge, but as a deliberate strategy. Any one of them changes the trajectory. The goal isn't to pick one and hope. The goal is to execute everything that can be done right now on all three and let the process resolve itself. The DD-368 conversation at May drill, the exam on May 9, and the pre-interview process are all live at the same time.</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding-top:14px;border-top:1px solid var(--b1)">
+          <div style="text-align:center"><div style="font-family:var(--mono);font-size:28px;font-weight:500;color:var(--vio);line-height:1">20%</div><div style="font-family:var(--mono);font-size:8px;color:var(--t4);letter-spacing:.1em;text-transform:uppercase;margin-top:4px">Air Force OTS</div></div>
+          <div style="text-align:center"><div style="font-family:var(--mono);font-size:28px;font-weight:500;color:var(--sky);line-height:1">35%</div><div style="font-family:var(--mono);font-size:8px;color:var(--t4);letter-spacing:.1em;text-transform:uppercase;margin-top:4px">United Airlines</div><div style="font-size:9px;color:var(--sky);margin-top:2px">Best odds</div></div>
+          <div style="text-align:center"><div style="font-family:var(--mono);font-size:28px;font-weight:500;color:var(--sage);line-height:1">15%</div><div style="font-family:var(--mono);font-size:8px;color:var(--t4);letter-spacing:.1em;text-transform:uppercase;margin-top:4px">Civil Service</div></div>
+        </div>
       </div>
       <!-- Path 1: OTS -->
       <div class="card ca d1 path-card vio">
@@ -940,12 +963,16 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
   <div style="display:grid;grid-template-columns:240px 1fr;gap:22px;align-items:start;max-width:1340px;margin:0 auto;padding:0 28px">
     <div style="display:flex;flex-direction:column;gap:12px;position:sticky;top:60px">
       <div class="sc light-sc">
-        <div class="sgt">MBA Status</div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk">GPA</span><span class="sv" style="color:#2a5a9a">3.83</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk">Courses done</span><span class="sv">4 / 10</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk">IgnitED rate</span><span class="sv" style="color:#2a7a3a">$750 / course</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk">Est. graduation</span><span class="sv">Mar 2027</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk">Funding thru</span><span class="sv">Winter 2027</span></div>
+        <div class="sgt" style="color:#555550">MBA Status</div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#555550">GPA</span><span class="sv" style="color:#2a5a9a">3.83</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#555550">Courses done</span><span class="sv" style="color:#0a0a08">4 / 10</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#555550">IgnitED rate</span><span class="sv" style="color:#2a7a3a">$750 / course</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#555550">Est. graduation</span><span class="sv" style="color:#0a0a08">Mar 2027</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#555550">Funding thru</span><span class="sv" style="color:#0a0a08">Winter 2027</span></div>
+      </div>
+      <div style="background:#fff;border:1px solid rgba(42,90,138,.2);border-radius:var(--r2);padding:12px 14px;border-left:3px solid #3a6a9a">
+        <div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#3a6a9a;margin-bottom:6px">Why this matters</div>
+        <div style="font-size:12px;line-height:1.65;color:#333330">The MBA makes every career path stronger. OTS values the degree. United values the management credential. Civil service boards score it. And the 3.83 GPA is proof the work is actually getting done while everything else is in motion.</div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:14px">
@@ -1013,7 +1040,11 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
       <div class="si"><span class="sk">Confirmed + dep.</span><span class="sv" style="color:var(--sage)">$6,771</span></div>
       <div class="si"><span class="sk">Signed, dep. due</span><span class="sv" style="color:var(--gold)">$2,200</span></div>
       <div class="si"><span class="sk">Negotiating</span><span class="sv" style="color:var(--t3)">$2,520</span></div>
-      <div class="si"><span class="sk">Deposits held</span><span class="sv" style="color:var(--sage)">$1,500</span></div>
+      <div class="si"><span class="sk">Deposits held</span><span class="sv" style="color:var(--sage)">$1,550</span></div>
+    </div>
+    <div class="sc" style="border-left:3px solid var(--rose);background:rgba(204,120,136,.06)">
+      <div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--rose);margin-bottom:6px">Why this matters</div>
+      <div style="font-size:12px;line-height:1.62;color:var(--t2)">The photography business is the income floor during transition. If any career path takes longer than expected, $9K+ in the pipeline means the gap doesn't become a crisis.</div>
     </div>
   </aside>
   <div class="content">
