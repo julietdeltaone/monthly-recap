@@ -3,1108 +3,1151 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JD Monthly Recap — April 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<title>April 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"><\/script>
 <style>
 :root{
-  --bg:#09090B;--bg2:#0F0F12;--bg3:#17171C;--bg4:#1E1E26;--bg5:#26262F;
-  --b0:rgba(255,255,255,.05);--b1:rgba(255,255,255,.09);--b2:rgba(255,255,255,.16);--b3:rgba(255,255,255,.28);
-  --tx:#F2F0EB;--t2:#C8C4BC;--t3:#8A867F;--t4:#4A4844;
-  --gold:#E0B84E;--gbg:rgba(224,184,78,.12);--gdim:rgba(224,184,78,.06);
-  --sage:#5EC97A;--sbg:rgba(94,201,122,.12);--sdim:rgba(94,201,122,.06);
-  --sky:#5AADD4;--kbg:rgba(90,173,212,.12);--kdim:rgba(90,173,212,.06);
-  --rust:#D96E4E;--rbg:rgba(217,110,78,.12);
-  --vio:#9A8FD8;--vbg:rgba(154,143,216,.12);
+  --bg:#0A0B0C;--bg2:#111214;--bg3:#18191D;--bg4:#1F2025;--bg5:#272830;
+  --b0:rgba(255,255,255,.05);--b1:rgba(255,255,255,.10);--b2:rgba(255,255,255,.20);--b3:rgba(255,255,255,.32);
+  --tx:#F7F5F0;--t2:#D8D4CC;--t3:#A09A93;--t4:#5E5A56;--t5:#2A2826;
+  --gold:#E0B44E;--gbg:rgba(224,180,78,.14);--gdim:rgba(224,180,78,.07);
+  --sage:#62C97A;--sbg:rgba(98,201,122,.14);--sdim:rgba(98,201,122,.07);
+  --rust:#D9714E;--rbg:rgba(217,113,78,.14);
+  --sky:#5FADD4;--kbg:rgba(95,173,212,.14);--kdim:rgba(95,173,212,.07);
+  --vio:#9A8FD8;--vbg:rgba(154,143,216,.14);
+  --rose:#CC7888;--robg:rgba(204,120,136,.14);
   --teal:#4BBDB8;
-  --serif:'Libre Baskerville',Georgia,serif;
-  --sans:'DM Sans',-apple-system,sans-serif;
-  --mono:'JetBrains Mono',monospace;
-  --r:10px;--r2:16px;--r3:22px;
-  --sh:0 2px 16px rgba(0,0,0,.7);
-  --sh2:0 8px 48px rgba(0,0,0,.9);
+  --serif:"Libre Baskerville",Georgia,serif;
+  --sans:"DM Sans",-apple-system,sans-serif;
+  --mono:"JetBrains Mono",monospace;
+  --r1:6px;--r2:10px;--r3:16px;--r4:20px;
+  --sh1:0 2px 12px rgba(0,0,0,.8);
+  --sh2:0 6px 40px rgba(0,0,0,.92);
+  --sh3:0 20px 80px rgba(0,0,0,.98);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-
-/* BACK TO TOP */
-#btt{position:fixed;bottom:24px;right:24px;width:38px;height:38px;border-radius:50%;background:var(--bg4);border:1px solid var(--b2);color:var(--t3);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s,transform .2s;z-index:500}
-#btt.show{opacity:1}
-#btt:hover{transform:translateY(-2px);color:var(--tx)}
+body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100vh;-webkit-font-smoothing:antialiased}
+@keyframes slideUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+@keyframes modalIn{from{opacity:0;transform:scale(.93) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.ca{opacity:0;transform:translateY(18px)}.ca.vis{animation:slideUp .48s cubic-bezier(.22,.68,0,1.1) both}
+.ca.vis.d1{animation-delay:.06s}.ca.vis.d2{animation-delay:.12s}.ca.vis.d3{animation-delay:.18s}
+.ca.vis.d4{animation-delay:.24s}.ca.vis.d5{animation-delay:.30s}.ca.vis.d6{animation-delay:.36s}
 
 /* SHELL */
-.shell{max-width:900px;margin:0 auto;padding:52px 24px 100px}
+.shell{max-width:1340px;margin:0 auto;padding:36px 28px 100px}
 
 /* HEADER */
-.hdr{text-align:center;margin-bottom:48px}
-.hdr-eye{font-family:var(--mono);font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:2.5px;margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:10px}
-.hdr-eye::before,.hdr-eye::after{content:'';width:36px;height:1px;background:rgba(224,184,78,.3)}
-.hdr h1{font-family:var(--serif);font-size:38px;font-weight:700;font-style:italic;letter-spacing:-.5px;line-height:1;margin-bottom:6px}
-.hdr-sub{font-family:var(--mono);font-size:10px;color:var(--t4);letter-spacing:1px;text-transform:uppercase}
+.hdr{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-bottom:20px;border-bottom:1px solid var(--b1)}
+.hdr-l{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.hdr h1{font-family:var(--serif);font-size:22px;font-weight:700;font-style:italic;letter-spacing:-.3px}
+.hdr h1 em{color:var(--gold);font-style:italic}
+.mlbl{font-family:var(--mono);font-size:10px;color:var(--t4);letter-spacing:1.2px;text-transform:uppercase}
+.hdr-r{display:flex;gap:8px;flex-wrap:wrap}
+.mnav-btn{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.7px;text-transform:uppercase;padding:6px 14px;border:1px solid var(--b1);border-radius:40px;background:var(--bg3);color:var(--t3);cursor:pointer;transition:all .18s;text-decoration:none;display:inline-flex;align-items:center}
+.mnav-btn:hover{color:var(--tx);border-color:var(--b2);background:var(--bg4)}
 
-/* HERO KPI BAR */
-.hero{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-bottom:32px;background:var(--b0);border:1px solid var(--b1);border-radius:var(--r2);overflow:hidden}
-.hero-kpi{padding:22px 18px;background:var(--bg2);text-align:center;transition:background .2s}
-.hero-kpi:hover{background:var(--bg3)}
-.hero-kpi:not(:last-child){border-right:1px solid var(--b0)}
-.hk-val{font-family:var(--mono);font-size:26px;font-weight:500;line-height:1;margin-bottom:5px;display:block}
-.hk-val.green{color:var(--sage)}
-.hk-val.gold{color:var(--gold)}
-.hk-val.sky{color:var(--sky)}
-.hk-val.vio{color:var(--vio)}
-.hk-lbl{font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;display:block}
-@media(max-width:640px){.hero{grid-template-columns:repeat(3,1fr)}.hero-kpi:nth-child(4){border-top:1px solid var(--b0)}.hero-kpi:nth-child(5){border-top:1px solid var(--b0)}}
+/* CAREER SPOTLIGHT BANNER */
+.career-spotlight{background:linear-gradient(135deg,rgba(154,143,216,.08) 0%,rgba(95,173,212,.05) 50%,rgba(98,201,122,.06) 100%);border:1px solid rgba(154,143,216,.25);border-radius:var(--r3);padding:20px 24px;margin-top:20px;position:relative;overflow:hidden}
+.career-spotlight::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--vio),var(--sky),var(--sage))}
+.cs-eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:1.6px;text-transform:uppercase;color:var(--vio);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.cs-eyebrow::after{content:"";flex:1;height:1px;background:rgba(154,143,216,.2)}
+.cs-title{font-family:var(--serif);font-size:18px;font-weight:700;font-style:italic;color:var(--tx);margin-bottom:8px}
+.cs-body{font-size:13px;line-height:1.7;color:var(--t2);margin-bottom:14px}
+.cs-paths{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+@media(max-width:700px){.cs-paths{grid-template-columns:1fr}}
+.cs-path{border-radius:var(--r2);padding:12px 14px;position:relative;overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.cs-path:hover{transform:translateY(-2px);box-shadow:var(--sh2)}
+.cs-path-pct{font-family:var(--mono);font-size:26px;font-weight:500;line-height:1;margin-bottom:4px}
+.cs-path-name{font-size:12px;font-weight:600;margin-bottom:3px}
+.cs-path-detail{font-family:var(--mono);font-size:9px;color:var(--t3);line-height:1.4}
+.cs-path-bar{height:3px;border-radius:2px;margin-top:8px;background:rgba(255,255,255,.06)}
+.cs-path-bar-fill{height:100%;border-radius:2px;transition:width 1.2s cubic-bezier(.22,.68,0,1.1)}
+.cs-crunch{display:flex;align-items:flex-start;gap:12px;background:rgba(217,113,78,.08);border:1px solid rgba(217,113,78,.2);border-radius:var(--r2);padding:12px 14px}
+.cs-crunch-icon{font-size:18px;flex-shrink:0}
+.cs-crunch-text{font-size:12px;line-height:1.62;color:var(--t2)}
+.cs-crunch-text strong{color:var(--rust)}
 
-/* NAV PILLS */
-.nav{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:40px}
-.nav-pill{font-family:var(--mono);font-size:10px;letter-spacing:.8px;text-transform:uppercase;padding:6px 14px;border:1px solid var(--b1);border-radius:40px;background:none;color:var(--t3);cursor:pointer;transition:all .18s;text-decoration:none}
-.nav-pill:hover{color:var(--tx);border-color:var(--b2);background:var(--bg3)}
+/* TABS */
+.tabs{display:flex;gap:2px;padding:16px 0 0;flex-wrap:wrap;position:sticky;top:0;z-index:100;background:var(--bg);padding-bottom:10px;margin-bottom:-10px;border-bottom:1px solid var(--b0)}
+.tab{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;padding:7px 16px;border:1px solid transparent;border-radius:40px;background:none;color:var(--t4);cursor:pointer;transition:color .22s,border-color .22s,background .22s,transform .18s cubic-bezier(.34,1.2,.64,1)}
+.tab:hover{color:var(--t2);border-color:var(--b1);background:rgba(255,255,255,.04);transform:translateY(-1px)}
+.tab.on{color:var(--tx);border-color:var(--b2);background:var(--bg4);box-shadow:var(--sh1);transform:translateY(-1px)}
+.tab[data-t="overview"].on{border-color:rgba(224,180,78,.4);color:var(--gold)}
+.tab[data-t="financial"].on{border-color:rgba(98,201,122,.4);color:var(--sage)}
+.tab[data-t="physical"].on{border-color:rgba(95,173,212,.4);color:var(--sky)}
+.tab[data-t="spiritual"].on{border-color:rgba(224,180,78,.4);color:var(--gold)}
+.tab[data-t="career"].on{border-color:rgba(154,143,216,.4);color:var(--vio)}
+.tab[data-t="intellectual"].on{border-color:rgba(95,173,212,.4);color:var(--sky)}
+.tab[data-t="creative"].on{border-color:rgba(204,120,136,.4);color:var(--rose)}
+.tab[data-t="reflections"].on{border-color:rgba(160,154,147,.4);color:var(--t2)}
 
-/* SECTION */
-.section{margin-bottom:16px}
-.sec-card{background:var(--bg2);border:1px solid var(--b1);border-radius:var(--r2);overflow:hidden;transition:border-color .25s}
-.sec-card:hover{border-color:var(--b2)}
+/* LAYOUT */
+.dash{display:grid;grid-template-columns:240px 1fr;gap:22px;margin-top:24px;align-items:start}
+@media(max-width:860px){.dash{grid-template-columns:1fr}.side{order:2}.content{order:1}}
+.side{display:flex;flex-direction:column;gap:12px;position:sticky;top:60px}
+.sc{background:var(--bg2);border:1px solid var(--b0);border-radius:var(--r3);padding:16px;box-shadow:var(--sh1);transition:border-color .28s,transform .24s cubic-bezier(.34,1.2,.64,1)}
+.sc:hover{border-color:var(--b2);transform:translateY(-1px)}
+.sgt{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:1.4px;text-transform:uppercase;color:var(--t4);margin-bottom:10px}
+.si{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--b0)}
+.si:last-child{border-bottom:none}
+.sk{font-size:12px;color:var(--t3)}.sv{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--tx)}
+.content{min-width:0}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:860px){.cg{grid-template-columns:1fr}}
+.sf{grid-column:1/-1}
 
-/* SECTION HEADER — always visible */
-.sec-head{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;cursor:pointer;user-select:none;gap:16px}
-.sec-head-l{display:flex;align-items:center;gap:14px}
-.sec-accent{width:3px;border-radius:2px;flex-shrink:0;align-self:stretch;min-height:40px}
-.sec-title{font-family:var(--serif);font-size:17px;font-weight:700;font-style:italic;color:var(--tx)}
-.sec-snap{font-size:12px;color:var(--t3);margin-top:2px;line-height:1.4}
-.sec-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-.chip{font-family:var(--mono);font-size:9px;padding:3px 8px;border-radius:20px;border:1px solid var(--b0);color:var(--t3);background:rgba(255,255,255,.03);white-space:nowrap}
-.chip.g{color:var(--sage);border-color:rgba(94,201,122,.2);background:rgba(94,201,122,.07)}
-.chip.b{color:var(--sky);border-color:rgba(90,173,212,.2);background:rgba(90,173,212,.07)}
-.chip.d{color:var(--gold);border-color:rgba(224,184,78,.2);background:rgba(224,184,78,.07)}
-.chip.v{color:var(--vio);border-color:rgba(154,143,216,.2);background:rgba(154,143,216,.07)}
-.chip.r{color:var(--rust);border-color:rgba(217,110,78,.2);background:rgba(217,110,78,.07)}
-.chip.t{color:var(--teal);border-color:rgba(75,189,184,.2);background:rgba(75,189,184,.07)}
-.sec-toggle{font-family:var(--mono);font-size:9px;color:var(--t4);letter-spacing:.5px;text-transform:uppercase;padding:5px 12px;border:1px solid var(--b1);border-radius:20px;background:none;cursor:pointer;white-space:nowrap;transition:all .18s;flex-shrink:0}
-.sec-toggle:hover{color:var(--tx);border-color:var(--b2)}
-
-/* DETAIL PANEL */
-.sec-detail{display:none;border-top:1px solid var(--b0)}
-.sec-detail.open{display:block}
-.sec-detail-inner{padding:24px}
-
-/* DETAIL GRID */
-.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:600px){.detail-grid{grid-template-columns:1fr}}
-.detail-grid.three{grid-template-columns:1fr 1fr 1fr}
-@media(max-width:700px){.detail-grid.three{grid-template-columns:1fr 1fr}}
-@media(max-width:480px){.detail-grid.three{grid-template-columns:1fr}}
-.detail-full{grid-column:1/-1}
-
-/* DETAIL CARD */
-.dc{background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r);padding:16px}
-.dc-title{font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:1.4px;text-transform:uppercase;color:var(--t4);margin-bottom:12px}
-.dc-row{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;border-bottom:1px solid var(--b0);gap:8px;font-size:12px}
-.dc-row:last-child{border-bottom:none}
-.dc-k{color:var(--t3)}
-.dc-v{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--tx);text-align:right}
-.dc-v.g{color:var(--sage)}.dc-v.d{color:var(--gold)}.dc-v.r{color:var(--rust)}.dc-v.b{color:var(--sky)}.dc-v.dim{color:var(--t3);font-weight:400}
-
-/* PROGRESS BARS */
-.prog-wrap{margin:8px 0}
-.prog-lbl{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--t3);margin-bottom:5px}
-.prog-lbl span:last-child{color:var(--tx)}
-.prog-track{height:5px;background:var(--bg4);border-radius:3px;overflow:hidden}
-.prog-fill{height:100%;border-radius:3px;transition:width 1s cubic-bezier(.22,.68,0,1.1)}
-
-/* WORKOUT CALENDAR */
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
-.cal-dow{font-family:var(--mono);font-size:8px;color:var(--t4);text-align:center;padding:3px 0;text-transform:uppercase;letter-spacing:.5px}
-.cal-day{min-height:44px;border-radius:6px;padding:4px;border:1px solid transparent;font-family:var(--mono);font-size:9px;color:var(--t4);position:relative;transition:border-color .15s}
-.cal-day.active{border-color:rgba(90,173,212,.25);background:rgba(90,173,212,.06)}
-.cal-day.church{border-color:rgba(224,184,78,.3);background:rgba(224,184,78,.08)}
-.cal-day.drill{border-color:rgba(154,143,216,.3);background:rgba(154,143,216,.08)}
-.cal-day.rest{border-color:rgba(255,255,255,.03);background:rgba(255,255,255,.01)}
-.cal-day.empty{opacity:0}
-.cal-num{font-weight:500;margin-bottom:2px;color:var(--t3)}
-.cal-day.active .cal-num{color:var(--sky)}
-.cal-day.church .cal-num{color:var(--gold)}
-.cal-day.drill .cal-num{color:var(--vio)}
-.cal-dots{display:flex;flex-wrap:wrap;gap:2px;margin-top:2px}
-.cal-dot{width:5px;height:5px;border-radius:50%}
-
-/* MUSCLE BADGE */
-.muscle-row{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
-.mbadge{font-family:var(--mono);font-size:8px;padding:2px 6px;border-radius:10px}
-
-/* SERMON CARD */
-.sermon-card{background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r);padding:18px;margin-bottom:10px}
-.sermon-card:last-child{margin-bottom:0}
-.sermon-num{font-family:var(--mono);font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
-.sermon-title{font-family:var(--serif);font-size:15px;font-weight:700;font-style:italic;color:var(--tx);margin-bottom:6px;line-height:1.3}
-.sermon-meta{font-family:var(--mono);font-size:9px;color:var(--t4);margin-bottom:10px}
-.sermon-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
-.sermon-body{font-size:12.5px;color:var(--t2);line-height:1.72}
-.sermon-body h4{font-family:var(--mono);font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin:12px 0 5px}
-.sermon-body p{margin-bottom:8px}
-.sermon-body p:last-child{margin-bottom:0}
-.sermon-commentary{margin-top:12px;padding:12px 14px;border-left:2px solid var(--gold);background:var(--gdim);border-radius:0 var(--r) var(--r) 0;font-size:12px;color:var(--t2);line-height:1.7;font-style:italic}
-.sermon-commentary::before{content:'Personal Note';display:block;font-style:normal;font-family:var(--mono);font-size:8px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
-
-/* AFT PROGRESS */
-.aft-event{margin-bottom:16px}
-.aft-event:last-child{margin-bottom:0}
-.aft-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
-.aft-name{font-size:12px;color:var(--t2)}
-.aft-vals{font-family:var(--mono);font-size:11px;color:var(--tx)}
-.aft-history{display:flex;align-items:center;gap:6px;margin-top:4px}
-.aft-hist-dot{font-family:var(--mono);font-size:9px;color:var(--t4)}
-.aft-delta{font-family:var(--mono);font-size:9px}
-
-/* CAREER PATH CARDS */
-.career-path{background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r);padding:16px;margin-bottom:10px}
-.career-path:last-child{margin-bottom:0}
-.path-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px}
-.path-label{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:1.2px;color:var(--t4)}
-.path-prob{font-family:var(--mono);font-size:13px;font-weight:500}
-.path-title{font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;color:var(--tx);margin-bottom:6px}
-.path-status{font-size:12px;color:var(--t2);line-height:1.6}
-.path-next{margin-top:10px;padding:8px 10px;background:var(--bg4);border-radius:6px;font-family:var(--mono);font-size:10px;color:var(--t3);border-left:2px solid var(--sky)}
-.path-next strong{color:var(--sky)}
-
-/* TIMELINE */
-.timeline{display:flex;flex-direction:column;gap:0}
-.tl-item{display:flex;gap:10px;align-items:flex-start}
-.tl-rail{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:12px;padding-top:3px}
-.tl-dot{width:8px;height:8px;border-radius:50%;border:1.5px solid currentColor;flex-shrink:0}
-.tl-dot.done{background:currentColor}
-.tl-dot.hot{border-color:var(--gold);background:rgba(224,184,78,.3)}
-.tl-dot.soon{border-color:var(--sky);background:transparent}
-.tl-line{width:1px;flex:1;min-height:12px;background:var(--b1);margin:2px 0}
-.tl-content{padding-bottom:10px;flex:1}
-.tl-date{font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.6px;margin-bottom:2px}
-.tl-text{font-size:12px;color:var(--t2);line-height:1.4}
-.tl-text strong{color:var(--tx)}
-
-/* INCOME/EXPENSE BARS */
-.fin-bar-row{display:flex;align-items:center;gap:10px;padding:5px 0}
-.fin-bar-lbl{font-size:11px;color:var(--t2);width:140px;flex-shrink:0}
-.fin-bar-track{flex:1;height:6px;background:var(--bg4);border-radius:3px;overflow:hidden}
-.fin-bar-fill{height:100%;border-radius:3px}
-.fin-bar-amt{font-family:var(--mono);font-size:10px;color:var(--tx);width:60px;text-align:right;flex-shrink:0}
-
-/* NOTE BOX */
-.note{padding:12px 14px;border-left:2px solid var(--sky);background:var(--kdim);border-radius:0 var(--r) var(--r) 0;font-size:12px;color:var(--t2);line-height:1.7;margin-top:8px}
-.note.gold{border-color:var(--gold);background:var(--gdim)}
-.note.sage{border-color:var(--sage);background:var(--sdim)}
-.note.rust{border-color:var(--rust);background:var(--rbg)}
-.note-lbl{font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;display:block}
-
-/* COURSE CARD */
-.course-card{background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r);padding:16px;margin-bottom:10px}
-.course-card:last-child{margin-bottom:0}
-.course-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:8px}
-.course-code{font-family:var(--mono);font-size:9px;color:var(--sky);text-transform:uppercase;letter-spacing:1px}
-.course-name{font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;color:var(--tx);margin-bottom:4px}
-.course-meta{font-family:var(--mono);font-size:10px;color:var(--t4);margin-bottom:10px}
-.course-dl{font-size:11.5px;color:var(--t2);line-height:1.6}
-.deadline-row{display:flex;align-items:baseline;gap:8px;padding:4px 0;border-bottom:1px solid var(--b0);font-size:11.5px}
-.deadline-row:last-child{border-bottom:none}
-.dl-date{font-family:var(--mono);font-size:10px;color:var(--gold);flex-shrink:0;width:70px}
-.dl-text{color:var(--t2)}
-
-/* REFLECTIONS */
-.refl-block{background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r);padding:18px;margin-bottom:10px}
-.refl-block:last-child{margin-bottom:0}
-.refl-title{font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;color:var(--tx);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--b0)}
-.refl-body{font-size:13px;color:var(--t2);line-height:1.78}
-.refl-body p{margin-bottom:10px}
-.refl-body p:last-child{margin-bottom:0}
-
-/* CREATIVE PROJECT */
-.proj-card{background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r);padding:16px;margin-bottom:10px}
-.proj-card:last-child{margin-bottom:0}
-.proj-name{font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;color:var(--tx);margin-bottom:4px}
-.proj-status{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
-.proj-desc{font-size:12px;color:var(--t2);line-height:1.6}
-
-/* CHART WRAPPER */
-.chart-wrap{position:relative;width:100%;height:180px}
+/* CARDS */
+.card{background:var(--bg2);border:1px solid var(--b0);border-radius:var(--r3);padding:20px;box-shadow:var(--sh1);transition:border-color .28s,box-shadow .28s,transform .24s cubic-bezier(.34,1.2,.64,1)}
+.card:hover{border-color:var(--b2);box-shadow:var(--sh2);transform:translateY(-2px)}
+.card.light{background:#F4F1EA;color:#1a1a14}
+.card.light:hover{border-color:rgba(0,0,0,.2)}
+.ch{margin-bottom:13px}
+.ct{font-family:var(--serif);font-size:15px;font-weight:700;color:var(--tx);font-style:italic}
+.card.light .ct{color:#0a0a08}
+.cs2{font-size:11px;color:var(--t3);margin-top:3px}
+.card.light .cs2{color:#888880}
+.secdiv{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--b0)}
+.card.light .secdiv{border-bottom-color:rgba(0,0,0,.08)}
+.secacc{width:3px;height:16px;border-radius:2px;flex-shrink:0}
+.sectit{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--tx);font-style:italic}
+.card.light .sectit{color:#0a0a08}
 
 /* STAT TILES */
-.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
-@media(max-width:500px){.stat-row{grid-template-columns:repeat(2,1fr)}}
-.stat-tile{background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r);padding:12px 14px;text-align:center}
-.stat-tile-v{font-family:var(--mono);font-size:18px;font-weight:500;line-height:1;margin-bottom:4px;color:var(--tx)}
-.stat-tile-k{font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px}
+.stat-tile{background:var(--bg3);border:1px solid var(--b0);border-radius:var(--r2);padding:12px 14px;cursor:pointer;transition:border-color .2s,transform .2s,background .2s}
+.stat-tile:hover{border-color:var(--b2);transform:translateY(-2px);background:var(--bg4)}
+.stat-tile.clickable::after{content:"↗";font-size:9px;color:var(--t4);float:right;margin-top:2px}
+.st-k{font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.8px;margin-bottom:5px}
+.st-v{font-family:var(--mono);font-size:18px;font-weight:500;color:var(--tx);line-height:1;margin-bottom:3px}
+.st-d{font-size:11px;color:var(--t3);line-height:1.35}
 
-/* URGENT CARE CALLOUT */
-.uc-card{background:var(--rbg);border:1px solid rgba(217,110,78,.25);border-radius:var(--r);padding:14px 16px;display:flex;gap:14px;align-items:flex-start;margin-bottom:14px}
-.uc-icon{font-size:20px;flex-shrink:0;margin-top:1px}
-.uc-body{flex:1}
-.uc-title{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--rust);margin-bottom:4px}
-.uc-text{font-size:12px;color:var(--t2);line-height:1.6}
+/* PROGRESS BAR */
+.prog-wrap{margin:8px 0}
+.prog-row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9px;color:var(--t3);margin-bottom:4px}
+.prog-track{height:4px;background:var(--bg4);border-radius:3px;overflow:hidden}
+.card.light .prog-track{background:rgba(0,0,0,.1)}
+.prog-fill{height:100%;border-radius:3px;transition:width 1.2s cubic-bezier(.22,.68,0,1.1)}
 
-/* FOOTER */
-.footer{font-family:var(--mono);font-size:10px;color:var(--t4);text-align:center;margin-top:60px;line-height:2}
-.footer a{color:var(--t4);text-decoration:none;transition:color .15s}
-.footer a:hover{color:var(--t3)}
+/* INLINE NOTE */
+.note{padding:10px 13px;border-radius:0 var(--r1) var(--r1) 0;margin:10px 0;font-size:12px;line-height:1.68}
+.note.gold{border-left:2px solid var(--gold);background:var(--gdim);color:var(--t2)}
+.note.sage{border-left:2px solid var(--sage);background:var(--sdim);color:var(--t2)}
+.note.sky{border-left:2px solid var(--sky);background:var(--kdim);color:var(--t2)}
+.note.rust{border-left:2px solid var(--rust);background:var(--rbg);color:var(--t2)}
+.note.light-note{border-left:2px solid #3a6a9a;background:rgba(42,90,138,.06);color:#333330}
+.note-lbl{font-family:var(--mono);font-size:7px;letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:4px;opacity:.75}
 
-/* CANVAS FIX */
-canvas{display:block}
+/* DATA ROW */
+.dr{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;font-size:12px;gap:8px;border-bottom:1px solid var(--b0)}
+.dr:last-child{border-bottom:none}
+.card.light .dr{border-bottom-color:rgba(0,0,0,.06);color:#555550}
+.drv{font-family:var(--mono);font-size:12px;font-weight:500;text-align:right;color:var(--tx)}
+.card.light .drv{color:#0a0a08}
+.drv.g{color:var(--sage)!important}.drv.d{color:var(--gold)!important}
+.drv.b{color:var(--sky)!important}.drv.r{color:var(--rust)!important}.drv.dim{color:var(--t4)!important}
 
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.shell>*{animation:fadeUp .5s ease both}
-.shell>*:nth-child(2){animation-delay:.06s}
-.shell>*:nth-child(3){animation-delay:.12s}
-.shell>*:nth-child(4){animation-delay:.18s}
-.shell>*:nth-child(5){animation-delay:.22s}
+/* OPEN MODAL BUTTON */
+.open-modal-btn{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;padding:7px 16px;border-radius:24px;cursor:pointer;border:1px solid var(--b2);background:var(--bg4);color:var(--t2);transition:all .2s;display:inline-flex;align-items:center;gap:5px;margin-top:14px}
+.open-modal-btn:hover{background:var(--b1);color:var(--tx);transform:translateY(-1px)}
+.card.light .open-modal-btn{background:rgba(0,0,0,.06);border-color:rgba(0,0,0,.14);color:#333330}
+.card.light .open-modal-btn:hover{background:rgba(0,0,0,.12);color:#0a0a08}
+
+/* COLLAPSIBLE */
+.coll-btn{width:100%;display:flex;align-items:center;justify-content:space-between;padding:9px 0;border:none;background:none;cursor:pointer;font-family:var(--mono);font-size:8.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--t4);border-top:1px solid var(--b1);margin-top:6px;transition:color .15s}
+.coll-btn:hover{color:var(--t2)}
+.caret{transition:transform .25s;font-size:10px}.caret.open{transform:rotate(180deg)}
+.coll-body{display:none;margin-top:8px}.coll-body.open{display:block}
+
+/* CHART WRAP */
+.chart-container{position:relative;height:140px;margin-top:10px}
+.chart-container.tall{height:180px}
+
+/* MODAL OVERLAY */
+.modal-overlay{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s cubic-bezier(.4,0,.2,1)}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.modal-box{position:relative;z-index:2;width:min(95vw,1000px);max-height:88vh;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;transform:scale(.93) translateY(24px);transition:transform .38s cubic-bezier(.34,1.15,.64,1);box-shadow:0 40px 120px rgba(0,0,0,.98),0 0 0 1px rgba(255,255,255,.08)}
+.modal-overlay.open .modal-box{transform:scale(1) translateY(0)}
+.modal-dark{background:var(--bg2)}
+.modal-light{background:#F4F1EA}
+.modal-hdr{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;flex-shrink:0;gap:12px}
+.modal-dark .modal-hdr{border-bottom:1px solid var(--b1)}
+.modal-light .modal-hdr{border-bottom:1px solid rgba(0,0,0,.1)}
+.modal-acc{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.modal-title{font-family:var(--serif);font-size:20px;font-weight:700;font-style:italic}
+.modal-dark .modal-title{color:var(--tx)}.modal-light .modal-title{color:#0a0a08}
+.modal-sub{font-family:var(--mono);font-size:8px;letter-spacing:.13em;text-transform:uppercase;margin-top:2px}
+.modal-dark .modal-sub{color:var(--t4)}.modal-light .modal-sub{color:#888880}
+.modal-close-btn{width:30px;height:30px;border-radius:50%;border:none;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;transition:all .18s;flex-shrink:0;line-height:1}
+.modal-dark .modal-close-btn{background:var(--b1);color:var(--t3)}.modal-dark .modal-close-btn:hover{background:var(--b2);color:var(--tx)}
+.modal-light .modal-close-btn{background:rgba(0,0,0,.08);color:#555}.modal-light .modal-close-btn:hover{background:rgba(0,0,0,.16);color:#000}
+.modal-body{overflow-y:auto;flex:1;padding:22px 24px}
+.modal-body::-webkit-scrollbar{width:4px}
+.modal-body::-webkit-scrollbar-track{background:transparent}
+.modal-dark .modal-body::-webkit-scrollbar-thumb{background:var(--b2)}
+.modal-light .modal-body::-webkit-scrollbar-thumb{background:rgba(0,0,0,.18)}
+.mg{display:grid;gap:12px}.mg2{grid-template-columns:1fr 1fr}.mg3{grid-template-columns:1fr 1fr 1fr}.mfull{grid-column:1/-1}
+@media(max-width:660px){.mg2,.mg3{grid-template-columns:1fr}}
+.mc{border-radius:10px;padding:14px}
+.modal-dark .mc{background:var(--bg3);border:1px solid var(--b1)}
+.modal-light .mc{background:#fff;border:1px solid rgba(0,0,0,.08);box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.mc-t{font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px}
+.modal-dark .mc-t{color:var(--t4)}.modal-light .mc-t{color:#888880}
+.mr2{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;font-size:12px;gap:8px;border-bottom:1px solid var(--b0)}
+.modal-dark .mr2{color:var(--t2)}.modal-light .mr2{color:#555550;border-bottom-color:rgba(0,0,0,.06)}
+.mr2:last-child{border-bottom:none}
+.mrv2{font-family:var(--mono);font-size:11.5px;font-weight:500;text-align:right}
+.modal-dark .mrv2{color:var(--tx)}.modal-light .mrv2{color:#0a0a08}
+.mrv2.g{color:var(--sage)!important}.mrv2.d{color:var(--gold)!important}.mrv2.b{color:var(--sky)!important}.mrv2.r{color:var(--rust)!important}.mrv2.dim{color:var(--t4)!important}
+
+/* MODAL NOTE */
+.mnote{padding:10px 13px;border-radius:0 8px 8px 0;margin:8px 0;font-size:12px;line-height:1.65}
+.modal-dark .mnote{background:rgba(95,173,212,.06);border-left:2px solid var(--sky);color:var(--t2)}
+.modal-dark .mnote.mg2n{background:rgba(98,201,122,.06);border-left-color:var(--sage)}
+.modal-dark .mnote.md{background:rgba(224,180,78,.06);border-left-color:var(--gold)}
+.modal-dark .mnote.mr{background:rgba(217,113,78,.07);border-left-color:var(--rust)}
+.modal-light .mnote{background:rgba(42,90,138,.05);border-left:2px solid #3a6a9a;color:#333330}
+.mnote-lbl{font-family:var(--mono);font-size:7px;letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:4px;opacity:.7}
+
+/* SPRINT TABLE */
+.sprint-tbl{width:100%;border-collapse:collapse;font-size:11.5px}
+.sprint-tbl th{font-family:var(--mono);font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;padding:5px 8px;text-align:left;color:var(--t4);border-bottom:1px solid var(--b1)}
+.sprint-tbl td{padding:6px 8px;vertical-align:middle;border-bottom:1px solid var(--b0);color:var(--t2)}
+.sprint-tbl tr:last-child td{border-bottom:none}
+
+/* WORKOUT LOG */
+.wk-row{display:flex;gap:8px;align-items:flex-start;padding:5px 0;font-size:11px;border-bottom:1px solid var(--b0)}
+.wk-row:last-child{border-bottom:none}
+.wk-date{font-family:var(--mono);font-size:8px;color:var(--t4);width:42px;flex-shrink:0;padding-top:2px}
+.wk-badges{display:flex;flex-wrap:wrap;gap:2px;width:120px;flex-shrink:0}
+.wk-b{font-family:var(--mono);font-size:7px;padding:2px 5px;border-radius:8px;color:#fff;white-space:nowrap}
+.wk-detail{font-size:10.5px;flex:1;color:var(--t3)}
+
+/* NODE TIMELINE */
+.ntl{display:flex;flex-direction:column}
+.nti{display:flex;gap:12px;align-items:flex-start}
+.nti-rail{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:14px}
+.nti-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:2px;border:2px solid currentColor}
+.nti-dot.filled{background:currentColor}
+.nti-line{width:2px;flex:1;min-height:16px;margin:3px 0}
+.nti-c{padding-bottom:16px;flex:1}
+.nti-d{font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px}
+.nti-t{font-size:12.5px;line-height:1.65}
+.nti-t strong{font-weight:600}
+.ntl.dark .nti-line{background:var(--b1)}
+.ntl.dark .nti-d{color:var(--t4)}.ntl.dark .nti-t{color:var(--t2)}.ntl.dark .nti-t strong{color:var(--tx)}
+.ntl.light .nti-line{background:rgba(0,0,0,.09)}
+.ntl.light .nti-d{color:#888880}.ntl.light .nti-t{color:#333330}.ntl.light .nti-t strong{color:#0a0a08}
+
+/* CAREER DEEP DIVE */
+.path-card{border-radius:var(--r2);padding:16px;margin-bottom:10px;border:1px solid var(--b1);background:var(--bg3);position:relative;overflow:hidden}
+.path-card::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px}
+.path-card.vio::before{background:var(--vio)}.path-card.sky::before{background:var(--sky)}.path-card.sage::before{background:var(--sage)}
+.path-card-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;flex-wrap:wrap;gap:6px;padding-left:8px}
+.path-lbl{font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--t4)}
+.path-pct{font-family:var(--mono);font-size:22px;font-weight:500}
+.path-title{font-family:var(--serif);font-size:14px;font-weight:700;font-style:italic;margin-bottom:5px;padding-left:8px}
+.path-body{font-size:12px;line-height:1.62;color:var(--t2);padding-left:8px}
+.path-next{margin-top:8px;padding:7px 10px;border-radius:5px;font-size:11.5px;line-height:1.5;background:var(--bg4);color:var(--t3);border-left:2px solid var(--sky);padding-left:8px;margin-left:8px}
+.path-next strong{color:var(--sky)}
+
+/* SCENARIO MATRIX */
+.scm{border-radius:var(--r2);overflow:hidden;border:1px solid var(--b1)}
+.scr{display:grid;grid-template-columns:130px 1fr;border-bottom:1px solid var(--b0)}
+.scr:last-child{border-bottom:none}
+.sck{padding:9px 12px;font-family:var(--mono);font-size:10px;font-weight:500}
+.scv{padding:9px 12px;font-size:11.5px;line-height:1.45;color:var(--t2);border-left:1px solid var(--b0)}
+
+/* PIPELINE TABLE */
+.pipe-tbl{width:100%;border-collapse:collapse;font-size:11.5px}
+.pipe-tbl th{font-family:var(--mono);font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;padding:5px 10px;text-align:left;color:var(--t4);border-bottom:1px solid var(--b1)}
+.pipe-tbl td{padding:7px 10px;vertical-align:middle;border-bottom:1px solid var(--b0);color:var(--t2)}
+.pipe-tbl tr:last-child td{border-bottom:none}
+.status-pill{font-family:var(--mono);font-size:7.5px;padding:2px 7px;border-radius:20px;white-space:nowrap}
+
+/* LIGHT TAB OVERRIDES */
+.light-tab-bg{background:#EEE9DF}
+.light-card{background:#F4F1EA;border:1px solid rgba(0,0,0,.09);color:#1a1a14}
+.light-mc{background:#fff;border:1px solid rgba(0,0,0,.08)}
+.lc-t{font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px;color:#888880}
+.l-mr{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;font-size:12px;gap:8px;border-bottom:1px solid rgba(0,0,0,.06);color:#555550}
+.l-mr:last-child{border-bottom:none}
+.l-mrv{font-family:var(--mono);font-size:11.5px;font-weight:500;text-align:right;color:#0a0a08}
+
+/* BTT */
+#btt{position:fixed;bottom:26px;right:26px;width:38px;height:38px;border-radius:50%;background:var(--bg4);border:1px solid var(--b2);color:var(--t2);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s,transform .2s;z-index:500;line-height:1}
+#btt.show{opacity:1}#btt:hover{transform:translateY(-2px);color:var(--tx)}
+
+/* IFRAME for sermons */
+.sermon-iframe{width:100%;height:calc(100vh - 160px);border:none;border-radius:var(--r3);background:var(--bg2)}
 </style>
 </head>
 <body>
-
-<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
 <div class="shell">
-
-  <header class="hdr">
-    <div class="hdr-eye">JD Meyers · 2026</div>
-    <h1>April Recap</h1>
-    <p class="hdr-sub">Month 04 of 12</p>
-  </header>
-
-  <!-- HERO KPI BAR -->
-  <div class="hero">
-    <div class="hero-kpi">
-      <span class="hk-val green">+$3,999</span>
-      <span class="hk-lbl">Net Saved</span>
-    </div>
-    <div class="hero-kpi">
-      <span class="hk-val sky">24</span>
-      <span class="hk-lbl">Gym Days</span>
-    </div>
-    <div class="hero-kpi">
-      <span class="hk-val gold">3 / 4</span>
-      <span class="hk-lbl">Sermons</span>
-    </div>
-    <div class="hero-kpi">
-      <span class="hk-val vio">3 Paths</span>
-      <span class="hk-lbl">Career</span>
-    </div>
-    <div class="hero-kpi">
-      <span class="hk-val">3.83</span>
-      <span class="hk-lbl">GPA</span>
-    </div>
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-l">
+    <div class="mlbl">JD Meyers &middot; Monthly Recap</div>
+    <h1><em>April</em> 2026</h1>
+    <div class="mlbl">Month 04 / 12</div>
   </div>
-
-  <!-- NAV -->
-  <nav class="nav">
-    <a class="nav-pill" href="#spiritual">Spiritual</a>
-    <a class="nav-pill" href="#physical">Physical</a>
-    <a class="nav-pill" href="#financial">Financial</a>
-    <a class="nav-pill" href="#career">Career</a>
-    <a class="nav-pill" href="#intellectual">Intellectual</a>
-    <a class="nav-pill" href="#creative">Creative</a>
-    <a class="nav-pill" href="#reflections">Reflections</a>
-    <a class="nav-pill" href="index.html">← All Months</a>
-  </nav>
-
-  <!-- ══ SPIRITUAL ══ -->
-  <div class="section" id="spiritual">
-    <div class="sec-card">
-      <div class="sec-head" onclick="toggle('s-spiritual')">
-        <div class="sec-head-l">
-          <div class="sec-accent" style="background:var(--gold)"></div>
-          <div>
-            <div class="sec-title">Spiritual</div>
-            <div class="sec-snap">3 of 4 Sundays — Easter, Acts 10, Romans 11</div>
-            <div class="sec-chips">
-              <span class="chip d">3 Sermons</span>
-              <span class="chip d">Calvary Baptist</span>
-              <span class="chip d">Luke 24, Acts 10, Romans 11</span>
-            </div>
-          </div>
-        </div>
-        <button class="sec-toggle" id="btn-s-spiritual">See Full Details</button>
-      </div>
-      <div class="sec-detail" id="s-spiritual">
-        <div class="sec-detail-inner">
-
-          <div class="sermon-card">
-            <div class="sermon-num">Sermon 01 · April 5, 2026</div>
-            <div class="sermon-title">Easter — "Why Do You Seek the Living Among the Dead?" — Luke 24 / Genesis 3 / Isaiah 53</div>
-            <div class="sermon-meta">Calvary Baptist Church · Guest Speaker: Ken Wilson</div>
-            <div class="sermon-tags">
-              <span class="chip d">Luke 24</span><span class="chip d">Isaiah 53</span><span class="chip d">Passover / Resurrection</span><span class="chip d">Satan's Attempts to Destroy</span>
-            </div>
-            <div class="sermon-body">
-              <h4>Overview</h4>
-              <p>Easter message tracing the thread from Genesis 3 through Isaiah 53 to the empty tomb. The sermon built the case that Satan tried to destroy God's plan at every stage — the fall, the wilderness temptation, the cross — and failed at every one. The resurrection is the proof of that failure.</p>
-              <h4>1. Satan Has One Playbook and It Doesn't Work</h4>
-              <p>From Genesis 3 to the wilderness to the cross, the pattern is the same: target the most vulnerable moment, use deception or brute force, try to kill what God promised. At every point the plan failed. The attempt on the infant Jesus in Matthew 2. The wilderness temptation after 40 days of fasting. The cross itself, which Satan designed and which turned out to be the mechanism of his own defeat.</p>
-              <h4>2. The Resurrection Was Prophesied Before Anyone Was Looking for It</h4>
-              <p>Isaiah 53:10 describes the suffering servant dying and then prolonging his days — a resurrection embedded in a prophecy that predates Christ by centuries. The Passover lamb's blood on the doorposts foreshadows Christ's blood as the covering for death. These weren't retrofitted — they were woven in from the beginning.</p>
-              <h4>3. The Question at the Tomb Applies Now</h4>
-              <p>The angels' question to the women — "Why do you seek the living among the dead?" — applies to anyone looking for life in anything other than Christ. The tomb being empty is the only claim in history that changed the world because it was verifiable and was never successfully refuted.</p>
-              <h4>Application</h4>
-              <p>Satan has no peace to offer — that's his only blind spot. Peace is one thing he cannot counterfeit. Offering to pray for someone's peace is one of the most effective witnessing tools available because nobody turns it down.</p>
-            </div>
-            <div class="sermon-commentary">
-              The detail about Satan having no counterfeit for peace stuck with me. Every other spiritual-sounding thing — wisdom, power, fulfillment, community — he can fake well enough to fool people for a while. Peace, actual peace, he can't replicate. That's a practical evangelism insight, not just a theological one. The person who has nothing to lose by trying the prayer is the exact person who needs it most.
-            </div>
-          </div>
-
-          <div class="sermon-card">
-            <div class="sermon-num">Sermon 02 · April 19, 2026</div>
-            <div class="sermon-title">Acts 10 — Cornelius, Peter, and the Limits of Religion</div>
-            <div class="sermon-meta">Calvary Baptist Church · Pastor Brad</div>
-            <div class="sermon-tags">
-              <span class="chip d">Acts 10</span><span class="chip d">Cornelius</span><span class="chip d">Peter's Vision</span><span class="chip d">Holy Spirit on Gentiles</span>
-            </div>
-            <div class="sermon-body">
-              <h4>Overview</h4>
-              <p>Acts 10 centers on two men — a Roman centurion and a Jewish apostle — who both needed their assumptions corrected. Cornelius was a genuinely good man, devout, generous, prayerful, and still unsaved. Peter was committed to the gospel and still operating with ethnic walls God was about to tear down.</p>
-              <h4>1. Being a Good Person Is Not Enough</h4>
-              <p>Cornelius checks every box a man could check in religious sincerity: feared God, prayed always, gave generously, ran a household that followed his lead. The Bible even calls him "devout." And yet the angel sends him to find Peter — because he still needed to hear the gospel and receive the Holy Spirit. Good religious behavior with no actual encounter with Christ is where most of the American church lives.</p>
-              <h4>2. God Shows No Partiality — and Doesn't Ask Our Permission</h4>
-              <p>The sheet vision given to Peter was as much for him as for Cornelius. Peter would not have walked into a Gentile's home without divine instruction — it violated everything in his religious framework. God's plan for the gospel required dismantling the ethnic and religious walls Peter had built. He obeyed, preached, and the Holy Spirit fell on the Gentiles mid-sentence. God didn't wait for Peter to finish. He didn't ask whether the theological framework was ready.</p>
-              <h4>Application</h4>
-              <p>Your relationship with God through Jesus Christ does not depend on any church, any ceremony, any tradition, or any priest. Christ died to give direct access. The walls that religion builds around God are exactly what the gospel is designed to tear down.</p>
-            </div>
-            <div class="sermon-commentary">
-              The Cornelius picture is the uncomfortable one. He's not a skeptic, not a rebel, not someone you'd look at and say "he needs Jesus." He's doing everything. The gap between religious sincerity and actual salvation is narrow enough that a lot of people never realize they're on the wrong side of it. What makes the difference, based on this chapter, is the Holy Spirit's actual presence — not behavior, not effort, not church attendance. That's either deeply reassuring or deeply unsettling depending on where you're standing.
-            </div>
-          </div>
-
-          <div class="sermon-card">
-            <div class="sermon-num">Sermon 03 · April 26, 2026</div>
-            <div class="sermon-title">Romans 11 — Grace, the Remnant, and God's Unsearchable Plan</div>
-            <div class="sermon-meta">Calvary Baptist Church · Pastor Brad</div>
-            <div class="sermon-tags">
-              <span class="chip d">Romans 11</span><span class="chip d">Grace vs. Works</span><span class="chip d">Jewish Remnant</span><span class="chip d">Israel</span>
-            </div>
-            <div class="sermon-body">
-              <h4>Overview</h4>
-              <p>Romans 11 addresses what looks like God abandoning Israel and concludes the opposite — that God's hardening of a portion of Israel was intentional, purposeful, and will result in their eventual reconciliation. The chapter is also the clearest definition of grace in the New Testament.</p>
-              <h4>1. Grace Is Not Just Forgiveness — It's Forgiveness With a Plan</h4>
-              <p>Mercy means you deserve punishment and aren't getting it. Grace goes further: you deserve punishment, you're not getting it, and God has a specific plan for your life. The distinction matters because grace is not passive. It's active. God's plan for the 7,000 who hadn't bowed to Baal wasn't just to spare them — it was to use them.</p>
-              <h4>2. God's Sovereignty Doesn't Look Fair — and That's the Point</h4>
-              <p>God purposely blinded a portion of Israel so that the gospel would go to the Gentiles, who would then make Israel jealous, which would eventually bring Israel back. The whole architecture is counterintuitive. Paul's response isn't to explain it — it's to declare that God's ways are past finding out and that the appropriate response is humility and prayer, not analysis.</p>
-              <h4>Application</h4>
-              <p>When God's plan doesn't make sense — and especially when it looks unfair — the prescribed posture is humility, not argument. Pray for the peace of Jerusalem. Pray for those who are currently blinded. Resist the pull of the political vortex that wants to make Israel vs. Palestine into a left/right issue. It isn't. The real division is always Christ or not Christ.</p>
-            </div>
-            <div class="sermon-commentary">
-              The "vortex" illustration landed. Washington is evil — not one side of it, all of it. Christians getting pulled into partisan camps, thinking alignment with "good morality" on one side makes them spiritually safe, is the exact trap Paul is describing. The real division has always been Christ vs. not-Christ, and anything that blurs that line — even things with good optics — is working against the gospel.
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
+  <div class="hdr-r">
+    <a href="2026-03_v2.html" class="mnav-btn">&larr; Mar</a>
+    <a href="index.html" class="mnav-btn">All Months</a>
+    <a href="cbc-sermons.html" class="mnav-btn">Sermons</a>
   </div>
-
-  <!-- ══ PHYSICAL ══ -->
-  <div class="section" id="physical">
-    <div class="sec-card">
-      <div class="sec-head" onclick="toggle('s-physical')">
-        <div class="sec-head-l">
-          <div class="sec-accent" style="background:var(--sky)"></div>
-          <div>
-            <div class="sec-title">Physical</div>
-            <div class="sec-snap">24 gym days · 128,418 lb volume · 6 cardio sessions · DL PR 345lb</div>
-            <div class="sec-chips">
-              <span class="chip b">24 Days</span>
-              <span class="chip b">128K lbs</span>
-              <span class="chip g">DL 345lb PR</span>
-              <span class="chip b">Plank 2:00 PR</span>
-              <span class="chip b">6 Runs</span>
-              <span class="chip r">Urgent Care Apr 21</span>
-            </div>
-          </div>
-        </div>
-        <button class="sec-toggle" id="btn-s-physical">See Full Details</button>
-      </div>
-      <div class="sec-detail" id="s-physical">
-        <div class="sec-detail-inner">
-
-          <!-- Stat tiles -->
-          <div class="stat-row">
-            <div class="stat-tile"><div class="stat-tile-v" style="color:var(--sky)">24</div><div class="stat-tile-k">Gym Days</div></div>
-            <div class="stat-tile"><div class="stat-tile-v">128K</div><div class="stat-tile-k">Lbs Volume</div></div>
-            <div class="stat-tile"><div class="stat-tile-v" style="color:var(--sage)">345lb</div><div class="stat-tile-k">DL Max</div></div>
-            <div class="stat-tile"><div class="stat-tile-v">6</div><div class="stat-tile-k">Cardio Sessions</div></div>
-          </div>
-
-          <!-- Urgent care callout -->
-          <div class="uc-card">
-            <div class="uc-icon">⚕</div>
-            <div class="uc-body">
-              <div class="uc-title">Urgent Care Visit · April 21</div>
-              <div class="uc-text">CPH Urgent Care, Potsdam. Diagnosis: Dermatitis. BP 137/83, weight 191lb, pulse 67. Prescribed clobetasol. Medications updated. Follow-up if symptoms persist or worsen.</div>
-            </div>
-          </div>
-
-          <!-- Calendar -->
-          <div class="dc" style="margin-bottom:16px">
-            <div class="dc-title">April Training Calendar</div>
-            <div class="cal-grid" id="cal-april"></div>
-            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;font-family:var(--mono);font-size:9px;color:var(--t4)">
-              <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:50%;background:var(--sky)"></span>Training</span>
-              <span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;border-radius:50%;background:var(--gold)"></span>Church</span>
-              <span style="display:flex;align-items:center;gap=4px"><span style="width:8px;height:8px;border-radius:50%;background:var(--vio)"></span>Drill</span>
-              <span style="display:flex;align-items:center;gap=4px"><span style="width:8px;height:8px;border-radius:50%;background:#4BBDB8"></span>Cardio</span>
-            </div>
-          </div>
-
-          <div class="detail-grid">
-            <!-- AFT Progress -->
-            <div class="dc">
-              <div class="dc-title">ACFT Progress vs Previous Months</div>
-              <div class="aft-event">
-                <div class="aft-top">
-                  <span class="aft-name">MDL — Trap Bar Deadlift</span>
-                  <span class="aft-vals" style="color:var(--sage)">345 lb</span>
-                </div>
-                <div class="prog-wrap">
-                  <div class="prog-lbl"><span>Jan 70% · Feb 78% · Mar 81%</span><span>Goal 350lb</span></div>
-                  <div class="prog-track"><div class="prog-fill" style="width:98%;background:var(--sage)"></div></div>
-                </div>
-                <div class="aft-delta" style="color:var(--sage)">▲ +60 lb since Jan · PR this month · 345×3 on Apr 26</div>
-              </div>
-              <div class="aft-event" style="margin-top:14px">
-                <div class="aft-top">
-                  <span class="aft-name">HRP — Hand Release Push-ups</span>
-                  <span class="aft-vals">47 reps</span>
-                </div>
-                <div class="prog-wrap">
-                  <div class="prog-lbl"><span>Jan 68% · Feb 71% · Mar 74%</span><span>Goal 61</span></div>
-                  <div class="prog-track"><div class="prog-fill" style="width:77%;background:var(--sky)"></div></div>
-                </div>
-                <div class="aft-delta" style="color:var(--t3)">→ 47 reps on Apr 16, holding steady</div>
-              </div>
-              <div class="aft-event" style="margin-top:14px">
-                <div class="aft-top">
-                  <span class="aft-name">PLK — Plank</span>
-                  <span class="aft-vals" style="color:var(--sage)">2:00 BW</span>
-                </div>
-                <div class="prog-wrap">
-                  <div class="prog-lbl"><span>Jan 38% · Feb 42% · Mar 47%</span><span>Goal 3:35</span></div>
-                  <div class="prog-track"><div class="prog-fill" style="width:56%;background:var(--gold)"></div></div>
-                </div>
-                <div class="aft-delta" style="color:var(--sage)">▲ New PR — 2:00 floor BW on Apr 26. Previously 1:50 on Apr 2</div>
-              </div>
-              <div class="aft-event" style="margin-top:14px">
-                <div class="aft-top">
-                  <span class="aft-name">SDC — Sprint Drag Carry</span>
-                  <span class="aft-vals">Est. ~1:50</span>
-                </div>
-                <div class="prog-wrap">
-                  <div class="prog-lbl"><span>No formal trial</span><span>Goal 1:30</span></div>
-                  <div class="prog-track"><div class="prog-fill" style="width:83%;background:var(--gold)"></div></div>
-                </div>
-              </div>
-              <div class="aft-event" style="margin-top:14px">
-                <div class="aft-top">
-                  <span class="aft-name">2MR — 2-Mile Run</span>
-                  <span class="aft-vals dim">TBD</span>
-                </div>
-                <div class="prog-wrap">
-                  <div class="prog-lbl"><span>Building base — 6mi outdoor Apr 3</span><span>Goal 13:25</span></div>
-                  <div class="prog-track"><div class="prog-fill" style="width:10%;background:var(--t4)"></div></div>
-                </div>
-                <div class="aft-delta" style="color:var(--t3)">6 outdoor runs this month — base building underway. Right knee pain noted Apr 29.</div>
-              </div>
-            </div>
-
-            <!-- Cardio log -->
-            <div class="dc">
-              <div class="dc-title">Cardio Sessions</div>
-              <div class="dc-row"><span class="dc-k">Apr 3</span><span class="dc-v">6.0 mi / 51:40 outdoor</span></div>
-              <div class="dc-row"><span class="dc-k">Apr 11</span><span class="dc-v b">5.0 mi / 40:29 — no knee pain</span></div>
-              <div class="dc-row"><span class="dc-k">Apr 17</span><span class="dc-v">2.0 mi / 14:27 outdoor</span></div>
-              <div class="dc-row"><span class="dc-k">Apr 22</span><span class="dc-v">5.0 km / 25:49 outdoor</span></div>
-              <div class="dc-row"><span class="dc-k">Apr 25</span><span class="dc-v">Zone 2 · 3.5 mi / 20:00 treadmill</span></div>
-              <div class="dc-row"><span class="dc-k">Apr 29</span><span class="dc-v r">5.0 mi / 46:43 — moderate right knee pain</span></div>
-              <div class="note rust" style="margin-top:12px">Right knee pain flagged on Apr 29. Monitor going into May — don't let this compound.</div>
-
-              <div class="dc-title" style="margin-top:20px">Session Summary</div>
-              <div class="dc-row"><span class="dc-k">Total gym days</span><span class="dc-v b">24 / 30</span></div>
-              <div class="dc-row"><span class="dc-k">Total volume</span><span class="dc-v">128,418 lb</span></div>
-              <div class="dc-row"><span class="dc-k">vs March</span><span class="dc-v" style="color:var(--sage)">+4 days, −9K lbs</span></div>
-              <div class="dc-row"><span class="dc-k">Top lift</span><span class="dc-v g">Trap Bar DL 345lb</span></div>
-              <div class="dc-row"><span class="dc-k">Bench max</span><span class="dc-v">225 lb (Smith, Apr 6)</span></div>
-              <div class="dc-row"><span class="dc-k">Squat max</span><span class="dc-v">225 lb (barbell, Apr 15)</span></div>
-              <div class="dc-row"><span class="dc-k">OHP max</span><span class="dc-v">135 lb (Apr 24)</span></div>
-            </div>
-          </div>
-
-          <!-- Workout log -->
-          <div class="dc detail-full" style="margin-top:16px">
-            <div class="dc-title">Full Session Log</div>
-            <div id="workout-log"></div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ FINANCIAL ══ -->
-  <div class="section" id="financial">
-    <div class="sec-card">
-      <div class="sec-head" onclick="toggle('s-financial')">
-        <div class="sec-head-l">
-          <div class="sec-accent" style="background:var(--sage)"></div>
-          <div>
-            <div class="sec-title">Financial</div>
-            <div class="sec-snap">Best net month YTD — ArmyIgnitED + tax refunds stacked</div>
-            <div class="sec-chips">
-              <span class="chip g">+$3,999 net</span>
-              <span class="chip g">$5,963 income</span>
-              <span class="chip">$1,964 expenses</span>
-              <span class="chip d">$250 tithe</span>
-              <span class="chip">$100 invested</span>
-            </div>
-          </div>
-        </div>
-        <button class="sec-toggle" id="btn-s-financial">See Full Details</button>
-      </div>
-      <div class="sec-detail" id="s-financial">
-        <div class="sec-detail-inner">
-
-          <!-- Top stat row -->
-          <div class="stat-row">
-            <div class="stat-tile"><div class="stat-tile-v" style="color:var(--sage)">$5,963</div><div class="stat-tile-k">Income</div></div>
-            <div class="stat-tile"><div class="stat-tile-v" style="color:var(--rust)">$1,964</div><div class="stat-tile-k">Expenses</div></div>
-            <div class="stat-tile"><div class="stat-tile-v" style="color:var(--sage)">+$3,999</div><div class="stat-tile-k">Net Saved</div></div>
-            <div class="stat-tile"><div class="stat-tile-v">$8,793</div><div class="stat-tile-k">YTD Saved</div></div>
-          </div>
-
-          <div class="detail-grid">
-            <!-- Income sources -->
-            <div class="dc">
-              <div class="dc-title">Income Sources</div>
-              <div class="dc-row"><span class="dc-k">Clarkson CU (×3 checks)</span><span class="dc-v g">$3,490.83</span></div>
-              <div class="dc-row"><span class="dc-k">ArmyIgnitED Reimbursement</span><span class="dc-v g">$1,250.00</span></div>
-              <div class="dc-row"><span class="dc-k">Federal Tax Refund</span><span class="dc-v">$533.00</span></div>
-              <div class="dc-row"><span class="dc-k">DFAS — Army National Guard</span><span class="dc-v">$408.15</span></div>
-              <div class="dc-row"><span class="dc-k">Uber / Raiser</span><span class="dc-v">$151.02</span></div>
-              <div class="dc-row"><span class="dc-k">NY State Tax Refund</span><span class="dc-v">$37.00</span></div>
-              <div class="dc-row"><span class="dc-k">Interest / Misc</span><span class="dc-v dim">$93.23</span></div>
-              <div class="note sage" style="margin-top:10px"><span class="note-lbl">Why this month was different</span>ArmyIgnitED reimbursement ($1,250) and both tax refunds hit in April. These are one-time — May income will be back to baseline ~$3,500.</div>
-            </div>
-
-            <!-- Expense breakdown -->
-            <div class="dc">
-              <div class="dc-title">Expenses by Category</div>
-              <div style="margin-top:8px" id="exp-bars"></div>
-            </div>
-          </div>
-
-          <!-- Spending chart -->
-          <div class="dc detail-full" style="margin-top:16px">
-            <div class="dc-title">Cumulative Spending — April vs March vs January</div>
-            <div class="chart-wrap"><canvas id="spendChart"></canvas></div>
-          </div>
-
-          <!-- YTD savings progress -->
-          <div class="dc detail-full" style="margin-top:16px">
-            <div class="dc-title">YTD Savings Tracker</div>
-            <div class="prog-wrap" style="margin-top:12px">
-              <div class="prog-lbl"><span>$8,793 saved</span><span>Goal $10,000</span></div>
-              <div class="prog-track" style="height:8px"><div class="prog-fill" style="width:87.9%;background:linear-gradient(90deg,var(--sage),var(--sky))"></div></div>
-            </div>
-            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px">
-              <div class="stat-tile"><div class="stat-tile-v" style="font-size:14px;color:var(--sage)">+$812</div><div class="stat-tile-k">Jan</div></div>
-              <div class="stat-tile"><div class="stat-tile-v" style="font-size:14px;color:var(--sage)">+$1,094</div><div class="stat-tile-k">Feb</div></div>
-              <div class="stat-tile"><div class="stat-tile-v" style="font-size:14px;color:var(--sage)">+$888</div><div class="stat-tile-k">Mar</div></div>
-              <div class="stat-tile"><div class="stat-tile-v" style="font-size:14px;color:var(--sage)">+$3,999</div><div class="stat-tile-k">Apr</div></div>
-            </div>
-            <div class="note gold" style="margin-top:12px"><span class="note-lbl">Note</span>Amex Platinum $895 annual fee charged in April — cancellation in progress. Fee will be refunded or offset by credits. Net figures above are as-transacted.</div>
-          </div>
-
-          <!-- Transaction highlights -->
-          <div class="dc detail-full" style="margin-top:16px">
-            <div class="dc-title">Notable Transactions</div>
-            <div class="dc-row"><span class="dc-k">Apr 10 — Calvary Baptist Tithe</span><span class="dc-v d">−$250.00</span></div>
-            <div class="dc-row"><span class="dc-k">Apr 10 — ArmyIgnitED deposit (SUNY Potsdam)</span><span class="dc-v g">+$1,250.00</span></div>
-            <div class="dc-row"><span class="dc-k">Apr 9 — IRS Tax Refund</span><span class="dc-v g">+$533.00</span></div>
-            <div class="dc-row"><span class="dc-k">Apr 17 — Amex Platinum Renewal Fee</span><span class="dc-v r">−$895.00</span></div>
-            <div class="dc-row"><span class="dc-k">Apr 22 — DFAS Army Guard Pay</span><span class="dc-v g">+$408.15</span></div>
-            <div class="dc-row"><span class="dc-k">Apr 20 — Apple Store</span><span class="dc-v r">−$538.92</span></div>
-            <div class="dc-row"><span class="dc-k">Apr 25 — Walmart (groceries)</span><span class="dc-v">−$229.98</span></div>
-            <div class="dc-row"><span class="dc-k">Apr 24 / 10 — M1 Finance (×2)</span><span class="dc-v">−$100.00</span></div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ CAREER ══ -->
-  <div class="section" id="career">
-    <div class="sec-card">
-      <div class="sec-head" onclick="toggle('s-career')">
-        <div class="sec-head-l">
-          <div class="sec-accent" style="background:var(--vio)"></div>
-          <div>
-            <div class="sec-title">Career</div>
-            <div class="sec-snap">Three paths in motion — OTS, United Airlines, Civil Service</div>
-            <div class="sec-chips">
-              <span class="chip v">AF OTS · 20%</span>
-              <span class="chip b">United Airlines · 35%</span>
-              <span class="chip t">Civil Service · 15%</span>
-              <span class="chip d">Drill Weekend Apr 10–12</span>
-              <span class="chip d">Apr 30 — 318th RCS Brief</span>
-            </div>
-          </div>
-        </div>
-        <button class="sec-toggle" id="btn-s-career">See Full Details</button>
-      </div>
-      <div class="sec-detail" id="s-career">
-        <div class="sec-detail-inner">
-
-          <div class="note gold" style="margin-bottom:16px">
-            <span class="note-lbl">Strategy</span>
-            Keep all three paths in motion simultaneously. Front-load everything that can be done now. Make no irreversible decisions until an offer or selection is confirmed. Any one of these is a meaningful upgrade from the current baseline.
-          </div>
-
-          <!-- Path 1: OTS -->
-          <div class="career-path">
-            <div class="path-head">
-              <div>
-                <div class="path-label">Path 1 — Air Force OTS</div>
-                <div class="path-title">Commission as Non-Rated Active Duty AF Officer (14N Intelligence)</div>
-              </div>
-              <div class="path-prob" style="color:var(--vio)">20%</div>
-            </div>
-            <div class="path-status">
-              OTS class window (Aug–Dec 2027) is <em>after</em> ETS (June 12, 2027) — contract is fulfilled regardless. The DD-368 Conditional Release is the key friction point. SSG Wilson (S1) confirmed the commissioning-source framing has real possibility. April 30 informational Teams brief with 318th RCS was the immediate next step.
-            </div>
-            <div class="path-next">
-              <strong>Next:</strong> Mid-May drill — informal CO conversation with SSG Wilson framing. Initiate DD-368 target late May. AFOQT prep ongoing, deadline July 26.
-            </div>
-            <div class="dc" style="margin-top:12px">
-              <div class="dc-title">Key Timeline</div>
-              <div class="timeline" id="ots-timeline"></div>
-            </div>
-          </div>
-
-          <!-- Path 2: United -->
-          <div class="career-path">
-            <div class="path-head">
-              <div>
-                <div class="path-label">Path 2 — United Airlines Crew Scheduler</div>
-                <div class="path-title">On-site Chicago · Referral through Nabil</div>
-              </div>
-              <div class="path-prob" style="color:var(--sky)">35%</div>
-            </div>
-            <div class="path-status">
-              Internal referral. Advanced to recorded pre-interview phase. Start date July 2026, 6-week mandatory on-site training. Primary friction: NYARNG Annual Training Aug 6–21 overlaps. Guard service is on the resume; AT conflict has not been specifically raised. USERRA provides hiring protections — surface the conflict proactively if process advances, framed as a scheduling note.
-            </div>
-            <div class="path-next">
-              <strong>Next:</strong> If process advances, JAG consultation before AT conflict becomes urgent. Disclose proactively — don't let it come up as a surprise.
-            </div>
-          </div>
-
-          <!-- Path 3: Civil Service -->
-          <div class="career-path">
-            <div class="path-head">
-              <div>
-                <div class="path-label">Path 3 — St. Lawrence County Civil Service</div>
-                <div class="path-title">Police Officer + Deputy Sheriff Exams</div>
-              </div>
-              <div class="path-prob" style="color:var(--teal)">15%</div>
-            </div>
-            <div class="path-status">
-              Third attempt. Exams #60050-930 and #60050-960. May 9, 2026, 8:30 AM — Canton School, Middle School Cafeteria, 99 State Street, Canton NY. 3.5 hours. Bring two #2 pencils, photo ID, admittance letter. No electronics of any kind. Prior results point to personality-weighted question scoring as the consistent friction point (profile mismatch, not competence gap).
-            </div>
-            <div class="path-next">
-              <strong>Exam day May 9:</strong> Show up sharp, answer disposition questions for what the exam wants, not what feels authentic.
-            </div>
-          </div>
-
-          <!-- Scenario matrix -->
-          <div class="dc" style="margin-top:4px">
-            <div class="dc-title">Scenario Matrix — What Happens If One Lands</div>
-            <div class="dc-row"><span class="dc-k" style="color:var(--sky)">United offer</span><span class="dc-v dim" style="font-size:11px;text-align:right;max-width:55%">USERRA framing. Relocate Chicago. Air Guard possible later. OTS/LE become moot.</span></div>
-            <div class="dc-row"><span class="dc-k" style="color:var(--vio)">OTS selected</span><span class="dc-v dim" style="font-size:11px;text-align:right;max-width:55%">Commission post-ETS Jun 2027. DD-368 fulfilled. All other paths resolved. Best long-term military outcome.</span></div>
-            <div class="dc-row"><span class="dc-k" style="color:var(--teal)">Civil service list</span><span class="dc-v dim" style="font-size:11px;text-align:right;max-width:55%">Stay local. Compatible with Guard through ETS. Lowest disruption of the three.</span></div>
-            <div class="dc-row"><span class="dc-k">None land</span><span class="dc-v dim" style="font-size:11px;text-align:right;max-width:55%">Baseline continues. Business + campus safety + Guard + MBA. OTS re-applied next board. Status quo is not failure.</span></div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ INTELLECTUAL ══ -->
-  <div class="section" id="intellectual">
-    <div class="sec-card">
-      <div class="sec-head" onclick="toggle('s-intellectual')">
-        <div class="sec-head-l">
-          <div class="sec-accent" style="background:var(--sky)"></div>
-          <div>
-            <div class="sec-title">Intellectual</div>
-            <div class="sec-snap">Two active courses — Marketing Management + Leadership & OB · GPA 3.83</div>
-            <div class="sec-chips">
-              <span class="chip b">MK 610 · Marketing</span>
-              <span class="chip b">OS603 · Leadership & OB</span>
-              <span class="chip g">GPA 3.83</span>
-              <span class="chip">4 of 10 MBA Courses</span>
-            </div>
-          </div>
-        </div>
-        <button class="sec-toggle" id="btn-s-intellectual">See Full Details</button>
-      </div>
-      <div class="sec-detail" id="s-intellectual">
-        <div class="sec-detail-inner">
-
-          <div class="course-card">
-            <div class="course-head">
-              <span class="course-code">MK 610 / HC 626</span>
-              <span class="chip b">Wednesdays 8:00 PM</span>
-            </div>
-            <div class="course-name">Marketing Management</div>
-            <div class="course-meta">Jay Carlson · Spring Quarter Mar 30–Jun 10, 2026 · Online Synchronous · Pearson 17th Ed.</div>
-            <div class="dc-title" style="margin-bottom:8px">Grade Breakdown</div>
-            <div class="dc-row"><span class="dc-k">Quizzes / Exams</span><span class="dc-v">39%</span></div>
-            <div class="dc-row"><span class="dc-k">Written Assignments</span><span class="dc-v">25%</span></div>
-            <div class="dc-row"><span class="dc-k">Class Participation</span><span class="dc-v">24%</span></div>
-            <div class="dc-row"><span class="dc-k">Presentation</span><span class="dc-v">12%</span></div>
-            <div class="dc-title" style="margin-top:16px;margin-bottom:8px">Upcoming Deadlines</div>
-            <div class="deadline-row"><span class="dl-date">Apr 29</span><span class="dl-text">Second product research written assignment + Presentation (White Claw)</span></div>
-            <div class="deadline-row"><span class="dl-date">May 6</span><span class="dl-text">Presentation (continued)</span></div>
-            <div class="deadline-row"><span class="dl-date">May 17</span><span class="dl-text">Midterm Exam</span></div>
-            <div class="deadline-row"><span class="dl-date">May 27</span><span class="dl-text">AI written assignment</span></div>
-            <div class="deadline-row"><span class="dl-date">Jun 7</span><span class="dl-text">Third product research written assignment</span></div>
-            <div class="deadline-row"><span class="dl-date">Jun 10</span><span class="dl-text">Final Exam</span></div>
-          </div>
-
-          <div class="course-card">
-            <div class="course-head">
-              <span class="course-code">OS 603</span>
-              <span class="chip b">Wednesdays 6:00 PM</span>
-            </div>
-            <div class="course-name">Leadership & Organizational Behavior</div>
-            <div class="course-meta">Stacey Zeigler, PT DPT PhD · Spring Quarter Mar 30–Jun 12, 2026 · Online Synchronous · Kinicki 3rd Ed.</div>
-            <div class="dc-title" style="margin-bottom:8px">Grade Breakdown</div>
-            <div class="dc-row"><span class="dc-k">Weekly Individual Assignments</span><span class="dc-v">25%</span></div>
-            <div class="dc-row"><span class="dc-k">Leadership Self-Assessment + AI Action Plan</span><span class="dc-v">25%</span></div>
-            <div class="dc-row"><span class="dc-k">Team Communication Strategy & Simulation</span><span class="dc-v">25%</span></div>
-            <div class="dc-row"><span class="dc-k">Case Study: Organizational Health</span><span class="dc-v">25%</span></div>
-            <div class="dc-title" style="margin-top:16px;margin-bottom:8px">Upcoming Deadlines</div>
-            <div class="deadline-row"><span class="dl-date">Apr 23</span><span class="dl-text">Leadership Self-Assessment & AI as Thought Partner Action Plan</span></div>
-            <div class="deadline-row"><span class="dl-date">May 7</span><span class="dl-text">Technology-Enabled Team Communication Strategy & Simulation (group)</span></div>
-            <div class="deadline-row"><span class="dl-date">May 21</span><span class="dl-text">Case Study: Organizational Health (group video presentation, Zoom recorded)</span></div>
-            <div class="deadline-row"><span class="dl-date">Jun 12</span><span class="dl-text">Final Leadership Project</span></div>
-          </div>
-
-          <div class="note" style="margin-top:4px">
-            <span class="note-lbl">MBA Progress</span>
-            4 of 10 courses complete. Estimated completion March 2027. Clarkson General MBA, online. GPA currently 3.83.
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ CREATIVE ══ -->
-  <div class="section" id="creative">
-    <div class="sec-card">
-      <div class="sec-head" onclick="toggle('s-creative')">
-        <div class="sec-head-l">
-          <div class="sec-accent" style="background:var(--vio)"></div>
-          <div>
-            <div class="sec-title">Creative & Business</div>
-            <div class="sec-snap">Inventory system shipped (528 items) · Active client pipeline · 9 weddings booked/negotiating</div>
-            <div class="sec-chips">
-              <span class="chip v">Inventory App Live</span>
-              <span class="chip g">Megan Eddy Signed</span>
-              <span class="chip d">JuliaKia Dep. Paid</span>
-              <span class="chip d">Brenna McGrath Dep. Paid</span>
-              <span class="chip b">May 10 Shoots Negotiating</span>
-            </div>
-          </div>
-        </div>
-        <button class="sec-toggle" id="btn-s-creative">See Full Details</button>
-      </div>
-      <div class="sec-detail" id="s-creative">
-        <div class="sec-detail-inner">
-
-          <div class="proj-card">
-            <div class="proj-name">Personal Inventory System — v3.0 Shipped</div>
-            <div class="proj-status" style="color:var(--sage)">✓ Complete — Production</div>
-            <div class="proj-desc">
-              Full-stack inventory app built from scratch across 3.5 weeks (~15 active hours). Started as a Notion DB → pivoted to single-file HTML/JS → migrated to Supabase (PostgreSQL) backend. 528+ items cataloged across room and Tesla. Features: AI photo parse workflow, outline parser, score system (Freq/Crit/Repl/Keep), PIN-locked items, military subcategory (OCIE/Personal), locate.html companion browse UI, GitHub Pages deploy, CSV/JSON export. Column visibility bug squashed Apr 30.
-            </div>
-            <div class="sec-chips" style="margin-top:10px">
-              <span class="chip g">528+ Items</span>
-              <span class="chip g">Supabase Live</span>
-              <span class="chip g">GitHub Pages</span>
-              <span class="chip">AI Enrich</span>
-              <span class="chip">PIN Lock</span>
-              <span class="chip">Military OCIE</span>
-            </div>
-          </div>
-
-          <div class="proj-card">
-            <div class="proj-name">JD Meyers Productions — Client Pipeline</div>
-            <div class="proj-status" style="color:var(--gold)">Active</div>
-            <div class="detail-grid" style="margin-top:10px">
-              <div class="dc">
-                <div class="dc-title">Confirmed / Deposit Paid</div>
-                <div class="dc-row"><span class="dc-k">Brenna McGrath · Jun 6</span><span class="dc-v g">Dep. $500 / $1,800</span></div>
-                <div class="dc-row"><span class="dc-k">JuliaKia Photography · Jun 27</span><span class="dc-v g">Dep. $500 / $1,771</span></div>
-                <div class="dc-row"><span class="dc-k">Megan Eddy · Aug 22</span><span class="dc-v g">Signed — $500 / $2,200</span></div>
-              </div>
-              <div class="dc">
-                <div class="dc-title">Negotiating</div>
-                <div class="dc-row"><span class="dc-k">Francesca Mnenula · May 10</span><span class="dc-v d">$250 · Photoshoot</span></div>
-                <div class="dc-row"><span class="dc-k">Grace Sheehan · May 10</span><span class="dc-v d">$120 · Contract Sent</span></div>
-                <div class="dc-row"><span class="dc-k">Zachary Gerow · May 19</span><span class="dc-v d">$1,200 · Wedding</span></div>
-                <div class="dc-row"><span class="dc-k">Clark Choate · Aug 1</span><span class="dc-v d">$1,200 · Wedding</span></div>
-                <div class="dc-row"><span class="dc-k">Haleigh Dunbar · Oct 10</span><span class="dc-v dim">Awaiting avail.</span></div>
-                <div class="dc-row"><span class="dc-k">Jenna St. Laurent · Jul '27</span><span class="dc-v dim">Awaiting avail.</span></div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ══ REFLECTIONS ══ -->
-  <div class="section" id="reflections">
-    <div class="sec-card">
-      <div class="sec-head" onclick="toggle('s-reflections')">
-        <div class="sec-head-l">
-          <div class="sec-accent" style="background:var(--t3)"></div>
-          <div>
-            <div class="sec-title">Reflections</div>
-            <div class="sec-snap">Career situation documented · Three paths, one outcome · Building correctly</div>
-            <div class="sec-chips">
-              <span class="chip">Career Strategy</span>
-              <span class="chip">OTS Path</span>
-              <span class="chip">Honest Probability</span>
-            </div>
-          </div>
-        </div>
-        <button class="sec-toggle" id="btn-s-reflections">See Full Details</button>
-      </div>
-      <div class="sec-detail" id="s-reflections">
-        <div class="sec-detail-inner">
-
-          <div class="refl-block">
-            <div class="refl-title">Career Situation — Where Things Actually Stand</div>
-            <div class="refl-body">
-              <p>Three paths are in motion. United Airlines is the most likely near-term outcome if anything lands — internal referral, advanced past resume screen, genuine willingness to relocate. The honest probability is 35%, which sounds low until you consider the other two.</p>
-              <p>OTS is the right long-term military play. The structural argument is strong — the contract is fulfilled regardless, the DD-368 is conditional by definition, and commissioning to active duty is the kind of move a unit can respect even if they'd rather keep you. SSG Wilson's read was that it has real possibility. But "real possibility" and "approved" are different things, and the state AG is the final authority. 20%.</p>
-              <p>Civil service is the third attempt at the same wall. The honest read on the prior failures points to a profile mismatch, not a competence gap — the personality-weighted disposition questions favor rule-bound, authority-deferring profiles, and that's not the profile that builds a multimedia business, pursues an officer commission, and thinks across multiple career paths simultaneously. That doesn't mean don't try. The exam costs nothing. Local law enforcement — particularly Deputy Sheriff — would be compatible with Guard obligations and has the lowest life disruption of any of the three. 15%.</p>
-              <p>What the situation has going for it: none of these paths are being pursued at the expense of the others. The MBA, the clearance, the Guard service, the business — they're not random. They're a deliberate accumulation of options. The July–August crunch window (OTS deadline July 4, AFOQT July 26, AT Aug 6–21, possible United training overlap) is the most operationally dense stretch. Front-loading starts now.</p>
-            </div>
-          </div>
-
-          <div class="refl-block">
-            <div class="refl-title">On Running the Inventory Project</div>
-            <div class="refl-body">
-              <p>The inventory system was a good example of what happens when you let a project find its right form. It started as a Notion database, became a flat HTML file, then became a two-file web app backed by Supabase — all in 3.5 weeks. The migration decision was right each time it was made.</p>
-              <p>528 items cataloged. The AI photo-parse workflow was the forcing function — taking photos and having Claude read them and output structured text cut the data entry time by probably 60%. That workflow is worth using again on any cataloging project.</p>
-              <p>The column visibility bug that kept recurring was a reminder that bugs at the intersection of state and rendering always hide in the same place — you fix the state but forget to re-run the display logic. Once applyColPrefs() was wired to fire after every renderTable(), it stopped.</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <footer class="footer">
-    <a href="index.html">← Back to 2026 Overview</a> · <a href="cbc-sermons.html">CBC Sermon Dashboard</a><br>
-    JD Meyers · April 2026
-  </footer>
-
 </div>
 
+<!-- CAREER SPOTLIGHT BANNER -->
+<div class="career-spotlight ca">
+  <div class="cs-eyebrow">2026 Priority</div>
+  <div class="cs-title">This is the year it locks in.</div>
+  <div class="cs-body">Three career paths are running simultaneously — not as a hedge, but as a strategy. AF Officer Training School, a United Airlines crew scheduler role, and St. Lawrence civil service. Any one of them changes the trajectory. The May drill conversation, the May 9 exam, and the pre-interview process are all live right now.</div>
+  <div class="cs-paths">
+    <div class="cs-path" style="background:rgba(154,143,216,.1);border:1px solid rgba(154,143,216,.2)" onclick="switchTab('career')">
+      <div class="cs-path-pct" style="color:var(--vio)">20%</div>
+      <div class="cs-path-name" style="color:var(--tx)">Air Force OTS</div>
+      <div class="cs-path-detail">DD-368 routing &middot; May drill buy-in &middot; Board Nov 2026</div>
+      <div class="cs-path-bar"><div class="cs-path-bar-fill" style="width:20%;background:var(--vio)"></div></div>
+    </div>
+    <div class="cs-path" style="background:rgba(95,173,212,.1);border:1px solid rgba(95,173,212,.2)" onclick="switchTab('career')">
+      <div class="cs-path-pct" style="color:var(--sky)">35%</div>
+      <div class="cs-path-name" style="color:var(--tx)">United Airlines</div>
+      <div class="cs-path-detail">Pre-interview active &middot; Chicago &middot; USERRA applies</div>
+      <div class="cs-path-bar"><div class="cs-path-bar-fill" style="width:35%;background:var(--sky)"></div></div>
+    </div>
+    <div class="cs-path" style="background:rgba(98,201,122,.1);border:1px solid rgba(98,201,122,.2)" onclick="switchTab('career')">
+      <div class="cs-path-pct" style="color:var(--sage)">15%</div>
+      <div class="cs-path-name" style="color:var(--tx)">Civil Service</div>
+      <div class="cs-path-detail">Exam May 9 &middot; Canton &middot; Police + Deputy Sheriff</div>
+      <div class="cs-path-bar"><div class="cs-path-bar-fill" style="width:15%;background:var(--sage)"></div></div>
+    </div>
+  </div>
+  <div class="cs-crunch">
+    <div class="cs-crunch-icon">&#9888;</div>
+    <div class="cs-crunch-text"><strong>July&ndash;August crunch incoming:</strong> OTS pre-application due July 4 &middot; AFT deadline July 26 &middot; Annual Training Aug 6&ndash;21 at Fort Drum. Everything that can be front-loaded needs to start now. <span style="cursor:pointer;text-decoration:underline;color:var(--rust)" onclick="switchTab('career')">See career tab &rarr;</span></div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs" id="tabBar">
+  <button class="tab on" data-t="overview" onclick="switchTab('overview')">Overview</button>
+  <button class="tab" data-t="financial" onclick="switchTab('financial')">Financial</button>
+  <button class="tab" data-t="physical" onclick="switchTab('physical')">Physical</button>
+  <button class="tab" data-t="spiritual" onclick="switchTab('spiritual')">Spiritual</button>
+  <button class="tab" data-t="career" onclick="switchTab('career')">Career</button>
+  <button class="tab" data-t="intellectual" onclick="switchTab('intellectual')">Intellectual</button>
+  <button class="tab" data-t="creative" onclick="switchTab('creative')">Creative</button>
+  <button class="tab" data-t="reflections" onclick="switchTab('reflections')">Reflections</button>
+</div>
+<!-- ═══════════════════════════════════════════
+     OVERVIEW TAB
+════════════════════════════════════════════ -->
+<div id="tab-overview" class="dash">
+  <aside class="side">
+    <div class="sc">
+      <div class="sgt">April at a Glance</div>
+      <div class="si"><span class="sk">Net Saved</span><span class="sv" style="color:var(--sage)">+$3,999</span></div>
+      <div class="si"><span class="sk">Gym Days</span><span class="sv" style="color:var(--sky)">24</span></div>
+      <div class="si"><span class="sk">Sermons</span><span class="sv" style="color:var(--gold)">3 / 4</span></div>
+      <div class="si"><span class="sk">GPA</span><span class="sv">3.83</span></div>
+      <div class="si"><span class="sk">YTD Saved</span><span class="sv" style="color:var(--sage)">$8,793</span></div>
+      <div class="si"><span class="sk">Goal %</span><span class="sv" style="color:var(--sage)">87.9%</span></div>
+    </div>
+    <div class="sc">
+      <div class="sgt">PRs This Month</div>
+      <div class="si"><span class="sk">Trap Bar DL</span><span class="sv" style="color:var(--sage)">345 lb &times;3</span></div>
+      <div class="si"><span class="sk">Plank</span><span class="sv" style="color:var(--sage)">2:00 BW</span></div>
+      <div class="si"><span class="sk">Date</span><span class="sv">Apr 26</span></div>
+      <div class="si"><span class="sk">Same session</span><span class="sv" style="color:var(--gold)">&#10003;</span></div>
+    </div>
+    <div class="sc">
+      <div class="sgt">Jump to</div>
+      <span class="sqlink" onclick="switchTab('financial')">&#8594; Financial</span>
+      <span class="sqlink" onclick="switchTab('physical')">&#8594; Physical</span>
+      <span class="sqlink" onclick="switchTab('career')">&#8594; Career</span>
+      <span class="sqlink" onclick="switchTab('creative')">&#8594; Creative</span>
+      <span class="sqlink" onclick="switchTab('reflections')">&#8594; Reflections</span>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="cg">
+      <!-- Finance chart card -->
+      <div class="card sf ca clickable" onclick="switchTab('financial')" style="cursor:pointer" title="Click to open Financial tab">
+        <div class="ch">
+          <div class="ct">Financial Overview</div>
+          <div class="cs2">Click to explore &rarr; Best net month YTD</div>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">
+          <div class="stat-tile"><div class="st-k">Income</div><div class="st-v" style="color:var(--sage)">$5,963</div><div class="st-d">3 Clarkson + IgnitED + refunds</div></div>
+          <div class="stat-tile"><div class="st-k">Expenses</div><div class="st-v" style="color:var(--rust)">$1,845</div><div class="st-d">Dining $541 &middot; Groceries $488</div></div>
+          <div class="stat-tile"><div class="st-k">Net Saved</div><div class="st-v" style="color:var(--sage)">+$3,999</div><div class="st-d">Best month of 2026</div></div>
+        </div>
+        <div class="chart-container"><canvas id="overviewFinChart"></canvas></div>
+        <div class="prog-wrap" style="margin-top:12px">
+          <div class="prog-row"><span>YTD Goal &mdash; $8,793 of $10,000</span><span style="color:var(--sage)">87.9%</span></div>
+          <div class="prog-track"><div class="prog-fill" style="width:87.9%;background:linear-gradient(90deg,var(--sage),var(--sky))"></div></div>
+        </div>
+      </div>
+      <!-- Gym chart card -->
+      <div class="card ca d1 clickable" onclick="switchTab('physical')" style="cursor:pointer" title="Click to open Physical tab">
+        <div class="ch"><div class="ct">Gym Volume &mdash; April</div><div class="cs2">128,418 lbs &middot; 24 sessions &middot; &#9733; Apr 26 double PR</div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+          <div class="stat-tile"><div class="st-k">DL PR</div><div class="st-v" style="color:var(--sage)">345lb</div><div class="st-d">+60lb from Jan &middot; chalk</div></div>
+          <div class="stat-tile"><div class="st-k">Plank PR</div><div class="st-v" style="color:var(--sage)">2:00</div><div class="st-d">Bodyweight floor</div></div>
+        </div>
+        <div class="chart-container"><canvas id="overviewGymChart"></canvas></div>
+      </div>
+      <!-- Sprint chart card -->
+      <div class="card ca d2 clickable" onclick="switchTab('physical')" style="cursor:pointer" title="Click to see sprint detail">
+        <div class="ch"><div class="ct">Treadmill Sprints</div><div class="cs2">2 sessions &middot; Apr 6 &amp; Apr 21 &middot; peaked 12 mph</div></div>
+        <div style="margin-bottom:10px">
+          <div style="font-family:var(--mono);font-size:8.5px;color:var(--sky);margin-bottom:5px;letter-spacing:.1em">APR 6 &mdash; 2.25 mi / ~22 min</div>
+          <div style="display:flex;gap:4px;align-items:flex-end;height:44px;margin-bottom:4px">
+            <div style="flex:1;background:rgba(95,173,212,.2);border-radius:3px 3px 0 0;height:85%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-family:var(--mono);font-size:7px;color:var(--sky)">11mph</span></div>
+            <div style="flex:1;background:var(--sky);border-radius:3px 3px 0 0;height:100%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-family:var(--mono);font-size:7px;color:#000;font-weight:600">12mph</span></div>
+            <div style="flex:1;background:rgba(95,173,212,.15);border-radius:3px 3px 0 0;height:60%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-family:var(--mono);font-size:7px;color:var(--t4)">9mph</span></div>
+          </div>
+          <div style="height:1px;background:var(--b1);margin-bottom:8px"></div>
+          <div style="font-family:var(--mono);font-size:8.5px;color:var(--sky);margin-bottom:5px;letter-spacing:.1em">APR 21 &mdash; 1.9 mi / ~18 min</div>
+          <div style="display:flex;gap:4px;align-items:flex-end;height:44px">
+            <div style="flex:1;background:rgba(95,173,212,.15);border-radius:3px 3px 0 0;height:70%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-family:var(--mono);font-size:7px;color:var(--t4)">10mph</span></div>
+            <div style="flex:1;background:var(--sky);border-radius:3px 3px 0 0;height:100%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-family:var(--mono);font-size:7px;color:#000;font-weight:600">12mph</span></div>
+            <div style="flex:1;background:rgba(95,173,212,.15);border-radius:3px 3px 0 0;height:60%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-family:var(--mono);font-size:7px;color:var(--t4)">10mph</span></div>
+          </div>
+        </div>
+        <div class="note sky" style="margin-top:6px"><span class="note-lbl">Pattern</span>12mph top speed both sessions. Form degrades on final set. Third set is the training frontier.</div>
+      </div>
+      <!-- Pipeline card -->
+      <div class="card ca d3 clickable" onclick="switchTab('creative')" style="cursor:pointer" title="Click to open Creative tab">
+        <div class="ch"><div class="ct">Client Pipeline</div><div class="cs2">$11,491 total &middot; $1,500 deposits held &middot; 9 bookings</div></div>
+        <div class="chart-container" style="height:120px"><canvas id="overviewPipeChart"></canvas></div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px">
+          <div class="stat-tile"><div class="st-k">Contracted</div><div class="st-v" style="color:var(--sage);font-size:14px">$6,771</div><div class="st-d">Dep. paid &middot; 2 events</div></div>
+          <div class="stat-tile"><div class="st-k">Megan Eddy</div><div class="st-v" style="color:var(--gold);font-size:14px">$2,200</div><div class="st-d">Signed &middot; dep. pending</div></div>
+          <div class="stat-tile"><div class="st-k">Negotiating</div><div class="st-v" style="color:var(--t3);font-size:14px">$2,520</div><div class="st-d">3 clients active</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ═══════════════════════════════════════════
+     FINANCIAL TAB
+════════════════════════════════════════════ -->
+<div id="tab-financial" class="dash" style="display:none">
+  <aside class="side">
+    <div class="sc">
+      <div class="sgt">April Summary</div>
+      <div class="si"><span class="sk">Total Income</span><span class="sv" style="color:var(--sage)">$5,963</span></div>
+      <div class="si"><span class="sk">Total Expenses</span><span class="sv" style="color:var(--rust)">$1,845</span></div>
+      <div class="si"><span class="sk">Net Saved</span><span class="sv" style="color:var(--sage)">+$3,999</span></div>
+      <div class="si"><span class="sk">Tithe</span><span class="sv" style="color:var(--gold)">$250</span></div>
+    </div>
+    <div class="sc">
+      <div class="sgt">YTD Progress</div>
+      <div class="si"><span class="sk">Saved</span><span class="sv" style="color:var(--sage)">$8,793</span></div>
+      <div class="si"><span class="sk">Goal</span><span class="sv">$10,000</span></div>
+      <div class="si"><span class="sk">Remaining</span><span class="sv">$1,207</span></div>
+      <div class="si"><span class="sk">Months left</span><span class="sv">8</span></div>
+      <div style="margin-top:10px">
+        <div class="prog-row"><span></span><span style="color:var(--sage)">87.9%</span></div>
+        <div class="prog-track" style="height:6px"><div class="prog-fill" style="width:87.9%;background:linear-gradient(90deg,var(--sage),var(--sky))"></div></div>
+      </div>
+    </div>
+    <div class="sc">
+      <div class="sgt">Monthly Comparison</div>
+      <div class="si"><span class="sk">January</span><span class="sv">$812</span></div>
+      <div class="si"><span class="sk">February</span><span class="sv">$1,094</span></div>
+      <div class="si"><span class="sk">March</span><span class="sv">$1,444</span></div>
+      <div class="si"><span class="sk">April</span><span class="sv" style="color:var(--sage)">$3,999 &#9733;</span></div>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="cg">
+      <div class="card sf ca">
+        <div class="ch"><div class="ct">Income vs Expenses &mdash; April 2026</div></div>
+        <div class="chart-container tall"><canvas id="finBarChart"></canvas></div>
+        <div class="note gold ca d2" style="margin-top:12px"><span class="note-lbl">Why April was exceptional</span>ArmyIgnitED ($1,250) + IRS refund ($533) + NY State refund ($37) all landed alongside the regular Clarkson paycheck cycle. These are one-time &mdash; May income returns to baseline ~$3,500.</div>
+      </div>
+      <div class="card ca d1">
+        <div class="ch"><div class="ct">Income Sources</div></div>
+        <div class="dr"><span>Clarkson University &times;3 paychecks</span><span class="drv g">$3,491</span></div>
+        <div class="dr"><span>ArmyIgnitED Reimbursement</span><span class="drv g">$1,250</span></div>
+        <div class="dr"><span>IRS Federal Tax Refund</span><span class="drv">$533</span></div>
+        <div class="dr"><span>DFAS &mdash; Army Guard</span><span class="drv">$408</span></div>
+        <div class="dr"><span>Uber / Raiser</span><span class="drv">$151</span></div>
+        <div class="dr"><span>Amex Resy Credit</span><span class="drv">$100</span></div>
+        <div class="dr"><span>NY State Tax Refund</span><span class="drv">$37</span></div>
+        <div class="dr"><span>Interest / Other / Misc</span><span class="drv dim">$33</span></div>
+        <div class="dr" style="border-top:1px solid var(--b2);margin-top:6px;padding-top:8px"><span style="font-weight:600">Total</span><span class="drv g" style="font-size:15px">$5,963</span></div>
+      </div>
+      <div class="card ca d2">
+        <div class="ch"><div class="ct">Expenses by Category</div></div>
+        <div class="dr"><span>Drinks &amp; Dining</span><span class="drv">$541</span></div>
+        <div class="dr"><span>Groceries</span><span class="drv">$488</span></div>
+        <div class="dr"><span>Tithe</span><span class="drv d">$250</span></div>
+        <div class="dr"><span>Auto &amp; Transport</span><span class="drv">$214</span></div>
+        <div class="dr"><span>Shopping</span><span class="drv">$128</span></div>
+        <div class="dr"><span>Healthcare</span><span class="drv">$74</span></div>
+        <div class="dr"><span>Subscriptions</span><span class="drv dim">$44</span></div>
+        <div class="dr"><span>Apple Products</span><span class="drv dim">$41</span></div>
+        <div class="dr"><span>Personal Care</span><span class="drv dim">$30</span></div>
+        <div class="dr"><span>Charging / Travel / Other</span><span class="drv dim">$36</span></div>
+        <div class="dr" style="border-top:1px solid var(--b2);margin-top:6px;padding-top:8px"><span style="font-weight:600">Total</span><span class="drv r" style="font-size:15px">$1,845</span></div>
+      </div>
+      <div class="card sf ca d3">
+        <div class="ch"><div class="ct">Notable Transactions</div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div>
+            <div style="font-family:var(--mono);font-size:8px;color:var(--sage);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px">Incoming</div>
+            <div class="dr"><span>Apr 7 &mdash; SUNY/IgnitED</span><span class="drv g">+$1,250</span></div>
+            <div class="dr"><span>Apr 9 &mdash; IRS Refund</span><span class="drv g">+$533</span></div>
+            <div class="dr"><span>Apr 22 &mdash; DFAS Army</span><span class="drv g">+$408</span></div>
+            <div class="dr"><span>Apr 10 &mdash; NY State Refund</span><span class="drv g">+$37</span></div>
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:8px;color:var(--rust);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px">Notable Outgoing</div>
+            <div class="dr"><span>Apr 10 &mdash; Tithe CBC</span><span class="drv d">-$250</span></div>
+            <div class="dr"><span>Apr 17 &mdash; Amex Annual Fee</span><span class="drv r">-$895</span></div>
+            <div class="dr"><span>Apr 20 &mdash; Apple Store</span><span class="drv r">-$539</span></div>
+          </div>
+        </div>
+        <div class="note rust ca d4" style="margin-top:12px"><span class="note-lbl">Amex Platinum</span>$895 annual fee posted Apr 17. Cancellation in progress &mdash; fee to be refunded or offset by statement credits before the cycle closes. May figures will reflect resolution.</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ═══════════════════════════════════════════
+     PHYSICAL TAB
+════════════════════════════════════════════ -->
+<div id="tab-physical" class="dash" style="display:none">
+  <aside class="side">
+    <div class="sc">
+      <div class="sgt">April Training</div>
+      <div class="si"><span class="sk">Gym Days</span><span class="sv" style="color:var(--sky)">24</span></div>
+      <div class="si"><span class="sk">Total Volume</span><span class="sv">128,418 lb</span></div>
+      <div class="si"><span class="sk">Outdoor Runs</span><span class="sv">6</span></div>
+      <div class="si"><span class="sk">Sprint Sessions</span><span class="sv">2</span></div>
+    </div>
+    <div class="sc">
+      <div class="sgt">PRs Hit</div>
+      <div class="si"><span class="sk">Trap Bar DL</span><span class="sv" style="color:var(--sage)">345lb &times;3</span></div>
+      <div class="si"><span class="sk">Plank BW</span><span class="sv" style="color:var(--sage)">2:00</span></div>
+      <div class="si"><span class="sk">Session</span><span class="sv">Apr 26</span></div>
+    </div>
+    <div class="sc">
+      <div class="sgt">Health Flags</div>
+      <div class="si"><span class="sk">Apr 21</span><span class="sv" style="color:var(--rust)">Urgent Care</span></div>
+      <div class="si"><span class="sk">Diagnosis</span><span class="sv">Dermatitis</span></div>
+      <div class="si"><span class="sk">Rx</span><span class="sv">Clobetasol</span></div>
+      <div class="si"><span class="sk">Apr 29</span><span class="sv" style="color:var(--rust)">Knee pain</span></div>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="cg">
+      <div class="card sf ca">
+        <div class="ch"><div class="ct">Volume by Session</div><div class="cs2">19 lifting days tracked &middot; Peak Apr 2 (14,465 lb)</div></div>
+        <div class="chart-container tall"><canvas id="gymDetailChart"></canvas></div>
+      </div>
+      <div class="card ca d1">
+        <div class="ch"><div class="ct">AFT Progress</div><div class="cs2">Army Flight Test preparation benchmarks</div></div>
+        <div class="prog-wrap">
+          <div class="prog-row"><span>MDL &mdash; Trap Bar Deadlift</span><span style="color:var(--sage)">345lb &middot; Goal 350</span></div>
+          <div class="prog-track"><div class="prog-fill" style="width:98%;background:var(--sage)"></div></div>
+        </div>
+        <div class="prog-wrap">
+          <div class="prog-row"><span>HRP &mdash; Hand Release Push-up</span><span>47 reps &middot; Goal 61</span></div>
+          <div class="prog-track"><div class="prog-fill" style="width:77%;background:var(--sky)"></div></div>
+        </div>
+        <div class="prog-wrap">
+          <div class="prog-row"><span>PLK &mdash; Plank</span><span style="color:var(--sage)">2:00 &middot; Goal 3:35</span></div>
+          <div class="prog-track"><div class="prog-fill" style="width:56%;background:var(--gold)"></div></div>
+        </div>
+        <div class="prog-wrap">
+          <div class="prog-row"><span>2MR &mdash; Two Mile Run</span><span style="color:var(--t4)">Base building</span></div>
+          <div class="prog-track"><div class="prog-fill" style="width:15%;background:var(--t4)"></div></div>
+        </div>
+        <div class="note sage" style="margin-top:10px"><span class="note-lbl">&#9733; Apr 26 Double PR</span>345lb DL &times;3 with chalk + 2:00 floor plank both hit in the same session. DL is up +60lb from January. Plank is a first-time 2-minute bodyweight floor hold.</div>
+      </div>
+      <div class="card ca d2">
+        <div class="ch"><div class="ct">Cardio Log</div></div>
+        <div class="dr"><span>Apr 3 &mdash; Outdoor</span><span class="drv b">6.0 mi / 51:40</span></div>
+        <div class="dr"><span>Apr 6 &mdash; Treadmill Sprints</span><span class="drv">2.25 mi / ~22 min</span></div>
+        <div class="dr"><span>Apr 11 &mdash; Outdoor</span><span class="drv b">5.0 mi / 40:29</span></div>
+        <div class="dr" style="padding-left:12px;font-size:10.5px"><span style="color:var(--t4);font-style:italic">No notable knee pain noted</span></div>
+        <div class="dr"><span>Apr 17 &mdash; Outdoor</span><span class="drv">2.0 mi / 14:27</span></div>
+        <div class="dr"><span>Apr 21 &mdash; Treadmill Sprints</span><span class="drv">1.9 mi / ~18 min</span></div>
+        <div class="dr"><span>Apr 22 &mdash; Outdoor</span><span class="drv">5.0 km / 25:49</span></div>
+        <div class="dr"><span>Apr 25 &mdash; Zone 2</span><span class="drv">3.5 mi / 20:00</span></div>
+        <div class="dr" style="padding-left:12px;font-size:10.5px"><span style="color:var(--t4);font-style:italic">Elev 3.5 &middot; Speed 10 &middot; mouth closed &middot; ~1hr post-wake</span></div>
+        <div class="dr"><span>Apr 29 &mdash; Outdoor</span><span class="drv r">5.0 mi / 46:43</span></div>
+        <div class="dr" style="padding-left:12px;font-size:10.5px"><span style="color:var(--rust);font-style:italic">Moderate right knee pain &middot; wet weather &middot; Zone 3</span></div>
+        <div class="note rust" style="margin-top:10px"><span class="note-lbl">Flag</span>Right knee resurfaced Apr 29. Don't compound heading into Annual Training prep. Monitor May runs closely.</div>
+      </div>
+      <div class="card sf ca d3">
+        <div class="ch"><div class="ct">Treadmill Sprint Sessions &mdash; Full Detail</div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div>
+            <div style="font-family:var(--mono);font-size:8.5px;color:var(--sky);margin-bottom:8px;letter-spacing:.1em">SESSION 1 &mdash; APR 6 &middot; 2.25 mi / ~22 min</div>
+            <table class="sprint-tbl">
+              <tr><th>Set</th><th>Speed</th><th>Time</th><th>Notes</th></tr>
+              <tr><td>Warm-up</td><td style="color:var(--t3)">6.0 mph</td><td>0.5 mi</td><td style="color:var(--t4)">Ramp, rest 1&ndash;3 min @ 5.0</td></tr>
+              <tr><td>Sprint 1</td><td style="color:var(--sky)">11.0 mph</td><td>1:30</td><td style="color:var(--t4)">Manageable entry</td></tr>
+              <tr><td>Sprint 2</td><td style="color:var(--sky)">12.0 mph</td><td>1:10</td><td style="color:var(--rust)">3 min break &middot; jump to 3.5 &middot; PB muffin pre-session hurt</td></tr>
+              <tr><td>Sprint 3</td><td style="color:var(--t3)">9.0 mph</td><td>2:30</td><td style="color:var(--rust)">5 min break &middot; sloppy form &middot; ramped to 3.5</td></tr>
+            </table>
+            <div class="note" style="margin-top:8px;font-size:11px"><span class="note-lbl">Assessment</span>Food timing killed it. Peanut butter muffin too close to session. Top speed 12mph but form broke down at set 3.</div>
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:8.5px;color:var(--sky);margin-bottom:8px;letter-spacing:.1em">SESSION 2 &mdash; APR 21 &middot; 1.9 mi / ~18 min</div>
+            <table class="sprint-tbl">
+              <tr><th>Set</th><th>Speed</th><th>Time</th><th>Notes</th></tr>
+              <tr><td>Warm-up</td><td style="color:var(--t3)">6.0 mph</td><td>0.5 mi</td><td style="color:var(--t4)">Ramp, rest 1&ndash;3 min @ 5.0</td></tr>
+              <tr><td>Sprint 1</td><td style="color:var(--sky)">10.0 mph</td><td>1:00</td><td style="color:var(--t4)">Conservative start</td></tr>
+              <tr><td>Sprint 2</td><td style="color:var(--sky)">12.0 mph</td><td>1:20</td><td style="color:var(--sage)">Good from start &middot; sloppy finish</td></tr>
+              <tr><td>Sprint 3</td><td style="color:var(--t3)">10.0 mph</td><td>1:00</td><td style="color:var(--rust)">5 min break &middot; sloppy form again</td></tr>
+            </table>
+            <div class="note sage" style="margin-top:8px;font-size:11px"><span class="note-lbl">Assessment</span>Better session. Sprint 2 was longer at 12mph. Same pattern: third set is where it falls apart. Core fatigue is the ceiling right now.</div>
+          </div>
+        </div>
+        <div class="note sky" style="margin-top:12px"><span class="note-lbl">Pattern to Address</span>Both sessions hit 12mph peak but degrade at set 3. The third set is the training frontier &mdash; that's where the work needs to happen in May. Fix: shorter rest between 2 and 3, lighter warm-up meal timing.</div>
+      </div>
+      <!-- Workout log collapsible -->
+      <div class="card sf ca d4">
+        <button class="coll-btn" onclick="toggleColl('wklog')">Full Session Log &mdash; All 24 Training Days <span class="caret" id="caret-wklog">&#9660;</span></button>
+        <div class="coll-body" id="wklog">
+          <div style="margin-top:10px" id="wklog-content"></div>
+        </div>
+      </div>
+      <!-- Health callout -->
+      <div class="card sf ca d5" style="border-color:rgba(217,113,78,.2);background:rgba(217,113,78,.05)">
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div style="font-size:24px;flex-shrink:0">&#9877;</div>
+          <div>
+            <div style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);margin-bottom:5px">Urgent Care &mdash; April 21, 2026</div>
+            <div style="font-size:12.5px;line-height:1.7;color:var(--t2)">CPH Urgent Care, Potsdam. Provider: Joey Adams. Diagnosis: Dermatitis. Vitals: BP 137/83, weight 191lb 9.6oz, height 5'11", pulse 67, temp 97.9&deg;F, O&#8322; sat 98%, BMI 26.72. Prescribed clobetasol &mdash; pickup at Kinney Drugs Potsdam.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ═══════════════════════════════════════════
+     SPIRITUAL TAB — EMBEDDED CBC DASHBOARD
+════════════════════════════════════════════ -->
+<div id="tab-spiritual" style="display:none;margin-top:24px">
+  <iframe src="cbc-sermons.html#apr" class="sermon-iframe" id="sermonFrame"></iframe>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     CAREER TAB
+════════════════════════════════════════════ -->
+<div id="tab-career" class="dash" style="display:none">
+  <aside class="side">
+    <div class="sc">
+      <div class="sgt">Path Odds</div>
+      <div class="si"><span class="sk">Air Force OTS</span><span class="sv" style="color:var(--vio)">20%</span></div>
+      <div class="si"><span class="sk">United Airlines</span><span class="sv" style="color:var(--sky)">35%</span></div>
+      <div class="si"><span class="sk">Civil Service</span><span class="sv" style="color:var(--sage)">15%</span></div>
+    </div>
+    <div class="sc">
+      <div class="sgt">Upcoming Hard Dates</div>
+      <div class="si"><span class="sk">May 9</span><span class="sv" style="color:var(--gold)">Exam day</span></div>
+      <div class="si"><span class="sk">Mid-May</span><span class="sv" style="color:var(--vio)">Drill / DD-368</span></div>
+      <div class="si"><span class="sk">Jul 4</span><span class="sv" style="color:var(--rust)">OTS deadline</span></div>
+      <div class="si"><span class="sk">Jul 26</span><span class="sv" style="color:var(--rust)">AFT deadline</span></div>
+      <div class="si"><span class="sk">Aug 6&ndash;21</span><span class="sv" style="color:var(--vio)">Annual Training</span></div>
+    </div>
+    <div class="sc">
+      <div class="sgt">Contacts</div>
+      <div class="si"><span class="sk">OTS recruiter</span><span class="sv">Ashley Araya</span></div>
+      <div class="si"><span class="sk">S1</span><span class="sv">SSG Ian Wilson</span></div>
+      <div class="si"><span class="sk">United ref.</span><span class="sv">Nabil</span></div>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="cg">
+      <!-- Career narrative header -->
+      <div class="card sf ca" style="border-color:rgba(154,143,216,.2);background:linear-gradient(135deg,rgba(154,143,216,.06),rgba(95,173,212,.04))">
+        <div style="font-family:var(--mono);font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:var(--vio);margin-bottom:8px">2026 Priority Objective</div>
+        <div style="font-family:var(--serif);font-size:22px;font-weight:700;font-style:italic;color:var(--tx);margin-bottom:10px;line-height:1.2">Get locked in to a career job this year.</div>
+        <div style="font-size:13px;line-height:1.72;color:var(--t2)">Three paths are running simultaneously &mdash; not as a hedge, but as a deliberate strategy. Any one of them changes the trajectory. The goal isn't to pick one and hope. The goal is to execute everything that can be done right now on all three and let the process resolve itself. The DD-368 conversation at May drill, the exam on May 9, and the pre-interview process are all live at the same time. That's by design.</div>
+      </div>
+      <!-- Path 1: OTS -->
+      <div class="card ca d1 path-card vio">
+        <div class="path-card-head">
+          <div><div class="path-lbl">Path 1 &mdash; Air Force OTS</div></div>
+          <div class="path-pct" style="color:var(--vio)">20%</div>
+        </div>
+        <div class="path-title">Commission as AF Officer &mdash; 14N Intelligence</div>
+        <div class="path-body">OTS class window (Aug&ndash;Dec 2027) falls after ETS (June 12, 2027) &mdash; the Guard contract is fulfilled regardless. The DD-368 Conditional Release is the single friction point: soldier initiates &rarr; company CO &rarr; battalion &rarr; state AG (Joint Force HQ NY). Valid 12 months per AR 135-91. SSG Wilson confirmed the commissioning-source framing has real possibility. Apr 30: attended 318th RCS Teams brief on line officer program.</div>
+        <div style="margin-top:12px;padding-left:8px">
+          <div style="font-family:var(--mono);font-size:8px;color:var(--t4);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px">OTS Timeline</div>
+          <div class="ntl dark">
+            <div class="nti"><div class="nti-rail"><div class="nti-dot filled" style="color:var(--sage)"></div><div class="nti-line"></div></div><div class="nti-c"><div class="nti-d" style="color:var(--sage)">Apr 30, 2026</div><div class="nti-t"><strong>318th RCS Teams brief attended</strong> &mdash; line officer / Space Force program overview</div></div></div>
+            <div class="nti"><div class="nti-rail"><div class="nti-dot" style="color:var(--gold)"></div><div class="nti-line"></div></div><div class="nti-c"><div class="nti-d" style="color:var(--gold)">Mid-May drill &mdash; CRITICAL</div><div class="nti-t"><strong>Informal CO conversation via SSG Wilson.</strong> This is the entire critical path. DD-368 cannot move until chain buy-in is secured.</div></div></div>
+            <div class="nti"><div class="nti-rail"><div class="nti-dot" style="color:var(--t3)"></div><div class="nti-line"></div></div><div class="nti-c"><div class="nti-d">Late May</div><div class="nti-t">Formally initiate DD-368 &mdash; target 6 weeks routing to hit Jul 4 deadline</div></div></div>
+            <div class="nti"><div class="nti-rail"><div class="nti-dot" style="color:var(--rust)"></div><div class="nti-line"></div></div><div class="nti-c"><div class="nti-d" style="color:var(--rust)">July 4, 2026 &mdash; HARD DEADLINE</div><div class="nti-t"><strong>Approved DD-368 must be in hand.</strong> Miss this and the board cycle closes.</div></div></div>
+            <div class="nti"><div class="nti-rail"><div class="nti-dot" style="color:var(--rust)"></div><div class="nti-line"></div></div><div class="nti-c"><div class="nti-d" style="color:var(--rust)">July 26, 2026 &mdash; HARD DEADLINE</div><div class="nti-t">AFT test &middot; prior service docs &middot; transcripts &middot; pre-selection forms all due. Two lifetime attempts, 150-day wait between.</div></div></div>
+            <div class="nti"><div class="nti-rail"><div class="nti-dot" style="color:var(--t3)"></div><div class="nti-line"></div></div><div class="nti-c"><div class="nti-d">Aug 15, 2026</div><div class="nti-t">Letters of recommendation + Commander's interview due</div></div></div>
+            <div class="nti"><div class="nti-rail"><div class="nti-dot" style="color:var(--t3)"></div><div class="nti-line"></div></div><div class="nti-c"><div class="nti-d">Nov 2, 2026</div><div class="nti-t">Board review</div></div></div>
+            <div class="nti"><div class="nti-rail"><div class="nti-dot" style="color:var(--sage)"></div></div><div class="nti-c"><div class="nti-d">Jun 12, 2027</div><div class="nti-t"><strong>ETS from NYARNG</strong> &mdash; contract fulfilled &middot; OTS Aug&ndash;Dec 2027</div></div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Path 2: United -->
+      <div class="card ca d2 path-card sky">
+        <div class="path-card-head">
+          <div><div class="path-lbl">Path 2 &mdash; United Airlines</div></div>
+          <div class="path-pct" style="color:var(--sky)">35%</div>
+        </div>
+        <div class="path-title">Crew Scheduler &mdash; On-site Chicago</div>
+        <div class="path-body">Advanced to recorded pre-interview via Nabil &mdash; friend from when United serviced Ogdensburg International (2022), now Chicago-based. Start date July 2026 with mandatory 6-week on-site training. Primary friction: training window overlaps directly with NYARNG Annual Training Aug 6&ndash;21. Guard service is visible on the resume. AT conflict not yet specifically raised. USERRA prohibits hiring discrimination based on military obligations &mdash; proving it post-hire is easier than proving a pre-hire decision was influenced. JAG consult before this becomes urgent.</div>
+        <div class="path-next"><strong>Next:</strong> If process advances past pre-interview, surface the AT conflict proactively. Frame it as a scheduling note, not an apology. Don't let it come up as a surprise. JAG consult first.</div>
+      </div>
+      <!-- Path 3: Civil Service -->
+      <div class="card ca d3 path-card sage">
+        <div class="path-card-head">
+          <div><div class="path-lbl">Path 3 &mdash; St. Lawrence Civil Service</div></div>
+          <div class="path-pct" style="color:var(--sage)">15%</div>
+        </div>
+        <div class="path-title">Police Officer + Deputy Sheriff Exams</div>
+        <div class="path-body">Third attempt. Exams #60050-930 (Police Officer) and #60050-960 (Deputy Sheriff). May 9, 2026 at 8:30 AM &mdash; Canton School Middle School Cafeteria, 99 State Street, Canton NY. 3.5 hours. Bring: two #2 pencils, photo ID, admittance letter. No electronics. Prior results point to a profile mismatch on disposition questions, not a competence gap &mdash; the exams optimize for rule-bound, authority-deferring profiles. The interest in Deputy Sheriff specifically is genuine and the role is compatible with Guard obligations through ETS.</div>
+        <div class="path-next"><strong>Exam May 9:</strong> Show up sharp. Answer disposition questions for what the exam is selecting for, not what feels authentic. Zero cost to attempt. This is the lowest-disruption outcome of the three.</div>
+      </div>
+      <!-- Scenario matrix -->
+      <div class="card sf ca d4">
+        <div class="ch"><div class="ct">Scenario Matrix</div><div class="cs2">What happens if one lands</div></div>
+        <div class="scm">
+          <div class="scr" style="background:rgba(95,173,212,.04)"><div class="sck" style="color:var(--sky)">United offer</div><div class="scv">Relocate Chicago. USERRA framing for AT. Air Guard possible later. OTS and civil service become moot. Business winds down or scales back.</div></div>
+          <div class="scr" style="background:rgba(154,143,216,.04)"><div class="sck" style="color:var(--vio)">OTS selected</div><div class="scv">Commission post-ETS Jun 2027. DD-368 fulfilled in full. Best long-term military outcome. Active duty, clearance-attached career track.</div></div>
+          <div class="scr" style="background:rgba(98,201,122,.04)"><div class="sck" style="color:var(--sage)">Civil service list</div><div class="scv">Stay local. Compatible with Guard through ETS. Lowest life disruption. Genuine interest in the Deputy Sheriff role specifically.</div></div>
+          <div class="scr"><div class="sck" style="color:var(--t3)">None land</div><div class="scv">Business + campus safety + Guard + MBA. OTS re-applied next board cycle. Status quo is not failure &mdash; the accumulation is still deliberate.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ═══════════════════════════════════════════
+     INTELLECTUAL TAB (LIGHT)
+════════════════════════════════════════════ -->
+<div id="tab-intellectual" style="display:none;margin-top:24px">
+  <div style="display:grid;grid-template-columns:240px 1fr;gap:22px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:12px;position:sticky;top:60px">
+      <div class="sc" style="background:#F4F1EA;border-color:rgba(0,0,0,.09);color:#1a1a14">
+        <div class="sgt" style="color:#888880">MBA Status</div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">GPA</span><span class="sv" style="color:#2a5a9a">3.83</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">Courses done</span><span class="sv" style="color:#0a0a08">4 / 10</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">IgnitED rate</span><span class="sv" style="color:#2a7a3a">$750 / course</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">Est. graduation</span><span class="sv" style="color:#0a0a08">Mar 2027</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">Funding thru</span><span class="sv" style="color:#0a0a08">Winter 2027</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <!-- MK610 -->
+      <div style="background:#F4F1EA;border:1px solid rgba(0,0,0,.09);border-radius:var(--r3);padding:20px;box-shadow:var(--sh1)" class="ca">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:6px">
+          <div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#2a5a9a">MK 610 / HC 626</div>
+          <div style="font-family:var(--mono);font-size:8.5px;color:#2a5a9a">Wednesdays 8:00 PM</div>
+        </div>
+        <div style="font-family:var(--serif);font-size:17px;font-weight:700;color:#0a0a08;margin-bottom:3px">Marketing Management</div>
+        <div style="font-family:var(--mono);font-size:8.5px;color:#888880;margin-bottom:14px">Jay Carlson &middot; Mar 30&ndash;Jun 10, 2026 &middot; Kotler/Keller 17th Ed.</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:14px;font-size:11.5px">
+          <div style="padding:7px 9px;background:#fff;border-radius:5px;border:1px solid rgba(0,0,0,.07)"><strong>Quizzes/Exams</strong> &mdash; 39%</div>
+          <div style="padding:7px 9px;background:#fff;border-radius:5px;border:1px solid rgba(0,0,0,.07)"><strong>Written Assignments</strong> &mdash; 25%</div>
+          <div style="padding:7px 9px;background:#fff;border-radius:5px;border:1px solid rgba(0,0,0,.07)"><strong>Participation</strong> &mdash; 24%</div>
+          <div style="padding:7px 9px;background:#fff;border-radius:5px;border:1px solid rgba(0,0,0,.07)"><strong>Presentation</strong> &mdash; 12%</div>
+        </div>
+        <div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#888880;margin-bottom:8px">Upcoming Deadlines</div>
+        <div class="l-mr"><span class="dl-d" style="font-family:var(--mono);font-size:9px;color:#8a6010;width:54px;flex-shrink:0">Apr 29</span><span style="font-size:11.5px;color:#444440">Second product research + Presentation (White Claw)</span></div>
+        <div class="l-mr"><span class="dl-d" style="font-family:var(--mono);font-size:9px;color:#8a6010;width:54px;flex-shrink:0">May 17</span><span style="font-size:11.5px;color:#444440">Midterm Exam</span></div>
+        <div class="l-mr"><span class="dl-d" style="font-family:var(--mono);font-size:9px;color:#8a6010;width:54px;flex-shrink:0">May 27</span><span style="font-size:11.5px;color:#444440">AI written assignment</span></div>
+        <div class="l-mr"><span class="dl-d" style="font-family:var(--mono);font-size:9px;color:#8a6010;width:54px;flex-shrink:0">Jun 7</span><span style="font-size:11.5px;color:#444440">Third product research written assignment</span></div>
+        <div class="l-mr" style="border:none"><span class="dl-d" style="font-family:var(--mono);font-size:9px;color:#8a6010;width:54px;flex-shrink:0">Jun 10</span><span style="font-size:11.5px;color:#444440">Final Exam</span></div>
+      </div>
+      <!-- OS603 -->
+      <div style="background:#F4F1EA;border:1px solid rgba(0,0,0,.09);border-radius:var(--r3);padding:20px;box-shadow:var(--sh1)" class="ca d1">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:6px">
+          <div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#2a5a9a">OS 603</div>
+          <div style="font-family:var(--mono);font-size:8.5px;color:#2a5a9a">Wednesdays 6:00 PM</div>
+        </div>
+        <div style="font-family:var(--serif);font-size:17px;font-weight:700;color:#0a0a08;margin-bottom:3px">Leadership &amp; Organizational Behavior</div>
+        <div style="font-family:var(--mono);font-size:8.5px;color:#888880;margin-bottom:14px">Stacey Zeigler PT DPT PhD &middot; Mar 30&ndash;Jun 12, 2026 &middot; Kinicki 3rd Ed.</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:14px;font-size:11.5px">
+          <div style="padding:7px 9px;background:#fff;border-radius:5px;border:1px solid rgba(0,0,0,.07)"><strong>Weekly Assignments</strong> &mdash; 25%</div>
+          <div style="padding:7px 9px;background:#fff;border-radius:5px;border:1px solid rgba(0,0,0,.07)"><strong>Self-Assessment</strong> &mdash; 25%</div>
+          <div style="padding:7px 9px;background:#fff;border-radius:5px;border:1px solid rgba(0,0,0,.07)"><strong>Team Communication</strong> &mdash; 25%</div>
+          <div style="padding:7px 9px;background:#fff;border-radius:5px;border:1px solid rgba(0,0,0,.07)"><strong>Case Study: Org Health</strong> &mdash; 25%</div>
+        </div>
+        <div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#888880;margin-bottom:8px">Upcoming Deadlines</div>
+        <div class="l-mr"><span class="dl-d" style="font-family:var(--mono);font-size:9px;color:#8a6010;width:54px;flex-shrink:0">Apr 23</span><span style="font-size:11.5px;color:#444440">Leadership Self-Assessment &amp; AI as Thought Partner Action Plan</span></div>
+        <div class="l-mr"><span class="dl-d" style="font-family:var(--mono);font-size:9px;color:#8a6010;width:54px;flex-shrink:0">May 7</span><span style="font-size:11.5px;color:#444440">Technology-Enabled Team Communication Strategy &amp; Simulation (group)</span></div>
+        <div class="l-mr"><span class="dl-d" style="font-family:var(--mono);font-size:9px;color:#8a6010;width:54px;flex-shrink:0">May 21</span><span style="font-size:11.5px;color:#444440">Case Study: Organizational Health (group video presentation)</span></div>
+        <div class="l-mr" style="border:none"><span class="dl-d" style="font-family:var(--mono);font-size:9px;color:#8a6010;width:54px;flex-shrink:0">Jun 12</span><span style="font-size:11.5px;color:#444440">Final Leadership Project</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     CREATIVE TAB
+════════════════════════════════════════════ -->
+<div id="tab-creative" class="dash" style="display:none">
+  <aside class="side">
+    <div class="sc">
+      <div class="sgt">Inventory System</div>
+      <div class="si"><span class="sk">Items cataloged</span><span class="sv" style="color:var(--sage)">528+</span></div>
+      <div class="si"><span class="sk">Build time</span><span class="sv">~15 hrs</span></div>
+      <div class="si"><span class="sk">Shipped</span><span class="sv">Apr 30</span></div>
+      <div class="si"><span class="sk">Backend</span><span class="sv">Supabase</span></div>
+      <div class="si"><span class="sk">Host</span><span class="sv">GitHub Pages</span></div>
+    </div>
+    <div class="sc">
+      <div class="sgt">Pipeline Summary</div>
+      <div class="si"><span class="sk">Confirmed + dep.</span><span class="sv" style="color:var(--sage)">$6,771</span></div>
+      <div class="si"><span class="sk">Signed, dep. due</span><span class="sv" style="color:var(--gold)">$2,200</span></div>
+      <div class="si"><span class="sk">Negotiating</span><span class="sv" style="color:var(--t3)">$2,520</span></div>
+      <div class="si"><span class="sk">Deposits held</span><span class="sv" style="color:var(--sage)">$1,500</span></div>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="cg">
+      <div class="card sf ca">
+        <div class="ch"><div class="ct">Personal Inventory System &mdash; Shipped Apr 30</div></div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px">
+          <div class="stat-tile" style="text-align:center"><div class="st-k">Items</div><div class="st-v" style="color:var(--sage);font-size:22px">528+</div></div>
+          <div class="stat-tile" style="text-align:center"><div class="st-k">Build Time</div><div class="st-v" style="color:var(--sky);font-size:22px">~15h</div></div>
+          <div class="stat-tile" style="text-align:center"><div class="st-k">Versions</div><div class="st-v" style="color:var(--vio);font-size:22px">3</div></div>
+          <div class="stat-tile" style="text-align:center"><div class="st-k">Scope</div><div class="st-v" style="color:var(--gold);font-size:14px">Room + Tesla</div></div>
+        </div>
+        <div style="font-size:12.5px;line-height:1.72;color:var(--t2);margin-bottom:12px">Built from scratch over 3.5 weeks: Notion DB &rarr; single-file HTML/JS &rarr; Supabase PostgreSQL backend with GitHub Pages hosting. The project evolved through three distinct architectures as the problem became better understood. Features shipped: AI photo-parse workflow (Claude reads photos &rarr; structured outline &rarr; paste to import), score system (Freq/Crit/Repl/Keep), PIN-locked items, military OCIE subcategory with green row coding, locate.html companion browse UI, CSV/JSON export, column hide/resize, 50-step undo/redo, bulk operations, Quick Add and Dupe Add modals.</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px">
+          <span style="font-family:var(--mono);font-size:8px;padding:3px 8px;border-radius:20px;background:var(--sbg);border:1px solid rgba(98,201,122,.2);color:var(--sage)">Supabase Live</span>
+          <span style="font-family:var(--mono);font-size:8px;padding:3px 8px;border-radius:20px;background:var(--sbg);border:1px solid rgba(98,201,122,.2);color:var(--sage)">GitHub Pages</span>
+          <span style="font-family:var(--mono);font-size:8px;padding:3px 8px;border-radius:20px;background:var(--b0);border:1px solid var(--b1);color:var(--t3)">AI Photo Parse</span>
+          <span style="font-family:var(--mono);font-size:8px;padding:3px 8px;border-radius:20px;background:var(--b0);border:1px solid var(--b1);color:var(--t3)">PIN Lock</span>
+          <span style="font-family:var(--mono);font-size:8px;padding:3px 8px;border-radius:20px;background:var(--b0);border:1px solid var(--b1);color:var(--t3)">Military OCIE</span>
+          <span style="font-family:var(--mono);font-size:8px;padding:3px 8px;border-radius:20px;background:var(--b0);border:1px solid var(--b1);color:var(--t3)">locate.html</span>
+          <span style="font-family:var(--mono);font-size:8px;padding:3px 8px;border-radius:20px;background:var(--b0);border:1px solid var(--b1);color:var(--t3)">50-step Undo</span>
+        </div>
+      </div>
+      <div class="card sf ca d1">
+        <div class="ch"><div class="ct">Client Pipeline &mdash; JD Meyers Productions</div></div>
+        <table class="pipe-tbl">
+          <thead><tr><th>Client</th><th>Date</th><th>Type</th><th>Deposit</th><th>Total</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Brenna McGrath</td><td>Jun 6, 2026</td><td>Wedding Photo</td><td style="color:var(--sage)">$500 paid</td><td>$1,800</td><td><span class="status-pill" style="background:var(--sbg);color:var(--sage);border:1px solid rgba(98,201,122,.2)">Confirmed</span></td></tr>
+            <tr><td>JuliaKia</td><td>Jun 27, 2026</td><td>Wedding Video</td><td style="color:var(--sage)">$500 paid</td><td>$1,771</td><td><span class="status-pill" style="background:var(--sbg);color:var(--sage);border:1px solid rgba(98,201,122,.2)">Confirmed</span></td></tr>
+            <tr><td>Megan Eddy</td><td>Aug 22, 2026</td><td>Wedding Video</td><td style="color:var(--gold)">$500 due</td><td>$2,200</td><td><span class="status-pill" style="background:var(--gbg);color:var(--gold);border:1px solid rgba(224,180,78,.2)">Signed</span></td></tr>
+            <tr><td>Francesca Mnenula</td><td>May 10, 2026</td><td>Photoshoot</td><td style="color:var(--t4)">&mdash;</td><td>$250</td><td><span class="status-pill" style="background:var(--gbg);color:var(--gold);border:1px solid rgba(224,180,78,.2)">Negotiating</span></td></tr>
+            <tr><td>Grace Sheehan</td><td>May 10, 2026</td><td>Photoshoot</td><td style="color:var(--t4)">&mdash;</td><td>$120</td><td><span class="status-pill" style="background:var(--kbg);color:var(--sky);border:1px solid rgba(95,173,212,.2)">Contract Sent</span></td></tr>
+            <tr><td>Zachary Gerow</td><td>May 19, 2026</td><td>Wedding Photo</td><td style="color:var(--t4)">&mdash;</td><td>$1,200</td><td><span class="status-pill" style="background:var(--gbg);color:var(--gold);border:1px solid rgba(224,180,78,.2)">Negotiating</span></td></tr>
+            <tr><td>Clark Choate</td><td>Aug 1, 2026</td><td>Wedding Photo</td><td style="color:var(--t4)">&mdash;</td><td>$1,200</td><td><span class="status-pill" style="background:var(--gbg);color:var(--gold);border:1px solid rgba(224,180,78,.2)">Negotiating</span></td></tr>
+            <tr><td>Haleigh Dunbar</td><td>Oct 10, 2026</td><td>Wedding Photo</td><td style="color:var(--t4)">&mdash;</td><td>TBD</td><td><span class="status-pill" style="background:var(--b0);color:var(--t3);border:1px solid var(--b1)">Awaiting Avail.</span></td></tr>
+            <tr><td>Jenna St. Laurent</td><td>Jul 2027</td><td>Wedding Photo</td><td style="color:var(--t4)">&mdash;</td><td>TBD</td><td><span class="status-pill" style="background:var(--b0);color:var(--t3);border:1px solid var(--b1)">Awaiting Avail.</span></td></tr>
+          </tbody>
+        </table>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px">
+          <div class="stat-tile" style="text-align:center"><div class="st-k">Contracted</div><div class="st-v" style="color:var(--sage);font-size:16px">$6,771</div><div class="st-d">Deposits paid &middot; 2 events</div></div>
+          <div class="stat-tile" style="text-align:center"><div class="st-k">Dep. Pending</div><div class="st-v" style="color:var(--gold);font-size:16px">$2,200</div><div class="st-d">Megan Eddy &middot; signed</div></div>
+          <div class="stat-tile" style="text-align:center"><div class="st-k">Negotiating</div><div class="st-v" style="color:var(--t3);font-size:16px">$2,520</div><div class="st-d">3 clients active</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ═══════════════════════════════════════════
+     REFLECTIONS TAB (LIGHT)
+════════════════════════════════════════════ -->
+<div id="tab-reflections" style="display:none;margin-top:24px">
+  <div style="display:grid;grid-template-columns:240px 1fr;gap:22px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:12px;position:sticky;top:60px">
+      <div class="sc" style="background:#F4F1EA;border-color:rgba(0,0,0,.09)">
+        <div class="sgt" style="color:#888880">This Month In Summary</div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">Career</span><span class="sv" style="color:#5a3a8a">3 paths active</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">Financial</span><span class="sv" style="color:#2a7a3a">+$3,999</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">Physical</span><span class="sv" style="color:#2a5a9a">2 PRs</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">Creative</span><span class="sv" style="color:#0a0a08">Inv. shipped</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">Spiritual</span><span class="sv" style="color:#8a6010">3 sermons</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <!-- Career situation -->
+      <div style="background:#F4F1EA;border:1px solid rgba(0,0,0,.09);border-radius:var(--r3);padding:22px;box-shadow:var(--sh1)" class="ca">
+        <div style="font-family:var(--serif);font-size:18px;font-weight:700;color:#0a0a08;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid rgba(0,0,0,.08)">The Career Situation</div>
+        <div class="ntl light">
+          <div class="nti">
+            <div class="nti-rail"><div class="nti-dot filled" style="color:#5a3a8a;background:#5a3a8a;width:14px;height:14px"></div><div class="nti-line"></div></div>
+            <div class="nti-c">
+              <div class="nti-d" style="color:#5a3a8a">Air Force OTS &mdash; 20%</div>
+              <div class="nti-t">The right long-term military play. The structural argument is sound &mdash; contract fulfilled regardless, DD-368 is conditional by definition, commissioning to active duty is the kind of move a unit can respect. SSG Wilson's read: real possibility. <strong>The DD-368 conversation at mid-May drill is the entire critical path.</strong> Everything else waits on that single conversation.</div>
+            </div>
+          </div>
+          <div class="nti">
+            <div class="nti-rail"><div class="nti-dot filled" style="color:#2a5a9a;background:#2a5a9a;width:14px;height:14px"></div><div class="nti-line"></div></div>
+            <div class="nti-c">
+              <div class="nti-d" style="color:#2a5a9a">United Airlines &mdash; 35% &middot; Most Live Momentum</div>
+              <div class="nti-t">Internal referral, advanced past resume screen, genuine willingness to relocate. The AT conflict (Annual Training Aug 6&ndash;21) is real and manageable under USERRA but requires proactive disclosure. <strong>If this process advances past pre-interview, surface the conflict early and frame it as a scheduling note, not an apology or a red flag.</strong></div>
+            </div>
+          </div>
+          <div class="nti">
+            <div class="nti-rail"><div class="nti-dot filled" style="color:#2a7a3a;background:#2a7a3a;width:14px;height:14px"></div><div class="nti-line"></div></div>
+            <div class="nti-c">
+              <div class="nti-d" style="color:#2a7a3a">Civil Service &mdash; 15% &middot; Zero Cost to Try</div>
+              <div class="nti-t">Third attempt. The honest read on prior results points to a profile mismatch on disposition questions, not a competence gap. Exams optimize for rule-bound profiles. That's not the profile that builds a multimedia business and pursues an officer commission simultaneously. <strong>Don't overthink the exam. Answer for what it's selecting for.</strong> Local law enforcement &mdash; particularly Deputy Sheriff &mdash; is compatible with Guard obligations and the interest is genuine.</div>
+            </div>
+          </div>
+          <div class="nti">
+            <div class="nti-rail"><div class="nti-dot filled" style="color:#888880;background:#888880;width:14px;height:14px"></div></div>
+            <div class="nti-c">
+              <div class="nti-d" style="color:#888880">Baseline &mdash; If None Land</div>
+              <div class="nti-t">Business + campus safety + Guard + MBA. OTS re-applied next board. <strong>Status quo is not failure.</strong> The MBA, the clearance track, the Guard service, the business &mdash; none of it is random. It's a deliberate accumulation of options that is closer to stability than it probably feels right now.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- July-August crunch -->
+      <div style="background:#F4F1EA;border:1px solid rgba(0,0,0,.09);border-radius:var(--r3);padding:22px;box-shadow:var(--sh1)" class="ca d1">
+        <div style="font-family:var(--serif);font-size:18px;font-weight:700;color:#0a0a08;margin-bottom:8px;padding-bottom:10px;border-bottom:2px solid rgba(0,0,0,.08)">The July&ndash;August Crunch Window</div>
+        <div style="font-size:13px;line-height:1.72;color:#333330;margin-bottom:16px">Regardless of which path advances, the next eight weeks are the most operationally dense stretch of the year. Everything that can be front-loaded needs to start now.</div>
+        <div class="ntl light">
+          <div class="nti"><div class="nti-rail"><div class="nti-dot" style="color:#8a6010;border-color:#8a6010;width:12px;height:12px"></div><div class="nti-line"></div></div><div class="nti-c"><div class="nti-d" style="color:#8a6010">May 9, 2026</div><div class="nti-t"><strong>Civil service exams</strong> &mdash; Police Officer + Deputy Sheriff &middot; Canton School 8:30 AM sharp</div></div></div>
+          <div class="nti"><div class="nti-rail"><div class="nti-dot" style="color:#5a3a8a;border-color:#5a3a8a;width:12px;height:12px"></div><div class="nti-line"></div></div><div class="nti-c"><div class="nti-d" style="color:#5a3a8a">Mid-May Drill</div><div class="nti-t"><strong>DD-368 informal CO conversation</strong> &mdash; the prerequisite for everything in the OTS path that follows</div></div></div>
+          <div class="nti"><div class="nti-rail"><div class="nti-dot filled" style="color:#c0392b;background:#c0392b;width:12px;height:12px"></div><div class="nti-line"></div></div><div class="nti-c"><div class="nti-d" style="color:#c0392b">July 4, 2026 &mdash; HARD DEADLINE</div><div class="nti-t"><strong>OTS pre-application due &mdash; approved DD-368 must be in hand.</strong> Miss this and the board cycle closes.</div></div></div>
+          <div class="nti"><div class="nti-rail"><div class="nti-dot" style="color:#2a5a9a;border-color:#2a5a9a;width:12px;height:12px"></div><div class="nti-line"></div></div><div class="nti-c"><div class="nti-d" style="color:#2a5a9a">July 2026</div><div class="nti-t">United Airlines mandatory 6-week on-site training begins in Chicago &mdash; overlaps with AT below</div></div></div>
+          <div class="nti"><div class="nti-rail"><div class="nti-dot filled" style="color:#c0392b;background:#c0392b;width:12px;height:12px"></div><div class="nti-line"></div></div><div class="nti-c"><div class="nti-d" style="color:#c0392b">July 26, 2026 &mdash; HARD DEADLINE</div><div class="nti-t"><strong>AFT test deadline</strong> &mdash; two lifetime attempts, 150-day wait between. Prior service docs, transcripts, pre-selection forms also due this date.</div></div></div>
+          <div class="nti"><div class="nti-rail"><div class="nti-dot" style="color:#5a3a8a;border-color:#5a3a8a;width:12px;height:12px"></div><div class="nti-line"></div></div><div class="nti-c"><div class="nti-d" style="color:#5a3a8a">August 6&ndash;21, 2026</div><div class="nti-t"><strong>NYARNG Annual Training at Fort Drum</strong> &mdash; non-negotiable Guard obligation. Hard conflict with United training start date.</div></div></div>
+          <div class="nti"><div class="nti-rail"><div class="nti-dot" style="color:#8a6010;border-color:#8a6010;width:12px;height:12px"></div></div><div class="nti-c"><div class="nti-d" style="color:#8a6010">August 15, 2026</div><div class="nti-t">OTS letters of recommendation + Commander's interview both due</div></div></div>
+        </div>
+      </div>
+      <!-- Inventory + financial reflection -->
+      <div style="background:#F4F1EA;border:1px solid rgba(0,0,0,.09);border-radius:var(--r3);padding:22px;box-shadow:var(--sh1)" class="ca d2">
+        <div style="font-family:var(--serif);font-size:18px;font-weight:700;color:#0a0a08;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid rgba(0,0,0,.08)">On Shipping the Inventory Project</div>
+        <div style="font-size:13px;line-height:1.82;color:#333330">
+          <p>The inventory system started as a Notion database, became a flat HTML file, then became a two-file web app backed by Supabase &mdash; all in 3.5 weeks. The migration decision was right each time it was made. None of it was overengineered before the problem was actually understood. 528 items cataloged. The AI photo-parse workflow cut data entry time by roughly 60%.</p>
+          <p style="margin-top:10px">The column visibility bug that kept recurring was a reminder that bugs at the intersection of state and rendering always hide in the same place: fix the state but forget to re-run the display logic. Once applyColPrefs() was wired to fire after every renderTable(), it stopped. The open items &mdash; PWA for locate.html, second bulk enrich pass, barn memorabilia totes &mdash; are documented and don't block use of the system.</p>
+        </div>
+      </div>
+      <div style="background:#F4F1EA;border:1px solid rgba(0,0,0,.09);border-radius:var(--r3);padding:22px;box-shadow:var(--sh1)" class="ca d3">
+        <div style="font-family:var(--serif);font-size:18px;font-weight:700;color:#0a0a08;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid rgba(0,0,0,.08)">On the Financial Picture</div>
+        <div style="font-size:13px;line-height:1.82;color:#333330">
+          <p>April's +$3,999 figure looks exceptional and is, but it's largely non-recurring. ArmyIgnitED ($1,250), the federal refund ($533), and the state refund ($37) are all one-time for this cycle. May income reverts to roughly three Clarkson paychecks plus DFAS &mdash; call it ~$3,500. The goal remains $10K YTD. The position is strong at $8,793 with eight months remaining &mdash; that number is essentially done.</p>
+          <p style="margin-top:10px">The Amex Platinum cancellation is in process. The $895 fee was posted but will be refunded. The decision to cancel is correct if the credits don't justify the fee at the current usage level &mdash; and they don't.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
 <script>
-// ── TOGGLE ──
-function toggle(id){
-  const panel=document.getElementById(id);
-  const btn=document.getElementById('btn-'+id);
-  const open=panel.classList.toggle('open');
-  btn.textContent=open?'Close ↑':'See Full Details';
-  if(open){
-    setTimeout(()=>panel.scrollIntoView({behavior:'smooth',block:'nearest'}),60);
-    initCharts(id);
-  }
-}
-
-// ── BACK TO TOP ──
-window.addEventListener('scroll',()=>{
-  document.getElementById('btt').classList.toggle('show',window.scrollY>400);
-},{passive:true});
-
-// ── CALENDAR DATA ──
-const SESSIONS={
-  1:{muscles:['Legs'],label:'Legs · Smith Squat 205lb×7, RDL 150lb, Split Glute'},
-  2:{muscles:['Back','Chest','Shoulders','Abs'],label:'Full · Trap Bar DL 315lb×4, Smith Row 155lb×13, Chest Dips +25lb, OHP 100lb×5, Plank 1:50 BW PR'},
-  3:{muscles:['Cardio'],label:'Cardio · Outdoor Run 6.0mi / 51:40'},
-  4:{muscles:['Abs','Back','Legs'],label:'Core + Legs · HLR×15, Cable Crunch 140lb, Good Morning 95lb, Hip Abduction 110lb'},
-  6:{muscles:['Chest','Abs','Cardio'],label:'Push + Cardio · Smith Bench 225lb×6, KB Clean, Treadmill Sprints ~2.25mi'},
-  7:{muscles:['Back','Biceps','Legs'],label:'Pull + Legs · Chin-ups, DB Curl 70lb, KB Split RDL'},
-  9:{muscles:['Legs'],label:'Legs · Squat 210lb×13, Hip Abduction, Leg Extension 130lb'},
-  11:{muscles:['Cardio'],label:'Cardio · Outdoor Run 5.0mi / 40:29 — no knee pain'},
-  13:{muscles:['Chest','Shoulders','Triceps'],label:'Push · Bench 205lb×7, Tricep Cable, Cable Raise'},
-  14:{muscles:['Back','Biceps','Shoulders'],label:'Pull · Lat Pulldown 162.5lb, EZ Curl 80lb, Rear Delt Cable'},
-  15:{muscles:['Legs','Abs'],label:'Legs + Core · Squat 225lb×4, KB Split RDL, Plank +25lb 1:30'},
-  16:{muscles:['Back','Chest','Abs'],label:'Key Day · Trap Bar DL 335lb×3 PR, HRPU 47, Plank 1:30×3'},
-  17:{muscles:['Cardio'],label:'Cardio · Outdoor Run 2.0mi / 14:27'},
-  20:{muscles:['Chest','Shoulders','Triceps'],label:'Push · Bench 195lb×8, Lateral Raise 60lb, EZ Skullcrusher 50lb'},
-  21:{muscles:['Biceps','Cardio','Legs'],label:'Biceps + Cardio · Incline DB Curl, Treadmill Sprint ~1.9mi, Hip Abduction'},
-  22:{muscles:['Cardio'],label:'Cardio · Outdoor Run 5.0km / 25:49'},
-  23:{muscles:['Legs'],label:'Legs · Squat 195lb×9, KB Split RDL, Weight Plate Drag'},
-  24:{muscles:['Shoulders','Back','Chest'],label:'Shoulders + Back · OHP 135lb, Good Morning 95lb×4, Chest Dips BW'},
-  25:{muscles:['Abs','Cardio','Legs'],label:'Core + Zone 2 · HLR, Cable Crunch 165lb, Zone 2 3.5mi / 20min'},
-  26:{muscles:['Back','Abs','Legs'],label:'Key Day · Trap Bar DL 345lb×3 PR, Plank 2:00 BW PR, Leg Ext Iso'},
-  27:{muscles:['Chest','Shoulders','Triceps'],label:'Push · Incline Smith 185lb, Tricep Cable 55lb, Lateral Raise 70lb×4'},
-  28:{muscles:['Back','Biceps'],label:'Pull · Lat Pulldown 150lb×5, DB Curl 70lb, Fore Arm Curl'},
-  29:{muscles:['Cardio'],label:'Cardio · Outdoor Run 5.0mi / 46:43 — moderate right knee pain noted'},
-  30:{muscles:['Legs'],label:'Legs · Leg Press 225lb×18, KB Split RDL'}
-};
-const CHURCH=[5,19,26];
-const DRILL=[10,11,12];
-const MUSCLE_COLORS={
-  'Back':'#5A9DC0','Chest':'#5CB872','Legs':'#D4A84B','Shoulders':'#C07080',
-  'Triceps':'#8B7EC8','Biceps':'#47B0AB','Abs':'#CC6B47','Cardio':'#4BBDB8'
-};
-
-function buildCal(){
-  const grid=document.getElementById('cal-april');
-  if(!grid)return;
-  const dows=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  // April 1 2026 = Wednesday = index 3
-  let html=dows.map(d=>`<div class="cal-dow">${d}</div>`).join('');
-  // Empty cells for Mon Tue before Apr 1 (Wed)
-  for(let i=0;i<3;i++) html+=`<div class="cal-day empty"></div>`;
-  for(let d=1;d<=30;d++){
-    const isGym=SESSIONS[d]&&!SESSIONS[d].muscles.every(m=>m==='Cardio');
-    const isCardio=SESSIONS[d]&&SESSIONS[d].muscles.includes('Cardio');
-    const isChurch=CHURCH.includes(d);
-    const isDrill=DRILL.includes(d);
-    let cls='cal-day rest';
-    if(isDrill) cls='cal-day drill';
-    else if(isChurch&&isGym) cls='cal-day active church';
-    else if(isChurch) cls='cal-day church';
-    else if(SESSIONS[d]) cls='cal-day active';
-    let dots='';
-    if(SESSIONS[d]){
-      dots=`<div class="cal-dots">${SESSIONS[d].muscles.slice(0,4).map(m=>`<div class="cal-dot" style="background:${MUSCLE_COLORS[m]||'#6E6C68'}" title="${m}"></div>`).join('')}</div>`;
-    }
-    if(isDrill) dots=`<div class="cal-dots"><div class="cal-dot" style="background:var(--vio)"></div></div>`;
-    const title=SESSIONS[d]?SESSIONS[d].label:(isDrill?'Drill Weekend':'');
-    html+=`<div class="${cls}" title="${title}"><div class="cal-num">${d}</div>${dots}</div>`;
-  }
-  grid.innerHTML=html;
-}
-
-function buildWorkoutLog(){
-  const el=document.getElementById('workout-log');
-  if(!el)return;
-  let html='';
-  Object.entries(SESSIONS).sort((a,b)=>a[0]-b[0]).forEach(([d,s])=>{
-    const muscles=s.muscles.map(m=>`<span class="mbadge" style="background:${MUSCLE_COLORS[m]||'rgba(255,255,255,.06)'};color:#fff;opacity:.85">${m}</span>`).join('');
-    html+=`<div class="dc-row" style="align-items:flex-start;flex-wrap:wrap;gap:6px"><span class="dc-k" style="width:50px;flex-shrink:0">Apr ${d}</span><div style="flex:1"><div class="muscle-row" style="margin-bottom:3px">${muscles}</div><div style="font-size:11px;color:var(--t3)">${s.label}</div></div></div>`;
+// ── TAB SYSTEM ──
+const TABS = ['overview','financial','physical','spiritual','career','intellectual','creative','reflections'];
+function switchTab(name) {
+  TABS.forEach(t => {
+    const el = document.getElementById('tab-'+t);
+    if (el) el.style.display = 'none';
   });
-  el.innerHTML=html;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+  const target = document.getElementById('tab-'+name);
+  if (target) {
+    target.style.display = (name==='spiritual'||name==='intellectual'||name==='reflections') ? 'block' : 'grid';
+    // Trigger animations
+    target.querySelectorAll('.ca').forEach((el,i) => {
+      el.classList.remove('vis');
+      void el.offsetWidth;
+      el.classList.add('vis');
+    });
+  }
+  const btn = document.querySelector('.tab[data-t="'+name+'"]');
+  if (btn) btn.classList.add('on');
+  // Load sermon iframe when spiritual tab opens
+  if (name === 'spiritual') {
+    const fr = document.getElementById('sermonFrame');
+    if (fr && !fr.src.includes('cbc-sermons')) fr.src = 'cbc-sermons.html#apr';
+  }
+  window.scrollTo({top: 0, behavior:'smooth'});
+  // Store active tab
+  try { sessionStorage.setItem('aprilTab', name); } catch(e){}
 }
 
-function buildExpBars(){
-  const el=document.getElementById('exp-bars');
-  if(!el)return;
-  const cats=[
-    {n:'Drinks & Dining',a:641.16,c:'#D96E4E'},
-    {n:'Groceries',a:487.84,c:'#5CB872'},
-    {n:'Tithe',a:250.00,c:'#E0B84E'},
-    {n:'Auto & Transport',a:214.12,c:'#5AADD4'},
-    {n:'Shopping',a:128.33,c:'#9A8FD8'},
-    {n:'Healthcare',a:73.88,c:'#4BBDB8'},
-    {n:'Subscriptions',a:51.68,c:'#CC6B47'},
-    {n:'Apple Products',a:40.66,c:'#8A867F'},
-    {n:'Personal Care',a:30.00,c:'#C07080'},
-  ];
-  const max=641.16;
-  el.innerHTML=cats.map(c=>`
-    <div class="fin-bar-row">
-      <div class="fin-bar-lbl">${c.n}</div>
-      <div class="fin-bar-track"><div class="fin-bar-fill" style="width:${(c.a/max*100).toFixed(1)}%;background:${c.c}"></div></div>
-      <div class="fin-bar-amt">$${c.a.toFixed(0)}</div>
-    </div>`).join('');
+// ── COLLAPSIBLE ──
+function toggleColl(id) {
+  const body = document.getElementById(id);
+  const caret = document.getElementById('caret-'+id);
+  if (!body) return;
+  const open = body.classList.toggle('open');
+  if (caret) caret.classList.toggle('open', open);
+  if (open && id === 'wklog' && !document.getElementById('wklog-content').dataset.built) {
+    buildWorkoutLog();
+  }
 }
 
-function buildOTSTimeline(){
-  const el=document.getElementById('ots-timeline');
-  if(!el)return;
-  const items=[
-    {date:'Apr 30, 2026',text:'318th RCS Teams brief — line officer / Space Force program',cls:'done',done:true},
-    {date:'May 2026 mid',text:'<strong>Drill — informal CO conversation, SSG Wilson framing</strong>',cls:'hot'},
-    {date:'May 2026 late',text:'Initiate DD-368 formally — target ~6 weeks for routing chain',cls:'soon'},
-    {date:'Jul 4, 2026',text:'<strong>Pre-application deadline</strong> — approved DD-368 required',cls:'soon'},
-    {date:'Jul 26, 2026',text:'AFOQT deadline · Prior service docs, transcripts, pre-selection forms',cls:'soon'},
-    {date:'Aug 15, 2026',text:'Letters of recommendation · Commander\'s interview',cls:'soon'},
-    {date:'Nov 2, 2026',text:'Board review',cls:'soon'},
-    {date:'Dec 18, 2026',text:'Board decision expected',cls:'soon'},
-    {date:'Jun 12, 2027',text:'ETS from NYARNG — contract fulfilled',cls:'soon'},
-  ];
-  el.innerHTML=items.map((item,i)=>`
-    <div class="tl-item">
-      <div class="tl-rail">
-        <div class="tl-dot ${item.cls} ${item.done?'done':''}"></div>
-        ${i<items.length-1?'<div class="tl-line"></div>':''}
-      </div>
-      <div class="tl-content">
-        <div class="tl-date">${item.date}</div>
-        <div class="tl-text">${item.text}</div>
-      </div>
-    </div>`).join('');
+// ── WORKOUT LOG ──
+const SESSIONS = [
+  {d:'Apr 1', m:['Legs'], note:'Smith Squat 205lb×7 · RDL 150lb · Split Glute 100lb'},
+  {d:'Apr 2', m:['Back','Chest','Shldr','Abs'], note:'★ Trap DL 315lb×4, Plank 1:50 BW · DB Press 100lb×5'},
+  {d:'Apr 4', m:['Abs','Back','Legs'], note:'HLR×15, Cable Crunch 140lb, Good Morning 95lb, Leg Ext Iso 305lb'},
+  {d:'Apr 6', m:['Chest','Abs','Cardio'], note:'Smith Bench 225lb×6 · Sprint: 11mph 1:30 / 12mph 1:10 / 9mph 2:30'},
+  {d:'Apr 7', m:['Back','Biceps','Legs'], note:'Chin-ups ×4×(4-9) · DB Curl 70lb×8 · KB Split RDL'},
+  {d:'Apr 9', m:['Legs'], note:'Squat 210lb×13 · Hip Abduction 100lb · Leg Extension 130lb×11'},
+  {d:'Apr 11',m:['Cardio'], note:'Outdoor Run 5.0mi / 40:29 — no knee pain noted'},
+  {d:'Apr 13',m:['Chest','Tris','Shldr'], note:'Bench 205lb×7 (4 sets) · Tricep Cable 50lb · Cable Raise 25lb'},
+  {d:'Apr 14',m:['Back','Biceps','Shldr'], note:'Lat PD 162.5lb · EZ Curl 80lb×5 · Rear Delt Cable'},
+  {d:'Apr 15',m:['Legs','Abs'], note:'Squat 225lb×4 controlled · KB Split RDL · Plank 25lb+BW 1:30'},
+  {d:'Apr 16',m:['Back','Chest','Abs'], note:'Trap DL 335lb×4 then ×3 chalk · HRPU 47 reps · Plank 1:30×3'},
+  {d:'Apr 17',m:['Cardio'], note:'Outdoor Run 2.0mi / 14:27'},
+  {d:'Apr 20',m:['Chest','Shldr','Tris'], note:'Bench 195lb×8 · Lateral Raise 60lb · EZ Skullcrusher 50lb'},
+  {d:'Apr 21',m:['Biceps','Legs','Cardio'], note:'Incline DB Curl 70lb · Hip Abduction · Sprint: 10/12/10mph'},
+  {d:'Apr 22',m:['Cardio'], note:'Outdoor Run 5.0km / 25:49'},
+  {d:'Apr 23',m:['Legs'], note:'Squat 195lb×9 · KB Split RDL 25lb · Plate Drag 45lb'},
+  {d:'Apr 24',m:['Shldr','Back','Chest'], note:'OHP Bar 135lb×5 · Good Morning 95lb×5 (4 sets) · Chest Dips BW'},
+  {d:'Apr 25',m:['Abs','Legs','Cardio'], note:'HLR controlled · Cable Crunch 165lb · Zone 2 3.5mi/20min spd10 elev3.5'},
+  {d:'Apr 26',m:['Back','Abs','Legs'], note:'★★ TRAP DL 345lb×3 PR (chalk) · 315lb×4 slow · PLANK 2:00 BW PR'},
+  {d:'Apr 27',m:['Chest','Shldr','Tris'], note:'Incline Smith 185lb×6 chalk · Tricep Cable 55lb · Lateral Raise 70lb×6'},
+  {d:'Apr 28',m:['Back','Biceps'], note:'Lat PD 150lb×8 (4 sets) · DB Curl 70lb seated · Forearm Curl'},
+  {d:'Apr 29',m:['Cardio'], note:'⚠ Outdoor Run 5.0mi / 46:43 — moderate right knee pain · wet · Zone 3'},
+  {d:'Apr 30',m:['Legs'], note:'Leg Press 225lb×18 · KB Split RDL 25lb faster tempo'},
+];
+const MC = {
+  'Legs':'#D4A84B','Back':'#5FADD4','Chest':'#62C97A','Shldr':'#CC7888',
+  'Tris':'#9A8FD8','Biceps':'#4BBDB8','Abs':'#D9714E','Cardio':'#74B8A8'
+};
+function buildWorkoutLog() {
+  const el = document.getElementById('wklog-content');
+  el.dataset.built = '1';
+  el.innerHTML = SESSIONS.map(s => {
+    const badges = s.m.map(m => `<span class="wk-b" style="background:${MC[m]||'#3a3836'}">${m}</span>`).join('');
+    const isPR = s.note.includes('★');
+    const isFlag = s.note.startsWith('⚠');
+    const col = isPR ? 'var(--sage)' : isFlag ? 'var(--rust)' : 'var(--t3)';
+    return `<div class="wk-row"><div class="wk-date">${s.d}</div><div class="wk-badges">${badges}</div><div class="wk-detail" style="color:${col}">${s.note}</div></div>`;
+  }).join('');
 }
 
 // ── CHARTS ──
-let chartsInited={};
-function initCharts(panelId){
-  if(chartsInited[panelId])return;
-  chartsInited[panelId]=true;
+const MONO = "'JetBrains Mono', monospace";
+Chart.defaults.font.family = MONO;
+Chart.defaults.color = '#A09A93';
 
-  if(panelId==='s-financial'){
-    const cum_apr=[148.26,265.16,278.48,300.74,321.98,405.32,477.05,522.34,542.56,817.26,833.15,873.9,900.57,909.27,944.8,944.8,991.15,1026.48,1053.12,1053.12,1296.79,1310.32,1354.13,1375.18,1722.07,1729.85,1758.36,1791.67,1914.14,1963.54];
-    const cum_mar=[7.68,73.13,145.81,155.53,185.78,196.82,240.73,259.9,457.49,497.43,530.72,537.2,537.2,537.2,537.2,562.71,603.37,603.37,612.77,689.96,703.1,718.51,732.43,808.08,1048.13,1060.38,1153.96,1225.28,1275.28,1275.28];
-    const cum_jan=[45.9,58.14,241.74,267.23,333.53,382.49,413.09,469.19,560.99,815.98,851.68,894.52,950.62,1037.32,1363.71,1404.51,1460.61,1537.11,1634.01,1766.61,1817.61,1886.96,1973.66,2096.06,2300.06,2396.95,2458.15,2504.05,2560.15,2598.91,2647.87];
-    const labels=Array.from({length:31},(_,i)=>i+1);
-    const ctx=document.getElementById('spendChart');
-    if(!ctx)return;
-    new Chart(ctx,{
-      type:'line',
-      data:{
-        labels,
-        datasets:[
-          {label:'April 2026',data:cum_apr.map((v,i)=>({x:i+1,y:v})),borderColor:'#5AADD4',backgroundColor:'rgba(90,173,212,.08)',tension:.4,fill:true,pointRadius:0,borderWidth:2},
-          {label:'March 2026',data:cum_mar.map((v,i)=>({x:i+1,y:v})),borderColor:'rgba(224,184,78,.5)',backgroundColor:'transparent',tension:.4,fill:false,pointRadius:0,borderWidth:1.5,borderDash:[4,3]},
-          {label:'January 2026',data:cum_jan.map((v,i)=>({x:i+1,y:v})),borderColor:'rgba(255,255,255,.2)',backgroundColor:'transparent',tension:.4,fill:false,pointRadius:0,borderWidth:1,borderDash:[2,4]},
-        ]
-      },
-      options:{
-        responsive:true,maintainAspectRatio:false,
-        plugins:{legend:{display:true,labels:{color:'#8A867F',font:{family:"'JetBrains Mono'",size:10},boxWidth:24,padding:16}}},
-        scales:{
-          x:{ticks:{color:'#4A4844',font:{family:"'JetBrains Mono'",size:9}},grid:{color:'rgba(255,255,255,.04)'},title:{display:true,text:'Day of Month',color:'#4A4844',font:{size:9}}},
-          y:{ticks:{color:'#4A4844',font:{family:"'JetBrains Mono'",size:9},callback:v=>'$'+v.toLocaleString()},grid:{color:'rgba(255,255,255,.04)'},title:{display:true,text:'Cumulative Spend ($)',color:'#4A4844',font:{size:9}}}
-        }
-      }
-    });
+// Overview finance
+new Chart(document.getElementById('overviewFinChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Jan','Feb','Mar','Apr'],
+    datasets: [
+      {label:'Net', data:[812,1094,1444,3999], backgroundColor:['rgba(98,201,122,.4)','rgba(98,201,122,.4)','rgba(98,201,122,.4)','rgba(98,201,122,.9)'], borderRadius:4}
+    ]
+  },
+  options: {
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{
+      x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:9}}},
+      y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:9},callback:v=>'$'+v.toLocaleString()}}
+    }
   }
-}
+});
 
-// ── INIT ──
-buildCal();
-buildWorkoutLog();
-buildExpBars();
-buildOTSTimeline();
+// Overview gym
+const gymDates=['4/1','4/2','4/4','4/6','4/7','4/9','4/13','4/14','4/15','4/16','4/20','4/21','4/23','4/24','4/25','4/26','4/27','4/28','4/30'];
+const gymVols=[9510,14465,6975,6275,3575,9685,7085,6458,4965,4810,8235,3060,5610,3855,5695,5200,7385,7570,8005];
+new Chart(document.getElementById('overviewGymChart'), {
+  type:'line',
+  data:{labels:gymDates,datasets:[{data:gymVols,borderColor:'#5FADD4',backgroundColor:'rgba(95,173,212,.08)',borderWidth:2,pointRadius:3,pointBackgroundColor:gymDates.map((_,i)=>gymVols[i]===5200?'#62C97A':'#5FADD4'),tension:.4,fill:true}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:7},maxRotation:0}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:8},callback:v=>(v/1000).toFixed(0)+'K'}}}}
+});
+
+// Pipeline donut
+new Chart(document.getElementById('overviewPipeChart'), {
+  type:'doughnut',
+  data:{
+    labels:['Dep. Paid','Signed (dep due)','Negotiating'],
+    datasets:[{data:[6771,2200,2520],backgroundColor:['rgba(98,201,122,.8)','rgba(224,180,78,.7)','rgba(95,173,212,.4)'],borderColor:'#111214',borderWidth:2}]
+  },
+  options:{responsive:true,maintainAspectRatio:false,cutout:'58%',plugins:{legend:{display:true,position:'right',labels:{font:{size:8},padding:8,boxWidth:10}}}}
+});
+
+// Financial bar chart (full)
+new Chart(document.getElementById('finBarChart'), {
+  type:'bar',
+  data:{
+    labels:['Clarkson ×3','IgnitED','IRS Refund','DFAS','Uber','Other','Dining','Groceries','Tithe','Auto','Shopping','Health','Other Exp'],
+    datasets:[
+      {label:'Income',data:[3491,1250,533,408,151,130,0,0,0,0,0,0,0],backgroundColor:'rgba(98,201,122,.7)',borderRadius:4},
+      {label:'Expenses',data:[0,0,0,0,0,0,-541,-488,-250,-214,-128,-74,-151],backgroundColor:'rgba(217,113,78,.6)',borderRadius:4}
+    ]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{labels:{font:{size:9}}}},
+    scales:{
+      x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:8},maxRotation:45}},
+      y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:9},callback:v=>v>=0?'$'+v.toLocaleString():'-$'+Math.abs(v).toLocaleString()}}
+    }
+  }
+});
+
+// Gym detail chart
+new Chart(document.getElementById('gymDetailChart'), {
+  type:'bar',
+  data:{
+    labels:gymDates,
+    datasets:[{
+      data:gymVols,
+      backgroundColor:gymVols.map((_,i)=>i===18?'rgba(98,201,122,.9)':'rgba(95,173,212,.55)'),
+      borderRadius:4
+    }]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{title:ctx=>'Apr '+gymDates[ctx[0].dataIndex].split('/')[1],label:ctx=>ctx.raw.toLocaleString()+' lbs'}}},
+    scales:{
+      x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:7},maxRotation:0}},
+      y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:9},callback:v=>(v/1000).toFixed(0)+'K'}}
+    }
+  }
+});
+
+// ── INTERSECTION OBSERVER for animations ──
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target);}});
+},{threshold:.1});
+document.querySelectorAll('.ca').forEach(el=>obs.observe(el));
+
+// ── RESTORE TAB ──
+try {
+  const saved = sessionStorage.getItem('aprilTab');
+  if (saved && TABS.includes(saved)) switchTab(saved);
+} catch(e){}
+
+// ── BTT ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('btt').classList.toggle('show',window.scrollY>300);
+},{passive:true});
+
+// ── SQLINKS ──
+document.querySelectorAll('.sqlink').forEach(el=>{
+  if (!el.getAttribute('onclick')) return;
+});
+
+// ── KEYBOARD NAV ──
+document.addEventListener('keydown', e=>{
+  if (e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
+  const cur = document.querySelector('.tab.on')?.dataset?.t;
+  const idx = TABS.indexOf(cur);
+  if (e.key==='ArrowRight'&&idx<TABS.length-1) switchTab(TABS[idx+1]);
+  if (e.key==='ArrowLeft'&&idx>0) switchTab(TABS[idx-1]);
+});
+
+// ── VALIDATION: check all tab targets exist ──
+TABS.forEach(t=>{
+  if(!document.getElementById('tab-'+t)) console.warn('Missing tab target: tab-'+t);
+});
 </script>
+</div><!-- /shell -->
 </body>
 </html>
