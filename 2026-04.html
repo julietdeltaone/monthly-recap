@@ -281,6 +281,17 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .sqlink{display:block;font-family:var(--mono);font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;padding:5px 0;border-bottom:1px solid var(--b0);cursor:pointer;transition:color .15s}
 .sqlink:last-child{border-bottom:none}
 .sqlink:hover{color:var(--tx)}
+/* NOTE nd (gold variant used in sprint section) */
+.note.nd{border-left:2px solid var(--gold);background:var(--gdim);color:var(--t2)}
+.note.nd .note-lbl{color:var(--gold)}
+/* LIGHT TAB WRAPPERS */
+.light-tab-wrap{background:#EAE5DC;min-height:100%;padding-bottom:40px}
+.light-tab-wrap .sc{background:#F4F1EA;border-color:rgba(0,0,0,.09)}
+.light-tab-wrap .sgt{color:#555550}
+.light-tab-wrap .sk{color:#555550}.light-tab-wrap .sv{color:#0a0a08}
+.light-tab-wrap .si{border-bottom-color:rgba(0,0,0,.07)}
+.light-tab-wrap .cs2{color:#555550 !important}
+.light-tab-wrap .ct{color:#0a0a08 !important}
 /* SPENDING ACCORDION */
 .fcat{border-bottom:1px solid var(--b0)}
 .fcat:last-child{border-bottom:none}
@@ -308,6 +319,28 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .sort-btn{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px;border:1px solid var(--b1);background:none;color:var(--t4);cursor:pointer;transition:all .15s}
 .sort-btn:hover{color:var(--t2);border-color:var(--b2)}
 .sort-btn.on{background:var(--bg4);color:var(--tx);border-color:var(--b2)}
+/* Light sidebar card overrides — readable dark text */
+.sc.light-sc{background:#F4F1EA;border-color:rgba(0,0,0,.1)}
+.sc.light-sc .sgt{color:#555550}
+.sc.light-sc .sk{color:#555550}
+.sc.light-sc .sv{color:#0a0a08}
+.sc.light-sc .si{border-bottom-color:rgba(0,0,0,.07)}
+.sc.light-sc .sqlink{color:#6a6058;border-bottom-color:rgba(0,0,0,.06)}
+.sc.light-sc .sqlink:hover{color:#0a0a08}
+/* Accordion on dark */
+.fcat:hover .fcath{background:rgba(255,255,255,.03)}
+/* May preview — single clean definition */
+.may-preview{background:#F4F1EA;border:1px solid rgba(0,0,0,.1);border-radius:var(--r3);padding:20px 22px;position:relative;overflow:hidden}
+.may-preview::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--rose),var(--sky))}
+.may-eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:#888880;margin-bottom:8px}
+.may-title{font-family:var(--serif);font-size:15px;font-weight:700;color:#0a0a08;margin-bottom:14px;font-style:italic}
+.may-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.07)}
+.may-item:last-child{border-bottom:none}
+.may-date{font-family:var(--mono);font-size:9px;font-weight:600;color:#8a6010;width:52px;flex-shrink:0;padding-top:2px;letter-spacing:.04em}
+.may-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.may-text{font-size:12.5px;color:#1a1a14;line-height:1.5;flex:1;font-weight:500}
+.may-text strong{color:#0a0a08;font-weight:700}
+.may-sub{font-size:10.5px;color:#6a6560;display:block;margin-top:2px;font-weight:400;line-height:1.45}
 /* BTT */
 #btt{position:fixed;bottom:26px;right:26px;width:38px;height:38px;border-radius:50%;background:var(--bg4);border:1px solid var(--b2);color:var(--t2);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s,transform .2s;z-index:500;line-height:1}
 #btt.show{opacity:1}#btt:hover{transform:translateY(-2px);color:var(--tx)}
@@ -329,6 +362,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
     <a href="2026-03_v2.html" class="mnav-btn">&larr; Mar</a>
     <a href="index.html" class="mnav-btn">All Months</a>
     <a href="cbc-sermons.html" class="mnav-btn">Sermons</a>
+    <span class="mnav-btn" style="opacity:.3;cursor:default">May &rarr;</span>
+    <span class="mnav-btn" style="opacity:.3;cursor:default">May &rarr;</span>
   </div>
 </div>
 
@@ -388,14 +423,14 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
       <div class="si"><span class="sk">YTD Saved</span><span class="sv" style="color:var(--sage)">$8,793</span></div>
       <div class="si"><span class="sk">Goal %</span><span class="sv" style="color:var(--sage)">87.9%</span></div>
     </div>
-    <div class="sc">
+    <div class="sc light-sc">
       <div class="sgt">PRs This Month</div>
-      <div class="si"><span class="sk">Trap Bar DL</span><span class="sv" style="color:var(--sage)">345 lb &times;3</span></div>
-      <div class="si"><span class="sk">Plank</span><span class="sv" style="color:var(--sage)">2:00 BW</span></div>
-      <div class="si"><span class="sk">Date</span><span class="sv">Apr 26</span></div>
-      <div class="si"><span class="sk">Same session</span><span class="sv" style="color:var(--gold)">&#10003;</span></div>
+      <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk">Trap Bar DL</span><span class="sv" style="color:#2a7a3a">345 lb &times;3</span></div>
+      <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk">Plank</span><span class="sv" style="color:#2a7a3a">2:00 BW</span></div>
+      <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk">Date</span><span class="sv">Apr 26</span></div>
+      <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk">Same session</span><span class="sv" style="color:#2a7a3a">&#10003;</span></div>
     </div>
-    <div class="sc">
+    <div class="sc light-sc">
       <div class="sgt">Jump to</div>
       <span class="sqlink" onclick="switchTab('financial')">&#8594; Financial</span>
       <span class="sqlink" onclick="switchTab('physical')">&#8594; Physical</span>
@@ -433,38 +468,88 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
         <div class="chart-container"><canvas id="overviewGymChart"></canvas></div>
       </div>
       <!-- Sprint chart card -->
-      <div class="card ca d2 clickable" onclick="switchTab('physical')" style="cursor:pointer" title="Click to see sprint detail">
-        <div class="ch"><div class="ct">Treadmill Sprints</div><div class="cs2">2 sessions &middot; Apr 6 &amp; Apr 21 &middot; peaked 12 mph</div></div>
+      <div class="card ca d2 clickable" onclick="switchTab('physical')" style="cursor:pointer;background:#F4F1EA;border-color:rgba(0,0,0,.1)" title="Click to see sprint detail">
+        <div class="ch"><div class="ct" style="color:#0a0a08">Treadmill Sprints</div><div class="cs2" style="color:#555550">2 sessions &middot; Apr 6 &amp; Apr 21 &middot; peaked 12 mph</div></div>
         <div style="margin-bottom:10px">
-          <div style="font-family:var(--mono);font-size:8.5px;color:var(--sky);margin-bottom:5px;letter-spacing:.1em">APR 6 &mdash; 2.25 mi / ~22 min</div>
+          <div style="font-family:var(--mono);font-size:8.5px;color:#2a5a8a;margin-bottom:5px;letter-spacing:.1em">APR 6 &mdash; 2.25 mi / ~22 min</div>
           <div style="display:flex;gap:4px;align-items:flex-end;height:44px;margin-bottom:4px">
-            <div style="flex:1;background:rgba(95,173,212,.2);border-radius:3px 3px 0 0;height:85%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-family:var(--mono);font-size:7px;color:var(--sky)">11mph</span></div>
-            <div style="flex:1;background:var(--sky);border-radius:3px 3px 0 0;height:100%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-family:var(--mono);font-size:7px;color:#000;font-weight:600">12mph</span></div>
-            <div style="flex:1;background:rgba(95,173,212,.15);border-radius:3px 3px 0 0;height:60%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-family:var(--mono);font-size:7px;color:var(--t4)">9mph</span></div>
+            <div style="flex:1;background:rgba(95,173,212,.25);border-radius:3px 3px 0 0;height:85%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-family:var(--mono);font-size:7px;color:#2a5a8a">11mph</span></div>
+            <div style="flex:1;background:#5FADD4;border-radius:3px 3px 0 0;height:100%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-family:var(--mono);font-size:7px;color:#fff;font-weight:600">12mph</span></div>
+            <div style="flex:1;background:rgba(95,173,212,.15);border-radius:3px 3px 0 0;height:60%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-family:var(--mono);font-size:7px;color:#777570">9mph</span></div>
           </div>
-          <div style="height:1px;background:var(--b1);margin-bottom:8px"></div>
-          <div style="font-family:var(--mono);font-size:8.5px;color:var(--sky);margin-bottom:5px;letter-spacing:.1em">APR 21 &mdash; 1.9 mi / ~18 min</div>
+          <div style="height:1px;background:rgba(0,0,0,.1);margin-bottom:8px"></div>
+          <div style="font-family:var(--mono);font-size:8.5px;color:#2a5a8a;margin-bottom:5px;letter-spacing:.1em">APR 21 &mdash; 1.9 mi / ~18 min</div>
           <div style="display:flex;gap:4px;align-items:flex-end;height:44px">
-            <div style="flex:1;background:rgba(95,173,212,.15);border-radius:3px 3px 0 0;height:70%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-family:var(--mono);font-size:7px;color:var(--t4)">10mph</span></div>
-            <div style="flex:1;background:var(--sky);border-radius:3px 3px 0 0;height:100%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-family:var(--mono);font-size:7px;color:#000;font-weight:600">12mph</span></div>
-            <div style="flex:1;background:rgba(95,173,212,.15);border-radius:3px 3px 0 0;height:60%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-family:var(--mono);font-size:7px;color:var(--t4)">10mph</span></div>
+            <div style="flex:1;background:rgba(95,173,212,.2);border-radius:3px 3px 0 0;height:70%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-family:var(--mono);font-size:7px;color:#777570">10mph</span></div>
+            <div style="flex:1;background:#5FADD4;border-radius:3px 3px 0 0;height:100%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-family:var(--mono);font-size:7px;color:#fff;font-weight:600">12mph</span></div>
+            <div style="flex:1;background:rgba(95,173,212,.2);border-radius:3px 3px 0 0;height:60%;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px"><span style="font-family:var(--mono);font-size:7px;color:#777570">10mph</span></div>
           </div>
         </div>
-        <div class="note sky" style="margin-top:6px"><span class="note-lbl">Pattern</span>12mph top speed both sessions. Form degrades on final set. Third set is the training frontier.</div>
+        <div class="note light-note" style="margin-top:6px"><span class="note-lbl" style="color:#3a6a9a">Pattern</span>12mph top speed both sessions. +10s at peak, floor speed up 1mph. Third set is the frontier.</div>
       </div>
       <!-- Pipeline card -->
-      <div class="card ca d3 clickable" onclick="switchTab('creative')" style="cursor:pointer" title="Click to open Creative tab">
-        <div class="ch"><div class="ct">Client Pipeline</div><div class="cs2">$11,491 total &middot; $1,500 deposits held &middot; 9 bookings</div></div>
+      <div class="card ca d3 clickable" onclick="switchTab('creative')" style="cursor:pointer;background:#F4F1EA;border-color:rgba(0,0,0,.1)" title="Click to open Creative tab">
+        <div class="ch"><div class="ct" style="color:#0a0a08">Client Pipeline</div><div class="cs2" style="color:#555550">$11,491 total &middot; $1,550 deposits held &middot; 9 bookings</div></div>
         <div class="chart-container" style="height:120px"><canvas id="overviewPipeChart"></canvas></div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px">
-          <div class="stat-tile"><div class="st-k">Contracted</div><div class="st-v" style="color:var(--sage);font-size:14px">$6,771</div><div class="st-d">Dep. paid &middot; 2 events</div></div>
-          <div class="stat-tile"><div class="st-k">Megan Eddy</div><div class="st-v" style="color:var(--gold);font-size:14px">$2,200</div><div class="st-d">Signed &middot; dep. pending</div></div>
-          <div class="stat-tile"><div class="st-k">Negotiating</div><div class="st-v" style="color:var(--t3);font-size:14px">$2,520</div><div class="st-d">3 clients active</div></div>
+          <div style="background:#fff;border:1px solid rgba(0,0,0,.09);border-radius:8px;padding:10px;text-align:center"><div style="font-family:var(--mono);font-size:8px;color:#888880;text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px">Contracted</div><div style="font-family:var(--mono);font-size:14px;color:#2a7a3a;font-weight:600">$6,771</div><div style="font-size:9.5px;color:#6a6560;margin-top:2px">Dep. paid &middot; 2 events</div></div>
+          <div style="background:#fff;border:1px solid rgba(0,0,0,.09);border-radius:8px;padding:10px;text-align:center"><div style="font-family:var(--mono);font-size:8px;color:#888880;text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px">Megan Eddy</div><div style="font-family:var(--mono);font-size:14px;color:#8a6010;font-weight:600">$2,200</div><div style="font-size:9.5px;color:#6a6560;margin-top:2px">Signed &middot; dep. pending</div></div>
+          <div style="background:#fff;border:1px solid rgba(0,0,0,.09);border-radius:8px;padding:10px;text-align:center"><div style="font-family:var(--mono);font-size:8px;color:#888880;text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px">Negotiating</div><div style="font-family:var(--mono);font-size:14px;color:#555550;font-weight:600">$2,650</div><div style="font-size:9.5px;color:#6a6560;margin-top:2px">3 clients active</div></div>
+        </div>
+      </div>
+      <!-- May Preview -->
+      <div class="may-preview sf ca d4">
+        <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:14px">
+          <div style="font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#8a6010">Looking Ahead</div>
+          <div style="font-family:var(--serif);font-size:17px;font-weight:700;color:#0a0a08;font-style:italic">May 2026</div>
+          <div style="flex:1;height:1px;background:rgba(0,0,0,.1);margin-left:4px"></div>
+        </div>
+        <div>
+          <div class="may-item">
+            <div class="may-date">May 9</div>
+            <div class="may-dot" style="background:#62C97A"></div>
+            <div class="may-text"><strong>Civil service exams</strong> — Police Officer #60050-930 &amp; Deputy Sheriff #60050-960 &middot; Canton School, 8:30 AM sharp &middot; 2 pencils + photo ID</div>
+            <div class="may-cat" style="background:rgba(98,201,122,.12);color:#2a7a3a;border:1px solid rgba(98,201,122,.25)">Career</div>
+          </div>
+          <div class="may-item">
+            <div class="may-date">May 10</div>
+            <div class="may-dot" style="background:#CC7888"></div>
+            <div class="may-text"><strong>Grace Sheehan photoshoot</strong> — $120 &middot; contract sent, awaiting signature &middot; also Francesca Mnenula negotiating same day</div>
+            <div class="may-cat" style="background:rgba(204,120,136,.12);color:#8a3a4a;border:1px solid rgba(204,120,136,.25)">Creative</div>
+          </div>
+          <div class="may-item">
+            <div class="may-date">May mid</div>
+            <div class="may-dot" style="background:#9A8FD8"></div>
+            <div class="may-text"><strong>Drill weekend — critical</strong> — informal CO conversation re: DD-368 via SSG Wilson &middot; entire OTS path depends on this going well</div>
+            <div class="may-cat" style="background:rgba(154,143,216,.12);color:#5a3a9a;border:1px solid rgba(154,143,216,.25)">OTS</div>
+          </div>
+          <div class="may-item">
+            <div class="may-date">May 19</div>
+            <div class="may-dot" style="background:#CC7888"></div>
+            <div class="may-text"><strong>Zachary Gerow wedding photo</strong> — $1,200 &middot; negotiating</div>
+            <div class="may-cat" style="background:rgba(204,120,136,.12);color:#8a3a4a;border:1px solid rgba(204,120,136,.25)">Creative</div>
+          </div>
+          <div class="may-item">
+            <div class="may-date">May 17</div>
+            <div class="may-dot" style="background:#5A9DC0"></div>
+            <div class="may-text"><strong>MK610 Midterm Exam</strong> &middot; May 27 AI assignment due</div>
+            <div class="may-cat" style="background:rgba(95,173,212,.12);color:#2a5a8a;border:1px solid rgba(95,173,212,.25)">MBA</div>
+          </div>
+          <div class="may-item">
+            <div class="may-date">May 30</div>
+            <div class="may-dot" style="background:#62C97A"></div>
+            <div class="may-text"><strong>Brenna McGrath balance due</strong> — $1,300 remaining &middot; per contract: 7 days before Jun 6 wedding</div>
+            <div class="may-cat" style="background:rgba(98,201,122,.12);color:#2a7a3a;border:1px solid rgba(98,201,122,.25)">Creative</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(0,0,0,.08);font-family:var(--mono);font-size:8.5px;color:#888880">
+          Income outlook: ~$3,500 (3 Clarkson + Guard) &middot; No IgnitED or tax refunds &middot; Expenses should normalize
         </div>
       </div>
     </div>
   </div>
-</div>
+</div><!-- /tab-overview -->
+
 <!-- ═══════════════════════════════════════════
      FINANCIAL TAB
 ════════════════════════════════════════════ -->
@@ -850,16 +935,17 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 <!-- ═══════════════════════════════════════════
      INTELLECTUAL TAB (LIGHT)
 ════════════════════════════════════════════ -->
-<div id="tab-intellectual" style="display:none;margin-top:24px">
-  <div style="display:grid;grid-template-columns:240px 1fr;gap:22px;align-items:start">
+<div id="tab-intellectual" style="display:none;margin-top:0">
+<div class="light-tab-wrap" style="padding:24px 0 40px">
+  <div style="display:grid;grid-template-columns:240px 1fr;gap:22px;align-items:start;max-width:1340px;margin:0 auto;padding:0 28px">
     <div style="display:flex;flex-direction:column;gap:12px;position:sticky;top:60px">
-      <div class="sc" style="background:#F4F1EA;border-color:rgba(0,0,0,.09);color:#1a1a14">
-        <div class="sgt" style="color:#888880">MBA Status</div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">GPA</span><span class="sv" style="color:#2a5a9a">3.83</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">Courses done</span><span class="sv" style="color:#0a0a08">4 / 10</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">IgnitED rate</span><span class="sv" style="color:#2a7a3a">$750 / course</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">Est. graduation</span><span class="sv" style="color:#0a0a08">Mar 2027</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">Funding thru</span><span class="sv" style="color:#0a0a08">Winter 2027</span></div>
+      <div class="sc light-sc">
+        <div class="sgt">MBA Status</div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk">GPA</span><span class="sv" style="color:#2a5a9a">3.83</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk">Courses done</span><span class="sv">4 / 10</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk">IgnitED rate</span><span class="sv" style="color:#2a7a3a">$750 / course</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk">Est. graduation</span><span class="sv">Mar 2027</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk">Funding thru</span><span class="sv">Winter 2027</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:14px">
@@ -906,7 +992,8 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
       </div>
     </div>
   </div>
-</div>
+</div><!-- /light-tab-wrap -->
+</div><!-- /tab-intellectual -->
 
 <!-- ═══════════════════════════════════════════
      CREATIVE TAB
@@ -1039,16 +1126,17 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 <!-- ═══════════════════════════════════════════
      REFLECTIONS TAB (LIGHT)
 ════════════════════════════════════════════ -->
-<div id="tab-reflections" style="display:none;margin-top:24px">
-  <div style="display:grid;grid-template-columns:240px 1fr;gap:22px;align-items:start">
+<div id="tab-reflections" style="display:none;margin-top:0">
+<div class="light-tab-wrap" style="padding:24px 0 40px">
+  <div style="display:grid;grid-template-columns:240px 1fr;gap:22px;align-items:start;max-width:1340px;margin:0 auto;padding:0 28px">
     <div style="display:flex;flex-direction:column;gap:12px;position:sticky;top:60px">
-      <div class="sc" style="background:#F4F1EA;border-color:rgba(0,0,0,.09)">
-        <div class="sgt" style="color:#888880">This Month In Summary</div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">Career</span><span class="sv" style="color:#5a3a8a">3 paths active</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">Financial</span><span class="sv" style="color:#2a7a3a">+$3,999</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">Physical</span><span class="sv" style="color:#2a5a9a">2 PRs</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">Creative</span><span class="sv" style="color:#0a0a08">Inv. shipped</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#888880">Spiritual</span><span class="sv" style="color:#8a6010">3 sermons</span></div>
+      <div class="sc light-sc">
+        <div class="sgt">This Month In Summary</div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk">Career</span><span class="sv" style="color:#5a3a8a">3 paths active</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk">Financial</span><span class="sv" style="color:#2a7a3a">+$3,999</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk">Physical</span><span class="sv" style="color:#2a5a9a">2 PRs</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk">Creative</span><span class="sv">Inv. shipped</span></div>
+        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk">Spiritual</span><span class="sv" style="color:#8a6010">3 sermons</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:16px">
@@ -1115,9 +1203,12 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
           <p style="margin-top:10px">The Amex Platinum cancellation is in process. The $895 fee was posted but will be refunded. The decision to cancel is correct if the credits don't justify the fee at the current usage level &mdash; and they don't.</p>
         </div>
       </div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</div><!-- /light-tab-wrap -->
+</div><!-- /tab-reflections -->
 
 <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
 <script>
