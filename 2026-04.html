@@ -281,6 +281,33 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .sqlink{display:block;font-family:var(--mono);font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;padding:5px 0;border-bottom:1px solid var(--b0);cursor:pointer;transition:color .15s}
 .sqlink:last-child{border-bottom:none}
 .sqlink:hover{color:var(--tx)}
+/* SPENDING ACCORDION */
+.fcat{border-bottom:1px solid var(--b0)}
+.fcat:last-child{border-bottom:none}
+.fcath{display:flex;align-items:center;justify-content:space-between;padding:11px 4px;cursor:pointer;transition:background .15s;border-radius:var(--r1);user-select:none}
+.fcath:hover{background:rgba(255,255,255,.025)}
+.fcatl{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
+.fcatdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.fcatn{font-size:13px;color:var(--tx);font-weight:500}
+.fcatnt{font-family:var(--mono);font-size:9px;color:var(--t4);margin-left:6px}
+.fcatr{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.fcatp{font-family:var(--mono);font-size:10px;color:var(--t4)}
+.fcata{font-family:var(--mono);font-size:10px;color:var(--t4);transition:transform .2s;display:inline-block}
+.fcatamt{font-family:var(--mono);font-size:13px;font-weight:600;color:var(--tx)}
+.fcatbar{height:3px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;margin:0 4px 4px}
+.fcatbf{height:100%;border-radius:2px;transition:width .6s cubic-bezier(.22,.68,0,1.2)}
+.fcatb{max-height:0;overflow:hidden;transition:max-height .55s cubic-bezier(.4,0,.2,1),opacity .3s ease;opacity:0;padding:0 4px}
+.fcat.open .fcatb{max-height:2000px;opacity:1}
+.fcat.open .fcata{transform:rotate(90deg)}
+.ftx{display:grid;grid-template-columns:52px 1fr 80px;gap:6px;padding:5px 2px;font-size:11px;border-bottom:1px solid var(--b0);align-items:baseline;cursor:default}
+.ftx:last-child{border-bottom:none}
+.ftxd{font-family:var(--mono);font-size:9px;color:var(--t4)}
+.ftxn{color:var(--t2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ftxa{font-family:var(--mono);font-size:10px;text-align:right;font-weight:500;color:var(--rust)}
+.sort-bar{display:flex;gap:6px;align-items:center;margin-bottom:10px;flex-wrap:wrap}
+.sort-btn{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px;border:1px solid var(--b1);background:none;color:var(--t4);cursor:pointer;transition:all .15s}
+.sort-btn:hover{color:var(--t2);border-color:var(--b2)}
+.sort-btn.on{background:var(--bg4);color:var(--tx);border-color:var(--b2)}
 /* BTT */
 #btt{position:fixed;bottom:26px;right:26px;width:38px;height:38px;border-radius:50%;background:var(--bg4);border:1px solid var(--b2);color:var(--t2);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .25s,transform .2s;z-index:500;line-height:1}
 #btt.show{opacity:1}#btt:hover{transform:translateY(-2px);color:var(--tx)}
@@ -519,6 +546,19 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
           </div>
         </div>
         <div class="note rust ca d4" style="margin-top:12px"><span class="note-lbl">Amex Platinum</span>$895 annual fee posted Apr 17. Cancellation in progress &mdash; fee to be refunded or offset by statement credits before the cycle closes. May figures will reflect resolution.</div>
+      </div>
+      <!-- TRANSACTION ACCORDION -->
+      <div class="card sf ca d4">
+        <div class="ch">
+          <div class="ct">Transactions by Category</div>
+          <div class="cs2" id="txn-summary">Loading&hellip;</div>
+        </div>
+        <div class="sort-bar">
+          <span style="font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.1em">Sort transactions:</span>
+          <button class="sort-btn on" id="sort-date" onclick="sortTxns('date')">By Date</button>
+          <button class="sort-btn" id="sort-amt" onclick="sortTxns('amount')">By Amount</button>
+        </div>
+        <div id="txn-accordion"></div>
       </div>
     </div>
   </div>
@@ -1303,6 +1343,118 @@ document.addEventListener('keydown', e=>{
   if (e.key==='ArrowRight'&&idx<TABS.length-1) switchTab(TABS[idx+1]);
   if (e.key==='ArrowLeft'&&idx>0) switchTab(TABS[idx-1]);
 });
+
+// ── TRANSACTION ACCORDION ──
+const TXN_CATS = [
+  {name:'Drinks & Dining', amt:541.16, color:'#CC6B47', txns:[
+    {d:'Apr 01',n:'CU Servery',a:-6.25},{d:'Apr 01',n:'Uber Eats',a:-2.35},
+    {d:'Apr 02',n:'Burger King',a:-8.41},{d:'Apr 03',n:'Sunoco',a:-13.32},
+    {d:'Apr 04',n:'Sunoco',a:-8.46},{d:'Apr 04',n:'Sunoco',a:-3.55},{d:'Apr 04',n:'Taco Bell',a:-10.25},
+    {d:'Apr 05',n:'Sunoco',a:-6.77},{d:'Apr 05',n:'Sunoco',a:-6.18},{d:'Apr 05',n:'Sunoco',a:-4.53},{d:'Apr 05',n:'Tim Hortons',a:-3.76},
+    {d:'Apr 08',n:'CU Servery',a:-3.66},{d:'Apr 08',n:"McDonald's",a:-6.67},{d:'Apr 08',n:'Starbucks',a:-4.96},
+    {d:'Apr 09',n:'Sunoco',a:-9.92},{d:'Apr 09',n:'Sunoco',a:-5.99},
+    {d:'Apr 10',n:'Chipotle',a:-17.01},{d:'Apr 10',n:'ExxonMobil',a:-7.69},
+    {d:'Apr 11',n:'Chipotle',a:-15.89},
+    {d:'Apr 12',n:"Dave's Hot Chicken",a:-15.65},{d:'Apr 12',n:"Dave's Hot Chicken",a:-3.55},{d:'Apr 12',n:'Five Guys',a:-6.69},{d:'Apr 12',n:'Speedway',a:-4.04},
+    {d:'Apr 13',n:'Taco Bell',a:-6.69},{d:'Apr 14',n:'Sunoco',a:-8.70},{d:'Apr 15',n:"McDonald's",a:-5.17},
+    {d:'Apr 17',n:'Five Guys',a:-30.10},{d:'Apr 17',n:'Sunoco',a:-9.89},{d:'Apr 17',n:'Sunoco',a:-2.26},
+    {d:'Apr 18',n:"McDonald's",a:-6.67},{d:'Apr 18',n:'Sunoco',a:-11.04},{d:'Apr 18',n:'Sunoco',a:-1.99},
+    {d:'Apr 19',n:'Burger King',a:-9.72},{d:'Apr 19',n:'Sunoco',a:-5.39},{d:'Apr 19',n:'Sunoco',a:-3.55},{d:'Apr 19',n:'Tim Hortons',a:-7.98},
+    {d:'Apr 21',n:'Chick-fil-A',a:-5.61},{d:'Apr 21',n:"Jake Hafner's",a:-111.30},
+    {d:'Apr 22',n:'Sunoco',a:-9.22},{d:'Apr 22',n:'Sunoco',a:-4.31},
+    {d:'Apr 23',n:'Sunoco',a:-12.16},{d:'Apr 23',n:'Sunoco',a:-10.94},{d:'Apr 23',n:'Sunoco',a:-4.73},
+    {d:'Apr 24',n:"McDonald's",a:-5.50},{d:'Apr 24',n:"McDonald's",a:-4.31},{d:'Apr 24',n:'Park Bros Potsdam',a:-7.45},{d:'Apr 24',n:'Tim Hortons',a:-3.79},
+    {d:'Apr 26',n:"Dunkin'",a:-7.78},
+    {d:'Apr 27',n:'Little Italy Potsdam',a:-3.88},{d:'Apr 27',n:'Sunoco',a:-3.23},
+    {d:'Apr 28',n:'Taco Bell',a:-21.77},{d:'Apr 28',n:'Sunoco',a:-11.54},
+    {d:'Apr 29',n:"McDonald's",a:-4.09},
+    {d:'Apr 30',n:"Dunkin'",a:-6.13},{d:'Apr 30',n:"Wendy's",a:-18.72}
+  ]},
+  {name:'Groceries', amt:487.84, color:'#5CB872', txns:[
+    {d:'Apr 02',n:'Walmart',a:-50.61},{d:'Apr 06',n:'Walmart',a:-83.34},
+    {d:'Apr 15',n:'Walmart',a:-30.36},{d:'Apr 25',n:'Walmart',a:-229.98},{d:'Apr 29',n:'Walmart',a:-93.55}
+  ]},
+  {name:'Tithe', amt:250.00, color:'#E9E7E2', txns:[
+    {d:'Apr 10',n:'Calvary Baptist Church',a:-250.00}
+  ]},
+  {name:'Auto & Transport', amt:214.12, color:'#5A9DC0', txns:[
+    {d:'Apr 01',n:'Tesla',a:-99.00},{d:'Apr 17',n:'A.W. Collins / Nayax',a:-4.10},
+    {d:'Apr 18',n:'A.W. Collins / Nayax',a:-4.10},{d:'Apr 25',n:'Tesla',a:-106.92}
+  ]},
+  {name:'Shopping', amt:128.33, color:'#7A90A8', txns:[
+    {d:'Apr 07',n:'Amazon',a:-71.73},{d:'Apr 18',n:'Best Buy',a:-7.22},
+    {d:'Apr 29',n:'Amazon',a:-24.83},{d:'Apr 30',n:'Anthropic',a:-13.85},{d:'Apr 30',n:'Anthropic',a:-10.70}
+  ]},
+  {name:'Healthcare', amt:73.88, color:'#47B0AB', txns:[
+    {d:'Apr 02',n:'TRICARE Select',a:-57.88},{d:'Apr 21',n:'Kinney Drugs (Rx)',a:-16.00}
+  ]},
+  {name:'Subscriptions', amt:43.69, color:'#8B7EC8', txns:[
+    {d:'Apr 09',n:'Apple',a:-4.31},{d:'Apr 23',n:'YouTube Premium',a:-7.99},
+    {d:'Apr 25',n:'Apple',a:-9.99},{d:'Apr 27',n:'Claude.ai',a:-21.40}
+  ]},
+  {name:'Apple Products', amt:40.66, color:'#B0B0B8', txns:[
+    {d:'Apr 01',n:'Apple Store',a:-35.75},{d:'Apr 01',n:'Apple Store',a:-4.91}
+  ]},
+  {name:'Personal Care', amt:30.00, color:'#CC7888', txns:[
+    {d:'Apr 08',n:'Sian Miller — Hair',a:-30.00}
+  ]},
+  {name:'Charging', amt:21.58, color:'#6AC9A0', txns:[
+    {d:'Apr 12',n:'Supercharger',a:-10.82},{d:'Apr 21',n:'Supercharger',a:-10.76}
+  ]},
+  {name:'Travel & Vacation', amt:9.99, color:'#D4A84B', txns:[
+    {d:'Apr 13',n:'Uber',a:-9.99}
+  ]},
+  {name:'Other', amt:4.31, color:'#5E5A56', txns:[
+    {d:'Apr 18',n:'Point of Sale',a:-4.31}
+  ]}
+];
+
+let txnSortMode = 'date';
+
+function sortTxns(mode) {
+  txnSortMode = mode;
+  document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('on'));
+  const btn = document.getElementById('sort-'+mode);
+  if (btn) btn.classList.add('on');
+  buildAccordion();
+}
+
+function buildAccordion() {
+  const acc = document.getElementById('txn-accordion');
+  if (!acc) return;
+  const max = Math.max(...TXN_CATS.map(c => c.amt));
+  const total = TXN_CATS.reduce((s,c) => s+c.txns.length, 0);
+  const sumEl = document.getElementById('txn-summary');
+  if (sumEl) sumEl.textContent = total + ' transactions \u00b7 ' + TXN_CATS.length + ' categories \u00b7 click any row to expand';
+  acc.innerHTML = TXN_CATS.map((cat, i) => {
+    const pct = (cat.amt / max * 100).toFixed(0);
+    const sp = (cat.amt / 1845.56 * 100).toFixed(1);
+    const sorted = [...cat.txns].sort((a,b) =>
+      txnSortMode === 'amount' ? a.a - b.a : a.d.localeCompare(b.d)
+    );
+    const rows = sorted.map(t =>
+      `<div class="ftx"><span class="ftxd">${t.d}</span><span class="ftxn">${t.n}</span><span class="ftxa">-$${Math.abs(t.a).toFixed(2)}</span></div>`
+    ).join('');
+    return `<div class="fcat" id="fapr${i}"><div class="fcath" onclick="toggleFin('fapr${i}')"><div class="fcatl"><span class="fcatdot" style="background:${cat.color}"></span><span class="fcatn">${cat.name}</span><span class="fcatnt">${cat.txns.length} txn</span></div><div class="fcatr"><span class="fcatp">${sp}%</span><span class="fcata">&rsaquo;</span><span class="fcatamt">$${cat.amt.toFixed(2)}</span></div></div><div class="fcatbar"><div class="fcatbf" style="width:${pct}%;background:${cat.color}"></div></div><div class="fcatb">${rows}</div></div>`;
+  }).join('');
+}
+
+window.toggleFin = id => {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+};
+
+// Wrap switchTab to build accordion on first open
+(function(){
+  const orig = window.switchTab;
+  window.switchTab = function(name) {
+    orig(name);
+    if (name === 'financial') {
+      const acc = document.getElementById('txn-accordion');
+      if (acc && acc.innerHTML === '') buildAccordion();
+    }
+  };
+})();
 
 // ── VALIDATION: check all tab targets exist ──
 TABS.forEach(t=>{
