@@ -315,7 +315,7 @@ to{transform:translateX(-50%)}}
 /* ── ACCENT ORBS ─────────────────────────────────────────────────── */
 .orb-row{display:flex;gap:0;padding:12px 0;overflow-x:auto;border-bottom:1px solid var(--b0);margin:0 -24px;padding-left:24px;scrollbar-width:none}
 .orb-row::-webkit-scrollbar{display:none}
-.orb{position:relative;display:flex;flex-direction:column;gap:4px;padding:10px 20px;flex-shrink:0;border-right:1px solid var(--b0)}
+.orb{position:relative;display:flex;flex-direction:column;gap:4px;padding:10px 14px;flex-shrink:0;border-right:1px solid var(--b0)}
 .orb:last-child{border-right:none}
 .orb-val{font-family:var(--mono);font-size:14px;font-weight:500;line-height:1;color:var(--tx)}
 .orb-lbl{font-family:var(--mono);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--t4)}
@@ -441,7 +441,7 @@ to{transform:translateX(-50%)}}
 
 <!-- SPOTLIGHT BANNER — update narrative each month based on career events -->
 <div class="spotlight">
-  <div class="sp-tag">The thing to know about June 2026</div>
+  <div class="sp-tag">The thing to know about May 2026</div>
   <div class="sp-title" id="sp-title">&#8212;</div>
   <div class="sp-body" id="sp-body">&#8212;</div>
   <div class="sp-paths">
@@ -608,7 +608,6 @@ to{transform:translateX(-50%)}}
       <div class="si"><span class="sk">February</span><span class="sv">$1,094</span></div>
       <div class="si"><span class="sk">March</span><span class="sv">$1,444</span></div>
       <div class="si"><span class="sk">April</span><span class="sv">$3,999</span></div>
-      <div class="si"><span class="sk">April</span><span class="sv">$3,999</span></div>
       <div class="si"><span class="sk">May</span><span class="sv" style="color:var(--green)" id="fin-jun-cmp">&#8212;</span></div>
     </div>
   </aside>
@@ -681,7 +680,7 @@ to{transform:translateX(-50%)}}
 
       <div class="panel ag sf">
         <div class="plbl">Income vs Expenses &#8212; May 2026</div>
-        <div class="note g"><span class="note-lbl">&#9888; Data pending</span>Source: Origin Financial CSV. All category totals verified in Python. Net $2,883.12 &#10003; Expense sum must be verified in Python before entering DATA block.</div>
+        <div class="note g"><span class="note-lbl">Source: Origin Financial CSV &mdash; May 2026</span>All category totals verified in Python. Net $2,883.12 confirmed. When copying for June: replace DATA.fin.* with June CSV export and re-run the Python sum check.</div>
         <div class="chart-wrap tall"><canvas id="finBarChart"></canvas></div>
       </div>
       <div class="panel ag">
@@ -735,8 +734,8 @@ to{transform:translateX(-50%)}}
   <div class="content">
     <div class="cg">
       <div class="panel ab sf">
-        <div class="plbl">Volume by Session &#8212; June 2026</div>
-        <div class="note b"><span class="note-lbl">&#9888; Data pending</span>Upload FitNotes CSV for June. Volume = sum of (lbs &#215; reps) per session date.</div>
+        <div class="plbl">Volume by Session &#8212; May 2026</div>
+        <div class="note b"><span class="note-lbl">Source: FitNotes CSV &mdash; May 2026</span>20 training days. 87,390 lbs total volume. PRs: Bench 215&#215;4 (May 26), Squat 225&#215;4 (May 28), HRPU 42 reps. When copying for June: replace DATA.physical.sessions[] with June FitNotes CSV export.</div>
         <div class="chart-wrap tall"><canvas id="gymDetailChart"></canvas></div>
       </div>
       <div class="panel ab">
@@ -923,7 +922,7 @@ to{transform:translateX(-50%)}}
     <div class="cg">
       <div class="panel sf" style="border-left:2px solid var(--red);background:var(--rdim)">
         <div style="font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-bottom:8px">May Career Update</div>
-        <div style="font-size:17px;font-weight:300;color:#fff;margin-bottom:8px;line-height:1.3" id="ca-headline">TBD &#8212; update with June career headline</div>
+        <div style="font-size:17px;font-weight:300;color:#fff;margin-bottom:8px;line-height:1.3" id="ca-headline">One path closed. One waiting. One in motion.</div>
         <div style="font-size:12px;line-height:1.72;color:var(--t2)" id="ca-body">Update with June career narrative. Did SSG Wilson respond to the DD-368 email? Did civil service grant the AT accommodation? Adjust this text to reflect what actually happened.</div>
       </div>
       <div class="path-card pv">
@@ -1227,7 +1226,7 @@ const DATA = {
   // ── PHYSICAL ─────────────────────────────────────────────────────────
   // SOURCE: FitNotes CSV export. Volume = weight_lbs * reps summed per date.
   physical: {
-    days: 0, volume: 0, outdoorRuns: 2, sprintSessions: 2,
+    days: 20, volume: 87390, outdoorRuns: 2, sprintSessions: 2,
     prHighlight: {lift:'Bench Press', detail:'215&#215;4 &#9733;', subtext:'+20 lb vs April'},
     // sessions: [{d:'Jun X', m:['Chest','Tris'], v:lbs_total, note:'...'}]
     // v:0 = cardio only. Use &#9733; in note to flag PRs (detected by buildWorkoutLog)
@@ -1323,7 +1322,7 @@ const DATA = {
   // ── CAREER ────────────────────────────────────────────────────────────
   career: {
     spotlightTitle: 'The field is narrowing. That&rsquo;s not failure &mdash; that&rsquo;s clarity.',
-    spotlightBody:  'Update with June career narrative. Did SSG Wilson respond to the DD-368? Did civil service grant the AT accommodation? Adjust tone to reflect what actually happened.',
+    spotlightBody:  'United went with other candidates. Civil service exam done, AT conflict pending. DD-368 email sent to SSG Wilson. Photography delivered $2,735 across 6 shoots. May is the month options started resolving.',
     otsStatus:  'Active',
     otsBarW:    '30%',
     otsBody:    'DD-368 email drafted and sent to SSG Wilson. Letter outlines commissioning rationale. Awaiting response. Jul 4 deadline is the hard wall.',
