@@ -1,476 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JD Monthly Recap — 2026</title>
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,700;1,400&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #0C0D10;
-      --surface: #14151A;
-      --surface2: #1C1D23;
-      --border: rgba(255,255,255,.07);
-      --border-hover: rgba(255,255,255,.18);
-      --text: #F0EEE9;
-      --text-muted: #6E6C68;
-      --text-soft: #A8A5A0;
-      --gold: #D4A84B;
-      --gold-dim: rgba(212,168,75,.12);
-      --sage: #5CB872;
-      --sky: #5A9DC0;
-      --vio: #8B7EC8;
-      --mono: 'JetBrains Mono', monospace;
-      --sans: 'DM Sans', sans-serif;
-      --serif: 'Libre Baskerville', Georgia, serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JD Meyers &#8212; 2026 Monthly Recap</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060810;--bg2:#0C0E16;--bg3:#12151F;--bg4:#181C28;
+  --g:rgba(255,255,255,.04);--gm:rgba(255,255,255,.07);
+  --b0:rgba(255,255,255,.06);--b1:rgba(255,255,255,.10);--b2:rgba(255,255,255,.18);
+  --tx:#E2E8F0;--t2:rgba(226,232,240,.70);--t3:rgba(226,232,240,.45);--t4:rgba(226,232,240,.25);
+  --green:#00E5A0;--gdim:rgba(0,229,160,.10);
+  --blue:#4DA8FF;--bdim:rgba(77,168,255,.10);
+  --amber:#FFB830;--adim:rgba(255,184,48,.10);
+  --red:#FF4D6D;
+  --vio:#9B8FFF;
+  --rose:#FF7AA8;
+  --mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100vh;-webkit-font-smoothing:antialiased}
+@keyframes scan-v{0%{top:-2px}100%{top:100vh}}
+@keyframes breathe-g{0%,100%{box-shadow:0 0 0 1px rgba(0,229,160,.12)}50%{box-shadow:0 0 0 1px rgba(0,229,160,.5),0 0 28px rgba(0,229,160,.12)}}
+@keyframes dot-blink{0%,100%{opacity:1}45%,55%{opacity:.08}}
+@keyframes slide-up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.scan1,.scan2{position:fixed;left:0;width:100%;height:1px;pointer-events:none;z-index:9999}
+.scan1{background:linear-gradient(90deg,transparent,rgba(0,229,160,.07),transparent);animation:scan-v 9s linear infinite}
+.scan2{background:linear-gradient(90deg,transparent,rgba(77,168,255,.04),transparent);animation:scan-v 14s linear infinite 5s}
+.shell{max-width:1100px;margin:0 auto;padding:40px 24px 80px}
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 60px 20px 80px;
-      -webkit-font-smoothing: antialiased;
-    }
+/* Header */
+.hdr{margin-bottom:32px;animation:slide-up .6s ease both}
+.hdr-eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--t4);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.live-dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:dot-blink 2.2s ease-in-out infinite}
+.hdr-title{font-size:36px;font-weight:300;letter-spacing:-.5px;color:var(--tx);margin-bottom:6px}
+.hdr-title strong{font-weight:600;color:#fff}
+.hdr-sub{font-size:14px;color:var(--t3);line-height:1.6;max-width:520px}
 
-    /* subtle grain */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: .6;
-    }
+/* YTD Stats bar — links to 2026-overview.html when that page exists */
+.ytd-bar{display:flex;gap:0;border:1px solid var(--b0);margin-bottom:28px;background:var(--g);text-decoration:none;transition:border-color .2s;animation:slide-up .6s ease .1s both;cursor:pointer}
+.ytd-bar:hover{border-color:var(--b1)}
+.ytd-stat{flex:1;padding:12px 16px;border-right:1px solid var(--b0);position:relative}
+.ytd-stat:last-child{border-right:none}
+.ytd-stat-v{font-family:var(--mono);font-size:16px;font-weight:500;line-height:1;margin-bottom:3px;color:var(--green)}
+.ytd-stat-l{font-family:var(--mono);font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--t4)}
+.ytd-bar-hint{font-family:var(--mono);font-size:8px;color:var(--t4);padding:12px 14px;display:flex;align-items:center;gap:5px;white-space:nowrap;flex-shrink:0;border-left:1px solid var(--b0)}
 
-    .shell {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 680px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+/* Career banner */
+.career-banner{padding:14px 20px;margin-bottom:28px;background:var(--g);border:1px solid var(--b0);border-left:2px solid var(--red);animation:slide-up .6s ease .15s both}
+.cb-tag{font-family:var(--mono);font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-bottom:5px}
+.cb-text{font-size:13px;color:var(--t2);line-height:1.6}
+.cb-paths{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.cb-path{font-family:var(--mono);font-size:8px;letter-spacing:.5px;text-transform:uppercase;padding:3px 10px;border:1px solid}
 
-    /* ── HEADER ── */
-    .header {
-      text-align: center;
-      margin-bottom: 52px;
-    }
-    .header-eyebrow {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--gold);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    .header-eyebrow::before,
-    .header-eyebrow::after {
-      content: '';
-      width: 32px;
-      height: 1px;
-      background: rgba(212,168,75,.35);
-    }
-    .header h1 {
-      font-family: var(--serif);
-      font-size: 36px;
-      font-weight: 700;
-      font-style: italic;
-      letter-spacing: -0.5px;
-      color: var(--text);
-      margin-bottom: 8px;
-      line-height: 1.1;
-    }
-    .header-sub {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--text-muted);
-      letter-spacing: .8px;
-      text-transform: uppercase;
-    }
+/* Month grid */
+.grid-label{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t4);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.grid-label::after{content:'';flex:1;height:1px;background:var(--b0)}
+.month-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px}
+@media(max-width:700px){.month-grid{grid-template-columns:1fr}}
 
-    /* ── YEAR STATS ── */
-    .year-stats {
-      display: flex;
-      gap: 24px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 40px;
-      padding: 16px 24px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      width: 100%;
-    }
-    .ys-item {
-      text-align: center;
-    }
-    .ys-val {
-      font-family: var(--mono);
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--text);
-      display: block;
-    }
-    .ys-val.green { color: var(--sage); }
-    .ys-val.gold  { color: var(--gold); }
-    .ys-val.sky   { color: var(--sky);  }
-    .ys-key {
-      font-family: var(--mono);
-      font-size: 9px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: .8px;
-      display: block;
-      margin-top: 3px;
-    }
+/* Month cards */
+.month-card{background:var(--g);border:1px solid var(--b0);position:relative;overflow:hidden;transition:border-color .2s,transform .15s;text-decoration:none;display:block}
+.month-card:hover{border-color:var(--b1);transform:translateY(-1px)}
+.month-card::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.013),transparent);pointer-events:none}
+.month-card:hover::before{left:200%;transition:left .55s ease}
 
-    /* ── MONTH GRID ── */
-    .months {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      width: 100%;
-      margin-bottom: 16px;
-    }
-    @media (max-width: 520px) {
-      .months { grid-template-columns: repeat(2, 1fr); }
-    }
+/* Card states */
+.month-card.done{opacity:.55}
+.month-card.done:hover{opacity:.75;transform:none}
+.month-card.latest{border-top:2px solid var(--green);animation:breathe-g 4s ease-in-out infinite}
+.month-card.upcoming{border-top:1px solid var(--b0);opacity:.65}
+.month-card.upcoming:hover{opacity:.85}
 
-    .month-card {
-      display: block;
-      text-decoration: none;
-      padding: 20px 18px 18px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      transition: border-color .18s, transform .18s, background .18s, box-shadow .18s;
-      position: relative;
-      overflow: hidden;
-    }
-    .month-card:hover {
-      border-color: var(--border-hover);
-      transform: translateY(-2px);
-      background: var(--surface2);
-      box-shadow: 0 8px 32px rgba(0,0,0,.5);
-    }
-    .month-card.done {
-      border-color: rgba(92,184,114,.2);
-    }
-    .month-card.done:hover {
-      border-color: rgba(92,184,114,.45);
-    }
-    .month-card.latest {
-      border-color: rgba(212,168,75,.35);
-      background: rgba(212,168,75,.04);
-    }
-    .month-card.latest:hover {
-      border-color: rgba(212,168,75,.65);
-      background: rgba(212,168,75,.07);
-    }
-    .month-card.upcoming {
-      opacity: .45;
-      cursor: default;
-      pointer-events: none;
-    }
-    /* accent bar on done/latest cards */
-    .month-card.done::before,
-    .month-card.latest::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-    }
-    .month-card.done::before {
-      background: linear-gradient(90deg, transparent, rgba(92,184,114,.5), transparent);
-    }
-    .month-card.latest::before {
-      background: linear-gradient(90deg, transparent, rgba(212,168,75,.7), transparent);
-    }
+/* Card inner */
+.mc-inner{padding:16px 18px}
+.mc-num{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t4);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}
+.mc-badge{font-family:var(--mono);font-size:7.5px;letter-spacing:.8px;text-transform:uppercase;padding:2px 7px;border:1px solid}
+.mc-badge.latest{color:var(--green);border-color:rgba(0,229,160,.4)}
+.mc-badge.done{color:var(--t4);border-color:var(--b0)}
+.mc-badge.upcoming{color:var(--t4);border-color:var(--b0)}
+.mc-month{font-size:18px;font-weight:300;color:#fff;margin-bottom:3px}
+.mc-month strong{font-weight:600}
+.mc-year{font-family:var(--mono);font-size:9px;color:var(--t4);margin-bottom:12px}
 
-    .card-num {
-      font-family: var(--mono);
-      font-size: 9px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-    }
-    .card-month {
-      font-family: var(--serif);
-      font-size: 20px;
-      font-weight: 700;
-      font-style: italic;
-      color: var(--text);
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .card-year {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-    }
-    .card-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      margin-bottom: 10px;
-    }
-    .chip {
-      font-family: var(--mono);
-      font-size: 9px;
-      padding: 2px 7px;
-      border-radius: 20px;
-      border: 1px solid rgba(255,255,255,.06);
-      color: var(--text-muted);
-      background: rgba(255,255,255,.03);
-      white-space: nowrap;
-    }
-    .chip.g { color: var(--sage); border-color: rgba(92,184,114,.2); background: rgba(92,184,114,.07); }
-    .chip.d { color: var(--gold); border-color: rgba(212,168,75,.2); background: rgba(212,168,75,.07); }
-    .chip.b { color: var(--sky);  border-color: rgba(90,157,192,.2); background: rgba(90,157,192,.07); }
+/* Chips */
+.mc-chips{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
+.chip{font-family:var(--mono);font-size:8px;padding:2px 8px;border:1px solid var(--b0);color:var(--t3)}
+.chip.g{border-color:rgba(0,229,160,.3);color:var(--green)}
+.chip.b{border-color:rgba(77,168,255,.3);color:var(--blue)}
+.chip.a{border-color:rgba(255,184,48,.3);color:var(--amber)}
+.chip.r{border-color:rgba(255,122,168,.3);color:var(--rose)}
 
-    .card-badge {
-      display: inline-block;
-      font-family: var(--mono);
-      font-size: 9px;
-      padding: 2px 8px;
-      border-radius: 20px;
-      font-weight: 500;
-      letter-spacing: .3px;
-    }
-    .badge-latest {
-      background: rgba(212,168,75,.18);
-      color: var(--gold);
-      border: 1px solid rgba(212,168,75,.3);
-    }
-    .badge-done {
-      background: rgba(92,184,114,.1);
-      color: var(--sage);
-      border: 1px solid rgba(92,184,114,.2);
-    }
-    .badge-upcoming {
-      background: rgba(255,255,255,.04);
-      color: var(--text-muted);
-      border: 1px solid rgba(255,255,255,.06);
-    }
+/* Tagline */
+.mc-tagline{font-size:11.5px;color:var(--t3);line-height:1.55;font-style:italic;padding-top:10px;border-top:1px solid var(--b0)}
 
-    /* ── SERMON LINK ── */
-    .sermon-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      padding: 12px 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      text-decoration: none;
-      color: var(--text-soft);
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: .5px;
-      transition: border-color .18s, color .18s, background .18s;
-      margin-bottom: 40px;
-    }
-    .sermon-link:hover {
-      border-color: rgba(212,168,75,.4);
-      color: var(--gold);
-      background: rgba(212,168,75,.04);
-    }
-    .sermon-link-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--gold);
-      opacity: .7;
-      flex-shrink: 0;
-    }
+/* Upcoming placeholder */
+.mc-upcoming-note{font-family:var(--mono);font-size:9px;color:var(--t4);padding:8px 0;text-align:center;letter-spacing:.5px}
 
-    /* ── FOOTER ── */
-    .footer {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--text-muted);
-      text-align: center;
-      line-height: 2;
-    }
-    .footer a {
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color .15s;
-    }
-    .footer a:hover { color: var(--text-soft); }
-  </style>
+/* Footer */
+.footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--b0);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.footer-l{font-family:var(--mono);font-size:9px;color:var(--t4)}
+.footer-links{display:flex;gap:12px}
+.footer-link{font-family:var(--mono);font-size:9px;color:var(--t4);text-decoration:none;transition:color .15s}
+.footer-link:hover{color:var(--t2)}
+</style>
 </head>
 <body>
+<div class="scan1"></div>
+<div class="scan2"></div>
 <div class="shell">
 
-  <header class="header">
-    <div class="header-eyebrow">JD Meyers · 2026</div>
-    <h1>Monthly Recap</h1>
-    <p class="header-sub">Spiritual · Physical · Financial · Intellectual · Creative</p>
-  </header>
+<!-- Header -->
+<div class="hdr">
+  <div class="hdr-eyebrow"><span class="live-dot"></span>JD Meyers &mdash; Monthly Recap &mdash; 2026</div>
+  <div class="hdr-title"><strong>2026</strong> in Review</div>
+  <div class="hdr-sub">Monthly dashboards tracking financial, physical, spiritual, intellectual, and creative progress. The year the career locks in.</div>
+</div>
 
-  <!-- Year-to-date quick stats -->
-  <div class="year-stats">
-    <div class="ys-item">
-      <span class="ys-val green">$8,793</span>
-      <span class="ys-key">YTD Saved</span>
-    </div>
-    <div class="ys-item">
-      <span class="ys-val">13</span>
-      <span class="ys-key">Sermons</span>
-    </div>
-    <div class="ys-item">
-      <span class="ys-val sky">83</span>
-      <span class="ys-key">Gym Days</span>
-    </div>
-    <div class="ys-item">
-      <span class="ys-val gold">3.83</span>
-      <span class="ys-key">GPA</span>
-    </div>
-    <div class="ys-item">
-      <span class="ys-val">4 Months</span>
-      <span class="ys-key">Complete</span>
-    </div>
+<!-- YTD Stats bar — update each month. Links to 2026-overview.html when built -->
+<a class="ytd-bar" href="2026-overview.html" title="Year arc overview (coming soon)">
+  <div class="ytd-stat">
+    <div class="ytd-stat-v">$11,676</div>
+    <div class="ytd-stat-l">YTD Saved</div>
   </div>
-
-  <!-- Month cards -->
-  <div class="months">
-
-    <a class="month-card done" href="2026-01.html">
-      <div class="card-num">Month 01</div>
-      <div class="card-month">January</div>
-      <div class="card-year">2026</div>
-      <div class="card-chips">
-        <span class="chip g">+$812</span>
-        <span class="chip b">22 gym</span>
-        <span class="chip d">3 sermons</span>
-      </div>
-      <span class="card-badge badge-done">Complete</span>
-    </a>
-
-    <a class="month-card done" href="2026-02.html">
-      <div class="card-num">Month 02</div>
-      <div class="card-month">February</div>
-      <div class="card-year">2026</div>
-      <div class="card-chips">
-        <span class="chip g">+$1,094</span>
-        <span class="chip b">19 gym</span>
-        <span class="chip d">3 sermons</span>
-      </div>
-      <span class="card-badge badge-done">Complete</span>
-    </a>
-
-    <a class="month-card done" href="2026-03_v2.html">
-      <div class="card-num">Month 03</div>
-      <div class="card-month">March</div>
-      <div class="card-year">2026</div>
-      <div class="card-chips">
-        <span class="chip g">+$1,444</span>
-        <span class="chip b">20 gym</span>
-        <span class="chip d">4 sermons</span>
-      </div>
-      <span class="card-badge badge-done">Complete</span>
-    </a>
-
-    <a class="month-card latest" href="2026-04.html">
-      <div class="card-num">Month 04</div>
-      <div class="card-month">April</div>
-      <div class="card-year">2026</div>
-      <div class="card-chips">
-        <span class="chip g">+$3,999</span>
-        <span class="chip b">24 gym</span>
-        <span class="chip d">3 sermons</span>
-      </div>
-      <span class="card-badge badge-latest">Latest</span>
-    </a>
-
-    <div class="month-card upcoming">
-      <div class="card-num">Month 05</div>
-      <div class="card-month">May</div>
-      <div class="card-year">2026</div>
-      <span class="card-badge badge-upcoming">Upcoming</span>
-    </div>
-
-    <div class="month-card upcoming">
-      <div class="card-num">Month 06</div>
-      <div class="card-month">June</div>
-      <div class="card-year">2026</div>
-      <span class="card-badge badge-upcoming">Upcoming</span>
-    </div>
-
-    <div class="month-card upcoming">
-      <div class="card-num">Month 07</div>
-      <div class="card-month">July</div>
-      <div class="card-year">2026</div>
-      <span class="card-badge badge-upcoming">Upcoming</span>
-    </div>
-
-    <div class="month-card upcoming">
-      <div class="card-num">Month 08</div>
-      <div class="card-month">August</div>
-      <div class="card-year">2026</div>
-      <span class="card-badge badge-upcoming">Upcoming</span>
-    </div>
-
-    <div class="month-card upcoming">
-      <div class="card-num">Month 09</div>
-      <div class="card-month">September</div>
-      <div class="card-year">2026</div>
-      <span class="card-badge badge-upcoming">Upcoming</span>
-    </div>
-
-    <div class="month-card upcoming">
-      <div class="card-num">Month 10</div>
-      <div class="card-month">October</div>
-      <div class="card-year">2026</div>
-      <span class="card-badge badge-upcoming">Upcoming</span>
-    </div>
-
-    <div class="month-card upcoming">
-      <div class="card-num">Month 11</div>
-      <div class="card-month">November</div>
-      <div class="card-year">2026</div>
-      <span class="card-badge badge-upcoming">Upcoming</span>
-    </div>
-
-    <div class="month-card upcoming">
-      <div class="card-num">Month 12</div>
-      <div class="card-month">December</div>
-      <div class="card-year">2026</div>
-      <span class="card-badge badge-upcoming">Upcoming</span>
-    </div>
-
+  <div class="ytd-stat">
+    <div class="ytd-stat-v" style="color:var(--blue)">103</div>
+    <div class="ytd-stat-l">Gym Days</div>
   </div>
+  <div class="ytd-stat">
+    <div class="ytd-stat-v" style="color:var(--amber)">15</div>
+    <div class="ytd-stat-l">Sermons Logged</div>
+  </div>
+  <div class="ytd-stat">
+    <div class="ytd-stat-v" style="color:var(--rose)">$2,735</div>
+    <div class="ytd-stat-l">May Photo Income</div>
+  </div>
+  <div class="ytd-stat">
+    <div class="ytd-stat-v" style="color:var(--t2)">5 / 12</div>
+    <div class="ytd-stat-l">Months Complete</div>
+  </div>
+  <div class="ytd-bar-hint">Year Arc &#8594;</div>
+</a>
 
-  <!-- Sermon series link -->
-  <a class="sermon-link" href="cbc-sermons.html">
-    <span class="sermon-link-dot"></span>
-    CBC Sermon Series — Acts 2026 · 13 Sermons Logged
-    <span class="sermon-link-dot"></span>
+<!-- Career banner -->
+<div class="career-banner">
+  <div class="cb-tag">2026 Career Goal &mdash; Lock it in this year</div>
+  <div class="cb-text">Three paths ran simultaneously. United closed in May. Civil service exam done, AT conflict pending. OTS is the live path &mdash; DD-368 sent, Jul 4 deadline.</div>
+  <div class="cb-paths">
+    <span class="cb-path" style="color:var(--vio);border-color:rgba(155,143,255,.35)">&#9679; OTS Active</span>
+    <span class="cb-path" style="color:var(--amber);border-color:rgba(255,184,48,.25)">&#9675; Civil Service Pending</span>
+    <span class="cb-path" style="color:var(--t4);border-color:var(--b0)">&#215; United Closed</span>
+  </div>
+</div>
+
+<!-- Month grid -->
+<div class="grid-label">2026 Months</div>
+<div class="month-grid">
+
+  <!-- January — done -->
+  <a href="2026-01.html" class="month-card done">
+    <div class="mc-inner">
+      <div class="mc-num">01 <span class="mc-badge done">Done</span></div>
+      <div class="mc-month"><strong>January</strong></div>
+      <div class="mc-year">2026</div>
+      <div class="mc-chips">
+        <span class="chip g">$812 saved</span>
+        <span class="chip b">&#9733; Gym started</span>
+      </div>
+      <div class="mc-tagline">First month. Baselines set. Gym habit started.</div>
+    </div>
   </a>
 
-  <footer class="footer">
-    Add a new month: upload 2026-XX.html · add a card above · move "latest" class<br>
-    <a href="https://github.com" target="_blank">Hosted on GitHub Pages</a> · JD Meyers 2026
-  </footer>
+  <!-- February — done -->
+  <a href="2026-02.html" class="month-card done">
+    <div class="mc-inner">
+      <div class="mc-num">02 <span class="mc-badge done">Done</span></div>
+      <div class="mc-month"><strong>February</strong></div>
+      <div class="mc-year">2026</div>
+      <div class="mc-chips">
+        <span class="chip g">$1,094 saved</span>
+      </div>
+      <div class="mc-tagline">Consistency over intensity.</div>
+    </div>
+  </a>
+
+  <!-- March — done -->
+  <a href="2026-03_v2.html" class="month-card done">
+    <div class="mc-inner">
+      <div class="mc-num">03 <span class="mc-badge done">Done</span></div>
+      <div class="mc-month"><strong>March</strong></div>
+      <div class="mc-year">2026</div>
+      <div class="mc-chips">
+        <span class="chip g">$1,444 saved</span>
+      </div>
+      <div class="mc-tagline">Wedding bookings starting to build.</div>
+    </div>
+  </a>
+
+  <!-- April — done -->
+  <a href="2026-04.html" class="month-card done">
+    <div class="mc-inner">
+      <div class="mc-num">04 <span class="mc-badge done">Done</span></div>
+      <div class="mc-month"><strong>April</strong></div>
+      <div class="mc-year">2026</div>
+      <div class="mc-chips">
+        <span class="chip g">$3,999 saved</span>
+        <span class="chip b">Bench 195lb</span>
+        <span class="chip r">3 paths open</span>
+      </div>
+      <div class="mc-tagline">Best month yet. Three career paths all in motion.</div>
+    </div>
+  </a>
+
+  <!-- May — LATEST -->
+  <a href="2026-05.html" class="month-card latest">
+    <div class="mc-inner">
+      <div class="mc-num">05 <span class="mc-badge latest">Latest &#9654;</span></div>
+      <div class="mc-month"><strong>May</strong></div>
+      <div class="mc-year">2026</div>
+      <div class="mc-chips">
+        <span class="chip g">$2,883 saved</span>
+        <span class="chip a">Bench PR 215lb</span>
+        <span class="chip r">$2,735 photo</span>
+        <span class="chip b">92.5% &amp; 94%</span>
+      </div>
+      <div class="mc-tagline">United closed. OTS is the path. DD-368 sent. Photography delivered. Field narrowing &mdash; that&rsquo;s clarity.</div>
+    </div>
+  </a>
+
+  <!-- June — upcoming -->
+  <a href="2026-06.html" class="month-card upcoming">
+    <div class="mc-inner">
+      <div class="mc-num">06 <span class="mc-badge upcoming">Upcoming</span></div>
+      <div class="mc-month"><strong>June</strong></div>
+      <div class="mc-year">2026</div>
+      <div class="mc-chips">
+        <span class="chip">Brenna McGrath Jun 6</span>
+        <span class="chip">JuliaKia Jun 27</span>
+        <span class="chip a">Jul 4 OTS deadline</span>
+      </div>
+      <div class="mc-upcoming-note">In progress &mdash; data TBD</div>
+    </div>
+  </a>
+
+  <!-- July–December — placeholders -->
+  <div class="month-card upcoming" style="cursor:default">
+    <div class="mc-inner">
+      <div class="mc-num">07 <span class="mc-badge upcoming">Ahead</span></div>
+      <div class="mc-month"><strong>July</strong></div>
+      <div class="mc-year">2026</div>
+      <div class="mc-chips"><span class="chip a">AFT Test Jul 26</span><span class="chip">Annual Training Aug</span></div>
+    </div>
+  </div>
+
+  <div class="month-card upcoming" style="cursor:default">
+    <div class="mc-inner">
+      <div class="mc-num">08 <span class="mc-badge upcoming">Ahead</span></div>
+      <div class="mc-month"><strong>August</strong></div>
+      <div class="mc-year">2026</div>
+      <div class="mc-chips"><span class="chip">Annual Training Aug 6&#8211;21</span><span class="chip r">Clark Choate Aug 1</span></div>
+    </div>
+  </div>
+
+  <div class="month-card upcoming" style="cursor:default">
+    <div class="mc-inner">
+      <div class="mc-num">09&#8211;12 <span class="mc-badge upcoming">Ahead</span></div>
+      <div class="mc-month"><strong>Sep &mdash; Dec</strong></div>
+      <div class="mc-year">2026</div>
+      <div class="mc-chips"><span class="chip a">Nov 2 OTS Board</span><span class="chip">Haleigh Dunbar Oct 10</span></div>
+    </div>
+  </div>
 
 </div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-l">julietdeltaone.github.io/monthly-recap &mdash; Updated May 2026</div>
+  <div class="footer-links">
+    <a href="cbc-sermons.html" class="footer-link">Sermons</a>
+    <a href="2026-overview.html" class="footer-link">Year Arc</a>
+    <a href="2026-05.html" class="footer-link">Latest Month</a>
+  </div>
+</div>
+
+</div><!-- /shell -->
 </body>
 </html>
