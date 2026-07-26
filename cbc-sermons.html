@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CBC Sermons &#8212; 2026</title>
+<title>CBC Sermons &middot; 2026</title>
 <!--
   CBC SERMONS DASHBOARD
   Adding a new month tab:
@@ -42,10 +42,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .mnav:hover{color:var(--tx);border-color:var(--b2)}
 /* Stats strip */
 .stats-strip{display:flex;gap:0;border:1px solid var(--b0);margin-bottom:20px;background:var(--g);overflow-x:auto;scrollbar-width:none}
-.month-tabs{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid var(--b0);margin-bottom:24px;position:sticky;top:0;z-index:50;background:var(--bg);margin-left:-24px;margin-right:-24px;padding-left:24px}
-.month-tab{font-family:var(--mono);font-size:10px;letter-spacing:.8px;text-transform:uppercase;padding:9px 18px;border:none;border-bottom:2px solid transparent;background:none;color:var(--t4);cursor:pointer;transition:all .2s;white-space:nowrap}
-.month-tab:hover{color:var(--t2)}
-.month-tab.on{color:var(--amber);border-bottom-color:var(--amber)}
+.month-tabs{display:flex;flex-wrap:wrap;gap:8px;border-bottom:none;margin-bottom:28px;position:sticky;top:0;z-index:50;background:rgba(6,8,16,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);margin-left:-24px;margin-right:-24px;padding:16px 24px;border-bottom:1px solid rgba(255,255,255,.08)}
+.month-tab{font-family:var(--sans);font-weight:700;font-size:19px;letter-spacing:-.3px;text-transform:none;padding:10px 20px;border:1.5px solid rgba(255,255,255,.10);border-radius:12px;background:rgba(255,255,255,.03);color:var(--t3);cursor:pointer;transition:all .25s cubic-bezier(.22,.68,0,1.15);white-space:nowrap}
+.month-tab:hover{color:#fff;border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.06);transform:translateY(-2px)}
+.month-tab.on{color:#0a0f0c;background:var(--amber);border-color:var(--amber);box-shadow:0 6px 20px rgba(255,184,48,.35);transform:translateY(-1px)}
 .stats-strip::-webkit-scrollbar{display:none}
 .sst{flex:1;padding:12px 16px;border-right:1px solid var(--b0);min-width:100px}
 .sst:last-child{border-right:none}
@@ -104,6 +104,11 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .note-lbl{font-family:var(--mono);font-size:7px;letter-spacing:.2em;text-transform:uppercase;display:block;margin-bottom:4px;color:var(--amber);opacity:.8}
 /* Empty state */
 .empty-state{padding:40px 20px;text-align:center;color:var(--t4);font-family:var(--mono);font-size:11px}
+/* ══ MODERN MINIMALIST OVERRIDE (matches June recap theme) ══ */
+.side-card,.sermon-card,.stats-strip,.sst,.note-card,.reading-card{border-radius:14px !important}
+.sermon-card{transition:transform .25s cubic-bezier(.22,.68,0,1.15),box-shadow .25s ease,border-color .2s ease}
+.sermon-card:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.35)}
+.theme-pill,.scripture-tag{border-radius:999px !important}
 </style>
 </head>
 <body>
@@ -113,11 +118,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 
 <div class="hdr">
   <div style="display:flex;align-items:center;gap:12px">
-    <span class="hdr-title"><strong>CBC</strong> Sermons &mdash; 2026</span>
-  </div>
-  <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
-    <a href="2026-05.html" class="mnav">&#8592; May Recap</a>
-    <a href="index.html" class="mnav">All Months</a>
+    <span class="hdr-title"><strong>CBC</strong> Sermons &middot; 2026</span>
   </div>
 </div>
 
@@ -188,7 +189,7 @@ const SERMONS = [
     book:'Acts 1:1&#8211;8',
     themes:['commission','Holy Spirit','waiting','witness'],
     scriptures:['Acts 1:1-8','Luke 24:44-49'],
-    overview:'Pastor opened the Acts series establishing Luke&rsquo;s intent: a continuation of what Jesus began to do and teach. The forty-day post-resurrection ministry and the promise of the Spirit framed as prerequisite to mission.',
+    overview:'Brad opened the Acts series establishing Luke&rsquo;s intent: a continuation of what Jesus began to do and teach. The forty-day post-resurrection ministry and the promise of the Spirit framed as prerequisite to mission.',
     points:['Jesus appeared for 40 days speaking about the kingdom of God — establishing that the resurrection is the starting point, not the ending point','The disciples still ask about restoring the kingdom to Israel — a reminder that even those closest to Jesus misunderstood the scope of the mission','&ldquo;You will receive power&rdquo; — not given so we feel powerful, but so we can be witnesses','Jerusalem, Judea, Samaria, ends of the earth — the geographic expansion is also a cultural and social one. Samaria was not an easy next step.'],
     application:'The same Spirit promised to the disciples is the resource available now. The commission doesn&rsquo;t shrink with geography — it expands.',
     commentary:'Strong opening to the series. The contrast between the disciples&rsquo; small political question and Jesus&rsquo; global answer was well handled.'},
@@ -280,10 +281,10 @@ const SERMONS = [
     book:'Acts 5:1&#8211;11',
     themes:['integrity','deception','fear','Holy Spirit','community trust'],
     scriptures:['Acts 5:1-11'],
-    overview:'The first internal failure of the early church. Ananias and Sapphira sell property and give part of the proceeds while presenting it as the full amount. Peter identifies the lie as not against the community but against the Holy Spirit. The severity of the outcome produces &ldquo;great fear.&rdquo; Pastor addressed this passage directly — the judgment is not about giving a partial amount, it&rsquo;s about the deception.',
+    overview:'The first internal failure of the early church. Ananias and Sapphira sell property and give part of the proceeds while presenting it as the full amount. Peter identifies the lie as not against the community but against the Holy Spirit. The severity of the outcome produces &ldquo;great fear.&rdquo; Brad addressed this passage directly. The judgment is not about giving a partial amount, it&rsquo;s about the deception.',
     points:['While it remained, was it not your own? — the property and the money were never required. The sin was the lie, not the amount.','You have not lied to men but to God — the presence of the Spirit in the community means deception in the community is deception of God','The three-hour gap between Ananias and Sapphira is a window she could have used — the choice was repeated, not coerced','Great fear came upon the whole church — not punishment of the congregation, but a recalibration of what this community is'],
     application:'Integrity in the community is not about performing generosity — it&rsquo;s about not performing at all. The gap between what we present and what is true is where this passage lives.',
-    commentary:'Pastor didn&rsquo;t soften this one. Good. The tendency to explain away uncomfortable passages often takes the edge off the thing that makes them useful.'},
+    commentary:'Brad didn&rsquo;t soften this one. Good. The tendency to explain away uncomfortable passages often takes the edge off the thing that makes them useful.'},
 
   {id:'S2611',month:'mar',section:'acts',date:'Mar 15, 2026',
     title:'The Apostles Before the Council, Again',
@@ -358,11 +359,11 @@ const SERMONS = [
 
   // ── MAY ─────────────────────────────────────────────────────────────
   {id:'S2618',month:'may',section:'epistle',date:'May 3, 2026',
-    title:'Pressing On &mdash; The Commitment to Forgiveness',
+    title:'Pressing On: The Commitment to Forgiveness',
     book:'Philippians 3:13&#8211;14',
     themes:['forgiveness','guilt','shame','pressing on','commitment'],
     scriptures:['Philippians 3:13-14','John 3:16-17','Matthew 6:14-15','Philippians 4:8'],
-    overview:'Pastor took a deliberate detour from the Acts series — a sermon that had been on his heart through the week, prompted by pastoral conversations about people held down by guilt and shame from their past. The anchor text is Philippians 3: forgetting what is behind, pressing toward what is ahead. He identified forgiveness not as a feeling to wait for but as a commitment to make.',
+    overview:'Brad took a deliberate detour from the Acts series, a sermon that had been on his heart through the week, prompted by conversations about people held down by guilt and shame from their past. The anchor text is Philippians 3: forgetting what is behind, pressing toward what is ahead. He identified forgiveness not as a feeling to wait for but as a commitment to make.',
     points:[
       'Forgetting those things which are behind — the grammar is active, not passive. It is something done, not something that happens to you.',
       'God did not send his Son to condemn the world (John 3:17) — the part of the verse that gets omitted. Christ came to save, not to give us an &ldquo;unbearable amount of guilt and shame.&rdquo;',
@@ -372,23 +373,23 @@ const SERMONS = [
       'When you say &ldquo;I can&rsquo;t forgive myself,&rdquo; you are telling God that Christ&rsquo;s sacrifice is not sufficient for your case. That&rsquo;s the theological weight of the statement.',
     ],
     application:'Two invitations: commit to forgiving someone else who has hurt you, and commit to receiving God&rsquo;s forgiveness of yourself — not as a feeling to wait for, but as a truth to stand on regardless of how it feels. The standing is the commitment.',
-    commentary:'A pastoral sermon — not exegetical but deeply personal. Pastor was clearly carrying something for his congregation into this. The repeated phrase &ldquo;not about a feeling&rdquo; landed differently each time. Philippians 4:8 as the counterweight to rumination was a practical note I hadn&rsquo;t heard framed that way before.'},
+    commentary:'A pastoral sermon, not exegetical but deeply personal. Brad was clearly carrying something for his congregation into this. The repeated phrase &ldquo;not about a feeling&rdquo; landed differently each time. Philippians 4:8 as the counterweight to rumination was a practical note I hadn&rsquo;t heard framed that way before.'},
 
   {id:'S2619',month:'may',section:'epistle',date:'May 10, 2026',
-    title:'Spiritual Parenting &mdash; Faith Passed Down',
+    title:'Spiritual Parenting: Faith Passed Down',
     book:'2 Timothy 1:1&#8211;7',
     themes:['faith','family','intergenerational','spiritual parenting','stir up the gift'],
     scriptures:['2 Timothy 1:1-7','Psalm 105:1-5'],
-    overview:'Pastor opened by telling the story of his mother and her life verse — Psalm 105:1-5 — passed down when he entered vocational ministry. That personal frame introduced 2 Timothy 1: Paul writing to Timothy, noting that the faith in Timothy &ldquo;first dwelt in your grandmother Lois.&rdquo; Three generations of faith: Lois &#8594; Eunice &#8594; Timothy. The sermon was about what gets transmitted when parents stay faithful even when their children push back.',
+    overview:'Brad opened by telling the story of his mother and her life verse, Psalm 105:1-5, passed down when he entered vocational ministry. That personal frame introduced 2 Timothy 1: Paul writing to Timothy, noting that the faith in Timothy &ldquo;first dwelt in your grandmother Lois.&rdquo; Three generations of faith: Lois &#8594; Eunice &#8594; Timothy. The sermon was about what gets transmitted when parents stay faithful even when their children push back.',
     points:[
       'A genuine faith that dwelt first in your grandmother Lois — faith documented through three generations in two verses. The economy of the observation is striking.',
-      'Pastor&rsquo;s mother took him to church even when he ran from it. The original drug problem: &ldquo;you got drug to church.&rdquo; The humor carries a point about consistency over coercion.',
+      'Brad&rsquo;s mother took him to church even when he ran from it. The original drug problem: &ldquo;you got drug to church.&rdquo; The humor carries a point about consistency over coercion.',
       'I remind you to stir up the gift of God — the gift needs stirring. Faith inherited can cool without attention.',
       'God has not given us a spirit of fear, but of power, love, and a sound mind — Timothy is being timid. Paul writes to address the temperament, not rebuke it.',
-      'The Psalm 105 frame: give thanks, call on his name, tell of his deeds, sing to him, seek his face. Pastor used these as a self-check for whether he&rsquo;s on track in ministry.',
+      'The Psalm 105 frame: give thanks, call on his name, tell of his deeds, sing to him, seek his face. Brad used these as a self-check for whether he&rsquo;s on track in ministry.',
     ],
     application:'What faith looks like to the person watching you is different from what it feels like from the inside. Lois and Eunice did not know they were being studied. The transmission of faith is often unaware of itself.',
-    commentary:'A Mother&rsquo;s Day-adjacent Sunday — the generational theme fit the occasion without being forced. The personal story about Pastor&rsquo;s mom opened the passage in a way that straight exegesis would not have. The &ldquo;stir up the gift&rdquo; point applies beyond Timothy — anything inherited requires active maintenance.'},
+    commentary:'A Mother&rsquo;s Day-adjacent Sunday, the generational theme fit the occasion without being forced. The personal story about Brad&rsquo;s mom opened the passage in a way that straight exegesis would not have. The &ldquo;stir up the gift&rdquo; point applies beyond Timothy: anything inherited requires active maintenance.'},
 
   // ── JUNE ────────────────────────────────────────────────────────────
   {id:'S2620',month:'jun',section:'epistle',date:'June 7, 2026',
@@ -396,29 +397,29 @@ const SERMONS = [
     book:'Exodus 14:1&#8211;14',
     themes:['trust','impossible situations','waiting on God','seasons'],
     scriptures:['Exodus 14:1-14','Isaiah 55:8-9','Ecclesiastes 3:1-8','Jeremiah 29:11'],
-    overview:'First in a short series answering hard questions about trust. Pastor opened with Moses at the Red Sea &#8212; boxed in by the sea and Pharaoh&rsquo;s army, with God having already told him it would happen. The core point: God knowing beforehand doesn&rsquo;t remove the impossible feeling, but it changes how you carry it.',
+    overview:'First in a short series answering hard questions about trust. Brad opened with Moses at the Red Sea, boxed in by the sea and Pharaoh&rsquo;s army, with God having already told him it would happen. The core point is that God knowing beforehand doesn&rsquo;t remove the impossible feeling, but it changes how you carry it.',
     points:[
-      'God already knew &#8212; Exodus 14 shows God telling Moses the pursuit was coming before it happened. Foreknowledge doesn&rsquo;t erase the impossible feeling, but it means nothing catches God off guard.',
-      '&ldquo;Stand still&rdquo; (Ex. 14:13) is a command, not a suggestion &#8212; the instruction in an impossible spot is to stop trying to engineer a way out and let God fight it.',
-      'Isaiah 55:8-9 &mdash; God&rsquo;s ways and thoughts are higher than ours. If prayer is the last resort instead of the first move, this verse lands hard.',
-      'Ecclesiastes 3 &mdash; there is a season for everything, including the hard ones. Recognizing you&rsquo;re in a season keeps you from mistaking a chapter for the whole story.',
+      'God already knew. Exodus 14 shows God telling Moses the pursuit was coming before it happened. Foreknowledge doesn&rsquo;t erase the impossible feeling, but it means nothing catches God off guard.',
+      '&ldquo;Stand still&rdquo; (Ex. 14:13) is a command, not a suggestion. The instruction in an impossible spot is to stop trying to engineer a way out and let God fight it.',
+      'Isaiah 55:8-9: God&rsquo;s ways and thoughts are higher than ours. If prayer is the last resort instead of the first move, this verse lands hard.',
+      'Ecclesiastes 3: there is a season for everything, including the hard ones. Recognizing you&rsquo;re in a season keeps you from mistaking a chapter for the whole story.',
     ],
-    application:'Three practical moves when the situation feels impossible: keep repeating God&rsquo;s stated plan for you (Jeremiah 29:11) back to yourself, remember his ways are higher than yours, and stop outsourcing the anxiety to other people &#8212; take it to scripture and to God directly instead.',
-    commentary:'A practical, personal message &#8212; heavy on real talk about what it actually feels like to wait on God rather than a purely exegetical walkthrough. Sets up next week&rsquo;s question directly: how do you follow God when you can&rsquo;t see or feel him.'},
+    application:'Three practical moves when the situation feels impossible: keep repeating God&rsquo;s stated plan for you (Jeremiah 29:11) back to yourself, remember his ways are higher than yours, and stop outsourcing the anxiety to other people. Take it to scripture and to God directly instead.',
+    commentary:'A practical, personal message, heavy on real talk about what it actually feels like to wait on God rather than a purely exegetical walkthrough. Sets up next week&rsquo;s question directly: how do you follow God when you can&rsquo;t see or feel him.'},
 
   {id:'S2621',month:'jun',section:'guest',date:'June 21, 2026',
-    title:'Father&rsquo;s Day &#8212; Evidence, Anger, and the Paralytic',
+    title:'Father&rsquo;s Day: Evidence, Anger, and the Paralytic',
     book:'Mark 2:1&#8211;12',
     themes:['Father&rsquo;s Day','apologetics','anger','forgiveness','evidence for faith'],
     scriptures:['Mark 2:1-12','Isaiah 48:12-16','Psalm 139:1-4','Daniel 7:13-14'],
-    overview:'Guest speaker (Bob) delivered a Father&rsquo;s Day message in two halves. The first was personal testimony &#8212; losing a grandson, choosing not to be angry at God over it, and a lifelong struggle with anger &mdash; and a case for evidence-based faith (fine-tuning, the Bible&rsquo;s internal cross-referencing, messianic prophecy statistics, C.S. Lewis&rsquo;s conversion). The second was Mark 2&rsquo;s paralytic, lowered through a roof by four friends, as proof Jesus claimed divine authority.',
+    overview:'Guest speaker (Bob) delivered a Father&rsquo;s Day message in two halves. The first was personal testimony: losing a grandson, choosing not to be angry at God over it, and a lifelong struggle with anger, plus a case for evidence-based faith (fine-tuning, the Bible&rsquo;s internal cross-referencing, messianic prophecy statistics, C.S. Lewis&rsquo;s conversion). The second was Mark 2&rsquo;s paralytic, lowered through a roof by four friends, as proof Jesus claimed divine authority.',
     points:[
-      'His grandson&rsquo;s death didn&rsquo;t become anger at God &#8212; he and his wife chose to lean into God&rsquo;s presence in the tragedy rather than away from it, and framed grief itself as something to feel honestly, not suppress.',
+      'His grandson&rsquo;s death didn&rsquo;t become anger at God. He and his wife chose to lean into God&rsquo;s presence in the tragedy rather than away from it, and framed grief itself as something to feel honestly, not suppress.',
       'A run through the case for design: fine-tuning of physical constants, the Bible&rsquo;s 66 books/40 authors/1,500 years cohering into one story, and the statistical improbability of Jesus fulfilling hundreds of messianic prophecies by chance.',
-      'The four friends who tore open a roof to lower the paralytic to Jesus &#8212; faith that takes real risk and looks a little reckless from the outside.',
-      '&ldquo;Your sins are forgiven&rdquo; before the healing &#8212; Jesus deals with the soul first, and the visible healing that follows is what proves he had the authority to say it.',
+      'The four friends who tore open a roof to lower the paralytic to Jesus, faith that takes real risk and looks a little reckless from the outside.',
+      '&ldquo;Your sins are forgiven&rdquo; before the healing. Jesus deals with the soul first, and the visible healing that follows is what proves he had the authority to say it.',
     ],
-    application:'A caution to fathers specifically: self-control under stress is the fruit of the spirit that&rsquo;s hardest to fake, and losing it erases the witness of everything else. For anyone carrying father-related pain, the invitation was reconciliation &#8212; toward an estranged parent or child, or simply toward God as a better Father than any earthly one.',
+    application:'A caution to fathers specifically: self-control under stress is the fruit of the spirit that&rsquo;s hardest to fake, and losing it erases the witness of everything else. For anyone carrying father-related pain, the invitation was reconciliation, toward an estranged parent or child, or simply toward God as a better Father than any earthly one.',
     commentary:'A guest message, more testimony and apologetics than expository preaching, and it ran long. The Father&rsquo;s Day framing and the personal grief story gave it real weight even where the delivery wandered.'},
 
   {id:'S2622',month:'jun',section:'epistle',date:'June 28, 2026',
@@ -426,14 +427,14 @@ const SERMONS = [
     book:'John 11:28&#8211;44',
     themes:['grief','trust','suffering','focus'],
     scriptures:['John 11:28-44','Matthew 14:28-31'],
-    overview:'Continuation of the trust series, this time on grief specifically. Pastor used Jesus at Lazarus&rsquo;s tomb &#8212; Jesus weeping despite knowing he was about to raise Lazarus &#8212; as permission to actually feel loss rather than spiritually bypass it, while warning against letting grief calcify into something that blocks the relationship with God.',
+    overview:'Continuation of the trust series, this time on grief specifically. Brad used Jesus at Lazarus&rsquo;s tomb, Jesus weeping despite knowing he was about to raise Lazarus, as permission to actually feel loss rather than spiritually bypass it, while warning against letting grief calcify into something that blocks the relationship with God.',
     points:[
-      '&ldquo;Jesus wept&rdquo; even knowing the outcome &#8212; grief is not a faith failure. Feeling the loss and trusting God are not opposites.',
+      '&ldquo;Jesus wept&rdquo; even knowing the outcome. Grief is not a faith failure. Feeling the loss and trusting God are not opposites.',
       'Mary&rsquo;s &ldquo;Lord, if you had been here&rdquo; (John 11:32) is named as the common trap: assuming God&rsquo;s absence explains the pain, when he was present the whole time.',
-      'Peter walking on water (Matt. 14) as the picture of focus &#8212; steady as long as his eyes were on Jesus, sinking the moment he fixated on the storm instead.',
-      'Grief that runs too long risks curdling from conviction into condemnation &#8212; a wedge between the person and God rather than a bridge through the pain.',
+      'Peter walking on water (Matt. 14) as the picture of focus: steady as long as his eyes were on Jesus, sinking the moment he fixated on the storm instead.',
+      'Grief that runs too long risks curdling from conviction into condemnation, a wedge between the person and God rather than a bridge through the pain.',
     ],
-    application:'The invitation was to surrender a grief cycle that&rsquo;s stopped moving &#8212; not to stop missing who was lost, but to stop letting the cycle of anger and depression be the whole relationship with God. Practically: name the loss honestly, then deliberately refocus on Christ rather than the circumstance, the way Peter had to.',
+    application:'The invitation was to surrender a grief cycle that&rsquo;s stopped moving. Not to stop missing who was lost, but to stop letting the cycle of anger and depression be the whole relationship with God. Practically: name the loss honestly, then deliberately refocus on Christ rather than the circumstance, the way Peter had to.',
     commentary:'Drew on 25 years of pastoral counseling experience with grieving families, which gave the message unusual directness about how grief actually behaves versus how it&rsquo;s supposed to behave. Less a study passage, more pastoral care delivered from the pulpit.'},
 
 ];
