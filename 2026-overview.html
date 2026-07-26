@@ -39,22 +39,27 @@ svg{display:block}
 .hdr-title strong{color:var(--green)}
 .back-btn{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--t2);text-decoration:none;padding:7px 14px;border:1px solid var(--b1);border-radius:var(--r-pill);transition:all .25s cubic-bezier(.22,.68,0,1.15);background:var(--g)}
 .back-btn:hover{background:var(--gm);border-color:var(--b2);transform:translateX(-3px)}
-.hdr-row2{display:flex;align-items:center;gap:6px;padding:0 28px 12px;overflow-x:auto;scrollbar-width:none}
+.hdr-row2{display:flex;align-items:center;justify-content:center;gap:8px;padding:2px 28px 16px;overflow-x:auto;scrollbar-width:none;flex-wrap:wrap}
 .hdr-row2::-webkit-scrollbar{display:none}
-.mnav-lbl{font-family:var(--mono);font-size:8.5px;letter-spacing:1px;text-transform:uppercase;color:var(--t4);margin-right:4px;flex-shrink:0}
-.mnav-pill{flex-shrink:0;font-family:var(--mono);font-size:10.5px;font-weight:600;color:var(--t3);text-decoration:none;padding:5px 13px;border:1px solid var(--b0);border-radius:var(--r-pill);transition:all .2s ease;white-space:nowrap}
+.mnav-lbl{font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--t4);margin-right:6px;flex-shrink:0}
+.mnav-pill{flex-shrink:0;font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--t3);text-decoration:none;padding:8px 18px;border:1px solid var(--b0);border-radius:var(--r-pill);transition:all .2s ease;white-space:nowrap}
 .mnav-pill:hover{color:var(--tx);border-color:var(--b2);background:var(--g)}
 .mnav-pill.ahead{opacity:.4;pointer-events:none}
 
 .shell{max-width:1220px;margin:0 auto;padding:0 28px 100px;position:relative;z-index:1}
 
 /* ── GOALS STRIP ──────────────────────────────────────────────────────── */
-.goals-strip{display:flex;flex-wrap:wrap;gap:8px;padding:18px 0 22px;animation:fade-in-up .6s cubic-bezier(.22,.68,0,1.15) both}
-.goal-chip{display:flex;align-items:center;gap:8px;background:var(--g);border:1px solid var(--b0);border-radius:var(--r-pill);padding:7px 14px 7px 10px;transition:transform .2s ease,border-color .2s ease}
-.goal-chip:hover{transform:translateY(-2px);border-color:var(--b1)}
-.goal-chip svg{width:15px;height:15px;flex-shrink:0}
-.goal-chip-label{font-family:var(--mono);font-size:9.5px;color:var(--t4);text-transform:uppercase;letter-spacing:.4px}
-.goal-chip-val{font-size:11.5px;color:var(--t2);font-weight:600}
+.goals-dashboard{background:var(--g);border:1px solid var(--b0);border-radius:var(--r-lg);padding:22px 26px;margin:18px 0 28px;animation:fade-in-up .6s cubic-bezier(.22,.68,0,1.15) both}
+.gd-hd{margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--b0)}
+.gd-title{font-size:16px;font-weight:800;letter-spacing:-.3px;margin-bottom:3px}
+.gd-sub{font-family:var(--mono);font-size:9.5px;color:var(--t4);text-transform:uppercase;letter-spacing:.6px}
+.gd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 24px}
+@media(max-width:820px){.gd-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.gd-grid{grid-template-columns:1fr}}
+.gd-item{display:flex;gap:12px;align-items:flex-start}
+.gd-item svg{width:20px;height:20px;flex-shrink:0;margin-top:1px}
+.gd-item-label{font-family:var(--mono);font-size:9.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--t4);margin-bottom:4px}
+.gd-item-val{font-size:12px;color:var(--t2);line-height:1.5}
 
 /* ── SECTION HEADER ───────────────────────────────────────────────────── */
 .sec-hd{display:flex;align-items:baseline;justify-content:space-between;margin:8px 0 22px;flex-wrap:wrap;gap:8px}
@@ -140,6 +145,23 @@ svg{display:block}
 /* ── FOOTER + BACK TO TOP ─────────────────────────────────────────────── */
 .pagefoot{text-align:center;margin-top:60px;padding-top:22px;border-top:1px solid var(--b0)}
 .pagefoot-text{font-family:var(--mono);font-size:9.5px;color:var(--t4);margin-bottom:16px}
+/* ── FLOATING GOAL-PROGRESS SIDEBAR (uses the wide-screen side margins) ──
+   Only renders where there's actually room beside the 1220px shell.     */
+.goal-sidebar{position:fixed;top:50%;transform:translateY(-50%);right:calc(50% - 610px - 250px);width:220px;background:rgba(12,14,22,.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--b0);border-radius:var(--r-lg);padding:16px 18px;opacity:0;visibility:hidden;transition:opacity .4s ease,visibility .4s ease;z-index:50}
+.goal-sidebar.show{opacity:1;visibility:visible}
+.gsb-title{font-family:var(--mono);font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:var(--t4);margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--b0)}
+.gsb-item{margin-bottom:11px}
+.gsb-item:last-child{margin-bottom:0}
+.gsb-item-hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.gsb-item-k{font-size:10px;color:var(--t3)}
+.gsb-item-v{font-family:var(--mono);font-size:9.5px;font-weight:600}
+.gsb-item-v.ahead{color:var(--green)}
+.gsb-item-v.ontrack{color:var(--blue)}
+.gsb-item-v.behind{color:var(--amber)}
+.gsb-track{height:3px;background:rgba(255,255,255,.06);border-radius:var(--r-pill);overflow:hidden}
+.gsb-fill{height:100%;border-radius:var(--r-pill)}
+@media(max-width:1600px){.goal-sidebar{display:none}}
+
 .back-to-top{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border-radius:50%;background:var(--bg3);border:1px solid var(--b1);color:var(--t2);display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:16px;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease,transform .25s cubic-bezier(.22,.68,0,1.15),border-color .25s ease;z-index:90}
 .back-to-top.show{opacity:1;visibility:visible}
 .back-to-top:hover{transform:translateY(-3px);border-color:var(--b2)}
@@ -174,13 +196,55 @@ svg{display:block}
 
 <div class="shell">
 
-  <div class="goals-strip">
-    <div class="goal-chip"><svg style="color:var(--green)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span class="goal-chip-label">Financial</span><span class="goal-chip-val">$10K/yr &middot; $250 tithe/mo</span></div>
-    <div class="goal-chip"><svg style="color:var(--blue)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span class="goal-chip-label">Physical</span><span class="goal-chip-val">90-pt AFT standard</span></div>
-    <div class="goal-chip"><svg style="color:var(--vio)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.5v19M6 8.5h12"/></svg><span class="goal-chip-label">Spiritual</span><span class="goal-chip-val">New book every 2 months</span></div>
-    <div class="goal-chip"><svg style="color:var(--amber)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 6.5c-1.6-1.3-4-1.8-6.5-1.5v12c2.5-.3 4.9.2 6.5 1.5 1.6-1.3 4-1.8 6.5-1.5v-12c-2.5-.3-4.9.2-6.5 1.5z"/><path d="M12 6.5v12"/></svg><span class="goal-chip-label">Intellectual</span><span class="goal-chip-val">New topic every month</span></div>
-    <div class="goal-chip"><svg style="color:var(--rose)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8 7l1.6-2.5h4.8L16 7"/><circle cx="12" cy="13.3" r="3.4"/></svg><span class="goal-chip-label">Creative</span><span class="goal-chip-val">3&#8211;4 weddings &middot; 6 shoots</span></div>
-    <div class="goal-chip"><svg style="color:var(--red)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 12l3.6-5.4-6.4 2 2.8 3.4z"/></svg><span class="goal-chip-label">Career</span><span class="goal-chip-val">Run every path, narrow by year end</span></div>
+  <div class="goals-dashboard">
+    <div class="gd-hd">
+      <div class="gd-title">2026 Goals</div>
+      <div class="gd-sub">Set January 2026 &middot; the baseline every month is measured against</div>
+    </div>
+    <div class="gd-grid">
+      <div class="gd-item">
+        <svg style="color:var(--green)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg>
+        <div class="gd-item-body">
+          <div class="gd-item-label">Financial</div>
+          <div class="gd-item-val">$10K/yr savings goal &middot; $250 tithe/mo &middot; $2,500/mo spending cap</div>
+        </div>
+      </div>
+      <div class="gd-item">
+        <svg style="color:var(--blue)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg>
+        <div class="gd-item-body">
+          <div class="gd-item-label">Physical</div>
+          <div class="gd-item-val">90-point AFT minimum, every event, Male 22&#8211;26</div>
+        </div>
+      </div>
+      <div class="gd-item">
+        <svg style="color:var(--vio)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.5v19M6 8.5h12"/></svg>
+        <div class="gd-item-body">
+          <div class="gd-item-label">Spiritual</div>
+          <div class="gd-item-val">New book of the Bible every two months, sermon notes weekly</div>
+        </div>
+      </div>
+      <div class="gd-item">
+        <svg style="color:var(--amber)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 6.5c-1.6-1.3-4-1.8-6.5-1.5v12c2.5-.3 4.9.2 6.5 1.5 1.6-1.3 4-1.8 6.5-1.5v-12c-2.5-.3-4.9.2-6.5 1.5z"/><path d="M12 6.5v12"/></svg>
+        <div class="gd-item-body">
+          <div class="gd-item-label">Intellectual</div>
+          <div class="gd-item-val">New learning topic every month, Jan through Dec</div>
+        </div>
+      </div>
+      <div class="gd-item">
+        <svg style="color:var(--rose)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8 7l1.6-2.5h4.8L16 7"/><circle cx="12" cy="13.3" r="3.4"/></svg>
+        <div class="gd-item-body">
+          <div class="gd-item-label">Creative</div>
+          <div class="gd-item-val">3&#8211;4 weddings &middot; 6 photo shoots, paid or unpaid</div>
+        </div>
+      </div>
+      <div class="gd-item">
+        <svg style="color:var(--red)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 12l3.6-5.4-6.4 2 2.8 3.4z"/></svg>
+        <div class="gd-item-body">
+          <div class="gd-item-label">Career Thread</div>
+          <div class="gd-item-val">Run every viable path, let the year narrow it down</div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="sec-hd">
@@ -519,6 +583,42 @@ svg{display:block}
 
 </div>
 
+<div class="goal-sidebar" id="goalSidebar">
+  <div class="gsb-title">Goal Progress &middot; June</div>
+  <div class="gsb-item">
+    <div class="gsb-item-hd"><span class="gsb-item-k">Savings ($10K)</span><span class="gsb-item-v ahead">$12,985</span></div>
+    <div class="gsb-track"><div class="gsb-fill" style="width:100%;background:var(--green)"></div></div>
+  </div>
+  <div class="gsb-item">
+    <div class="gsb-item-hd"><span class="gsb-item-k">Shoots (6)</span><span class="gsb-item-v ahead">9 of 6</span></div>
+    <div class="gsb-track"><div class="gsb-fill" style="width:100%;background:var(--green)"></div></div>
+  </div>
+  <div class="gsb-item">
+    <div class="gsb-item-hd"><span class="gsb-item-k">Weddings (3&#8211;4)</span><span class="gsb-item-v ontrack">2</span></div>
+    <div class="gsb-track"><div class="gsb-fill" style="width:55%;background:var(--blue)"></div></div>
+  </div>
+  <div class="gsb-item">
+    <div class="gsb-item-hd"><span class="gsb-item-k">AFT Deadlift</span><span class="gsb-item-v ahead">315 lb</span></div>
+    <div class="gsb-track"><div class="gsb-fill" style="width:100%;background:var(--green)"></div></div>
+  </div>
+  <div class="gsb-item">
+    <div class="gsb-item-hd"><span class="gsb-item-k">AFT Push-Up</span><span class="gsb-item-v ontrack">98%</span></div>
+    <div class="gsb-track"><div class="gsb-fill" style="width:98%;background:var(--blue)"></div></div>
+  </div>
+  <div class="gsb-item">
+    <div class="gsb-item-hd"><span class="gsb-item-k">AFT Plank</span><span class="gsb-item-v ontrack">97%</span></div>
+    <div class="gsb-track"><div class="gsb-fill" style="width:97%;background:var(--blue)"></div></div>
+  </div>
+  <div class="gsb-item">
+    <div class="gsb-item-hd"><span class="gsb-item-k">Reading Plan</span><span class="gsb-item-v ontrack">On pace</span></div>
+    <div class="gsb-track"><div class="gsb-fill" style="width:75%;background:var(--blue)"></div></div>
+  </div>
+  <div class="gsb-item">
+    <div class="gsb-item-hd"><span class="gsb-item-k">Career &mdash; Narrowing</span><span class="gsb-item-v ontrack">OTS live</span></div>
+    <div class="gsb-track"><div class="gsb-fill" style="width:65%;background:var(--blue)"></div></div>
+  </div>
+</div>
+
 <a href="#top" class="back-to-top" id="backToTop">&#8593;</a>
 
 <script>
@@ -535,9 +635,12 @@ const scoreObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll('.score-card').forEach(c => scoreObserver.observe(c));
 
 const backToTop = document.getElementById('backToTop');
+const goalSidebar = document.getElementById('goalSidebar');
 window.addEventListener('scroll', () => {
   if (window.scrollY > 500) backToTop.classList.add('show');
   else backToTop.classList.remove('show');
+  if (window.scrollY > 260) goalSidebar.classList.add('show');
+  else goalSidebar.classList.remove('show');
 }, { passive: true });
 
 // Spine fill grows with scroll progress through the timeline (purely additive, no visibility gating)
