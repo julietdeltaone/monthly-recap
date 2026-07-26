@@ -10,7 +10,7 @@
   --bg:#060810;--bg2:#0C0E16;--bg3:#12151F;--bg4:#181C28;
   --g:rgba(255,255,255,.04);--gm:rgba(255,255,255,.07);
   --b0:rgba(255,255,255,.06);--b1:rgba(255,255,255,.10);--b2:rgba(255,255,255,.18);
-  --tx:#E2E8F0;--t2:rgba(226,232,240,.70);--t3:rgba(226,232,240,.45);--t4:rgba(226,232,240,.25);
+  --tx:#F5F8FC;--t2:rgba(245,248,252,.88);--t3:rgba(245,248,252,.68);--t4:rgba(245,248,252,.48);
   --green:#00E5A0;--gdim:rgba(0,229,160,.10);
   --blue:#4DA8FF;--bdim:rgba(77,168,255,.10);
   --amber:#FFB830;--adim:rgba(255,184,48,.10);
@@ -22,14 +22,12 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100vh;-webkit-font-smoothing:antialiased}
-@keyframes scan-v{0%{top:-2px}100%{top:100vh}}
+@keyframes orb-breathe{0%,100%{transform:scale(1);opacity:.35}50%{transform:scale(1.18);opacity:.55}}
 @keyframes breathe-g{0%,100%{box-shadow:0 0 0 1px rgba(0,229,160,.12)}50%{box-shadow:0 0 0 1px rgba(0,229,160,.5),0 0 28px rgba(0,229,160,.12)}}
 @keyframes dot-blink{0%,100%{opacity:1}45%,55%{opacity:.08}}
 @keyframes slide-up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.scan1,.scan2{position:fixed;left:0;width:100%;height:1px;pointer-events:none;z-index:9999}
-.scan1{background:linear-gradient(90deg,transparent,rgba(0,229,160,.07),transparent);animation:scan-v 9s linear infinite}
-.scan2{background:linear-gradient(90deg,transparent,rgba(77,168,255,.04),transparent);animation:scan-v 14s linear infinite 5s}
-.shell{max-width:1100px;margin:0 auto;padding:40px 24px 80px}
+.bg-orb{position:fixed;top:50%;left:50%;width:60vmax;height:60vmax;transform:translate(-50%,-50%);pointer-events:none;z-index:0;border-radius:50%;background:radial-gradient(circle,rgba(0,229,160,.10) 0%,rgba(77,168,255,.06) 45%,transparent 72%);filter:blur(40px);animation:orb-breathe 8s ease-in-out infinite}
+.shell{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:40px 24px 80px}
 
 /* Header */
 .hdr{margin-bottom:32px;animation:slide-up .6s ease both}
@@ -108,8 +106,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 </style>
 </head>
 <body>
-<div class="scan1"></div>
-<div class="scan2"></div>
+<div class="bg-orb"></div>
 <div class="shell">
 
 <!-- Header -->
