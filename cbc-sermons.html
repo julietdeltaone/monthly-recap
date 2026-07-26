@@ -42,6 +42,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .mnav:hover{color:var(--tx);border-color:var(--b2)}
 /* Stats strip */
 .stats-strip{display:flex;gap:0;border:1px solid var(--b0);margin-bottom:20px;background:var(--g);overflow-x:auto;scrollbar-width:none}
+.month-tabs{display:flex;flex-wrap:wrap;gap:0;border-bottom:1px solid var(--b0);margin-bottom:24px;position:sticky;top:0;z-index:50;background:var(--bg);margin-left:-24px;margin-right:-24px;padding-left:24px}
+.month-tab{font-family:var(--mono);font-size:10px;letter-spacing:.8px;text-transform:uppercase;padding:9px 18px;border:none;border-bottom:2px solid transparent;background:none;color:var(--t4);cursor:pointer;transition:all .2s;white-space:nowrap}
+.month-tab:hover{color:var(--t2)}
+.month-tab.on{color:var(--amber);border-bottom-color:var(--amber)}
 .stats-strip::-webkit-scrollbar{display:none}
 .sst{flex:1;padding:12px 16px;border-right:1px solid var(--b0);min-width:100px}
 .sst:last-child{border-right:none}
@@ -119,20 +123,30 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 
 <!-- Stats strip -->
 <div class="stats-strip">
-  <div class="sst"><div class="sst-v" id="stat-total">15</div><div class="sst-l">Sermons Logged</div></div>
-  <div class="sst"><div class="sst-v">12</div><div class="sst-l">Acts Series</div></div>
-  <div class="sst"><div class="sst-v">2</div><div class="sst-l">Pastoral Detours</div></div>
-  <div class="sst"><div class="sst-v">5</div><div class="sst-l">Months Covered</div></div>
+  <div class="sst"><div class="sst-v" id="stat-total">22</div><div class="sst-l">Sermons Logged</div></div>
+  <div class="sst"><div class="sst-v" id="stat-acts">17</div><div class="sst-l">Acts Series</div></div>
+  <div class="sst"><div class="sst-v" id="stat-epistle">4</div><div class="sst-l">Pastoral Detours</div></div>
+  <div class="sst"><div class="sst-v" id="stat-months">6</div><div class="sst-l">Months Covered</div></div>
   <div class="sst"><div class="sst-v">Jan &ndash; Jun</div><div class="sst-l">2026</div></div>
+</div>
+
+<!-- Month tabs — primary navigation between months of sermons -->
+<div class="month-tabs">
+  <button class="month-tab" onclick="filterMonth('jan',this)">January</button>
+  <button class="month-tab" onclick="filterMonth('feb',this)">February</button>
+  <button class="month-tab" onclick="filterMonth('mar',this)">March</button>
+  <button class="month-tab" onclick="filterMonth('apr',this)">April</button>
+  <button class="month-tab" onclick="filterMonth('may',this)">May</button>
+  <button class="month-tab" onclick="filterMonth('jun',this)">June</button>
 </div>
 
 <div class="main-grid">
   <!-- Sidebar -->
   <aside class="sidebar">
     <div class="side-card aa">
-      <div class="sc-title" style="color:var(--amber)">Total Logged</div>
-      <div id="sidebar-count" style="font-family:var(--mono);font-size:20px;font-weight:600;color:var(--amber)">22 sermons</div>
-      <div style="font-family:var(--mono);font-size:9px;color:var(--t4);margin-top:2px">Jan &#8211; Jun 2026</div>
+      <div class="sc-title" style="color:var(--amber)">Viewing</div>
+      <div id="sidebar-month" style="font-family:var(--mono);font-size:16px;font-weight:600;color:var(--amber)">June</div>
+      <div id="sidebar-count" style="font-family:var(--mono);font-size:9px;color:var(--t4);margin-top:2px">3 sermons</div>
     </div>
     <div class="side-card">
       <div class="sc-title">2026 Reading Plan</div>
@@ -429,39 +443,46 @@ const MONTH_COUNTS = {jan:4, feb:4, mar:5, apr:4, may:2, jun:3};
 
 // ── MONTH LABELS ──────────────────────────────────────────────────────
 const MONTH_LABELS = {
-  jan:'January', feb:'February', mar:'March', apr:'April', may:'May', jun:'June', all:'All Months'
+  jan:'January', feb:'February', mar:'March', apr:'April', may:'May', jun:'June'
 };
 
 // ── INIT ──────────────────────────────────────────────────────────────
 function init(){
-  // No month filtering — this page just shows every sermon, grouped by month.
-  // (JD's monthly recap pages already handle per-month navigation.)
-  renderSermons(SERMONS);
+  // Primary navigation is by month. Defaults to the current/latest month (June)
+  // unless a specific month is requested via URL hash (e.g. cbc-sermons.html#mar).
+  const hash = window.location.hash.replace('#','');
+  const validMonths = ['jan','feb','mar','apr','may','jun'];
+  const startMonth = validMonths.includes(hash) ? hash : 'jun';
+  filterMonth(startMonth, null, true);
   buildMonthChart();
+}
+
+// ── FILTER (by month — the only navigation on this page) ───────────────
+function filterMonth(month, el, silent=false){
+  document.querySelectorAll('.month-tab').forEach(t => t.classList.remove('on'));
+  if(el){
+    el.classList.add('on');
+  } else {
+    document.querySelectorAll('.month-tab').forEach(t => {
+      const onclick = t.getAttribute('onclick');
+      if(onclick && onclick.includes("'"+month+"'")) t.classList.add('on');
+    });
+  }
+  if(!silent) window.location.hash = month;
+  document.getElementById('sidebar-month').textContent = MONTH_LABELS[month] || month;
+  const filtered = SERMONS.filter(s => s.month === month);
+  document.getElementById('sidebar-count').textContent = filtered.length + ' sermon' + (filtered.length !== 1 ? 's' : '');
+  renderSermons(filtered);
 }
 
 // ── RENDER ────────────────────────────────────────────────────────────
 function renderSermons(list){
   const container = document.getElementById('sermon-list');
   if(!list.length){
-    container.innerHTML = '<div class="empty-state">No sermons logged yet.</div>';
+    container.innerHTML = '<div class="empty-state">No sermons logged for this month yet.</div>';
     return;
   }
-  // Group by month, in chronological order
-  let html = '';
-  const byMonth = {};
-  list.forEach(s => {
-    if(!byMonth[s.month]) byMonth[s.month] = [];
-    byMonth[s.month].push(s);
-  });
-  const order = ['jan','feb','mar','apr','may','jun'];
-  order.forEach(m => {
-    if(byMonth[m]){
-      html += `<div class="section-divider">${MONTH_LABELS[m]}</div>`;
-      byMonth[m].forEach(s => html += sermonCard(s));
-    }
-  });
-  container.innerHTML = html;
+  container.innerHTML = list.map(s => sermonCard(s)).join('');
 }
 
 // ── SERMON CARD HTML ──────────────────────────────────────────────────
