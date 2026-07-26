@@ -311,6 +311,37 @@ to{transform:translateX(-50%)}}
 .ai-side-lbl{font-family:var(--mono);font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:var(--vio)}
 .ai-side-body{font-size:12px;line-height:1.68;color:var(--t2);font-style:italic}
 .ai-side-body strong{color:var(--tx);font-style:normal}
+
+/* ── PHYSICAL CALENDAR (hover to see workout detail) ─────────────────── */
+.phys-cal-wrap{grid-column:1/-1;padding:20px 22px}
+.phys-cal-hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;flex-wrap:wrap;gap:8px}
+.phys-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
+.phys-cal-dow{text-align:center;font-family:var(--mono);font-size:9px;color:var(--t4);padding:2px 0 8px;text-transform:uppercase;letter-spacing:.1em}
+.cal-day{position:relative;aspect-ratio:1;border:1px solid var(--b0);background:var(--g);padding:6px;display:flex;flex-direction:column;transition:border-color .15s,background .15s,transform .15s}
+.cal-day.has-session{border-color:var(--b1);cursor:pointer}
+.cal-day.has-session:hover{border-color:var(--blue);background:var(--gm);z-index:20;transform:scale(1.05)}
+.cal-day.blank{border:none;background:none}
+.cal-day-num{font-family:var(--mono);font-size:12px;color:var(--t2);font-weight:500}
+.cal-day.has-session .cal-day-num{color:var(--tx)}
+.cal-day-dots{display:flex;flex-wrap:wrap;gap:3px;margin-top:auto}
+.cal-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;box-shadow:0 0 4px currentColor}
+.cal-tooltip{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(-4px);width:230px;background:var(--bg4);border:1px solid var(--b2);padding:11px 13px;z-index:50;opacity:0;visibility:hidden;transition:opacity .15s ease,transform .15s ease;pointer-events:none;box-shadow:0 10px 30px rgba(0,0,0,.7)}
+.cal-day.has-session:hover .cal-tooltip{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.phys-cal>.cal-day:nth-child(7n-1).has-session .cal-tooltip,.phys-cal>.cal-day:nth-child(7n).has-session .cal-tooltip{left:auto;right:0;transform:translateY(-4px)}
+.phys-cal>.cal-day:nth-child(7n-1).has-session:hover .cal-tooltip,.phys-cal>.cal-day:nth-child(7n).has-session:hover .cal-tooltip{transform:translateY(0)}
+.phys-cal>.cal-day:nth-child(7n-6).has-session .cal-tooltip{left:0;transform:translateY(-4px)}
+.phys-cal>.cal-day:nth-child(7n-6).has-session:hover .cal-tooltip{transform:translateY(0)}
+.cal-tooltip-date{font-family:var(--mono);font-size:9px;color:var(--amber);text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}
+.cal-tooltip-badges{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:7px}
+.cal-tooltip-note{font-size:11px;color:var(--t2);line-height:1.55}
+.phys-cal-legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;padding-top:12px;border-top:1px solid var(--b0)}
+.phys-cal-chip{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9px;color:var(--t3)}
+/* Smaller condensed widgets below the calendar */
+.phys-widgets{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px}
+@media(max-width:900px){.phys-widgets{grid-template-columns:1fr 1fr}}
+.pw-panel{background:var(--g);border:1px solid var(--b0);padding:12px 14px}
+.pw-panel .plbl{font-size:9px;margin-bottom:8px}
+.pw-panel .chart-wrap{height:120px}
 .nti-d{font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px;color:var(--t4)}
 .nti-t{font-size:11.5px;line-height:1.6;color:var(--t2)}
 .nti-t strong{color:var(--tx);font-weight:500}
@@ -341,18 +372,18 @@ to{transform:translateX(-50%)}}
 /* ── LIGHT WRAP (Intellectual + Reflections tabs) ───────────────────── */
 .light-wrap{background:var(--bg2);padding:24px 0 40px}
 .light-panel{background:var(--g);border:1px solid var(--b0);padding:18px 20px}
-.ldr{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;font-size:12px;border-bottom:1px solid rgba(0,0,0,.06);color:#555550}
+.ldr{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;font-size:12px;border-bottom:1px solid var(--b0);color:var(--t3)}
 .ldr:last-child{border-bottom:none}
 
 /* ── P&L TABLE (light bg) ─────────────────────────────────────────────── */
 .pl-tbl{width:100%;border-collapse:collapse;font-size:11px}
-.pl-tbl th{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:5px 8px;text-align:right;color:#888880;border-bottom:1px solid rgba(0,0,0,.1)}
+.pl-tbl th{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:5px 8px;text-align:right;color:var(--t4);border-bottom:1px solid var(--b1)}
 .pl-tbl th:first-child{text-align:left}
-.pl-tbl td{padding:5px 8px;border-bottom:1px solid rgba(0,0,0,.06);text-align:right;font-family:var(--mono);font-size:10px;color:#555550}
-.pl-tbl td:first-child{text-align:left;font-family:var(--sans);font-size:11px;color:#444440}
-.pl-tbl tr.total-row td{border-top:1px solid rgba(0,0,0,.15);font-weight:600;color:#0a0a08;border-bottom:none}
-.pl-tbl tr.hl-row td{background:rgba(0,180,120,.06)}
-.pl-pos{color:#2a7a3a!important}.pl-neg{color:#8a2020!important}.pl-proj{color:#8a6010!important}
+.pl-tbl td{padding:5px 8px;border-bottom:1px solid var(--b0);text-align:right;font-family:var(--mono);font-size:10px;color:var(--t3)}
+.pl-tbl td:first-child{text-align:left;font-family:var(--sans);font-size:11px;color:var(--t2)}
+.pl-tbl tr.total-row td{border-top:1px solid var(--b2);font-weight:600;color:var(--tx);border-bottom:none}
+.pl-tbl tr.hl-row td{background:rgba(0,229,160,.08)}
+.pl-pos{color:var(--green)!important}.pl-neg{color:var(--red)!important}.pl-proj{color:var(--amber)!important}
 
 /* ── IFRAME ───────────────────────────────────────────────────────────── */
 .sermon-iframe{width:100%;height:calc(100vh - 160px);border:none;background:var(--bg2)}
@@ -441,8 +472,48 @@ to{transform:translateX(-50%)}}
 <!-- TICKER — content duplicated for seamless CSS loop -->
 
 
+<!-- TABS -->
+<div class="tabs">
+  <button class="tab on"  data-t="overview"     onclick="switchTab('overview')">Overview</button>
+  <button class="tab"     data-t="financial"    onclick="switchTab('financial')">Financial</button>
+  <button class="tab"     data-t="physical"     onclick="switchTab('physical')">Physical</button>
+  <button class="tab"     data-t="spiritual"    onclick="switchTab('spiritual')">Spiritual</button>
+  <button class="tab"     data-t="career"       onclick="switchTab('career')">Career</button>
+  <button class="tab"     data-t="intellectual" onclick="switchTab('intellectual')">Intellectual</button>
+  <button class="tab"     data-t="creative"     onclick="switchTab('creative')">Creative</button>
+  <button class="tab"     data-t="reflections"  onclick="switchTab('reflections')">Reflections</button>
+</div>
+
+<!-- ═══ OVERVIEW TAB ═══ -->
+<div id="tab-overview" class="dash">
+  <aside class="side">
+    <div class="sc">
+      <div class="sgt">June at a Glance</div>
+      <div class="si"><span class="sk">Net Saved</span><span class="sv" style="color:var(--green)" id="ov-net">&#8212;</span></div>
+      <div class="si"><span class="sk">YTD Saved</span><span class="sv" style="color:var(--green)" id="ov-ytd">&#8212;</span></div>
+      <div class="si"><span class="sk">Gym Days</span><span class="sv" style="color:var(--blue)" id="ov-gym">&#8212;</span></div>
+      <div class="si"><span class="sk">OS603 Final</span><span class="sv" id="ov-os603">&#8212;</span></div>
+      <div class="si"><span class="sk">MK610 Final</span><span class="sv" id="ov-mk610">&#8212;</span></div>
+      <div class="si"><span class="sk">June Shoots</span><span class="sv" style="color:var(--rose)" id="ov-shoots-ct">&#8212;</span></div>
+    </div>
+    <div class="sc bv-a" style="border-top:1px solid rgba(255,184,48,.4)">
+      <div class="sgt" style="color:var(--amber)">&#9733; June PRs</div>
+      <div id="ov-prs"><div class="si"><span class="sk">Awaiting data</span><span class="sv dim">TBD</span></div></div>
+    </div>
+    <div class="sc">
+      <div class="sgt">Jump to</div>
+      <span class="sqlink" onclick="switchTab('financial')">&#8594; Financial</span>
+      <span class="sqlink" onclick="switchTab('physical')">&#8594; Physical</span>
+      <span class="sqlink" onclick="switchTab('career')">&#8594; Career</span>
+      <span class="sqlink" onclick="switchTab('creative')">&#8594; Creative</span>
+      <span class="sqlink" onclick="switchTab('reflections')">&#8594; Reflections</span>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="cg">
+<!-- ═══ OVERVIEW-ONLY: STAT STRIP + SPOTLIGHT ═══ -->
 <!-- ACCENT ORBS — ambient stat strip replacing ticker -->
-<div class="orb-row">
+<div class="orb-row" style="grid-column:1/-1">
   <div class="orb cg">
     <span class="orb-pulse" style="background:var(--green)"></span>
     <div class="orb-val" style="color:var(--green)" id="orb-net">&#8212;</div>
@@ -488,8 +559,9 @@ to{transform:translateX(-50%)}}
 </div>
 
 
+
 <!-- SPOTLIGHT BANNER — update narrative each month based on career events -->
-<div class="spotlight">
+<div class="spotlight" style="grid-column:1/-1">
   <div class="sp-tag">The thing to know about June 2026</div>
   <div class="sp-title" id="sp-title">&#8212;</div>
   <div class="sp-body" id="sp-body">&#8212;</div>
@@ -515,8 +587,9 @@ to{transform:translateX(-50%)}}
   </div>
 </div>
 
+
 <!-- STAT ROW -->
-<div class="stat-row">
+<div class="stat-row" style="grid-column:1/-1">
   <div class="stat bv-g" style="border-top:1px solid rgba(0,229,160,.35)">
     <div class="slbl">Net Saved</div>
     <div class="sval" style="color:var(--green)" id="sv-net">&#8212;</div>
@@ -544,45 +617,7 @@ to{transform:translateX(-50%)}}
   </div>
 </div>
 
-<!-- TABS -->
-<div class="tabs">
-  <button class="tab on"  data-t="overview"     onclick="switchTab('overview')">Overview</button>
-  <button class="tab"     data-t="financial"    onclick="switchTab('financial')">Financial</button>
-  <button class="tab"     data-t="physical"     onclick="switchTab('physical')">Physical</button>
-  <button class="tab"     data-t="spiritual"    onclick="switchTab('spiritual')">Spiritual</button>
-  <button class="tab"     data-t="career"       onclick="switchTab('career')">Career</button>
-  <button class="tab"     data-t="intellectual" onclick="switchTab('intellectual')">Intellectual</button>
-  <button class="tab"     data-t="creative"     onclick="switchTab('creative')">Creative</button>
-  <button class="tab"     data-t="reflections"  onclick="switchTab('reflections')">Reflections</button>
-</div>
 
-<!-- ═══ OVERVIEW TAB ═══ -->
-<div id="tab-overview" class="dash">
-  <aside class="side">
-    <div class="sc">
-      <div class="sgt">June at a Glance</div>
-      <div class="si"><span class="sk">Net Saved</span><span class="sv" style="color:var(--green)" id="ov-net">&#8212;</span></div>
-      <div class="si"><span class="sk">YTD Saved</span><span class="sv" style="color:var(--green)" id="ov-ytd">&#8212;</span></div>
-      <div class="si"><span class="sk">Gym Days</span><span class="sv" style="color:var(--blue)" id="ov-gym">&#8212;</span></div>
-      <div class="si"><span class="sk">OS603 Final</span><span class="sv" id="ov-os603">&#8212;</span></div>
-      <div class="si"><span class="sk">MK610 Final</span><span class="sv" id="ov-mk610">&#8212;</span></div>
-      <div class="si"><span class="sk">June Shoots</span><span class="sv" style="color:var(--rose)" id="ov-shoots-ct">&#8212;</span></div>
-    </div>
-    <div class="sc bv-a" style="border-top:1px solid rgba(255,184,48,.4)">
-      <div class="sgt" style="color:var(--amber)">&#9733; June PRs</div>
-      <div id="ov-prs"><div class="si"><span class="sk">Awaiting data</span><span class="sv dim">TBD</span></div></div>
-    </div>
-    <div class="sc">
-      <div class="sgt">Jump to</div>
-      <span class="sqlink" onclick="switchTab('financial')">&#8594; Financial</span>
-      <span class="sqlink" onclick="switchTab('physical')">&#8594; Physical</span>
-      <span class="sqlink" onclick="switchTab('career')">&#8594; Career</span>
-      <span class="sqlink" onclick="switchTab('creative')">&#8594; Creative</span>
-      <span class="sqlink" onclick="switchTab('reflections')">&#8594; Reflections</span>
-    </div>
-  </aside>
-  <div class="content">
-    <div class="cg">
       <div class="panel ag sf" style="cursor:pointer" onclick="switchTab('financial')">
         <div class="plbl">YTD Net Saved &#8212; Jan through Jun</div>
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px">
@@ -621,6 +656,16 @@ to{transform:translateX(-50%)}}
         <div class="prog" style="margin-top:12px">
           <div class="prog-hd"><span>Days to AFOQT test</span><span style="color:var(--vio)" id="ov-days-lbl">&#8212;</span></div>
           <div class="prog-track"><div class="prog-fill" id="ov-days-fill" style="background:var(--vio)"></div></div>
+        </div>
+      </div>
+      <div class="panel sf" style="cursor:pointer;grid-column:1/-1" onclick="switchTab('spiritual')">
+        <div class="plbl">June at a Glance &#8212; All Categories</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center">
+          <div class="chart-wrap tall"><canvas id="radarChart"></canvas></div>
+          <div>
+            <div class="mstat" style="border-top:1px solid rgba(255,184,48,.3);margin-bottom:6px"><div class="mstat-lbl">Spiritual</div><div class="mstat-val" style="color:var(--amber)">3 sermons logged</div></div>
+            <div style="font-size:11px;line-height:1.6;color:var(--t2)">Six categories, normalized against their own goals for June. Financial and Intellectual both closed the month essentially maxed out &#8212; YTD savings goal already cleared, and the semester closed at a 4.0. Career sits lower because the AFOQT clock only just started running (due Sep 25). Physical and Creative land mid-pack: no new strength PRs, but real cardio gains, and one paid wedding against a pipeline still filling in.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -795,43 +840,55 @@ to{transform:translateX(-50%)}}
   </aside>
   <div class="content">
     <div class="cg">
-      <div class="panel ab sf">
-        <div class="plbl">Volume by Session &#8212; June 2026</div>
-        <div class="note b"><span class="note-lbl">Source: FitNotes CSV &mdash; June 2026</span>21 training days. 114,025 lbs total volume. No new strength maxes, but both outdoor runs came back faster: 5K in 7:48/mi (Jun 7), 8mi in 8:37/mi (Jun 20). Trap Bar DL 315&#215;6 was a rep PR at max weight. When copying for July: replace DATA.physical.sessions[] with July FitNotes CSV export.</div>
-        <div class="chart-wrap tall"><canvas id="gymDetailChart"></canvas></div>
+      <!-- ═══ FULL-WIDTH CALENDAR — hover any day for workout detail ═══ -->
+      <div class="panel phys-cal-wrap">
+        <div class="phys-cal-hd">
+          <div class="plbl" style="margin-bottom:0">June 2026 Training Calendar</div>
+          <div style="font-family:var(--mono);font-size:9px;color:var(--t4)">Hover a day for the full session</div>
+        </div>
+        <div class="phys-cal" id="phys-cal-grid">
+          <div class="phys-cal-dow">Su</div><div class="phys-cal-dow">Mo</div><div class="phys-cal-dow">Tu</div><div class="phys-cal-dow">We</div><div class="phys-cal-dow">Th</div><div class="phys-cal-dow">Fr</div><div class="phys-cal-dow">Sa</div>
+          <!-- day cells injected by buildPhysCalendar() -->
+        </div>
+        <div class="phys-cal-legend" id="phys-cal-legend"></div>
       </div>
-      <div class="panel ab">
-        <div class="plbl">June vs May &#8212; Days &amp; Volume</div>
-        <div class="chart-wrap"><canvas id="physCompareChart"></canvas></div>
-      </div>
-      <div class="panel ab">
-        <div class="plbl">AFT Progress</div>
-        <div id="aft-progs"><!-- built from DATA.physical.aftProgress --></div>
-      </div>
-      <div class="panel ab sf">
-        <div class="plbl">Cardio &#8212; Distance &amp; Pace, June 2026</div>
-        <div class="note b"><span class="note-lbl">Source: FitNotes CSV &mdash; June 2026</span>6 cardio sessions: 2 outdoor runs, 2 treadmill sprint sessions, 2 stair sessions. Both outdoor runs improved on their May counterparts at the same distance.</div>
-        <div class="chart-wrap tall"><canvas id="cardioDistChart"></canvas></div>
-      </div>
-      <div class="panel ab">
-        <div class="plbl">Outdoor Run Pace &#8212; May vs June</div>
-        <div class="chart-wrap"><canvas id="cardioPaceChart"></canvas></div>
-        <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
-          <span class="trend-badge" style="border-color:rgba(0,229,160,.4)">&#9650; 5K: 8:20/mi &#8594; 7:48/mi</span>
-          <span class="trend-badge" style="border-color:rgba(0,229,160,.4)">&#9650; 8mi: 9:37/mi &#8594; 8:37/mi</span>
+
+      <!-- ═══ CONDENSED WIDGETS ═══ -->
+      <div class="phys-widgets">
+        <div class="pw-panel">
+          <div class="plbl">Volume by Session</div>
+          <div class="chart-wrap"><canvas id="gymDetailChart"></canvas></div>
+        </div>
+        <div class="pw-panel">
+          <div class="plbl">June vs May</div>
+          <div class="chart-wrap"><canvas id="physCompareChart"></canvas></div>
+        </div>
+        <div class="pw-panel">
+          <div class="plbl">AFT Progress</div>
+          <div id="aft-progs" style="font-size:11px"><!-- built from DATA.physical.aftProgress --></div>
+        </div>
+        <div class="pw-panel">
+          <div class="plbl">Cardio Distance</div>
+          <div class="chart-wrap"><canvas id="cardioDistChart"></canvas></div>
+        </div>
+        <div class="pw-panel">
+          <div class="plbl">Pace &#8212; May vs June</div>
+          <div class="chart-wrap"><canvas id="cardioPaceChart"></canvas></div>
+        </div>
+        <div class="pw-panel">
+          <div class="plbl">Cardio Log</div>
+          <div id="cardio-log" style="font-size:10px"></div>
         </div>
       </div>
-      <div class="panel sf ab">
-        <div class="plbl">Cardio Session Log &#8212; June 2026</div>
-        <div id="cardio-log"></div>
-      </div>
-      <div class="panel sf">
+
+      <div class="panel sf" style="grid-column:1/-1">
         <button class="coll-btn" onclick="toggleColl('wklog')">Full Session Log &#8212; All June Training Days <span class="caret" id="caret-wklog">&#9660;</span></button>
         <div class="coll-body" id="wklog"><div style="margin-top:10px" id="wklog-content"></div></div>
       </div>
     </div>
   </div>
 </div>
+
 
 <!-- ═══ SPIRITUAL TAB ═══ -->
 <!-- NOTE FOR JULY: change #jun to #jul -->
@@ -1035,12 +1092,12 @@ to{transform:translateX(-50%)}}
           <div style="font-family:var(--mono);font-size:22px;font-weight:500;color:var(--green)">4.000</div>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-          <div style="padding:10px 12px;background:#fff;border:1px solid var(--b0)">
+          <div style="padding:10px 12px;background:var(--bg4);border:1px solid var(--b0)">
             <div style="font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:var(--t4);margin-bottom:4px">OS 603 &#8212; Leadership &amp; Organizational Behavior</div>
             <div style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-bottom:6px">Stacey Zeigler &middot; Mar 30&#8211;Jun 12, 2026</div>
             <div style="display:flex;align-items:baseline;gap:8px"><span style="font-family:var(--mono);font-size:18px;color:var(--green);font-weight:500">A</span><span style="font-size:9px;color:var(--t4)">92.5% weighted final</span></div>
           </div>
-          <div style="padding:10px 12px;background:#fff;border:1px solid var(--b0)">
+          <div style="padding:10px 12px;background:var(--bg4);border:1px solid var(--b0)">
             <div style="font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:var(--t4);margin-bottom:4px">MK 610 &#8212; Marketing Management</div>
             <div style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-bottom:6px">Jay Carlson &middot; Mar 30&#8211;Jun 10, 2026 &middot; White Claw case</div>
             <div style="display:flex;align-items:baseline;gap:8px"><span style="font-family:var(--mono);font-size:18px;color:var(--green);font-weight:500">A</span><span style="font-size:9px;color:var(--t4)">94.03% weighted final</span></div>
@@ -1604,6 +1661,42 @@ window.toggleFin=id=>{const el=document.getElementById(id);if(el)el.classList.to
 
 // ── WORKOUT LOG (lazy) ────────────────────────────────────────────────
 const MC={Legs:'#C48038',Back:'#4DA8FF',Chest:'#00E5A0',Shldr:'#FF7AA8',Tris:'#9B8FFF',Biceps:'#00D4C8',Abs:'#FF4D6D',Cardio:'#54A898'};
+
+// ── PHYSICAL CALENDAR (full-screen hover calendar) ──────────────────────
+function buildPhysCalendar(){
+  const grid=document.getElementById('phys-cal-grid');
+  if(!grid || grid.dataset.built) return;
+  grid.dataset.built='1';
+  const byDate={};
+  DATA.physical.sessions.forEach(s=>{ byDate[s.d]=s; });
+  const daysInMonth=30;
+  const leadBlanks=1; // June 1, 2026 is a Monday -> 1 blank Sunday cell
+  let html='';
+  for(let i=0;i<leadBlanks;i++) html+='<div class="cal-day blank"></div>';
+  for(let d=1;d<=daysInMonth;d++){
+    const key='Jun '+d;
+    const s=byDate[key];
+    if(!s){ html+=`<div class="cal-day"><div class="cal-day-num">${d}</div></div>`; continue; }
+    const dots=s.m.map(m=>`<span class="cal-dot" style="background:${MC[m]||'#888'};color:${MC[m]||'#888'}"></span>`).join('');
+    const badges=s.m.map(m=>`<span class="wk-b" style="background:${MC[m]||'#333'}">${m}</span>`).join('');
+    const isPR=s.note.includes('&#9733;');
+    html+=`<div class="cal-day has-session">
+      <div class="cal-day-num">${d}${isPR?' &#9733;':''}</div>
+      <div class="cal-day-dots">${dots}</div>
+      <div class="cal-tooltip">
+        <div class="cal-tooltip-date">${key}${s.v>0?' &middot; '+s.v.toLocaleString()+' lb volume':''}</div>
+        <div class="cal-tooltip-badges">${badges}</div>
+        <div class="cal-tooltip-note">${s.note}</div>
+      </div>
+    </div>`;
+  }
+  grid.insertAdjacentHTML('beforeend', html);
+  // Legend
+  const leg=document.getElementById('phys-cal-legend');
+  if(leg){
+    leg.innerHTML=Object.entries(MC).map(([k,c])=>`<span class="phys-cal-chip"><span class="cal-dot" style="background:${c};color:${c}"></span>${k}</span>`).join('');
+  }
+}
 function buildWorkoutLog(){
   const el=document.getElementById('wklog-content'); if(!el) return; el.dataset.built='1';
   if(!DATA.physical.sessions.length){ el.innerHTML='<div style="color:var(--t4);font-family:var(--mono);font-size:9px;padding:8px 0">No session data &#8212; upload FitNotes CSV for June.</div>'; return; }
@@ -1710,6 +1803,30 @@ function buildCreativeSide(){
 }
 
 // ── CHARTS ────────────────────────────────────────────────────────────
+function buildRadarChart(){
+  const c=document.getElementById('radarChart');
+  if(!c || c.dataset.built) return;
+  c.dataset.built='1';
+  const ytd=DATA.fin.ytdPrev+DATA.fin.net;
+  const finScore=Math.min(100, Math.round(ytd/DATA.fin.goal*100));
+  const physScore=Math.round(DATA.physical.days/22*100);
+  const careerScore=Math.round(parseInt(DATA.career.otsBarW)*1.4); // 45% bar -> visually distinct on chart
+  const spiritScore=Math.round(3/4*100);
+  const intelScore=Math.round(parseFloat(DATA.mba.termGpa)/4*100);
+  const creativeScore=Math.round(Math.min(100, DATA.creative.juneIncome/2000*100));
+  new Chart(c,{type:'radar',
+    data:{labels:['Financial','Physical','Career','Spiritual','Intellectual','Creative'],
+      datasets:[{label:'June',data:[finScore,physScore,careerScore,spiritScore,intelScore,creativeScore],
+        backgroundColor:'rgba(0,229,160,.18)',borderColor:'#00E5A0',borderWidth:2,
+        pointBackgroundColor:'#00E5A0',pointRadius:3}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{r:{min:0,max:100,ticks:{display:false,stepSize:25},
+        grid:{color:'rgba(255,255,255,.08)'},angleLines:{color:'rgba(255,255,255,.08)'},
+        pointLabels:{color:'rgba(255,255,255,.85)',font:{size:10,family:"'JetBrains Mono'"}}}},
+      animation:{duration:900}}
+  });
+}
 function buildOvCharts(){
   const monthly=[812,1094,1444,3999,2883.12,DATA.fin.net];
   new Chart(document.getElementById('finOvChart'),{type:'bar',
@@ -1823,7 +1940,7 @@ function switchTab(name){
   if(!built[name]){
     built[name]=true;
     if(name==='financial'){ buildFinBarChart(); buildFinRows(); buildAccordion(); buildYTDHero(); buildIncomeSplit(); buildExpDoughnut(); buildFinCompareChart(); setTimeout(animateProgs,100); }
-    if(name==='physical') { buildGymChart(); buildAftProgs(); buildCardioLog(); buildCardioCharts(); buildPhysCompareChart(); setTimeout(animateProgs,100); }
+    if(name==='physical') { buildPhysCalendar(); buildGymChart(); buildAftProgs(); buildCardioLog(); buildCardioCharts(); buildPhysCompareChart(); setTimeout(animateProgs,100); }
     if(name==='creative')  { buildPipeline(); setTimeout(()=>document.querySelectorAll('.rev-bar-conf,.rev-bar-cont').forEach(el=>el.classList.add('anim')),200); }
     if(name==='intellectual'){
       setTimeout(()=>document.querySelectorAll('.lp-bar-conf,.lp-bar-cont').forEach(el=>el.style.transform='scaleX(1)'),300);
@@ -1850,6 +1967,7 @@ function toggleColl(id){
 // ── INIT ──────────────────────────────────────────────────────────────
 populateAll();
 buildOvCharts();
+buildRadarChart();
 populateOrbs();
 buildYTDHero();
 buildIncomeSplit();
