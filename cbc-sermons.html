@@ -137,6 +137,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
   <button class="month-tab" onclick="filterMonth('mar',this)">March</button>
   <button class="month-tab" onclick="filterMonth('apr',this)">April</button>
   <button class="month-tab" onclick="filterMonth('may',this)">May</button>
+  <button class="month-tab" onclick="filterMonth('jun',this)">June</button>
   <button class="month-tab" onclick="filterMonth('all',this)">All</button>
 </div>
 
@@ -146,7 +147,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
     <div class="side-card aa">
       <div class="sc-title" style="color:var(--amber)">Current Filter</div>
       <div id="sidebar-month" style="font-family:var(--mono);font-size:14px;font-weight:500;color:var(--amber);margin-bottom:6px">All Months</div>
-      <div id="sidebar-count" style="font-family:var(--mono);font-size:9px;color:var(--t4)">15 sermons</div>
+      <div id="sidebar-count" style="font-family:var(--mono);font-size:9px;color:var(--t4)">22 sermons</div>
     </div>
     <div class="side-card">
       <div class="sc-title">2026 Reading Plan</div>
@@ -390,14 +391,60 @@ const SERMONS = [
     application:'What faith looks like to the person watching you is different from what it feels like from the inside. Lois and Eunice did not know they were being studied. The transmission of faith is often unaware of itself.',
     commentary:'A Mother&rsquo;s Day-adjacent Sunday — the generational theme fit the occasion without being forced. The personal story about Pastor&rsquo;s mom opened the passage in a way that straight exegesis would not have. The &ldquo;stir up the gift&rdquo; point applies beyond Timothy — anything inherited requires active maintenance.'},
 
+  // ── JUNE ────────────────────────────────────────────────────────────
+  {id:'S2620',month:'jun',section:'epistle',date:'June 7, 2026',
+    title:'How Do I Trust God in an Impossible Situation?',
+    book:'Exodus 14:1&#8211;14',
+    themes:['trust','impossible situations','waiting on God','seasons'],
+    scriptures:['Exodus 14:1-14','Isaiah 55:8-9','Ecclesiastes 3:1-8','Jeremiah 29:11'],
+    overview:'First in a short series answering hard questions about trust. Pastor opened with Moses at the Red Sea &#8212; boxed in by the sea and Pharaoh&rsquo;s army, with God having already told him it would happen. The core point: God knowing beforehand doesn&rsquo;t remove the impossible feeling, but it changes how you carry it.',
+    points:[
+      'God already knew &#8212; Exodus 14 shows God telling Moses the pursuit was coming before it happened. Foreknowledge doesn&rsquo;t erase the impossible feeling, but it means nothing catches God off guard.',
+      '&ldquo;Stand still&rdquo; (Ex. 14:13) is a command, not a suggestion &#8212; the instruction in an impossible spot is to stop trying to engineer a way out and let God fight it.',
+      'Isaiah 55:8-9 &mdash; God&rsquo;s ways and thoughts are higher than ours. If prayer is the last resort instead of the first move, this verse lands hard.',
+      'Ecclesiastes 3 &mdash; there is a season for everything, including the hard ones. Recognizing you&rsquo;re in a season keeps you from mistaking a chapter for the whole story.',
+    ],
+    application:'Three practical moves when the situation feels impossible: keep repeating God&rsquo;s stated plan for you (Jeremiah 29:11) back to yourself, remember his ways are higher than yours, and stop outsourcing the anxiety to other people &#8212; take it to scripture and to God directly instead.',
+    commentary:'A practical, personal message &#8212; heavy on real talk about what it actually feels like to wait on God rather than a purely exegetical walkthrough. Sets up next week&rsquo;s question directly: how do you follow God when you can&rsquo;t see or feel him.'},
+
+  {id:'S2621',month:'jun',section:'guest',date:'June 21, 2026',
+    title:'Father&rsquo;s Day &#8212; Evidence, Anger, and the Paralytic',
+    book:'Mark 2:1&#8211;12',
+    themes:['Father&rsquo;s Day','apologetics','anger','forgiveness','evidence for faith'],
+    scriptures:['Mark 2:1-12','Isaiah 48:12-16','Psalm 139:1-4','Daniel 7:13-14'],
+    overview:'Guest speaker (Bob) delivered a Father&rsquo;s Day message in two halves. The first was personal testimony &#8212; losing a grandson, choosing not to be angry at God over it, and a lifelong struggle with anger &mdash; and a case for evidence-based faith (fine-tuning, the Bible&rsquo;s internal cross-referencing, messianic prophecy statistics, C.S. Lewis&rsquo;s conversion). The second was Mark 2&rsquo;s paralytic, lowered through a roof by four friends, as proof Jesus claimed divine authority.',
+    points:[
+      'His grandson&rsquo;s death didn&rsquo;t become anger at God &#8212; he and his wife chose to lean into God&rsquo;s presence in the tragedy rather than away from it, and framed grief itself as something to feel honestly, not suppress.',
+      'A run through the case for design: fine-tuning of physical constants, the Bible&rsquo;s 66 books/40 authors/1,500 years cohering into one story, and the statistical improbability of Jesus fulfilling hundreds of messianic prophecies by chance.',
+      'The four friends who tore open a roof to lower the paralytic to Jesus &#8212; faith that takes real risk and looks a little reckless from the outside.',
+      '&ldquo;Your sins are forgiven&rdquo; before the healing &#8212; Jesus deals with the soul first, and the visible healing that follows is what proves he had the authority to say it.',
+    ],
+    application:'A caution to fathers specifically: self-control under stress is the fruit of the spirit that&rsquo;s hardest to fake, and losing it erases the witness of everything else. For anyone carrying father-related pain, the invitation was reconciliation &#8212; toward an estranged parent or child, or simply toward God as a better Father than any earthly one.',
+    commentary:'A guest message, more testimony and apologetics than expository preaching, and it ran long. The Father&rsquo;s Day framing and the personal grief story gave it real weight even where the delivery wandered.'},
+
+  {id:'S2622',month:'jun',section:'epistle',date:'June 28, 2026',
+    title:'How Do I Trust God in Tough Times?',
+    book:'John 11:28&#8211;44',
+    themes:['grief','trust','suffering','focus'],
+    scriptures:['John 11:28-44','Matthew 14:28-31'],
+    overview:'Continuation of the trust series, this time on grief specifically. Pastor used Jesus at Lazarus&rsquo;s tomb &#8212; Jesus weeping despite knowing he was about to raise Lazarus &#8212; as permission to actually feel loss rather than spiritually bypass it, while warning against letting grief calcify into something that blocks the relationship with God.',
+    points:[
+      '&ldquo;Jesus wept&rdquo; even knowing the outcome &#8212; grief is not a faith failure. Feeling the loss and trusting God are not opposites.',
+      'Mary&rsquo;s &ldquo;Lord, if you had been here&rdquo; (John 11:32) is named as the common trap: assuming God&rsquo;s absence explains the pain, when he was present the whole time.',
+      'Peter walking on water (Matt. 14) as the picture of focus &#8212; steady as long as his eyes were on Jesus, sinking the moment he fixated on the storm instead.',
+      'Grief that runs too long risks curdling from conviction into condemnation &#8212; a wedge between the person and God rather than a bridge through the pain.',
+    ],
+    application:'The invitation was to surrender a grief cycle that&rsquo;s stopped moving &#8212; not to stop missing who was lost, but to stop letting the cycle of anger and depression be the whole relationship with God. Practically: name the loss honestly, then deliberately refocus on Christ rather than the circumstance, the way Peter had to.',
+    commentary:'Drew on 25 years of pastoral counseling experience with grieving families, which gave the message unusual directness about how grief actually behaves versus how it&rsquo;s supposed to behave. Less a study passage, more pastoral care delivered from the pulpit.'},
+
 ];
 
 // ── MONTH COUNTS ──────────────────────────────────────────────────────
-const MONTH_COUNTS = {jan:4, feb:4, mar:5, apr:4, may:2};
+const MONTH_COUNTS = {jan:4, feb:4, mar:5, apr:4, may:2, jun:3};
 
 // ── MONTH LABELS ──────────────────────────────────────────────────────
 const MONTH_LABELS = {
-  jan:'January', feb:'February', mar:'March', apr:'April', may:'May', all:'All Months'
+  jan:'January', feb:'February', mar:'March', apr:'April', may:'May', jun:'June', all:'All Months'
 };
 
 // ── STATE ─────────────────────────────────────────────────────────────
@@ -544,7 +591,7 @@ function buildMonthChart(){
   new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Jan','Feb','Mar','Apr','May'],
+      labels: ['Jan','Feb','Mar','Apr','May','Jun'],
       datasets: [{
         data: [
           MONTH_COUNTS.jan,
@@ -552,13 +599,15 @@ function buildMonthChart(){
           MONTH_COUNTS.mar,
           MONTH_COUNTS.apr,
           MONTH_COUNTS.may,
+          MONTH_COUNTS.jun,
         ],
         backgroundColor: [
           'rgba(255,184,48,.35)',
           'rgba(255,184,48,.35)',
           'rgba(255,184,48,.35)',
           'rgba(255,184,48,.35)',
-          'rgba(255,184,48,.85)',  // May highlighted
+          'rgba(255,184,48,.35)',
+          'rgba(255,184,48,.85)',  // June highlighted
         ],
         borderWidth: 0,
         borderRadius: 0,
