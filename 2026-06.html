@@ -65,8 +65,7 @@ html{scroll-behavior:smooth}
 body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
 /* ── ANIMATIONS (all CSS-only, ongoing) ─────────────────────────────── */
-@keyframes scan-v   {0%{top:-2px}100%{top:100vh}}
-to{transform:translateX(-50%)}}
+@keyframes orb-breathe{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.32}50%{transform:translate(-50%,-50%) scale(1.16);opacity:.52}}
 @keyframes breathe-g{0%,100%{box-shadow:0 0 0 1px rgba(0,229,160,.15)}50%{box-shadow:0 0 0 1px rgba(0,229,160,.55),0 0 24px rgba(0,229,160,.13)}}
 @keyframes breathe-v{0%,100%{box-shadow:0 0 0 1px rgba(155,143,255,.15)}50%{box-shadow:0 0 0 1px rgba(155,143,255,.55),0 0 24px rgba(155,143,255,.13)}}
 @keyframes breathe-a{0%,100%{box-shadow:0 0 0 1px rgba(255,184,48,.15)}50%{box-shadow:0 0 0 1px rgba(255,184,48,.55),0 0 20px rgba(255,184,48,.11)}}
@@ -76,14 +75,14 @@ to{transform:translateX(-50%)}}
 @keyframes dash-run {to{stroke-dashoffset:0}}
 @keyframes pulse-dot{0%,100%{r:4;opacity:1}50%{r:6;opacity:.6}}
 @keyframes slide-up {from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fade-in-up{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pop-in{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
 
-/* ── SCAN LINES (two, different speeds for depth) ───────────────────── */
-.scan1,.scan2{position:fixed;left:0;width:100%;height:1px;pointer-events:none;z-index:9999}
-.scan1{background:linear-gradient(90deg,transparent,rgba(0,229,160,.07),transparent);animation:scan-v 9s linear infinite}
-.scan2{background:linear-gradient(90deg,transparent,rgba(77,168,255,.05),transparent);animation:scan-v 14s linear infinite 5s}
+/* ── AMBIENT BACKGROUND ORB (replaces old scan lines) ────────────────── */
+.bg-orb{position:fixed;top:38%;left:50%;width:64vmax;height:64vmax;transform:translate(-50%,-50%);pointer-events:none;z-index:0;border-radius:50%;background:radial-gradient(circle,rgba(0,229,160,.10) 0%,rgba(77,168,255,.06) 45%,transparent 72%);filter:blur(46px);animation:orb-breathe 9s ease-in-out infinite}
 
 /* ── SHELL ──────────────────────────────────────────────────────────── */
-.shell{max-width:1380px;margin:0 auto;padding:28px 24px 100px}
+.shell{max-width:1380px;margin:0 auto;padding:28px 24px 100px;position:relative;z-index:1}
 
 /* ── HEADER ─────────────────────────────────────────────────────────── */
 .hdr{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-bottom:18px;border-bottom:1px solid var(--b0)}
@@ -96,30 +95,30 @@ to{transform:translateX(-50%)}}
 .mnav:hover{color:var(--tx);border-color:var(--b2);background:var(--g)}
 
 /* ── SPOTLIGHT BANNER ────────────────────────────────────────────────── */
-.spotlight{position:relative;overflow:hidden;padding:18px 22px;margin:20px 0;background:var(--g);border:1px solid var(--b0);border-left:2px solid var(--red)}
+.spotlight{position:relative;overflow:hidden;padding:12px 16px;margin:8px 0;background:var(--g);border:1px solid var(--b0);border-left:2px solid var(--red)}
 .spotlight::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--red),transparent);transform:scaleX(0);animation:reveal-ln 2s ease-out .3s both;transform-origin:left}
-.sp-tag{font-family:var(--mono);font-size:9px;letter-spacing:1.8px;text-transform:uppercase;color:var(--red);margin-bottom:7px}
-.sp-title{font-size:17px;font-weight:300;color:#fff;margin-bottom:6px;line-height:1.3}
-.sp-body{font-size:12px;line-height:1.7;color:var(--t2);margin-bottom:14px}
+.sp-tag{font-family:var(--mono);font-size:8px;letter-spacing:1.6px;text-transform:uppercase;color:var(--red);margin-bottom:4px}
+.sp-title{font-size:14px;font-weight:500;color:#fff;margin-bottom:4px;line-height:1.25}
+.sp-body{font-size:10.5px;line-height:1.5;color:var(--t2);margin-bottom:8px}
 .sp-paths{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 @media(max-width:700px){.sp-paths{grid-template-columns:1fr}}
-.sp-path{padding:12px 14px;background:var(--gm);border:1px solid var(--b0)}
-.sp-pct{font-family:var(--mono);font-size:22px;font-weight:500;line-height:1;margin-bottom:3px}
-.sp-name{font-size:12px;font-weight:500;margin-bottom:3px}
-.sp-sub{font-family:var(--mono);font-size:9px;color:var(--t4);line-height:1.4}
-.sp-bar{height:2px;background:rgba(255,255,255,.06);margin-top:8px}
+.sp-path{padding:7px 10px;background:var(--gm);border:1px solid var(--b0)}
+.sp-pct{font-family:var(--mono);font-size:16px;font-weight:500;line-height:1;margin-bottom:2px}
+.sp-name{font-size:10.5px;font-weight:500;margin-bottom:2px}
+.sp-sub{font-family:var(--mono);font-size:7.5px;color:var(--t4);line-height:1.3}
+.sp-bar{height:2px;background:rgba(255,255,255,.06);margin-top:5px}
 .sp-fill{height:100%;transition:width 1.5s ease}
 
 /* ── STAT ROW ────────────────────────────────────────────────────────── */
-.stat-row{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:16px}
+.stat-row{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:8px}
 @media(max-width:900px){.stat-row{grid-template-columns:repeat(3,1fr)}}
-.stat{padding:14px 16px;background:var(--g);border:1px solid var(--b0)}
+.stat{padding:8px 10px;background:var(--g);border:1px solid var(--b0)}
 .bv-g{animation:breathe-g 4s ease-in-out infinite}
 .bv-v{animation:breathe-v 5s ease-in-out infinite 1s}
 .bv-a{animation:breathe-a 4.5s ease-in-out infinite .5s}
-.slbl{font-family:var(--mono);font-size:9px;letter-spacing:1.2px;text-transform:uppercase;color:var(--t4);margin-bottom:8px}
-.sval{font-family:var(--mono);font-size:20px;font-weight:500;line-height:1;margin-bottom:4px}
-.ssub{font-family:var(--mono);font-size:9px;color:var(--t4)}
+.slbl{font-family:var(--mono);font-size:7.5px;letter-spacing:1px;text-transform:uppercase;color:var(--t4);margin-bottom:4px}
+.sval{font-family:var(--mono);font-size:15px;font-weight:500;line-height:1;margin-bottom:2px}
+.ssub{font-family:var(--mono);font-size:7.5px;color:var(--t4)}
 
 /* ── TABS ────────────────────────────────────────────────────────────── */
 .tabs{display:flex;flex-wrap:wrap;position:sticky;top:0;z-index:100;background:rgba(6,8,16,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--b1);margin:0 -24px 4px;padding:0 24px;gap:2px}
@@ -325,17 +324,22 @@ to{transform:translateX(-50%)}}
 .cal-day.has-session .cal-day-num{color:var(--tx)}
 .cal-day-dots{display:flex;flex-wrap:wrap;gap:3px;margin-top:auto}
 .cal-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;box-shadow:0 0 4px currentColor}
-.cal-tooltip{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(-4px);width:230px;background:var(--bg4);border:1px solid var(--b2);padding:11px 13px;z-index:50;opacity:0;visibility:hidden;transition:opacity .15s ease,transform .15s ease;pointer-events:none;box-shadow:0 10px 30px rgba(0,0,0,.7)}
-.cal-day.has-session:hover .cal-tooltip{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
-.phys-cal>.cal-day:nth-child(7n-1).has-session .cal-tooltip,.phys-cal>.cal-day:nth-child(7n).has-session .cal-tooltip{left:auto;right:0;transform:translateY(-4px)}
-.phys-cal>.cal-day:nth-child(7n-1).has-session:hover .cal-tooltip,.phys-cal>.cal-day:nth-child(7n).has-session:hover .cal-tooltip{transform:translateY(0)}
-.phys-cal>.cal-day:nth-child(7n-6).has-session .cal-tooltip{left:0;transform:translateY(-4px)}
-.phys-cal>.cal-day:nth-child(7n-6).has-session:hover .cal-tooltip{transform:translateY(0)}
-.cal-tooltip-date{font-family:var(--mono);font-size:9px;color:var(--amber);text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}
-.cal-tooltip-badges{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:7px}
-.cal-tooltip-note{font-size:11px;color:var(--t2);line-height:1.55}
+.cal-day.has-session{transition:border-color .2s ease,background .2s ease,transform .2s ease}
 .phys-cal-legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;padding-top:12px;border-top:1px solid var(--b0)}
 .phys-cal-chip{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9px;color:var(--t3)}
+
+/* Day detail sidebar (half calendar / half detail split) */
+.phys-day-detail{border:1px solid var(--b0);background:var(--g);padding:16px 18px;min-height:340px;max-height:460px;overflow-y:auto}
+.pdd-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;min-height:300px;color:var(--t4);gap:10px;padding:20px}
+.pdd-empty-icon{font-size:26px;opacity:.4}
+.pdd-date{font-size:15px;font-weight:600;color:var(--tx);margin-bottom:2px}
+.pdd-meta{font-family:var(--mono);font-size:9px;color:var(--t4);margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid var(--b0)}
+.pdd-ex{margin-bottom:12px;animation:fade-in-up .3s ease both}
+.pdd-ex-hd{display:flex;align-items:center;gap:7px;margin-bottom:3px}
+.pdd-ex-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.pdd-ex-name{font-size:12px;font-weight:600;color:var(--tx)}
+.pdd-ex-cat{font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.pdd-ex-sets{font-family:var(--mono);font-size:11px;color:var(--t2);padding-left:15px;line-height:1.6}
 /* Smaller condensed widgets below the calendar */
 .phys-widgets{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:4px}
 @media(max-width:900px){.phys-widgets{grid-template-columns:1fr 1fr}}
@@ -393,12 +397,12 @@ to{transform:translateX(-50%)}}
 #btt.show{opacity:1}#btt:hover{border-color:var(--green);color:var(--green)}
 
 /* ── ACCENT ORBS ─────────────────────────────────────────────────── */
-.orb-row{display:flex;gap:0;padding:12px 0;overflow-x:auto;border-bottom:1px solid var(--b0);margin:0 -24px;padding-left:24px;scrollbar-width:none}
+.orb-row{display:flex;gap:0;padding:6px 0;overflow-x:auto;border-bottom:1px solid var(--b0);margin:0 -24px 4px;padding-left:24px;scrollbar-width:none}
 .orb-row::-webkit-scrollbar{display:none}
-.orb{position:relative;display:flex;flex-direction:column;gap:4px;padding:10px 14px;flex-shrink:0;border-right:1px solid var(--b0)}
+.orb{position:relative;display:flex;flex-direction:column;gap:2px;padding:5px 12px;flex-shrink:0;border-right:1px solid var(--b0)}
 .orb:last-child{border-right:none}
-.orb-val{font-family:var(--mono);font-size:14px;font-weight:500;line-height:1;color:var(--tx)}
-.orb-lbl{font-family:var(--mono);font-size:8px;letter-spacing:1.2px;text-transform:uppercase;color:var(--t4)}
+.orb-val{font-family:var(--mono);font-size:12px;font-weight:500;line-height:1;color:var(--tx)}
+.orb-lbl{font-family:var(--mono);font-size:7px;letter-spacing:1px;text-transform:uppercase;color:var(--t4)}
 .orb-pulse{position:absolute;top:8px;right:10px;width:5px;height:5px;border-radius:50%;animation:dot-blink 2.2s ease-in-out infinite}
 /* glow behind each orb — breathes at different rates */
 @keyframes orb-g{0%,100%{background:rgba(0,229,160,.0)}50%{background:rgba(0,229,160,.06)}}
@@ -448,11 +452,68 @@ to{transform:translateX(-50%)}}
 .ytd-month-bar-wrap{display:flex;flex-direction:column;align-items:center;gap:5px;flex:1}
 .ytd-month-col{display:flex;flex-direction:column;align-items:center;gap:5px}
 
+/* ══════════════════════════════════════════════════════════════════════
+   MODERN MINIMALIST OVERRIDE LAYER
+   Moves the whole page away from the sharp-cornered "terminal" look:
+   rounded corners everywhere, softer borders, gentle hover lifts and
+   fade-ins. Placed last so it wins the cascade without fighting every
+   individual rule above. Copy this block as-is into future months.
+   ══════════════════════════════════════════════════════════════════════ */
+:root{--r-sm:8px;--r-md:12px;--r-lg:18px;--r-pill:999px}
+
+.panel,.kpi,.orb,.chip,.pill,.note,.sc,.ai-side,.light-panel,
+.mnav,.coll-btn,.month-card,.mc-badge,.hdr-badge,.live-lbl,
+.col-box,.pw-panel,.afoqt-item,.afoqt-stage,.trend-badge,
+.cal-day,.phys-day-detail,.chart-cell,.chart-wrap,textarea,input,
+.spotlight,.stat-row .stat,.path-card,#sermonFrame{
+  border-radius:var(--r-md) !important;
+}
+.tab{border-radius:var(--r-sm) var(--r-sm) 0 0 !important}
+.tab.on{border-radius:var(--r-sm) var(--r-sm) 0 0 !important}
+.orb,.kpi,.chip,.pill,.mc-badge,.hdr-badge,.live-lbl,.trend-badge{border-radius:var(--r-pill) !important}
+.orb{animation:fade-in-up .5s cubic-bezier(.22,.68,0,1.15) both}
+.orb:nth-child(1){animation-delay:.02s}.orb:nth-child(2){animation-delay:.05s}.orb:nth-child(3){animation-delay:.08s}
+.orb:nth-child(4){animation-delay:.11s}.orb:nth-child(5){animation-delay:.14s}.orb:nth-child(6){animation-delay:.17s}
+.orb:nth-child(7){animation-delay:.20s}.orb:nth-child(8){animation-delay:.23s}.orb:nth-child(9){animation-delay:.26s}
+.orb:nth-child(10){animation-delay:.29s}
+.stat{animation:fade-in-up .5s cubic-bezier(.22,.68,0,1.15) both;transition:transform .2s ease,box-shadow .2s ease}
+.stat:nth-child(1){animation-delay:.05s}.stat:nth-child(2){animation-delay:.10s}.stat:nth-child(3){animation-delay:.15s}
+.stat:nth-child(4){animation-delay:.20s}.stat:nth-child(5){animation-delay:.25s}
+.stat:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.sp-path{transition:transform .2s ease,box-shadow .2s ease}
+.sp-path:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.3)}
+.wk-b{border-radius:var(--r-sm) !important}
+.cal-dot{border-radius:50% !important}
+#btt{border-radius:50% !important}
+
+/* Softer, more elegant borders — thin, low-contrast, no hard black edges */
+.panel,.sc,.col-box,.pw-panel,.light-panel{border-color:rgba(255,255,255,.09) !important}
+
+/* Gentle hover lift for interactive cards */
+.panel,.month-card,.col-box,.pw-panel,.kpi,.afoqt-item,.cal-day.has-session{
+  transition:transform .25s cubic-bezier(.22,.68,0,1.15),
+             box-shadow .25s ease, border-color .2s ease, background .2s ease;
+}
+.panel:hover,.col-box:hover,.pw-panel:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 28px rgba(0,0,0,.35);
+  border-color:rgba(255,255,255,.16) !important;
+}
+.tab{transition:all .25s cubic-bezier(.22,.68,0,1.15)}
+
+/* Fade-in for tab content on switch */
+.dash,#tab-overview,#tab-intellectual,#tab-reflections{animation:fade-in-up .45s cubic-bezier(.22,.68,0,1.15) both}
+
+/* Chart canvases pop in gently */
+.chart-wrap canvas{animation:pop-in .5s cubic-bezier(.22,.68,0,1.15) both}
+
+/* Elegant type: slightly tighter letter-spacing on headings, softer weight */
+.hdr-title,.pagehd-month,.mc-month,.sp-title,#ca-headline{letter-spacing:-.3px}
+body{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 </style>
 </head>
 <body>
-<div class="scan1"></div>
-<div class="scan2"></div>
+<div class="bg-orb"></div>
 <div class="shell">
 <!-- HEADER -->
 <div class="hdr">
@@ -625,7 +686,10 @@ to{transform:translateX(-50%)}}
           <div class="mstat" style="border-top:1px solid rgba(255,77,109,.3)"><div class="mstat-lbl">Expenses</div><div class="mstat-val" style="color:var(--red)" id="ov-exp">&#8212;</div></div>
           <div class="mstat" style="border-top:1px solid rgba(0,229,160,.3)"><div class="mstat-lbl">Net</div><div class="mstat-val" style="color:var(--green)" id="ov-net2">&#8212;</div></div>
         </div>
-        <div class="chart-wrap"><canvas id="finOvChart"></canvas></div>
+        <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:8px">
+          <div class="chart-wrap"><canvas id="finOvChart"></canvas></div>
+          <div class="chart-wrap"><canvas id="ovCatDonut"></canvas></div>
+        </div>
         <div class="prog" style="margin-top:10px">
           <div class="prog-hd"><span id="ytd-lbl">YTD Savings</span><span style="color:var(--green)" id="ytd-pct">&#8212;</span></div>
           <div class="prog-track"><div class="prog-fill" id="ytd-fill" style="background:var(--green)"></div></div>
@@ -727,6 +791,21 @@ to{transform:translateX(-50%)}}
         <div id="txn-accordion"><div style="font-family:var(--mono);font-size:9px;color:var(--t4);padding:8px 0">No transaction data yet &#8212; add to DATA.txnCats after CSV upload.</div></div>
       </div>
 
+      <!-- ── CASH FLOW CHARTS (compact, moved up) ─────────────────── -->
+      <div class="panel ag" style="grid-column:1/-1">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start">
+          <div>
+            <div class="plbl">Income vs Expenses</div>
+            <div class="chart-wrap" style="height:130px"><canvas id="finBarChart"></canvas></div>
+          </div>
+          <div>
+            <div class="plbl">June vs May &#8212; Category Deltas</div>
+            <div class="chart-wrap" style="height:130px"><canvas id="finCompareChart"></canvas></div>
+          </div>
+        </div>
+        <div class="note g" style="margin-top:8px;margin-bottom:0"><span class="note-lbl">Source: Origin Financial CSV &mdash; June 2026</span>All category totals verified in Python against the full-year export. Net $2,464.22 confirmed.</div>
+      </div>
+
       <!-- ── YTD PROGRESS HERO ─────────────────────────────── -->
       <div class="panel ag sf" style="background:linear-gradient(135deg,rgba(0,229,160,.05) 0%,rgba(0,229,160,.01) 100%);border-color:rgba(0,229,160,.3)">
         <div class="plbl" style="color:var(--green)">YTD Savings Progress &#8212; Annual Goal $10,000</div>
@@ -792,17 +871,6 @@ to{transform:translateX(-50%)}}
         </div>
       </div>
 
-      <div class="panel ag sf">
-        <div class="plbl">Income vs Expenses &#8212; June 2026</div>
-        <div class="note g"><span class="note-lbl">Source: Origin Financial CSV &mdash; June 2026</span>All category totals verified in Python against the full-year export. Net $2,464.22 confirmed. When copying for July: replace DATA.fin.* with July CSV export and re-run the Python sum check.</div>
-        <div class="chart-wrap tall"><canvas id="finBarChart"></canvas></div>
-      </div>
-
-      <!-- ── JUNE VS MAY COMPARISON ─────────────────────────────── -->
-      <div class="panel ab">
-        <div class="plbl">June vs May &#8212; Category Deltas</div>
-        <div class="chart-wrap tall"><canvas id="finCompareChart"></canvas></div>
-      </div>
     </div>
   </div>
 </div>
@@ -840,17 +908,25 @@ to{transform:translateX(-50%)}}
   </aside>
   <div class="content">
     <div class="cg">
-      <!-- ═══ FULL-WIDTH CALENDAR — hover any day for workout detail ═══ -->
-      <div class="panel phys-cal-wrap">
-        <div class="phys-cal-hd">
-          <div class="plbl" style="margin-bottom:0">June 2026 Training Calendar</div>
-          <div style="font-family:var(--mono);font-size:9px;color:var(--t4)">Hover a day for the full session</div>
+      <!-- ═══ CALENDAR + DAY DETAIL (split half / half) ═══ -->
+      <div class="panel phys-cal-wrap" style="display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start">
+        <div>
+          <div class="phys-cal-hd">
+            <div class="plbl" style="margin-bottom:0">June 2026 Training Calendar</div>
+            <div style="font-family:var(--mono);font-size:9px;color:var(--t4)">Hover a day &#8594;</div>
+          </div>
+          <div class="phys-cal" id="phys-cal-grid">
+            <div class="phys-cal-dow">Su</div><div class="phys-cal-dow">Mo</div><div class="phys-cal-dow">Tu</div><div class="phys-cal-dow">We</div><div class="phys-cal-dow">Th</div><div class="phys-cal-dow">Fr</div><div class="phys-cal-dow">Sa</div>
+            <!-- day cells injected by buildPhysCalendar() -->
+          </div>
+          <div class="phys-cal-legend" id="phys-cal-legend"></div>
         </div>
-        <div class="phys-cal" id="phys-cal-grid">
-          <div class="phys-cal-dow">Su</div><div class="phys-cal-dow">Mo</div><div class="phys-cal-dow">Tu</div><div class="phys-cal-dow">We</div><div class="phys-cal-dow">Th</div><div class="phys-cal-dow">Fr</div><div class="phys-cal-dow">Sa</div>
-          <!-- day cells injected by buildPhysCalendar() -->
+        <div class="phys-day-detail" id="phys-day-detail">
+          <div class="pdd-empty">
+            <div class="pdd-empty-icon">&#9737;</div>
+            <div>Hover any highlighted day on the calendar to see the full session here: every exercise, every set, in long form.</div>
+          </div>
         </div>
-        <div class="phys-cal-legend" id="phys-cal-legend"></div>
       </div>
 
       <!-- ═══ CONDENSED WIDGETS ═══ -->
@@ -1256,12 +1332,21 @@ to{transform:translateX(-50%)}}
       </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:14px">
-      <div class="light-panel"><div style="font-size:17px;font-weight:500;color:var(--tx);margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--b1)">On the Career Picture</div><div style="font-size:13px;line-height:1.82;color:var(--t2)">The 368 clearing the Jul 4 deadline is the real headline &#8212; that critical path stayed open through JD&rsquo;s own follow-through, not luck. The waiting isn&rsquo;t over, it just moved: from &ldquo;will the chain approve this&rdquo; to &ldquo;will the recruiter respond.&rdquo; A new thread opened at the very end of the month with the Clarkson interview &#8212; worth naming here, more to say once it resolves.</div></div>
-      <div class="light-panel"><div style="font-size:17px;font-weight:500;color:var(--tx);margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--b1)">On Closing Out the Semester</div><div style="font-size:13px;line-height:1.82;color:var(--t2)">Two A&rsquo;s and a 4.000 term GPA to close Spring, with a 3.917 cumulative and Good Academic Standing. Fall is the next push, but the gap between semesters is real runway &#8212; no coursework competing for attention while the OTS pieces move.</div></div>
-      <div class="light-panel"><div style="font-size:17px;font-weight:500;color:var(--tx);margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--b1)">On the Physical Work</div><div style="font-size:13px;line-height:1.82;color:var(--t2)">No new strength maxes in June, but the cardio work quietly had the best month of the year &#8212; both outdoor runs came back a full minute per mile faster than their May counterparts, at equal or greater distance. That&rsquo;s the metric that matters most with the AFT 2-mile run test now on the October calendar.</div></div>
-      <div class="light-panel"><div style="font-size:17px;font-weight:500;color:var(--tx);margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--b1)">On the Sermon Theme</div><div style="font-size:13px;line-height:1.82;color:var(--t2)">Three sermons in June, all working the same thread from different angles: trusting God through waiting and impossible-looking situations. Not a bad theme for a month spent waiting on a recruiter to call back.</div></div>
+      <div class="light-panel"><div style="font-size:17px;font-weight:600;color:var(--tx);margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--b1)">Career: where this actually stands</div><div style="font-size:13px;line-height:1.8;color:var(--t2)">Plainly: the part JD controlled got done. The 368 moved through his chain and reached the Air Force recruiter before its own deadline. The part he does not control is what happens now. No recruiter has been assigned yet, and there is no way to know if that takes another week or another month. The honest read is that the AFOQT date (Sep 25) is more reliable than the recruiter timeline right now, since it does not depend on anyone getting back to him. The Clarkson interview is the wildcard. It was not the plan A path, but a same-field admin role at a university he already knows would be a reasonable fallback if OTS timing drags into next year.</div></div>
+      <div class="light-panel"><div style="font-size:17px;font-weight:600;color:var(--tx);margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--b1)">Academic: a genuinely clean result</div><div style="font-size:13px;line-height:1.8;color:var(--t2)">A 4.000 term GPA is not a number that needs much interpretation. It closes the spring cleanly and pushes the cumulative to 3.917. The open question is whether that pace holds once Fall classes stack back up against whatever the OTS process demands in September and October. Worth watching: if the AFOQT and interview prep land in the same window as the first weeks of a new term, something will get less attention than it deserves. That is a scheduling risk, not a performance one.</div></div>
+      <div class="light-panel"><div style="font-size:17px;font-weight:600;color:var(--tx);margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--b1)">Physical: the number that matters moved</div><div style="font-size:13px;line-height:1.8;color:var(--t2)">No new maxes on the barbell lifts this month, and that is fine. The number that actually moved was pace: both outdoor runs came back roughly a minute per mile faster than their May equivalents. That is the metric tied directly to the AFT two-mile run, and it is trending the right way before the test even mattered on a calendar. The AFT moving to October is a real gift here. It buys another three months to keep building that same trend instead of peaking too early.</div></div>
+      <div class="light-panel"><div style="font-size:17px;font-weight:600;color:var(--tx);margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--b1)">Spiritual: a theme that lined up with the month</div><div style="font-size:13px;line-height:1.8;color:var(--t2)">Three sermons, three angles on the same question: how do you trust God when you cannot see the outcome yet. That is not a coincidence worth overreading, but it is worth naming, since it tracked almost exactly against a month spent waiting to hear back from a recruiter. Whether that connection was intentional on Brad&rsquo;s part or not, it landed at a useful time.</div></div>
+      <div class="light-panel" style="border-left:2px solid var(--vio)">
+        <div style="font-size:17px;font-weight:600;color:var(--tx);margin-bottom:10px">Possible next steps</div>
+        <div style="font-size:13px;line-height:1.85;color:var(--t2)">
+          <p style="margin-bottom:8px">1. Follow up with the AF recruiter directly if there is still no contact by mid-July. The 368 being approved does not guarantee anyone is actively working the file.</p>
+          <p style="margin-bottom:8px">2. Start AFOQT prep now rather than waiting for a scheduled date to force it. Sep 25 sounds far away in July, it will not in September.</p>
+          <p style="margin-bottom:8px">3. If the Clarkson interview turns into an offer, that decision will need a real side-by-side against the OTS timeline, not a reflexive yes or no.</p>
+          <p>4. Keep the outdoor running cadence through the summer heat. The pace gains are real and worth protecting through October.</p>
+        </div>
+      </div>
       <div class="light-panel" style="border-left:2px solid var(--green)">
-        <div style="font-size:17px;font-weight:500;color:var(--tx);margin-bottom:10px">Key Takeaway &#8212; June 2026</div>
+        <div style="font-size:17px;font-weight:600;color:var(--tx);margin-bottom:10px">Key takeaway, June 2026</div>
         <div style="font-size:14px;line-height:1.82;color:var(--tx);font-style:italic" id="refl-takeaway">&#8212;</div>
       </div>
     </div>
@@ -1367,6 +1452,29 @@ const DATA = {
       {d:'Jun 29', m:['Chest','Legs','Shldr'], v:5700,  note:'Hammer Isometric 225&#215;1 &middot; Bench 205&#215;6'},
       {d:'Jun 30', m:['Back','Biceps'],        v:5550,  note:'Cable Row 130&#215;10 &middot; DB Curl 50&#215;16'},
     ],
+    fullLog: {
+      'Jun 1': [{n:'Flat Barbell Bench Press',c:'Chest',sets:'135&#215;5, 195&#215;9, 200&#215;6, 200&#215;3'}, {n:'Kneeling Kettlebell Clean (Upper Mobility)',c:'Shoulders',sets:'25&#215;10, 30&#215;11, 25&#215;10'}, {n:'Upper Mobility',c:'Chest',sets:''}],
+      'Jun 2': [{n:'Chin Up',c:'Back',sets:'BW&#215;4, BW&#215;10, BW&#215;6, BW&#215;6'}, {n:'Dumbbell Curl',c:'Biceps',sets:'60&#215;11, 60&#215;8, 60&#215;7'}, {n:'Good Morning (Lower Mobility)',c:'Back',sets:'45&#215;5, 75&#215;9, 75&#215;6'}, {n:'Cable Crunch',c:'Abs',sets:'100&#215;10, 160&#215;9, 175&#215;4'}, {n:'Stairs',c:'Cardio',sets:'40:00 : Speed 5 to 10 min. Zone 1  Speed 6 to 30 min zone 2  Speed 5'}],
+      'Jun 3': [{n:'Barbell Squat',c:'Legs',sets:'135&#215;5, 155&#215;10, 155&#215;10'}, {n:'Kettlebell Split Rdl (Lower Mobility)',c:'Legs',sets:'30&#215;7, 40&#215;7'}, {n:'One Leg Bosu',c:'Legs',sets:'30 lb'}],
+      'Jun 4': [{n:'Lat Pulldown Potsdam',c:'Back',sets:'100&#215;10, 110&#215;16, 110&#215;14, 110&#215;10'}, {n:'Standing Barbell Press',c:'Shoulders',sets:'85&#215;5, 115&#215;8, 95&#215;6, 95&#215;6, 95&#215;6'}, {n:'Plank',c:'Abs',sets:'25 lb'}],
+      'Jun 5': [{n:'Trap Bar Deadlift',c:'Back',sets:'175&#215;8, 265&#215;8, 315&#215;5'}, {n:'Incline Dumbbell Bench Press',c:'Chest',sets:'70&#215;10, 160&#215;5, 120&#215;10, 120&#215;5'}, {n:'Oblique Cable',c:'Abs',sets:'55&#215;8, 65&#215;7, 50&#215;8'}],
+      'Jun 7': [{n:'Running (Outdoor)',c:'Cardio',sets:'5.00km 24:16 : FFML. ONE PRESIDENTIAL HILL.'}],
+      'Jun 8': [{n:'Flat Barbell Bench Press',c:'Chest',sets:'135&#215;8, 175&#215;10, 175&#215;6, 175&#215;6'}, {n:'Kneeling Kettlebell Clean (Upper Mobility)',c:'Shoulders',sets:'20&#215;10, 35&#215;12, 20&#215;10'}, {n:'Overhead Straight Bar',c:'Triceps',sets:'55&#215;10, 60&#215;15, 60&#215;10'}],
+      'Jun 9': [{n:'Chin Up',c:'Back',sets:'BW&#215;4, 25&#215;5, 25&#215;4, 25&#215;4'}, {n:'EZ-Bar Curl',c:'Biceps',sets:'70&#215;5, 90&#215;4, 70&#215;7, 70&#215;5'}, {n:'Split Low Row Potsdam',c:'Back',sets:'50&#215;13, 50&#215;10, 50&#215;10'}],
+      'Jun 10': [{n:'Split Squat Smith Machine',c:'Legs',sets:'95&#215;5, 135&#215;7, 135&#215;5'}, {n:'Kettlebell Split Rdl (Lower Mobility)',c:'Legs',sets:'35&#215;8, 35&#215;8'}, {n:'One Leg Bosu',c:'Legs',sets:'35 lb, 35 lb'}, {n:'Hip Abduction',c:'Legs',sets:'90&#215;10, 120&#215;7'}, {n:'Stairs',c:'Cardio',sets:'10:00'}],
+      'Jun 11': [{n:'Treadmill Sprint',c:'Cardio',sets:'02:30 : Warm-up: 0.5 mi @ 6.0 mph. Sprint at 10 mph for 2:30. Ramp d, 01:00 : Sprint at 12 mph for 1:00, form sloppy. Jumped off (abrupt d, 01:00 : Sprint at 10 mph for 1:00. Jumped off and lowered treadmill '}],
+      'Jun 15': [{n:'Flat Barbell Bench Press',c:'Chest',sets:'135&#215;5, 205&#215;7, 210&#215;6, 205&#215;4'}, {n:'Kneeling Kettlebell Clean (Upper Mobility)',c:'Shoulders',sets:'25&#215;10, 40&#215;12, 25&#215;10'}, {n:'Tricep Cable Potsdam',c:'Triceps',sets:'30&#215;20, 35&#215;11'}, {n:'Oblique Cable',c:'Abs',sets:'50&#215;10, 50&#215;8, 40&#215;8'}],
+      'Jun 16': [{n:'Chin Up',c:'Back',sets:'BW&#215;4, BW&#215;12, BW&#215;6, BW&#215;6'}, {n:'EZ-Bar Curl',c:'Biceps',sets:'70&#215;8, 70&#215;7, 70&#215;6'}, {n:'Plank',c:'Abs',sets:''}, {n:'Decline Crunch',c:'Abs',sets:'BW&#215;20, BW&#215;14'}],
+      'Jun 18': [{n:'Split Squat Smith Machine',c:'Legs',sets:'95&#215;6, 135&#215;8, 135&#215;5'}, {n:'Kettlebell Split Rdl (Lower Mobility)',c:'Legs',sets:'45&#215;6, 45&#215;6'}, {n:'Leg Extension',c:'Legs',sets:'100&#215;10, 100&#215;10, 100&#215;10, 100&#215;10'}],
+      'Jun 20': [{n:'Running (Outdoor)',c:'Cardio',sets:'8.00mi 1:09:00'}],
+      'Jun 22': [{n:'Flat Barbell Bench Press',c:'Chest',sets:'135&#215;10, 185&#215;7, 185&#215;8, 165&#215;9'}, {n:'Kneeling Kettlebell Clean (Upper Mobility)',c:'Shoulders',sets:'25&#215;13, 35&#215;13, 25&#215;10'}, {n:'Overhead Straight Bar',c:'Triceps',sets:'55&#215;10, 65&#215;10, 75&#215;17'}],
+      'Jun 23': [{n:'Trap Bar Deadlift',c:'Back',sets:'175&#215;10, 265&#215;9, 315&#215;6'}, {n:'Close Grip Lat Pull Potsdam',c:'Back',sets:'100&#215;5, 180&#215;8, 150&#215;10, 140&#215;8'}, {n:'Dumbbell Curl',c:'Biceps',sets:'70&#215;6, 50&#215;10, 50&#215;7, 50&#215;7'}],
+      'Jun 24': [{n:'Split Squat Smith Machine',c:'Legs',sets:'95&#215;6, 135&#215;8, 135&#215;5'}, {n:'Kettlebell Split Rdl (Lower Mobility)',c:'Legs',sets:'30&#215;12, 30&#215;6'}, {n:'Hip Abduction',c:'Legs',sets:'100&#215;11, 120&#215;8'}],
+      'Jun 25': [{n:'Cabel High-To-Low Fly',c:'Chest',sets:'40&#215;10, 60&#215;10'}, {n:'Chest Supported Cable Row',c:'Back',sets:'70&#215;10, 90&#215;10, 110&#215;10, 120&#215;10'}, {n:'EZ-Bar Skullcrusher',c:'Triceps',sets:'40&#215;15, 60&#215;8, 60&#215;6'}, {n:'Plank',c:'Abs',sets:''}, {n:'Hanging Leg Raise',c:'Abs',sets:'BW&#215;8, BW&#215;8, BW&#215;3'}, {n:'Decline Crunch Spine Flex',c:'Abs',sets:'BW&#215;8, BW&#215;8'}, {n:'Cabel Raise Potsdam',c:'Shoulders',sets:'25&#215;17, 35&#215;8'}, {n:'Hammer Isometric',c:'Chest',sets:'225&#215;2'}, {n:'Split Incline Hammer Strength Chest Press',c:'Chest',sets:'225&#215;5, 185&#215;10, 185&#215;6'}, {n:'Hip Plank',c:'Legs',sets:''}, {n:'Lower Mobility',c:'Legs',sets:''}],
+      'Jun 26': [{n:'Lower Mobility',c:'Legs',sets:''}, {n:'Treadmill Sprint',c:'Cardio',sets:'02:00 : Warm-up: 0.5 mi @ 6.0 mph. Sprint at 11 mph for 2:00. Jumped, 02:00 : Sprint at 10 mph for 2:00, form sloppy. Jumped off and lower, 01:00 : Sprint at 10 mph for 1:00, clean form. Jumped off and lowere'}],
+      'Jun 29': [{n:'Flat Barbell Bench Press',c:'Chest',sets:'135&#215;8, 205&#215;6, 205&#215;6, 195&#215;5'}, {n:'Kneeling Kettlebell Clean (Upper Mobility)',c:'Shoulders',sets:'30&#215;10, 45&#215;8, 30&#215;10'}, {n:'Pushup',c:'Chest',sets:'BW&#215;20, BW&#215;20'}, {n:'Lower Mobility',c:'Legs',sets:''}, {n:'Hammer Isometric',c:'Chest',sets:'225&#215;1'}],
+      'Jun 30': [{n:'Chin Up',c:'Back',sets:'BW&#215;4, BW&#215;6, BW&#215;6, BW&#215;7'}, {n:'Chest Supported Cable Row',c:'Back',sets:'110&#215;10, 130&#215;10, 130&#215;10'}, {n:'Dumbbell Curl',c:'Biceps',sets:'50&#215;16, 50&#215;7, 50&#215;6'}, {n:'Fore Arm Curl',c:'Biceps',sets:'20&#215;10, 20&#215;10'}],
+    },
     aftProgress: [
       {label:'MDL &#8212; Trap Bar DL', current:'315 lb', goal:'350 lb', pct:90,  color:'var(--green)'},
       {label:'HRP &#8212; Push-Up',     current:'42 reps', goal:'61 reps', pct:69, color:'var(--amber)'},
@@ -1452,7 +1560,7 @@ const DATA = {
 
   // ── REFLECTIONS ──────────────────────────────────────────────────────
   reflections: {
-    takeaway: 'The 368 is out of JD&rsquo;s hands and in the recruiter&rsquo;s &#8212; the deadline that mattered got met. Cardio quietly had the best month of the year: both outdoor runs came back faster at the same or greater distance. The MBA semester closed with a 4.0. Keep the email follow-ups moving, keep the runs coming.',
+    takeaway: 'The 368 is out of JD&rsquo;s hands now and in the recruiter&rsquo;s. The deadline that mattered got met. Cardio quietly had the best month of the year, with both outdoor runs coming back faster at the same or greater distance. The MBA semester closed with a 4.0. Keep the follow-ups moving, keep the runs coming.',
     summary: {career:'368 approved &amp; sent', phys:'8mi @ 8:37/mi &#9733;', creative:'2 June shoots', spiritual:'3 sermons', mba:'4.000 term GPA &middot; A / A'},
   },
 };
@@ -1678,16 +1786,10 @@ function buildPhysCalendar(){
     const s=byDate[key];
     if(!s){ html+=`<div class="cal-day"><div class="cal-day-num">${d}</div></div>`; continue; }
     const dots=s.m.map(m=>`<span class="cal-dot" style="background:${MC[m]||'#888'};color:${MC[m]||'#888'}"></span>`).join('');
-    const badges=s.m.map(m=>`<span class="wk-b" style="background:${MC[m]||'#333'}">${m}</span>`).join('');
     const isPR=s.note.includes('&#9733;');
-    html+=`<div class="cal-day has-session">
+    html+=`<div class="cal-day has-session" data-day="${key}" onmouseenter="showDayDetail('${key}')">
       <div class="cal-day-num">${d}${isPR?' &#9733;':''}</div>
       <div class="cal-day-dots">${dots}</div>
-      <div class="cal-tooltip">
-        <div class="cal-tooltip-date">${key}${s.v>0?' &middot; '+s.v.toLocaleString()+' lb volume':''}</div>
-        <div class="cal-tooltip-badges">${badges}</div>
-        <div class="cal-tooltip-note">${s.note}</div>
-      </div>
     </div>`;
   }
   grid.insertAdjacentHTML('beforeend', html);
@@ -1696,6 +1798,22 @@ function buildPhysCalendar(){
   if(leg){
     leg.innerHTML=Object.entries(MC).map(([k,c])=>`<span class="phys-cal-chip"><span class="cal-dot" style="background:${c};color:${c}"></span>${k}</span>`).join('');
   }
+}
+// ── DAY DETAIL SIDEBAR (long-form, every exercise, every set) ──────────
+function showDayDetail(key){
+  const el=document.getElementById('phys-day-detail');
+  if(!el) return;
+  const s = DATA.physical.sessions.find(x=>x.d===key);
+  const log = DATA.physical.fullLog && DATA.physical.fullLog[key];
+  if(!log || !log.length){
+    el.innerHTML = `<div class="pdd-empty"><div class="pdd-empty-icon">&#9737;</div><div>No logged exercises for ${key}.</div></div>`;
+    return;
+  }
+  const meta = s ? `${s.m.join(' &middot; ')}${s.v>0?' &middot; '+s.v.toLocaleString()+' lb volume':''}` : '';
+  const exHtml = log.filter(e=>e.sets && e.sets.length).map((e,i)=>
+    `<div class="pdd-ex" style="animation-delay:${i*.03}s"><div class="pdd-ex-hd"><span class="pdd-ex-dot" style="background:${MC[e.c]||'#888'}"></span><span class="pdd-ex-name">${e.n}</span><span class="pdd-ex-cat">${e.c}</span></div><div class="pdd-ex-sets">${e.sets}</div></div>`
+  ).join('');
+  el.innerHTML = `<div class="pdd-date">${key}, 2026</div><div class="pdd-meta">${meta}</div>${exHtml}`;
 }
 function buildWorkoutLog(){
   const el=document.getElementById('wklog-content'); if(!el) return; el.dataset.built='1';
@@ -1844,9 +1962,17 @@ function buildOvCharts(){
         scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:7},maxRotation:0}},
                 y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{font:{size:8},callback:v=>(v/1000).toFixed(0)+'K'}}}}
     });
-  } else {
-    const c=document.getElementById('gymOvChart');
-    if(c){const ctx=c.getContext('2d');ctx.fillStyle='rgba(226,232,240,.2)';ctx.font="11px 'JetBrains Mono'";ctx.fillText('Gym data TBD &#8212; upload FitNotes CSV',40,75);}
+  }
+  const ovCat=document.getElementById('ovCatDonut');
+  if(ovCat){
+    const top5=DATA.fin.cats.slice().sort((a,b)=>b.a-a.a).slice(0,5);
+    new Chart(ovCat,{type:'doughnut',
+      data:{labels:top5.map(c=>c.n.replace(/&amp;/g,'&').replace(/<[^>]*>/g,'')),
+        datasets:[{data:top5.map(c=>c.a),backgroundColor:top5.map(c=>c.c+'CC'),borderColor:top5.map(c=>c.c),borderWidth:1}]},
+      options:{responsive:true,maintainAspectRatio:false,cutout:'58%',
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.label}: $${ctx.raw.toFixed(0)}`}}},
+        animation:{animateRotate:true,duration:800}}
+    });
   }
 }
 
