@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 &#8212; Year in Review &mdash; JD Meyers</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060810;--bg2:#0C0E16;--bg3:#12151F;--bg4:#181C28;
+  --g:rgba(255,255,255,.04);--gm:rgba(255,255,255,.07);
+  --b0:rgba(255,255,255,.08);--b1:rgba(255,255,255,.13);--b2:rgba(255,255,255,.22);
+  --tx:#FFFFFF;--t2:rgba(255,255,255,.90);--t3:rgba(255,255,255,.70);--t4:rgba(255,255,255,.50);
+  --green:#00E5A0;--blue:#4DA8FF;--amber:#FFB830;--red:#FF4D6D;--vio:#9B8FFF;--rose:#FF7AA8;
+  --mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
+  --r-sm:8px;--r-md:12px;--r-lg:20px;--r-pill:999px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+svg{display:block}
+
+@keyframes orb-breathe{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.30}50%{transform:translate(-50%,-50%) scale(1.18);opacity:.50}}
+@keyframes fade-in-up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fade-in-left{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes fade-in-right{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
+@keyframes dot-pop{from{transform:scale(0)}to{transform:scale(1)}}
+@keyframes pulse-ring{0%{box-shadow:0 0 0 0 rgba(0,229,160,.5)}70%{box-shadow:0 0 0 14px rgba(0,229,160,0)}100%{box-shadow:0 0 0 0 rgba(0,229,160,0)}}
+@keyframes leaf-in{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:translateX(0)}}
+
+.bg-orb{position:fixed;top:30%;left:50%;width:70vmax;height:70vmax;transform:translate(-50%,-50%);pointer-events:none;z-index:0;border-radius:50%;background:radial-gradient(circle,rgba(0,229,160,.09) 0%,rgba(77,168,255,.05) 45%,transparent 72%);filter:blur(50px);animation:orb-breathe 10s ease-in-out infinite}
+
+/* ── HEADER (only nav element on the whole page) ─────────────────────── */
+.hdr{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 28px;background:rgba(6,8,16,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--b0)}
+.hdr-title{font-size:15px;font-weight:700;letter-spacing:-.2px}
+.hdr-title strong{color:var(--green)}
+.back-btn{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--t2);text-decoration:none;padding:8px 16px;border:1px solid var(--b1);border-radius:var(--r-pill);transition:all .25s cubic-bezier(.22,.68,0,1.15);background:var(--g)}
+.back-btn:hover{background:var(--gm);border-color:var(--b2);transform:translateX(-3px)}
+
+.shell{max-width:1080px;margin:0 auto;padding:0 24px 120px;position:relative;z-index:1}
+
+/* ── HERO ─────────────────────────────────────────────────────────────── */
+.hero{text-align:center;padding:64px 0 48px;animation:fade-in-up .8s cubic-bezier(.22,.68,0,1.15) both}
+.hero-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:14px;display:flex;align-items:center;justify-content:center;gap:8px}
+.hero-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse-ring 2.4s ease-in-out infinite}
+.hero-title{font-size:44px;font-weight:800;letter-spacing:-1.5px;line-height:1.05;margin-bottom:16px}
+.hero-title span{background:linear-gradient(90deg,var(--green),var(--blue));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:16px;line-height:1.65;color:var(--t3);max-width:640px;margin:0 auto;font-weight:400}
+
+/* ── GOALS GRID ───────────────────────────────────────────────────────── */
+.goals-section{margin:40px 0 80px;animation:fade-in-up .8s cubic-bezier(.22,.68,0,1.15) .1s both}
+.goals-hd{text-align:center;margin-bottom:8px}
+.goals-title{font-size:22px;font-weight:700;letter-spacing:-.3px;margin-bottom:6px}
+.goals-sub{font-family:var(--mono);font-size:10.5px;color:var(--t4);text-transform:uppercase;letter-spacing:1px;margin-bottom:32px;text-align:center}
+.goals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:820px){.goals-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.goals-grid{grid-template-columns:1fr}}
+.goal-card{background:var(--g);border:1px solid var(--b0);border-radius:var(--r-lg);padding:20px 22px;transition:transform .3s cubic-bezier(.22,.68,0,1.15),box-shadow .3s ease,border-color .3s ease}
+.goal-card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(0,0,0,.4);border-color:var(--b2)}
+.goal-icon{width:26px;height:26px;margin-bottom:12px}
+.goal-cat{font-family:var(--mono);font-size:9.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--t4);margin-bottom:10px}
+.goal-body{font-size:12.5px;line-height:1.55;color:var(--t2);margin-bottom:12px}
+.goal-body strong{color:var(--tx)}
+.goal-meta{display:flex;flex-direction:column;gap:5px;padding-top:12px;border-top:1px solid var(--b0)}
+.goal-meta-row{display:flex;justify-content:space-between;font-family:var(--mono);font-size:9.5px}
+.goal-meta-k{color:var(--t4)}
+.goal-meta-v{color:var(--t2);text-align:right}
+.goal-foot{font-size:10.5px;color:var(--t4);font-style:italic;margin-top:10px;line-height:1.5}
+
+/* Floating highlight chips — small snippets rising and fading per month */
+@keyframes float-up{
+  0%{opacity:0;transform:translateY(8px)}
+  12%{opacity:1;transform:translateY(0)}
+  80%{opacity:1;transform:translateY(-14px)}
+  100%{opacity:0;transform:translateY(-28px)}
+}
+.tl-float-zone{position:relative;height:40px;margin-top:12px;padding-top:10px;border-top:1px solid var(--b0);overflow:hidden}
+.tl-float{position:absolute;left:0;right:0;top:8px;text-align:center;font-family:var(--mono);font-size:10.5px;color:var(--t3);opacity:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 6px;animation-name:float-up;animation-duration:10s;animation-timing-function:ease-in-out;animation-iteration-count:infinite}
+
+/* ── TIMELINE (branched) ─────────────────────────────────────────────── */
+.timeline-section{position:relative;padding:24px 0}
+.timeline-hd{text-align:center;margin-bottom:56px}
+.timeline-title{font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px}
+.timeline-sub{font-size:13px;color:var(--t3)}
+
+.tl-wrap{position:relative}
+.tl-line{position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--b0);transform:translateX(-50%);z-index:0}
+.tl-line-fill{position:absolute;left:0;top:0;width:100%;height:0%;background:linear-gradient(180deg,var(--green),var(--blue) 55%,var(--vio));transition:height 1.2s cubic-bezier(.22,.68,0,1.15);box-shadow:0 0 12px rgba(0,229,160,.4)}
+
+.tl-node{position:relative;display:flex;margin-bottom:18px;min-height:40px;opacity:0}
+.tl-node.left{justify-content:flex-start}
+.tl-node.right{justify-content:flex-end}
+.tl-node.visible.left{animation:fade-in-left .7s cubic-bezier(.22,.68,0,1.15) both}
+.tl-node.visible.right{animation:fade-in-right .7s cubic-bezier(.22,.68,0,1.15) both}
+
+.tl-dot{position:absolute;left:50%;top:10px;transform:translateX(-50%);width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--green);z-index:2;display:flex;align-items:center;justify-content:center}
+.tl-dot.done{border-color:var(--green)}
+.tl-dot-inner{width:5px;height:5px;border-radius:50%;background:var(--green);animation:dot-pop .4s cubic-bezier(.22,.68,0,1.6) .3s both}
+.tl-dot.ahead{border-color:var(--b1);background:var(--bg2)}
+.tl-node.visible .tl-dot{animation:pulse-ring 2s ease-in-out 1}
+
+/* Unified month card — one cohesive block, no floating disconnected pieces */
+.tl-card{width:calc(50% - 34px);background:var(--g);border:1px solid var(--b0);border-radius:var(--r-lg);padding:18px 20px;transition:transform .3s cubic-bezier(.22,.68,0,1.15),box-shadow .3s ease,border-color .3s ease}
+.tl-card:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(0,0,0,.4);border-color:var(--b2)}
+.tl-node.left .tl-card{margin-right:34px}
+.tl-node.right .tl-card{margin-left:34px}
+
+.tl-card-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:5px;gap:8px}
+.tl-card-month{font-size:18px;font-weight:700;letter-spacing:-.3px}
+.tl-card-badge{font-family:var(--mono);font-size:8px;letter-spacing:1px;text-transform:uppercase;color:var(--green);border:1px solid rgba(0,229,160,.35);border-radius:var(--r-pill);padding:2px 9px;white-space:nowrap}
+.tl-card-badge.ahead{color:var(--t4);border-color:var(--b1)}
+.tl-card-tag{font-size:11.5px;color:var(--t3);font-style:italic;line-height:1.4;margin-bottom:14px}
+
+/* Tight, bordered stat grid — no floating pills */
+.tl-stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--b0);border:1px solid var(--b0);border-radius:var(--r-md);overflow:hidden;margin-bottom:14px}
+.tl-tile{background:var(--bg2);padding:9px 6px;text-align:center}
+.tl-tile-top{display:flex;align-items:center;justify-content:center;gap:3px;margin-bottom:4px}
+.tl-tile-top svg{width:10px;height:10px;color:var(--t4);flex-shrink:0}
+.tl-tile-k{font-family:var(--mono);font-size:6.6px;letter-spacing:.4px;text-transform:uppercase;color:var(--t4);white-space:nowrap}
+.tl-tile-v{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--t2)}
+.tl-tile-ytd{background:rgba(0,229,160,.06)}
+
+.tl-hl{display:flex;flex-direction:column;gap:6px;padding-top:12px;border-top:1px solid var(--b0)}
+.tl-hl-row{display:flex;gap:10px;font-size:10.5px;line-height:1.45}
+.tl-hl-k{font-family:var(--mono);font-size:8px;letter-spacing:.5px;text-transform:uppercase;color:var(--t4);flex:0 0 54px;padding-top:1px}
+.tl-hl-v{color:var(--t2);flex:1}
+.ahead-card{opacity:.5}
+
+@media(max-width:760px){
+  .tl-line{left:16px}
+  .tl-dot{left:16px}
+  .tl-node.left,.tl-node.right{justify-content:flex-start}
+  .tl-card{width:calc(100% - 40px);margin-left:40px !important;margin-right:0 !important}
+  .tl-stat-grid{grid-template-columns:repeat(3,1fr)}
+}
+
+@media(max-width:420px){
+  .tl-stat-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ── SCORECARD ────────────────────────────────────────────────────────── */
+.scorecard{margin-top:80px}
+.scorecard-hd{text-align:center;margin-bottom:36px}
+.scorecard-title{font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px}
+.scorecard-sub{font-size:13px;color:var(--t3);max-width:600px;margin:0 auto;line-height:1.6}
+.score-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(max-width:700px){.score-grid{grid-template-columns:1fr}}
+.score-card{background:var(--g);border:1px solid var(--b0);border-left:3px solid var(--green);border-radius:var(--r-lg);padding:20px 22px;opacity:0}
+.score-card.visible{animation:fade-in-up .6s cubic-bezier(.22,.68,0,1.15) both}
+.score-card.behind{border-left-color:var(--amber)}
+.score-cat{font-family:var(--mono);font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--t4);margin-bottom:6px}
+.score-goal{font-size:13px;color:var(--t3);margin-bottom:10px;line-height:1.5}
+.score-status-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.score-status{font-size:15px;font-weight:700}
+.score-status.ahead{color:var(--green)}
+.score-status.ontrack{color:var(--blue)}
+.score-status.behind{color:var(--amber)}
+.score-track{height:6px;background:rgba(255,255,255,.06);border-radius:var(--r-pill);overflow:hidden}
+.score-fill{height:100%;border-radius:var(--r-pill);width:0%;transition:width 1.4s cubic-bezier(.22,.68,0,1.15)}
+
+.scorecard-note{margin-top:20px;background:var(--g);border:1px solid var(--b0);border-left:3px solid var(--blue);border-radius:var(--r-lg);padding:16px 20px;font-size:12px;line-height:1.65;color:var(--t2)}
+.scorecard-note strong{color:var(--tx)}
+
+/* ── FOOTER ───────────────────────────────────────────────────────────── */
+.pagefoot{text-align:center;margin-top:80px;padding-top:24px;border-top:1px solid var(--b0)}
+.pagefoot-text{font-family:var(--mono);font-size:10px;color:var(--t4);margin-bottom:16px}
+</style>
+</head>
+<body>
+<div class="bg-orb"></div>
+
+<div class="hdr">
+  <div class="hdr-title"><strong>2026</strong> &mdash; Year in Review</div>
+  <a href="index.html" class="back-btn">&#8592; Back to Recap</a>
+</div>
+
+<div class="shell">
+
+  <div class="hero">
+    <div class="hero-eyebrow"><span class="hero-eyebrow-dot"></span>January 1, 2026 &mdash; The Year Begins</div>
+    <div class="hero-title">The year JD <span>locks in</span> a career.</div>
+    <div class="hero-sub">Three paths run at once this year &mdash; Air Force OTS, civil service, and a shot at the airlines &mdash; while five tracked pillars move in parallel underneath it: spiritual, physical, financial, intellectual, and creative. This page is the whole year distilled: the plan written in January, and what actually happened month by month.</div>
+  </div>
+
+  <div class="goals-section">
+    <div class="goals-hd">
+      <div class="goals-title">The Plan, Written January 2026</div>
+    </div>
+    <div class="goals-sub">Five tracked pillars, plus the career thread running underneath all of them</div>
+    <div class="goals-grid">
+
+      <div class="goal-card">
+        <div class="goal-icon" style="color:var(--vio)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.5v19M6 8.5h12"/></svg></div>
+        <div class="goal-cat" style="color:var(--vio)">1 &middot; Spiritual</div>
+        <div class="goal-body">Sermon notes every Sunday attended, plus a weekly summary covering Bible reading and prayer. A new book every two months.</div>
+        <div class="goal-meta">
+          <div class="goal-meta-row"><span class="goal-meta-k">Jan&#8211;Feb</span><span class="goal-meta-v">Mark</span></div>
+          <div class="goal-meta-row"><span class="goal-meta-k">Mar&#8211;Apr</span><span class="goal-meta-v">Luke</span></div>
+          <div class="goal-meta-row"><span class="goal-meta-k">May&#8211;Jun</span><span class="goal-meta-v">Romans</span></div>
+          <div class="goal-meta-row"><span class="goal-meta-k">Jul&#8211;Dec</span><span class="goal-meta-v">2 Cor &middot; 1&amp;2 Tim</span></div>
+        </div>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-icon" style="color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg></div>
+        <div class="goal-cat" style="color:var(--blue)">2 &middot; Physical</div>
+        <div class="goal-body">Primary standard is the Army Fitness Test &mdash; hold a minimum of <strong>90 points in every event</strong>, Male 22&#8211;26.</div>
+        <div class="goal-meta">
+          <div class="goal-meta-row"><span class="goal-meta-k">Deadlift</span><span class="goal-meta-v">230 lb &#215; 3</span></div>
+          <div class="goal-meta-row"><span class="goal-meta-k">Hand-Release Push-Up</span><span class="goal-meta-v">43 reps</span></div>
+          <div class="goal-meta-row"><span class="goal-meta-k">Plank</span><span class="goal-meta-v">2:25</span></div>
+          <div class="goal-meta-row"><span class="goal-meta-k">Two-Mile Run</span><span class="goal-meta-v">15:50</span></div>
+        </div>
+        <div class="goal-foot">Sprint-Drag-Carry excluded &mdash; no sled or 90 lb setup available outside Army facilities. PPL training min. 1 cycle/week, cardio min. 1 session/week.</div>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-icon" style="color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg></div>
+        <div class="goal-cat" style="color:var(--green)">3 &middot; Financial</div>
+        <div class="goal-body">Built on an assumed <strong>$2,500&#8211;$3,000/mo</strong> income.</div>
+        <div class="goal-meta">
+          <div class="goal-meta-row"><span class="goal-meta-k">Annual savings</span><span class="goal-meta-v">$10,000</span></div>
+          <div class="goal-meta-row"><span class="goal-meta-k">Tithe</span><span class="goal-meta-v">$250/mo</span></div>
+          <div class="goal-meta-row"><span class="goal-meta-k">Spending cap</span><span class="goal-meta-v">$2,500/mo</span></div>
+          <div class="goal-meta-row"><span class="goal-meta-k">Min. checking</span><span class="goal-meta-v">$1,000 always</span></div>
+        </div>
+        <div class="goal-foot">Starting balances: Roth $10,000 &middot; Brokerage $35,000 &middot; Crypto $4,000 &middot; 403(b) $6,200.</div>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-icon" style="color:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 6.5c-1.6-1.3-4-1.8-6.5-1.5v12c2.5-.3 4.9.2 6.5 1.5 1.6-1.3 4-1.8 6.5-1.5v-12c-2.5-.3-4.9.2-6.5 1.5z"/><path d="M12 6.5v12"/></svg></div>
+        <div class="goal-cat" style="color:var(--amber)">4 &middot; Intellectual</div>
+        <div class="goal-body">A new topic every month, Jan through Dec, each closed out with a proof of learning.</div>
+        <div class="goal-meta">
+          <div class="goal-meta-row"><span class="goal-meta-k">Input</span><span class="goal-meta-v">6&#8211;8 hrs audio, 3&#8211;5 articles</span></div>
+          <div class="goal-meta-row"><span class="goal-meta-k">Output</span><span class="goal-meta-v">memo, bullets, or voice</span></div>
+          <div class="goal-meta-row"><span class="goal-meta-k">Verify</span><span class="goal-meta-v">recall + transfer test</span></div>
+        </div>
+        <div class="goal-foot">Jan finance &middot; Feb STEM &middot; Mar history &middot; Apr leadership &middot; May psychology &middot; Jun military doctrine &middot; on through a December synthesis review.</div>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-icon" style="color:var(--rose)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8 7l1.6-2.5h4.8L16 7"/><circle cx="12" cy="13.3" r="3.4"/></svg></div>
+        <div class="goal-cat" style="color:var(--rose)">5 &middot; Creative</div>
+        <div class="goal-body">JD Meyers Productions, tracked in two hard numbers for the year.</div>
+        <div class="goal-meta">
+          <div class="goal-meta-row"><span class="goal-meta-k">Weddings</span><span class="goal-meta-v">3&#8211;4 for the year</span></div>
+          <div class="goal-meta-row"><span class="goal-meta-k">Photo shoots</span><span class="goal-meta-v">6, paid or unpaid</span></div>
+        </div>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-icon" style="color:var(--red)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 12l3.6-5.4-6.4 2 2.8 3.4z"/></svg></div>
+        <div class="goal-cat" style="color:var(--red)">&middot; Career Thread</div>
+        <div class="goal-body">Not one of the five formal pillars &mdash; a narrative running underneath all of them. No single path picked in January. The plan was to run every viable option and let the year narrow it down.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="timeline-section">
+    <div class="timeline-hd">
+      <div class="timeline-title">The Year, Month by Month</div>
+      <div class="timeline-sub">Six months written. Six still ahead.</div>
+    </div>
+    <div class="tl-wrap" id="tl-wrap">
+      <div class="tl-line"><div class="tl-line-fill" id="tl-fill"></div></div>
+      <div id="tl-nodes"><!-- injected --></div>
+    </div>
+  </div>
+
+  <div class="scorecard">
+    <div class="scorecard-hd">
+      <div class="scorecard-title">Mid-Year Scorecard</div>
+      <div class="scorecard-sub">The exact numbers from the January plan, checked against where June actually landed.</div>
+    </div>
+    <div class="score-grid">
+
+      <div class="score-card">
+        <div class="score-cat">Financial &mdash; $10,000 / Year</div>
+        <div class="score-status-row"><div class="score-goal">YTD net savings through June</div><div class="score-status ahead">$12,985</div></div>
+        <div class="score-track"><div class="score-fill" style="background:var(--green)" data-pct="100"></div></div>
+      </div>
+      <div class="score-card">
+        <div class="score-cat">Creative &mdash; 6 Shoots / Year</div>
+        <div class="score-status-row"><div class="score-goal">Shoots completed through June</div><div class="score-status ahead">9 of 6</div></div>
+        <div class="score-track"><div class="score-fill" style="background:var(--green)" data-pct="100"></div></div>
+      </div>
+      <div class="score-card">
+        <div class="score-cat">Creative &mdash; 3&#8211;4 Weddings</div>
+        <div class="score-status-row"><div class="score-goal">Weddings shot through June</div><div class="score-status ontrack">2 of 3&#8211;4</div></div>
+        <div class="score-track"><div class="score-fill" style="background:var(--blue)" data-pct="55"></div></div>
+      </div>
+      <div class="score-card">
+        <div class="score-cat">AFT &mdash; Deadlift (230 lb &#215; 3 goal)</div>
+        <div class="score-status-row"><div class="score-goal">Trap bar deadlift, June</div><div class="score-status ahead">315 lb &#215; 6</div></div>
+        <div class="score-track"><div class="score-fill" style="background:var(--green)" data-pct="100"></div></div>
+      </div>
+      <div class="score-card">
+        <div class="score-cat">AFT &mdash; Hand-Release Push-Up (43 goal)</div>
+        <div class="score-status-row"><div class="score-goal">Best logged set through June</div><div class="score-status ontrack">42 reps &middot; 98%</div></div>
+        <div class="score-track"><div class="score-fill" style="background:var(--blue)" data-pct="98"></div></div>
+      </div>
+      <div class="score-card">
+        <div class="score-cat">AFT &mdash; Plank (2:25 goal)</div>
+        <div class="score-status-row"><div class="score-goal">Best logged hold through June</div><div class="score-status ontrack">2:20 &middot; 97%</div></div>
+        <div class="score-track"><div class="score-fill" style="background:var(--blue)" data-pct="97"></div></div>
+      </div>
+      <div class="score-card behind">
+        <div class="score-cat">AFT &mdash; Two-Mile Run (15:50 goal)</div>
+        <div class="score-status-row"><div class="score-goal">Not yet tested this year</div><div class="score-status behind">Untested</div></div>
+        <div class="score-track"><div class="score-fill" style="background:var(--amber)" data-pct="0"></div></div>
+      </div>
+      <div class="score-card">
+        <div class="score-cat">Spiritual &mdash; Reading Plan</div>
+        <div class="score-status-row"><div class="score-goal">Mark done, into the Luke &#8594; Romans window</div><div class="score-status ontrack">On pace</div></div>
+        <div class="score-track"><div class="score-fill" style="background:var(--blue)" data-pct="75"></div></div>
+      </div>
+      <div class="score-card behind">
+        <div class="score-cat">Intellectual &mdash; Monthly Topics</div>
+        <div class="score-status-row"><div class="score-goal">Feb missed and logged as a miss; plan folded into MBA coursework</div><div class="score-status behind">Evolved</div></div>
+        <div class="score-track"><div class="score-fill" style="background:var(--amber)" data-pct="45"></div></div>
+      </div>
+      <div class="score-card">
+        <div class="score-cat">Career Thread &mdash; Lock It In</div>
+        <div class="score-status-row"><div class="score-goal">United closed, OTS is now the clear live path</div><div class="score-status ontrack">Narrowing</div></div>
+        <div class="score-track"><div class="score-fill" style="background:var(--blue)" data-pct="65"></div></div>
+      </div>
+    </div>
+
+    <div class="scorecard-note"><strong>A note on the physical numbers.</strong> The January plan set the AFT goal at a 90-point minimum per event &mdash; 230 lb deadlift, 43 push-ups, a 2:25 plank, 15:50 two-mile run. Later months' dashboards tracked toward a visibly higher personal bar (350 lb, 61 reps, 3:35, 16:36) without ever renaming it as a change. That looks like a drift toward the AFT&rsquo;s 100-point max scoring rather than a new decision, but it was never written down as one. This scorecard uses the actual January numbers.</div>
+  </div>
+
+  <div class="pagefoot">
+    <div class="pagefoot-text">JD Meyers &mdash; 2026 Year in Review &middot; julietdeltaone.github.io/monthly-recap</div>
+    <a href="index.html" class="back-btn">&#8592; Back to Recap</a>
+  </div>
+
+</div>
+
+<script>
+document.getElementById('tl-nodes').innerHTML = "\n    <div class=\"tl-node left\" data-month=\"1\">\n      <div class=\"tl-dot done\"><span class=\"tl-dot-inner\"></span></div>\n      <div class=\"tl-card\">\n        <div class=\"tl-card-hd\">\n          <span class=\"tl-card-month\">January</span>\n          <span class=\"tl-card-badge\">Done</span>\n        </div>\n        <div class=\"tl-card-tag\">Baselines set. Every category starts from zero.</div>\n\n        <div class=\"tl-stat-grid\">\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"12\" cy=\"12\" r=\"9.2\"/><path d=\"M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2\"/></svg><span class=\"tl-tile-k\">Net</span></div><div class=\"tl-tile-v\" style=\"color:var(--green)\">$865</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"12\" cy=\"12\" r=\"9.2\"/><path d=\"M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2\"/></svg><span class=\"tl-tile-k\">Income</span></div><div class=\"tl-tile-v\">$3,513</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"12\" cy=\"12\" r=\"9.2\"/><path d=\"M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2\"/></svg><span class=\"tl-tile-k\">Expenses</span></div><div class=\"tl-tile-v\" style=\"color:var(--red)\">$2,648</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"1.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"19.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"5.5\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><rect x=\"16.1\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><path d=\"M7.9 12h8.2\"/></svg><span class=\"tl-tile-k\">Gym Days</span></div><div class=\"tl-tile-v\" style=\"color:var(--blue)\">13</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"1.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"19.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"5.5\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><rect x=\"16.1\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><path d=\"M7.9 12h8.2\"/></svg><span class=\"tl-tile-k\">Volume</span></div><div class=\"tl-tile-v\" style=\"color:var(--blue)\">88K lb</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><path d=\"M12 2.5v19M6 8.5h12\"/></svg><span class=\"tl-tile-k\">Sermons</span></div><div class=\"tl-tile-v\" style=\"color:var(--amber)\">4</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"2.5\" y=\"7\" width=\"19\" height=\"13\" rx=\"2\"/><path d=\"M8 7l1.6-2.5h4.8L16 7\"/><circle cx=\"12\" cy=\"13.3\" r=\"3.4\"/></svg><span class=\"tl-tile-k\">Photo</span></div><div class=\"tl-tile-v\" style=\"color:var(--rose)\">$0</div></div>\n          <div class=\"tl-tile tl-tile-ytd\"><div class=\"tl-tile-top\"><span class=\"tl-tile-k\">YTD Net</span></div><div class=\"tl-tile-v\" style=\"color:var(--green)\">$865</div></div>\n        </div>\n\n        <div class=\"tl-hl\">\n          <div class=\"tl-hl-row\"><span class=\"tl-hl-k\">PR</span><span class=\"tl-hl-v\">Legs 245 lb (est. 1RM 300)</span></div>\n          <div class=\"tl-hl-row\"><span class=\"tl-hl-k\">Academic</span><span class=\"tl-hl-v\">Online MBA, Clarkson University \u2014 Week 1\u20134 of 10, term ends Mar 13</span></div>\n          <div class=\"tl-hl-row\"><span class=\"tl-hl-k\">Career</span><span class=\"tl-hl-v\">Not yet tracked as a distinct path this month.</span></div>\n        </div>\n\n        <div class=\"tl-float-zone\"><span class=\"tl-float\" style=\"animation-delay:0.0s\">$865 net saved</span><span class=\"tl-float\" style=\"animation-delay:2.0s\">13 gym days &middot; 88K lb</span><span class=\"tl-float\" style=\"animation-delay:4.0s\">4 sermons logged</span><span class=\"tl-float\" style=\"animation-delay:6.0s\">Legs 245 lb PR</span><span class=\"tl-float\" style=\"animation-delay:8.0s\">MBA term begins</span></div>\n      </div>\n    </div>\n    <div class=\"tl-node right\" data-month=\"2\">\n      <div class=\"tl-dot done\"><span class=\"tl-dot-inner\"></span></div>\n      <div class=\"tl-card\">\n        <div class=\"tl-card-hd\">\n          <span class=\"tl-card-month\">February</span>\n          <span class=\"tl-card-badge\">Done</span>\n        </div>\n        <div class=\"tl-card-tag\">Best volume month of Q1. Spending pulled well under cap.</div>\n\n        <div class=\"tl-stat-grid\">\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"12\" cy=\"12\" r=\"9.2\"/><path d=\"M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2\"/></svg><span class=\"tl-tile-k\">Net</span></div><div class=\"tl-tile-v\" style=\"color:var(--green)\">$1,094</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"12\" cy=\"12\" r=\"9.2\"/><path d=\"M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2\"/></svg><span class=\"tl-tile-k\">Income</span></div><div class=\"tl-tile-v\">$2,884</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"12\" cy=\"12\" r=\"9.2\"/><path d=\"M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2\"/></svg><span class=\"tl-tile-k\">Expenses</span></div><div class=\"tl-tile-v\" style=\"color:var(--red)\">$1,790</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"1.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"19.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"5.5\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><rect x=\"16.1\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><path d=\"M7.9 12h8.2\"/></svg><span class=\"tl-tile-k\">Gym Days</span></div><div class=\"tl-tile-v\" style=\"color:var(--blue)\">18</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"1.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"19.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"5.5\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><rect x=\"16.1\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><path d=\"M7.9 12h8.2\"/></svg><span class=\"tl-tile-k\">Volume</span></div><div class=\"tl-tile-v\" style=\"color:var(--blue)\">110K lb</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><path d=\"M12 2.5v19M6 8.5h12\"/></svg><span class=\"tl-tile-k\">Sermons</span></div><div class=\"tl-tile-v\" style=\"color:var(--amber)\">4</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"2.5\" y=\"7\" width=\"19\" height=\"13\" rx=\"2\"/><path d=\"M8 7l1.6-2.5h4.8L16 7\"/><circle cx=\"12\" cy=\"13.3\" r=\"3.4\"/></svg><span class=\"tl-tile-k\">Photo</span></div><div class=\"tl-tile-v\" style=\"color:var(--rose)\">$0</div></div>\n          <div class=\"tl-tile tl-tile-ytd\"><div class=\"tl-tile-top\"><span class=\"tl-tile-k\">YTD Net</span></div><div class=\"tl-tile-v\" style=\"color:var(--green)\">$1,960</div></div>\n        </div>\n\n        <div class=\"tl-hl\">\n          <div class=\"tl-hl-row\"><span class=\"tl-hl-k\">PR</span><span class=\"tl-hl-v\">Leg press 495 lb, new high (est. 1RM 561)</span></div>\n          <div class=\"tl-hl-row\"><span class=\"tl-hl-k\">Academic</span><span class=\"tl-hl-v\">Online MBA \u2014 Week 5\u20138 of 10 \u00b7 STEM goal missed, amended to ARNG/JCR/Radio for March</span></div>\n          <div class=\"tl-hl-row\"><span class=\"tl-hl-k\">Career</span><span class=\"tl-hl-v\">Not yet tracked as a distinct path this month.</span></div>\n        </div>\n\n        <div class=\"tl-float-zone\"><span class=\"tl-float\" style=\"animation-delay:0.0s\">$1,094 net saved</span><span class=\"tl-float\" style=\"animation-delay:2.0s\">18 gym days &middot; 110K lb</span><span class=\"tl-float\" style=\"animation-delay:4.0s\">STEM goal missed, logged</span><span class=\"tl-float\" style=\"animation-delay:6.0s\">Leg press 495 lb PR</span><span class=\"tl-float\" style=\"animation-delay:8.0s\">Best Q1 volume month</span></div>\n      </div>\n    </div>\n    <div class=\"tl-node left\" data-month=\"3\">\n      <div class=\"tl-dot done\"><span class=\"tl-dot-inner\"></span></div>\n      <div class=\"tl-card\">\n        <div class=\"tl-card-hd\">\n          <span class=\"tl-card-month\">March</span>\n          <span class=\"tl-card-badge\">Done</span>\n        </div>\n        <div class=\"tl-card-tag\">Wedding pipeline starts. Intellectual goal amended to ARNG training.</div>\n\n        <div class=\"tl-stat-grid\">\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"12\" cy=\"12\" r=\"9.2\"/><path d=\"M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2\"/></svg><span class=\"tl-tile-k\">Net</span></div><div class=\"tl-tile-v\" style=\"color:var(--green)\">$1,444</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"12\" cy=\"12\" r=\"9.2\"/><path d=\"M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2\"/></svg><span class=\"tl-tile-k\">Income</span></div><div class=\"tl-tile-v\">$3,492</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"12\" cy=\"12\" r=\"9.2\"/><path d=\"M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2\"/></svg><span class=\"tl-tile-k\">Expenses</span></div><div class=\"tl-tile-v\" style=\"color:var(--red)\">$2,637</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"1.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"19.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"5.5\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><rect x=\"16.1\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><path d=\"M7.9 12h8.2\"/></svg><span class=\"tl-tile-k\">Gym Days</span></div><div class=\"tl-tile-v\" style=\"color:var(--blue)\">20</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"1.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"19.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"5.5\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><rect x=\"16.1\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><path d=\"M7.9 12h8.2\"/></svg><span class=\"tl-tile-k\">Volume</span></div><div class=\"tl-tile-v\" style=\"color:var(--blue)\">137K lb</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><path d=\"M12 2.5v19M6 8.5h12\"/></svg><span class=\"tl-tile-k\">Sermons</span></div><div class=\"tl-tile-v\" style=\"color:var(--amber)\">5</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"2.5\" y=\"7\" width=\"19\" height=\"13\" rx=\"2\"/><path d=\"M8 7l1.6-2.5h4.8L16 7\"/><circle cx=\"12\" cy=\"13.3\" r=\"3.4\"/></svg><span class=\"tl-tile-k\">Photo</span></div><div class=\"tl-tile-v\" style=\"color:var(--rose)\">n/a</div></div>\n          <div class=\"tl-tile tl-tile-ytd\"><div class=\"tl-tile-top\"><span class=\"tl-tile-k\">YTD Net</span></div><div class=\"tl-tile-v\" style=\"color:var(--green)\">$3,404</div></div>\n        </div>\n\n        <div class=\"tl-hl\">\n          <div class=\"tl-hl-row\"><span class=\"tl-hl-k\">PR</span><span class=\"tl-hl-v\">Trap Bar DL 285 lb \u00d7 5 (81% of 350 lb AFT goal)</span></div>\n          <div class=\"tl-hl-row\"><span class=\"tl-hl-k\">Academic</span><span class=\"tl-hl-v\">Term GPA 3.83 (A, A-) \u00b7 MMCS Army Digital C2 amendment closes Feb's missed STEM goal</span></div>\n          <div class=\"tl-hl-row\"><span class=\"tl-hl-k\">Career</span><span class=\"tl-hl-v\">Not yet tracked as a distinct path this month.</span></div>\n        </div>\n\n        <div class=\"tl-float-zone\"><span class=\"tl-float\" style=\"animation-delay:0.0s\">$1,444 net saved</span><span class=\"tl-float\" style=\"animation-delay:2.0s\">20 gym days &middot; 137K lb</span><span class=\"tl-float\" style=\"animation-delay:4.0s\">5 sermons &middot; 4 of 4 Sundays</span><span class=\"tl-float\" style=\"animation-delay:6.0s\">Term GPA 3.83</span><span class=\"tl-float\" style=\"animation-delay:8.0s\">First video project delivered</span></div>\n      </div>\n    </div>\n    <div class=\"tl-node right\" data-month=\"4\">\n      <div class=\"tl-dot done\"><span class=\"tl-dot-inner\"></span></div>\n      <div class=\"tl-card\">\n        <div class=\"tl-card-hd\">\n          <span class=\"tl-card-month\">April</span>\n          <span class=\"tl-card-badge\">Done</span>\n        </div>\n        <div class=\"tl-card-tag\">Best month yet. All three career paths open at once.</div>\n\n        <div class=\"tl-stat-grid\">\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"12\" cy=\"12\" r=\"9.2\"/><path d=\"M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2\"/></svg><span class=\"tl-tile-k\">Net</span></div><div class=\"tl-tile-v\" style=\"color:var(--green)\">$4,234</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"12\" cy=\"12\" r=\"9.2\"/><path d=\"M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2\"/></svg><span class=\"tl-tile-k\">Income</span></div><div class=\"tl-tile-v\">$5,980</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"12\" cy=\"12\" r=\"9.2\"/><path d=\"M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2\"/></svg><span class=\"tl-tile-k\">Expenses</span></div><div class=\"tl-tile-v\" style=\"color:var(--red)\">$1,746</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"1.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"19.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"5.5\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><rect x=\"16.1\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><path d=\"M7.9 12h8.2\"/></svg><span class=\"tl-tile-k\">Gym Days</span></div><div class=\"tl-tile-v\" style=\"color:var(--blue)\">24</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"1.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"19.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"5.5\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><rect x=\"16.1\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><path d=\"M7.9 12h8.2\"/></svg><span class=\"tl-tile-k\">Volume</span></div><div class=\"tl-tile-v\" style=\"color:var(--blue)\">128K lb</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><path d=\"M12 2.5v19M6 8.5h12\"/></svg><span class=\"tl-tile-k\">Sermons</span></div><div class=\"tl-tile-v\" style=\"color:var(--amber)\">4</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"2.5\" y=\"7\" width=\"19\" height=\"13\" rx=\"2\"/><path d=\"M8 7l1.6-2.5h4.8L16 7\"/><circle cx=\"12\" cy=\"13.3\" r=\"3.4\"/></svg><span class=\"tl-tile-k\">Photo</span></div><div class=\"tl-tile-v\" style=\"color:var(--rose)\">$1,390</div></div>\n          <div class=\"tl-tile tl-tile-ytd\"><div class=\"tl-tile-top\"><span class=\"tl-tile-k\">YTD Net</span></div><div class=\"tl-tile-v\" style=\"color:var(--green)\">$7,638</div></div>\n        </div>\n\n        <div class=\"tl-hl\">\n          <div class=\"tl-hl-row\"><span class=\"tl-hl-k\">PR</span><span class=\"tl-hl-v\">Trap Bar DL 345 lb \u00d7 3 \u2014 98.6% of AFT MDL goal (350 lb)</span></div>\n          <div class=\"tl-hl-row\"><span class=\"tl-hl-k\">Academic</span><span class=\"tl-hl-v\">OS603 &amp; MK610 in progress \u00b7 Army IgnitED reimbursement $1,250 confirmed via SUNY Potsdam</span></div>\n          <div class=\"tl-hl-row\"><span class=\"tl-hl-k\">Career</span><span class=\"tl-hl-v\">All 3 paths active: OTS recruiter contact made, United interview in pipeline, civil service exam scheduled for May 9</span></div>\n        </div>\n\n        <div class=\"tl-float-zone\"><span class=\"tl-float\" style=\"animation-delay:0.0s\">$4,234 net saved</span><span class=\"tl-float\" style=\"animation-delay:2.0s\">24 gym days &middot; 128K lb</span><span class=\"tl-float\" style=\"animation-delay:4.0s\">All 3 career paths active</span><span class=\"tl-float\" style=\"animation-delay:6.0s\">Trap bar DL 345 lb PR</span><span class=\"tl-float\" style=\"animation-delay:8.0s\">IgnitED $1,250 confirmed</span></div>\n      </div>\n    </div>\n    <div class=\"tl-node left\" data-month=\"5\">\n      <div class=\"tl-dot done\"><span class=\"tl-dot-inner\"></span></div>\n      <div class=\"tl-card\">\n        <div class=\"tl-card-hd\">\n          <span class=\"tl-card-month\">May</span>\n          <span class=\"tl-card-badge\">Done</span>\n        </div>\n        <div class=\"tl-card-tag\">United closes. OTS becomes the live path. Photography delivers.</div>\n\n        <div class=\"tl-stat-grid\">\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"12\" cy=\"12\" r=\"9.2\"/><path d=\"M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2\"/></svg><span class=\"tl-tile-k\">Net</span></div><div class=\"tl-tile-v\" style=\"color:var(--green)\">$2,883</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"12\" cy=\"12\" r=\"9.2\"/><path d=\"M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2\"/></svg><span class=\"tl-tile-k\">Income</span></div><div class=\"tl-tile-v\">$5,660</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"12\" cy=\"12\" r=\"9.2\"/><path d=\"M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2\"/></svg><span class=\"tl-tile-k\">Expenses</span></div><div class=\"tl-tile-v\" style=\"color:var(--red)\">$2,776</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"1.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"19.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"5.5\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><rect x=\"16.1\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><path d=\"M7.9 12h8.2\"/></svg><span class=\"tl-tile-k\">Gym Days</span></div><div class=\"tl-tile-v\" style=\"color:var(--blue)\">20</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"1.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"19.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"5.5\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><rect x=\"16.1\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><path d=\"M7.9 12h8.2\"/></svg><span class=\"tl-tile-k\">Volume</span></div><div class=\"tl-tile-v\" style=\"color:var(--blue)\">87K lb</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><path d=\"M12 2.5v19M6 8.5h12\"/></svg><span class=\"tl-tile-k\">Sermons</span></div><div class=\"tl-tile-v\" style=\"color:var(--amber)\">2</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"2.5\" y=\"7\" width=\"19\" height=\"13\" rx=\"2\"/><path d=\"M8 7l1.6-2.5h4.8L16 7\"/><circle cx=\"12\" cy=\"13.3\" r=\"3.4\"/></svg><span class=\"tl-tile-k\">Photo</span></div><div class=\"tl-tile-v\" style=\"color:var(--rose)\">$2,735</div></div>\n          <div class=\"tl-tile tl-tile-ytd\"><div class=\"tl-tile-top\"><span class=\"tl-tile-k\">YTD Net</span></div><div class=\"tl-tile-v\" style=\"color:var(--green)\">$10,521</div></div>\n        </div>\n\n        <div class=\"tl-hl\">\n          <div class=\"tl-hl-row\"><span class=\"tl-hl-k\">PR</span><span class=\"tl-hl-v\">Bench Press 215 lb \u00d7 4 \u2014 +20 lb vs April</span></div>\n          <div class=\"tl-hl-row\"><span class=\"tl-hl-k\">Academic</span><span class=\"tl-hl-v\">OS603 92.5% \u00b7 MK610 94.03%</span></div>\n          <div class=\"tl-hl-row\"><span class=\"tl-hl-k\">Career</span><span class=\"tl-hl-v\">OTS Active (DD-368 sent to SSG Wilson) \u00b7 United closed (went with other candidates) \u00b7 Civil service exam done, AT conflict pending</span></div>\n        </div>\n\n        <div class=\"tl-float-zone\"><span class=\"tl-float\" style=\"animation-delay:0.0s\">$2,883 net saved</span><span class=\"tl-float\" style=\"animation-delay:2.0s\">6 shoots &middot; $2,735 photo</span><span class=\"tl-float\" style=\"animation-delay:4.0s\">United closed, OTS active</span><span class=\"tl-float\" style=\"animation-delay:6.0s\">Bench 215 lb PR</span><span class=\"tl-float\" style=\"animation-delay:8.0s\">DD-368 sent to SSG Wilson</span></div>\n      </div>\n    </div>\n    <div class=\"tl-node right\" data-month=\"6\">\n      <div class=\"tl-dot done\"><span class=\"tl-dot-inner\"></span></div>\n      <div class=\"tl-card\">\n        <div class=\"tl-card-hd\">\n          <span class=\"tl-card-month\">June</span>\n          <span class=\"tl-card-badge\">Done</span>\n        </div>\n        <div class=\"tl-card-tag\">The 368 deadline is met. Semester closes at a 4.0.</div>\n\n        <div class=\"tl-stat-grid\">\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"12\" cy=\"12\" r=\"9.2\"/><path d=\"M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2\"/></svg><span class=\"tl-tile-k\">Net</span></div><div class=\"tl-tile-v\" style=\"color:var(--green)\">$2,464</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"12\" cy=\"12\" r=\"9.2\"/><path d=\"M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2\"/></svg><span class=\"tl-tile-k\">Income</span></div><div class=\"tl-tile-v\">$4,323</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><circle cx=\"12\" cy=\"12\" r=\"9.2\"/><path d=\"M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2\"/></svg><span class=\"tl-tile-k\">Expenses</span></div><div class=\"tl-tile-v\" style=\"color:var(--red)\">$1,859</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"1.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"19.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"5.5\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><rect x=\"16.1\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><path d=\"M7.9 12h8.2\"/></svg><span class=\"tl-tile-k\">Gym Days</span></div><div class=\"tl-tile-v\" style=\"color:var(--blue)\">21</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"1.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"19.5\" y=\"9.5\" width=\"3\" height=\"5\" rx=\".8\"/><rect x=\"5.5\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><rect x=\"16.1\" y=\"8\" width=\"2.4\" height=\"8\" rx=\".8\"/><path d=\"M7.9 12h8.2\"/></svg><span class=\"tl-tile-k\">Volume</span></div><div class=\"tl-tile-v\" style=\"color:var(--blue)\">114K lb</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><path d=\"M12 2.5v19M6 8.5h12\"/></svg><span class=\"tl-tile-k\">Sermons</span></div><div class=\"tl-tile-v\" style=\"color:var(--amber)\">3</div></div>\n          <div class=\"tl-tile\"><div class=\"tl-tile-top\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\"><rect x=\"2.5\" y=\"7\" width=\"19\" height=\"13\" rx=\"2\"/><path d=\"M8 7l1.6-2.5h4.8L16 7\"/><circle cx=\"12\" cy=\"13.3\" r=\"3.4\"/></svg><span class=\"tl-tile-k\">Photo</span></div><div class=\"tl-tile-v\" style=\"color:var(--rose)\">$1,800</div></div>\n          <div class=\"tl-tile tl-tile-ytd\"><div class=\"tl-tile-top\"><span class=\"tl-tile-k\">YTD Net</span></div><div class=\"tl-tile-v\" style=\"color:var(--green)\">$12,985</div></div>\n        </div>\n\n        <div class=\"tl-hl\">\n          <div class=\"tl-hl-row\"><span class=\"tl-hl-k\">PR</span><span class=\"tl-hl-v\">Outdoor run 8 mi @ 8:37/mi \u2014 1:00/mi faster than May</span></div>\n          <div class=\"tl-hl-row\"><span class=\"tl-hl-k\">Academic</span><span class=\"tl-hl-v\">Term GPA 4.000 \u00b7 Cumulative 3.917 \u00b7 Good Academic Standing \u00b7 OS603 A \u00b7 MK610 A \u00b7 Semester closed</span></div>\n          <div class=\"tl-hl-row\"><span class=\"tl-hl-k\">Career</span><span class=\"tl-hl-v\">DD-368 approved &amp; sent to AF recruiter \u2014 Jul 4 deadline met \u00b7 AFOQT due Sep 25 \u00b7 Clarkson interview Jun 30</span></div>\n        </div>\n\n        <div class=\"tl-float-zone\"><span class=\"tl-float\" style=\"animation-delay:0.0s\">$2,464 net saved</span><span class=\"tl-float\" style=\"animation-delay:2.0s\">8mi run @ 8:37/mi PR</span><span class=\"tl-float\" style=\"animation-delay:4.0s\">Term GPA 4.000</span><span class=\"tl-float\" style=\"animation-delay:6.0s\">368 approved, AFOQT due Sep 25</span><span class=\"tl-float\" style=\"animation-delay:8.0s\">Best cardio month of the year</span></div>\n      </div>\n    </div>" + "\n    <div class=\"tl-node left ahead\">\n      <div class=\"tl-dot ahead\"></div>\n      <div class=\"tl-card ahead-card\">\n        <div class=\"tl-card-hd\">\n          <span class=\"tl-card-month\">July</span>\n          <span class=\"tl-card-badge ahead\">Ahead</span>\n        </div>\n        <div class=\"tl-card-tag\">Not yet written.</div>\n      </div>\n    </div>\n    <div class=\"tl-node right ahead\">\n      <div class=\"tl-dot ahead\"></div>\n      <div class=\"tl-card ahead-card\">\n        <div class=\"tl-card-hd\">\n          <span class=\"tl-card-month\">August</span>\n          <span class=\"tl-card-badge ahead\">Ahead</span>\n        </div>\n        <div class=\"tl-card-tag\">Not yet written.</div>\n      </div>\n    </div>\n    <div class=\"tl-node left ahead\">\n      <div class=\"tl-dot ahead\"></div>\n      <div class=\"tl-card ahead-card\">\n        <div class=\"tl-card-hd\">\n          <span class=\"tl-card-month\">September</span>\n          <span class=\"tl-card-badge ahead\">Ahead</span>\n        </div>\n        <div class=\"tl-card-tag\">Not yet written.</div>\n      </div>\n    </div>\n    <div class=\"tl-node right ahead\">\n      <div class=\"tl-dot ahead\"></div>\n      <div class=\"tl-card ahead-card\">\n        <div class=\"tl-card-hd\">\n          <span class=\"tl-card-month\">October</span>\n          <span class=\"tl-card-badge ahead\">Ahead</span>\n        </div>\n        <div class=\"tl-card-tag\">Not yet written.</div>\n      </div>\n    </div>\n    <div class=\"tl-node left ahead\">\n      <div class=\"tl-dot ahead\"></div>\n      <div class=\"tl-card ahead-card\">\n        <div class=\"tl-card-hd\">\n          <span class=\"tl-card-month\">November</span>\n          <span class=\"tl-card-badge ahead\">Ahead</span>\n        </div>\n        <div class=\"tl-card-tag\">Not yet written.</div>\n      </div>\n    </div>\n    <div class=\"tl-node right ahead\">\n      <div class=\"tl-dot ahead\"></div>\n      <div class=\"tl-card ahead-card\">\n        <div class=\"tl-card-hd\">\n          <span class=\"tl-card-month\">December</span>\n          <span class=\"tl-card-badge ahead\">Ahead</span>\n        </div>\n        <div class=\"tl-card-tag\">Not yet written.</div>\n      </div>\n    </div>";
+
+const nodeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.2, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.tl-node').forEach(n => nodeObserver.observe(n));
+
+const scoreObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      const fill = entry.target.querySelector('.score-fill');
+      if (fill) { const pct = fill.dataset.pct; setTimeout(() => { fill.style.width = Math.min(100, pct) + '%'; }, 150); }
+      scoreObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.score-card').forEach(c => scoreObserver.observe(c));
+
+const tlWrap = document.getElementById('tl-wrap');
+const tlFill = document.getElementById('tl-fill');
+function updateLineFill(){
+  const rect = tlWrap.getBoundingClientRect();
+  const vh = window.innerHeight;
+  const total = rect.height;
+  const scrolled = Math.min(total, Math.max(0, vh * 0.6 - rect.top));
+  const pct = total > 0 ? (scrolled / total) * 100 : 0;
+  tlFill.style.height = Math.min(100, Math.max(0, pct)) + '%';
+}
+window.addEventListener('scroll', updateLineFill, { passive: true });
+window.addEventListener('resize', updateLineFill);
+updateLineFill();
+</script>
+</body>
+</html>
