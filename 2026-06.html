@@ -49,7 +49,7 @@
   --bg:#060810;--bg2:#0C0E16;--bg3:#12151F;--bg4:#181C28;
   --g:rgba(255,255,255,.04);--gm:rgba(255,255,255,.07);--gb:rgba(255,255,255,.11);
   --b0:rgba(255,255,255,.06);--b1:rgba(255,255,255,.10);--b2:rgba(255,255,255,.18);
-  --tx:#E2E8F0;--t2:rgba(226,232,240,.70);--t3:rgba(226,232,240,.45);--t4:rgba(226,232,240,.25);
+  --tx:#FFFFFF;--t2:rgba(255,255,255,.90);--t3:rgba(255,255,255,.72);--t4:rgba(255,255,255,.52);
   --green:#00E5A0;--gdim:rgba(0,229,160,.12);--gglow:rgba(0,229,160,.35);
   --blue:#4DA8FF; --bdim:rgba(77,168,255,.12);
   --amber:#FFB830;--adim:rgba(255,184,48,.12);
@@ -268,6 +268,49 @@ to{transform:translateX(-50%)}}
 .nti-dot.pdot{animation:dot-blink 2.5s ease-in-out infinite}
 .nti-line{width:1px;flex:1;min-height:16px;margin:3px 0;background:var(--b0)}
 .nti-c{padding-bottom:14px;flex:1}
+
+/* ── AFOQT ROADMAP ────────────────────────────────────────────────────── */
+.afoqt-roadmap{display:flex;flex-direction:column;gap:4px}
+.afoqt-stage{border-left:2px solid var(--b1);padding:8px 0 8px 14px;margin-bottom:2px}
+.afoqt-stage.done{border-left-color:var(--green)}
+.afoqt-stage.active{border-left-color:var(--amber)}
+.afoqt-stage.pending{border-left-color:var(--blue)}
+.afoqt-stage.locked{border-left-color:var(--b1)}
+.afoqt-stage-hd{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.afoqt-stage-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.afoqt-stage-dot.done{background:var(--green)}
+.afoqt-stage-dot.active{background:var(--amber);animation:dot-blink 2.5s ease-in-out infinite}
+.afoqt-stage-dot.pending{background:var(--blue);opacity:.7}
+.afoqt-stage-dot.locked{background:var(--t4)}
+.afoqt-stage-name{font-size:13px;font-weight:600;color:var(--tx)}
+.afoqt-stage-prog{font-family:var(--mono);font-size:9px;letter-spacing:.5px;text-transform:uppercase;margin-left:auto;padding:2px 8px;border:1px solid var(--b1)}
+.afoqt-stage-prog.done{color:var(--green);border-color:rgba(0,229,160,.35)}
+.afoqt-stage-prog.active{color:var(--amber);border-color:rgba(255,184,48,.35)}
+.afoqt-stage-prog.pending{color:var(--blue);border-color:rgba(77,168,255,.35)}
+.afoqt-stage-prog.locked{color:var(--t4)}
+.afoqt-stage-note{font-size:10.5px;color:var(--t3);font-style:italic;margin:2px 0 6px 16px}
+.afoqt-item{display:flex;align-items:center;gap:8px;padding:4px 0 4px 16px;font-size:12px}
+.afoqt-item-dot{font-size:9px;flex-shrink:0;width:12px;text-align:center}
+.afoqt-item.done .afoqt-item-dot{color:var(--green)}
+.afoqt-item.due .afoqt-item-dot{color:var(--amber)}
+.afoqt-item.pending .afoqt-item-dot{color:var(--blue)}
+.afoqt-item.locked .afoqt-item-dot{color:var(--t4)}
+.afoqt-item-name{color:var(--t2);flex:1}
+.afoqt-item.done .afoqt-item-name{color:var(--tx)}
+.afoqt-item-status{font-family:var(--mono);font-size:10px;flex-shrink:0;text-align:right}
+.afoqt-item-status.done{color:var(--green)}
+.afoqt-item-status.due{color:var(--amber)}
+.afoqt-item-status.pending{color:var(--blue)}
+.afoqt-item-status.locked{color:var(--t4)}
+
+/* ── AI ASSISTANT SIDEBAR ────────────────────────────────────────────── */
+.ai-side{border:1px solid rgba(155,143,255,.25);background:linear-gradient(160deg,rgba(155,143,255,.08) 0%,rgba(155,143,255,.02) 100%);padding:14px 16px;position:relative;overflow:hidden}
+.ai-side::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--vio),transparent)}
+.ai-side-hd{display:flex;align-items:center;gap:7px;margin-bottom:9px}
+.ai-side-dot{width:6px;height:6px;border-radius:50%;background:var(--vio);animation:dot-blink 2.2s ease-in-out infinite}
+.ai-side-lbl{font-family:var(--mono);font-size:9px;letter-spacing:1.4px;text-transform:uppercase;color:var(--vio)}
+.ai-side-body{font-size:12px;line-height:1.68;color:var(--t2);font-style:italic}
+.ai-side-body strong{color:var(--tx);font-style:normal}
 .nti-d{font-family:var(--mono);font-size:8px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:2px;color:var(--t4)}
 .nti-t{font-size:11.5px;line-height:1.6;color:var(--t2)}
 .nti-t strong{color:var(--tx);font-weight:500}
@@ -296,8 +339,8 @@ to{transform:translateX(-50%)}}
 .route-svg{width:100%;height:90px;display:block}
 
 /* ── LIGHT WRAP (Intellectual + Reflections tabs) ───────────────────── */
-.light-wrap{background:#EAE5DC;padding:24px 0 40px}
-.light-panel{background:#F4F1EA;border:1px solid rgba(0,0,0,.09);padding:18px 20px}
+.light-wrap{background:var(--bg2);padding:24px 0 40px}
+.light-panel{background:var(--g);border:1px solid var(--b0);padding:18px 20px}
 .ldr{display:flex;justify-content:space-between;align-items:baseline;padding:5px 0;font-size:12px;border-bottom:1px solid rgba(0,0,0,.06);color:#555550}
 .ldr:last-child{border-bottom:none}
 
@@ -492,7 +535,7 @@ to{transform:translateX(-50%)}}
   <div class="stat bv-v" style="border-top:1px solid rgba(155,143,255,.35)">
     <div class="slbl">OTS Deadline</div>
     <div class="sval" style="color:var(--vio)" id="sv-days">&#8212;</div>
-    <div class="ssub">days to Jul 4</div>
+    <div class="ssub">days to AFOQT</div>
   </div>
   <div class="stat" style="border-top:1px solid rgba(255,122,168,.35)">
     <div class="slbl">Photo Income</div>
@@ -576,7 +619,7 @@ to{transform:translateX(-50%)}}
         <div class="dr"><span class="drk">Civil Service</span><span class="drv a" id="ov-cs">&#8212;</span></div>
         <div class="dr" style="border:none"><span class="drk">United Airlines</span><span class="drv r">Closed</span></div>
         <div class="prog" style="margin-top:12px">
-          <div class="prog-hd"><span>Days to Jul 4 OTS deadline</span><span style="color:var(--vio)" id="ov-days-lbl">&#8212;</span></div>
+          <div class="prog-hd"><span>Days to AFOQT test</span><span style="color:var(--vio)" id="ov-days-lbl">&#8212;</span></div>
           <div class="prog-track"><div class="prog-fill" id="ov-days-fill" style="background:var(--vio)"></div></div>
         </div>
       </div>
@@ -587,6 +630,10 @@ to{transform:translateX(-50%)}}
 <!-- ═══ FINANCIAL TAB ═══ -->
 <div id="tab-financial" class="dash" style="display:none">
   <aside class="side">
+    <div class="ai-side">
+      <div class="ai-side-hd"><span class="ai-side-dot"></span><span class="ai-side-lbl">Assistant Read</span></div>
+      <div class="ai-side-body">Income looks lighter than May at first glance, but that&rsquo;s mostly timing &mdash; May happened to land two big photography payouts in one month, June only had one. <strong>Spending stayed disciplined</strong>: dining is still the top category but nowhere near a red flag, and tithe held rock-steady at $250 regardless of how the month went. Net savings crossed $14K YTD, well past the $10K goal &mdash; the rest of the year is bonus territory now.</div>
+    </div>
     <div class="sc" style="border-top:1px solid rgba(0,229,160,.35)">
       <div class="sgt">June Summary</div>
       <div class="si"><span class="sk">Total Income</span><span class="sv" style="color:var(--green)" id="fin-inc">&#8212;</span></div>
@@ -620,6 +667,21 @@ to{transform:translateX(-50%)}}
   </aside>
   <div class="content">
     <div class="cg">
+      <!-- ── EXPENSES BY CATEGORY (moved to top per redesign) ─────────── -->
+      <div class="panel ar sf">
+        <div class="plbl">Expenses by Category &#8212; June 2026</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center;margin-bottom:14px">
+          <div class="chart-wrap" style="height:200px"><canvas id="expDoughnut"></canvas></div>
+          <div id="expense-rows-mini"></div>
+        </div>
+        <div class="sort-bar">
+          <span style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.1em;margin-right:4px">Sort:</span>
+          <button class="sort-btn on" id="sort-date" onclick="sortTxns('date')">By Date</button>
+          <button class="sort-btn" id="sort-amt" onclick="sortTxns('amount')">By Amount</button>
+        </div>
+        <div id="txn-accordion"><div style="font-family:var(--mono);font-size:9px;color:var(--t4);padding:8px 0">No transaction data yet &#8212; add to DATA.txnCats after CSV upload.</div></div>
+      </div>
+
       <!-- ── YTD PROGRESS HERO ─────────────────────────────── -->
       <div class="panel ag sf" style="background:linear-gradient(135deg,rgba(0,229,160,.05) 0%,rgba(0,229,160,.01) 100%);border-color:rgba(0,229,160,.3)">
         <div class="plbl" style="color:var(--green)">YTD Savings Progress &#8212; Annual Goal $10,000</div>
@@ -690,18 +752,11 @@ to{transform:translateX(-50%)}}
         <div class="note g"><span class="note-lbl">Source: Origin Financial CSV &mdash; June 2026</span>All category totals verified in Python against the full-year export. Net $2,464.22 confirmed. When copying for July: replace DATA.fin.* with July CSV export and re-run the Python sum check.</div>
         <div class="chart-wrap tall"><canvas id="finBarChart"></canvas></div>
       </div>
-      <div class="panel ar">
-        <div class="plbl">Expenses by Category</div>
-        <div id="expense-rows"><div class="dr"><span class="drk">Awaiting CSV upload</span><span class="drv dim">TBD</span></div></div>
-      </div>
-      <div class="panel sf">
-        <div class="plbl">Transactions by Category</div>
-        <div class="sort-bar">
-          <span style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.1em;margin-right:4px">Sort:</span>
-          <button class="sort-btn on" id="sort-date" onclick="sortTxns('date')">By Date</button>
-          <button class="sort-btn" id="sort-amt" onclick="sortTxns('amount')">By Amount</button>
-        </div>
-        <div id="txn-accordion"><div style="font-family:var(--mono);font-size:9px;color:var(--t4);padding:8px 0">No transaction data yet &#8212; add to DATA.txnCats after CSV upload.</div></div>
+
+      <!-- ── JUNE VS MAY COMPARISON ─────────────────────────────── -->
+      <div class="panel ab">
+        <div class="plbl">June vs May &#8212; Category Deltas</div>
+        <div class="chart-wrap tall"><canvas id="finCompareChart"></canvas></div>
       </div>
     </div>
   </div>
@@ -710,6 +765,10 @@ to{transform:translateX(-50%)}}
 <!-- ═══ PHYSICAL TAB ═══ -->
 <div id="tab-physical" class="dash" style="display:none">
   <aside class="side">
+    <div class="ai-side">
+      <div class="ai-side-hd"><span class="ai-side-dot"></span><span class="ai-side-lbl">Assistant Read</span></div>
+      <div class="ai-side-body">No new personal bests in the weight room this month, but the numbers point somewhere more interesting: <strong>both outdoor runs came back roughly a minute per mile faster</strong> than their May equivalents at the same or longer distance. That usually signals aerobic base improving quietly underneath the surface, even while max lifts hold flat. With the AFT now pushed to October, there&rsquo;s real runway to keep building that cardio edge before it counts.</div>
+    </div>
     <div class="sc" style="border-top:1px solid rgba(77,168,255,.35)">
       <div class="sgt">June Training</div>
       <div class="si"><span class="sk">Gym Days</span><span class="sv" style="color:var(--blue)" id="phys-days">&#8212;</span></div>
@@ -719,7 +778,7 @@ to{transform:translateX(-50%)}}
     </div>
     <div class="sc" style="border-left:2px solid var(--blue);background:var(--bdim)">
       <div class="sgt" style="color:var(--blue)">Why this matters</div>
-      <div style="font-size:11px;line-height:1.62;color:var(--t2)">The AFT test is Jul 26 &#8212; 26 days after June ends. Every June session is direct preparation. DL goal 350lb. HRPU goal 61. The body&rsquo;s adaptation in June determines the test result in July.</div>
+      <div style="font-size:11px;line-height:1.62;color:var(--t2)">The AFT test has moved to October &#8212; ARNG pushed the testing window back. That buys more prep time. DL goal 350lb. HRPU goal 61. Plank and cardio both trending the right direction.</div>
     </div>
     <div class="sc bv-a">
       <div class="sgt">June PRs</div>
@@ -731,7 +790,7 @@ to{transform:translateX(-50%)}}
       <div class="si"><span class="sk">HRP Goal</span><span class="sv">61 reps</span></div>
       <div class="si"><span class="sk">PLK Goal</span><span class="sv">3:35</span></div>
       <div class="si"><span class="sk">2MR Goal</span><span class="sv">&lt;16:36</span></div>
-      <div class="si"><span class="sk">AFT Test</span><span class="sv" style="color:var(--red)">Jul 26 &#9888;</span></div>
+      <div class="si"><span class="sk">AFT Test</span><span class="sv" style="color:var(--amber)">Oct 2026</span></div>
     </div>
   </aside>
   <div class="content">
@@ -740,6 +799,10 @@ to{transform:translateX(-50%)}}
         <div class="plbl">Volume by Session &#8212; June 2026</div>
         <div class="note b"><span class="note-lbl">Source: FitNotes CSV &mdash; June 2026</span>21 training days. 114,025 lbs total volume. No new strength maxes, but both outdoor runs came back faster: 5K in 7:48/mi (Jun 7), 8mi in 8:37/mi (Jun 20). Trap Bar DL 315&#215;6 was a rep PR at max weight. When copying for July: replace DATA.physical.sessions[] with July FitNotes CSV export.</div>
         <div class="chart-wrap tall"><canvas id="gymDetailChart"></canvas></div>
+      </div>
+      <div class="panel ab">
+        <div class="plbl">June vs May &#8212; Days &amp; Volume</div>
+        <div class="chart-wrap"><canvas id="physCompareChart"></canvas></div>
       </div>
       <div class="panel ab">
         <div class="plbl">AFT Progress</div>
@@ -772,13 +835,56 @@ to{transform:translateX(-50%)}}
 
 <!-- ═══ SPIRITUAL TAB ═══ -->
 <!-- NOTE FOR JULY: change #jun to #jul -->
-<div id="tab-spiritual" style="display:none;margin-top:24px">
-  <iframe src="cbc-sermons.html#jun" class="sermon-iframe" id="sermonFrame"></iframe>
+<div id="tab-spiritual" class="dash" style="display:none">
+  <aside class="side">
+    <div class="sc" style="border-top:1px solid rgba(255,184,48,.35)">
+      <div class="sgt">June Calendar &#8212; Sermon Dates</div>
+      <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:8px">
+        <div style="text-align:center;font-family:var(--mono);font-size:8px;color:var(--t4);padding:2px 0">Su</div><div style="text-align:center;font-family:var(--mono);font-size:8px;color:var(--t4);padding:2px 0">Mo</div><div style="text-align:center;font-family:var(--mono);font-size:8px;color:var(--t4);padding:2px 0">Tu</div><div style="text-align:center;font-family:var(--mono);font-size:8px;color:var(--t4);padding:2px 0">We</div><div style="text-align:center;font-family:var(--mono);font-size:8px;color:var(--t4);padding:2px 0">Th</div><div style="text-align:center;font-family:var(--mono);font-size:8px;color:var(--t4);padding:2px 0">Fr</div><div style="text-align:center;font-family:var(--mono);font-size:8px;color:var(--t4);padding:2px 0">Sa</div>
+        <div></div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">1</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">2</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">3</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">4</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">5</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">6</div><div title="Sermon" style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--amber);font-weight:700;background:rgba(255,184,48,.18);border-radius:3px">7</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">8</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">9</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">10</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">11</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">12</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">13</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">14</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">15</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">16</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">17</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">18</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">19</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">20</div><div title="Sermon" style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--amber);font-weight:700;background:rgba(255,184,48,.18);border-radius:3px">21</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">22</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">23</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">24</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">25</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">26</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">27</div><div title="Sermon" style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--amber);font-weight:700;background:rgba(255,184,48,.18);border-radius:3px">28</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">29</div><div style="text-align:center;padding:2px;font-family:var(--mono);font-size:9px;color:var(--t3);font-weight:400">30</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:5px">
+        <span style="width:8px;height:8px;border-radius:3px;background:rgba(255,184,48,.5);display:inline-block"></span>
+        <span style="font-family:var(--mono);font-size:8px;color:var(--t4)">Sermon logged</span>
+      </div>
+    </div>
+    <div class="ai-side">
+      <div class="ai-side-hd"><span class="ai-side-dot"></span><span class="ai-side-lbl">Assistant Read</span></div>
+      <div class="ai-side-body">Three Sundays logged in June, all landing on the same underlying question in different clothes: how do you actually trust God when the outcome isn&rsquo;t visible yet. <strong>That theme tracks suspiciously well</strong> against a month spent waiting on a recruiter callback.</div>
+    </div>
+    <div class="sc">
+      <div class="sgt">June Sermons</div>
+      <div class="si"><span class="sk">Jun 7</span><span class="sv" style="font-size:10px;text-align:right">Impossible Situation</span></div>
+      <div class="si"><span class="sk">Jun 21</span><span class="sv" style="font-size:10px;text-align:right">Father&rsquo;s Day (Guest)</span></div>
+      <div class="si"><span class="sk">Jun 28</span><span class="sv" style="font-size:10px;text-align:right">Tough Times</span></div>
+    </div>
+    <div class="sc">
+      <div class="sgt">2026 Reading Plan</div>
+      <div class="si"><span class="sk">Jan&#8211;Feb</span><span class="sv" style="font-size:10px">Mark</span></div>
+      <div class="si"><span class="sk">Mar&#8211;Apr</span><span class="sv" style="font-size:10px">Luke</span></div>
+      <div class="si" style="background:rgba(255,184,48,.06)"><span class="sk" style="color:var(--amber)">May&#8211;Jun</span><span class="sv" style="color:var(--amber);font-size:10px">Romans &#9654;</span></div>
+      <div class="si"><span class="sk">Jul&#8211;Aug</span><span class="sv" style="font-size:10px">2 Cor</span></div>
+    </div>
+  </aside>
+  <div class="content">
+    <div class="cg">
+      <div class="panel sf" style="grid-column:1/-1">
+        <div class="plbl">Spiritual &#8212; June 2026 Sermon Detail</div>
+        <div class="note a"><span class="note-lbl">Source: CBC Sermons Log</span>Full write-ups (themes, scripture, points, application, commentary) live on the sermons page &#8212; embedded below.</div>
+        <iframe src="cbc-sermons.html#jun" class="sermon-iframe" id="sermonFrame"></iframe>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ═══ CAREER TAB ═══ -->
+
 <div id="tab-career" class="dash" style="display:none">
   <aside class="side">
+    <div class="ai-side">
+      <div class="ai-side-hd"><span class="ai-side-dot"></span><span class="ai-side-lbl">Assistant Read</span></div>
+      <div class="ai-side-body">From the outside, this looks like a month where JD controlled what he could control: <strong>the 368 got approved and out the door before its own deadline</strong>, which is the part that was actually in his hands. What&rsquo;s left is a waiting game that shifted shape rather than ended &mdash; from &ldquo;will the chain sign off&rdquo; to &ldquo;when does a recruiter make contact.&rdquo; The AFOQT already carrying a due date, independent of that contact, suggests the pipeline is moving on its own clock either way.</div>
+    </div>
     <div class="sc" style="border-top:1px solid rgba(155,143,255,.35)">
       <div class="sgt">Path Status</div>
       <div class="si"><span class="sk">Air Force OTS</span><span class="sv" style="color:var(--vio)" id="ca-ots">&#8212;</span></div>
@@ -787,20 +893,22 @@ to{transform:translateX(-50%)}}
     </div>
     <div class="sc bv-v" style="border-left:2px solid var(--vio);background:var(--vdim)">
       <div class="sgt" style="color:var(--vio)">Why this matters</div>
-      <div style="font-size:11px;line-height:1.62;color:var(--t2)">OTS is the path with the highest ceiling. The 368 cleared its deadline &#8212; that gate is closed. The recruiter response is next, and the AFOQT can&rsquo;t be scheduled until that contact happens.</div>
+      <div style="font-size:11px;line-height:1.62;color:var(--t2)">OTS is the path with the highest ceiling. The 368 cleared its deadline &#8212; that gate is closed. The AFOQT is already on the calendar for Sep 25, due date locked in regardless of when a recruiter makes contact.</div>
     </div>
     <div class="sc">
       <div class="sgt">Hard Dates</div>
       <div class="si"><span class="sk">Jul 4</span><span class="sv" style="color:var(--green)">OTS deadline &#10003; Met</span></div>
-      <div class="si"><span class="sk">&#8212;</span><span class="sv" style="color:var(--amber)">AFOQT &#8212; not yet scheduled</span></div>
-      <div class="si"><span class="sk">Jul 26</span><span class="sv" style="color:var(--red)">AFT test &#9888;</span></div>
-      <div class="si"><span class="sk">Aug 6&#8211;21</span><span class="sv" style="color:var(--vio)">Annual Training</span></div>
-      <div class="si"><span class="sk">Aug 15</span><span class="sv">LORs due</span></div>
-      <div class="si"><span class="sk">Nov 2</span><span class="sv">Board review</span></div>
+      <div class="si"><span class="sk">Sep 25</span><span class="sv" style="color:var(--amber)">AFOQT Test</span></div>
+      <div class="si"><span class="sk">Oct 2026</span><span class="sv" style="color:var(--amber)">AFT test (ARNG, pushed back)</span></div>
+      <div class="si"><span class="sk">Oct 30</span><span class="sv">LORs + docs due</span></div>
+      <div class="si"><span class="sk">Nov 13</span><span class="sv">Commander&rsquo;s Interview</span></div>
+      <div class="si"><span class="sk">Dec 4</span><span class="sv">Board Readiness Review</span></div>
+      <div class="si"><span class="sk">Jan 11 &rsquo;27</span><span class="sv">Board Review</span></div>
+      <div class="si"><span class="sk">Apr 1 &rsquo;27</span><span class="sv">Board Decision</span></div>
     </div>
     <div class="sc">
       <div class="sgt">Key Contacts</div>
-      <div class="si"><span class="sk">Recruiter</span><span class="sv">Ashley Araya</span></div>
+      <div class="si"><span class="sk">Recruiter</span><span class="sv" style="color:var(--amber)">Not yet assigned</span></div>
       <div class="si"><span class="sk">S1 / DD-368</span><span class="sv">SSG Wilson</span></div>
     </div>
   </aside>
@@ -817,18 +925,66 @@ to{transform:translateX(-50%)}}
           <span class="pill bv-v" style="color:var(--vio);border-color:rgba(155,143,255,.35)" id="ca-ots-pill">Active</span>
         </div>
         <div class="path-title">Commission as AF Officer &#8212; 14N Intelligence</div>
-        <div class="path-body" id="ca-ots-body">DD-368 approved through JD&rsquo;s chain and sent to the Air Force recruiter in June &#8212; the Jul 4 hard deadline was met. Awaiting the recruiter&rsquo;s response; next concrete step is scheduling the AFOQT (Air Force Officer Qualifying Test).</div>
+        <div class="path-body" id="ca-ots-body">DD-368 approved through JD&rsquo;s chain and sent to the Air Force recruiter in June &#8212; the Jul 4 hard deadline was met. Recruiter assignment is still pending per the portal, but the AFOQT (Air Force Officer Qualifying Test) already has a due date on the books: Sep 25, 2026.</div>
         <div style="margin-top:12px;padding-left:10px">
-          <div class="ntl">
-            <div class="nti"><div class="nti-rail"><div class="nti-dot filled" style="color:var(--green);background:var(--green)"></div><div class="nti-line"></div></div><div class="nti-c"><div class="nti-d" style="color:var(--green)">May 2026</div><div class="nti-t"><strong>DD-368 email sent to SSG Wilson.</strong> Letter outlines commissioning rationale.</div></div></div>
-            <div class="nti"><div class="nti-rail"><div class="nti-dot filled" style="color:var(--green);background:var(--green)"></div><div class="nti-line"></div></div><div class="nti-c"><div class="nti-d" style="color:var(--green)" id="ca-368-date">June 2026 &#8212; Approved &amp; Sent</div><div class="nti-t" id="ca-368-body"><strong>DD-368 approved and forwarded to the AF recruiter.</strong> No response yet.</div></div></div>
-            <div class="nti"><div class="nti-rail"><div class="nti-dot filled" style="color:var(--green);background:var(--green)"></div><div class="nti-line"></div></div><div class="nti-c"><div class="nti-d" style="color:var(--green)">July 4, 2026 &#8212; Deadline Met &#10003;</div><div class="nti-t">Approved DD-368 was in hand and forwarded before the wall. The board cycle stays open.</div></div></div>
-            <div class="nti"><div class="nti-rail"><div class="nti-dot pdot" style="color:var(--amber)"></div><div class="nti-line"></div></div><div class="nti-c"><div class="nti-d" style="color:var(--amber)">Next</div><div class="nti-t"><strong>Schedule the AFOQT</strong> once the recruiter makes contact &#8212; the standard entrance exam for OTS.</div></div></div>
-            <div class="nti"><div class="nti-rail"><div class="nti-dot filled" style="color:var(--red);background:var(--red)"></div><div class="nti-line"></div></div><div class="nti-c"><div class="nti-d" style="color:var(--red)">July 26, 2026 &#8212; Hard Deadline</div><div class="nti-t">AFT test &middot; prior service docs &middot; transcripts &middot; pre-selection forms all due.</div></div></div>
-            <div class="nti"><div class="nti-rail"><div class="nti-dot" style="color:var(--t3)"></div><div class="nti-line"></div></div><div class="nti-c"><div class="nti-d">August 15, 2026</div><div class="nti-t">Letters of recommendation + Commander&rsquo;s interview due</div></div></div>
-            <div class="nti"><div class="nti-rail"><div class="nti-dot" style="color:var(--t3)"></div></div><div class="nti-c"><div class="nti-d">November 2, 2026</div><div class="nti-t">Board review</div></div></div>
+          <div style="font-family:var(--mono);font-size:8px;color:var(--t4);letter-spacing:1px;text-transform:uppercase;margin-bottom:10px">OTS Application Tracker &mdash; pulled from the recruiting portal</div>
+          <div class="afoqt-roadmap">
+            <!-- Stage: Getting Started -->
+            <div class="afoqt-stage done">
+              <div class="afoqt-stage-hd"><span class="afoqt-stage-dot done"></span><span class="afoqt-stage-name">Getting Started</span><span class="afoqt-stage-prog done">1 of 1</span></div>
+              <div class="afoqt-item done"><span class="afoqt-item-dot">&#10003;</span><span class="afoqt-item-name">Application Kickoff</span><span class="afoqt-item-status done">Completed</span></div>
+            </div>
+            <!-- Stage: Pre-Application -->
+            <div class="afoqt-stage active">
+              <div class="afoqt-stage-hd"><span class="afoqt-stage-dot active"></span><span class="afoqt-stage-name">Pre-Application</span><span class="afoqt-stage-prog active">2 of 3</span></div>
+              <div class="afoqt-item done"><span class="afoqt-item-dot">&#10003;</span><span class="afoqt-item-name">Career Confirmation</span><span class="afoqt-item-status done">Completed</span></div>
+              <div class="afoqt-item due"><span class="afoqt-item-dot">&#9679;</span><span class="afoqt-item-name">AFOQT Test</span><span class="afoqt-item-status due">Due in 62 days &middot; Sep 25, 2026</span></div>
+            </div>
+            <!-- Stage: Recruitment -->
+            <div class="afoqt-stage pending">
+              <div class="afoqt-stage-hd"><span class="afoqt-stage-dot pending"></span><span class="afoqt-stage-name">Recruitment</span><span class="afoqt-stage-prog pending">0 of 1</span></div>
+              <div class="afoqt-stage-note">Completes once a recruiter is assigned.</div>
+              <div class="afoqt-item pending"><span class="afoqt-item-dot">&#9675;</span><span class="afoqt-item-name">Recruiter Assignment</span><span class="afoqt-item-status pending">Not yet assigned</span></div>
+            </div>
+            <!-- Stage: Application Documents -->
+            <div class="afoqt-stage pending">
+              <div class="afoqt-stage-hd"><span class="afoqt-stage-dot pending"></span><span class="afoqt-stage-name">Application Documents</span><span class="afoqt-stage-prog pending">0 of 5</span></div>
+              <div class="afoqt-item due"><span class="afoqt-item-dot">&#9679;</span><span class="afoqt-item-name">Pilot Candidate Selection Method Test</span><span class="afoqt-item-status due">Due in 62 days &middot; Sep 25, 2026</span></div>
+              <div class="afoqt-item due"><span class="afoqt-item-dot">&#9679;</span><span class="afoqt-item-name">Letters of Recommendation</span><span class="afoqt-item-status due">Due in 97 days &middot; Oct 30, 2026</span></div>
+              <div class="afoqt-item due"><span class="afoqt-item-dot">&#9679;</span><span class="afoqt-item-name">Prior Service Documents</span><span class="afoqt-item-status due">Due in 97 days &middot; Oct 30, 2026</span></div>
+              <div class="afoqt-item due"><span class="afoqt-item-dot">&#9679;</span><span class="afoqt-item-name">College Transcripts</span><span class="afoqt-item-status due">Due in 97 days &middot; Oct 30, 2026</span></div>
+              <div class="afoqt-item due"><span class="afoqt-item-dot">&#9679;</span><span class="afoqt-item-name">Pre-Selection Forms</span><span class="afoqt-item-status due">Due in 97 days &middot; Oct 30, 2026</span></div>
+            </div>
+            <!-- Stage: Commander Evaluation -->
+            <div class="afoqt-stage pending">
+              <div class="afoqt-stage-hd"><span class="afoqt-stage-dot pending"></span><span class="afoqt-stage-name">Commander Evaluation</span><span class="afoqt-stage-prog pending">0 of 1</span></div>
+              <div class="afoqt-item due"><span class="afoqt-item-dot">&#9679;</span><span class="afoqt-item-name">Commander&rsquo;s Interview</span><span class="afoqt-item-status due">Due in 111 days &middot; Nov 13, 2026</span></div>
+            </div>
+            <!-- Stage: Board Process -->
+            <div class="afoqt-stage locked">
+              <div class="afoqt-stage-hd"><span class="afoqt-stage-dot locked"></span><span class="afoqt-stage-name">Board Process</span><span class="afoqt-stage-prog locked">0 of 3</span></div>
+              <div class="afoqt-stage-note">Managed by recruiter and leadership.</div>
+              <div class="afoqt-item locked"><span class="afoqt-item-dot">&#9675;</span><span class="afoqt-item-name">Board Readiness Review</span><span class="afoqt-item-status locked">Due in 132 days &middot; Dec 4, 2026</span></div>
+              <div class="afoqt-item locked"><span class="afoqt-item-dot">&#9675;</span><span class="afoqt-item-name">Board Review</span><span class="afoqt-item-status locked">Due in 170 days &middot; Jan 11, 2027</span></div>
+              <div class="afoqt-item locked"><span class="afoqt-item-dot">&#9675;</span><span class="afoqt-item-name">Board Decision</span><span class="afoqt-item-status locked">Due in 250 days &middot; Apr 1, 2027</span></div>
+            </div>
+            <!-- Stage: Post-Selection -->
+            <div class="afoqt-stage locked">
+              <div class="afoqt-stage-hd"><span class="afoqt-stage-dot locked"></span><span class="afoqt-stage-name">Post-Selection</span><span class="afoqt-stage-prog locked">0 of 3</span></div>
+              <div class="afoqt-item locked"><span class="afoqt-item-dot">&#9675;</span><span class="afoqt-item-name">Post-Selection Forms</span><span class="afoqt-item-status locked">Due in 261 days &middot; Apr 12, 2027</span></div>
+              <div class="afoqt-item locked"><span class="afoqt-item-dot">&#9675;</span><span class="afoqt-item-name">Medical Forms</span><span class="afoqt-item-status locked">Due in 286 days &middot; May 7, 2027</span></div>
+              <div class="afoqt-item locked"><span class="afoqt-item-dot">&#9675;</span><span class="afoqt-item-name">Send Final Transcripts</span><span class="afoqt-item-status locked">Due in 286 days &middot; May 7, 2027</span></div>
+            </div>
+            <!-- Stage: Processing & Training -->
+            <div class="afoqt-stage locked">
+              <div class="afoqt-stage-hd"><span class="afoqt-stage-dot locked"></span><span class="afoqt-stage-name">Processing &amp; Training</span><span class="afoqt-stage-prog locked">0 of 2</span></div>
+              <div class="afoqt-stage-note">Managed by recruiter and leadership.</div>
+              <div class="afoqt-item locked"><span class="afoqt-item-dot">&#9675;</span><span class="afoqt-item-name">Attend MEPS</span><span class="afoqt-item-status locked">Due in 286 days &middot; May 7, 2027</span></div>
+              <div class="afoqt-item locked"><span class="afoqt-item-dot">&#9675;</span><span class="afoqt-item-name">Attend Officer Training School (OTS)</span><span class="afoqt-item-status locked">Aug 1, 2027 &#8211; Jun 30, 2028 window</span></div>
+            </div>
           </div>
         </div>
+
       </div>
       <div class="path-card pa">
         <div style="display:flex;justify-content:space-between;align-items:flex-start;padding-left:10px;margin-bottom:6px">
@@ -856,76 +1012,76 @@ to{transform:translateX(-50%)}}
 <div class="light-wrap">
   <div style="display:grid;grid-template-columns:220px 1fr;gap:16px;max-width:1380px;margin:0 auto;padding:0 24px">
     <div style="display:flex;flex-direction:column;gap:10px;position:sticky;top:52px">
-      <div class="sc" style="background:#F4F1EA;border-color:rgba(0,0,0,.1)">
-        <div class="sgt" style="color:#555550">Spring 2026 &#8212; Final</div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#555550">OS603 Grade</span><span class="sv" style="color:#2a7a3a">A</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#555550">MK610 Grade</span><span class="sv" style="color:#2a7a3a">A</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#555550">Term GPA</span><span class="sv" style="color:#2a7a3a" id="int-term-gpa">4.000</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#555550">Cumulative GPA</span><span class="sv" style="color:#0a0a08" id="int-cum-gpa">3.917</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#555550">Standing</span><span class="sv" style="color:#2a7a3a">Good</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#555550">Courses done</span><span class="sv" style="color:#0a0a08">6 / 10</span></div>
-        <div class="si"><span class="sk" style="color:#555550">Next term</span><span class="sv" style="color:#8a6010">Fall 2026</span></div>
+      <div class="sc" style="background:var(--g);border-color:var(--b1)">
+        <div class="sgt" style="color:var(--t3)">Spring 2026 &#8212; Final</div>
+        <div class="si" style="border-bottom-color:var(--b0)"><span class="sk" style="color:var(--t3)">OS603 Grade</span><span class="sv" style="color:var(--green)">A</span></div>
+        <div class="si" style="border-bottom-color:var(--b0)"><span class="sk" style="color:var(--t3)">MK610 Grade</span><span class="sv" style="color:var(--green)">A</span></div>
+        <div class="si" style="border-bottom-color:var(--b0)"><span class="sk" style="color:var(--t3)">Term GPA</span><span class="sv" style="color:var(--green)" id="int-term-gpa">4.000</span></div>
+        <div class="si" style="border-bottom-color:var(--b0)"><span class="sk" style="color:var(--t3)">Cumulative GPA</span><span class="sv" style="color:var(--tx)" id="int-cum-gpa">3.917</span></div>
+        <div class="si" style="border-bottom-color:var(--b0)"><span class="sk" style="color:var(--t3)">Standing</span><span class="sv" style="color:var(--green)">Good</span></div>
+        <div class="si" style="border-bottom-color:var(--b0)"><span class="sk" style="color:var(--t3)">Courses done</span><span class="sv" style="color:var(--tx)">6 / 10</span></div>
+        <div class="si"><span class="sk" style="color:var(--t3)">Next term</span><span class="sv" style="color:var(--amber)">Fall 2026</span></div>
       </div>
-      <div style="background:#fff;border:1px solid rgba(42,90,138,.2);border-left:2px solid #3a6a9a;padding:12px 14px">
-        <div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#3a6a9a;margin-bottom:6px">Why this matters</div>
-        <div style="font-size:11px;line-height:1.65;color:#333330">Spring closed with a 4.0 term GPA and both courses at A. The MBA makes every career path stronger &#8212; OTS values the degree, civil service boards score it. Fall is the next push toward the credential.</div>
+      <div style="background:var(--bdim);border:1px solid rgba(77,168,255,.25);border-left:2px solid var(--blue);padding:12px 14px">
+        <div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:6px">Why this matters</div>
+        <div style="font-size:11px;line-height:1.65;color:var(--t2)">Spring closed with a 4.0 term GPA and both courses at A. The MBA makes every career path stronger &#8212; OTS values the degree, civil service boards score it. Fall is the next push toward the credential.</div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:12px">
       <!-- SEMESTER SUMMARY -->
-      <div class="light-panel" style="border-top:1px solid rgba(42,90,138,.3)">
+      <div class="light-panel" style="border-top:1px solid rgba(77,168,255,.3)">
         <div style="display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:14px">
-          <div><div style="font-size:16px;font-weight:500;color:#0a0a08">Spring 2026 Semester &#8212; Closed</div><div style="font-family:var(--mono);font-size:8px;color:#888880">Closed first week of June 2026 &middot; classes resume Fall 2026</div></div>
-          <div style="font-family:var(--mono);font-size:22px;font-weight:500;color:#2a7a3a">4.000</div>
+          <div><div style="font-size:16px;font-weight:500;color:var(--tx)">Spring 2026 Semester &#8212; Closed</div><div style="font-family:var(--mono);font-size:8px;color:var(--t4)">Closed first week of June 2026 &middot; classes resume Fall 2026</div></div>
+          <div style="font-family:var(--mono);font-size:22px;font-weight:500;color:var(--green)">4.000</div>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-          <div style="padding:10px 12px;background:#fff;border:1px solid rgba(0,0,0,.07)">
-            <div style="font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:#888880;margin-bottom:4px">OS 603 &#8212; Leadership &amp; Organizational Behavior</div>
-            <div style="font-family:var(--mono);font-size:8px;color:#888880;margin-bottom:6px">Stacey Zeigler &middot; Mar 30&#8211;Jun 12, 2026</div>
-            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-family:var(--mono);font-size:18px;color:#2a7a3a;font-weight:500">A</span><span style="font-size:9px;color:#888880">92.5% weighted final</span></div>
+          <div style="padding:10px 12px;background:#fff;border:1px solid var(--b0)">
+            <div style="font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:var(--t4);margin-bottom:4px">OS 603 &#8212; Leadership &amp; Organizational Behavior</div>
+            <div style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-bottom:6px">Stacey Zeigler &middot; Mar 30&#8211;Jun 12, 2026</div>
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-family:var(--mono);font-size:18px;color:var(--green);font-weight:500">A</span><span style="font-size:9px;color:var(--t4)">92.5% weighted final</span></div>
           </div>
-          <div style="padding:10px 12px;background:#fff;border:1px solid rgba(0,0,0,.07)">
-            <div style="font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:#888880;margin-bottom:4px">MK 610 &#8212; Marketing Management</div>
-            <div style="font-family:var(--mono);font-size:8px;color:#888880;margin-bottom:6px">Jay Carlson &middot; Mar 30&#8211;Jun 10, 2026 &middot; White Claw case</div>
-            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-family:var(--mono);font-size:18px;color:#2a7a3a;font-weight:500">A</span><span style="font-size:9px;color:#888880">94.03% weighted final</span></div>
+          <div style="padding:10px 12px;background:#fff;border:1px solid var(--b0)">
+            <div style="font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.12em;color:var(--t4);margin-bottom:4px">MK 610 &#8212; Marketing Management</div>
+            <div style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-bottom:6px">Jay Carlson &middot; Mar 30&#8211;Jun 10, 2026 &middot; White Claw case</div>
+            <div style="display:flex;align-items:baseline;gap:8px"><span style="font-family:var(--mono);font-size:18px;color:var(--green);font-weight:500">A</span><span style="font-size:9px;color:var(--t4)">94.03% weighted final</span></div>
           </div>
         </div>
       </div>
       <!-- IgnitED note -->
-      <div style="background:#fff8ec;border:1px solid rgba(212,168,75,.3);border-left:2px solid #d4a84b;padding:14px 16px">
-        <div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#8a6010;margin-bottom:6px">IgnitED Tuition &#8212; Status</div>
-        <div style="font-size:12px;line-height:1.68;color:#333330" id="ignited-body">&#8212;</div>
+      <div style="background:var(--adim);border:1px solid rgba(255,184,48,.3);border-left:2px solid var(--amber);padding:14px 16px">
+        <div style="font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:6px">IgnitED Tuition &#8212; Status</div>
+        <div style="font-size:12px;line-height:1.68;color:var(--t2)" id="ignited-body">&#8212;</div>
       </div>
       <!-- Reading focus -->
       <div class="light-panel">
-        <div style="font-size:15px;font-weight:500;color:#0a0a08;margin-bottom:4px">Between Semesters &#8212; Career-Critical Windows</div>
-        <div style="font-family:var(--mono);font-size:8px;color:#888880;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px">No classes until Fall 2026</div>
-        <div style="font-size:12.5px;line-height:1.78;color:#333330">
-          <p style="margin-bottom:10px"><strong style="color:#0a0a08">Semester closed with room to spare.</strong> A 4.000 term GPA against a 3.917 cumulative in Good Academic Standing, two courses cleared with A grades. The gap until Fall is open runway for the OTS application, the AFOQT once it&rsquo;s scheduled, and the AFT prep for Jul 26.</p>
-          <p><strong style="color:#0a0a08">Why it connects.</strong> OTS applicants aren&rsquo;t just evaluated on their records &#8212; they&rsquo;re evaluated on whether they think like officers. The completed MBA coursework and the discipline it took to close at 4.0 both speak to that directly.</p>
+        <div style="font-size:15px;font-weight:500;color:var(--tx);margin-bottom:4px">Between Semesters &#8212; Career-Critical Windows</div>
+        <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px">No classes until Fall 2026</div>
+        <div style="font-size:12.5px;line-height:1.78;color:var(--t2)">
+          <p style="margin-bottom:10px"><strong style="color:var(--tx)">Semester closed with room to spare.</strong> A 4.000 term GPA against a 3.917 cumulative in Good Academic Standing, two courses cleared with A grades. The gap until Fall is open runway for the OTS application, the AFOQT (now due Sep 25), and AFT prep &#8212; that test moved to October.</p>
+          <p><strong style="color:var(--tx)">Why it connects.</strong> OTS applicants aren&rsquo;t just evaluated on their records &#8212; they&rsquo;re evaluated on whether they think like officers. The completed MBA coursework and the discipline it took to close at 4.0 both speak to that directly.</p>
         </div>
       </div>
       <!-- P&L Bookkeeping — with confirmed vs projected visual -->
-      <div class="light-panel" style="border-top:1px solid rgba(42,90,138,.3)">
-        <div style="font-size:15px;font-weight:500;color:#0a0a08;margin-bottom:4px">Business Bookkeeping &#8212; JD Meyers Productions P&amp;L</div>
-        <div style="font-family:var(--mono);font-size:8px;color:#888880;text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">Source: Notion Projects &amp; Ledger, pulled July 2026</div>
+      <div class="light-panel" style="border-top:1px solid rgba(77,168,255,.3)">
+        <div style="font-size:15px;font-weight:500;color:var(--tx);margin-bottom:4px">Business Bookkeeping &#8212; JD Meyers Productions P&amp;L</div>
+        <div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">Source: Notion Projects &amp; Ledger, pulled July 2026</div>
         <!-- Projected vs Confirmed legend -->
         <div style="display:flex;gap:14px;margin-bottom:12px;flex-wrap:wrap">
-          <span style="font-family:var(--mono);font-size:8px;color:#2a7a3a;display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:10px;height:10px;background:#2a7a3a"></span>Confirmed paid</span>
-          <span style="font-family:var(--mono);font-size:8px;color:#8a6010;display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:10px;height:10px;background:repeating-linear-gradient(45deg,#8a6010,#8a6010 2px,transparent 2px,transparent 5px)"></span>Signed / contracted</span>
-          <span style="font-family:var(--mono);font-size:8px;color:#888880;display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:10px;height:10px;border:1px dashed #888880"></span>Pending / projected</span>
+          <span style="font-family:var(--mono);font-size:8px;color:var(--green);display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:10px;height:10px;background:var(--green)"></span>Confirmed paid</span>
+          <span style="font-family:var(--mono);font-size:8px;color:var(--amber);display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:10px;height:10px;background:repeating-linear-gradient(45deg,var(--amber),var(--amber) 2px,transparent 2px,transparent 5px)"></span>Signed / contracted</span>
+          <span style="font-family:var(--mono);font-size:8px;color:var(--t4);display:flex;align-items:center;gap:4px"><span style="display:inline-block;width:10px;height:10px;border:1px dashed var(--t4)"></span>Pending / projected</span>
         </div>
         <!-- 2026 split revenue bar -->
         <div style="margin-bottom:16px">
-          <div style="font-family:var(--mono);font-size:8px;color:#888880;margin-bottom:6px;text-transform:uppercase;letter-spacing:.1em">2026 Revenue &#8212; Best Year Ever</div>
-          <div style="height:10px;background:rgba(0,0,0,.08);display:flex;overflow:hidden">
-            <div style="width:74.8%;height:100%;background:#2a7a3a;transform:scaleX(0);transform-origin:left;transition:transform 1.2s ease .3s" class="lp-bar-conf"></div>
+          <div style="font-family:var(--mono);font-size:8px;color:var(--t4);margin-bottom:6px;text-transform:uppercase;letter-spacing:.1em">2026 Revenue &#8212; Best Year Ever</div>
+          <div style="height:10px;background:rgba(255,255,255,.08);display:flex;overflow:hidden">
+            <div style="width:74.8%;height:100%;background:var(--green);transform:scaleX(0);transform-origin:left;transition:transform 1.2s ease .3s" class="lp-bar-conf"></div>
             <div style="width:25.2%;height:100%;background:repeating-linear-gradient(45deg,rgba(138,96,16,.6),rgba(138,96,16,.6) 2px,rgba(138,96,16,.2) 2px,rgba(138,96,16,.2) 6px);transform:scaleX(0);transform-origin:left;transition:transform 1.2s ease .6s" class="lp-bar-cont"></div>
           </div>
           <div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:8px;margin-top:4px;flex-wrap:wrap;gap:4px">
-            <span style="color:#2a7a3a">$7,306 confirmed paid</span>
-            <span style="color:#8a6010">$2,460 contracted (signed, balance due)</span>
-            <span style="color:#888880">$9,766 total &middot; 13 jobs</span>
+            <span style="color:var(--green)">$7,306 confirmed paid</span>
+            <span style="color:var(--amber)">$2,460 contracted (signed, balance due)</span>
+            <span style="color:var(--t4)">$9,766 total &middot; 13 jobs</span>
           </div>
         </div>
         <!-- P&L table -->
@@ -942,18 +1098,18 @@ to{transform:translateX(-50%)}}
             <tr><td>2023</td><td>$7,640</td><td>$1,483</td><td class="pl-pos">$6,157</td><td>81%</td><td>4</td></tr>
             <tr><td>2024</td><td>$1,800</td><td>$2,517</td><td class="pl-neg">($717)</td><td>-40%</td><td>3</td></tr>
             <tr><td>2025</td><td>$4,690</td><td>$1,602</td><td class="pl-pos">$3,087</td><td>66%</td><td>11</td></tr>
-            <tr class="hl-row"><td><strong>2026</strong><span style="font-size:8px;color:#8a6010;display:block">$7,306 paid + $2,460 contracted</span></td><td><strong>$9,766</strong></td><td><strong>$573</strong></td><td class="pl-pos"><strong>$9,193</strong></td><td class="pl-proj"><strong>94%</strong><span style="font-size:7px;display:block">projected</span></td><td><strong>13</strong></td></tr>
+            <tr class="hl-row"><td><strong>2026</strong><span style="font-size:8px;color:var(--amber);display:block">$7,306 paid + $2,460 contracted</span></td><td><strong>$9,766</strong></td><td><strong>$573</strong></td><td class="pl-pos"><strong>$9,193</strong></td><td class="pl-proj"><strong>94%</strong><span style="font-size:7px;display:block">projected</span></td><td><strong>13</strong></td></tr>
             <tr class="total-row"><td>TOTAL</td><td>$34,880</td><td>$19,233</td><td class="pl-pos">$15,647</td><td>45%</td><td>54</td></tr>
           </tbody>
         </table>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <div style="background:#fff;border:1px solid rgba(0,0,0,.08);border-left:2px solid #2a7a3a;padding:10px 12px">
-            <div style="font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.1em;color:#2a7a3a;margin-bottom:5px">Drone = Highest ROI</div>
-            <div style="font-size:11px;color:#333330;line-height:1.6">5 projects &middot; $8,495 total &middot; $1,699 avg. FAA Part 107 = county monopoly on licensed commercial aerial. Hardware fully depreciated &mdash; every project is near-pure profit.</div>
+          <div style="background:var(--gdim);border:1px solid var(--b0);border-left:2px solid var(--green);padding:10px 12px">
+            <div style="font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:5px">Drone = Highest ROI</div>
+            <div style="font-size:11px;color:var(--t2);line-height:1.6">5 projects &middot; $8,495 total &middot; $1,699 avg. FAA Part 107 = county monopoly on licensed commercial aerial. Hardware fully depreciated &mdash; every project is near-pure profit.</div>
           </div>
-          <div style="background:#fff;border:1px solid rgba(0,0,0,.08);border-left:2px solid #8a2020;padding:10px 12px">
-            <div style="font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.1em;color:#8a2020;margin-bottom:5px">&#9888; Reviews = #1 Gap</div>
-            <div style="font-size:11px;color:#333330;line-height:1.6">Still 0/30 Social Proof as of the last audit. Zero reviews on any neutral platform. 10 Google reviews would immediately move local pack ranking above every competitor.</div>
+          <div style="background:var(--rdim);border:1px solid var(--b0);border-left:2px solid var(--red);padding:10px 12px">
+            <div style="font-family:var(--mono);font-size:8px;text-transform:uppercase;letter-spacing:.1em;color:var(--red);margin-bottom:5px">&#9888; Reviews = #1 Gap</div>
+            <div style="font-size:11px;color:var(--t2);line-height:1.6">Still 0/30 Social Proof as of the last audit. Zero reviews on any neutral platform. 10 Google reviews would immediately move local pack ranking above every competitor.</div>
           </div>
         </div>
       </div>
@@ -1032,24 +1188,24 @@ to{transform:translateX(-50%)}}
 <div class="light-wrap">
   <div style="display:grid;grid-template-columns:220px 1fr;gap:16px;max-width:1380px;margin:0 auto;padding:0 24px">
     <div style="position:sticky;top:52px;display:flex;flex-direction:column;gap:10px">
-      <div class="sc" style="background:#F4F1EA;border-color:rgba(0,0,0,.1)">
-        <div class="sgt" style="color:#555550">June In Summary</div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#555550">Career</span><span class="sv" style="color:#5a3a8a" id="refl-career">&#8212;</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#555550">Financial</span><span class="sv" style="color:#2a7a3a" id="refl-net">&#8212;</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#555550">Physical</span><span class="sv" style="color:#2a5a9a" id="refl-phys">&#8212;</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#555550">Creative</span><span class="sv" id="refl-creative">&#8212;</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#555550">Spiritual</span><span class="sv" style="color:#8a6010" id="refl-spiritual">&#8212;</span></div>
-        <div class="si" style="border-bottom-color:rgba(0,0,0,.07)"><span class="sk" style="color:#555550">MBA</span><span class="sv" style="color:#2a5a9a" id="refl-mba">&#8212;</span></div>
+      <div class="sc" style="background:var(--g);border-color:var(--b1)">
+        <div class="sgt" style="color:var(--t3)">June In Summary</div>
+        <div class="si" style="border-bottom-color:var(--b0)"><span class="sk" style="color:var(--t3)">Career</span><span class="sv" style="color:var(--vio)" id="refl-career">&#8212;</span></div>
+        <div class="si" style="border-bottom-color:var(--b0)"><span class="sk" style="color:var(--t3)">Financial</span><span class="sv" style="color:var(--green)" id="refl-net">&#8212;</span></div>
+        <div class="si" style="border-bottom-color:var(--b0)"><span class="sk" style="color:var(--t3)">Physical</span><span class="sv" style="color:var(--blue)" id="refl-phys">&#8212;</span></div>
+        <div class="si" style="border-bottom-color:var(--b0)"><span class="sk" style="color:var(--t3)">Creative</span><span class="sv" id="refl-creative">&#8212;</span></div>
+        <div class="si" style="border-bottom-color:var(--b0)"><span class="sk" style="color:var(--t3)">Spiritual</span><span class="sv" style="color:var(--amber)" id="refl-spiritual">&#8212;</span></div>
+        <div class="si" style="border-bottom-color:var(--b0)"><span class="sk" style="color:var(--t3)">MBA</span><span class="sv" style="color:var(--blue)" id="refl-mba">&#8212;</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;gap:14px">
-      <div class="light-panel"><div style="font-size:17px;font-weight:500;color:#0a0a08;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid rgba(0,0,0,.08)">On the Career Picture</div><div style="font-size:13px;line-height:1.82;color:#333330">The 368 clearing the Jul 4 deadline is the real headline &#8212; that critical path stayed open through JD&rsquo;s own follow-through, not luck. The waiting isn&rsquo;t over, it just moved: from &ldquo;will the chain approve this&rdquo; to &ldquo;will the recruiter respond.&rdquo; A new thread opened at the very end of the month with the Clarkson interview &#8212; worth naming here, more to say once it resolves.</div></div>
-      <div class="light-panel"><div style="font-size:17px;font-weight:500;color:#0a0a08;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid rgba(0,0,0,.08)">On Closing Out the Semester</div><div style="font-size:13px;line-height:1.82;color:#333330">Two A&rsquo;s and a 4.000 term GPA to close Spring, with a 3.917 cumulative and Good Academic Standing. Fall is the next push, but the gap between semesters is real runway &#8212; no coursework competing for attention while the OTS pieces move.</div></div>
-      <div class="light-panel"><div style="font-size:17px;font-weight:500;color:#0a0a08;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid rgba(0,0,0,.08)">On the Physical Work</div><div style="font-size:13px;line-height:1.82;color:#333330">No new strength maxes in June, but the cardio work quietly had the best month of the year &#8212; both outdoor runs came back a full minute per mile faster than their May counterparts, at equal or greater distance. That&rsquo;s the metric that matters most with the AFT 2-mile run test looming Jul 26.</div></div>
-      <div class="light-panel"><div style="font-size:17px;font-weight:500;color:#0a0a08;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid rgba(0,0,0,.08)">On the Sermon Theme</div><div style="font-size:13px;line-height:1.82;color:#333330">Three sermons in June, all working the same thread from different angles: trusting God through waiting and impossible-looking situations. Not a bad theme for a month spent waiting on a recruiter to call back.</div></div>
-      <div class="light-panel" style="border-left:2px solid #0a0a08">
-        <div style="font-size:17px;font-weight:500;color:#0a0a08;margin-bottom:10px">Key Takeaway &#8212; June 2026</div>
-        <div style="font-size:14px;line-height:1.82;color:#0a0a08;font-style:italic" id="refl-takeaway">&#8212;</div>
+      <div class="light-panel"><div style="font-size:17px;font-weight:500;color:var(--tx);margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--b1)">On the Career Picture</div><div style="font-size:13px;line-height:1.82;color:var(--t2)">The 368 clearing the Jul 4 deadline is the real headline &#8212; that critical path stayed open through JD&rsquo;s own follow-through, not luck. The waiting isn&rsquo;t over, it just moved: from &ldquo;will the chain approve this&rdquo; to &ldquo;will the recruiter respond.&rdquo; A new thread opened at the very end of the month with the Clarkson interview &#8212; worth naming here, more to say once it resolves.</div></div>
+      <div class="light-panel"><div style="font-size:17px;font-weight:500;color:var(--tx);margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--b1)">On Closing Out the Semester</div><div style="font-size:13px;line-height:1.82;color:var(--t2)">Two A&rsquo;s and a 4.000 term GPA to close Spring, with a 3.917 cumulative and Good Academic Standing. Fall is the next push, but the gap between semesters is real runway &#8212; no coursework competing for attention while the OTS pieces move.</div></div>
+      <div class="light-panel"><div style="font-size:17px;font-weight:500;color:var(--tx);margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--b1)">On the Physical Work</div><div style="font-size:13px;line-height:1.82;color:var(--t2)">No new strength maxes in June, but the cardio work quietly had the best month of the year &#8212; both outdoor runs came back a full minute per mile faster than their May counterparts, at equal or greater distance. That&rsquo;s the metric that matters most with the AFT 2-mile run test now on the October calendar.</div></div>
+      <div class="light-panel"><div style="font-size:17px;font-weight:500;color:var(--tx);margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid var(--b1)">On the Sermon Theme</div><div style="font-size:13px;line-height:1.82;color:var(--t2)">Three sermons in June, all working the same thread from different angles: trusting God through waiting and impossible-looking situations. Not a bad theme for a month spent waiting on a recruiter to call back.</div></div>
+      <div class="light-panel" style="border-left:2px solid var(--green)">
+        <div style="font-size:17px;font-weight:500;color:var(--tx);margin-bottom:10px">Key Takeaway &#8212; June 2026</div>
+        <div style="font-size:14px;line-height:1.82;color:var(--tx);font-style:italic" id="refl-takeaway">&#8212;</div>
       </div>
     </div>
   </div>
@@ -1064,6 +1220,19 @@ to{transform:translateX(-50%)}}
 // ║  VERIFY: python3 -c "cats=[...]; print(sum(a for _,a in cats))"      ║
 // ║  Must equal fin.expenses exactly before publishing.                  ║
 // ╚══════════════════════════════════════════════════════════════════════╝
+// ── HISTORICAL (for June vs May comparison charts) ──────────────────────
+const HIST = {
+  may: {
+    income: 5659.60, expenses: 2776.48, net: 2883.12, gymDays: 20, volume: 87390,
+    cats: {
+      'Drinks &amp; Dining': 538.67, 'Business (JD Meyers Prod.)': 416.69, 'Groceries': 374.19,
+      'Subscriptions': 227.81, 'Tithe': 250.00, 'Auto &amp; Transport': 116.92,
+      'Shopping': 37.67, 'Personal Care': 30.00, 'Entertainment': 26.19, 'Healthcare': 16.00,
+      'Charging': 0,
+    },
+  },
+};
+
 const DATA = {
 
   // ── FINANCIAL ────────────────────────────────────────────────────────
@@ -1077,8 +1246,7 @@ const DATA = {
     goal:     10000,
     sources: [
       {n:'Clarkson University &#215;2 paychecks', a:2254.27},
-      {n:'Julia Tomford &#8212; service exchange (2nd installment)', a:1271.00, note:'Cash toward the $1,550 balance. Lens trade (Canon 70-200mm F/2.8L) still planned for end of July &mdash; not this payment.'},
-      {n:'Photography &#8212; JD Meyers Productions (Square)', a:483.20},
+      {n:'Photography &#8212; JD Meyers Productions', a:1754.20, note:'$483.20 collected directly + $1,271.00 cash toward the Julia Tomford service-exchange balance. Lens trade (Canon 70-200mm F/2.8L) still planned for end of July &mdash; not this payment.'},
       {n:'National Guard / DFAS', a:246.51},
       {n:'Interest &amp; Misc', a:67.98},
     ],
@@ -1100,7 +1268,19 @@ const DATA = {
 
   // ── TRANSACTIONS (accordion) ─────────────────────────────────────────
   // Each category: {n, a, c, txns:[{d:'Jun XX', n:'Merchant', a:amount}]}
-  txnCats: [],
+    txnCats: [
+      {n:'Drinks &amp; Dining', a:527.02, c:'#E05533', txns:[{d:'Jun 2', n:'Taco Bell', a:7.65}, {d:'Jun 3', n:'McDonald&rsquo;s', a:6.48}, {d:'Jun 3', n:'Sunoco', a:9.05}, {d:'Jun 3', n:'Sunoco', a:9.41}, {d:'Jun 4', n:'Burger King', a:9.72}, {d:'Jun 4', n:'Sunoco', a:9.96}, {d:'Jun 5', n:'Dunkin&rsquo;', a:4.16}, {d:'Jun 5', n:'Pizza Hut', a:9.71}, {d:'Jun 6', n:'Dunkin&rsquo;', a:6.48}, {d:'Jun 6', n:'Sunoco', a:3.60}, {d:'Jun 7', n:'Tim Hortons', a:3.84}, {d:'Jun 8', n:'McDonald&rsquo;s', a:6.48}, {d:'Jun 8', n:'Sunoco', a:3.55}, {d:'Jun 8', n:'Sunoco', a:12.66}, {d:'Jun 9', n:'Sunoco', a:8.77}, {d:'Jun 9', n:'Taco Bell', a:7.92}, {d:'Jun 11', n:'Buffalo Wild Wings', a:46.92}, {d:'Jun 11', n:'Stewart&rsquo;s Shops', a:4.31}, {d:'Jun 11', n:'Tim Hortons', a:4.31}, {d:'Jun 13', n:'Chipotle', a:17.17}, {d:'Jun 13', n:'Speedway', a:1.55}, {d:'Jun 13', n:'Starbucks', a:6.43}, {d:'Jun 13', n:'Wendy&rsquo;s', a:22.12}, {d:'Jun 14', n:'Chipotle', a:4.59}, {d:'Jun 14', n:'Dunkin&rsquo;', a:8.48}, {d:'Jun 14', n:'Five Guys', a:6.69}, {d:'Jun 15', n:'Pizza Hut', a:22.44}, {d:'Jun 16', n:'Taco Bell', a:6.74}, {d:'Jun 17', n:'Sunoco', a:15.03}, {d:'Jun 18', n:'McDonald&rsquo;s', a:8.10}, {d:'Jun 18', n:'Sunoco', a:9.20}, {d:'Jun 19', n:'Black Sheep Pub', a:16.99}, {d:'Jun 19', n:'Taco Bell', a:9.48}, {d:'Jun 20', n:'McDonald&rsquo;s', a:9.27}, {d:'Jun 21', n:'Sunoco', a:4.39}, {d:'Jun 21', n:'Tim Hortons', a:2.69}, {d:'Jun 22', n:'Bob&rsquo;s', a:17.17}, {d:'Jun 22', n:'McDonald&rsquo;s', a:13.02}, {d:'Jun 23', n:'A.W. COLLINS CORP', a:2.60}, {d:'Jun 23', n:'Burger King', a:3.77}, {d:'Jun 23', n:'Subway', a:10.69}, {d:'Jun 24', n:'Chipotle', a:17.17}, {d:'Jun 24', n:'Wendy&rsquo;s', a:15.85}, {d:'Jun 25', n:'In-law Brewing Com', a:6.00}, {d:'Jun 26', n:'Sunoco', a:4.39}, {d:'Jun 27', n:'Anthropic Claude Sub', a:21.40}, {d:'Jun 27', n:'Sunoco', a:5.21}, {d:'Jun 28', n:'Park Bros Coffee', a:16.29}, {d:'Jun 28', n:'Roxy Theater Concession', a:9.25}, {d:'Jun 28', n:'Tim Hortons', a:4.13}, {d:'Jun 29', n:'Taco Bell', a:10.02}, {d:'Jun 30', n:'Old Market Coffee', a:13.34}, {d:'Jun 30', n:'Sunoco', a:10.38}]},
+      {n:'Shopping', a:418.26, c:'#6A8098', txns:[{d:'Jun 11', n:'Adobe', a:7.55}, {d:'Jun 11', n:'Adobe', a:32.39}, {d:'Jun 14', n:'Amazon', a:17.63}, {d:'Jun 14', n:'Exchange', a:8.28}, {d:'Jun 21', n:'Opus Clip', a:15.07}, {d:'Jun 21', n:'Opus Clip', a:16.20}, {d:'Jun 22', n:'Amazon', a:31.75}, {d:'Jun 24', n:'Best Buy', a:289.39}]},
+      {n:'Groceries', a:309.47, c:'#3BA869', txns:[{d:'Jun 2', n:'Walmart', a:44.35}, {d:'Jun 10', n:'Walmart', a:157.74}, {d:'Jun 25', n:'Walmart', a:107.38}]},
+      {n:'Tithe', a:250.00, c:'#C8C0A0', txns:[{d:'Jun 10', n:'Calvary Baptist', a:250.00}]},
+      {n:'Auto &amp; Transport', a:121.92, c:'#3A8DC0', txns:[{d:'Jun 24', n:'Oncenter Parking', a:15.00}, {d:'Jun 25', n:'Tesla', a:106.92}]},
+      {n:'Healthcare', a:76.59, c:'#37A09B', txns:[{d:'Jun 3', n:'Reserve Select Tricare Tr', a:57.88}, {d:'Jun 7', n:'Kinney Drugs', a:2.52}, {d:'Jun 26', n:'Kinney Drugs', a:16.19}]},
+      {n:'Subscriptions', a:73.81, c:'#9A8FD8', txns:[{d:'Jun 1', n:'Google', a:1.94}, {d:'Jun 9', n:'Apple', a:4.31}, {d:'Jun 22', n:'Apple', a:48.58}, {d:'Jun 23', n:'YouTube Premium', a:8.99}, {d:'Jun 25', n:'Apple', a:9.99}]},
+      {n:'Business (JD Meyers Prod.)', a:34.24, c:'#7A6FD8', txns:[{d:'Jun 3', n:'Elevenlabs Io', a:6.48}, {d:'Jun 8', n:'Pixieset', a:0.81}, {d:'Jun 10', n:'Anthropic', a:5.35}, {d:'Jun 11', n:'Pixieset', a:21.60}]},
+      {n:'Personal Care', a:30.00, c:'#C06878', txns:[{d:'Jun 3', n:'Sian Miller June Hair', a:30.00}]},
+      {n:'Charging', a:9.93, c:'#8888AA', txns:[{d:'Jun 14', n:'Supercharger', a:8.08}, {d:'Jun 24', n:'Supercharger', a:1.85}]},
+      {n:'Entertainment', a:7.50, c:'#54A898', txns:[{d:'Jun 28', n:'Roxy', a:7.50}]},
+    ],
 
   // ── PHYSICAL ─────────────────────────────────────────────────────────
   // SOURCE: FitNotes CSV export, June 2026. Volume = weight_lbs * reps summed per date.
@@ -1199,10 +1379,10 @@ const DATA = {
   // ── CAREER ────────────────────────────────────────────────────────────
   career: {
     spotlightTitle: 'The 368 is approved. Now it&rsquo;s the recruiter&rsquo;s move.',
-    spotlightBody:  'DD-368 was approved through JD&rsquo;s chain and sent to the Air Force recruiter in June &#8212; the Jul 4 deadline was met. Still waiting to hear back; the next step is scheduling the AFOQT (Air Force Officer Qualifying Test), the standard entrance exam for OTS. Also interviewed June 30 for an administrative role at Clarkson&rsquo;s Lewis School of Health &amp; Life Sciences &#8212; more on that next month.',
+    spotlightBody:  'DD-368 was approved through JD&rsquo;s chain and sent to the Air Force recruiter in June &#8212; the Jul 4 deadline was met. A recruiter still hasn&rsquo;t been formally assigned, but the AFOQT (the standard entrance exam for OTS) already has a due date: Sep 25, 2026. Also interviewed June 30 for an administrative role at Clarkson&rsquo;s Lewis School of Health &amp; Life Sciences &#8212; more on that next month.',
     otsStatus:  'Active',
     otsBarW:    '45%',
-    otsBody:    'DD-368 approved by JD&rsquo;s chain and sent to the Air Force recruiter in June. Awaiting a response. Next step once contact is made: schedule the AFOQT.',
+    otsBody:    'DD-368 approved by JD&rsquo;s chain and sent to the Air Force recruiter in June. Per the recruiting portal: a recruiter still hasn&rsquo;t been formally assigned, but the AFOQT already has a due date &#8212; Sep 25, 2026. That test doesn&rsquo;t wait on the recruiter.',
     d368Date:   'June 2026 &#8212; Approved &amp; Sent',
     d368Body:   '<strong>DD-368 approved and forwarded to the AF recruiter.</strong> No response yet. Follow up if the recruiter hasn&rsquo;t made contact by mid-July.',
     csStatus:   'Pending',
@@ -1210,7 +1390,7 @@ const DATA = {
     csBody:     'No update from civil service in June. AT conflict accommodation request (with military orders, USERRA-protected) remains outstanding from May.',
     csNext:     'Await AT accommodation response. Follow up if nothing by the Aug 6&#8211;21 Annual Training window.',
     headline:   'One deadline met. One interview added to the mix.',
-    bodyText:   'The DD-368 cleared JD&rsquo;s chain and reached the Air Force recruiter before the Jul 4 wall &#8212; that part of the critical path is done. The ball is now with the recruiter; next concrete step is scheduling the AFOQT once contact is made. Civil service stayed quiet. A new thread opened June 30: an interview for an administrative coordinator role at Clarkson&rsquo;s Lewis School of Health &amp; Life Sciences, panel included both PT and OT program directors.',
+    bodyText:   'The DD-368 cleared JD&rsquo;s chain and reached the Air Force recruiter before the Jul 4 wall &#8212; that part of the critical path is done. Recruiter assignment is still pending per the portal, but the AFOQT already carries a due date &#8212; Sep 25, 2026 &#8212; independent of that contact. Civil service stayed quiet. A new thread opened June 30: an interview for an administrative coordinator role at Clarkson&rsquo;s Lewis School of Health &amp; Life Sciences, panel included both PT and OT program directors.',
   },
 
   // ── REFLECTIONS ──────────────────────────────────────────────────────
@@ -1243,8 +1423,8 @@ const ytdP = Math.min(ytd / DATA.fin.goal * 100, 100);
 // POPULATE ALL IDS FROM DATA
 // ═══════════════════════════════════════════════════════════════════════
 function populateAll(){
-  const jul4  = new Date('2026-07-04');
-  const days  = Math.max(0, Math.ceil((jul4 - new Date()) / 864e5));
+  const afoqtDate = new Date('2026-09-25');
+  const days  = Math.max(0, Math.ceil((afoqtDate - new Date()) / 864e5));
   const daysS = days > 0 ? days+'d' : 'Passed';
   const pctS  = ytdP.toFixed(1)+'%';
 
@@ -1273,7 +1453,7 @@ function populateAll(){
   set('sp-title',  DATA.career.spotlightTitle);
   set('sp-body',   DATA.career.spotlightBody);
   set('sp-ots-st', DATA.career.otsStatus);
-  set('sp-ots-sub',DATA.career.d368Date+' &middot; next: schedule AFOQT');
+  set('sp-ots-sub',DATA.career.d368Date+' &middot; AFOQT due Sep 25');
   const otsBar = document.getElementById('sp-ots-bar');
   if(otsBar) otsBar.style.width = DATA.career.otsBarW;
   set('sp-cs-st',  DATA.career.csStatus);
@@ -1324,8 +1504,6 @@ function populateAll(){
   set('ca-body',     DATA.career.bodyText);
   set('ca-ots-pill', DATA.career.otsStatus);
   set('ca-ots-body', DATA.career.otsBody);
-  set('ca-368-date', DATA.career.d368Date);
-  set('ca-368-body', DATA.career.d368Body);
 
   // MBA
   set('int-term-gpa',     DATA.mba.termGpa);
@@ -1390,7 +1568,7 @@ function buildFinRows(){
       ).join('')+`<div class="dr" style="border-top:1px solid var(--b1);margin-top:4px;padding-top:8px"><span style="font-weight:500">Total</span><span class="drv g" style="font-size:14px">${fmt2(DATA.fin.income)}</span></div>`;
     }
   }
-  const exp=document.getElementById('expense-rows');
+  const exp=document.getElementById('expense-rows-mini');
   if(exp){
     if(!DATA.fin.cats.length){
       exp.innerHTML='<div class="dr"><span class="drk">Awaiting CSV upload</span><span class="drv dim">TBD</span></div>';
@@ -1555,6 +1733,40 @@ function buildOvCharts(){
   }
 }
 
+function buildExpDoughnut(){
+  const c=document.getElementById('expDoughnut');
+  if(!c || c.dataset.built) return;
+  c.dataset.built='1';
+  const cats=DATA.fin.cats;
+  new Chart(c,{type:'doughnut',
+    data:{labels:cats.map(x=>x.n.replace(/&amp;/g,'&').replace(/<[^>]*>/g,'')),
+      datasets:[{data:cats.map(x=>x.a),backgroundColor:cats.map(x=>x.c+'CC'),borderColor:cats.map(x=>x.c),borderWidth:1,hoverOffset:10}]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},
+        tooltip:{callbacks:{label:ctx=>`${ctx.label}: $${ctx.raw.toFixed(2)} (${(ctx.raw/DATA.fin.expenses*100).toFixed(1)}%)`}}},
+      cutout:'62%',animation:{animateRotate:true,duration:900}}
+  });
+}
+function buildFinCompareChart(){
+  const c=document.getElementById('finCompareChart');
+  if(!c || c.dataset.built) return;
+  c.dataset.built='1';
+  const cats=DATA.fin.cats;
+  const mayVals=cats.map(x=>HIST.may.cats[x.n]!==undefined?HIST.may.cats[x.n]:0);
+  const junVals=cats.map(x=>x.a);
+  new Chart(c,{type:'bar',
+    data:{labels:cats.map(x=>x.n.replace(/&amp;/g,'&').replace(/<[^>]*>/g,'').split(' ').slice(0,2).join(' ')),
+      datasets:[
+        {label:'May',data:mayVals,backgroundColor:'rgba(77,168,255,.35)',borderColor:'#4DA8FF',borderWidth:1,borderRadius:3},
+        {label:'June',data:junVals,backgroundColor:'rgba(0,229,160,.75)',borderColor:'#00E5A0',borderWidth:1,borderRadius:3},
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:true,position:'top',labels:{color:'rgba(255,255,255,.85)',font:{size:9},boxWidth:12}}},
+      scales:{x:{grid:{display:false},ticks:{color:'rgba(255,255,255,.7)',font:{size:8},maxRotation:35,minRotation:35}},
+              y:{grid:{color:'rgba(255,255,255,.06)'},ticks:{color:'rgba(255,255,255,.6)',font:{size:9},callback:v=>'$'+v}}},
+      animation:{duration:800}}
+  });
+}
 function buildFinBarChart(){
   if(!DATA.fin.sources.length) return;
   const labels=[...DATA.fin.sources.map(s=>s.n.split(' ').slice(0,2).join(' ')),...DATA.fin.cats.map(c=>c.n.split(' ')[0])];
@@ -1568,6 +1780,23 @@ function buildFinBarChart(){
   });
 }
 
+function buildPhysCompareChart(){
+  const c=document.getElementById('physCompareChart');
+  if(!c || c.dataset.built) return;
+  c.dataset.built='1';
+  new Chart(c,{type:'bar',
+    data:{labels:['Gym Days','Volume (K lbs)'],
+      datasets:[
+        {label:'May',data:[HIST.may.gymDays, +(HIST.may.volume/1000).toFixed(1)],backgroundColor:'rgba(77,168,255,.35)',borderColor:'#4DA8FF',borderWidth:1,borderRadius:4},
+        {label:'June',data:[DATA.physical.days, +(DATA.physical.volume/1000).toFixed(1)],backgroundColor:'rgba(0,229,160,.75)',borderColor:'#00E5A0',borderWidth:1,borderRadius:4},
+      ]},
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:true,position:'top',labels:{color:'rgba(255,255,255,.85)',font:{size:9},boxWidth:12}}},
+      scales:{x:{grid:{display:false},ticks:{color:'rgba(255,255,255,.7)',font:{size:9}}},
+              y:{grid:{color:'rgba(255,255,255,.06)'},ticks:{color:'rgba(255,255,255,.6)',font:{size:9}}}},
+      animation:{duration:800}}
+  });
+}
 function buildGymChart(){
   const ls=DATA.physical.sessions.filter(s=>s.v>0);
   const c=document.getElementById('gymDetailChart');
@@ -1588,13 +1817,13 @@ function switchTab(name){
   TABS.forEach(t=>{const e=document.getElementById('tab-'+t);if(e)e.style.display='none';});
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
   const target=document.getElementById('tab-'+name);
-  if(target){const isBlock=['spiritual','intellectual','reflections'].includes(name);target.style.display=isBlock?'block':'grid';}
+  if(target){const isBlock=['intellectual','reflections'].includes(name);target.style.display=isBlock?'block':'grid';}
   const btn=document.querySelector('.tab[data-t="'+name+'"]');
   if(btn) btn.classList.add('on');
   if(!built[name]){
     built[name]=true;
-    if(name==='financial'){ buildFinBarChart(); buildFinRows(); buildAccordion(); buildYTDHero(); buildIncomeSplit(); setTimeout(animateProgs,100); }
-    if(name==='physical') { buildGymChart(); buildAftProgs(); buildCardioLog(); buildCardioCharts(); setTimeout(animateProgs,100); }
+    if(name==='financial'){ buildFinBarChart(); buildFinRows(); buildAccordion(); buildYTDHero(); buildIncomeSplit(); buildExpDoughnut(); buildFinCompareChart(); setTimeout(animateProgs,100); }
+    if(name==='physical') { buildGymChart(); buildAftProgs(); buildCardioLog(); buildCardioCharts(); buildPhysCompareChart(); setTimeout(animateProgs,100); }
     if(name==='creative')  { buildPipeline(); setTimeout(()=>document.querySelectorAll('.rev-bar-conf,.rev-bar-cont').forEach(el=>el.classList.add('anim')),200); }
     if(name==='intellectual'){
       setTimeout(()=>document.querySelectorAll('.lp-bar-conf,.lp-bar-cont').forEach(el=>el.style.transform='scaleX(1)'),300);
@@ -1639,7 +1868,7 @@ document.addEventListener('keydown',e=>{
 // ── ORB POPULATION ────────────────────────────────────────────────
 function populateOrbs(){
   const ytd  = DATA.fin.ytdPrev + DATA.fin.net;
-  const days = Math.max(0,Math.ceil((new Date('2026-07-04')-new Date())/864e5));
+  const days = Math.max(0,Math.ceil((new Date('2026-09-25')-new Date())/864e5));
   const s=(id,v)=>{const e=document.getElementById(id);if(e)e.innerHTML=v;};
   s('orb-net', fmtD(DATA.fin.net,true));
   s('orb-ytd', fmtD(ytd));
@@ -1689,7 +1918,7 @@ function buildYTDHero(){
 function buildIncomeSplit(){
   const total = DATA.fin.income;
   const base  = 2254.27 + 246.51 + 67.98;  // Clarkson + DFAS + Interest/Misc
-  const photo = 483.20;                     // Square (JD Meyers Productions)
+  const photo = 1754.20;                    // JD Meyers Productions (Square + Julia Tomford exchange installment)
   const other = total - base - photo;
   const s=(id,v)=>{const e=document.getElementById(id);if(e)e.innerHTML=v;};
   s('inc-base-pct',  (base/total*100).toFixed(1)+'%');
