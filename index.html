@@ -22,11 +22,17 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100vh;-webkit-font-smoothing:antialiased}
-@keyframes orb-breathe{0%,100%{transform:scale(1);opacity:.35}50%{transform:scale(1.18);opacity:.55}}
-@keyframes breathe-g{0%,100%{box-shadow:0 0 0 1px rgba(0,229,160,.12)}50%{box-shadow:0 0 0 1px rgba(0,229,160,.5),0 0 28px rgba(0,229,160,.12)}}
+@keyframes orb-drift-1{0%{transform:translate(-10%,-15%) scale(1)}33%{transform:translate(15%,10%) scale(1.15)}66%{transform:translate(-5%,20%) scale(.95)}100%{transform:translate(-10%,-15%) scale(1)}}
+@keyframes orb-drift-2{0%{transform:translate(10%,20%) scale(1.05)}50%{transform:translate(-15%,-10%) scale(.9)}100%{transform:translate(10%,20%) scale(1.05)}}
+@keyframes orb-drift-3{0%,100%{opacity:.3}50%{opacity:.55}}
+@keyframes breathe-g{0%,100%{box-shadow:0 0 0 1px rgba(0,229,160,.08)}50%{box-shadow:0 0 0 1px rgba(0,229,160,.22)}}
 @keyframes dot-blink{0%,100%{opacity:1}45%,55%{opacity:.08}}
 @keyframes slide-up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.bg-orb{position:fixed;top:50%;left:50%;width:60vmax;height:60vmax;transform:translate(-50%,-50%);pointer-events:none;z-index:0;border-radius:50%;background:radial-gradient(circle,rgba(0,229,160,.10) 0%,rgba(77,168,255,.06) 45%,transparent 72%);filter:blur(40px);animation:orb-breathe 8s ease-in-out infinite}
+@keyframes hero-pulse{0%,100%{opacity:1}45%,55%{opacity:.15}}
+.bg-orb{position:fixed;pointer-events:none;z-index:0;border-radius:50%;filter:blur(46px)}
+.bg-orb-1{top:5%;left:12%;width:46vmax;height:46vmax;background:radial-gradient(circle,rgba(0,229,160,.11) 0%,rgba(0,229,160,.03) 55%,transparent 75%);animation:orb-drift-1 22s ease-in-out infinite}
+.bg-orb-2{bottom:0%;right:5%;width:50vmax;height:50vmax;background:radial-gradient(circle,rgba(77,168,255,.09) 0%,rgba(77,168,255,.02) 55%,transparent 75%);animation:orb-drift-2 26s ease-in-out infinite}
+.bg-orb-3{top:38%;left:55%;width:34vmax;height:34vmax;background:radial-gradient(circle,rgba(155,143,255,.08) 0%,transparent 70%);animation:orb-drift-3 14s ease-in-out infinite}
 .shell{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:40px 24px 80px}
 
 /* Header */
@@ -37,20 +43,14 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .hdr-title strong{font-weight:600;color:#fff}
 .hdr-sub{font-size:14px;color:var(--t3);line-height:1.6;max-width:520px}
 
-/* Hero button — links to 2026-overview.html */
-@keyframes hero-glow{0%,100%{box-shadow:0 0 0 1px rgba(0,229,160,.18),0 20px 50px rgba(0,229,160,.08)}50%{box-shadow:0 0 0 1px rgba(0,229,160,.4),0 24px 60px rgba(0,229,160,.16)}}
-@keyframes hero-pulse{0%,100%{opacity:1}45%,55%{opacity:.15}}
-.year-hero-btn{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;text-decoration:none;background:linear-gradient(160deg,rgba(0,229,160,.07) 0%,rgba(77,168,255,.04) 100%);border:1px solid rgba(0,229,160,.25);border-radius:22px;padding:34px 28px 30px;margin:0 auto 28px;max-width:560px;cursor:pointer;animation:slide-up .6s ease .1s both,hero-glow 5s ease-in-out infinite;transition:transform .3s cubic-bezier(.22,.68,0,1.15),border-color .3s ease}
-.year-hero-btn:hover{transform:translateY(-4px);border-color:rgba(0,229,160,.5)}
-.yhb-eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--green);display:flex;align-items:center;gap:7px;margin-bottom:4px}
-.yhb-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:hero-pulse 2.2s ease-in-out infinite}
-.yhb-title{font-size:26px;font-weight:700;letter-spacing:-.6px;color:#fff}
-.yhb-title span{background:linear-gradient(90deg,var(--green),var(--blue));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.yhb-sub{font-size:13px;color:var(--t3);max-width:400px;line-height:1.55;margin-bottom:10px}
-.yhb-cta{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--bg);background:var(--green);padding:10px 22px;border-radius:999px;font-weight:600;transition:gap .25s ease}
-.year-hero-btn:hover .yhb-cta{gap:13px}
-.yhb-arrow{display:inline-block;transition:transform .25s ease}
-.year-hero-btn:hover .yhb-arrow{transform:translateX(3px)}
+/* Year at a Glance — subtle link, not a big hero CTA */
+.year-glance-wrap{display:flex;justify-content:center;margin-bottom:26px}
+.year-glance-link{display:inline-flex;align-items:center;gap:12px;text-decoration:none;background:var(--g);border:1px solid var(--b0);border-radius:16px;padding:14px 26px;animation:slide-up .6s ease .1s both;transition:transform .25s cubic-bezier(.22,.68,0,1.15),border-color .25s ease,background .25s ease}
+.year-glance-link:hover{transform:translateY(-3px);border-color:var(--b1);background:var(--gm)}
+.ygl-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:hero-pulse 2.2s ease-in-out infinite;flex-shrink:0}
+.ygl-text{font-family:var(--mono);font-size:13px;letter-spacing:.7px;color:var(--t2);font-weight:500}
+.ygl-arrow{font-size:14px;color:var(--t4);transition:transform .25s ease}
+.year-glance-link:hover .ygl-arrow{transform:translateX(3px);color:var(--green)}
 
 /* Career banner */
 .career-banner{padding:14px 20px;margin-bottom:28px;background:var(--g);border:1px solid var(--b0);border-left:2px solid var(--red);animation:slide-up .6s ease .15s both}
@@ -67,14 +67,14 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 
 /* Month cards */
 .month-card{background:var(--g);border:1px solid var(--b0);position:relative;overflow:hidden;transition:border-color .2s,transform .15s;text-decoration:none;display:block}
-.month-card:hover{border-color:var(--b1);transform:translateY(-1px)}
+.month-card:hover{border-color:var(--b2);transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.35)}
 .month-card::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.013),transparent);pointer-events:none}
 .month-card:hover::before{left:200%;transition:left .55s ease}
 
 /* Card states */
 .month-card.done{opacity:.55}
 .month-card.done:hover{opacity:.75;transform:none}
-.month-card.latest{border-top:2px solid var(--green);animation:breathe-g 4s ease-in-out infinite}
+.month-card.latest{border-top:1px solid var(--green);animation:breathe-g 5s ease-in-out infinite}
 .month-card.upcoming{border-top:1px solid var(--b0);opacity:.65}
 .month-card.upcoming:hover{opacity:.85}
 
@@ -98,7 +98,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .chip.r{border-color:rgba(255,122,168,.3);color:var(--rose)}
 
 /* Tagline */
-.mc-tagline{font-size:11.5px;color:var(--t3);line-height:1.55;font-style:italic;padding-top:10px;border-top:1px solid var(--b0)}
+.mc-tagline{font-size:11.5px;color:var(--t3);line-height:1.55;font-style:italic;padding-top:10px;border-top:1px solid var(--b0);position:relative}
+.mc-go{position:absolute;top:16px;right:16px;width:22px;height:22px;border-radius:50%;background:var(--gm);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--t4);opacity:0;transform:translateX(-4px);transition:opacity .25s ease,transform .25s ease}
+.month-card:hover .mc-go{opacity:1;transform:translateX(0);color:var(--tx);border-color:var(--b2)}
 
 /* Upcoming placeholder */
 .mc-upcoming-note{font-family:var(--mono);font-size:9px;color:var(--t4);padding:8px 0;text-align:center;letter-spacing:.5px}
@@ -112,7 +114,9 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 </style>
 </head>
 <body>
-<div class="bg-orb"></div>
+<div class="bg-orb bg-orb-1"></div>
+<div class="bg-orb bg-orb-2"></div>
+<div class="bg-orb bg-orb-3"></div>
 <div class="shell">
 
 <!-- Header -->
@@ -122,13 +126,14 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
   <div class="hdr-sub">Monthly dashboards tracking financial, physical, spiritual, intellectual, and creative progress. The year the career locks in.</div>
 </div>
 
-<!-- Hero button — links to 2026-overview.html -->
-<a href="2026-overview.html" target="_blank" class="year-hero-btn">
-  <div class="yhb-eyebrow"><span class="yhb-dot"></span>Six Months In</div>
-  <div class="yhb-title">See the Whole <span>2026</span></div>
-  <div class="yhb-sub">The January plan, the mid-year scorecard, and every month laid out on one page.</div>
-  <div class="yhb-cta">Open Year in Review <span class="yhb-arrow">&#8594;</span></div>
+<!-- Year at a Glance — subtle link to 2026-overview.html -->
+<div class="year-glance-wrap">
+<a href="2026-overview.html" class="year-glance-link">
+  <span class="ygl-dot"></span>
+  <span class="ygl-text">Year at a Glance</span>
+  <span class="ygl-arrow">&#8594;</span>
 </a>
+</div>
 
 <!-- Career banner -->
 <div class="career-banner">
@@ -155,7 +160,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
         <span class="chip g">$812 saved</span>
         <span class="chip b">&#9733; Gym started</span>
       </div>
-      <div class="mc-tagline">First month. Baselines set. Gym habit started.</div>
+      <div class="mc-tagline">First month. Baselines set. Gym habit started.<span class="mc-go">&#8594;</span></div>
     </div>
   </a>
 
@@ -168,7 +173,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
       <div class="mc-chips">
         <span class="chip g">$1,094 saved</span>
       </div>
-      <div class="mc-tagline">Consistency over intensity.</div>
+      <div class="mc-tagline">Consistency over intensity.<span class="mc-go">&#8594;</span></div>
     </div>
   </a>
 
@@ -181,7 +186,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
       <div class="mc-chips">
         <span class="chip g">$1,444 saved</span>
       </div>
-      <div class="mc-tagline">Wedding bookings starting to build.</div>
+      <div class="mc-tagline">Wedding bookings starting to build.<span class="mc-go">&#8594;</span></div>
     </div>
   </a>
 
@@ -196,7 +201,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
         <span class="chip b">Bench 195lb</span>
         <span class="chip r">3 paths open</span>
       </div>
-      <div class="mc-tagline">Best month yet. Three career paths all in motion.</div>
+      <div class="mc-tagline">Best month yet. Three career paths all in motion.<span class="mc-go">&#8594;</span></div>
     </div>
   </a>
 
@@ -212,7 +217,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
         <span class="chip r">$2,735 photo</span>
         <span class="chip b">92.5% &amp; 94%</span>
       </div>
-      <div class="mc-tagline">United closed. OTS is the path. DD-368 sent. Photography delivered. Field narrowing &mdash; that&rsquo;s clarity.</div>
+      <div class="mc-tagline">United closed. OTS is the path. DD-368 sent. Photography delivered. Field narrowing &mdash; that&rsquo;s clarity.<span class="mc-go">&#8594;</span></div>
     </div>
   </a>
 
@@ -228,7 +233,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
         <span class="chip r">$1,800 photo</span>
         <span class="chip b">4.000 term GPA</span>
       </div>
-      <div class="mc-tagline">DD-368 approved &amp; sent to the AF recruiter &mdash; Jul 4 deadline met. Spring semester closed with a 4.0. Cardio&rsquo;s the quiet win: both outdoor runs came back faster.</div>
+      <div class="mc-tagline">DD-368 approved &amp; sent to the AF recruiter &mdash; Jul 4 deadline met. Spring semester closed with a 4.0. Cardio&rsquo;s the quiet win: both outdoor runs came back faster.<span class="mc-go">&#8594;</span></div>
     </div>
   </a>
 
@@ -267,7 +272,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
   <div class="footer-l">julietdeltaone.github.io/monthly-recap &mdash; Updated June 2026</div>
   <div class="footer-links">
     <a href="cbc-sermons.html" class="footer-link">Sermons</a>
-    <a href="2026-overview.html" target="_blank" class="footer-link">Year Arc</a>
+    <a href="2026-overview.html" class="footer-link">Year Arc</a>
     <a href="2026-06.html" class="footer-link">Latest Month</a>
   </div>
 </div>
