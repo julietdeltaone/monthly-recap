@@ -10,11 +10,9 @@
   1. Add button to .month-tabs ro
   2. Add sermons to const SERMONS array with month:'xxx'
   3. Update STATS.total and MONTH_COUNT
-  4. Update buildMonthChart() labels/data arrays
   Acts series section = 'acts' | Pastoral detour = 'epistle' | Guest = 'guest'
 -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
 :root{
   --bg:#060810;--bg2:#0C0E16;--bg3:#12151F;--bg4:#181C28;
@@ -93,7 +91,6 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .sc-points li{font-size:12px;line-height:1.65;color:var(--t2);padding-left:14px;position:relative}
 .sc-points li::before{content:'\2192';position:absolute;left:0;color:var(--amber);font-size:9px;top:2px}
 .sc-app{font-size:12px;line-height:1.72;color:var(--t2);padding:10px 12px;border-left:2px solid var(--amber);background:var(--adim);margin-top:4px}
-.sc-commentary{font-size:11.5px;line-height:1.72;color:var(--t3);font-style:italic;margin-top:4px}
 .sc-scriptures{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
 .scripture-tag{font-family:var(--mono);font-size:9px;padding:3px 10px;border:1px solid rgba(255,184,48,.3);color:var(--amber)}
 /* Section divider */
@@ -120,15 +117,16 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
   <div style="display:flex;align-items:center;gap:12px">
     <span class="hdr-title"><strong>CBC</strong> Sermons &middot; 2026</span>
   </div>
+  <a href="index.html" id="backToIndex" class="mnav" style="display:none">&#8592; Back to Index</a>
 </div>
 
 <!-- Stats strip -->
 <div class="stats-strip">
-  <div class="sst"><div class="sst-v" id="stat-total">22</div><div class="sst-l">Sermons Logged</div></div>
+  <div class="sst"><div class="sst-v" id="stat-total">25</div><div class="sst-l">Sermons Logged</div></div>
   <div class="sst"><div class="sst-v" id="stat-acts">17</div><div class="sst-l">Acts Series</div></div>
-  <div class="sst"><div class="sst-v" id="stat-epistle">4</div><div class="sst-l">Pastoral Detours</div></div>
-  <div class="sst"><div class="sst-v" id="stat-months">6</div><div class="sst-l">Months Covered</div></div>
-  <div class="sst"><div class="sst-v">Jan &ndash; Jun</div><div class="sst-l">2026</div></div>
+  <div class="sst"><div class="sst-v" id="stat-epistle">5</div><div class="sst-l">Pastoral Detours</div></div>
+  <div class="sst"><div class="sst-v" id="stat-months">7</div><div class="sst-l">Months Covered</div></div>
+  <div class="sst"><div class="sst-v">Jan &ndash; Jul</div><div class="sst-l">2026</div></div>
 </div>
 
 <!-- Month tabs — primary navigation between months of sermons -->
@@ -139,6 +137,20 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
   <button class="month-tab" onclick="filterMonth('apr',this)">April</button>
   <button class="month-tab" onclick="filterMonth('may',this)">May</button>
   <button class="month-tab" onclick="filterMonth('jun',this)">June</button>
+    <button class="month-tab" onclick="filterMonth('jul',this)">July</button>
+</div>
+
+<!-- Reading Plan — its own section, not squeezed into the sidebar -->
+<div class="side-card" style="margin-bottom:16px">
+  <div class="sc-title">2026 Bible Reading Plan</div>
+  <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-top:8px">
+    <div style="text-align:center;padding:10px 6px;background:var(--gm);border-radius:8px;border:1px solid var(--b0)"><div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;margin-bottom:4px">Jan&#8211;Feb</div><div style="font-size:12px;color:var(--t2);font-weight:600">Mark</div></div>
+    <div style="text-align:center;padding:10px 6px;background:var(--gm);border-radius:8px;border:1px solid var(--b0)"><div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;margin-bottom:4px">Mar&#8211;Apr</div><div style="font-size:12px;color:var(--t2);font-weight:600">Luke</div></div>
+    <div style="text-align:center;padding:10px 6px;background:var(--gm);border-radius:8px;border:1px solid var(--b0)"><div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;margin-bottom:4px">May&#8211;Jun</div><div style="font-size:12px;color:var(--t2);font-weight:600">Romans</div></div>
+    <div style="text-align:center;padding:10px 6px;background:rgba(255,184,48,.1);border-radius:8px;border:1px solid rgba(255,184,48,.35)"><div style="font-family:var(--mono);font-size:8px;color:var(--amber);text-transform:uppercase;margin-bottom:4px">Jul&#8211;Aug &#9654;</div><div style="font-size:12px;color:var(--amber);font-weight:700">2 Corinthians</div></div>
+    <div style="text-align:center;padding:10px 6px;background:var(--gm);border-radius:8px;border:1px solid var(--b0)"><div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;margin-bottom:4px">Sep&#8211;Oct</div><div style="font-size:12px;color:var(--t2);font-weight:600">1 Timothy</div></div>
+    <div style="text-align:center;padding:10px 6px;background:var(--gm);border-radius:8px;border:1px solid var(--b0)"><div style="font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;margin-bottom:4px">Nov&#8211;Dec</div><div style="font-size:12px;color:var(--t2);font-weight:600">2 Timothy</div></div>
+  </div>
 </div>
 
 <div class="main-grid">
@@ -146,21 +158,10 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
   <aside class="sidebar">
     <div class="side-card aa">
       <div class="sc-title" style="color:var(--amber)">Viewing</div>
-      <div id="sidebar-month" style="font-family:var(--mono);font-size:16px;font-weight:600;color:var(--amber)">June</div>
+      <div id="sidebar-month" style="font-family:var(--mono);font-size:16px;font-weight:600;color:var(--amber)">July</div>
       <div id="sidebar-count" style="font-family:var(--mono);font-size:9px;color:var(--t4);margin-top:2px">3 sermons</div>
-    </div>
-    <div class="side-card">
-      <div class="sc-title">2026 Reading Plan</div>
-      <div class="sc-row"><span class="sc-k">Jan&#8211;Feb</span><span class="sc-v">Mark</span></div>
-      <div class="sc-row"><span class="sc-k">Mar&#8211;Apr</span><span class="sc-v">Luke</span></div>
-      <div class="sc-row" style="background:rgba(255,184,48,.05)"><span class="sc-k" style="color:var(--amber)">May&#8211;Jun</span><span class="sc-v" style="color:var(--amber)">Romans &#9654;</span></div>
-      <div class="sc-row"><span class="sc-k">Jul&#8211;Aug</span><span class="sc-v">2 Cor</span></div>
-      <div class="sc-row"><span class="sc-k">Sep&#8211;Oct</span><span class="sc-v">1 Tim</span></div>
-      <div class="sc-row"><span class="sc-k">Nov&#8211;Dec</span><span class="sc-v">2 Tim</span></div>
-    </div>
-    <div class="side-card">
-      <div class="sc-title">Monthly Count</div>
-      <div class="chart-wrap"><canvas id="monthChart"></canvas></div>
+      <div id="sidebar-range" style="font-family:var(--mono);font-size:9px;color:var(--t4);margin-top:2px"></div>
+      <div id="sidebar-breakdown" style="display:flex;flex-direction:column;gap:5px;margin-top:12px;padding-top:10px;border-top:1px solid var(--b0)"></div>
     </div>
     <div class="side-card">
       <div class="sc-title">Series Legend</div>
@@ -437,14 +438,59 @@ const SERMONS = [
     application:'The invitation was to surrender a grief cycle that&rsquo;s stopped moving. Not to stop missing who was lost, but to stop letting the cycle of anger and depression be the whole relationship with God. Practically: name the loss honestly, then deliberately refocus on Christ rather than the circumstance, the way Peter had to.',
     commentary:'Drew on 25 years of pastoral counseling experience with grieving families, which gave the message unusual directness about how grief actually behaves versus how it&rsquo;s supposed to behave. Less a study passage, more pastoral care delivered from the pulpit.'},
 
+  // ── JULY ────────────────────────────────────────────────────────────
+  {id:'S2623',month:'jul',section:'guest',date:'July 5, 2026',
+    title:'A Piece of Robe: Trusting God&rsquo;s Plan in What You Don&rsquo;t Understand',
+    book:'1 Samuel 24:1&#8211;7',
+    themes:['God&rsquo;s sovereignty','suffering','trust','testimony'],
+    scriptures:['1 Samuel 24:1-7','1 Samuel 15:26-28','1 Samuel 18:7'],
+    overview:'Guest speaker Art delivered a personal, unscripted message built around David sparing Saul&rsquo;s life in the cave at En Gedi. He paired the narrative with his own testimony: a serious pedestrian accident in February 2023 that nearly cost him his life and has left him in a slow, painful recovery ever since. The through-line was trusting that God is at work even in circumstances that make no sense from the inside.',
+    points:[
+      'David had Saul, the man actively hunting him, alone and defenseless in a cave, and his men urged him to take the opening. David refused, cutting only the edge of Saul&rsquo;s robe, because Saul was still &ldquo;the Lord&rsquo;s anointed&rdquo; regardless of how far he had fallen.',
+      'Both Saul and David were placed in their positions by God. David recognized that it was not his place to force God&rsquo;s timeline by removing Saul himself, even when the opportunity looked providential.',
+      'Art connected this directly to his own accident: he does not have a tidy explanation for why it happened, but has become convinced God had a purpose in it, whether or not that purpose is visible from where he stands now.',
+      'The question posed to the congregation: when your circumstances put you somewhere confusing or painful, does your response look like David&rsquo;s restraint and trust, or like something else?',
+    ],
+    application:'Art&rsquo;s challenge was direct: most people, himself included, do not respond well to unexplained suffering in the moment. The invitation was to keep listening for God inside a hard season rather than demanding the explanation first, since David&rsquo;s trust in the cave came before any resolution, not after.',
+    commentary:'A guest message built almost entirely on personal testimony rather than structured exposition, and the delivery was rough and unscripted in places. The rawness of the accident story gave it real weight even where the David narrative got a little lost in the retelling.'},
+
+  {id:'S2624',month:'jul',section:'guest',date:'July 19, 2026',
+    title:'Get Out of Sodom',
+    book:'Genesis 13:1&#8211;13',
+    themes:['separation from sin','discernment','Sodom'],
+    scriptures:['Genesis 13:1-13','Genesis 19'],
+    overview:'A second guest speaker (Philip) opened what became a multi-week series with a message on Abram and Lot&rsquo;s separation in Genesis 13. Lot chose the land toward Sodom because it looked well-watered and prosperous, a choice that set up his family&rsquo;s eventual disaster. Note on this entry: the recording had a heavy accent and low transcription accuracy, so this summary is necessarily thinner than usual and some detail may be missing or slightly off.',
+    points:[
+      'Abram let Lot choose first when their combined herds outgrew the land, and Lot chose based on what looked good to the eye, the well-watered plain toward Sodom, without weighing what Sodom actually was.',
+      'The core warning: what looks prosperous or appealing on the surface can still be the wrong direction, and by the time the danger is obvious it may already be very costly to leave.',
+      'The phrase &ldquo;get out of Sodom&rdquo; was framed as a call to identify whatever compromise looks attractive but is quietly leading someone away from God, and leave it deliberately rather than drifting toward it the way Lot did.',
+    ],
+    application:'The application was left somewhat open, functioning more as the first beat of a series than a fully resolved message on its own. The following Sunday (July 26) picked up directly where this one left off.',
+    commentary:'Given the transcription quality, this entry leans on the clearest recoverable points rather than a full walkthrough. Worth revisiting notes taken live that Sunday if a fuller record is needed.'},
+
+  {id:'S2625',month:'jul',section:'epistle',date:'July 26, 2026',
+    title:'Conviction vs. Condemnation',
+    book:'Romans 8:1',
+    themes:['conviction','condemnation','repentance','the Holy Spirit'],
+    scriptures:['Romans 8:1','Romans 2:4','1 John 1:9','John 12:47','John 3:17','Isaiah 30:18'],
+    overview:'Brad continued directly from Philip&rsquo;s &ldquo;Get Out of Sodom&rdquo; message the week before, using it to launch a teaching on the difference between conviction and condemnation. The core distinction: conviction comes from the Holy Spirit, names the specific problem, and always offers a way out through confession and repentance. Condemnation comes from the enemy, only tears down, and offers no path forward.',
+    points:[
+      'Conviction intensifies the longer someone walks with God, not because more is wrong, but because more gets exposed. The absence of any felt conviction was named as its own warning sign.',
+      'Brad shared his mother&rsquo;s story as a cautionary example: a lifelong, unresolved jealousy that she would never let anyone confront, which she let calcify into wounded relationships rather than repentance, right up until she left the world with that damage unresolved.',
+      'Romans 8:1, &ldquo;there is no condemnation for those who are in Christ Jesus,&rdquo; was the anchor verse: condemnation says you are the problem with no way out, conviction says here is the problem and here is the way through it.',
+      'A direct, personal aside: Brad admitted his own instinct after hearing Philip&rsquo;s message the week before was to want to walk away rather than deal with what it exposed, and framed that instinct itself as an example of condemnation trying to masquerade as conviction.',
+    ],
+    application:'The call was to learn to tell the two apart in real time: if a thought only accuses with no offer of a way back to God, it is condemnation and should be rejected outright; if it names something specific and points toward confession and repentance, it is conviction and should be followed, however uncomfortable.',
+    commentary:'Personal and unusually vulnerable for a Sunday message, especially the extended story about his mother. The theology was solid and well-supported scripturally, even though the delivery ran long and looped back on itself often in the transcript.'},
+
 ];
 
 // ── MONTH COUNTS ──────────────────────────────────────────────────────
-const MONTH_COUNTS = {jan:4, feb:4, mar:5, apr:4, may:2, jun:3};
+const MONTH_COUNTS = {jan:4, feb:4, mar:5, apr:4, may:2, jun:3, jul:3};
 
 // ── MONTH LABELS ──────────────────────────────────────────────────────
 const MONTH_LABELS = {
-  jan:'January', feb:'February', mar:'March', apr:'April', may:'May', jun:'June'
+  jan:'January', feb:'February', mar:'March', apr:'April', may:'May', jun:'June', jul:'July'
 };
 
 // ── INIT ──────────────────────────────────────────────────────────────
@@ -452,10 +498,21 @@ function init(){
   // Primary navigation is by month. Defaults to the current/latest month (June)
   // unless a specific month is requested via URL hash (e.g. cbc-sermons.html#mar).
   const hash = window.location.hash.replace('#','');
-  const validMonths = ['jan','feb','mar','apr','may','jun'];
-  const startMonth = validMonths.includes(hash) ? hash : 'jun';
+  const validMonths = ['jan','feb','mar','apr','may','jun','jul'];
+  const startMonth = validMonths.includes(hash) ? hash : 'jul';
   filterMonth(startMonth, null, true);
-  buildMonthChart();
+
+  // Only show "Back to Index" when this page is standalone, not when it's
+  // embedded via iframe inside a monthly recap page (which has its own nav).
+  try {
+    if (window.self === window.top) {
+      const btn = document.getElementById('backToIndex');
+      if (btn) btn.style.display = 'inline-block';
+    }
+  } catch (e) {
+    // Cross-origin iframe access throws; if we can't tell, stay hidden
+    // rather than risk showing a redundant button inside an embed.
+  }
 }
 
 // ── FILTER (by month — the only navigation on this page) ───────────────
@@ -473,6 +530,26 @@ function filterMonth(month, el, silent=false){
   document.getElementById('sidebar-month').textContent = MONTH_LABELS[month] || month;
   const filtered = SERMONS.filter(s => s.month === month);
   document.getElementById('sidebar-count').textContent = filtered.length + ' sermon' + (filtered.length !== 1 ? 's' : '');
+
+  const rangeEl = document.getElementById('sidebar-range');
+  if(filtered.length){
+    const first = filtered[0].date.replace(', 2026','');
+    const last = filtered[filtered.length-1].date.replace(', 2026','');
+    rangeEl.textContent = first === last ? first : first + ' \u2013 ' + last;
+  } else { rangeEl.textContent = ''; }
+
+  const secColor = {acts:'var(--blue)', epistle:'var(--amber)', guest:'var(--green)'};
+  const secLabel = {acts:'Acts series', epistle:'Epistle / pastoral', guest:'Guest speaker'};
+  const bySec = {};
+  filtered.forEach(s => { bySec[s.section] = (bySec[s.section]||0) + 1; });
+  const breakdownEl = document.getElementById('sidebar-breakdown');
+  breakdownEl.innerHTML = Object.keys(bySec).length ? Object.entries(bySec).map(([sec,count]) =>
+    `<div style="display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:9.5px">
+      <span style="display:flex;align-items:center;gap:6px;color:var(--t3)"><span style="width:8px;height:8px;border-radius:50%;background:${secColor[sec]||'var(--t4)'};display:inline-block"></span>${secLabel[sec]||sec}</span>
+      <span style="color:var(--t2);font-weight:600">${count}</span>
+    </div>`
+  ).join('') : '<div style="font-size:9.5px;color:var(--t4)">No sermons logged.</div>';
+
   renderSermons(filtered);
 }
 
@@ -522,10 +599,6 @@ function sermonCard(s){
         <div class="sc-section-lbl">Application</div>
         <div class="sc-app">${s.application}</div>
       </div>
-      <div class="sc-section">
-        <div class="sc-section-lbl">JD&rsquo;s Commentary</div>
-        <div class="sc-commentary">${s.commentary}</div>
-      </div>
     </div>
   </div>`;
 }
@@ -537,47 +610,6 @@ function toggleCard(id){
   if(!body) return;
   const open = body.classList.toggle('open');
   if(exp) exp.classList.toggle('open', open);
-}
-
-// ── MONTH CHART ───────────────────────────────────────────────────────
-function buildMonthChart(){
-  const ctx = document.getElementById('monthChart');
-  if(!ctx) return;
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Jan','Feb','Mar','Apr','May','Jun'],
-      datasets: [{
-        data: [
-          MONTH_COUNTS.jan,
-          MONTH_COUNTS.feb,
-          MONTH_COUNTS.mar,
-          MONTH_COUNTS.apr,
-          MONTH_COUNTS.may,
-          MONTH_COUNTS.jun,
-        ],
-        backgroundColor: [
-          'rgba(255,184,48,.35)',
-          'rgba(255,184,48,.35)',
-          'rgba(255,184,48,.35)',
-          'rgba(255,184,48,.35)',
-          'rgba(255,184,48,.35)',
-          'rgba(255,184,48,.85)',  // June highlighted
-        ],
-        borderWidth: 0,
-        borderRadius: 0,
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { grid: { color: 'rgba(255,255,255,.04)' }, ticks: { font: { size: 9, family: "'JetBrains Mono'" }, color: 'rgba(226,232,240,.4)' } },
-        y: { grid: { color: 'rgba(255,255,255,.04)' }, ticks: { stepSize: 1, font: { size: 9 }, color: 'rgba(226,232,240,.4)' } }
-      }
-    }
-  });
 }
 
 // ── START ─────────────────────────────────────────────────────────────
