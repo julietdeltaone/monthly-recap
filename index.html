@@ -60,7 +60,11 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 .cb-path{font-family:var(--mono);font-size:8px;letter-spacing:.5px;text-transform:uppercase;padding:3px 10px;border:1px solid}
 
 /* Month grid */
-.grid-label{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t4);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.grid-label{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t4);margin-bottom:0;display:flex;align-items:center;gap:8px}
+.grid-label-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.legend-mini{display:flex;gap:10px;flex-wrap:wrap}
+.legend-mini-item{display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.4px}
+.legend-mini-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 .grid-label::after{content:'';flex:1;height:1px;background:var(--b0)}
 .month-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px}
 @media(max-width:700px){.month-grid{grid-template-columns:1fr}}
@@ -149,7 +153,16 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 </div>
 
 <!-- Month grid -->
-<div class="grid-label">2026 Months</div>
+<div class="grid-label-row">
+  <div class="grid-label">2026 Months</div>
+  <div class="legend-mini">
+    <span class="legend-mini-item"><span class="legend-mini-dot" style="background:var(--green)"></span>Financial</span>
+    <span class="legend-mini-item"><span class="legend-mini-dot" style="background:var(--blue)"></span>Physical</span>
+    <span class="legend-mini-item"><span class="legend-mini-dot" style="background:var(--amber)"></span>Spiritual</span>
+    <span class="legend-mini-item"><span class="legend-mini-dot" style="background:var(--rose)"></span>Creative</span>
+    <span class="legend-mini-item"><span class="legend-mini-dot" style="background:var(--vio)"></span>Career</span>
+  </div>
+</div>
 <div class="month-grid">
 
   <!-- January — done -->
@@ -279,7 +292,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100
 
 <!-- Footer -->
 <div class="footer">
-  <div class="footer-l">julietdeltaone.github.io/monthly-recap &mdash; Updated July 2026</div>
+  <div class="footer-l">julietdeltaone.github.io/monthly-recap &mdash; last updated Jul 27, 2026</div>
   <div class="footer-links">
     <a href="cbc-sermons.html" class="footer-link">Sermons</a>
     <a href="2026-overview.html" class="footer-link">Year Arc</a>
