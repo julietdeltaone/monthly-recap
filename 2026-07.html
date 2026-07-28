@@ -70,6 +70,13 @@ a{color:inherit}
 .hdr-link:hover{color:var(--tx);border-color:var(--b2);transform:translateY(-2px)}
 
 .tabs{display:flex;gap:6px;flex-wrap:wrap;margin:14px 20px 0;padding:10px 12px;background:rgba(11,14,22,.85);backdrop-filter:blur(16px);border:1px solid var(--b0);border-radius:var(--r3)}
+
+.tab-desc{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:12px 18px;margin-bottom:14px;background:var(--glass);border:1px solid var(--b0);border-radius:var(--r-md)}
+.tab-desc-text{font-size:11.5px;color:var(--t3);line-height:1.5}
+.tab-desc-text strong{color:var(--tx);font-weight:600}
+.legend{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0}
+.legend-item{display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.4px}
+.legend-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
 .tab-btn{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;color:var(--t3);background:none;border:1px solid transparent;border-radius:var(--pill);padding:8px 16px;cursor:pointer;transition:all .22s cubic-bezier(.22,.68,0,1.15)}
 .tab-btn:hover{color:var(--tx);background:var(--glass-hi)}
 .tab-btn.on{color:var(--bg);background:var(--teal);box-shadow:0 4px 16px rgba(45,212,207,.35)}
@@ -121,6 +128,34 @@ a{color:inherit}
 #daySpendTooltip,.cal-tooltip-fixed{position:fixed;background:var(--bg3);border:1px solid var(--b2);border-radius:var(--r1);padding:8px 12px;font-size:11px;color:var(--t2);pointer-events:none;z-index:9999;opacity:0;transition:opacity .15s;max-width:240px;box-shadow:var(--sh1)}
 
 /* ── PHYSICAL: insight cards + sparklines ─────────────────────────────── */
+/* ── PHYSICAL: training calendar (split half/half, ported from June) ─── */
+.phys-cal-wrap{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+@media(max-width:760px){.phys-cal-wrap{grid-template-columns:1fr}}
+.phys-cal-hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;flex-wrap:wrap;gap:8px}
+.phys-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.phys-cal-dow{text-align:center;font-family:var(--mono);font-size:8px;color:var(--t4);padding:2px 0 6px;text-transform:uppercase;letter-spacing:.1em}
+.cal-day{position:relative;aspect-ratio:1;border:1px solid var(--b0);background:var(--glass);border-radius:var(--r-sm);padding:4px;display:flex;flex-direction:column;transition:border-color .15s,background .15s,transform .15s}
+.cal-day.has-session{border-color:var(--b1);cursor:pointer}
+.cal-day.has-session:hover{border-color:var(--teal);background:var(--glass-hi);z-index:20;transform:scale(1.06)}
+.cal-day.blank{border:none;background:none}
+.cal-day-num{font-family:var(--mono);font-size:10px;color:var(--t3);font-weight:500}
+.cal-day.has-session .cal-day-num{color:var(--tx)}
+.cal-day-dots{display:flex;flex-wrap:wrap;gap:2px;margin-top:auto}
+.cal-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;box-shadow:0 0 3px currentColor}
+.phys-cal-legend{display:flex;flex-wrap:wrap;gap:9px;margin-top:10px;padding-top:10px;border-top:1px solid var(--b0)}
+.phys-cal-chip{display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:8px;color:var(--t3)}
+.phys-day-detail{border:1px solid var(--b0);background:var(--glass);border-radius:var(--r-md);padding:14px 16px;min-height:280px;max-height:360px;overflow-y:auto}
+.pdd-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;height:100%;min-height:240px;color:var(--t4);gap:8px;padding:16px}
+.pdd-empty-icon{font-size:22px;opacity:.4}
+.pdd-date{font-size:13px;font-weight:600;color:var(--tx);margin-bottom:2px}
+.pdd-meta{font-family:var(--mono);font-size:8.5px;color:var(--t4);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--b0)}
+.pdd-ex{margin-bottom:9px}
+.pdd-ex-hd{display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.pdd-ex-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.pdd-ex-name{font-size:11px;font-weight:600;color:var(--tx)}
+.pdd-ex-cat{font-family:var(--mono);font-size:7.5px;color:var(--t4);text-transform:uppercase;letter-spacing:.06em;margin-left:auto}
+.pdd-ex-sets{font-family:var(--mono);font-size:10px;color:var(--t2);padding-left:13px;line-height:1.55}
+
 .aftrow{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--b0);cursor:pointer}
 .aftrow:last-child{border-bottom:none}
 .aftn{flex:0 0 140px;color:var(--t2)}
@@ -133,6 +168,8 @@ a{color:inherit}
 .fkpi{flex:1;background:var(--glass);border:1px solid var(--b0);border-radius:var(--r2);padding:14px;text-align:center}
 .fkpiv{font-family:var(--serif);font-size:22px;font-weight:600}
 .fkpik{font-family:var(--mono);font-size:9px;color:var(--t4);text-transform:uppercase;letter-spacing:.6px;margin-top:4px}
+.fkpi-sub{font-family:var(--mono);font-size:8px;color:var(--amber);margin-top:3px}
+.tab-asof{grid-column:1/-1;font-family:var(--mono);font-size:9px;color:var(--t4);margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--b0)}
 
 .fcat{margin-bottom:2px;border-radius:var(--r1);overflow:hidden}
 .fcath{display:flex;justify-content:space-between;align-items:center;padding:9px 4px;cursor:pointer;transition:background .2s ease}
@@ -185,6 +222,9 @@ a{color:inherit}
 .ibadge{font-family:var(--mono);font-size:8px;padding:2px 8px;border-radius:var(--pill)}
 
 .footer{text-align:center;margin-top:36px;padding-top:18px;border-top:1px solid var(--b0)}
+.footer-sources{max-width:640px;margin:0 auto 18px;padding:14px 18px;background:var(--glass);border:1px solid var(--b0);border-radius:var(--r-md);text-align:left}
+.footer-sources-title{font-family:var(--mono);font-size:9px;color:var(--teal);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.footer-sources-text{font-size:10px;color:var(--t3);line-height:1.6}
 .footer-text{font-family:var(--mono);font-size:9px;color:var(--t4)}
 #btt{position:fixed;bottom:22px;right:22px;width:42px;height:42px;border-radius:50%;background:var(--bg3);border:1px solid var(--b1);color:var(--t2);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease,transform .25s ease;z-index:90}
 #btt.show{opacity:1;visibility:visible}
@@ -211,12 +251,17 @@ a{color:inherit}
 </div>
 
 <div class="shell">
+  <div id="tabDesc" class="tab-desc"></div>
   <div class="dash">
     <aside class="side" id="sidebar"></aside>
     <section class="main" id="main"></section>
   </div>
   <div class="footer">
-    <div class="footer-text">JD Meyers &mdash; 2026 Monthly Recap &middot; July build, mid-month (through Jul 26) &middot; julietdeltaone.github.io/monthly-recap</div>
+    <div class="footer-sources">
+      <div class="footer-sources-title">Data Sources &amp; Verification</div>
+      <div class="footer-sources-text">Financial: Origin Financial CSV export, Jul 1&#8211;26, every transaction verified against category totals. Physical: FitNotes CSV export, Jul 1&#8211;24, day counts and volume computed directly from logged sets. Spiritual: sermon notes transcribed from audio, cross-checked against the CBC Sermons log. Career: JD's own written context, not independently verified. Creative &amp; AFT figures for July are carried forward or partial where explicitly marked.</div>
+    </div>
+    <div class="footer-text">JD Meyers &mdash; 2026 Monthly Recap &middot; July build (mid-month, through Jul 26) &middot; last updated Jul 27, 2026 &middot; julietdeltaone.github.io/monthly-recap</div>
   </div>
 </div>
 
@@ -225,6 +270,7 @@ a{color:inherit}
 
 <script>
 const TABS=['overview','spiritual','physical','financial','intellectual','creative','reflections'];
+const MC={Legs:'#C48038',Back:'#4DA8FF',Chest:'#00E5A0',Shoulders:'#FF7AA8',Triceps:'#9B8FFF',Biceps:'#00D4C8',Abs:'#FF4D6D',Cardio:'#54A898'};
 const TAB_LABELS={overview:'Overview',spiritual:'Spiritual',physical:'Physical',financial:'Financial',intellectual:'Intellectual',creative:'Creative',reflections:'Reflections'};
 let tab='overview';
 
@@ -267,6 +313,26 @@ const D = {
       {date:'Jul 19', dist:'4.00 mi', time:'37:09', pace:'9:17/mi', note:''},
       {date:'Jul 22', dist:'5.00 km', time:'26:31', pace:'8:32/mi', note:''},
     ],
+    fullLog: {
+      'Jul 1': [{n:'Barbell Squat',c:'Legs',sets:'135&#215;5, 185&#215;5, 225&#215;5'}, {n:'Kettlebell Split Rdl (Lower Mobility)',c:'Legs',sets:'45&#215;7, 45&#215;6'}, {n:'Box Jumps',c:'Cardio',sets:'12.00in, 12.00in, 12.00in'}],
+      'Jul 2': [{n:'Trap Bar Deadlift',c:'Back',sets:'175&#215;10, 265&#215;10, 295&#215;8'}, {n:'Plank',c:'Abs',sets:'25 lb'}],
+      'Jul 3': [{n:'Running (Outdoor)',c:'Cardio',sets:'5.00mi 51:55 : Hot weather'}],
+      'Jul 6': [{n:'Chest Dips',c:'Chest',sets:'BW&#215;5, BW&#215;5, 45&#215;9, 45&#215;6'}, {n:'Kneeling Kettlebell Clean (Upper Mobility)',c:'Shoulders',sets:'20&#215;15, 30&#215;14, 20&#215;10'}],
+      'Jul 7': [{n:'Lat Pulldown Potsdam',c:'Back',sets:'100&#215;10, 110&#215;14, 110&#215;12, 110&#215;12'}, {n:'EZ-Bar Curl',c:'Biceps',sets:'70&#215;10, 70&#215;5, 70&#215;4'}, {n:'Rear Delt Cable',c:'Shoulders',sets:'20&#215;10, 25&#215;9'}],
+      'Jul 8': [{n:'Leg Press',c:'Legs',sets:'135&#215;12, 225&#215;10, 315&#215;8'}, {n:'Kettlebell Split Rdl (Lower Mobility)',c:'Legs',sets:'30&#215;13, 30&#215;8'}],
+      'Jul 9': [{n:'Wide Grip Lat Potsdam',c:'Back',sets:'100&#215;10, 125&#215;13, 115&#215;10'}, {n:'Chest Supported Cable Row',c:'Back',sets:'130&#215;11, 140&#215;10, 140&#215;8'}, {n:'Dumbbell Curl',c:'Biceps',sets:'60&#215;6, 60&#215;13, 60&#215;7'}, {n:'Rear Delt Cable',c:'Shoulders',sets:'20&#215;10, 20&#215;10, 30&#215;9, 40&#215;6'}],
+      'Jul 13': [{n:'Incline Dumbbell Bench Press',c:'Chest',sets:'70&#215;10, 140&#215;11, 110&#215;10, 110&#215;5'}, {n:'Lateral Dumbbell Raise',c:'Shoulders',sets:'20&#215;20, 20&#215;20, 20&#215;20'}, {n:'Decline Crunch Spine Flex',c:'Abs',sets:'BW&#215;10, 10&#215;6, 25&#215;5'}, {n:'Overhead Straight Bar',c:'Triceps',sets:'70&#215;10, 60&#215;20, 80&#215;10, 90&#215;3'}, {n:'Split Incline Hammer Strength Chest Press',c:'Chest',sets:'135&#215;12, 135&#215;10'}, {n:'Kneeling Kettlebell Clean (Upper Mobility)',c:'Shoulders',sets:'30&#215;10, 30&#215;10'}],
+      'Jul 14': [{n:'Landmine Row To Press',c:'Back',sets:'25&#215;10, 25&#215;10'}, {n:'Lat Pulldown Potsdam',c:'Back',sets:'100&#215;10, 120&#215;10, 100&#215;10, 100&#215;10, 100&#215;12'}, {n:'Pronated Curl',c:'Biceps',sets:'35&#215;10, 35&#215;10, 35&#215;8'}, {n:'Split Lat Pulldown',c:'Back',sets:'60&#215;10, 70&#215;7'}, {n:'One Leg Bosu',c:'Legs',sets:''}, {n:'Lower Mobility',c:'Legs',sets:''}, {n:'Frisbee',c:'Cardio',sets:'5.00mi 3:04:00'}],
+      'Jul 15': [{n:'Zone 2 Cardio',c:'Cardio',sets:'2.50mi 25:54 : Elevation 13-9 speed 3'}],
+      'Jul 16': [{n:'Bulgarian Split Squat',c:'Legs',sets:'60&#215;6, 60&#215;6, 60&#215;6'}, {n:'Kettlebell Split Rdl (Lower Mobility)',c:'Legs',sets:'45&#215;8, 45&#215;6'}, {n:'Hip Plank',c:'Legs',sets:''}, {n:'Landmine Row To Press',c:'Back',sets:'35&#215;8, 35&#215;8'}],
+      'Jul 17': [{n:'Soccer',c:'Cardio',sets:'4.38mi 2:34:00'}],
+      'Jul 19': [{n:'Running (Outdoor)',c:'Cardio',sets:'4.00mi 37:09'}],
+      'Jul 20': [{n:'Landmine Row To Press',c:'Back',sets:'25&#215;10, 25&#215;11'}, {n:'Cabel High-To-Low Fly',c:'Chest',sets:'40&#215;12, 50&#215;10'}, {n:'Dumbbell Overhead Triceps Extension',c:'Triceps',sets:'40&#215;10, 40&#215;10'}, {n:'Frisbee',c:'Cardio',sets:'5.32mi 2:04:00'}],
+      'Jul 21': [{n:'Lat Pulldown Potsdam',c:'Back',sets:'100&#215;10, 150&#215;4, 120&#215;10, 110&#215;16'}, {n:'Chest Supported Cable Row',c:'Back',sets:'130&#215;10, 150&#215;7, 140&#215;8'}, {n:'Dumbbell Curl',c:'Biceps',sets:'90&#215;4, 70&#215;6, 70&#215;6, 70&#215;6'}, {n:'Situps',c:'Abs',sets:'BW&#215;20, BW&#215;20'}, {n:'Plank',c:'Abs',sets:''}, {n:'One Leg Bosu',c:'Legs',sets:''}, {n:'Oblique Cable',c:'Abs',sets:'50&#215;15, 50&#215;10'}],
+      'Jul 22': [{n:'Running (Outdoor)',c:'Cardio',sets:'5.00km 26:31'}],
+      'Jul 23': [{n:'Bulgarian Split Squat',c:'Legs',sets:'50&#215;7, 50&#215;7, 50&#215;7'}, {n:'Kettlebell Split Rdl (Lower Mobility)',c:'Legs',sets:'25&#215;15, 25&#215;10'}, {n:'Kettlebell Toe Raise',c:'Legs',sets:'25&#215;11, 15&#215;12'}, {n:'Frisbee',c:'Cardio',sets:'3.37mi 1:20:00'}],
+      'Jul 24': [{n:'Flat Barbell Bench Press',c:'Chest',sets:'135&#215;10, 185&#215;9, 160&#215;6, 160&#215;5'}, {n:'Tricep Cable Potsdam',c:'Triceps',sets:'45&#215;15, 35&#215;10'}, {n:'Seated Dumbbell Shoulder Press',c:'Shoulders',sets:'70&#215;10, 70&#215;10, 70&#215;8'}, {n:'Fore Arm Curl',c:'Biceps',sets:'20&#215;10, 20&#215;10'}, {n:'Soccer',c:'Cardio',sets:'4.69mi 2:13:00'}],
+    },
     cardioLog: [
       {date:'Jul 1', type:'Box Jumps', detail:'3 x 12in box'},
       {date:'Jul 3', type:'Outdoor Run', detail:'5.00 mi &middot; 51:55 &middot; hot weather'},
@@ -366,6 +432,68 @@ const D = {
 };
 
 // ── HELPERS ──────────────────────────────────────────────────────────
+// ── PHYSICAL CALENDAR (ported from June, driven by fullLog) ───────────
+function deriveDaySummary(key){
+  const log = D.physical.fullLog[key];
+  if(!log) return null;
+  const muscles = [...new Set(log.map(e=>e.c).filter(c=>c!=='Cardio'))];
+  let vol = 0;
+  log.forEach(e=>{
+    if(e.c==='Cardio' || !e.sets) return;
+    e.sets.split(', ').forEach(s=>{
+      const m = s.match(/^([\d.]+)&#215;(\d+)/);
+      if(m) vol += parseFloat(m[1]) * parseInt(m[2]);
+    });
+  });
+  const hasCardio = log.some(e=>e.c==='Cardio');
+  return {muscles, vol: Math.round(vol), hasCardio};
+}
+function buildPhysCalendar(){
+  const dowHtml=['Su','Mo','Tu','We','Th','Fr','Sa'].map(d=>`<div class="phys-cal-dow">${d}</div>`).join('');
+  const leadBlanks=3; // July 1, 2026 is a Wednesday
+  let html='';
+  for(let i=0;i<leadBlanks;i++) html+='<div class="cal-day blank"></div>';
+  for(let d=1;d<=26;d++){
+    const key='Jul '+d;
+    const s=deriveDaySummary(key);
+    if(!s){ html+=`<div class="cal-day"><div class="cal-day-num">${d}</div></div>`; continue; }
+    const dots=s.muscles.map(m=>`<span class="cal-dot" style="background:${MC[m]||'#888'};color:${MC[m]||'#888'}"></span>`).join('')
+      + (s.hasCardio?`<span class="cal-dot" style="background:${MC.Cardio};color:${MC.Cardio}"></span>`:'');
+    html+=`<div class="cal-day has-session" onmouseenter="showDayDetail('${key}')">
+      <div class="cal-day-num">${d}</div>
+      <div class="cal-day-dots">${dots}</div>
+    </div>`;
+  }
+  const legend=Object.entries(MC).map(([k,c])=>`<span class="phys-cal-chip"><span class="cal-dot" style="background:${c};color:${c}"></span>${k}</span>`).join('');
+  return `<div class="card ca sf">
+    <div class="phys-cal-hd"><div class="ct">July Training Calendar</div><div style="font-family:var(--mono);font-size:9px;color:var(--t4)">Hover a day &#8594;</div></div>
+    <div class="phys-cal-wrap">
+      <div>
+        <div class="phys-cal">${dowHtml}${html}</div>
+        <div class="phys-cal-legend">${legend}</div>
+      </div>
+      <div class="phys-day-detail" id="phys-day-detail">
+        <div class="pdd-empty"><div class="pdd-empty-icon">&#9737;</div><div>Hover any highlighted day to see every exercise and set logged, in full.</div></div>
+      </div>
+    </div>
+  </div>`;
+}
+window.showDayDetail=function(key){
+  const el=document.getElementById('phys-day-detail');
+  if(!el) return;
+  const log = D.physical.fullLog[key];
+  if(!log || !log.length){
+    el.innerHTML = `<div class="pdd-empty"><div class="pdd-empty-icon">&#9737;</div><div>No logged exercises for ${key}.</div></div>`;
+    return;
+  }
+  const s = deriveDaySummary(key);
+  const meta = s ? `${s.muscles.join(' &middot; ')}${s.vol>0?' &middot; '+s.vol.toLocaleString()+' lb volume':''}` : '';
+  const exHtml = log.filter(e=>e.sets && e.sets.length).map(e=>
+    `<div class="pdd-ex"><div class="pdd-ex-hd"><span class="pdd-ex-dot" style="background:${MC[e.c]||'#888'}"></span><span class="pdd-ex-name">${e.n}</span><span class="pdd-ex-cat">${e.c}</span></div><div class="pdd-ex-sets">${e.sets}</div></div>`
+  ).join('');
+  el.innerHTML = `<div class="pdd-date">${key}, 2026</div><div class="pdd-meta">${meta}</div>${exHtml}`;
+};
+
 function spark(vals, color){
   const w=90,h=22,pad=3;
   const mn=Math.min(...vals),mx=Math.max(...vals);
@@ -378,11 +506,20 @@ function spark(vals, color){
 function miniBar(vals,color,labels,fmtFn){
   const max=Math.max(...vals);
   return vals.map((v,i)=>`<div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1">
-    <div style="width:100%;background:rgba(255,255,255,.06);border-radius:3px 3px 0 0;height:44px;display:flex;align-items:flex-end;overflow:hidden">
+    <div style="width:100%;background:rgba(255,255,255,.06);border-radius:3px 3px 0 0;height:34px;display:flex;align-items:flex-end;overflow:hidden">
       <div style="width:100%;background:${color};opacity:${.5+.5*(v/max)};height:${Math.max(8,(v/max*100)).toFixed(0)}%;transition:height 1s cubic-bezier(.22,.68,0,1.2);border-radius:3px 3px 0 0"></div>
     </div>
     <div style="font-family:var(--mono);font-size:9px;color:var(--t3)">${fmtFn(v)}</div>
     <div style="font-family:var(--mono);font-size:8px;color:var(--t5)">${labels[i]}</div>
+  </div>`).join('');
+}
+function miniBarCompact(vals,color,labels){
+  const max=Math.max(...vals);
+  return vals.map((v,i)=>`<div style="display:flex;flex-direction:column;align-items:center;gap:2px;flex:1" title="${labels[i]}: ${v}">
+    <div style="width:100%;background:rgba(255,255,255,.06);border-radius:2px 2px 0 0;height:26px;display:flex;align-items:flex-end;overflow:hidden">
+      <div style="width:100%;background:${color};opacity:${.5+.5*(v/max)};height:${Math.max(10,(v/max*100)).toFixed(0)}%;transition:height 1s cubic-bezier(.22,.68,0,1.2)"></div>
+    </div>
+    <div style="font-family:var(--mono);font-size:7px;color:var(--t5)">${labels[i]}</div>
   </div>`).join('');
 }
 window.sw=function(t){
@@ -504,7 +641,7 @@ function rOverview(){
     <div class="ov-timeline-row">
       <div class="card ca d4"><div class="ch"><div class="ct">Key Events This Month</div></div>${evts}</div>
       <div style="display:flex;flex-direction:column;gap:10px">
-        ${mks('Financial','var(--green)',[{k:'Income',v:'$'+f.income.toFixed(2),cls:'ok'},{k:'Expenses',v:'$'+f.expenses.toFixed(2),cls:'warn'},{k:'Net MTD',v:'+$'+f.net.toFixed(2),cls:'ok'}],'financial')}
+        ${mks('Financial','var(--green)',[{k:'Income',v:'$'+f.income.toFixed(0),cls:'ok'},{k:'Expenses',v:'$'+f.expenses.toFixed(0),cls:'warn'},{k:'Net MTD',v:'+$'+f.net.toFixed(0),cls:'ok'}],'financial')}
         ${mks('Career','var(--vio)',[{k:'New Role',v:'Started Jul 20',cls:'ok'},{k:'Rate',v:D.career.rate,cls:''},{k:'OTS Thread',v:'No change',cls:'warn'}],'reflections')}
       </div>
     </div>
@@ -557,73 +694,81 @@ function rSpiritual(){
 // ── PHYSICAL ─────────────────────────────────────────────────────────
 function rPhysical(){
   const ph=D.physical, Y=D.year;
-  const aftList=ph.aft.map((a,i)=>`<div class="aftrow"><span class="aftn" style="font-size:11px">${a.event}<br><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">${a.cur} &#8594; ${a.goal}</span></span><div class="aftbw"><div class="aftbf" style="width:${a.pct}%;background:${a.color}"></div></div><span class="aftp" style="color:${a.color};font-size:10px">${a.pct?a.pct+'%':''}</span></div>`).join('');
-  const commNote=`<div class="comm-note"><span class="cnl">Commentary</span>AFT numbers carried forward from June &mdash; no new max-effort test this month, since training time went into cardio and sport. 2-mile run remains untested.</div>`;
+  const calendar = buildPhysCalendar();
 
-  const volByMonth=`<div class="card ca sf">
-    <div class="ch"><div class="ct">Gym Days &amp; Lift Volume &mdash; Full Year</div><div class="cs">January through July, verified against every FitNotes export</div></div>
-    <div class="cg" style="grid-template-columns:1fr 1fr;gap:14px">
-      <div><div class="ov-chart-lbl" style="margin-bottom:8px">Gym Days</div><div style="display:flex;gap:3px;align-items:flex-end">${miniBar(Y.gymDays,'var(--blue)',Y.months,v=>v)}</div></div>
-      <div><div class="ov-chart-lbl" style="margin-bottom:8px">Volume (lb)</div><div style="display:flex;gap:3px;align-items:flex-end">${miniBar(Y.volume,'var(--teal)',Y.months,v=>Math.round(v/1000)+'K')}</div></div>
+  const aftList=ph.aft.map((a,i)=>`<div class="aftrow"><span class="aftn" style="font-size:11px">${a.event}<br><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">${a.cur} &#8594; ${a.goal}</span></span><div class="aftbw"><div class="aftbf" style="width:${a.pct}%;background:${a.color}"></div></div><span class="aftp" style="color:${a.color};font-size:10px">${a.pct?a.pct+'%':''}</span></div>`).join('');
+  const commNote=`<div class="comm-note"><span class="cnl">Commentary</span>AFT numbers carried forward from June, no new max-effort test this month. 2-mile run remains untested.</div>`;
+
+  const volByMonth=`<div class="card ca">
+    <div class="ch"><div class="ct" style="font-size:14px">Gym Days &amp; Volume &mdash; Full Year</div></div>
+    <div class="cg" style="grid-template-columns:1fr 1fr;gap:10px">
+      <div><div class="ov-chart-lbl" style="margin-bottom:5px">Gym Days</div><div style="display:flex;gap:2px;align-items:flex-end">${miniBarCompact(Y.gymDays,'var(--blue)',Y.months)}</div></div>
+      <div><div class="ov-chart-lbl" style="margin-bottom:5px">Volume (lb)</div><div style="display:flex;gap:2px;align-items:flex-end">${miniBarCompact(Y.volume.map(v=>Math.round(v/1000)),'var(--teal)',Y.months)}</div></div>
     </div>
   </div>`;
 
-  const insightData=[
-    {label:"7-Month Trend", color:"var(--teal)", dot:"#2DD4CF", rows:[
-      {text:"Gym days across 2026: 13 &#8594; 18 &#8594; 20 &#8594; 24 &#8594; 20 &#8594; 21 &#8594; 18", spark:spark(Y.gymDays,'#2DD4CF')},
-      {text:"Lift volume: peaked in March (137K lb), lowest this month (81K lb)", spark:spark(Y.volume,'#3DDC97')},
-      {text:"Cardio hours: 2.1h (Jun) &#8594; 13.6h (Jul), sports took over", spark:spark([2.1,13.6],'#5CA8FF')},
-    ]},
-    {label:"Strength This Month", color:"var(--amber)", dot:"#FFB84D", rows:[
-      {text:"Trap bar deadlift: 315lb (Jun) &#8594; 295lb (Jul)", spark:spark([315,295],'#FFB84D')},
-      {text:"Bench: 210lb (Jun) &#8594; 185lb (Jul)", spark:spark([210,185],'#FFB84D')},
-      {text:"Squat held flat at 225lb both months", spark:spark([225,225],'#FF6B6B')},
-    ]},
-    {label:"Sport Breakdown", color:"var(--vio)", dot:"#A78BFA", rows: ph.sportBreakdown.map(s=>({
-      text: s.sport+': '+s.sessions+' sessions, '+s.hours+'h, '+s.miles+'mi',
-      spark: `<span style="font-family:var(--mono);font-size:10px;color:${s.color};font-weight:600">${s.hours}h</span>`
-    }))},
-  ];
-  const insightCards=insightData.map(g=>`<div class="card ca" style="border-top:2px solid ${g.color};padding:13px 14px"><div style="font-family:var(--mono);font-size:9px;color:${g.color};text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:${g.dot};display:inline-block"></span>${g.label}</div><div style="display:flex;flex-direction:column;gap:6px">${g.rows.map(r=>`<div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font-size:11px;color:var(--t2);line-height:1.4;flex:1">${r.text}</span>${r.spark}</div>`).join('')}</div></div>`).join('');
-
   const runRows=ph.runs.map(r=>`<div class="si"><span class="sk">${r.date}</span><span class="sv">${r.dist} &middot; ${r.time} &middot; ${r.pace}${r.note?' ('+r.note+')':''}</span></div>`).join('');
+
+  // Cardio log sessions (shared data for both charts + list)
+  const cardioSessions = [
+    ['Jul 1','Box Jumps',0,0,'#A78BFA'],['Jul 3','Outdoor Run',51.9,5.0,'#3DDC97'],['Jul 14','Frisbee',184,5.0,'#A78BFA'],
+    ['Jul 15','Zone 2 Cardio',25.9,2.5,'#2DD4CF'],['Jul 17','Soccer',154,4.38,'#5CA8FF'],['Jul 19','Outdoor Run',37.1,4.0,'#3DDC97'],
+    ['Jul 20','Frisbee',124,5.32,'#A78BFA'],['Jul 22','Outdoor Run',26.5,3.11,'#3DDC97'],['Jul 23','Frisbee',80,3.37,'#A78BFA'],['Jul 24','Soccer',133,4.69,'#5CA8FF'],
+  ];
+  const maxMin = Math.max(...cardioSessions.map(s=>s[2]));
+  const maxMi = Math.max(...cardioSessions.map(s=>s[3]));
+  const durChart = cardioSessions.map(([d,type,mins,mi,color])=>{
+    const pctw = Math.max(3, Math.round(mins/maxMin*100));
+    const label = mins>0 ? Math.round(mins)+'m' : 'untimed';
+    return `<div style="display:grid;grid-template-columns:44px 1fr 34px;gap:6px;align-items:center" title="${type}, ${d}">
+      <span style="font-family:var(--mono);font-size:8px;color:var(--t4)">${d}</span>
+      <div style="height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden"><div style="height:100%;width:${pctw}%;background:${color};border-radius:3px;transition:width 1s cubic-bezier(.22,.68,0,1.2)"></div></div>
+      <span style="font-family:var(--mono);font-size:8px;color:var(--t3);text-align:right">${label}</span>
+    </div>`;
+  }).join('');
+  const distChart = cardioSessions.map(([d,type,mins,mi,color])=>{
+    const pctw = mi>0 ? Math.max(3, Math.round(mi/maxMi*100)) : 0;
+    const label = mi>0 ? mi.toFixed(1)+'mi' : '&mdash;';
+    return `<div style="display:grid;grid-template-columns:44px 1fr 34px;gap:6px;align-items:center" title="${type}, ${d}">
+      <span style="font-family:var(--mono);font-size:8px;color:var(--t4)">${d}</span>
+      <div style="height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden"><div style="height:100%;width:${pctw}%;background:${color};border-radius:3px;transition:width 1s cubic-bezier(.22,.68,0,1.2)"></div></div>
+      <span style="font-family:var(--mono);font-size:8px;color:var(--t3);text-align:right">${label}</span>
+    </div>`;
+  }).join('');
+
+  // Sport totals mini donut-style bars (share of total cardio hours)
+  const sportShare = ph.sportBreakdown.map(s=>{
+    const pct = Math.round(s.hours/ph.cardioHours*100);
+    return `<div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:${s.color};flex-shrink:0"></span><span style="font-size:10.5px;color:var(--t2);flex:1">${s.sport}</span><span style="font-family:var(--mono);font-size:9px;color:var(--t3)">${pct}%</span></div>`;
+  }).join('');
+
   const cardioRows=ph.cardioLog.map(c=>`<div class="ove"><span class="oved">${c.date}</span><span class="ovet"><b style="color:var(--tx)">${c.type}</b> &mdash; ${c.detail}</span></div>`).join('');
 
   return `<div class="cg">
+    <div class="tab-asof sf">Figures as of Jul 26, 2026 &middot; FitNotes export covers Jul 1&#8211;24</div>
+    ${calendar}
     ${volByMonth}
-    <div class="card ca sf">
-      <div class="ch"><div class="ct">Cardio &amp; Sport &mdash; July 2026</div><div class="cs">18 gym days &middot; ${ph.cardioSessions} cardio sessions &middot; ${ph.cardioHours} hours &middot; ${ph.cardioMiles} miles</div></div>
-      <div class="cg" style="grid-template-columns:repeat(3,1fr);gap:10px">${insightCards}</div>
-    </div>
     <div class="card ca d1">
-      <div class="ch"><div class="ct">AFT Standard Progress</div><div class="cs">90-point minimum per event</div></div>
+      <div class="ch"><div class="ct" style="font-size:14px">AFT Standard Progress</div></div>
       ${aftList}
       ${commNote}
     </div>
     <div class="card ca d2">
-      <div class="ch"><div class="ct">Outdoor Run Pace</div><div class="cs">All 3 runs this month</div></div>
+      <div class="ch"><div class="ct" style="font-size:14px">Outdoor Run Pace</div></div>
       ${runRows}
     </div>
+    <div class="card ca d2">
+      <div class="ch"><div class="ct" style="font-size:14px">Cardio Share by Sport</div></div>
+      <div style="display:flex;flex-direction:column;gap:8px">${sportShare}</div>
+    </div>
     <div class="card sf ca d3">
-      <div class="ch"><div class="ct">Full Cardio Log</div><div class="cs">Every session, July 1&#8211;24 &middot; duration in minutes, color-coded by activity</div></div>
-      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:16px">
-        ${[
-          ['Jul 1','Box Jumps',0,'#A78BFA'],['Jul 3','Outdoor Run',51.9,'#3DDC97'],['Jul 14','Frisbee',184,'#A78BFA'],
-          ['Jul 15','Zone 2 Cardio',25.9,'#2DD4CF'],['Jul 17','Soccer',154,'#5CA8FF'],['Jul 19','Outdoor Run',37.1,'#3DDC97'],
-          ['Jul 20','Frisbee',124,'#A78BFA'],['Jul 22','Outdoor Run',26.5,'#3DDC97'],['Jul 23','Frisbee',80,'#A78BFA'],['Jul 24','Soccer',133,'#5CA8FF'],
-        ].map(([d,type,mins,color])=>{
-          const pctw = Math.max(3, Math.round(mins/184*100));
-          const label = mins>0 ? Math.round(mins)+' min' : 'untimed';
-          return `<div style="display:grid;grid-template-columns:56px 90px 1fr 60px;gap:8px;align-items:center">
-            <span style="font-family:var(--mono);font-size:9px;color:var(--t4)">${d}</span>
-            <span style="font-size:10.5px;color:var(--t2)">${type}</span>
-            <div style="height:8px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden"><div style="height:100%;width:${pctw}%;background:${color};border-radius:4px;transition:width 1s cubic-bezier(.22,.68,0,1.2)"></div></div>
-            <span style="font-family:var(--mono);font-size:9px;color:var(--t3);text-align:right">${label}</span>
-          </div>`;
-        }).join('')}
+      <div class="ch"><div class="ct">Full Cardio Log &mdash; Visualized</div><div class="cs">Every session, July 1&#8211;24</div></div>
+      <div class="cg" style="grid-template-columns:1fr 1fr;gap:16px;margin-bottom:14px">
+        <div><div class="ov-chart-lbl" style="margin-bottom:6px">Duration (min)</div><div style="display:flex;flex-direction:column;gap:5px">${durChart}</div></div>
+        <div><div class="ov-chart-lbl" style="margin-bottom:6px">Distance (mi)</div><div style="display:flex;flex-direction:column;gap:5px">${distChart}</div></div>
       </div>
-      <p style="font-size:11px;color:var(--t4);line-height:1.6;margin-bottom:14px">Bars scaled against the longest session this month (Jul 14 frisbee, 3h04m). Box jumps has no tracked duration in the FitNotes export, shown as untimed rather than assumed zero-effort.</p>
-      <div class="ch" style="margin-bottom:10px"><div class="ct" style="font-size:13px">Session-by-Session Detail</div></div>
+      <p style="font-size:10px;color:var(--t4);line-height:1.6;margin-bottom:12px">Bars scaled against the month's longest session (duration) and longest distance separately. Box jumps has no tracked duration or distance in the FitNotes export, shown as untimed rather than assumed zero.</p>
+      <div class="ch" style="margin-bottom:8px"><div class="ct" style="font-size:12px">Session-by-Session Detail</div></div>
       ${cardioRows}
       <div class="comm-note" style="margin-top:14px"><span class="cnl">Note</span>${ph.strengthNote}</div>
     </div>
@@ -633,7 +778,9 @@ function rPhysical(){
 // ── FINANCIAL ────────────────────────────────────────────────────────
 function rFinancial(){
   const f=D.fin;
-  const kpis=`<div class="fsg"><div class="fkpi ca"><div class="fkpiv" style="color:var(--green)">$${f.income.toFixed(2)}</div><div class="fkpik">Income MTD</div></div><div class="fkpi ca d1"><div class="fkpiv" style="color:var(--red)">$${f.expenses.toFixed(2)}</div><div class="fkpik">Expenses MTD</div></div><div class="fkpi ca d2"><div class="fkpiv" style="color:var(--green)">+$${f.net.toFixed(2)}</div><div class="fkpik">Net MTD</div></div></div>`;
+  const spendPct = Math.round(f.expenses/2500*100);
+  const kpis=`<div class="tab-asof">Figures as of Jul 26, 2026 &middot; 5 days of July still uncaptured</div>
+  <div class="fsg"><div class="fkpi ca"><div class="fkpiv" style="color:var(--green)">$${f.income.toFixed(2)}</div><div class="fkpik">Income MTD</div></div><div class="fkpi ca d1"><div class="fkpiv" style="color:var(--red)">$${f.expenses.toFixed(2)}</div><div class="fkpik">Expenses MTD</div><div class="fkpi-sub">${spendPct}% of $2,500 cap</div></div><div class="fkpi ca d2"><div class="fkpiv" style="color:var(--green)">+$${f.net.toFixed(2)}</div><div class="fkpik">Net MTD</div></div></div>`;
 
   const payTransition=`<div class="card ca sf" style="border-top:2px solid var(--vio)">
     <div class="ch"><div class="ct">Pay Transition &mdash; Campus Safety &#8594; Clarkson Admin Coordinator</div><div class="cs">What actually shows in July's paychecks vs. what's coming</div></div>
@@ -668,7 +815,7 @@ function rFinancial(){
     const amtLabel=mo.done&&mo.v>0?'+$'+Math.round(mo.v):'';
     return `<div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1">
       <div style="font-family:var(--mono);font-size:8px;color:${mo.cur?'var(--amber)':mo.done?'var(--green)':'var(--t5)'};white-space:nowrap">${amtLabel}</div>
-      <div style="width:100%;background:rgba(255,255,255,.05);border-radius:3px 3px 0 0;height:80px;display:flex;align-items:flex-end;overflow:hidden">
+      <div style="width:100%;background:rgba(255,255,255,.05);border-radius:3px 3px 0 0;height:52px;display:flex;align-items:flex-end;overflow:hidden">
         <div style="width:100%;height:${barH}%;background:${col};border-radius:3px 3px 0 0;transition:height 1s cubic-bezier(.22,.68,0,1.2)"></div>
       </div>
       <div style="font-family:var(--mono);font-size:9px;color:${mo.cur?'var(--amber)':mo.done?'var(--t3)':'var(--t5)'};font-weight:${mo.cur?700:400}">${mo.m}</div>
@@ -695,24 +842,24 @@ function rFinancial(){
   const incRows=f.incomeSources.map(s=>`<div class="inrow"><span class="inlbl"><span class="indot" style="background:${s.color}"></span>${s.label}</span><span class="inamt">$${s.amt.toFixed(2)}</span></div>`).join('');
 
   const Y=D.year;
-  const catTrends=`<div class="card ca sf">
-    <div class="ch"><div class="ct">Top Categories &mdash; Full Year Trend</div><div class="cs">Dining, Groceries &amp; Tithe, January through July</div></div>
-    <div class="cg" style="grid-template-columns:repeat(3,1fr);gap:12px">
-      <div><div class="ov-chart-lbl" style="margin-bottom:8px">Drinks &amp; Dining</div><div style="display:flex;gap:3px;align-items:flex-end">${miniBar(Y.dining,'#FF8FB3',Y.months,v=>'$'+Math.round(v))}</div></div>
-      <div><div class="ov-chart-lbl" style="margin-bottom:8px">Groceries</div><div style="display:flex;gap:3px;align-items:flex-end">${miniBar(Y.groceries,'#3DDC97',Y.months,v=>'$'+Math.round(v))}</div></div>
-      <div><div class="ov-chart-lbl" style="margin-bottom:8px">Tithe (fixed)</div><div style="display:flex;gap:3px;align-items:flex-end">${miniBar(Y.tithe,'#FFB84D',Y.months,v=>'$'+Math.round(v))}</div></div>
+  const catTrends=`<div class="card ca">
+    <div class="ch"><div class="ct" style="font-size:14px">Top Categories &mdash; Full Year</div></div>
+    <div class="cg" style="grid-template-columns:repeat(3,1fr);gap:8px">
+      <div><div class="ov-chart-lbl" style="margin-bottom:4px;font-size:8px">Dining</div><div style="display:flex;gap:2px;align-items:flex-end">${miniBarCompact(Y.dining.map(Math.round),'#FF8FB3',Y.months)}</div></div>
+      <div><div class="ov-chart-lbl" style="margin-bottom:4px;font-size:8px">Groceries</div><div style="display:flex;gap:2px;align-items:flex-end">${miniBarCompact(Y.groceries.map(Math.round),'#3DDC97',Y.months)}</div></div>
+      <div><div class="ov-chart-lbl" style="margin-bottom:4px;font-size:8px">Tithe</div><div style="display:flex;gap:2px;align-items:flex-end">${miniBarCompact(Y.tithe,'#FFB84D',Y.months)}</div></div>
     </div>
   </div>`;
 
   return `<div class="cg">
     ${kpis}
+    <div class="card ca d1 sf">
+      <div class="ch"><div class="ct">Expenses by Category</div><div class="cs">July 1&#8211;26, verified against every line &middot; click to expand transactions</div></div>
+      ${cats}
+    </div>
     ${payTransition}
     <div class="sf">${savCard}</div>
     ${catTrends}
-    <div class="card ca d3">
-      <div class="ch"><div class="ct">Expenses by Category</div><div class="cs">July 1&#8211;26, verified against every line</div></div>
-      ${cats}
-    </div>
     <div class="card ca d4">
       <div class="ch"><div class="ct">Income Sources</div><div class="cs">July 1&#8211;26</div></div>
       ${incRows}
@@ -868,52 +1015,69 @@ function rReflections(){
 
 // ── SIDEBAR (Year Progress timeline + Self-Assessment) ──────────────────
 function buildSidebar(){
-  const months=[
-    {m:'Jan',net:865,gym:13,sub:'Net +$865 &middot; 13 gym days'},
-    {m:'Feb',net:1094,gym:18,sub:'Net +$1,094 &middot; 18 gym days'},
-    {m:'Mar',net:1444,gym:20,sub:'Net +$1,444 &middot; 20 gym days'},
-    {m:'Apr',net:4234,gym:24,sub:'Net +$4,234 &middot; 24 gym days'},
-    {m:'May',net:2883,gym:20,sub:'Net +$2,883 &middot; 20 gym days'},
-    {m:'Jun',net:2464,gym:21,sub:'Net +$2,464 &middot; 21 gym days'},
-    {m:'Jul',net:600,gym:18,sub:'Net +$600 MTD &middot; 18 gym days',cur:true},
-    {m:'Aug'},{m:'Sep'},{m:'Oct'},{m:'Nov'},{m:'Dec'},
-  ];
-  const tl=months.map((item,i)=>{
-    const done = item.net !== undefined && !item.cur;
-    const col = item.cur ? 'var(--amber)' : done ? 'var(--green)' : 'var(--t5)';
-    return `<div style="display:flex;gap:10px;align-items:flex-start;padding-bottom:${i<11?'10px':'0'}">
-      <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
-        <div style="width:8px;height:8px;border-radius:50%;background:${item.cur?'var(--amber)':done?'var(--green)':'transparent'};border:1.5px solid ${col}"></div>
-        ${i<11?`<div style="width:1px;flex:1;min-height:18px;background:${done?'var(--green)':'var(--b1)'};margin-top:2px"></div>`:''}
-      </div>
-      <div style="padding-bottom:2px">
-        <div style="font-family:var(--mono);font-size:10px;color:${col};font-weight:${item.cur?700:400}">${item.m}${item.cur?' (current)':''}</div>
-        ${item.sub?`<div style="font-size:10px;color:var(--t3);margin-top:2px;line-height:1.4">${item.sub}</div>`:''}
-      </div>
-    </div>`;
-  }).join('');
+  const Y = D.year;
+  // Per-tab metric: the sidebar only tracks the number relevant to
+  // whichever tab is currently open, not every category at once.
+  const configs = {
+    overview:     {label:'Net Saved',      color:'var(--green)', data:Y.net,      fmt:v=>'$'+Math.round(v)},
+    financial:    {label:'Net Saved',      color:'var(--green)', data:Y.net,      fmt:v=>'$'+Math.round(v)},
+    physical:     {label:'Gym Days',       color:'var(--blue)',  data:Y.gymDays,  fmt:v=>v},
+    spiritual:    {label:'Sermons Logged', color:'var(--amber)', data:Y.sermons,  fmt:v=>v},
+    creative:     {label:'Photo Income',   color:'var(--rose)',  data:Y.photoIncome.map(v=>v||0), fmt:v=>v?'$'+Math.round(v):'&mdash;'},
+    intellectual: null,
+    reflections:  {label:'Net Saved',      color:'var(--green)', data:Y.net,      fmt:v=>'$'+Math.round(v)},
+  };
+  const cfg = configs[tab];
 
-  return `<div class="sc ca" style="border-top:2px solid var(--amber)">
-    <div class="sgt">2026 Year Progress</div>
-    <div>${tl}</div>
-  </div>
-  <div class="sc ca d1" style="border-top:2px solid var(--amber)">
-    <div class="sgt" style="color:var(--amber)">July Self-Assessment</div>
-    <div style="margin-bottom:12px">
-      <div style="font-family:var(--mono);font-size:9px;color:var(--green);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:var(--green);display:inline-block"></span>Keep Doing</div>
-      <div style="font-size:11.5px;color:var(--t2);line-height:1.6;margin-bottom:5px">Cardio diversity. Frisbee, soccer, and real runs kept training genuinely enjoyable instead of grinding the treadmill.</div>
-      <div style="font-size:11.5px;color:var(--t2);line-height:1.6">Career momentum. The Clarkson offer moved from signed to started inside two weeks, with a resignation handled cleanly in between.</div>
-    </div>
-    <div style="margin-bottom:12px">
-      <div style="font-family:var(--mono);font-size:9px;color:var(--blue);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:var(--blue);display:inline-block"></span>Improve</div>
-      <div style="font-size:11.5px;color:var(--t2);line-height:1.6;margin-bottom:5px">Strength numbers slipped while cardio took the spotlight. Both can coexist with a little more intent.</div>
-      <div style="font-size:11.5px;color:var(--t2);line-height:1.6">July 12th sermon notes are missing. Worth a habit check heading into August.</div>
-    </div>
-    <div>
-      <div style="font-family:var(--mono);font-size:9px;color:var(--red);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px;display:flex;align-items:center;gap:5px"><span style="width:5px;height:5px;border-radius:50%;background:var(--red);display:inline-block"></span>Correct</div>
-      <div style="font-size:11.5px;color:var(--t2);line-height:1.6">2-mile run remains untested against the AFT standard, with no test date set. That needs to happen before it becomes a recurring gap.</div>
-    </div>
-  </div>`;
+  let timelineCard = '';
+  if (cfg) {
+    const tl = Y.months.map((m, i) => {
+      const isCur = (i === Y.months.length - 1);
+      const val = cfg.data[i];
+      const hasVal = val !== null && val !== undefined && val !== 0 || i===0;
+      return `<div style="display:flex;gap:10px;align-items:flex-start;padding-bottom:${i<Y.months.length-1?'10px':'0'}">
+        <div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">
+          <div style="width:8px;height:8px;border-radius:50%;background:${isCur?'var(--amber)':cfg.color};border:1.5px solid ${isCur?'var(--amber)':cfg.color}"></div>
+          ${i<Y.months.length-1?`<div style="width:1px;flex:1;min-height:14px;background:var(--b1);margin-top:2px"></div>`:''}
+        </div>
+        <div style="padding-bottom:2px">
+          <div style="font-family:var(--mono);font-size:10px;color:${isCur?'var(--amber)':'var(--t3)'};font-weight:${isCur?700:400}">${m}${isCur?' (current)':''}</div>
+          <div style="font-size:10px;color:var(--t3);margin-top:1px">${cfg.fmt(val)}</div>
+        </div>
+      </div>`;
+    }).join('');
+    timelineCard = `<div class="sc ca" style="border-top:2px solid ${cfg.color}">
+      <div class="sgt" style="color:${cfg.color}">${cfg.label} &mdash; Year Progress</div>
+      <div>${tl}</div>
+    </div>`;
+  } else {
+    // Intellectual: no single numeric trend fits; show academic milestones instead.
+    timelineCard = `<div class="sc ca" style="border-top:2px solid var(--blue)">
+      <div class="sgt" style="color:var(--blue)">Academic Timeline</div>
+      <div class="si"><span class="sk">Spring Term</span><span class="sv">4.000 GPA</span></div>
+      <div class="si"><span class="sk">Cumulative</span><span class="sv">3.917</span></div>
+      <div class="si"><span class="sk">Status</span><span class="sv">Good Standing</span></div>
+      <div class="si"><span class="sk">Fall 2026</span><span class="sv">Not started</span></div>
+    </div>`;
+  }
+
+  // Cardio & Sport summary card — only on the Physical tab, per request.
+  let cardioCard = '';
+  if (tab === 'physical') {
+    const ph = D.physical;
+    const rows = ph.sportBreakdown.map(s=>
+      `<div class="si"><span class="sk">${s.sport}</span><span class="sv" style="color:${s.color}">${s.hours}h &middot; ${s.miles}mi</span></div>`
+    ).join('');
+    cardioCard = `<div class="sc ca d1" style="border-top:2px solid var(--teal)">
+      <div class="sgt" style="color:var(--teal)">Cardio &amp; Sport</div>
+      <div class="si"><span class="sk">Sessions</span><span class="sv">${ph.cardioSessions}</span></div>
+      <div class="si"><span class="sk">Total Hours</span><span class="sv">${ph.cardioHours}h</span></div>
+      <div class="si"><span class="sk">Total Miles</span><span class="sv">${ph.cardioMiles}mi</span></div>
+      <div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--b0)">${rows}</div>
+    </div>`;
+  }
+
+  return timelineCard + cardioCard;
 }
 
 // ── RENDER DISPATCHER ─────────────────────────────────────────────────
@@ -928,7 +1092,31 @@ function render(){
   if(tab==='reflections')el.innerHTML=rReflections();
   document.getElementById('sidebar').innerHTML=buildSidebar();
   document.getElementById('mlbl').textContent=TAB_LABELS[tab];
+  renderTabDesc();
   initCountUps();
+}
+
+const TAB_DESCRIPTIONS = {
+  overview:     'A month-at-a-glance summary, pulling one headline number from each tracked category.',
+  spiritual:    'Every Sunday sermon logged this month, plus where the year-long reading plan stands.',
+  physical:     'Gym days, lift volume, and this month\u2019s pivot toward cardio and team sports, verified against the FitNotes export.',
+  financial:    'Every dollar in and out this month, verified transaction-by-transaction against the Origin Financial export.',
+  intellectual: 'The formal MBA plan status, plus whatever self-directed learning filled the gap this month.',
+  creative:     'JD Meyers Productions bookings, deposits, and revenue for the full year, plus this month\u2019s specific activity.',
+  reflections:  'The month\u2019s narrative thread, tying the other categories together, plus full career detail.',
+};
+function renderTabDesc(){
+  const el = document.getElementById('tabDesc');
+  if(!el) return;
+  el.innerHTML = `
+    <div class="tab-desc-text"><strong>${TAB_LABELS[tab]}:</strong> ${TAB_DESCRIPTIONS[tab]}</div>
+    <div class="legend">
+      <span class="legend-item"><span class="legend-dot" style="background:var(--green)"></span>Financial</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--blue)"></span>Physical</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--amber)"></span>Spiritual</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--rose)"></span>Creative</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--vio)"></span>Career</span>
+    </div>`;
 }
 
 // ── ANIMATION 2: count-up (applied to KPI/fkpi values on render) ───────
