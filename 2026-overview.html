@@ -89,8 +89,8 @@ svg{display:block}
 
 .t-card{background:var(--g);border:1px solid var(--b0);border-radius:var(--r-lg);padding:20px 22px;transition:transform .3s cubic-bezier(.22,.68,0,1.15),box-shadow .3s ease,border-color .3s ease;scroll-margin-top:130px}
 .t-card:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(0,0,0,.4);border-color:var(--b2)}
-.t-card.ahead{opacity:.45}
-.t-card.ahead:hover{opacity:.7;transform:none;box-shadow:none}
+.t-card.ahead{opacity:.5;border-style:dashed;background:transparent}
+.t-card.ahead:hover{opacity:.75;transform:none;box-shadow:none;border-color:var(--b2)}
 
 .t-card-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:5px}
 .t-card-month{font-size:19px;font-weight:800;letter-spacing:-.4px}
@@ -105,18 +105,17 @@ svg{display:block}
 .t-delta-item.down{color:var(--amber)}
 .t-delta-arrow{font-size:6.5px}
 
-.t-stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--b0);border:1px solid var(--b0);border-radius:var(--r-md);overflow:hidden;margin-bottom:13px}
-.t-tile{background:var(--bg2);padding:8px 4px;text-align:center}
-.t-tile-top{display:flex;align-items:center;justify-content:center;gap:3px;margin-bottom:3px}
-.t-tile-top svg{width:9px;height:9px;color:var(--t4);flex-shrink:0}
-.t-tile-k{font-family:var(--mono);font-size:6.2px;letter-spacing:.3px;text-transform:uppercase;color:var(--t4);white-space:nowrap}
-.t-tile-v{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--t2)}
-.t-tile-ytd{background:rgba(0,229,160,.06)}
-
-.t-summary{font-size:11.5px;line-height:1.7;color:var(--t2)}
-.hl-blue{color:var(--blue);font-weight:600}
-.hl-amber{color:var(--amber);font-weight:600}
-.hl-rose{color:var(--rose);font-weight:600}
+/* Category dashboards — each month breaks into separate per-category
+   mini-dashboards instead of one dense stat grid + summary paragraph. */
+.cat-dash-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media(max-width:480px){.cat-dash-grid{grid-template-columns:1fr}}
+.cat-dash{background:rgba(255,255,255,.03);border:1px solid var(--b0);border-top:2px solid var(--t4);border-radius:var(--r-md);padding:10px 11px}
+.cat-dash-hd{display:flex;align-items:center;gap:6px;font-size:10.5px;font-weight:700;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px}
+.cat-dash-hd svg{width:12px;height:12px;flex-shrink:0}
+.cat-dash-p{font-size:10px;line-height:1.5;color:var(--t3);margin-bottom:6px}
+.cat-dash-bullets{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:3px}
+.cat-dash-bullets li{font-size:9.5px;line-height:1.45;color:var(--t2);padding-left:9px;position:relative}
+.cat-dash-bullets li::before{content:'';position:absolute;left:0;top:6px;width:4px;height:4px;border-radius:50%;background:var(--t4)}
 
 @media(max-width:820px){
   .t-spine{left:20px}
@@ -148,6 +147,7 @@ svg{display:block}
 
 /* ── FOOTER + BACK TO TOP ─────────────────────────────────────────────── */
 .pagefoot{text-align:center;margin-top:60px;padding-top:22px;border-top:1px solid var(--b0)}
+.pagefoot-sources{max-width:560px;margin:0 auto 14px;font-size:10.5px;color:var(--t4);line-height:1.6}
 .pagefoot-text{font-family:var(--mono);font-size:9.5px;color:var(--t4);margin-bottom:16px}
 /* ── FLOATING GOAL-PROGRESS SIDEBAR (uses the wide-screen side margins) ──
    Only renders where there's actually room beside the 1220px shell.     */
@@ -175,7 +175,7 @@ svg{display:block}
     <a href="#m4" class="mnav-pill">Apr</a>
     <a href="#m5" class="mnav-pill">May</a>
     <a href="#m6" class="mnav-pill">Jun</a>
-    <span class="mnav-pill ahead">Jul</span>
+    <a href="#m7" class="mnav-pill">Jul</a>
     <span class="mnav-pill ahead">Aug</span>
     <span class="mnav-pill ahead">Sep</span>
     <span class="mnav-pill ahead">Oct</span>
@@ -249,29 +249,61 @@ svg{display:block}
 
   <div class="timeline" id="timeline">
     <div class="t-spine"><div class="t-spine-fill" id="tSpineFill"></div></div>
-    
+
+
     <div class="t-row left" style="animation-delay:0.00s">
       <div class="t-col t-col-left"><div class="t-card" id="m1">
         <div class="t-card-hd">
           <span class="t-card-month">January</span>
           <span class="t-card-badge">Done</span>
         </div>
-        <div class="t-card-tag">Baselines set. Every category starts from zero.</div>
+        <div class="t-card-tag">First month of the year. Baselines set across every category.</div>
 
         <div class="t-delta first">First month tracked &mdash; no prior month to compare</div>
 
-        <div class="t-stat-grid">
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span class="t-tile-k">Net</span></div><div class="t-tile-v" style="color:var(--green)">$865</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span class="t-tile-k">Income</span></div><div class="t-tile-v">$3,513</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span class="t-tile-k">Expenses</span></div><div class="t-tile-v" style="color:var(--red)">$2,648</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span class="t-tile-k">Gym Days</span></div><div class="t-tile-v" style="color:var(--blue)">13</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span class="t-tile-k">Volume</span></div><div class="t-tile-v" style="color:var(--blue)">88K lb</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.5v19M6 8.5h12"/></svg><span class="t-tile-k">Sermons</span></div><div class="t-tile-v" style="color:var(--amber)">4</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8 7l1.6-2.5h4.8L16 7"/><circle cx="12" cy="13.3" r="3.4"/></svg><span class="t-tile-k">Photo</span></div><div class="t-tile-v" style="color:var(--rose)">$0</div></div>
-          <div class="t-tile t-tile-ytd"><div class="t-tile-top"><span class="t-tile-k">YTD Net</span></div><div class="t-tile-v" style="color:var(--green)">$865</div></div>
-        </div>
-
-        <div class="t-summary">Legs led the gym at <span class="hl-blue">245 lb</span>, a strong opening number for the year. <span class="hl-amber">The MBA&rsquo;s first term got underway at Clarkson</span>, four weeks into a ten-week stretch. <span class="hl-rose">Career wasn&rsquo;t yet tracked as its own thread</span> &mdash; that comes later in the year.</div>
+        <div class="cat-dash-grid">
+      <div class="cat-dash" style="border-top-color:var(--green)">
+        <div class="cat-dash-hd" style="color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span>Financial</span></div>
+        <p class="cat-dash-p">Baselines set: income covered expenses with room to spare, and the first tithe and spending patterns of the year got logged.</p>
+        <ul class="cat-dash-bullets">
+          <li>Income $3,513 &middot; Expenses $2,648</li>
+          <li>Net $865 &middot; YTD $865</li>
+          <li>Top category: Travel, $603</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--blue)">
+        <div class="cat-dash-hd" style="color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span>Physical</span></div>
+        <p class="cat-dash-p">The gym habit started cold and held: thirteen days in, with legs leading the volume.</p>
+        <ul class="cat-dash-bullets">
+          <li>13 gym days &middot; 88,392 lb volume</li>
+          <li>PR: Legs 245 lb (est. 1RM 300)</li>
+          <li>5 cardio sessions · 10.56 running mi · longest run 6.23 mi @ 8:68/mi · peak HR 174 bpm</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--amber)">
+        <div class="cat-dash-hd" style="color:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.5v19M6 8.5h12"/></svg><span>Spiritual</span></div>
+        <p class="cat-dash-p">Four Sundays, four sets of notes, the Acts series opened the year.</p>
+        <ul class="cat-dash-bullets">
+          <li><b>Jan 5</b> — The Beginning of the Good News</li><li><b>Jan 12</b> — The Ascension and the Waiting</li><li><b>Jan 19</b> — Pentecost — Wind, Fire, Language</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--rose)">
+        <div class="cat-dash-hd" style="color:var(--rose)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8 7l1.6-2.5h4.8L16 7"/><circle cx="12" cy="13.3" r="3.4"/></svg><span>Creative</span></div>
+        <p class="cat-dash-p">CU EMS headshot session — 13 subjects, complimentary repeat-client shoot. No paid photography revenue.</p>
+        <ul class="cat-dash-bullets">
+          <li>Photo income: $0</li>
+          
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--vio)">
+        <div class="cat-dash-hd" style="color:var(--vio)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 12l3.6-5.4-6.4 2 2.8 3.4z"/></svg><span>Career</span></div>
+        <p class="cat-dash-p">Not yet tracked as a distinct path this month.</p>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--teal)">
+        <div class="cat-dash-hd" style="color:var(--teal)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 6.5c-1.6-1.3-4-1.8-6.5-1.5v12c2.5-.3 4.9.2 6.5 1.5 1.6-1.3 4-1.8 6.5-1.5v-12c-2.5-.3-4.9.2-6.5 1.5z"/><path d="M12 6.5v12"/></svg><span>Academic</span></div>
+        <p class="cat-dash-p">Online MBA, Clarkson University — Week 1–4 of 10, term ends Mar 13</p>
+      </div>
+    </div>
       </div></div>
       <div class="t-col-mid"><div class="t-dot"><span class="t-dot-inner"></span></div></div>
       <div class="t-col t-col-right"></div>
@@ -284,22 +316,53 @@ svg{display:block}
           <span class="t-card-month">February</span>
           <span class="t-card-badge">Done</span>
         </div>
-        <div class="t-card-tag">Best volume month of Q1. Spending pulled well under cap.</div>
+        <div class="t-card-tag">Best volume month of Q1. Spending pulled well under the cap.</div>
 
         <div class="t-delta"><span class="t-delta-item up"><span class="t-delta-arrow">&#9650;</span>Net $229 vs Jan</span><span class="t-delta-item up"><span class="t-delta-arrow">&#9650;</span>Gym Days 5 vs Jan</span><span class="t-delta-item up"><span class="t-delta-arrow">&#9650;</span>Volume 22K lb vs Jan</span></div>
 
-        <div class="t-stat-grid">
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span class="t-tile-k">Net</span></div><div class="t-tile-v" style="color:var(--green)">$1,094</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span class="t-tile-k">Income</span></div><div class="t-tile-v">$2,884</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span class="t-tile-k">Expenses</span></div><div class="t-tile-v" style="color:var(--red)">$1,790</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span class="t-tile-k">Gym Days</span></div><div class="t-tile-v" style="color:var(--blue)">18</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span class="t-tile-k">Volume</span></div><div class="t-tile-v" style="color:var(--blue)">110K lb</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.5v19M6 8.5h12"/></svg><span class="t-tile-k">Sermons</span></div><div class="t-tile-v" style="color:var(--amber)">4</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8 7l1.6-2.5h4.8L16 7"/><circle cx="12" cy="13.3" r="3.4"/></svg><span class="t-tile-k">Photo</span></div><div class="t-tile-v" style="color:var(--rose)">$0</div></div>
-          <div class="t-tile t-tile-ytd"><div class="t-tile-top"><span class="t-tile-k">YTD Net</span></div><div class="t-tile-v" style="color:var(--green)">$1,960</div></div>
-        </div>
-
-        <div class="t-summary">A new high on leg press, <span class="hl-blue">495 lb</span>, headlined the best volume month of the quarter. <span class="hl-amber">The STEM learning goal got missed and logged honestly</span> rather than quietly dropped, with March already amended to cover ARNG training instead. <span class="hl-rose">Career still hadn&rsquo;t split out as its own thread.</span></div>
+        <div class="cat-dash-grid">
+      <div class="cat-dash" style="border-top-color:var(--green)">
+        <div class="cat-dash-hd" style="color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span>Financial</span></div>
+        <p class="cat-dash-p">Spending pulled in hard under the cap, producing the best net of Q1 so far on ordinary income.</p>
+        <ul class="cat-dash-bullets">
+          <li>Income $2,884 &middot; Expenses $1,790</li>
+          <li>Net $1,094 &middot; YTD $1,960</li>
+          <li>Top category: Dining, $393</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--blue)">
+        <div class="cat-dash-hd" style="color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span>Physical</span></div>
+        <p class="cat-dash-p">Volume jumped to a Q1 high behind a new leg press max, even as gym days only grew modestly.</p>
+        <ul class="cat-dash-bullets">
+          <li>18 gym days &middot; 110,005 lb volume</li>
+          <li>PR: Leg press 495 lb, new high (est. 1RM 561)</li>
+          <li>5 cardio sessions · outdoor run 3.11 mi @ 8:28/mi</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--amber)">
+        <div class="cat-dash-hd" style="color:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.5v19M6 8.5h12"/></svg><span>Spiritual</span></div>
+        <p class="cat-dash-p">A full month of attendance and notes, still inside the Acts series.</p>
+        <ul class="cat-dash-bullets">
+          <li><b>Feb 2</b> — The First Community</li><li><b>Feb 9</b> — Silver and Gold I Have None</li><li><b>Feb 16</b> — Peter in Solomon's Portico</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--rose)">
+        <div class="cat-dash-hd" style="color:var(--rose)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8 7l1.6-2.5h4.8L16 7"/><circle cx="12" cy="13.3" r="3.4"/></svg><span>Creative</span></div>
+        <p class="cat-dash-p">Squarespace site renewed for JD Meyers Productions. No paid shoots logged.</p>
+        <ul class="cat-dash-bullets">
+          <li>Photo income: $0</li>
+          
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--vio)">
+        <div class="cat-dash-hd" style="color:var(--vio)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 12l3.6-5.4-6.4 2 2.8 3.4z"/></svg><span>Career</span></div>
+        <p class="cat-dash-p">Not yet tracked as a distinct path this month.</p>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--teal)">
+        <div class="cat-dash-hd" style="color:var(--teal)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 6.5c-1.6-1.3-4-1.8-6.5-1.5v12c2.5-.3 4.9.2 6.5 1.5 1.6-1.3 4-1.8 6.5-1.5v-12c-2.5-.3-4.9.2-6.5 1.5z"/><path d="M12 6.5v12"/></svg><span>Academic</span></div>
+        <p class="cat-dash-p">Online MBA — Week 5–8 of 10 · STEM goal missed, amended to ARNG/JCR/Radio for March</p>
+      </div>
+    </div>
       </div></div>
     </div>
     <div class="t-row left" style="animation-delay:0.16s">
@@ -308,22 +371,53 @@ svg{display:block}
           <span class="t-card-month">March</span>
           <span class="t-card-badge">Done</span>
         </div>
-        <div class="t-card-tag">Wedding pipeline starts. Intellectual goal amended to ARNG training.</div>
+        <div class="t-card-tag">Wedding bookings starting to build. MMCS pivot completes the intellectual goal.</div>
 
         <div class="t-delta"><span class="t-delta-item up"><span class="t-delta-arrow">&#9650;</span>Net $350 vs Feb</span><span class="t-delta-item up"><span class="t-delta-arrow">&#9650;</span>Gym Days 2 vs Feb</span><span class="t-delta-item up"><span class="t-delta-arrow">&#9650;</span>Volume 27K lb vs Feb</span></div>
 
-        <div class="t-stat-grid">
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span class="t-tile-k">Net</span></div><div class="t-tile-v" style="color:var(--green)">$1,444</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span class="t-tile-k">Income</span></div><div class="t-tile-v">$3,492</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span class="t-tile-k">Expenses</span></div><div class="t-tile-v" style="color:var(--red)">$2,637</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span class="t-tile-k">Gym Days</span></div><div class="t-tile-v" style="color:var(--blue)">20</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span class="t-tile-k">Volume</span></div><div class="t-tile-v" style="color:var(--blue)">137K lb</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.5v19M6 8.5h12"/></svg><span class="t-tile-k">Sermons</span></div><div class="t-tile-v" style="color:var(--amber)">5</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8 7l1.6-2.5h4.8L16 7"/><circle cx="12" cy="13.3" r="3.4"/></svg><span class="t-tile-k">Photo</span></div><div class="t-tile-v" style="color:var(--rose)">n/a</div></div>
-          <div class="t-tile t-tile-ytd"><div class="t-tile-top"><span class="t-tile-k">YTD Net</span></div><div class="t-tile-v" style="color:var(--green)">$3,404</div></div>
-        </div>
-
-        <div class="t-summary">Trap bar deadlift climbed to <span class="hl-blue">285 lb for five</span>, 81% of the year&rsquo;s AFT goal. <span class="hl-amber">The amended intellectual plan closed clean at a 3.83 term GPA.</span> <span class="hl-rose">Career remained folded into the general narrative</span>, not yet a tracked thread of its own.</div>
+        <div class="cat-dash-grid">
+      <div class="cat-dash" style="border-top-color:var(--green)">
+        <div class="cat-dash-hd" style="color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span>Financial</span></div>
+        <p class="cat-dash-p">A steady month, income held flat while a few categories crept up, still finishing comfortably positive.</p>
+        <ul class="cat-dash-bullets">
+          <li>Income $3,492 &middot; Expenses $2,637</li>
+          <li>Net $1,444 &middot; YTD $3,404</li>
+          <li>Top category: Other / unspecified, $568</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--blue)">
+        <div class="cat-dash-hd" style="color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span>Physical</span></div>
+        <p class="cat-dash-p">The most consistent month yet, twenty days trained and the highest volume of the year so far.</p>
+        <ul class="cat-dash-bullets">
+          <li>20 gym days &middot; 137,105 lb volume</li>
+          <li>PR: Trap Bar DL 285 lb × 5 (81% of 350 lb AFT goal)</li>
+          <li>4 cardio sessions · outdoor run 6.0 mi/56:22 · 5K/27:31 · sprints 2.45–2.65 mi</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--amber)">
+        <div class="cat-dash-hd" style="color:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.5v19M6 8.5h12"/></svg><span>Spiritual</span></div>
+        <p class="cat-dash-p">Perfect attendance for the month, four for four Sundays, still tracking Acts.</p>
+        <ul class="cat-dash-bullets">
+          <li><b>Mar 1</b> — One Heart, One Mind</li><li><b>Mar 8</b> — Ananias and Sapphira</li><li><b>Mar 15</b> — The Apostles Before the Council, Again</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--rose)">
+        <div class="cat-dash-hd" style="color:var(--rose)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8 7l1.6-2.5h4.8L16 7"/><circle cx="12" cy="13.3" r="3.4"/></svg><span>Creative</span></div>
+        <p class="cat-dash-p">LMSW documentary video project (M. Maurer) delivered · site refresh · 2 new leads in contract negotiation</p>
+        <ul class="cat-dash-bullets">
+          <li>Photo income: n/a</li>
+          
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--vio)">
+        <div class="cat-dash-hd" style="color:var(--vio)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 12l3.6-5.4-6.4 2 2.8 3.4z"/></svg><span>Career</span></div>
+        <p class="cat-dash-p">Not yet tracked as a distinct path this month.</p>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--teal)">
+        <div class="cat-dash-hd" style="color:var(--teal)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 6.5c-1.6-1.3-4-1.8-6.5-1.5v12c2.5-.3 4.9.2 6.5 1.5 1.6-1.3 4-1.8 6.5-1.5v-12c-2.5-.3-4.9.2-6.5 1.5z"/><path d="M12 6.5v12"/></svg><span>Academic</span></div>
+        <p class="cat-dash-p">Term GPA 3.83 (A, A-) · MMCS Army Digital C2 amendment closes Feb's missed STEM goal</p>
+      </div>
+    </div>
       </div></div>
       <div class="t-col-mid"><div class="t-dot"><span class="t-dot-inner"></span></div></div>
       <div class="t-col t-col-right"></div>
@@ -336,22 +430,53 @@ svg{display:block}
           <span class="t-card-month">April</span>
           <span class="t-card-badge">Done</span>
         </div>
-        <div class="t-card-tag">Best month yet. All three career paths open at once.</div>
+        <div class="t-card-tag">Best month yet. All three career paths open simultaneously.</div>
 
         <div class="t-delta"><span class="t-delta-item up"><span class="t-delta-arrow">&#9650;</span>Net $2,790 vs Mar</span><span class="t-delta-item up"><span class="t-delta-arrow">&#9650;</span>Gym Days 4 vs Mar</span><span class="t-delta-item down"><span class="t-delta-arrow">&#9660;</span>Volume 9K lb vs Mar</span></div>
 
-        <div class="t-stat-grid">
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span class="t-tile-k">Net</span></div><div class="t-tile-v" style="color:var(--green)">$4,234</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span class="t-tile-k">Income</span></div><div class="t-tile-v">$5,980</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span class="t-tile-k">Expenses</span></div><div class="t-tile-v" style="color:var(--red)">$1,746</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span class="t-tile-k">Gym Days</span></div><div class="t-tile-v" style="color:var(--blue)">24</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span class="t-tile-k">Volume</span></div><div class="t-tile-v" style="color:var(--blue)">128K lb</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.5v19M6 8.5h12"/></svg><span class="t-tile-k">Sermons</span></div><div class="t-tile-v" style="color:var(--amber)">4</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8 7l1.6-2.5h4.8L16 7"/><circle cx="12" cy="13.3" r="3.4"/></svg><span class="t-tile-k">Photo</span></div><div class="t-tile-v" style="color:var(--rose)">$1,390</div></div>
-          <div class="t-tile t-tile-ytd"><div class="t-tile-top"><span class="t-tile-k">YTD Net</span></div><div class="t-tile-v" style="color:var(--green)">$7,638</div></div>
-        </div>
-
-        <div class="t-summary">Deadlift pushed further to <span class="hl-blue">345 lb for three</span>, 98.6% of the AFT target. <span class="hl-amber">Both MBA courses were mid-term, with an Army IgnitED reimbursement confirmed.</span> <span class="hl-rose">This was the month all three career paths &mdash; OTS, United, and civil service &mdash; went active at once.</span></div>
+        <div class="cat-dash-grid">
+      <div class="cat-dash" style="border-top-color:var(--green)">
+        <div class="cat-dash-hd" style="color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span>Financial</span></div>
+        <p class="cat-dash-p">The best financial month of the year by a wide margin, driven by a tax refund and reimbursement landing in the same month as three paychecks.</p>
+        <ul class="cat-dash-bullets">
+          <li>Income $5,980 &middot; Expenses $1,746</li>
+          <li>Net $4,234 &middot; YTD $7,638</li>
+          <li>Top category: Groceries, $488</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--blue)">
+        <div class="cat-dash-hd" style="color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span>Physical</span></div>
+        <p class="cat-dash-p">A personal-best twenty-four gym days, with deadlift climbing to within a few percent of the AFT goal.</p>
+        <ul class="cat-dash-bullets">
+          <li>24 gym days &middot; 128,418 lb volume</li>
+          <li>PR: Trap Bar DL 345 lb × 3 — 98.6% of AFT MDL goal (350 lb)</li>
+          <li>5 outdoor runs · 2 sprint sessions</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--amber)">
+        <div class="cat-dash-hd" style="color:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.5v19M6 8.5h12"/></svg><span>Spiritual</span></div>
+        <p class="cat-dash-p">The Acts series continued through the month with notes taken each week attended.</p>
+        <ul class="cat-dash-bullets">
+          <li><b>Apr 6</b> — Stephen's Defense — The Long View</li><li><b>Apr 13</b> — The First Martyr</li><li><b>Apr 20</b> — Philip and the Ethiopian</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--rose)">
+        <div class="cat-dash-hd" style="color:var(--rose)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8 7l1.6-2.5h4.8L16 7"/><circle cx="12" cy="13.3" r="3.4"/></svg><span>Creative</span></div>
+        <p class="cat-dash-p">No shoots dated in April itself, but deposits landed for June weddings (Brenna McGrath, Zachary Gerow) — pipeline building</p>
+        <ul class="cat-dash-bullets">
+          <li>Photo income: $1,390</li>
+          
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--vio)">
+        <div class="cat-dash-hd" style="color:var(--vio)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 12l3.6-5.4-6.4 2 2.8 3.4z"/></svg><span>Career</span></div>
+        <p class="cat-dash-p">All 3 paths active: OTS recruiter contact made, United interview in pipeline, civil service exam scheduled for May 9</p>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--teal)">
+        <div class="cat-dash-hd" style="color:var(--teal)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 6.5c-1.6-1.3-4-1.8-6.5-1.5v12c2.5-.3 4.9.2 6.5 1.5 1.6-1.3 4-1.8 6.5-1.5v-12c-2.5-.3-4.9.2-6.5 1.5z"/><path d="M12 6.5v12"/></svg><span>Academic</span></div>
+        <p class="cat-dash-p">OS603 &amp; MK610 in progress · Army IgnitED reimbursement $1,250 confirmed via SUNY Potsdam</p>
+      </div>
+    </div>
       </div></div>
     </div>
     <div class="t-row left" style="animation-delay:0.32s">
@@ -360,22 +485,53 @@ svg{display:block}
           <span class="t-card-month">May</span>
           <span class="t-card-badge">Done</span>
         </div>
-        <div class="t-card-tag">United closes. OTS becomes the live path. Photography delivers.</div>
+        <div class="t-card-tag">United closed. OTS becomes the live path. Photography delivers.</div>
 
         <div class="t-delta"><span class="t-delta-item down"><span class="t-delta-arrow">&#9660;</span>Net $1,351 vs Apr</span><span class="t-delta-item down"><span class="t-delta-arrow">&#9660;</span>Gym Days 4 vs Apr</span><span class="t-delta-item down"><span class="t-delta-arrow">&#9660;</span>Volume 41K lb vs Apr</span></div>
 
-        <div class="t-stat-grid">
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span class="t-tile-k">Net</span></div><div class="t-tile-v" style="color:var(--green)">$2,883</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span class="t-tile-k">Income</span></div><div class="t-tile-v">$5,660</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span class="t-tile-k">Expenses</span></div><div class="t-tile-v" style="color:var(--red)">$2,776</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span class="t-tile-k">Gym Days</span></div><div class="t-tile-v" style="color:var(--blue)">20</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span class="t-tile-k">Volume</span></div><div class="t-tile-v" style="color:var(--blue)">87K lb</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.5v19M6 8.5h12"/></svg><span class="t-tile-k">Sermons</span></div><div class="t-tile-v" style="color:var(--amber)">2</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8 7l1.6-2.5h4.8L16 7"/><circle cx="12" cy="13.3" r="3.4"/></svg><span class="t-tile-k">Photo</span></div><div class="t-tile-v" style="color:var(--rose)">$2,735</div></div>
-          <div class="t-tile t-tile-ytd"><div class="t-tile-top"><span class="t-tile-k">YTD Net</span></div><div class="t-tile-v" style="color:var(--green)">$10,521</div></div>
-        </div>
-
-        <div class="t-summary">Bench press jumped to <span class="hl-blue">215 lb</span>, up twenty pounds in a single month. <span class="hl-amber">Both spring courses posted in the low-to-mid 90s.</span> <span class="hl-rose">United closed the door after a pre-interview rejection</span>, leaving OTS as the clearly live path with the 368 sent to SSG Wilson.</div>
+        <div class="cat-dash-grid">
+      <div class="cat-dash" style="border-top-color:var(--green)">
+        <div class="cat-dash-hd" style="color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span>Financial</span></div>
+        <p class="cat-dash-p">Photography income joined the paycheck for the first time this year, keeping net strong even as spending rose.</p>
+        <ul class="cat-dash-bullets">
+          <li>Income $5,660 &middot; Expenses $2,776</li>
+          <li>Net $2,883 &middot; YTD $10,521</li>
+          <li>Top category: Apple Products, $640</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--blue)">
+        <div class="cat-dash-hd" style="color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span>Physical</span></div>
+        <p class="cat-dash-p">Volume eased off from March and April, but bench press jumped twenty pounds in a single month.</p>
+        <ul class="cat-dash-bullets">
+          <li>20 gym days &middot; 87,390 lb volume</li>
+          <li>PR: Bench Press 215 lb × 4 — +20 lb vs April</li>
+          <li>2 outdoor runs · 2 sprint sessions</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--amber)">
+        <div class="cat-dash-hd" style="color:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.5v19M6 8.5h12"/></svg><span>Spiritual</span></div>
+        <p class="cat-dash-p">A lighter month for attendance, two Sundays logged.</p>
+        <ul class="cat-dash-bullets">
+          <li><b>May 3</b> — Pressing On — The Commitment to Forgiveness</li><li><b>May 10</b> — Spiritual Parenting — Faith Passed Down</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--rose)">
+        <div class="cat-dash-hd" style="color:var(--rose)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8 7l1.6-2.5h4.8L16 7"/><circle cx="12" cy="13.3" r="3.4"/></svg><span>Creative</span></div>
+        <p class="cat-dash-p">6 paid shoots, $2,735: Zachary Gerow wedding $1,200 · Daniel Zufall $1,000 · Vimbai Kuzanga, Grace Sheehan, Maytal Slattery, Hannah Richards (portraits, $120–175 each)</p>
+        <ul class="cat-dash-bullets">
+          <li>Photo income: $2,735</li>
+          <li>Zachary Gerow — Wedding Photo, $1,200</li><li>Daniel Zufall — Wedding Video, $1,000</li><li>Maytal Slattery — Portrait, $175</li><li>Vimbai Kuzanga — Portrait, $120</li><li>Grace Sheehan — Portrait, $120</li><li>Hannah Richards — Portrait, $120</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--vio)">
+        <div class="cat-dash-hd" style="color:var(--vio)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 12l3.6-5.4-6.4 2 2.8 3.4z"/></svg><span>Career</span></div>
+        <p class="cat-dash-p">OTS Active (DD-368 sent to SSG Wilson) · United closed (went with other candidates) · Civil service exam done, AT conflict pending</p>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--teal)">
+        <div class="cat-dash-hd" style="color:var(--teal)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 6.5c-1.6-1.3-4-1.8-6.5-1.5v12c2.5-.3 4.9.2 6.5 1.5 1.6-1.3 4-1.8 6.5-1.5v-12c-2.5-.3-4.9.2-6.5 1.5z"/><path d="M12 6.5v12"/></svg><span>Academic</span></div>
+        <p class="cat-dash-p">OS603 92.5% · MK610 94.03%</p>
+      </div>
+    </div>
       </div></div>
       <div class="t-col-mid"><div class="t-dot"><span class="t-dot-inner"></span></div></div>
       <div class="t-col t-col-right"></div>
@@ -388,34 +544,110 @@ svg{display:block}
           <span class="t-card-month">June</span>
           <span class="t-card-badge">Done</span>
         </div>
-        <div class="t-card-tag">The 368 deadline is met. Semester closes at a 4.0.</div>
+        <div class="t-card-tag">The 368 deadline is met. Semester closes at a 4.0. Cardio quietly peaks.</div>
 
         <div class="t-delta"><span class="t-delta-item down"><span class="t-delta-arrow">&#9660;</span>Net $419 vs May</span><span class="t-delta-item up"><span class="t-delta-arrow">&#9650;</span>Gym Days 1 vs May</span><span class="t-delta-item up"><span class="t-delta-arrow">&#9650;</span>Volume 27K lb vs May</span></div>
 
-        <div class="t-stat-grid">
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span class="t-tile-k">Net</span></div><div class="t-tile-v" style="color:var(--green)">$2,464</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span class="t-tile-k">Income</span></div><div class="t-tile-v">$4,323</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span class="t-tile-k">Expenses</span></div><div class="t-tile-v" style="color:var(--red)">$1,859</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span class="t-tile-k">Gym Days</span></div><div class="t-tile-v" style="color:var(--blue)">21</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span class="t-tile-k">Volume</span></div><div class="t-tile-v" style="color:var(--blue)">114K lb</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.5v19M6 8.5h12"/></svg><span class="t-tile-k">Sermons</span></div><div class="t-tile-v" style="color:var(--amber)">3</div></div>
-          <div class="t-tile"><div class="t-tile-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8 7l1.6-2.5h4.8L16 7"/><circle cx="12" cy="13.3" r="3.4"/></svg><span class="t-tile-k">Photo</span></div><div class="t-tile-v" style="color:var(--rose)">$1,800</div></div>
-          <div class="t-tile t-tile-ytd"><div class="t-tile-top"><span class="t-tile-k">YTD Net</span></div><div class="t-tile-v" style="color:var(--green)">$12,985</div></div>
-        </div>
-
-        <div class="t-summary">No new strength maxes, but <span class="hl-blue">the outdoor run pace dropped a full minute per mile</span> &mdash; the real headline of the month. <span class="hl-amber">The spring semester closed at a 4.000 term GPA.</span> <span class="hl-rose">The 368 was approved and sent to the recruiter</span> ahead of its own deadline, with the AFOQT now the thing to watch.</div>
+        <div class="cat-dash-grid">
+      <div class="cat-dash" style="border-top-color:var(--green)">
+        <div class="cat-dash-hd" style="color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span>Financial</span></div>
+        <p class="cat-dash-p">A clean, ordinary month, no windfalls, no surprises, just income steadily ahead of expenses.</p>
+        <ul class="cat-dash-bullets">
+          <li>Income $4,323 &middot; Expenses $1,859</li>
+          <li>Net $2,464 &middot; YTD $12,985</li>
+          <li>Top category: Dining, $527</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--blue)">
+        <div class="cat-dash-hd" style="color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span>Physical</span></div>
+        <p class="cat-dash-p">No new strength maxes, but the best cardio month of the year, both outdoor runs came back noticeably faster.</p>
+        <ul class="cat-dash-bullets">
+          <li>21 gym days &middot; 114,025 lb volume</li>
+          <li>PR: Outdoor run 8 mi @ 8:37/mi — 1:00/mi faster than May</li>
+          <li>2 outdoor runs (both PRs) · 2 treadmill sprint sessions · 2 stair sessions</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--amber)">
+        <div class="cat-dash-hd" style="color:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.5v19M6 8.5h12"/></svg><span>Spiritual</span></div>
+        <p class="cat-dash-p">Three sermons logged, all built around the same thread: trusting God through uncertainty.</p>
+        <ul class="cat-dash-bullets">
+          <li><b>Jun 7</b> — How Do I Trust God in an Impossible Situation?</li><li><b>Jun 21</b> — Father's Day — Evidence, Anger, and the Paralytic (guest)</li><li><b>Jun 28</b> — How Do I Trust God in Tough Times?</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--rose)">
+        <div class="cat-dash-hd" style="color:var(--rose)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8 7l1.6-2.5h4.8L16 7"/><circle cx="12" cy="13.3" r="3.4"/></svg><span>Creative</span></div>
+        <p class="cat-dash-p">2 shoots, $1,800 confirmed: Brenna McGrath wedding paid in full · JuliaKia Photography video, $500 deposit on $1,771</p>
+        <ul class="cat-dash-bullets">
+          <li>Photo income: $1,800</li>
+          <li>Brenna McGrath — Wedding Photo, $1,800 paid</li><li>JuliaKia Photography — Wedding Video, $500 dep. / $1,771</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--vio)">
+        <div class="cat-dash-hd" style="color:var(--vio)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 12l3.6-5.4-6.4 2 2.8 3.4z"/></svg><span>Career</span></div>
+        <p class="cat-dash-p">DD-368 approved &amp; sent to AF recruiter — Jul 4 deadline met · AFOQT due Sep 25 · Clarkson interview Jun 30</p>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--teal)">
+        <div class="cat-dash-hd" style="color:var(--teal)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 6.5c-1.6-1.3-4-1.8-6.5-1.5v12c2.5-.3 4.9.2 6.5 1.5 1.6-1.3 4-1.8 6.5-1.5v-12c-2.5-.3-4.9.2-6.5 1.5z"/><path d="M12 6.5v12"/></svg><span>Academic</span></div>
+        <p class="cat-dash-p">Term GPA 4.000 · Cumulative 3.917 · Good Academic Standing · OS603 A · MK610 A · Semester closed</p>
+      </div>
+    </div>
       </div></div>
     </div>
-    
-    <div class="t-row left ahead-row" style="animation-delay:0.36s">
-      <div class="t-col t-col-left"><div class="t-card ahead">
+    <div class="t-row left" style="animation-delay:0.48s">
+      <div class="t-col t-col-left"><div class="t-card" id="m7">
         <div class="t-card-hd">
           <span class="t-card-month">July</span>
-          <span class="t-card-badge ahead">Ahead</span>
+          <span class="t-card-badge">Done</span>
         </div>
-        <div class="t-card-tag">Not yet written.</div>
+        <div class="t-card-tag">A new job starts. Sports take over cardio. Financials run mid-month.</div>
+
+        <div class="t-delta"><span class="t-delta-item down"><span class="t-delta-arrow">&#9660;</span>Net $1,864 vs Jun</span><span class="t-delta-item down"><span class="t-delta-arrow">&#9660;</span>Gym Days 3 vs Jun</span><span class="t-delta-item down"><span class="t-delta-arrow">&#9660;</span>Volume 33K lb vs Jun</span></div>
+
+        <div class="cat-dash-grid">
+      <div class="cat-dash" style="border-top-color:var(--green)">
+        <div class="cat-dash-hd" style="color:var(--green)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 7v10M9.3 9.3c0-1.1 1.1-2 2.7-2 1.6 0 2.9.8 2.9 2 0 1.3-1.3 1.8-2.9 2.2-1.6.4-2.9 1-2.9 2.3 0 1.2 1.3 2 2.9 2 1.6 0 2.7-.9 2.7-2"/></svg><span>Financial</span></div>
+        <p class="cat-dash-p">Financials are mid-month, income and expenses both partial. What is captured so far stays on the same pace as the rest of the year.</p>
+        <ul class="cat-dash-bullets">
+          <li>Income $2,687 &middot; Expenses $2,087</li>
+          <li>Net $600 &middot; YTD $13,585</li>
+          <li>Top category: Shopping, $670</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--blue)">
+        <div class="cat-dash-hd" style="color:var(--blue)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="1.5" y="9.5" width="3" height="5" rx=".8"/><rect x="19.5" y="9.5" width="3" height="5" rx=".8"/><rect x="5.5" y="8" width="2.4" height="8" rx=".8"/><rect x="16.1" y="8" width="2.4" height="8" rx=".8"/><path d="M7.9 12h8.2"/></svg><span>Physical</span></div>
+        <p class="cat-dash-p">Training pivoted hard away from the barbell and into cardio and team sports, frisbee and soccer largely replaced lifting time.</p>
+        <ul class="cat-dash-bullets">
+          <li>18 gym days &middot; 81,365 lb volume</li>
+          <li>PR: 13.6 cardio hours across 12 sessions — frisbee, soccer, and real outdoor running took over</li>
+          <li>3 outdoor runs · 3 frisbee sessions · 2 soccer matches · 1 Zone 2 session · 37.4 total miles</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--amber)">
+        <div class="cat-dash-hd" style="color:var(--amber)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2.5v19M6 8.5h12"/></svg><span>Spiritual</span></div>
+        <p class="cat-dash-p">Three of four Sundays logged; two guest speakers and a return to the regular series, July 12th has no notes.</p>
+        <ul class="cat-dash-bullets">
+          <li><b>Jul 5</b> — A Piece of Robe (guest, 1 Samuel 24)</li><li><b>Jul 19</b> — Get Out of Sodom (guest, Genesis 13)</li><li><b>Jul 26</b> — Conviction vs. Condemnation (Romans 8:1)</li>
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--rose)">
+        <div class="cat-dash-hd" style="color:var(--rose)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="7" width="19" height="13" rx="2"/><path d="M8 7l1.6-2.5h4.8L16 7"/><circle cx="12" cy="13.3" r="3.4"/></svg><span>Creative</span></div>
+        <p class="cat-dash-p">1 Square payment, $292.05 (Jul 9) — client/shoot not specified in the export</p>
+        <ul class="cat-dash-bullets">
+          <li>Photo income: $292</li>
+          
+        </ul>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--vio)">
+        <div class="cat-dash-hd" style="color:var(--vio)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.2"/><path d="M12 12l3.6-5.4-6.4 2 2.8 3.4z"/></svg><span>Career</span></div>
+        <p class="cat-dash-p">Started as Administrative Coordinator, Clarkson Lewis School of Health Sciences, Jul 20 · $20.50/hr · resigned Campus Safety & Security Jul 16 · OTS/AFOQT unchanged, due Sep 25</p>
+      </div>
+      <div class="cat-dash" style="border-top-color:var(--teal)">
+        <div class="cat-dash-hd" style="color:var(--teal)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 6.5c-1.6-1.3-4-1.8-6.5-1.5v12c2.5-.3 4.9.2 6.5 1.5 1.6-1.3 4-1.8 6.5-1.5v-12c-2.5-.3-4.9.2-6.5 1.5z"/><path d="M12 6.5v12"/></svg><span>Academic</span></div>
+        <p class="cat-dash-p">Between semesters — Spring closed at 4.000 term GPA in June. Self-directed reading on military strategy & doctrine filled the intellectual slot.</p>
+      </div>
+    </div>
       </div></div>
-      <div class="t-col-mid"><div class="t-dot ahead"></div></div>
+      <div class="t-col-mid"><div class="t-dot"><span class="t-dot-inner"></span></div></div>
       <div class="t-col t-col-right"></div>
     </div>
     <div class="t-row right ahead-row" style="animation-delay:0.42s">
@@ -548,7 +780,8 @@ svg{display:block}
   </div>
 
   <div class="pagefoot">
-    <div class="pagefoot-text">JD Meyers &mdash; 2026 Year in Review &middot; julietdeltaone.github.io/monthly-recap</div>
+    <div class="pagefoot-sources">Figures pulled from each month's own dedicated recap page, verified against source CSVs where available. July is mid-month, through Jul 26.</div>
+    <div class="pagefoot-text">JD Meyers &mdash; 2026 Year in Review &middot; last updated Jul 27, 2026 &middot; julietdeltaone.github.io/monthly-recap</div>
     <a href="index.html" class="back-btn">&#8592; Back to Recap</a>
   </div>
 
