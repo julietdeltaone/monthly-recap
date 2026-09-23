@@ -76,7 +76,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .phead h2{font-family:var(--fd);font-size:1rem;font-weight:600;letter-spacing:.02em}
 .phead h2 .n{color:var(--t3);font-weight:500;margin-right:10px}
 .phead p{font-size:.8rem;color:var(--t3)}
-.pbody{flex:1 1 auto;min-height:0;min-width:0;display:grid;gap:var(--gap)}
+.pbody{flex:1 1 auto;min-height:0;min-width:0;display:flex;flex-direction:column;gap:var(--gap);overflow-y:auto;overscroll-behavior:contain;padding-bottom:8px}
 
 /* ---------------- shared components ---------------- */
 .card{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);
@@ -95,8 +95,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .rrow .n{font-weight:600;color:var(--t1);font-variant-numeric:tabular-nums;text-align:right}
 .note{font-size:.8rem;color:var(--t2);margin-top:10px;line-height:1.5}
 .note b,.note strong{color:var(--t1);font-weight:600}
-.tblwrap{overflow:hidden;min-height:0}
-.tbl{width:100%;border-collapse:collapse;font-size:.8rem}
+.tblwrap{overflow-x:auto;min-height:0;scrollbar-width:thin}
+.tbl{width:100%;min-width:460px;border-collapse:collapse;font-size:.8rem}
 .tbl th{font-size:.65rem;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--t3);
   text-align:left;padding:7px 10px;border-bottom:1px solid var(--bd2);white-space:nowrap}
 .tbl td{padding:8px 10px;border-bottom:1px solid var(--bd);color:var(--t2);vertical-align:middle}
@@ -119,19 +119,35 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .callout p+p{margin-top:8px}
 .callout b,.callout strong{color:var(--t1)}
 
+/* ---------------- layout helpers ---------------- */
+.cols2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap);align-items:start}
+.cols2>.card,.cols2>.stack{min-width:0}
+.stack{display:flex;flex-direction:column;gap:var(--gap);min-width:0}
+.narrow{width:100%;max-width:700px;margin-inline:auto;display:flex;flex-direction:column;gap:var(--gap)}
+.k{font-size:.65rem;font-weight:700;letter-spacing:.12em;color:var(--t3);text-transform:uppercase}
+.ss{font-size:.74rem;color:var(--t3);line-height:1.45}
+.lede{color:var(--t2);font-size:.9rem;line-height:1.6;max-width:42rem;margin-bottom:14px}
+.tbl tr.trow-total td{font-weight:700;color:var(--t1);border-top:1px solid var(--bd2);font-size:.84rem}
+.prow>*{min-width:0}
+.prow .lbl{flex:0 0 auto;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--t3)}
+.prow>span:last-child,.prow>div:last-child{text-align:right}
+.pipec .who{font-weight:600;font-size:.84rem;color:var(--t1)}
+.pipec .dim{font-size:.72rem;color:var(--t3);margin-top:2px}
+.pipec .num{font-size:.82rem;margin-top:6px}
+.pipec .pill{margin-top:8px}
+
 /* ---------------- overview panel ---------------- */
-.p-overview .pbody{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
 .ov-hero{display:flex;flex-direction:column;justify-content:center;gap:clamp(10px,1.8vmin,18px);min-width:0}
 .ov-hero h1{font-family:var(--fd);font-weight:600;font-size:clamp(1.8rem,3.4vw,3rem);
   line-height:1.05;letter-spacing:-.025em;text-wrap:balance}
 .ov-hero .lede{color:var(--t2);font-size:clamp(.82rem,1.15vw,.93rem);max-width:33rem;line-height:1.6}
-.netbox{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:clamp(12px,2vmin,20px)}
-.netrow{display:flex;gap:clamp(14px,2.4vmin,28px);margin-top:12px;flex-wrap:wrap}
-.netrow .cell .k{font-size:.65rem;font-weight:700;letter-spacing:.12em;color:var(--t3);text-transform:uppercase}
-.netrow .cell .n{font-family:var(--fd);font-weight:700;font-size:1.02rem;letter-spacing:-.01em;
-  font-variant-numeric:tabular-nums;margin-top:3px}
-.ov-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));
-  gap:var(--gap);min-height:0}
+.netbox{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);padding:clamp(12px,2vmin,20px);box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.netrow{display:flex;gap:14px 28px;margin-top:14px;flex-wrap:wrap;align-items:flex-end}
+.netrow:first-child{margin-top:0}
+.netrow .k{font-size:.65rem;font-weight:700;letter-spacing:.12em;color:var(--t3);text-transform:uppercase}
+.netrow .v{margin-top:4px}
+.saveline{font-size:.82rem;font-weight:600;color:var(--good)}
+.ov-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap)}
 .sum{display:flex;flex-direction:column;justify-content:center;gap:3px;text-align:left;
   background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);
   padding:clamp(10px,1.7vmin,18px);min-height:0;min-width:0;transition:border-color .15s ease,background .15s ease}
@@ -143,7 +159,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .sum .go{font-size:.7rem;font-weight:700;color:var(--acc);margin-top:3px}
 
 /* ---------------- financial panel ---------------- */
-.p-financial .pbody{grid-template-columns:minmax(0,5fr) minmax(0,7fr)}
 .fstack{display:flex;flex-direction:column;gap:var(--gap);min-height:0;min-width:0}
 .fstack .card{flex:0 1 auto}
 .saveline{display:flex;align-items:baseline;gap:10px;margin-top:8px}
@@ -151,14 +166,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .saveline .lbl{font-size:.75rem;color:var(--t3)}
 
 /* ---------------- physical panel ---------------- */
-.p-physical .pbody{grid-template-columns:minmax(0,4fr) minmax(0,8fr)}
 .ph-hero{justify-content:center;gap:14px}
 .ph-pair{display:grid;gap:14px}
 .ph-pair .k{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--t3)}
 .ph-ctx{font-size:.78rem;color:var(--t3);line-height:1.55;border-top:1px solid var(--bd);padding-top:12px}
 
 /* ---------------- spiritual panel ---------------- */
-.p-spiritual .pbody{grid-template-columns:minmax(0,600px);justify-content:center;align-content:center}
 .sp-num{font-family:var(--fd);font-weight:700;font-size:clamp(2.6rem,6vw,4rem);
   letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums}
 .sp-entry{margin-top:14px;padding-top:14px;border-top:1px solid var(--bd)}
@@ -166,10 +179,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .sp-entry .m{font-size:.8rem;color:var(--t3);margin-top:4px}
 
 /* ---------------- creative panel ---------------- */
-.p-creative .pbody{grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  grid-template-rows:minmax(0,1.25fr) minmax(0,1fr);
-  grid-template-areas:"delivered incident" "pipeline pipeline"}
-.c-delivered{grid-area:delivered}.c-incident{grid-area:incident}.c-pipe{grid-area:pipeline}
 .prow{display:flex;justify-content:space-between;align-items:center;gap:10px;
   padding:9px 0;border-top:1px solid var(--bd);font-size:.82rem}
 .prow:first-of-type{border-top:0}
@@ -190,7 +199,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .pipec .d.amt b{display:inline;font-size:.7rem}
 
 /* ---------------- intellectual panel ---------------- */
-.p-intellectual .pbody{grid-template-columns:minmax(0,6fr) minmax(0,6fr)}
 .qflag{color:var(--bad);font-weight:700}
 .career-strip{display:flex;gap:10px;align-items:center;background:var(--s1);border:1px solid var(--bd);
   border-radius:var(--r);padding:10px 14px;font-size:.78rem;color:var(--t2);flex-wrap:wrap}
@@ -198,14 +206,15 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .career-strip b{color:var(--t1);font-weight:600}
 
 /* ---------------- reflections panel ---------------- */
-.p-reflections .pbody{grid-template-rows:auto minmax(0,1fr)}
 .pull{font-family:var(--fd);font-style:normal;font-weight:600;font-size:clamp(1rem,1.9vw,1.4rem);
   letter-spacing:-.015em;line-height:1.35;color:var(--t1);
   border-left:2px solid var(--acc);padding:6px 0 6px 18px;max-width:56rem}
 .pull small{display:block;font-family:var(--fb);font-weight:600;font-size:.68rem;letter-spacing:.13em;
   text-transform:uppercase;color:var(--t3);margin-bottom:8px;font-style:normal}
-.rgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));
-  gap:var(--gap);min-height:0}
+.rgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap)}
+.rcard .k{margin-bottom:2px}
+.rcard .v{margin:3px 0}
+.rcard .ss{margin-top:2px}
 .rcard{justify-content:center}
 .rcard h3{font-family:var(--fd);font-size:.95rem;font-weight:600;letter-spacing:-.01em;margin-bottom:8px}
 .rcard h3 .rn{color:var(--t3);font-weight:500;margin-right:8px;font-size:.8rem}
@@ -249,27 +258,20 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 /* ---------------- responsive ---------------- */
 @media (max-width:760px){
   .sitenav{display:none}
-  .p-overview .pbody{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);overflow:hidden}
-  .ov-hero{gap:8px}
-  .ov-hero .lede{display:none}
-  .ov-hero h1{font-size:1.55rem}
-  .netbox{padding:12px 14px}
-  .netbox .v-hero{font-size:1.7rem}
-  .ov-grid{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr))}
+  .cols2{grid-template-columns:minmax(0,1fr)}
+  .stack{display:contents}
+  .ov-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .sum .ss{display:none}
-  .p-financial .pbody,.p-physical .pbody,.p-intellectual .pbody{grid-template-columns:minmax(0,1fr);overflow-y:auto}
-  .p-creative .pbody{grid-template-columns:minmax(0,1fr);grid-template-rows:none;
-    grid-template-areas:"delivered" "incident" "pipeline";overflow-y:auto}
+  .rgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .pipe3{display:flex;flex-direction:column;gap:6px;margin-top:8px}
-  .pipec{display:flex;align-items:center;gap:8px;padding:8px 12px}
-  .pipec b{font-size:.76rem;white-space:nowrap}
-  .pipec .d{font-size:.66rem;margin:0;white-space:nowrap}
-  .pipec .d.amt{margin-top:0}
-  .pipec .pill{margin-left:auto;font-size:.62rem;padding:2px 8px}
-  .callout p{font-size:.8rem}
-  .rgrid{grid-template-columns:minmax(0,1fr);grid-template-rows:none}
+  .pipec{display:flex;align-items:center;gap:8px;padding:8px 12px;flex-wrap:wrap}
+  .pipec .who{font-size:.78rem;white-space:nowrap}
+  .pipec .dim{font-size:.66rem;margin:0;white-space:nowrap}
+  .pipec .num{font-size:.7rem;margin:0 0 0 auto;white-space:nowrap}
+  .pipec .pill{margin:0 0 0 auto;font-size:.62rem;padding:2px 8px}
   .phead p{display:none}
   .pull{font-size:1rem}
+  .tbl{font-size:.74rem;min-width:420px}
 }
 /* short viewports: tighten density */
 @media (max-height:760px){
@@ -319,43 +321,53 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
   <section class="panel on p-overview" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" tabindex="-1">
     <div class="phead"><h2><span class="n">01</span>Overview</h2><p>August 2026 &middot; Month 08 &middot; The month everything stacked.</p></div>
     <div class="pbody">
-      <p class="lede">Sixteen days of Annual Training, the AFOQT on the 31st, and two weddings delivered &mdash; all while prepping the Fall MBA semester handoff. The money followed the workload: the best net of 2026.</p>
-      <div class="netbox">
-        <div class="netrow"><span class="k">Net &middot; best of 2026</span><span class="v v-hero grad num good">+$4,065.06</span></div>
-        <div class="netrow"><span class="k">In</span><span class="v v-md num">$7,181.71</span><span class="k">Out</span><span class="v v-md num">$3,116.65</span><span class="k">YTD net</span><span class="v v-md num">$17,650</span></div>
+      <div class="card">
+        <p class="lede">Sixteen days of Annual Training, the AFOQT on the 31st, and two weddings delivered &mdash; all while prepping the Fall MBA semester handoff. The money followed the workload: the best net of 2026.</p>
+        <div class="netbox">
+          <div class="netrow">
+            <div><div class="k">Net &middot; best of 2026</div><div class="v v-hero grad num good">+$4,065.06</div></div>
+          </div>
+          <div class="netrow">
+            <div><div class="k">In</div><div class="v v-md num">$7,181.71</div></div>
+            <div><div class="k">Out</div><div class="v v-md num">$3,116.65</div></div>
+            <div><div class="k">YTD net</div><div class="v v-md num">$17,650</div></div>
+          </div>
+        </div>
       </div>
       <div class="card">
         <span class="kicker">By the numbers</span>
         <div class="rgrid">
-          <div class="rcard"><div class="k">Gym days</div><div class="v v-md num">10</div><div class="ss">72,905 lb moved</div></div>
-          <div class="rcard"><div class="k">Avg volume / day</div><div class="v v-md num">&asymp;7,291 lb</div><div class="ss">across 10 sessions</div></div>
-          <div class="rcard"><div class="k">Weddings delivered</div><div class="v v-md num">2</div><div class="ss">$3,400 collected</div></div>
-          <div class="rcard"><div class="k">Sermons logged</div><div class="v v-md num">1</div><div class="ss">Aug 2 &middot; James 5:16</div></div>
-          <div class="rcard"><div class="k">AFOQT</div><div class="v v-md num">8/31</div><div class="ss">Verbal 61 &middot; Quant 6</div></div>
-          <div class="rcard"><div class="k">Annual Training</div><div class="v v-md num">16 days</div><div class="ss">Fort Drum &middot; Aug 6&ndash;21</div></div>
-          <div class="rcard"><div class="k">EUC</div><div class="v v-md num">$899</div><div class="ss">InMotion V9 &middot; Aug 27</div></div>
-          <div class="rcard"><div class="k">Pipeline outstanding</div><div class="v v-md num">$682.40</div><div class="ss">3 bookings ahead</div></div>
-          <div class="rcard"><div class="k">Saved</div><div class="v v-md num good">56.6%</div><div class="ss">of income kept</div></div>
+          <div class="card rcard"><div class="k">Gym days</div><div class="v v-md num">10</div><div class="ss">72,905 lb moved</div></div>
+          <div class="card rcard"><div class="k">Avg volume / day</div><div class="v v-md num">&asymp;7,291 lb</div><div class="ss">across 10 sessions</div></div>
+          <div class="card rcard"><div class="k">Weddings delivered</div><div class="v v-md num">2</div><div class="ss">$3,400 collected</div></div>
+          <div class="card rcard"><div class="k">Sermons logged</div><div class="v v-md num">1</div><div class="ss">Aug 2 &middot; James 5:16</div></div>
+          <div class="card rcard"><div class="k">AFOQT</div><div class="v v-md num">8/31</div><div class="ss">Verbal 61 &middot; Quant 6</div></div>
+          <div class="card rcard"><div class="k">Annual Training</div><div class="v v-md num">16 days</div><div class="ss">Fort Drum &middot; Aug 6&ndash;21</div></div>
+          <div class="card rcard"><div class="k">EUC</div><div class="v v-md num">$899</div><div class="ss">InMotion V9 &middot; Aug 27</div></div>
+          <div class="card rcard"><div class="k">Pipeline outstanding</div><div class="v v-md num">$682.40</div><div class="ss">3 bookings ahead</div></div>
+          <div class="card rcard"><div class="k">Saved</div><div class="v v-md num good">56.6%</div><div class="ss">of income kept</div></div>
         </div>
       </div>
-      <div class="card">
-        <span class="kicker">Month timeline</span>
-        <div class="tblwrap"><table class="tbl">
-          <tr><td class="num">Aug 1</td><td>Choate wedding &mdash; photography delivered <span class="dim">(JDM-2026-05)</span></td></tr>
-          <tr><td class="num">Aug 2</td><td>CBC sermon &mdash; &ldquo;Repentance &amp; Confession&rdquo;, Conviction series</td></tr>
-          <tr><td class="num">Aug 3&ndash;4</td><td>Two gym days before the field &mdash; push + pull</td></tr>
-          <tr><td class="num">Aug 6&ndash;21</td><td>Annual Training, Fort Drum &mdash; S1, then TAC as RTO, then S1</td></tr>
-          <tr><td class="num">Aug 22</td><td>Eddy wedding &mdash; videography delivered; main camera overheated on the aisle</td></tr>
-          <tr><td class="num">Aug 24&ndash;31</td><td>Eight gym days in eight days &mdash; the post-AT rebound</td></tr>
-          <tr><td class="num">Aug 27</td><td>InMotion V9 EUC arrives &mdash; $899, upgrading the 2018 Boosted board</td></tr>
-          <tr><td class="num">Aug 28</td><td>$5,000 swept to Apple Savings</td></tr>
-          <tr><td class="num">Aug 31</td><td>AFOQT taken &mdash; Verbal 61 solid, Quant 6 below minimum</td></tr>
-        </table></div>
-      </div>
-      <div class="card">
-        <span class="kicker">Annual Training 2026 &mdash; Fort Drum, HHC 27th IBCT</span>
-        <p>The first days were with the S1 personnel shop &mdash; an E5 and a brand-new O1 ran PERSTAT reporting up to the MAIN while the WO2 trained the shop on DD-93s, SGLV elections, 5960s, and iPERMS reviews. About three days in, the company commander moved JD to the TAC as RTO &mdash; radio checks with the S3 shop and a lot more infantry than the relaxed S1 setup, plus battle drills reacting to direct and indirect fire on early mornings and long days. He rotated back to S1 for the rest of the field problem.</p>
-        <p>About 10 days in the field living out of personal tents and sleep systems &mdash; one of the few who got a shower, a one-hour LMTV round trip each way to the northernmost range. Then back to the ORTC in Syracuse to clean vehicles, convoy home, one more day unpacking, and a group dinner at Texas de Brazil. A SUTA covered the one remaining drill so he could shoot a wedding. A helicopter morale flight along the way. Since he ETSs in June 2027, before the next AT cycle &mdash; this was his only annual training with the unit.</p>
+      <div class="cols2">
+        <div class="card">
+          <span class="kicker">Month timeline</span>
+          <div class="tblwrap"><table class="tbl">
+            <tr><td class="num">Aug 1</td><td>Choate wedding &mdash; photography delivered <span class="dim">(JDM-2026-05)</span></td></tr>
+            <tr><td class="num">Aug 2</td><td>CBC sermon &mdash; &ldquo;Repentance &amp; Confession&rdquo;, Conviction series</td></tr>
+            <tr><td class="num">Aug 3&ndash;4</td><td>Two gym days before the field &mdash; push + pull</td></tr>
+            <tr><td class="num">Aug 6&ndash;21</td><td>Annual Training, Fort Drum &mdash; S1, then TAC as RTO, then S1</td></tr>
+            <tr><td class="num">Aug 22</td><td>Eddy wedding &mdash; videography delivered; main camera overheated on the aisle</td></tr>
+            <tr><td class="num">Aug 24&ndash;31</td><td>Eight gym days in eight days &mdash; the post-AT rebound</td></tr>
+            <tr><td class="num">Aug 27</td><td>InMotion V9 EUC arrives &mdash; $899, upgrading the 2018 Boosted board</td></tr>
+            <tr><td class="num">Aug 28</td><td>$5,000 swept to Apple Savings</td></tr>
+            <tr><td class="num">Aug 31</td><td>AFOQT taken &mdash; Verbal 61 solid, Quant 6 below minimum</td></tr>
+          </table></div>
+        </div>
+        <div class="card">
+          <span class="kicker">Annual Training 2026 &mdash; Fort Drum, HHC 27th IBCT</span>
+          <p class="dim" style="font-size:.85rem">The first days were with the S1 personnel shop &mdash; PERSTAT reporting up to the MAIN while the WO2 trained the shop on DD-93s, SGLV elections, 5960s, and iPERMS reviews. About three days in, the company commander moved JD to the TAC as RTO &mdash; radio checks with the S3 shop and a lot more infantry, plus battle drills on early mornings and long days. He rotated back to S1 for the rest of the field problem.</p>
+          <p class="dim" style="font-size:.85rem;margin-top:8px">About 10 days in the field in personal tents &mdash; one of the few who got a shower, a one-hour LMTV round trip to the northernmost range. Then the ORTC in Syracuse, convoy home, and a group dinner at Texas de Brazil. A SUTA covered the last drill so he could shoot a wedding. Since he ETSs in June 2027, before the next AT cycle &mdash; this was his only annual training with the unit.</p>
+        </div>
       </div>
       <div class="card">
         <span class="kicker">Sections</span>
@@ -376,63 +388,75 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
   <section class="panel p-financial" role="tabpanel" id="panel-financial" aria-labelledby="tab-financial" tabindex="-1">
     <div class="phead"><h2><span class="n">02</span>Financial</h2><p>AT pay, two Clarkson checks, and photo payouts all landed in the same month.</p></div>
     <div class="pbody">
-      <div class="netbox">
-        <div class="netrow"><span class="k">The month</span><span class="v v-hero grad num good">+$4,065.06</span></div>
-        <div class="netrow"><span class="saveline">56.6% of income saved &middot; best net of 2026</span></div>
-        <div class="netrow"><span class="k">Income</span><span class="v v-md num">$7,181.71</span><span class="k">Expenses</span><span class="v v-md num">$3,116.65</span><span class="k">YTD net (rounded)</span><span class="v v-md num">$17,650</span></div>
-      </div>
       <div class="card">
-        <span class="kicker">Where it came from</span>
-        <div class="tblwrap"><table class="tbl">
-          <tr><th>Source</th><th class="r">Amount</th></tr>
-          <tr><td>NY Army National Guard paycheck <span class="dim">8/21</span></td><td class="r num">$2,216.27</td></tr>
-          <tr><td>Clarkson direct deposit <span class="dim">8/6</span></td><td class="r num">$1,248.21</td></tr>
-          <tr><td>Clarkson direct deposit <span class="dim">8/20</span></td><td class="r num">$1,248.20</td></tr>
-          <tr><td>Square payout <span class="dim">8/19</span></td><td class="r num">$1,643.60</td></tr>
-          <tr><td>Square payout <span class="dim">8/4</span></td><td class="r num">$740.41</td></tr>
-          <tr><td>Apple Savings interest</td><td class="r num">$57.16</td></tr>
-          <tr><td>Other <span class="dim">RAISER, Venmo, Apple Cash, dividend</span></td><td class="r num">$27.86</td></tr>
-          <tr class="ptotal"><td>Total income</td><td class="r num">$7,181.71</td></tr>
-        </table></div>
+        <div class="netbox">
+          <div class="netrow">
+            <div><div class="k">The month</div><div class="v v-hero grad num good">+$4,065.06</div></div>
+          </div>
+          <div class="netrow"><div class="saveline">56.6% of income saved &middot; best net of 2026</div></div>
+          <div class="netrow">
+            <div><div class="k">Income</div><div class="v v-md num">$7,181.71</div></div>
+            <div><div class="k">Expenses</div><div class="v v-md num">$3,116.65</div></div>
+            <div><div class="k">YTD net (rounded)</div><div class="v v-md num">$17,650</div></div>
+          </div>
+        </div>
       </div>
-      <div class="card">
-        <span class="kicker">Where it went &mdash; by category</span>
-        <div class="tblwrap"><table class="tbl">
-          <tr><th>Category</th><th class="r">Amount</th><th class="r">Share</th></tr>
-          <tr><td>Shopping <span class="dim">EUC $899 leads</span></td><td class="r num">$1,089.39</td><td class="r num dim">35.0%</td></tr>
-          <tr><td>Tithe <span class="dim">Calvary Baptist $250 + $300</span></td><td class="r num">$550.00</td><td class="r num dim">17.6%</td></tr>
-          <tr><td>Drinks &amp; dining</td><td class="r num">$401.47</td><td class="r num dim">12.9%</td></tr>
-          <tr><td>Groceries</td><td class="r num">$348.13</td><td class="r num dim">11.2%</td></tr>
-          <tr><td>Business <span class="dim">Adobe, Google Ads, Claude</span></td><td class="r num">$199.51</td><td class="r num dim">6.4%</td></tr>
-          <tr><td>Auto &amp; transport <span class="dim">Tesla sub + supercharging</span></td><td class="r num">$151.57</td><td class="r num dim">4.9%</td></tr>
-          <tr><td>Subscriptions <span class="dim">Apple, YouTube Premium, Google</span></td><td class="r num">$102.62</td><td class="r num dim">3.3%</td></tr>
-          <tr><td>Financial <span class="dim">GoFundMe &ldquo;Help Gabe Share&rdquo;</span></td><td class="r num">$100.00</td><td class="r num dim">3.2%</td></tr>
-          <tr><td>Other <span class="dim">Pixieset, Higgsfield, ElevenLabs</span></td><td class="r num">$66.08</td><td class="r num dim">2.1%</td></tr>
-          <tr><td>Healthcare <span class="dim">Reserve Select Tricare</span></td><td class="r num">$57.88</td><td class="r num dim">1.9%</td></tr>
-          <tr><td>Personal care <span class="dim">hair appointment</span></td><td class="r num">$30.00</td><td class="r num dim">1.0%</td></tr>
-          <tr><td>Entertainment</td><td class="r num">$20.00</td><td class="r num dim">0.6%</td></tr>
-          <tr class="ptotal"><td>Total expenses</td><td class="r num">$3,116.65</td><td class="r num dim">100%</td></tr>
-        </table></div>
-      </div>
-      <div class="card">
-        <span class="kicker">Money moves</span>
-        <div class="prow"><span class="lbl">Savings sweep</span><span class="num">$5,000 &rarr; Apple Savings <span class="dim">8/28</span></span></div>
-        <div class="prow"><span class="lbl">Investing drip</span><span class="num">M1 $50 &times;2 &middot; Robinhood $12.50 &times;2</span></div>
-        <div class="prow"><span class="lbl">The one big buy</span><span class="num">InMotion V9 EUC &mdash; $899 <span class="dim">8/27</span></span></div>
-        <div class="prow"><span class="lbl">Giving</span><span class="num">Tithe $550 &middot; GoFundMe $100</span></div>
-        <p class="note">Square payouts: $2,384.01. Paid out to JD through Square in August &mdash; one payment channel, not the income total.</p>
+      <div class="cols2">
+        <div class="stack">
+          <div class="card">
+            <span class="kicker">Where it came from</span>
+            <div class="tblwrap"><table class="tbl">
+              <tr><th>Source</th><th class="n">Amount</th></tr>
+              <tr><td>NY Army National Guard paycheck <span class="dim">8/21</span></td><td class="n num">$2,216.27</td></tr>
+              <tr><td>Clarkson direct deposit <span class="dim">8/6</span></td><td class="n num">$1,248.21</td></tr>
+              <tr><td>Clarkson direct deposit <span class="dim">8/20</span></td><td class="n num">$1,248.20</td></tr>
+              <tr><td>Square payout <span class="dim">8/19</span></td><td class="n num">$1,643.60</td></tr>
+              <tr><td>Square payout <span class="dim">8/4</span></td><td class="n num">$740.41</td></tr>
+              <tr><td>Apple Savings interest</td><td class="n num">$57.16</td></tr>
+              <tr><td>Other <span class="dim">RAISER, Venmo, Apple Cash, dividend</span></td><td class="n num">$27.86</td></tr>
+              <tr class="trow-total"><td>Total income</td><td class="n num">$7,181.71</td></tr>
+            </table></div>
+          </div>
+          <div class="card">
+            <span class="kicker">Money moves</span>
+            <div class="prow"><span class="lbl">Savings sweep</span><span class="num">$5,000 &rarr; Apple Savings <span class="dim">8/28</span></span></div>
+            <div class="prow"><span class="lbl">Investing drip</span><span class="num">M1 $50 &times;2 &middot; Robinhood $12.50 &times;2</span></div>
+            <div class="prow"><span class="lbl">The one big buy</span><span class="num">InMotion V9 EUC &mdash; $899 <span class="dim">8/27</span></span></div>
+            <div class="prow"><span class="lbl">Giving</span><span class="num">Tithe $550 &middot; GoFundMe $100</span></div>
+            <p class="note">Square payouts: $2,384.01. Paid out to JD through Square in August &mdash; one payment channel, not the income total.</p>
+          </div>
+        </div>
+        <div class="card">
+          <span class="kicker">Where it went &mdash; by category</span>
+          <div class="tblwrap"><table class="tbl">
+            <tr><th>Category</th><th class="n">Amount</th><th class="n">Share</th></tr>
+            <tr><td>Shopping <span class="dim">EUC $899 leads</span></td><td class="n num">$1,089.39</td><td class="n num dim">35.0%</td></tr>
+            <tr><td>Tithe <span class="dim">Calvary Baptist $250 + $300</span></td><td class="n num">$550.00</td><td class="n num dim">17.6%</td></tr>
+            <tr><td>Drinks &amp; dining</td><td class="n num">$401.47</td><td class="n num dim">12.9%</td></tr>
+            <tr><td>Groceries</td><td class="n num">$348.13</td><td class="n num dim">11.2%</td></tr>
+            <tr><td>Business <span class="dim">Adobe, Google Ads, Claude</span></td><td class="n num">$199.51</td><td class="n num dim">6.4%</td></tr>
+            <tr><td>Auto &amp; transport <span class="dim">Tesla sub + supercharging</span></td><td class="n num">$151.57</td><td class="n num dim">4.9%</td></tr>
+            <tr><td>Subscriptions <span class="dim">Apple, YouTube Premium, Google</span></td><td class="n num">$102.62</td><td class="n num dim">3.3%</td></tr>
+            <tr><td>Financial <span class="dim">GoFundMe &ldquo;Help Gabe Share&rdquo;</span></td><td class="n num">$100.00</td><td class="n num dim">3.2%</td></tr>
+            <tr><td>Other <span class="dim">Pixieset, Higgsfield, ElevenLabs</span></td><td class="n num">$66.08</td><td class="n num dim">2.1%</td></tr>
+            <tr><td>Healthcare <span class="dim">Reserve Select Tricare</span></td><td class="n num">$57.88</td><td class="n num dim">1.9%</td></tr>
+            <tr><td>Personal care <span class="dim">hair appointment</span></td><td class="n num">$30.00</td><td class="n num dim">1.0%</td></tr>
+            <tr><td>Entertainment</td><td class="n num">$20.00</td><td class="n num dim">0.6%</td></tr>
+            <tr class="trow-total"><td>Total expenses</td><td class="n num">$3,116.65</td><td class="n num dim">100%</td></tr>
+          </table></div>
+        </div>
       </div>
       <div class="card">
         <span class="kicker">Ledger &middot; Notion Projects &amp; Ledger</span>
         <div class="tblwrap"><table class="tbl">
-          <tr><th>Project</th><th>Client</th><th class="r">Collected</th><th class="r">Total</th><th>Status</th></tr>
-          <tr><td>JDM-2026-05</td><td>Clark Choate &middot; photo &middot; Aug 1</td><td class="r num">$1,200</td><td class="r num">$1,200</td><td><span class="pill ok">Paid in full</span></td></tr>
-          <tr><td>JDM-2026-04</td><td>Megan Eddy &middot; video &middot; Aug 22 <span class="fnsup">1</span></td><td class="r num">$2,200</td><td class="r num">$2,200</td><td><span class="pill ok">Paid in full</span></td></tr>
-          <tr class="ptotal"><td colspan="2">Ledger collections</td><td class="r num">$3,400</td><td></td><td></td></tr>
+          <tr><th>Project</th><th>Client</th><th class="n">Collected</th><th class="n">Total</th><th>Status</th></tr>
+          <tr><td>JDM-2026-05</td><td>Clark Choate &middot; photo &middot; Aug 1</td><td class="n num">$1,200</td><td class="n num">$1,200</td><td><span class="pill ok">Paid in full</span></td></tr>
+          <tr><td>JDM-2026-04</td><td>Megan Eddy &middot; video &middot; Aug 22 <span class="fnsup">1</span></td><td class="n num">$2,200</td><td class="n num">$2,200</td><td><span class="pill ok">Paid in full</span></td></tr>
+          <tr class="trow-total"><td colspan="2">Ledger collections</td><td class="n num">$3,400</td><td></td><td></td></tr>
         </table></div>
         <div class="fnotes">
-          <div class="fn"><span class="fnsup">1</span> The Eddy row still shows the full $2,200 collected / paid in full &mdash; it does not reflect the $150 refund issued for the camera-overheat incident. The ledger needs a correction.</div>
-          <div class="fn"><span class="fnsup">2</span> Square payouts ($2,384.01) and ledger collections ($3,400) measure different things: payouts are one payment channel&rsquo;s August transfers; the ledger is per-project cumulative collections.</div>
+          <p><span class="fn">1</span> The Eddy row still shows the full $2,200 collected / paid in full &mdash; it does not reflect the $150 refund issued for the camera-overheat incident. The ledger needs a correction.</p>
+          <p><span class="fn">2</span> Square payouts ($2,384.01) and ledger collections ($3,400) measure different things: payouts are one payment channel&rsquo;s August transfers; the ledger is per-project cumulative collections.</p>
         </div>
       </div>
       <div class="card">
@@ -451,39 +475,41 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
   <section class="panel p-physical" role="tabpanel" id="panel-physical" aria-labelledby="tab-physical" tabindex="-1">
     <div class="phead"><h2><span class="n">03</span>Physical</h2><p>AT split the month in two &mdash; all 10 gym days fell in the first and last weeks.</p></div>
     <div class="pbody">
-      <div class="card ph-hero">
-        <div class="ph-pair">
-          <div><div class="k">Gym days</div><div class="v v-hero grad num">10</div></div>
-          <div><div class="k">Total volume</div><div class="v v-lg num">72,905 <span style="font-size:.6em;color:var(--t3)">lb</span></div></div>
-          <div><div class="k">Avg / day</div><div class="v v-lg num">&asymp;7,291 <span style="font-size:.6em;color:var(--t3)">lb</span></div></div>
+      <div class="cols2">
+        <div class="card ph-hero">
+          <div class="ph-pair">
+            <div><div class="k">Gym days</div><div class="v v-hero grad num">10</div></div>
+            <div><div class="k">Total volume</div><div class="v v-lg num">72,905 <span style="font-size:.6em;color:var(--t3)">lb</span></div></div>
+            <div><div class="k">Avg / day</div><div class="v v-lg num">&asymp;7,291 <span style="font-size:.6em;color:var(--t3)">lb</span></div></div>
+          </div>
+          <p class="ph-ctx">Annual Training ran Aug 6&ndash;21 &mdash; training constrained to what the field allowed. Frisbee and soccer kept cardio alive weekly. July: 18 gym days.</p>
         </div>
-        <p class="ph-ctx">Annual Training ran Aug 6&ndash;21 &mdash; training constrained to what the field allowed. Frisbee and soccer kept cardio alive weekly. July: 18 gym days.</p>
+        <div class="card">
+          <span class="kicker">Best sets</span>
+          <div class="tblwrap"><table class="tbl">
+            <tr><th>Lift</th><th>Set</th><th>Note</th></tr>
+            <tr><td>Bench press</td><td class="num">190 &times; 9</td><td>Held strength through a disrupted month</td></tr>
+            <tr><td>Back squat</td><td class="num">205 &times; 7</td><td>Solid base under fatigue</td></tr>
+            <tr><td>Trap-bar deadlift</td><td class="num">315 lb</td><td>Matched &mdash; closing on the 350 lb AFT bar</td></tr>
+          </table></div>
+        </div>
       </div>
       <div class="card">
         <span class="kicker">Training log &mdash; every session</span>
         <div class="tblwrap"><table class="tbl">
-          <tr><th>Date</th><th>Focus</th><th class="r">Volume</th><th>Top sets</th></tr>
-          <tr><td class="num">Aug 3</td><td>Push + conditioning</td><td class="r num">7,500</td><td>Bench 190&times;9 &middot; stairs 30 min</td></tr>
-          <tr><td class="num">Aug 4</td><td>Pull</td><td class="r num">7,750</td><td>BB row 135&times;10 &middot; DB curl 50&times;17</td></tr>
-          <tr><td class="num">Aug 24</td><td>Chest / back / abs</td><td class="r num">12,665</td><td>Bench 185&times;6 &middot; lat pulldown 137.5&times;6 &middot; farmer carry 90 lb &times; 3:00</td></tr>
-          <tr><td class="num">Aug 25</td><td>Shoulders / arms</td><td class="r num">4,260</td><td>DB shoulder press 80&times;12</td></tr>
-          <tr><td class="num">Aug 26</td><td>Legs</td><td class="r num">7,470</td><td>Squat 205&times;7 &middot; leg curl 105&times;6</td></tr>
-          <tr><td class="num">Aug 27</td><td>Back / arms / core</td><td class="r num">8,665</td><td>Lat pulldown 150&times;12 &middot; EZ curl 70&times;8</td></tr>
-          <tr><td class="num">Aug 28</td><td>Deadlift</td><td class="r num">7,660</td><td>Trap-bar 315&times;8, 315&times;5 <span class="dim">(chalk)</span></td></tr>
-          <tr><td class="num">Aug 29</td><td>Chest / back / arms + sprints</td><td class="r num">3,690</td><td>Preacher curl 40&times;14 &middot; 6 treadmill sprints, 1.7 mi</td></tr>
-          <tr><td class="num">Aug 30</td><td>Back / arms</td><td class="r num">5,155</td><td>Chin-ups &times;10 &middot; DB curl 70&times;6</td></tr>
-          <tr><td class="num">Aug 31</td><td>Push</td><td class="r num">8,090</td><td>Bench 185&times;10 &middot; overhead tri ext 60&times;9</td></tr>
+          <tr><th>Date</th><th>Focus</th><th class="n">Volume</th><th>Top sets</th></tr>
+          <tr><td class="num">Aug 3</td><td>Push + conditioning</td><td class="n num">7,500</td><td>Bench 190&times;9 &middot; stairs 30 min</td></tr>
+          <tr><td class="num">Aug 4</td><td>Pull</td><td class="n num">7,750</td><td>BB row 135&times;10 &middot; DB curl 50&times;17</td></tr>
+          <tr><td class="num">Aug 24</td><td>Chest / back / abs</td><td class="n num">12,665</td><td>Bench 185&times;6 &middot; lat pulldown 137.5&times;6 &middot; farmer carry 90 lb &times; 3:00</td></tr>
+          <tr><td class="num">Aug 25</td><td>Shoulders / arms</td><td class="n num">4,260</td><td>DB shoulder press 80&times;12</td></tr>
+          <tr><td class="num">Aug 26</td><td>Legs</td><td class="n num">7,470</td><td>Squat 205&times;7 &middot; leg curl 105&times;6</td></tr>
+          <tr><td class="num">Aug 27</td><td>Back / arms / core</td><td class="n num">8,665</td><td>Lat pulldown 150&times;12 &middot; EZ curl 70&times;8</td></tr>
+          <tr><td class="num">Aug 28</td><td>Deadlift</td><td class="n num">7,660</td><td>Trap-bar 315&times;8, 315&times;5 <span class="dim">(chalk)</span></td></tr>
+          <tr><td class="num">Aug 29</td><td>Chest / back / arms + sprints</td><td class="n num">3,690</td><td>Preacher curl 40&times;14 &middot; 6 treadmill sprints, 1.7 mi</td></tr>
+          <tr><td class="num">Aug 30</td><td>Back / arms</td><td class="n num">5,155</td><td>Chin-ups &times;10 &middot; DB curl 70&times;6</td></tr>
+          <tr><td class="num">Aug 31</td><td>Push</td><td class="n num">8,090</td><td>Bench 185&times;10 &middot; overhead tri ext 60&times;9</td></tr>
         </table></div>
         <p class="note">Volume computed set-by-set from the training log. The Aug 24 session &mdash; first day back from the field &mdash; was the month&rsquo;s biggest at 12,665 lb.</p>
-      </div>
-      <div class="card">
-        <span class="kicker">Best sets</span>
-        <div class="tblwrap"><table class="tbl">
-          <tr><th>Lift</th><th>Set</th><th>Note</th></tr>
-          <tr><td>Bench press</td><td class="num">190 &times; 9</td><td>Held strength through a disrupted month</td></tr>
-          <tr><td>Back squat</td><td class="num">205 &times; 7</td><td>Solid base under fatigue</td></tr>
-          <tr><td>Trap-bar deadlift</td><td class="num">315 lb</td><td>Matched &mdash; closing on the 350 lb AFT bar</td></tr>
-        </table></div>
       </div>
     </div>
 
@@ -493,21 +519,23 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
   <section class="panel p-spiritual" role="tabpanel" id="panel-spiritual" aria-labelledby="tab-spiritual" tabindex="-1">
     <div class="phead"><h2><span class="n">04</span>Spiritual</h2><p>A thin month &mdash; 1 of 5 Sundays logged.</p></div>
     <div class="pbody">
-      <div class="card ph-hero">
-        <div class="ph-pair">
-          <div><div class="k">Sermons logged</div><div class="v v-hero grad num">1</div></div>
-          <div><div class="k">Series</div><div class="v v-lg">Conviction</div></div>
+      <div class="narrow">
+        <div class="card ph-hero">
+          <div class="ph-pair">
+            <div><div class="k">Sermons logged</div><div class="v v-hero grad num">1</div></div>
+            <div><div class="k">Series</div><div class="v v-lg">Conviction</div></div>
+          </div>
         </div>
-      </div>
-      <div class="card">
-        <span class="kicker">Aug 2 &mdash; &ldquo;Repentance &amp; Confession&rdquo;</span>
-        <p class="dim">Conviction series &middot; James 5:16</p>
-        <p>The season&rsquo;s theme: a season of conviction &mdash; the Holy Spirit surfacing things He hasn&rsquo;t convicted of before, things previously easy to excuse. The core distinction drawn was <b>conviction vs. condemnation</b>: conviction responded to promptly draws you toward God; left sitting, it curdles into condemnation, which pulls you away from His presence and wrecks relationships in the process.</p>
-        <p>The illustration was the pastor&rsquo;s own mother &mdash; a woman who loved the Lord, but whose unaddressed jealousy, confronted and rejected for decades, turned into church-hopping and burned bridges, even with her sons. The application, individual and corporate: respond to conviction <i>right away</i> &mdash; &ldquo;because He&rsquo;s God of the universe&rdquo; &mdash; and let the body of Christ close enough to speak into your life.</p>
-      </div>
-      <div class="card">
-        <span class="kicker">Reading plan</span>
-        <p>Sits in <b>2 Corinthians</b>, per the January plan (July&ndash;August window). Four Sundays went unlogged around Annual Training &mdash; the plan, not the streak, is what carries into September.</p>
+        <div class="card">
+          <span class="kicker">Aug 2 &mdash; &ldquo;Repentance &amp; Confession&rdquo;</span>
+          <p class="dim" style="font-size:.82rem;margin-bottom:8px">Conviction series &middot; James 5:16</p>
+          <p style="font-size:.85rem;color:var(--t2)">The season&rsquo;s theme: a season of conviction &mdash; the Holy Spirit surfacing things He hasn&rsquo;t convicted of before, things previously easy to excuse. The core distinction drawn was <b style="color:var(--t1)">conviction vs. condemnation</b>: conviction responded to promptly draws you toward God; left sitting, it curdles into condemnation, which pulls you away from His presence and wrecks relationships in the process.</p>
+          <p style="font-size:.85rem;color:var(--t2);margin-top:8px">The illustration was the pastor&rsquo;s own mother &mdash; a woman who loved the Lord, but whose unaddressed jealousy, confronted and rejected for decades, turned into church-hopping and burned bridges, even with her sons. The application, individual and corporate: respond to conviction <i>right away</i> &mdash; and let the body of Christ close enough to speak into your life.</p>
+        </div>
+        <div class="card">
+          <span class="kicker">Reading plan</span>
+          <p style="font-size:.85rem;color:var(--t2)">Sits in <b style="color:var(--t1)">2 Corinthians</b>, per the January plan (July&ndash;August window). Four Sundays went unlogged around Annual Training &mdash; the plan, not the streak, is what carries into September.</p>
+        </div>
       </div>
     </div>
 
@@ -517,20 +545,22 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
   <section class="panel p-creative" role="tabpanel" id="panel-creative" aria-labelledby="tab-creative" tabindex="-1">
     <div class="phead"><h2><span class="n">05</span>Creative</h2><p>Two weddings delivered &mdash; and the month&rsquo;s hardest professional lesson.</p></div>
     <div class="pbody">
-      <div class="card">
-        <span class="kicker">Delivered &middot; $3,400 collected</span>
-        <div class="tblwrap"><table class="tbl">
-          <tr><th>Project</th><th>Client &middot; service &middot; date</th><th class="r">Collected</th><th>Status</th></tr>
-          <tr><td>JDM-2026-05</td><td>Clark Choate &middot; wedding photography &middot; Aug 1</td><td class="r num">$1,200 <span class="dim">of $1,200</span></td><td><span class="pill ok">Paid in full</span></td></tr>
-          <tr><td>JDM-2026-04</td><td>Megan Eddy &middot; wedding videography &middot; Aug 22 <span class="fnsup">1</span></td><td class="r num">$2,200 <span class="dim">of $2,200</span></td><td><span class="pill ok">Paid in full</span></td></tr>
-        </table></div>
-        <div class="fnotes"><div class="fn"><span class="fnsup">1</span> Ledger row not yet corrected for the $150 camera-incident refund.</div></div>
-      </div>
-      <div class="card c-incident">
-        <span class="kicker">The Aug 22 incident</span>
-        <p>The main camera overheated as the bride entered &mdash; the first serious equipment failure on a wedding shoot. By the time the backup body was up and running, the aisle moment was missed &mdash; but coverage resumed in time for the vows.</p>
-        <p>What happened next is the part that matters: the bride was emailed directly that same stretch, told exactly what happened, and refunded <b>$150</b>. No deflection, no hoping she wouldn&rsquo;t notice.</p>
-        <p class="pull">&ldquo;Backup bodies and heat management are non-negotiable on wedding days.&rdquo;</p>
+      <div class="cols2">
+        <div class="card">
+          <span class="kicker">Delivered &middot; $3,400 collected</span>
+          <div class="tblwrap"><table class="tbl">
+            <tr><th>Project</th><th>Client &middot; service &middot; date</th><th class="n">Collected</th><th>Status</th></tr>
+            <tr><td>JDM-2026-05</td><td>Clark Choate &middot; photo &middot; Aug 1</td><td class="n num">$1,200 <span class="dim">of $1,200</span></td><td><span class="pill ok">Paid in full</span></td></tr>
+            <tr><td>JDM-2026-04</td><td>Megan Eddy &middot; video &middot; Aug 22 <span class="fnsup">1</span></td><td class="n num">$2,200 <span class="dim">of $2,200</span></td><td><span class="pill ok">Paid in full</span></td></tr>
+          </table></div>
+          <div class="fnotes"><p><span class="fn">1</span> Ledger row not yet corrected for the $150 camera-incident refund.</p></div>
+        </div>
+        <div class="card">
+          <span class="kicker">The Aug 22 incident</span>
+          <p style="font-size:.85rem;color:var(--t2)">The main camera overheated as the bride entered &mdash; the first serious equipment failure on a wedding shoot. By the time the backup body was up and running, the aisle moment was missed &mdash; but coverage resumed in time for the vows.</p>
+          <p style="font-size:.85rem;color:var(--t2);margin-top:8px">What happened next is the part that matters: the bride was emailed directly, told exactly what happened, and refunded <b style="color:var(--t1)">$150</b>. No deflection, no hoping she wouldn&rsquo;t notice.</p>
+          <p class="pull" style="margin-top:12px">&ldquo;Backup bodies and heat management are non-negotiable on wedding days.&rdquo;</p>
+        </div>
       </div>
       <div class="card">
         <span class="kicker">Equipment &mdash; what changes before the next wedding</span>
@@ -557,21 +587,21 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
     <div class="pbody">
       <div class="card">
         <span class="kicker">AFOQT &middot; taken Aug 31, 2026</span>
-        <p class="dim">DD-368 done and uploaded to the portal &middot; board 27OTS01R targets January 2027</p>
+        <p class="dim" style="font-size:.82rem;margin-bottom:8px">DD-368 done and uploaded to the portal &middot; board 27OTS01R targets January 2027</p>
         <div class="tblwrap"><table class="tbl">
-          <tr><th>Section</th><th class="r">Score</th><th>Note</th></tr>
-          <tr><td>Verbal</td><td class="r num">61</td><td>Solid</td></tr>
-          <tr><td>CSO</td><td class="r num">41</td><td>&mdash;</td></tr>
-          <tr><td>Pilot</td><td class="r num">35</td><td>&mdash;</td></tr>
-          <tr><td>Academic Aptitude</td><td class="r num">26</td><td>&mdash;</td></tr>
-          <tr><td>ABM</td><td class="r num">26</td><td>&mdash;</td></tr>
-          <tr><td class="qflag">Quantitative</td><td class="r num qflag">6</td><td class="qflag">Below commissioning-path minimum</td></tr>
+          <tr><th>Section</th><th class="n">Score</th><th>Note</th></tr>
+          <tr><td>Verbal</td><td class="n num">61</td><td>Solid</td></tr>
+          <tr><td>CSO</td><td class="n num">41</td><td>&mdash;</td></tr>
+          <tr><td>Pilot</td><td class="n num">35</td><td>&mdash;</td></tr>
+          <tr><td>Academic Aptitude</td><td class="n num">26</td><td>&mdash;</td></tr>
+          <tr><td>ABM</td><td class="n num">26</td><td>&mdash;</td></tr>
+          <tr><td class="qflag">Quantitative</td><td class="n num qflag">6</td><td class="qflag">Below commissioning-path minimum</td></tr>
         </table></div>
-        <p>The gap looks isolated to math rather than overall aptitude &mdash; Verbal came in solid, and the Army ASVAB was a 76. The path forward: a <b>90-day retest wait</b>, with <b>one retest allowed before a waiver is needed</b>. Quant prep is now the single highest-leverage study block on the calendar.</p>
+        <p class="note">The gap looks isolated to math rather than overall aptitude &mdash; Verbal came in solid, and the Army ASVAB was a 76. The path forward: a <b>90-day retest wait</b>, with <b>one retest allowed before a waiver is needed</b>. Quant prep is now the single highest-leverage study block on the calendar.</p>
       </div>
       <div class="card">
         <span class="kicker">MBA &middot; Clarkson, Capital Region Campus &mdash; Fall 2026</span>
-        <p class="dim">10-week accelerated term &middot; Sep 2 &ndash; Nov 3, 2026 &middot; fully online, synchronous weekly Zooms</p>
+        <p class="dim" style="font-size:.82rem;margin-bottom:8px">10-week accelerated term &middot; Sep 2 &ndash; Nov 3, 2026 &middot; fully online, synchronous weekly Zooms</p>
         <div class="tblwrap"><table class="tbl">
           <tr><th>Course</th><th>When</th><th>Instructor</th><th>Load &amp; grading</th></tr>
           <tr><td><b>FN 608</b> Financial Mgmt</td><td class="num">Mon 6&ndash;7PM</td><td>Prof. Zhilan Feng</td><td>Heaviest &mdash; 12&ndash;15 hrs/wk. 20% participation, 60% final report, 20% self-tests. Semester stock-valuation project; <b>zero late-work tolerance</b>. TI calculator recommended.</td></tr>
@@ -579,23 +609,25 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
           <tr><td><b>OM 603</b> Decision Analysis</td><td class="num">Thu 8&ndash;9PM</td><td>Prof. Alan Bowman</td><td>7 open-book quizzes (worst dropped), 2 papers, closed-book final Nov 5. Excel + Arena Simulation. Extra credit via &ldquo;C Insurance&rdquo;.</td></tr>
         </table></div>
       </div>
-      <div class="card">
-        <span class="kicker">Semester checkpoints</span>
-        <div class="tblwrap"><table class="tbl">
-          <tr><td class="num">Sep 3</td><td>OM 603 Quiz 1 &mdash; right after the first session, pre-class videos required</td></tr>
-          <tr><td class="num">Sep 17</td><td>OM 603 Quiz 2</td></tr>
-          <tr><td class="num">Wk of Oct 5</td><td>IS 606 midterm exam</td></tr>
-          <tr><td class="num">Oct 8 / 15</td><td>OM 603 Quiz 3 / Quiz 4</td></tr>
-          <tr><td class="num">Week 9</td><td>FN 608 final report due</td></tr>
-          <tr><td class="num">Nov 5</td><td>OM 603 final &mdash; in-class, closed-book, camera on</td></tr>
-        </table></div>
-        <p class="note">Week 1 is the crunch: FN 608&rsquo;s company selection and OM 603&rsquo;s Quiz 1 both land immediately.</p>
-      </div>
-      <div class="card">
-        <span class="kicker">Work &amp; systems</span>
-        <p>Back from AT a day after orientation &mdash; straight into semester pace, but manageable. Downtime between fires went into <b>Apps Script tools</b>: trackers and small utilities replacing manual, scattered Notion-and-spreadsheet work &mdash; the &ldquo;build the tool around the task&rdquo; approach.</p>
-        <p>Bigger opening: the director is considering a <b>Claude organizational license</b> for the school. JD&rsquo;s likely the de facto point person &mdash; rough rollout outline already in his head: admin controls and data handling first, early wins like Gmail triage, then shared intake/admissions workflows, documentation and governance throughout. Fill the gaps underneath PeopleSoft, not replace it.</p>
-        <p class="dim">Daily operating system: work &rarr; gym &rarr; Maxcy shower &rarr; Clarkson Hall for online classes and homework. Noticeably more productive staying out of the house &mdash; keep the day anchored on campus.</p>
+      <div class="cols2">
+        <div class="card">
+          <span class="kicker">Semester checkpoints</span>
+          <div class="tblwrap"><table class="tbl">
+            <tr><td class="num">Sep 3</td><td>OM 603 Quiz 1 &mdash; right after the first session, pre-class videos required</td></tr>
+            <tr><td class="num">Sep 17</td><td>OM 603 Quiz 2</td></tr>
+            <tr><td class="num">Wk of Oct 5</td><td>IS 606 midterm exam</td></tr>
+            <tr><td class="num">Oct 8 / 15</td><td>OM 603 Quiz 3 / Quiz 4</td></tr>
+            <tr><td class="num">Week 9</td><td>FN 608 final report due</td></tr>
+            <tr><td class="num">Nov 5</td><td>OM 603 final &mdash; in-class, closed-book, camera on</td></tr>
+          </table></div>
+          <p class="note">Week 1 is the crunch: FN 608&rsquo;s company selection and OM 603&rsquo;s Quiz 1 both land immediately.</p>
+        </div>
+        <div class="card">
+          <span class="kicker">Work &amp; systems</span>
+          <p style="font-size:.85rem;color:var(--t2)">Back from AT a day after orientation &mdash; straight into semester pace, but manageable. Downtime between fires went into <b style="color:var(--t1)">Apps Script tools</b>: trackers and small utilities replacing manual, scattered Notion-and-spreadsheet work.</p>
+          <p style="font-size:.85rem;color:var(--t2);margin-top:8px">Bigger opening: the director is considering a <b style="color:var(--t1)">Claude organizational license</b> for the school. JD&rsquo;s likely the de facto point person &mdash; admin controls and data handling first, early wins like Gmail triage, then shared intake/admissions workflows, documentation and governance throughout.</p>
+          <p class="dim" style="font-size:.8rem;margin-top:8px">Daily operating system: work &rarr; gym &rarr; Maxcy shower &rarr; Clarkson Hall for online classes and homework. Noticeably more productive staying out of the house.</p>
+        </div>
       </div>
       <div class="career-strip">
         <span class="kicker">Career thread</span>
@@ -611,29 +643,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
     <div class="phead"><h2><span class="n">07</span>Reflections</h2><p>August asked for everything and paid it back in the ledger.</p></div>
     <div class="pbody">
       <p class="pull">&ldquo;Backup bodies, cold cameras, drilled math. August&rsquo;s tuition, paid in full.&rdquo;</p>
-      <div class="card">
-        <span class="kicker">a. A clarifying cadence</span>
-        <p>Annual Training plus the AFOQT plus two weddings is not a sustainable cadence &mdash; but it was a clarifying one. Sixteen days in the field, an officer-qualifying exam, and two clients&rsquo; biggest days, back to back to back. The month proved the ceiling is higher than the routine suggests.</p>
-      </div>
-      <div class="card">
-        <span class="kicker">b. The only AT</span>
-        <p>Since the ETS is June 2027 &mdash; before the next AT cycle &mdash; Fort Drum was the one and only annual training with the unit. S1 shop, a surprise rotation to the TAC as RTO, battle drills at dawn, ten days in tents, one legendary LMTV shower run. It went about how it was expected to go, which is its own kind of good.</p>
-      </div>
-      <div class="card">
-        <span class="kicker">c. Preparation is the whole game</span>
-        <p>The camera overheated because heat management wasn&rsquo;t planned for; Quant 6 happened because math wasn&rsquo;t drilled like the job depended on it. Both get fixed the same way &mdash; systems, not willpower. The R6 II is on the shopping list; the math block is on the calendar.</p>
-      </div>
-      <div class="card">
-        <span class="kicker">d. Discipline held</span>
-        <p>Financial discipline held under the strangest income month of the year: windfalls came in, the EUC went out, and the net still printed +$4,065.06. That&rsquo;s the habit working. $5,000 swept to savings on the 28th anyway.</p>
-      </div>
-      <div class="card">
-        <span class="kicker">e. Field notes &mdash; the EUC</span>
-        <p>Picked up the InMotion V9 to upgrade the 2018 Boosted board &mdash; the board only does smooth asphalt, and the whole point was getting down the gravel driveway. So far: good but frustrating. Roads and light dirt are fine; stopping, remounting, and loose gravel are all still rough. The learning curve is the project.</p>
-      </div>
-      <div class="card">
-        <span class="kicker">f. September</span>
-        <p>Convert the pipeline (Foley and Bryson on the 26th), drill Quant, find the MBA rhythm. OTS is the clear live path &mdash; board 27OTS01R targets January 2027, AFT lands Oct 23&ndash;25. Don&rsquo;t miss the aisle.</p>
+      <div class="rgrid">
+        <div class="card rcard"><h3><span class="rn">a.</span>A clarifying cadence</h3><p>Annual Training plus the AFOQT plus two weddings is not a sustainable cadence &mdash; but it was a clarifying one. Sixteen days in the field, an officer-qualifying exam, and two clients&rsquo; biggest days, back to back to back. The month proved the ceiling is higher than the routine suggests.</p></div>
+        <div class="card rcard"><h3><span class="rn">b.</span>The only AT</h3><p>Since the ETS is June 2027 &mdash; before the next AT cycle &mdash; Fort Drum was the one and only annual training with the unit. S1 shop, a surprise rotation to the TAC as RTO, battle drills at dawn, ten days in tents, one legendary LMTV shower run. It went about how it was expected to go, which is its own kind of good.</p></div>
+        <div class="card rcard"><h3><span class="rn">c.</span>Preparation is the whole game</h3><p>The camera overheated because heat management wasn&rsquo;t planned for; Quant 6 happened because math wasn&rsquo;t drilled like the job depended on it. Both get fixed the same way &mdash; systems, not willpower. The R6 II is on the shopping list; the math block is on the calendar.</p></div>
+        <div class="card rcard"><h3><span class="rn">d.</span>Discipline held</h3><p>Financial discipline held under the strangest income month of the year: windfalls came in, the EUC went out, and the net still printed +$4,065.06. That&rsquo;s the habit working. $5,000 swept to savings on the 28th anyway.</p></div>
+        <div class="card rcard"><h3><span class="rn">e.</span>Field notes &mdash; the EUC</h3><p>Picked up the InMotion V9 to upgrade the 2018 Boosted board &mdash; the board only does smooth asphalt, and the whole point was getting down the gravel driveway. So far: good but frustrating. Roads and light dirt are fine; stopping, remounting, and loose gravel are all still rough. The learning curve is the project.</p></div>
+        <div class="card rcard"><h3><span class="rn">f.</span>September</h3><p>Convert the pipeline (Foley and Bryson on the 26th), drill Quant, find the MBA rhythm. OTS is the clear live path &mdash; board 27OTS01R targets January 2027, AFT lands Oct 23&ndash;25. Don&rsquo;t miss the aisle.</p></div>
       </div>
     </div>
 
