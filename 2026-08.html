@@ -292,52 +292,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 }
 
 </style>
-<script>
-(function(){
-  var tabs=Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
-  var panels={};
-  tabs.forEach(function(t){panels[t.id]=document.getElementById(t.getAttribute('aria-controls'));});
-  function select(tab,focus){
-    tabs.forEach(function(t){
-      var on=t===tab;
-      t.setAttribute('aria-selected',on?'true':'false');
-      t.tabIndex=on?0:-1;
-      panels[t.id].classList.toggle('on',on);
-    });
-    if(focus){
-      try{tab.focus({preventScroll:true});}catch(e){try{tab.focus();}catch(_){}}
-      try{tab.scrollIntoView({block:'nearest',inline:'nearest'});}catch(e){}
-    }
-    try{history.replaceState(null,'','#'+tab.getAttribute('data-slug'));}catch(e){}
-    document.title=tab.textContent.replace(/\s+/g,' ').trim()+' \u00B7 August 2026 \u00B7 Monthly Recap';
-  }
-  tabs.forEach(function(t,i){
-    t.addEventListener('click',function(){select(t,false);});
-    t.addEventListener('keydown',function(e){
-      var j=null;
-      if(e.key==='ArrowRight'){j=(i+1)%tabs.length;}
-      else if(e.key==='ArrowLeft'){j=(i-1+tabs.length)%tabs.length;}
-      else if(e.key==='Home'){j=0;}
-      else if(e.key==='End'){j=tabs.length-1;}
-      if(j!==null&&j!==undefined){e.preventDefault();select(tabs[j],true);}
-    });
-  });
-  var goto=document.querySelectorAll('[data-goto]');
-  Array.prototype.forEach.call(goto,function(b){
-    b.addEventListener('click',function(){
-      var t=document.getElementById('tab-'+b.getAttribute('data-goto'));
-      if(t){select(t,true);}
-    });
-  });
-  var slug=(location.hash||'').replace('#','');
-  var start=tabs[0];
-  tabs.forEach(function(t){if(t.getAttribute('data-slug')===slug){start=t;}});
-  var skip=document.querySelector('.skip');
-  if(skip){skip.addEventListener('click',function(){select(tabs[0],false);});}
-  select(start,false);
-})();
-
-</script></head>
+</head>
 <body>
 <a class="skip" href="#panel-overview">Skip to content</a>
 <header class="apphead">
@@ -438,6 +393,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
         <div class="ph-pair">
           <div><div class="k">Gym days</div><div class="v v-hero grad num">10</div></div>
           <div><div class="k">Total volume</div><div class="v v-lg num">72,905 <span style="font-size:.6em;color:var(--t3)">lb</span></div></div>
+          <div><div class="k">Avg / day</div><div class="v v-lg num">&asymp;7,291 <span style="font-size:.6em;color:var(--t3)">lb</span></div></div>
         </div>
         <p class="ph-ctx">Annual Training ran Aug 6&ndash;21 &mdash; training constrained to what the field allowed. Frisbee and soccer kept cardio alive weekly. July: 18 gym days.</p>
       </div>
@@ -547,5 +503,51 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 
 </main>
 
+<script>
+(function(){
+  var tabs=Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  var panels={};
+  tabs.forEach(function(t){panels[t.id]=document.getElementById(t.getAttribute('aria-controls'));});
+  function select(tab,focus){
+    tabs.forEach(function(t){
+      var on=t===tab;
+      t.setAttribute('aria-selected',on?'true':'false');
+      t.tabIndex=on?0:-1;
+      panels[t.id].classList.toggle('on',on);
+    });
+    if(focus){
+      try{tab.focus({preventScroll:true});}catch(e){try{tab.focus();}catch(_){}}
+      try{tab.scrollIntoView({block:'nearest',inline:'nearest'});}catch(e){}
+    }
+    try{history.replaceState(null,'','#'+tab.getAttribute('data-slug'));}catch(e){}
+    document.title=tab.textContent.replace(/\s+/g,' ').trim()+' \u00B7 August 2026 \u00B7 Monthly Recap';
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){select(t,false);});
+    t.addEventListener('keydown',function(e){
+      var j=null;
+      if(e.key==='ArrowRight'){j=(i+1)%tabs.length;}
+      else if(e.key==='ArrowLeft'){j=(i-1+tabs.length)%tabs.length;}
+      else if(e.key==='Home'){j=0;}
+      else if(e.key==='End'){j=tabs.length-1;}
+      if(j!==null&&j!==undefined){e.preventDefault();select(tabs[j],true);}
+    });
+  });
+  var goto=document.querySelectorAll('[data-goto]');
+  Array.prototype.forEach.call(goto,function(b){
+    b.addEventListener('click',function(){
+      var t=document.getElementById('tab-'+b.getAttribute('data-goto'));
+      if(t){select(t,true);}
+    });
+  });
+  var slug=(location.hash||'').replace('#','');
+  var start=tabs[0];
+  tabs.forEach(function(t){if(t.getAttribute('data-slug')===slug){start=t;}});
+  var skip=document.querySelector('.skip');
+  if(skip){skip.addEventListener('click',function(){select(tabs[0],false);});}
+  select(start,false);
+})();
+
+</script>
 </body>
 </html>
