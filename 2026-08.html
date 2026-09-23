@@ -252,37 +252,16 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .rcard p{font-size:.82rem;color:var(--t2);line-height:1.6}
 .rcard p b,.rcard p strong{color:var(--t1)}
 
-/* ---------------- section accents (restrained) ---------------- */
-.p-overview{--sec:#a9c8e8}
-.p-financial{--sec:#93d8a8}
-.p-physical{--sec:#f2b183}
-.p-spiritual{--sec:#d3c2ee}
-.p-creative{--sec:#f0a3b2}
-.p-intellectual{--sec:#8fc7e8}
-.p-reflections{--sec:#c9d4e0}
-.panel .kicker{color:var(--sec)}
-.phead h2 .n{color:var(--sec)}
-.sum .go{color:var(--sec)}
-.sum:hover{border-color:var(--sec);background:var(--s2);box-shadow:0 8px 22px -14px var(--sec)}
-.pull{border-left-color:var(--sec)}
-.fnsup{color:var(--sec);font-weight:700;font-size:.72em}
-/* gradient hero numerals (graceful fallback to solid --sec) */
-.grad{color:var(--sec,#a9c8e8)}
+/* ---------------- section accents (consolidated) ---------------- */
+.pull{border-left-color:var(--pacc,var(--bd2))}
+.fnsup{color:var(--pacc,var(--acc));font-weight:700;font-size:.72em}
+/* gradient hero numerals (graceful fallback to solid --pacc) */
+.grad{color:var(--pacc,#a9c8e8)}
 @supports ((-webkit-background-clip:text) or (background-clip:text)){
-  .grad{background:linear-gradient(180deg,#ffffff 10%,var(--sec,#a9c8e8) 120%);
+  .grad{background:linear-gradient(180deg,#ffffff 10%,var(--pacc,#a9c8e8) 120%);
     -webkit-background-clip:text;background-clip:text;
     -webkit-text-fill-color:transparent;color:transparent}
 }
-/* per-tab accent for the active state */
-.tab[data-slug="overview"]{--tabc:#a9c8e8;--tabg:rgba(169,200,232,.32)}
-.tab[data-slug="financial"]{--tabc:#93d8a8;--tabg:rgba(147,216,168,.32)}
-.tab[data-slug="physical"]{--tabc:#f2b183;--tabg:rgba(242,177,131,.32)}
-.tab[data-slug="spiritual"]{--tabc:#d3c2ee;--tabg:rgba(211,194,238,.32)}
-.tab[data-slug="creative"]{--tabc:#f0a3b2;--tabg:rgba(240,163,178,.32)}
-.tab[data-slug="intellectual"]{--tabc:#8fc7e8;--tabg:rgba(143,199,232,.32)}
-.tab[data-slug="reflections"]{--tabc:#c9d4e0;--tabg:rgba(201,212,224,.32)}
-.tab[aria-selected="true"]{background:var(--s3);color:#fff;
-  box-shadow:inset 0 0 0 1px var(--tabc),0 2px 18px -8px var(--tabg)}
 .tabs{scroll-padding:0 10px}
 .netbox{box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
 
