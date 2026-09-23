@@ -1,311 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JD Meyers &#8212; 2026 Monthly Recap</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JD Meyers — 2026 Monthly Recap</title>
+<meta name="description" content="Monthly dashboards tracking financial, physical, spiritual, intellectual, and creative progress through 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,560;0,9..144,700;1,9..144,400;1,9..144,560&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#060810;--bg2:#0C0E16;--bg3:#12151F;--bg4:#181C28;
-  --g:rgba(255,255,255,.04);--gm:rgba(255,255,255,.07);
-  --b0:rgba(255,255,255,.06);--b1:rgba(255,255,255,.10);--b2:rgba(255,255,255,.18);
-  --tx:#F5F8FC;--t2:rgba(245,248,252,.88);--t3:rgba(245,248,252,.68);--t4:rgba(245,248,252,.48);
-  --green:#00E5A0;--gdim:rgba(0,229,160,.10);
-  --blue:#4DA8FF;--bdim:rgba(77,168,255,.10);
-  --amber:#FFB830;--adim:rgba(255,184,48,.10);
-  --red:#FF4D6D;
-  --vio:#9B8FFF;
-  --rose:#FF7AA8;
-  --mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
-}
+/* ===== Monthly Recap — Design System v2 (2026-09) =====
+   Type: Fraunces (display) + Inter (body/UI)
+   Scale: major third 1.25 -> 12 / 14 / 16 / 20 / 25 / 31 / 39 / 48, fluid display
+   Numbers: Inter, tabular-nums, right-aligned in tables, one precision per column
+   Palette: warm dark editorial; elevation via tinted layers, not shadows
+*/
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--bg);color:var(--tx);min-height:100vh;-webkit-font-smoothing:antialiased}
-@keyframes orb-drift-1{0%{transform:translate(-10%,-15%) scale(1)}33%{transform:translate(15%,10%) scale(1.15)}66%{transform:translate(-5%,20%) scale(.95)}100%{transform:translate(-10%,-15%) scale(1)}}
-@keyframes orb-drift-2{0%{transform:translate(10%,20%) scale(1.05)}50%{transform:translate(-15%,-10%) scale(.9)}100%{transform:translate(10%,20%) scale(1.05)}}
-@keyframes orb-drift-3{0%,100%{opacity:.3}50%{opacity:.55}}
-@keyframes breathe-g{0%,100%{box-shadow:0 0 0 1px rgba(0,229,160,.08)}50%{box-shadow:0 0 0 1px rgba(0,229,160,.22)}}
-@keyframes dot-blink{0%,100%{opacity:1}45%,55%{opacity:.08}}
-@keyframes slide-up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@keyframes hero-pulse{0%,100%{opacity:1}45%,55%{opacity:.15}}
-.bg-orb{position:fixed;pointer-events:none;z-index:0;border-radius:50%;filter:blur(46px)}
-.bg-orb-1{top:5%;left:12%;width:46vmax;height:46vmax;background:radial-gradient(circle,rgba(0,229,160,.11) 0%,rgba(0,229,160,.03) 55%,transparent 75%);animation:orb-drift-1 22s ease-in-out infinite}
-.bg-orb-2{bottom:0%;right:5%;width:50vmax;height:50vmax;background:radial-gradient(circle,rgba(77,168,255,.09) 0%,rgba(77,168,255,.02) 55%,transparent 75%);animation:orb-drift-2 26s ease-in-out infinite}
-.bg-orb-3{top:38%;left:55%;width:34vmax;height:34vmax;background:radial-gradient(circle,rgba(155,143,255,.08) 0%,transparent 70%);animation:orb-drift-3 14s ease-in-out infinite}
-.shell{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:40px 24px 80px}
+:root{
+  --bg:#14110b; --bg-deep:#0f0c07; --surface:#1d1811; --surface-2:#241d13;
+  --line:#2f2819; --line-soft:#242015;
+  --ink:#f2ebdb; --soft:#c9bda4; --faint:#988b71;
+  --gold:#d9a441; --gold-soft:#eccf8f;
+  --green:#8fc79a; --red:#e08a76;
+  --fd:"Fraunces",Georgia,"Times New Roman",serif;
+  --fb:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  --r:14px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:radial-gradient(1100px 520px at 50% -8%,#1e1810 0%,var(--bg) 60%) fixed,var(--bg);
+  color:var(--ink);font-family:var(--fb);font-size:1rem;line-height:1.6;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+::selection{background:var(--gold);color:#14110b}
+a{color:var(--gold-soft)}
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+.num{font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"tnum" 1,"lnum" 1}
 
-/* Header */
-.hdr{margin-bottom:32px;animation:slide-up .6s ease both}
-.hdr-eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--t4);margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.live-dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:dot-blink 2.2s ease-in-out infinite}
-.hdr-title{font-size:36px;font-weight:300;letter-spacing:-.5px;color:var(--tx);margin-bottom:6px}
-.hdr-title strong{font-weight:600;color:#fff}
-.hdr-sub{font-size:14px;color:var(--t3);line-height:1.6;max-width:520px}
+/* ---------- Brand bar ---------- */
+.brandbar{border-bottom:1px solid var(--line-soft)}
+.brandbar .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px}
+.brand{font-family:var(--fd);font-size:1.125rem;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.brand em{font-style:italic;color:var(--gold)}
+.brandnav{display:flex;gap:4px}
+.brandnav a{font-size:.8125rem;font-weight:600;color:var(--soft);text-decoration:none;padding:8px 12px;border-radius:8px}
+.brandnav a:hover{color:var(--ink);background:var(--surface)}
+.brandnav a.now{color:var(--gold)}
 
-/* Year at a Glance — subtle link, not a big hero CTA */
-.year-glance-wrap{display:flex;justify-content:center;margin-bottom:26px}
-.year-glance-link{display:inline-flex;align-items:center;gap:12px;text-decoration:none;background:var(--g);border:1px solid var(--b0);border-radius:16px;padding:14px 26px;animation:slide-up .6s ease .1s both;transition:transform .25s cubic-bezier(.22,.68,0,1.15),border-color .25s ease,background .25s ease}
-.year-glance-link:hover{transform:translateY(-3px);border-color:var(--b1);background:var(--gm)}
-.ygl-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:hero-pulse 2.2s ease-in-out infinite;flex-shrink:0}
-.ygl-text{font-family:var(--mono);font-size:13px;letter-spacing:.7px;color:var(--t2);font-weight:500}
-.ygl-arrow{font-size:14px;color:var(--t4);transition:transform .25s ease}
-.year-glance-link:hover .ygl-arrow{transform:translateX(3px);color:var(--green)}
+/* ---------- Hero ---------- */
+.hero{padding:64px 0 40px}
+.kicker{font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.kicker .dot{color:var(--faint);margin:0 8px;letter-spacing:0}
+.h-display{font-family:var(--fd);font-weight:560;font-size:clamp(2.5rem,6.5vw,3.9rem);line-height:1.04;letter-spacing:-.02em;text-wrap:balance;margin-bottom:18px}
+.h-display em{font-style:italic;color:var(--gold-soft)}
+.lede{font-size:1.125rem;line-height:1.65;color:var(--soft);max-width:42rem}
+.lede strong{color:var(--ink);font-weight:600}
 
-/* Career banner */
-.career-banner{padding:14px 20px;margin-bottom:28px;background:var(--g);border:1px solid var(--b0);border-left:2px solid var(--red);animation:slide-up .6s ease .15s both}
-.cb-tag{font-family:var(--mono);font-size:8px;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-bottom:5px}
-.cb-text{font-size:13px;color:var(--t2);line-height:1.6}
-.cb-paths{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
-.cb-path{font-family:var(--mono);font-size:8px;letter-spacing:.5px;text-transform:uppercase;padding:3px 10px;border:1px solid}
+/* ---------- Hero stats ---------- */
+.statgrid{display:grid;gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:var(--r);overflow:hidden;margin:36px 0 0}
+.statgrid.cols-4{grid-template-columns:repeat(4,1fr)}
+.statgrid.cols-3{grid-template-columns:repeat(3,1fr)}
+.stat{background:var(--surface);padding:22px 24px}
+.stat .v{font-size:1.75rem;font-weight:700;letter-spacing:-.015em;line-height:1.15;font-variant-numeric:tabular-nums}
+.stat .v .u{font-size:.95rem;font-weight:600;color:var(--faint)}
+.stat .l{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:8px}
+.stat .v.pos{color:var(--green)} .stat .v.neg{color:var(--red)} .stat .v.gold{color:var(--gold-soft)}
 
-/* Month grid */
-.grid-label{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t4);margin-bottom:0;display:flex;align-items:center;gap:8px}
-.grid-label-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:14px}
-.legend-mini{display:flex;gap:10px;flex-wrap:wrap}
-.legend-mini-item{display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:8px;color:var(--t4);text-transform:uppercase;letter-spacing:.4px}
-.legend-mini-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-.grid-label::after{content:'';flex:1;height:1px;background:var(--b0)}
-.month-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px}
-@media(max-width:700px){.month-grid{grid-template-columns:1fr}}
+/* ---------- Section nav (tabs) ---------- */
+.secnav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+.secnav .wrap{display:flex;gap:2px;overflow-x:auto;padding-top:6px;padding-bottom:6px;scrollbar-width:none}
+.secnav .wrap::-webkit-scrollbar{display:none}
+.secnav a{flex:0 0 auto;font-size:.8125rem;font-weight:600;color:var(--faint);text-decoration:none;padding:10px 14px;border-radius:9px;white-space:nowrap}
+.secnav a:hover{color:var(--ink);background:var(--surface)}
+.secnav a.active{color:var(--gold);background:var(--surface-2)}
 
-/* Month cards */
-.month-card{background:var(--g);border:1px solid var(--b0);position:relative;overflow:hidden;transition:border-color .2s,transform .15s;text-decoration:none;display:block}
-.month-card:hover{border-color:var(--b2);transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.35)}
-.month-card::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.013),transparent);pointer-events:none}
-.month-card:hover::before{left:200%;transition:left .55s ease}
+/* ---------- Sections ---------- */
+section.block{padding:56px 0 8px;scroll-margin-top:76px}
+.sec-head{display:flex;align-items:baseline;gap:16px;border-bottom:1px solid var(--line-soft);padding-bottom:14px;margin-bottom:28px}
+.sec-head h2{font-family:var(--fd);font-size:1.938rem;font-weight:560;letter-spacing:-.015em;line-height:1.15}
+.sec-head .no{font-family:var(--fd);font-style:italic;color:var(--faint);font-size:1rem;min-width:2.2rem}
+.sec-sub{color:var(--soft);max-width:44rem;margin:-16px 0 28px;font-size:.95rem}
 
-/* Card states */
-.month-card.done{opacity:.55}
-.month-card.done:hover{opacity:.75;transform:none}
-.month-card.latest{border-top:1px solid var(--green);animation:breathe-g 5s ease-in-out infinite}
-.month-card.upcoming{border-top:1px solid var(--b0);opacity:.65}
-.month-card.upcoming:hover{opacity:.85}
+/* ---------- Cards & grids ---------- */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);padding:24px}
+.card h3{font-size:1rem;font-weight:700;margin-bottom:10px;letter-spacing:-.01em}
+.card h3 .k{display:block;font-size:.7rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.card p{color:var(--soft);font-size:.925rem}
+.card p+p{margin-top:10px}
+.card .big{font-size:1.25rem;font-weight:700;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.rule{border-top:1px solid var(--line-soft);margin:20px 0}
 
-/* Card inner */
-.mc-inner{padding:16px 18px}
-.mc-num{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--t4);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}
-.mc-badge{font-family:var(--mono);font-size:7.5px;letter-spacing:.8px;text-transform:uppercase;padding:2px 7px;border:1px solid}
-.mc-badge.latest{color:var(--green);border-color:rgba(0,229,160,.4)}
-.mc-badge.done{color:var(--t4);border-color:var(--b0)}
-.mc-badge.upcoming{color:var(--t4);border-color:var(--b0)}
-.mc-month{font-size:18px;font-weight:300;color:#fff;margin-bottom:3px}
-.mc-month strong{font-weight:600}
-.mc-year{font-family:var(--mono);font-size:9px;color:var(--t4);margin-bottom:12px}
+/* ---------- Tables ---------- */
+table.tbl{width:100%;border-collapse:collapse;font-size:.9rem;background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);overflow:hidden}
+.tbl th{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--surface-2)}
+.tbl td{padding:13px 16px;border-bottom:1px solid var(--line-soft);color:var(--soft);vertical-align:top}
+.tbl tr:last-child td{border-bottom:none}
+.tbl td.n,.tbl th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl td.strong,.tbl td:first-child{color:var(--ink);font-weight:600}
+.tblwrap{overflow-x:auto;border-radius:var(--r)}
+.pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--soft);white-space:nowrap}
+.pill.ok{color:var(--green);border-color:color-mix(in srgb,var(--green) 40%,transparent)}
+.pill.warn{color:var(--gold-soft);border-color:color-mix(in srgb,var(--gold) 45%,transparent)}
 
-/* Chips */
-.mc-chips{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}
-.chip{font-family:var(--mono);font-size:8px;padding:2px 8px;border:1px solid var(--b0);color:var(--t3)}
-.chip.g{border-color:rgba(0,229,160,.3);color:var(--green)}
-.chip.b{border-color:rgba(77,168,255,.3);color:var(--blue)}
-.chip.a{border-color:rgba(255,184,48,.3);color:var(--amber)}
-.chip.r{border-color:rgba(255,122,168,.3);color:var(--rose)}
-.chip.v{border-color:rgba(155,143,255,.3);color:var(--vio)}
+/* ---------- Lists ---------- */
+ul.clean{list-style:none}
+ul.clean li{padding:12px 0;border-bottom:1px solid var(--line-soft);color:var(--soft);font-size:.95rem}
+ul.clean li:last-child{border-bottom:none}
+ul.clean li b{color:var(--ink);font-weight:600}
+.timeline{list-style:none;margin-top:4px}
+.timeline li{position:relative;padding:0 0 22px 26px;color:var(--soft);font-size:.95rem}
+.timeline li::before{content:"";position:absolute;left:7px;top:8px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.timeline li::after{content:"";position:absolute;left:10px;top:20px;bottom:-2px;width:1px;background:var(--line)}
+.timeline li:last-child::after{display:none}
+.timeline .d{font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:4px}
+.timeline b{color:var(--ink);font-weight:600}
 
-/* Tagline */
-.mc-tagline{font-size:11.5px;color:var(--t3);line-height:1.55;font-style:italic;padding-top:10px;border-top:1px solid var(--b0);position:relative}
-.mc-go{position:absolute;top:16px;right:16px;width:22px;height:22px;border-radius:50%;background:var(--gm);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--t4);opacity:0;transform:translateX(-4px);transition:opacity .25s ease,transform .25s ease}
-.month-card:hover .mc-go{opacity:1;transform:translateX(0);color:var(--tx);border-color:var(--b2)}
+/* ---------- Callouts & footnotes ---------- */
+.callout{border:1px solid color-mix(in srgb,var(--gold) 35%,transparent);background:color-mix(in srgb,var(--gold) 7%,var(--surface));border-radius:var(--r);padding:20px 22px;margin:24px 0}
+.callout .k{font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.callout p{color:var(--soft);font-size:.93rem}
+.footnotes{margin-top:36px;padding-top:20px;border-top:1px solid var(--line-soft);font-size:.82rem;color:var(--faint)}
+.footnotes li{margin-bottom:8px;list-style:none;padding-left:22px;position:relative}
+.footnotes li::before{content:attr(data-n);position:absolute;left:0;color:var(--gold);font-weight:700}
 
-/* Upcoming placeholder */
-.mc-upcoming-note{font-family:var(--mono);font-size:9px;color:var(--t4);padding:8px 0;text-align:center;letter-spacing:.5px}
+/* ---------- Prose ---------- */
+.prose{max-width:44rem}
+.prose p{color:var(--soft);margin-bottom:16px;font-size:1rem}
+.prose p strong{color:var(--ink)}
+.prose .drop::first-letter{font-family:var(--fd);font-size:3.2em;float:left;line-height:.9;padding-right:10px;color:var(--gold-soft)}
+.pull{font-family:var(--fd);font-style:italic;font-size:1.5rem;line-height:1.4;letter-spacing:-.01em;color:var(--ink);border-left:2px solid var(--gold);padding-left:22px;margin:30px 0;max-width:40rem}
 
-/* Footer */
-.footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--b0);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-.footer-l{font-family:var(--mono);font-size:9px;color:var(--t4)}
-.footer-links{display:flex;gap:12px}
-.footer-link{font-family:var(--mono);font-size:9px;color:var(--t4);text-decoration:none;transition:color .15s}
-.footer-link:hover{color:var(--t2)}
+/* ---------- Month cards (index) ---------- */
+.months{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px}
+.mcard{display:block;background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);padding:24px;text-decoration:none;color:inherit;transition:border-color .2s,transform .2s}
+.mcard:hover{border-color:color-mix(in srgb,var(--gold) 55%,transparent);transform:translateY(-2px)}
+.mcard .mno{font-family:var(--fd);font-style:italic;font-size:2rem;color:var(--gold);line-height:1}
+.mcard .mt{font-family:var(--fd);font-size:1.5rem;letter-spacing:-.01em;margin:10px 0 4px}
+.mcard .my{font-size:.72rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)}
+.mcard .stats{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.mcard .stats span{font-size:.78rem;font-weight:600;color:var(--soft);background:var(--surface-2);border:1px solid var(--line-soft);padding:5px 10px;border-radius:999px;font-variant-numeric:tabular-nums}
+.mcard .desc{font-size:.88rem;color:var(--faint);line-height:1.55}
+.mcard .go{margin-top:14px;font-size:.82rem;font-weight:700;color:var(--gold)}
+.mcard.ahead{opacity:.75;border-style:dashed}
+.mcard.latest{border-color:color-mix(in srgb,var(--gold) 55%,transparent);background:linear-gradient(180deg,color-mix(in srgb,var(--gold) 8%,var(--surface)),var(--surface))}
+.mtag{font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.mtag.done{color:var(--faint)} .mtag.now{color:var(--gold)}
+
+/* ---------- Footer ---------- */
+footer.site{margin-top:80px;border-top:1px solid var(--line-soft);padding:32px 0 48px;color:var(--faint);font-size:.82rem}
+footer.site .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer.site nav{display:flex;gap:18px}
+footer.site a{color:var(--soft);text-decoration:none}
+footer.site a:hover{color:var(--gold-soft)}
+
+/* ---------- Overview extras ---------- */
+.score{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
+.score .card .big{font-size:1.6rem}
+.jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.jump a{font-size:.8rem;font-weight:600;color:var(--soft);text-decoration:none;border:1px solid var(--line-soft);border-radius:999px;padding:7px 14px}
+.jump a:hover{color:var(--gold);border-color:color-mix(in srgb,var(--gold) 50%,transparent)}
+details.goal{border:1px solid var(--line-soft);border-radius:var(--r);background:var(--surface);margin-bottom:12px;overflow:hidden}
+details.goal summary{cursor:pointer;list-style:none;padding:18px 22px;display:flex;align-items:center;gap:14px}
+details.goal summary::-webkit-details-marker{display:none}
+details.goal summary .t{font-family:var(--fd);font-size:1.15rem;letter-spacing:-.01em}
+details.goal summary .car{margin-left:auto;color:var(--gold);font-size:.8rem}
+details.goal .body{padding:0 22px 22px;color:var(--soft);font-size:.93rem;line-height:1.65}
+details.goal .body p+p{margin-top:10px}
+.mrow{display:grid;grid-template-columns:150px 1fr;gap:8px 20px;padding:14px 0;border-bottom:1px solid var(--line-soft);font-size:.92rem}
+.mrow .k{color:var(--ink);font-weight:700}
+.mrow .v{color:var(--soft)}
+.mrow .v b{color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px}
+.chip{font-size:.76rem;font-weight:700;padding:6px 12px;border-radius:999px;border:1px solid var(--line);font-variant-numeric:tabular-nums}
+.chip.up{color:var(--green);border-color:color-mix(in srgb,var(--green) 40%,transparent)}
+.chip.dn{color:var(--red);border-color:color-mix(in srgb,var(--red) 40%,transparent)}
+.chip.flat{color:var(--soft)}
+
+/* ---------- Responsive ---------- */
+@media (max-width:860px){
+  .months{grid-template-columns:1fr 1fr}
+  .score{grid-template-columns:1fr 1fr}
+  .statgrid.cols-4{grid-template-columns:1fr 1fr}
+  .statgrid.cols-3{grid-template-columns:1fr 1fr}
+  .grid2,.grid3{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .hero{padding:44px 0 28px}
+  .months{grid-template-columns:1fr}
+  .score{grid-template-columns:1fr}
+  .statgrid.cols-4,.statgrid.cols-3{grid-template-columns:1fr 1fr}
+  .stat{padding:16px 18px}
+  .stat .v{font-size:1.35rem}
+  section.block{padding:40px 0 4px}
+  .sec-head h2{font-size:1.5rem}
+  .mrow{grid-template-columns:1fr;gap:2px}
+  .brandnav a{padding:8px 8px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<div class="bg-orb bg-orb-1"></div>
-<div class="bg-orb bg-orb-2"></div>
-<div class="bg-orb bg-orb-3"></div>
-<div class="shell">
 
-<!-- Header -->
-<div class="hdr">
-  <div class="hdr-eyebrow"><span class="live-dot"></span>JD Meyers &mdash; Monthly Recap &mdash; 2026</div>
-  <div class="hdr-title"><strong>2026</strong> in Review</div>
-  <div class="hdr-sub">Monthly dashboards tracking financial, physical, spiritual, intellectual, and creative progress. The year the career locks in.</div>
-</div>
+<header class="brandbar"><div class="wrap">
+  <a class="brand" href="index.html">JD Meyers <em>&middot;</em> Monthly Recap</a>
+  <nav class="brandnav"><a class="now" href="index.html">Recap</a><a href="2026-overview.html">Year Arc</a><a href="2026-08.html">Aug 2026</a></nav>
+</div></header>
 
-<!-- Year at a Glance — subtle link to 2026-overview.html -->
-<div class="year-glance-wrap">
-<a href="2026-overview.html" class="year-glance-link">
-  <span class="ygl-dot"></span>
-  <span class="ygl-text">Year at a Glance</span>
-  <span class="ygl-arrow">&#8594;</span>
-</a>
-</div>
-
-<!-- Career banner -->
-<div class="career-banner">
-  <div class="cb-tag">2026 Career Goal &mdash; Lock it in this year</div>
-  <div class="cb-text">Three paths ran simultaneously. United closed in May. DD-368 approved and sent to the Air Force recruiter in June, the Jul 4 deadline was met. AFOQT taken Aug 31 &mdash; Verbal 61 solid, Quantitative 6 below minimum; retest after the 90-day wait. July added a new thread: started as Administrative Coordinator at Clarkson&rsquo;s Lewis School on Jul 20, closing out Campus Safety &amp; Security.</div>
-  <div class="cb-paths">
-    <span class="cb-path" style="color:var(--green);border-color:rgba(0,229,160,.35)">&#9679; Clarkson Job Started</span>
-    <span class="cb-path" style="color:var(--vio);border-color:rgba(155,143,255,.35)">&#9679; OTS Active</span>
-    <span class="cb-path" style="color:var(--amber);border-color:rgba(255,184,48,.25)">&#9675; Civil Service Pending</span>
-    <span class="cb-path" style="color:var(--t4);border-color:var(--b0)">&#215; United Closed</span>
-  </div>
-</div>
-
-<!-- Month grid -->
-<div class="grid-label-row">
-  <div class="grid-label">2026 Months</div>
-  <div class="legend-mini">
-    <span class="legend-mini-item"><span class="legend-mini-dot" style="background:var(--green)"></span>Financial</span>
-    <span class="legend-mini-item"><span class="legend-mini-dot" style="background:var(--blue)"></span>Physical</span>
-    <span class="legend-mini-item"><span class="legend-mini-dot" style="background:var(--amber)"></span>Spiritual</span>
-    <span class="legend-mini-item"><span class="legend-mini-dot" style="background:var(--rose)"></span>Creative</span>
-    <span class="legend-mini-item"><span class="legend-mini-dot" style="background:var(--vio)"></span>Career</span>
-  </div>
-</div>
-<div class="month-grid">
-
-  <!-- January — done -->
-  <a href="2026-01.html" class="month-card done">
-    <div class="mc-inner">
-      <div class="mc-num">01 <span class="mc-badge done">Done</span></div>
-      <div class="mc-month"><strong>January</strong></div>
-      <div class="mc-year">2026</div>
-      <div class="mc-chips">
-        <span class="chip g">$812 saved</span>
-        <span class="chip b">&#9733; Gym started</span>
-      </div>
-      <div class="mc-tagline">First month. Baselines set. Gym habit started.<span class="mc-go">&#8594;</span></div>
-    </div>
-  </a>
-
-  <!-- February — done -->
-  <a href="2026-02.html" class="month-card done">
-    <div class="mc-inner">
-      <div class="mc-num">02 <span class="mc-badge done">Done</span></div>
-      <div class="mc-month"><strong>February</strong></div>
-      <div class="mc-year">2026</div>
-      <div class="mc-chips">
-        <span class="chip g">$1,094 saved</span>
-      </div>
-      <div class="mc-tagline">Consistency over intensity.<span class="mc-go">&#8594;</span></div>
-    </div>
-  </a>
-
-  <!-- March — done -->
-  <a href="2026-03_v2.html" class="month-card done">
-    <div class="mc-inner">
-      <div class="mc-num">03 <span class="mc-badge done">Done</span></div>
-      <div class="mc-month"><strong>March</strong></div>
-      <div class="mc-year">2026</div>
-      <div class="mc-chips">
-        <span class="chip g">$1,444 saved</span>
-      </div>
-      <div class="mc-tagline">Wedding bookings starting to build.<span class="mc-go">&#8594;</span></div>
-    </div>
-  </a>
-
-  <!-- April — done -->
-  <a href="2026-04.html" class="month-card done">
-    <div class="mc-inner">
-      <div class="mc-num">04 <span class="mc-badge done">Done</span></div>
-      <div class="mc-month"><strong>April</strong></div>
-      <div class="mc-year">2026</div>
-      <div class="mc-chips">
-        <span class="chip g">$3,999 saved</span>
-        <span class="chip b">Bench 195lb</span>
-        <span class="chip r">3 paths open</span>
-      </div>
-      <div class="mc-tagline">Best month yet. Three career paths all in motion.<span class="mc-go">&#8594;</span></div>
-    </div>
-  </a>
-
-  <!-- May — done -->
-  <a href="2026-05.html" class="month-card done">
-    <div class="mc-inner">
-      <div class="mc-num">05 <span class="mc-badge done">Done</span></div>
-      <div class="mc-month"><strong>May</strong></div>
-      <div class="mc-year">2026</div>
-      <div class="mc-chips">
-        <span class="chip g">$2,883 saved</span>
-        <span class="chip a">Bench PR 215lb</span>
-        <span class="chip r">$2,735 photo</span>
-        <span class="chip b">92.5% &amp; 94%</span>
-      </div>
-      <div class="mc-tagline">United closed. OTS is the path. DD-368 sent. Photography delivered. Field narrowing &mdash; that&rsquo;s clarity.<span class="mc-go">&#8594;</span></div>
-    </div>
-  </a>
-
-  <!-- June — Done -->
-  <a href="2026-06.html" class="month-card done">
-    <div class="mc-inner">
-      <div class="mc-num">06 <span class="mc-badge done">Done</span></div>
-      <div class="mc-month"><strong>June</strong></div>
-      <div class="mc-year">2026</div>
-      <div class="mc-chips">
-        <span class="chip g">$2,464 saved</span>
-        <span class="chip a">8mi @ 8:37/mi &#9733;</span>
-        <span class="chip r">$1,800 photo</span>
-        <span class="chip b">4.000 term GPA</span>
-      </div>
-      <div class="mc-tagline">DD-368 approved &amp; sent to the AF recruiter &mdash; Jul 4 deadline met. Spring semester closed with a 4.0. Cardio&rsquo;s the quiet win: both outdoor runs came back faster.<span class="mc-go">&#8594;</span></div>
-    </div>
-  </a>
-
-  <!-- July — done -->
-  <a href="2026-07.html" class="month-card done">
-    <div class="mc-inner">
-      <div class="mc-num">07 <span class="mc-badge done">Done</span></div>
-      <div class="mc-month"><strong>July</strong></div>
-      <div class="mc-year">2026</div>
-      <div class="mc-chips">
-        <span class="chip g">+$600 MTD</span>
-        <span class="chip a">13.6h cardio &#9733;</span>
-        <span class="chip v">New job Jul 20</span>
-        <span class="chip b">18 gym days</span>
-      </div>
-      <div class="mc-tagline">Started as Administrative Coordinator at Clarkson&rsquo;s Lewis School, closing out Campus Safety. Training pivoted hard into frisbee, soccer, and real outdoor running. Mid-month build &mdash; figures run through Jul 26.<span class="mc-go">&#8594;</span></div>
-    </div>
-  </a>
-
-  <!-- August — LATEST -->
-  <a href="2026-08.html" class="month-card latest">
-    <div class="mc-inner">
-      <div class="mc-num">08 <span class="mc-badge latest">Latest &#9654;</span></div>
-      <div class="mc-month"><strong>August</strong></div>
-      <div class="mc-year">2026</div>
-      <div class="mc-chips">
-        <span class="chip g">+$4,065 net</span>
-        <span class="chip a">AFOQT taken 8/31</span>
-        <span class="chip r">$3,400 photo</span>
-        <span class="chip b">10 gym days</span>
-      </div>
-      <div class="mc-tagline">Best financial month of the year. AFOQT taken Aug 31 &mdash; Quant 6 below minimum, retest after the 90-day wait. Two weddings delivered; main camera overheated mid-aisle on Aug 22, $150 refunded.<span class="mc-go">&#8594;</span></div>
-    </div>
-  </a>
-
-  <!-- September–December — placeholders -->
-  <div class="month-card upcoming" style="cursor:default">
-    <div class="mc-inner">
-      <div class="mc-num">09&#8211;12 <span class="mc-badge upcoming">Ahead</span></div>
-      <div class="mc-month"><strong>Sep &mdash; Dec</strong></div>
-      <div class="mc-year">2026</div>
-      <div class="mc-chips"><span class="chip a">Nov 2 OTS Board</span><span class="chip">Haleigh Dunbar Oct 10</span></div>
-    </div>
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">JD Meyers <span class="dot">&middot;</span> Monthly Recap <span class="dot">&middot;</span> 2026</div>
+    <h1 class="h-display">2026 <em>in review.</em></h1>
+    <p class="lede">Monthly dashboards tracking financial, physical, spiritual, intellectual, and creative progress. <strong>The year the career locks in.</strong></p>
   </div>
 
-</div>
-
-<!-- Footer -->
-<div class="footer">
-  <div class="footer-l">julietdeltaone.github.io/monthly-recap &mdash; last updated Sep 22, 2026</div>
-  <div class="footer-links">
-    <a href="cbc-sermons.html" class="footer-link">Sermons</a>
-    <a href="2026-overview.html" class="footer-link">Year Arc</a>
-    <a href="2026-08.html" class="footer-link">Latest Month</a>
+  <div class="card" style="margin-top:8px">
+    <h3><span class="k">Career thread</span>2026 goal &mdash; lock it in this year</h3>
+    <p>Three paths ran simultaneously. United closed in May. DD-368 approved and sent to the Air Force recruiter in June, the Jul 4 deadline was met. AFOQT taken Aug 31 &mdash; Verbal 61 solid, Quantitative 6 below minimum; retest after the 90-day wait. July added a new thread: started as Administrative Coordinator at Clarkson&rsquo;s Lewis School on Jul 20, closing out Campus Safety &amp; Security.</p>
+    <div class="chips" style="margin-top:16px">
+      <span class="chip up">&#9679; Clarkson job started</span>
+      <span class="chip up">&#9679; OTS active</span>
+      <span class="chip flat">&#9675; Civil service pending</span>
+      <span class="chip dn">&times; United closed</span>
+    </div>
+    <p style="margin-top:16px"><a href="2026-overview.html" style="font-weight:700;text-decoration:none">Year at a Glance &rarr;</a></p>
   </div>
+
+  <section class="block" id="months">
+    <div class="sec-head"><span class="no">&#9673;</span><h2>2026 months</h2></div>
+    <div class="months">
+      <a class="mcard" href="2026-01.html"><span class="mno">01</span><span class="mtag done" style="display:block;margin-top:6px">Done</span><div class="mt">January</div><div class="my">2026</div>
+        <div class="stats"><span class="num">$812 saved</span><span>&#9733; Gym started</span></div>
+        <p class="desc">First month. Baselines set. Gym habit started.</p><span class="go">&rarr;</span></a>
+      <a class="mcard" href="2026-02.html"><span class="mno">02</span><span class="mtag done" style="display:block;margin-top:6px">Done</span><div class="mt">February</div><div class="my">2026</div>
+        <div class="stats"><span class="num">$1,094 saved</span></div>
+        <p class="desc">Consistency over intensity.</p><span class="go">&rarr;</span></a>
+      <a class="mcard" href="2026-03.html"><span class="mno">03</span><span class="mtag done" style="display:block;margin-top:6px">Done</span><div class="mt">March</div><div class="my">2026</div>
+        <div class="stats"><span class="num">$1,444 saved</span></div>
+        <p class="desc">Wedding bookings starting to build.</p><span class="go">&rarr;</span></a>
+      <a class="mcard" href="2026-04.html"><span class="mno">04</span><span class="mtag done" style="display:block;margin-top:6px">Done</span><div class="mt">April</div><div class="my">2026</div>
+        <div class="stats"><span class="num">$3,999 saved</span><span class="num">Bench 195 lb</span><span>3 paths open</span></div>
+        <p class="desc">Best month yet. Three career paths all in motion.</p><span class="go">&rarr;</span></a>
+      <a class="mcard" href="2026-05.html"><span class="mno">05</span><span class="mtag done" style="display:block;margin-top:6px">Done</span><div class="mt">May</div><div class="my">2026</div>
+        <div class="stats"><span class="num">$2,883 saved</span><span class="num">Bench PR 215 lb</span><span class="num">$2,735 photo</span><span class="num">92.5% &amp; 94%</span></div>
+        <p class="desc">United closed. OTS is the path. DD-368 sent. Photography delivered. Field narrowing &mdash; that&rsquo;s clarity.</p><span class="go">&rarr;</span></a>
+      <a class="mcard" href="2026-06.html"><span class="mno">06</span><span class="mtag done" style="display:block;margin-top:6px">Done</span><div class="mt">June</div><div class="my">2026</div>
+        <div class="stats"><span class="num">$2,464 saved</span><span class="num">8 mi @ 8:37/mi &#9733;</span><span class="num">$1,800 photo</span><span class="num">4.000 term GPA</span></div>
+        <p class="desc">DD-368 approved &amp; sent to the AF recruiter &mdash; Jul 4 deadline met. Spring semester closed with a 4.0. Cardio&rsquo;s the quiet win: both outdoor runs came back faster.</p><span class="go">&rarr;</span></a>
+      <a class="mcard" href="2026-07.html"><span class="mno">07</span><span class="mtag done" style="display:block;margin-top:6px">Done</span><div class="mt">July</div><div class="my">2026</div>
+        <div class="stats"><span class="num">+$600 MTD</span><span class="num">13.6h cardio &#9733;</span><span>New job Jul 20</span><span class="num">18 gym days</span></div>
+        <p class="desc">Started as Administrative Coordinator at Clarkson&rsquo;s Lewis School, closing out Campus Safety. Training pivoted hard into frisbee, soccer, and real outdoor running. Mid-month build &mdash; figures run through Jul 26.</p><span class="go">&rarr;</span></a>
+      <a class="mcard latest" href="2026-08.html"><span class="mno">08</span><span class="mtag now" style="display:block;margin-top:6px">Latest &#9654;</span><div class="mt">August</div><div class="my">2026</div>
+        <div class="stats"><span class="num">+$4,065 net</span><span>AFOQT taken 8/31</span><span class="num">$3,400 photo</span><span class="num">10 gym days</span></div>
+        <p class="desc">Best financial month of the year. AFOQT taken Aug 31 &mdash; Quant 6 below minimum, retest after the 90-day wait. Two weddings delivered; main camera overheated mid-aisle on Aug 22, $150 refunded.</p><span class="go">&rarr;</span></a>
+      <div class="mcard ahead"><span class="mno">09&ndash;12</span><span class="mtag done" style="display:block;margin-top:6px">Ahead</span><div class="mt">Sep &mdash; Dec</div><div class="my">2026</div>
+        <div class="stats"><span>Nov 2 OTS Board</span><span>Kayley Stets Oct 10</span></div>
+        <p class="desc">Not yet written.</p></div>
+    </div>
+  </section>
 </div>
 
-</div><!-- /shell -->
+<footer class="site"><div class="wrap">
+  <span>julietdeltaone.github.io/monthly-recap &mdash; last updated Sep 22, 2026</span>
+  <nav><a href="#">Sermons</a><a href="2026-overview.html">Year Arc</a><a href="2026-08.html">Latest Month</a></nav>
+</div></footer>
+
+<script>
+(function(){
+  var links=[].slice.call(document.querySelectorAll('.secnav a'));
+  if(!links.length)return;
+  var map={};links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a;});
+  var obs=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(a){a.classList.remove('active');});
+        var a=map[e.target.id];if(a)a.classList.add('active');
+      }
+    });
+  },{rootMargin:'-40% 0px -55% 0px'});
+  document.querySelectorAll('section.block[id]').forEach(function(s){obs.observe(s);});
+})();
+</script>
 </body>
 </html>
