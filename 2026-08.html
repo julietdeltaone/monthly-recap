@@ -212,6 +212,40 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .rcard p{font-size:.82rem;color:var(--t2);line-height:1.6}
 .rcard p b,.rcard p strong{color:var(--t1)}
 
+/* ---------------- section accents (restrained) ---------------- */
+.p-overview{--sec:#a9c8e8}
+.p-financial{--sec:#93d8a8}
+.p-physical{--sec:#f2b183}
+.p-spiritual{--sec:#d3c2ee}
+.p-creative{--sec:#f0a3b2}
+.p-intellectual{--sec:#8fc7e8}
+.p-reflections{--sec:#c9d4e0}
+.panel .kicker{color:var(--sec)}
+.phead h2 .n{color:var(--sec)}
+.sum .go{color:var(--sec)}
+.sum:hover{border-color:var(--sec);background:var(--s2);box-shadow:0 8px 22px -14px var(--sec)}
+.pull{border-left-color:var(--sec)}
+.fnsup{color:var(--sec);font-weight:700;font-size:.72em}
+/* gradient hero numerals (graceful fallback to solid --sec) */
+.grad{color:var(--sec,#a9c8e8)}
+@supports ((-webkit-background-clip:text) or (background-clip:text)){
+  .grad{background:linear-gradient(180deg,#ffffff 10%,var(--sec,#a9c8e8) 120%);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;color:transparent}
+}
+/* per-tab accent for the active state */
+.tab[data-slug="overview"]{--tabc:#a9c8e8;--tabg:rgba(169,200,232,.32)}
+.tab[data-slug="financial"]{--tabc:#93d8a8;--tabg:rgba(147,216,168,.32)}
+.tab[data-slug="physical"]{--tabc:#f2b183;--tabg:rgba(242,177,131,.32)}
+.tab[data-slug="spiritual"]{--tabc:#d3c2ee;--tabg:rgba(211,194,238,.32)}
+.tab[data-slug="creative"]{--tabc:#f0a3b2;--tabg:rgba(240,163,178,.32)}
+.tab[data-slug="intellectual"]{--tabc:#8fc7e8;--tabg:rgba(143,199,232,.32)}
+.tab[data-slug="reflections"]{--tabc:#c9d4e0;--tabg:rgba(201,212,224,.32)}
+.tab[aria-selected="true"]{background:var(--s3);color:#fff;
+  box-shadow:inset 0 0 0 1px var(--tabc),0 2px 18px -8px var(--tabg)}
+.tabs{scroll-padding:0 10px}
+.netbox{box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+
 /* ---------------- responsive ---------------- */
 @media (max-width:760px){
   .sitenav{display:none}
@@ -270,7 +304,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
       t.tabIndex=on?0:-1;
       panels[t.id].classList.toggle('on',on);
     });
-    if(focus){try{tab.focus();}catch(e){}}
+    if(focus){
+      try{tab.focus({preventScroll:true});}catch(e){try{tab.focus();}catch(_){}}
+      try{tab.scrollIntoView({block:'nearest',inline:'nearest'});}catch(e){}
+    }
     try{history.replaceState(null,'','#'+tab.getAttribute('data-slug'));}catch(e){}
     document.title=tab.textContent.replace(/\s+/g,' ').trim()+' \u00B7 August 2026 \u00B7 Monthly Recap';
   }
@@ -295,6 +332,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
   var slug=(location.hash||'').replace('#','');
   var start=tabs[0];
   tabs.forEach(function(t){if(t.getAttribute('data-slug')===slug){start=t;}});
+  var skip=document.querySelector('.skip');
+  if(skip){skip.addEventListener('click',function(){select(tabs[0],false);});}
   select(start,false);
 })();
 
@@ -331,7 +370,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
         <p class="lede">Sixteen days of Annual Training, the AFOQT on the 31st, and two weddings delivered &mdash; all while prepping the Fall MBA semester handoff. The money followed the workload: the best net of 2026.</p>
         <div class="netbox">
           <span class="kicker">Net &middot; best of 2026</span>
-          <div class="v v-hero good num">+$4,065.06</div>
+          <div class="v v-hero grad num">+$4,065.06</div>
           <div class="netrow">
             <div class="cell"><div class="k">In</div><div class="n num">$7,181.71</div></div>
             <div class="cell"><div class="k">Out</div><div class="n num">$3,116.65</div></div>
@@ -357,7 +396,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
       <div class="fstack">
         <div class="card">
           <span class="kicker">The month</span>
-          <div class="v v-hero good num">+$4,065.06</div>
+          <div class="v v-hero grad num">+$4,065.06</div>
           <div class="saveline"><span class="pct num">56.6%</span><span class="lbl">of income saved &middot; best net of 2026</span></div>
           <div class="rows" style="margin-top:12px">
             <div class="rrow"><span class="k">Income</span><span class="n num">$7,181.71</span></div>
@@ -368,7 +407,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
         <div class="card">
           <span class="kicker">Notes</span>
           <p class="note" style="margin-top:0"><b>Top category: Shopping &mdash; $1,089.</b> Driven by the InMotion V9 electric unicycle at $899 &mdash; the month&rsquo;s one big discretionary buy.</p>
-          <p class="note"><b>Square payouts: $2,384.01.</b> Paid out to JD through Square in August &mdash; one payment channel, not the income total.<sup class="fn" style="position:static;color:var(--acc)">2</sup></p>
+          <p class="note"><b>Square payouts: $2,384.01.</b> Paid out to JD through Square in August &mdash; one payment channel, not the income total.<sup class="fnsup">2</sup></p>
         </div>
       </div>
       <div class="fstack">
@@ -378,13 +417,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
             <thead><tr><th>Project</th><th>Client</th><th class="n">Collected</th><th class="n">Total</th><th>Status</th></tr></thead>
             <tbody>
               <tr><td>JDM-2026-05</td><td>Clark Choate &middot; photo &middot; Aug 1</td><td class="n num">$1,200</td><td class="n num">$1,200</td><td><span class="pill ok">Paid in full</span></td></tr>
-              <tr><td>JDM-2026-04</td><td>Megan Eddy &middot; video &middot; Aug 22</td><td class="n num">$2,200<sup style="color:var(--acc)">*</sup></td><td class="n num">$2,200</td><td><span class="pill ok">Paid in full</span></td></tr>
+              <tr><td>JDM-2026-04</td><td>Megan Eddy &middot; video &middot; Aug 22</td><td class="n num">$2,200<sup class="fnsup">1</sup></td><td class="n num">$2,200</td><td><span class="pill ok">Paid in full</span></td></tr>
             </tbody>
           </table></div>
           <div class="ptotal"><span class="dim">Ledger collections</span><b class="num">$3,400</b></div>
         </div>
         <div class="fnotes">
-          <p><span class="fn">*1</span>The Eddy row still shows the full $2,200 collected / paid in full &mdash; it does not reflect the $150 refund issued for the camera-overheat incident. The ledger needs a correction.</p>
+          <p><span class="fn">1</span>The Eddy row still shows the full $2,200 collected / paid in full &mdash; it does not reflect the $150 refund issued for the camera-overheat incident. The ledger needs a correction.</p>
           <p><span class="fn">2</span>Square payouts ($2,384.01) and ledger collections ($3,400) measure different things: payouts are one payment channel&rsquo;s August transfers; the ledger is per-project cumulative collections.</p>
         </div>
       </div>
@@ -397,7 +436,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
     <div class="pbody">
       <div class="card ph-hero">
         <div class="ph-pair">
-          <div><div class="k">Gym days</div><div class="v v-hero num">10</div></div>
+          <div><div class="k">Gym days</div><div class="v v-hero grad num">10</div></div>
           <div><div class="k">Total volume</div><div class="v v-lg num">72,905 <span style="font-size:.6em;color:var(--t3)">lb</span></div></div>
         </div>
         <p class="ph-ctx">Annual Training ran Aug 6&ndash;21 &mdash; training constrained to what the field allowed. Frisbee and soccer kept cardio alive weekly. July: 18 gym days.</p>
@@ -422,7 +461,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
     <div class="pbody">
       <div class="card" style="justify-content:center">
         <span class="kicker">Sermons logged</span>
-        <div class="sp-num num">1</div>
+        <div class="sp-num grad num">1</div>
         <div class="sp-entry">
           <div class="t">Repentance &amp; Confession</div>
           <div class="m">Aug 2 &middot; Conviction series &middot; James 5:16</div>
@@ -439,9 +478,9 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
       <div class="card c-delivered">
         <span class="kicker">Delivered &middot; $3,400 collected</span>
         <div class="prow"><div class="who"><b>Clark Choate</b><span>JDM-2026-05 &middot; Wedding photography &middot; Aug 1</span></div><div class="amt"><b class="num">$1,200</b><span class="num">of $1,200</span></div><span class="pill ok">Paid in full</span></div>
-        <div class="prow"><div class="who"><b>Megan Eddy</b><span>JDM-2026-04 &middot; Wedding videography &middot; Aug 22</span></div><div class="amt"><b class="num">$2,200*</b><span class="num">of $2,200</span></div><span class="pill ok">Paid in full</span></div>
+        <div class="prow"><div class="who"><b>Megan Eddy</b><span>JDM-2026-04 &middot; Wedding videography &middot; Aug 22</span></div><div class="amt"><b class="num">$2,200<sup class="fnsup">1</sup></b><span class="num">of $2,200</span></div><span class="pill ok">Paid in full</span></div>
         <div class="ptotal"><span class="dim">Ledger collections</span><b class="num">$3,400</b></div>
-        <div class="fnotes"><p><span class="fn">*</span>Ledger row not yet corrected for the $150 camera-incident refund.</p></div>
+        <div class="fnotes"><p><span class="fn">1</span>Ledger row not yet corrected for the $150 camera-incident refund.</p></div>
       </div>
       <div class="callout c-incident">
         <span class="kicker">The Aug 22 incident</span>
@@ -469,10 +508,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
           <thead><tr><th>Section</th><th class="n">Score</th><th>Note</th></tr></thead>
           <tbody>
             <tr><td>Verbal</td><td class="n num">61</td><td>Solid</td></tr>
-            <tr><td>CSO</td><td class="n num">41</td><td></td></tr>
-            <tr><td>Pilot</td><td class="n num">35</td><td></td></tr>
-            <tr><td>Academic Aptitude</td><td class="n num">26</td><td></td></tr>
-            <tr><td>ABM</td><td class="n num">26</td><td></td></tr>
+            <tr><td>CSO</td><td class="n num">41</td><td class="dim">&mdash;</td></tr>
+            <tr><td>Pilot</td><td class="n num">35</td><td class="dim">&mdash;</td></tr>
+            <tr><td>Academic Aptitude</td><td class="n num">26</td><td class="dim">&mdash;</td></tr>
+            <tr><td>ABM</td><td class="n num">26</td><td class="dim">&mdash;</td></tr>
             <tr><td>Quantitative</td><td class="n num qflag">6</td><td class="qflag">Below commissioning-path minimum</td></tr>
           </tbody>
         </table></div>
