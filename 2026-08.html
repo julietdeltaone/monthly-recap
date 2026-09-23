@@ -17,6 +17,13 @@
   --bd:#232329; --bd2:#32323a;
   --t1:#f4f4f6; --t2:#b8b8c0; --t3:#7f7f8a;
   --acc:#a9c8e8; --acc-soft:#cfe0f4; --acc-dim:rgba(169,200,232,.08);
+  --ov:#e7c98d; --ov-soft:#f2ddb3;
+  --fin:#93d3a2; --fin-soft:#c4e9cf;
+  --phy:#e8a583; --phy-soft:#f2c8a9;
+  --spi:#c3b1e9; --spi-soft:#dacef0;
+  --cre:#e3a8c4; --cre-soft:#eecadb;
+  --int:#a9c8e8; --int-soft:#cfe0f4;
+  --ref:#8fd0c9; --ref-soft:#bae3dd;
   --good:#8fd6a4; --bad:#e89393;
   --fd:"Space Grotesk","Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
   --fb:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
@@ -40,6 +47,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .num,.tbl{font-variant-numeric:tabular-nums}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .kicker{font-size:.6875rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--t3)}
+.panel .kicker{color:var(--pacc-soft,var(--t3))}
 .skip{position:absolute;left:12px;top:-48px;z-index:99;background:var(--s3);color:var(--t1);
   padding:10px 16px;border-radius:8px;font-size:.8125rem;font-weight:600;text-decoration:none;
   border:1px solid var(--bd2);transition:top .15s}
@@ -67,16 +75,32 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
   padding:9px 13px;border-radius:8px;transition:background .15s ease,color .15s ease}
 .tab:hover{color:var(--t1)}
 .tab[aria-selected="true"]{background:var(--s3);color:var(--t1);box-shadow:inset 0 0 0 1px var(--bd2)}
+.tab[data-slug="overview"][aria-selected="true"]{box-shadow:inset 0 0 0 1px var(--bd2),inset 0 -2px 0 var(--ov)}
+.tab[data-slug="financial"][aria-selected="true"]{box-shadow:inset 0 0 0 1px var(--bd2),inset 0 -2px 0 var(--fin)}
+.tab[data-slug="physical"][aria-selected="true"]{box-shadow:inset 0 0 0 1px var(--bd2),inset 0 -2px 0 var(--phy)}
+.tab[data-slug="spiritual"][aria-selected="true"]{box-shadow:inset 0 0 0 1px var(--bd2),inset 0 -2px 0 var(--spi)}
+.tab[data-slug="creative"][aria-selected="true"]{box-shadow:inset 0 0 0 1px var(--bd2),inset 0 -2px 0 var(--cre)}
+.tab[data-slug="intellectual"][aria-selected="true"]{box-shadow:inset 0 0 0 1px var(--bd2),inset 0 -2px 0 var(--int)}
+.tab[data-slug="reflections"][aria-selected="true"]{box-shadow:inset 0 0 0 1px var(--bd2),inset 0 -2px 0 var(--ref)}
 
 /* ---------------- stage / panels ---------------- */
 .stage{flex:1 1 auto;min-height:0;display:flex;position:relative}
 .panel{display:none;flex:1 1 auto;min-width:0;min-height:0;overflow:hidden;padding:var(--pad)}
 .panel.on{display:flex;flex-direction:column}
+/* per-tab accent context: subtle wayfinding color per section */
+.p-overview{--pacc:var(--ov);--pacc-soft:var(--ov-soft);--pacc-dim:rgba(231,201,141,.07);--pacc-bd:rgba(231,201,141,.30)}
+.p-financial{--pacc:var(--fin);--pacc-soft:var(--fin-soft);--pacc-dim:rgba(147,211,162,.07);--pacc-bd:rgba(147,211,162,.30)}
+.p-physical{--pacc:var(--phy);--pacc-soft:var(--phy-soft);--pacc-dim:rgba(232,165,131,.07);--pacc-bd:rgba(232,165,131,.30)}
+.p-spiritual{--pacc:var(--spi);--pacc-soft:var(--spi-soft);--pacc-dim:rgba(195,177,233,.07);--pacc-bd:rgba(195,177,233,.30)}
+.p-creative{--pacc:var(--cre);--pacc-soft:var(--cre-soft);--pacc-dim:rgba(227,168,196,.07);--pacc-bd:rgba(227,168,196,.30)}
+.p-intellectual{--pacc:var(--int);--pacc-soft:var(--int-soft);--pacc-dim:rgba(169,200,232,.08);--pacc-bd:rgba(169,200,232,.30)}
+.p-reflections{--pacc:var(--ref);--pacc-soft:var(--ref-soft);--pacc-dim:rgba(143,208,201,.07);--pacc-bd:rgba(143,208,201,.30)}
 .phead{flex:0 0 auto;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:var(--gap)}
 .phead h2{font-family:var(--fd);font-size:1rem;font-weight:600;letter-spacing:.02em}
-.phead h2 .n{color:var(--t3);font-weight:500;margin-right:10px}
+.phead h2 .n{color:var(--pacc,var(--t3));font-weight:500;margin-right:10px}
 .phead p{font-size:.8rem;color:var(--t3)}
-.pbody{flex:1 1 auto;min-height:0;min-width:0;display:flex;flex-direction:column;gap:var(--gap);overflow-y:auto;overscroll-behavior:contain;padding-bottom:8px}
+.pbody{flex:1 1 auto;min-height:0;min-width:0;display:flex;flex-direction:column;gap:var(--gap);overflow-y:auto;overscroll-behavior:contain;padding-bottom:8px;
+  background:radial-gradient(720px 240px at 50% -90px,var(--pacc-dim,transparent),transparent 70%)}
 
 /* ---------------- shared components ---------------- */
 .card{background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);
@@ -111,10 +135,10 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .fnotes{margin-top:auto;padding-top:10px;font-size:.7rem;color:var(--t3);line-height:1.55}
 .fnotes p{margin-bottom:6px;padding-left:18px;position:relative}
 .fnotes p:last-child{margin-bottom:0}
-.fnotes .fn{position:absolute;left:0;color:var(--acc);font-weight:700}
-.callout{border:1px solid rgba(169,200,232,.28);background:var(--acc-dim);
+.fnotes .fn{position:absolute;left:0;color:var(--pacc,var(--acc));font-weight:700}
+.callout{border:1px solid var(--pacc-bd,rgba(169,200,232,.28));background:var(--pacc-dim,var(--acc-dim));
   border-radius:var(--r);padding:clamp(12px,1.9vmin,20px)}
-.callout .kicker{color:var(--acc-soft);margin-bottom:8px;display:block}
+.callout .kicker{color:var(--pacc-soft,var(--acc-soft));margin-bottom:8px;display:block}
 .callout p{font-size:.85rem;color:var(--t2)}
 .callout p+p{margin-top:8px}
 .callout b,.callout strong{color:var(--t1)}
@@ -151,12 +175,19 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
 .sum{display:flex;flex-direction:column;justify-content:center;gap:3px;text-align:left;
   background:var(--s1);border:1px solid var(--bd);border-radius:var(--r);
   padding:clamp(10px,1.7vmin,18px);min-height:0;min-width:0;transition:border-color .15s ease,background .15s ease}
-.sum:hover{border-color:var(--bd2);background:var(--s2)}
+.sum:hover{border-color:var(--pacc-bd,var(--bd2));background:var(--s2)}
 .sum .sl{font-size:.64rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--t3)}
 .sum .sv{font-family:var(--fd);font-weight:700;font-size:clamp(1rem,1.8vw,1.4rem);
   letter-spacing:-.015em;font-variant-numeric:tabular-nums}
 .sum .ss{font-size:.74rem;color:var(--t3);line-height:1.45}
-.sum .go{font-size:.7rem;font-weight:700;color:var(--acc);margin-top:3px}
+.sum .go{font-size:.7rem;font-weight:700;color:var(--pacc,var(--acc));margin-top:3px}
+.sum[data-goto="overview"] .go{color:var(--ov)}
+.sum[data-goto="financial"] .go{color:var(--fin)}
+.sum[data-goto="physical"] .go{color:var(--phy)}
+.sum[data-goto="spiritual"] .go{color:var(--spi)}
+.sum[data-goto="creative"] .go{color:var(--cre)}
+.sum[data-goto="intellectual"] .go{color:var(--int)}
+.sum[data-goto="reflections"] .go{color:var(--ref)}
 
 /* ---------------- financial panel ---------------- */
 .fstack{display:flex;flex-direction:column;gap:var(--gap);min-height:0;min-width:0}
