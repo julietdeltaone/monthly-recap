@@ -305,6 +305,74 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
   .skip{transition:none}
 }
 
+/* ================= fidelity upgrade (2026-10-17) =================
+   Brings August up to the June/July system: glass depth, staggered
+   fadeSlideIn entrances, count-up stats, animated bars, ambient mesh,
+   spotlight reveal. Motion is deliberate only: feedback, state, and
+   softening — tokens 160/240/300ms, entrance 500ms (Jun/Jul standard).
+   Reduced motion flattens everything. */
+:root{
+  --ease:cubic-bezier(.22,.68,0,1.15);
+  --ease-out:cubic-bezier(.22,.61,.21,1);
+  --sh1:0 1px 2px rgba(0,0,0,.35),0 10px 30px -12px rgba(0,0,0,.55);
+  --sh-lift:0 2px 4px rgba(0,0,0,.4),0 18px 42px -14px rgba(0,0,0,.65);
+}
+/* ambient background mesh (July mesh-drift, neutral tint, very slow) */
+body::before{content:"";position:fixed;inset:-12%;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(560px 380px at 16% -4%,rgba(169,200,232,.06),transparent 65%),
+    radial-gradient(680px 440px at 86% 108%,rgba(169,200,232,.045),transparent 65%);
+  animation:mesh-drift 26s ease-in-out infinite alternate}
+@keyframes mesh-drift{from{transform:translate3d(-1.5%,-1%,0) scale(1)}to{transform:translate3d(1.5%,1.2%,0) scale(1.04)}}
+.apphead{position:relative;z-index:1}
+.stage{z-index:1}
+/* glass depth on cards (July: blur glass + layered shadow) */
+.card{background:linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,0) 44%),var(--s1);
+  box-shadow:var(--sh1);
+  transition:transform 240ms var(--ease-out),border-color 240ms ease,box-shadow 240ms ease,background 240ms ease}
+.callout{box-shadow:var(--sh1)}
+.netbox{position:relative;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.05),var(--sh1)}
+.career-strip{box-shadow:var(--sh1)}
+/* spotlight reveal line (June) sweeps the hero net box on panel open */
+.netbox::after{content:"";position:absolute;top:0;left:0;right:0;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,var(--pacc,var(--acc)),transparent 72%);
+  transform:scaleX(0);transform-origin:left center;opacity:0}
+.panel.on .netbox::after{animation:reveal-ln 1.8s ease-out .3s both}
+@keyframes reveal-ln{0%{transform:scaleX(0);opacity:.9}70%{transform:scaleX(1);opacity:.9}100%{transform:scaleX(1);opacity:0}}
+/* staggered entrances (June/July fadeSlideIn .5s, delays capped) */
+@keyframes fadeSlideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes rowFade{from{opacity:0}to{opacity:1}}
+.panel.on .phead{animation:fadeSlideIn .45s var(--ease) both}
+.anim-in{animation:fadeSlideIn .5s var(--ease) both;animation-delay:var(--ad,0ms)}
+.anim-row{animation:rowFade .45s ease both;animation-delay:var(--ad,0ms)}
+/* hover / press feedback */
+@media (hover:hover){
+  .sum:hover,.rcard:hover{transform:translateY(-2px);box-shadow:var(--sh-lift)}
+  .pipec{transition:transform 240ms var(--ease-out),border-color 240ms ease,box-shadow 240ms ease}
+  .pipec:hover{transform:translateY(-2px);border-color:var(--pacc-bd,var(--bd2));box-shadow:var(--sh1)}
+  .tbl tbody tr{transition:background 160ms ease}
+  .tbl tbody tr:hover td{background:rgba(255,255,255,.022)}
+}
+.tab{transition:background 160ms ease,color 160ms ease,box-shadow 240ms ease,transform 160ms ease}
+.tab:active{transform:scale(.97)}
+.sum{transition:transform 240ms var(--ease-out),border-color 240ms ease,background 240ms ease,box-shadow 240ms ease}
+.sum:active{transform:translateY(0) scale(.99)}
+.sitenav a{transition:color 160ms ease,background 160ms ease}
+.brand{transition:opacity 160ms ease}
+.brand:hover{opacity:.85}
+/* save-rate bar (Financial) — grows on panel open (June bar-grow) */
+.savebar{height:4px;border-radius:99px;background:var(--s3);overflow:hidden;margin-top:12px}
+.savebar i{display:block;height:100%;width:56.6%;border-radius:99px;
+  background:linear-gradient(90deg,var(--fin),var(--good));
+  transform:scaleX(0);transform-origin:left center}
+.panel.on .savebar i{animation:bar-grow .9s var(--ease-out) .4s both}
+@keyframes bar-grow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .savebar i{transform:scaleX(1)}
+  .netbox::after{display:none}
+}
+
 </style>
 </head>
 <body>
@@ -406,6 +474,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
             <div><div class="k">The month</div><div class="v v-hero grad num good">+$4,065.06</div></div>
           </div>
           <div class="netrow"><div class="saveline">56.6% of income saved &middot; best net of 2026</div></div>
+          <div class="savebar" role="img" aria-label="Save rate: 56.6 percent of income saved"><i></i></div>
           <div class="netrow">
             <div><div class="k">Income</div><div class="v v-md num">$7,181.71</div></div>
             <div><div class="k">Expenses</div><div class="v v-md num">$3,116.65</div></div>
@@ -687,6 +756,58 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;-webki
     }
     try{history.replaceState(null,'','#'+tab.getAttribute('data-slug'));}catch(e){}
     document.title=tab.textContent.replace(/\s+/g,' ').trim()+' \u00B7 August 2026 \u00B7 Monthly Recap';
+    animatePanel(panels[tab.id]);
+  }
+
+  /* ---- fidelity upgrade: staggered entrances + count-up stats ---- */
+  var reduceMotion=false;
+  try{reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}
+  function fmtNum(n,dec,comma){
+    var s=n.toFixed(dec);
+    if(comma){var parts=s.split('.');parts[0]=parts[0].replace(/\B(?=(\d{3})+(?!\d))/g,',');s=parts.join('.');}
+    return s;
+  }
+  function countUp(el){
+    if(el.children.length){return;}
+    var orig=el.textContent.replace(/\s+/g,' ').trim();
+    var m=orig.match(/^([^\d]*)([\d][\d,]*(?:\.\d+)?)([\s\S]*)$/);
+    if(!m){return;}
+    var prefix=m[1],numStr=m[2],suffix=m[3];
+    if(/[A-Za-z]/.test(prefix)||suffix.indexOf('/')!==-1){return;}
+    var target=parseFloat(numStr.replace(/,/g,''));
+    if(!isFinite(target)||target===0){return;}
+    var dec=(numStr.split('.')[1]||'').length;
+    var comma=numStr.indexOf(',')!==-1;
+    if(el._cuRaf){cancelAnimationFrame(el._cuRaf);}
+    var t0=null,DUR=750;
+    function step(ts){
+      if(t0===null){t0=ts;}
+      var k=Math.min(1,(ts-t0)/DUR);
+      var e=1-Math.pow(1-k,3);
+      el.textContent=prefix+fmtNum(target*e,dec,comma)+suffix;
+      if(k<1){el._cuRaf=requestAnimationFrame(step);}
+      else{el.textContent=orig;el._cuRaf=null;}
+    }
+    el._cuRaf=requestAnimationFrame(step);
+  }
+  function animatePanel(panel){
+    if(!panel||reduceMotion){return;}
+    var items=panel.querySelectorAll('.pbody .card,.pbody .callout,.pbody .career-strip,.pbody .pull');
+    Array.prototype.forEach.call(items,function(el,i){
+      el.classList.remove('anim-in');
+      el.style.setProperty('--ad',Math.min(i*55,440)+'ms');
+      void el.offsetWidth;
+      el.classList.add('anim-in');
+    });
+    var rows=panel.querySelectorAll('.tbl tr');
+    Array.prototype.forEach.call(rows,function(el,i){
+      el.classList.remove('anim-row');
+      el.style.setProperty('--ad',Math.min(120+i*28,420)+'ms');
+      void el.offsetWidth;
+      el.classList.add('anim-row');
+    });
+    var stats=panel.querySelectorAll('.v,.sv');
+    Array.prototype.forEach.call(stats,function(el){countUp(el);});
   }
   tabs.forEach(function(t,i){
     t.addEventListener('click',function(){select(t,false);});
