@@ -296,6 +296,21 @@ window.RECAP = {
        "None this month"
       ]
      ]
+    },
+    {
+     "hue": "teal",
+     "spine": "2026",
+     "blocks": [
+      {
+       "type": "sub",
+       "text": "Net by month"
+      },
+      {
+       "type": "year",
+       "metric": "net",
+       "fmt": "money"
+      }
+     ]
     }
    ]
   },
@@ -320,67 +335,713 @@ window.RECAP = {
      "blocks": [
       {
        "type": "sub",
-       "text": "Spending by category",
+       "text": "Spending by category · tap to expand",
        "right": "$3,230.09 total"
       },
       {
-       "type": "meter",
+       "type": "cats",
        "rows": [
-        [
-         "Phone & devices",
-         916.32,
-         "$916"
-        ],
-        [
-         "Groceries",
-         459.18,
-         "$459"
-        ],
-        [
-         "Dining & coffee",
-         420.27,
-         "$420"
-        ],
-        [
-         "Shopping",
-         391.97,
-         "$392"
-        ],
-        [
-         "Subscriptions",
-         278.81,
-         "$279"
-        ],
-        [
-         "Giving",
-         250.0,
-         "$250"
-        ],
-        [
-         "Health",
-         232.88,
-         "$233"
-        ],
-        [
-         "JDM Productions",
-         116.24,
-         "$116"
-        ],
-        [
-         "Tesla",
-         106.92,
-         "$107"
-        ],
-        [
-         "Personal care",
-         30.0,
-         "$30"
-        ],
-        [
-         "Entertainment",
-         27.5,
-         "$28"
-        ]
+        {
+         "name": "Phone & devices",
+         "hue": "blue",
+         "amt": 916.32,
+         "items": [
+          {
+           "date": "Sep 9",
+           "label": "Verizon, iPhone 17 Pro payoff",
+           "sub": "Chase card",
+           "amt": -833.25
+          },
+          {
+           "date": "Sep 6",
+           "label": "ESR phone accessories",
+           "sub": "Chase card",
+           "amt": -51.75
+          },
+          {
+           "date": "Sep 20",
+           "label": "Apple Store",
+           "sub": "Apple Card",
+           "amt": -31.32
+          }
+         ]
+        },
+        {
+         "name": "Groceries",
+         "hue": "green",
+         "amt": 459.18,
+         "items": [
+          {
+           "date": "Sep 13",
+           "label": "Walmart",
+           "sub": "Chase card",
+           "amt": -99.08
+          },
+          {
+           "date": "Sep 19",
+           "label": "Walmart",
+           "sub": "Chase card",
+           "amt": -84.2
+          },
+          {
+           "date": "Sep 6",
+           "label": "Walmart",
+           "sub": "Chase card",
+           "amt": -48.99
+          },
+          {
+           "date": "Sep 8",
+           "label": "Walmart",
+           "sub": "Chase card",
+           "amt": -40.98
+          },
+          {
+           "date": "Sep 27",
+           "label": "Walmart",
+           "sub": "Chase card",
+           "amt": -37.53
+          },
+          {
+           "date": "Sep 6",
+           "label": "Walmart",
+           "sub": "Chase card",
+           "amt": -26.85
+          },
+          {
+           "date": "Sep 25",
+           "label": "Walmart",
+           "sub": "Chase card",
+           "amt": -21.72
+          },
+          {
+           "date": "Sep 15",
+           "label": "Price Chopper",
+           "sub": "Chase card",
+           "amt": -17.21
+          },
+          {
+           "date": "Sep 17",
+           "label": "Price Chopper",
+           "sub": "Chase card",
+           "amt": -16.3
+          },
+          {
+           "date": "Sep 28",
+           "label": "Price Chopper",
+           "sub": "Chase card",
+           "amt": -11.53
+          },
+          {
+           "date": "Sep 25",
+           "label": "Price Chopper",
+           "sub": "Apple Cash",
+           "amt": -11.17
+          },
+          {
+           "date": "Sep 29",
+           "label": "Price Chopper",
+           "sub": "Chase card",
+           "amt": -10.97
+          },
+          {
+           "date": "Sep 18",
+           "label": "Price Chopper",
+           "sub": "Apple Cash",
+           "amt": -10.9
+          },
+          {
+           "date": "Sep 24",
+           "label": "Price Chopper",
+           "sub": "Chase card",
+           "amt": -9.02
+          },
+          {
+           "date": "Sep 23",
+           "label": "Price Chopper",
+           "sub": "Chase card",
+           "amt": -8.98
+          },
+          {
+           "date": "Sep 13",
+           "label": "Applewood Orchards",
+           "sub": "Chase card",
+           "amt": -3.75
+          }
+         ]
+        },
+        {
+         "name": "Dining & coffee",
+         "hue": "amber",
+         "amt": 420.27,
+         "items": [
+          {
+           "date": "Sep 20",
+           "label": "Mama Lucia",
+           "sub": "Chase card",
+           "amt": -37.45
+          },
+          {
+           "date": "Sep 25",
+           "label": "Tim Hortons",
+           "sub": "Chase card",
+           "amt": -30.0
+          },
+          {
+           "date": "Sep 10",
+           "label": "Village Diner",
+           "sub": "Chase card",
+           "amt": -23.3
+          },
+          {
+           "date": "Sep 16",
+           "label": "Park Bros",
+           "sub": "Chase card",
+           "amt": -17.05
+          },
+          {
+           "date": "Sep 9",
+           "label": "Park Bros",
+           "sub": "Chase card",
+           "amt": -17.05
+          },
+          {
+           "date": "Sep 12",
+           "label": "Park Bros Coffee",
+           "sub": "Apple Cash",
+           "amt": -16.63
+          },
+          {
+           "date": "Sep 8",
+           "label": "Jreck Subs",
+           "sub": "Chase card",
+           "amt": -15.86
+          },
+          {
+           "date": "Sep 30",
+           "label": "Jreck Subs",
+           "sub": "Chase card",
+           "amt": -15.22
+          },
+          {
+           "date": "Sep 7",
+           "label": "Subway",
+           "sub": "Chase card",
+           "amt": -14.83
+          },
+          {
+           "date": "Sep 3",
+           "label": "Jreck Subs",
+           "sub": "Chase card",
+           "amt": -14.74
+          },
+          {
+           "date": "Sep 11",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -12.76
+          },
+          {
+           "date": "Sep 7",
+           "label": "Sunoco",
+           "sub": "Apple Cash",
+           "amt": -11.79
+          },
+          {
+           "date": "Sep 8",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -11.42
+          },
+          {
+           "date": "Sep 4",
+           "label": "Burger King",
+           "sub": "Chase card",
+           "amt": -11.11
+          },
+          {
+           "date": "Sep 5",
+           "label": "Park Bros",
+           "sub": "Chase card",
+           "amt": -11.01
+          },
+          {
+           "date": "Sep 26",
+           "label": "Grasse River Grind",
+           "sub": "Apple Cash",
+           "amt": -10.9
+          },
+          {
+           "date": "Sep 14",
+           "label": "Sunoco",
+           "sub": "Apple Cash",
+           "amt": -10.49
+          },
+          {
+           "date": "Sep 12",
+           "label": "Jernabi Coffeehouse",
+           "sub": "Apple Cash",
+           "amt": -9.75
+          },
+          {
+           "date": "Sep 5",
+           "label": "Taco Bell",
+           "sub": "Chase card",
+           "amt": -8.93
+          },
+          {
+           "date": "Sep 2",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -7.11
+          },
+          {
+           "date": "Sep 13",
+           "label": "Tim Hortons",
+           "sub": "Chase card",
+           "amt": -6.86
+          },
+          {
+           "date": "Sep 24",
+           "label": "Taco Bell",
+           "sub": "Chase card",
+           "amt": -6.47
+          },
+          {
+           "date": "Sep 11",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -6.46
+          },
+          {
+           "date": "Sep 23",
+           "label": "Park Bros Coffee",
+           "sub": "Apple Cash",
+           "amt": -5.62
+          },
+          {
+           "date": "Sep 9",
+           "label": "Sunoco",
+           "sub": "Apple Cash",
+           "amt": -4.53
+          },
+          {
+           "date": "Sep 20",
+           "label": "Jernabi Coffeehouse",
+           "sub": "Apple Cash",
+           "amt": -4.5
+          },
+          {
+           "date": "Sep 18",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -4.31
+          },
+          {
+           "date": "Sep 8",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -4.31
+          },
+          {
+           "date": "Sep 20",
+           "label": "Tim Hortons",
+           "sub": "Chase card",
+           "amt": -4.28
+          },
+          {
+           "date": "Sep 1",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -4.25
+          },
+          {
+           "date": "Sep 9",
+           "label": "Park Bros",
+           "sub": "Chase card",
+           "amt": -4.05
+          },
+          {
+           "date": "Sep 2",
+           "label": "Taco Bell",
+           "sub": "Chase card",
+           "amt": -3.83
+          },
+          {
+           "date": "Sep 1",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -3.55
+          },
+          {
+           "date": "Sep 5",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -3.55
+          },
+          {
+           "date": "Sep 14",
+           "label": "McDonald's",
+           "sub": "Chase card",
+           "amt": -3.55
+          },
+          {
+           "date": "Sep 11",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -3.55
+          },
+          {
+           "date": "Sep 21",
+           "label": "Stewart's Shops",
+           "sub": "Apple Cash",
+           "amt": -3.55
+          },
+          {
+           "date": "Sep 17",
+           "label": "McDonald's",
+           "sub": "Chase card",
+           "amt": -3.01
+          },
+          {
+           "date": "Sep 27",
+           "label": "Tim Hortons",
+           "sub": "Chase card",
+           "amt": -2.69
+          },
+          {
+           "date": "Sep 9",
+           "label": "Sunoco",
+           "sub": "Apple Cash",
+           "amt": -2.47
+          },
+          {
+           "date": "Sep 19",
+           "label": "Park Bros Coffee",
+           "sub": "Apple Cash",
+           "amt": -2.27
+          },
+          {
+           "date": "Sep 3",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -2.26
+          },
+          {
+           "date": "Sep 2",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -2.26
+          },
+          {
+           "date": "Sep 17",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -2.26
+          },
+          {
+           "date": "Sep 8",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -2.26
+          },
+          {
+           "date": "Sep 27",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -2.26
+          },
+          {
+           "date": "Sep 10",
+           "label": "McDonald's",
+           "sub": "Chase card",
+           "amt": -2.16
+          },
+          {
+           "date": "Sep 21",
+           "label": "Tim Hortons",
+           "sub": "Chase card",
+           "amt": -1.99
+          },
+          {
+           "date": "Sep 21",
+           "label": "Stewart's Shops",
+           "sub": "Apple Cash",
+           "amt": -1.83
+          },
+          {
+           "date": "Sep 22",
+           "label": "Tim Hortons",
+           "sub": "Apple Cash",
+           "amt": -1.69
+          },
+          {
+           "date": "Sep 25",
+           "label": "Tim Hortons",
+           "sub": "Apple Cash",
+           "amt": -1.61
+          },
+          {
+           "date": "Sep 2",
+           "label": "Park Bros Coffee",
+           "sub": "Apple Cash",
+           "amt": -1.4
+          },
+          {
+           "date": "Sep 16",
+           "label": "McDonald's",
+           "sub": "Apple Cash",
+           "amt": -1.08
+          },
+          {
+           "date": "Sep 28",
+           "label": "McDonald's",
+           "sub": "Chase card",
+           "amt": -1.08
+          },
+          {
+           "date": "Sep 16",
+           "label": "McDonald's",
+           "sub": "Chase card",
+           "amt": -1.07
+          }
+         ]
+        },
+        {
+         "name": "Shopping",
+         "hue": "violet",
+         "amt": 391.97,
+         "items": [
+          {
+           "date": "Sep 9",
+           "label": "On Black backpack",
+           "sub": "Chase card",
+           "amt": -279.0
+          },
+          {
+           "date": "Sep 1",
+           "label": "Amazon",
+           "sub": "Chase card",
+           "amt": -70.19
+          },
+          {
+           "date": "Sep 7",
+           "label": "Amazon",
+           "sub": "Chase card",
+           "amt": -32.39
+          },
+          {
+           "date": "Sep 28",
+           "label": "Amazon",
+           "sub": "Chase card",
+           "amt": -10.39
+          }
+         ]
+        },
+        {
+         "name": "Subscriptions",
+         "hue": "teal",
+         "amt": 278.81,
+         "items": [
+          {
+           "date": "Sep 9",
+           "label": "Grammarly",
+           "sub": "Chase card",
+           "amt": -155.52
+          },
+          {
+           "date": "Sep 18",
+           "label": "Apple subscriptions",
+           "sub": "Apple Card",
+           "amt": -21.59
+          },
+          {
+           "date": "Sep 27",
+           "label": "Claude subscription",
+           "sub": "Chase card",
+           "amt": -21.4
+          },
+          {
+           "date": "Sep 23",
+           "label": "Higgsfield",
+           "sub": "Chase card",
+           "amt": -19.0
+          },
+          {
+           "date": "Sep 29",
+           "label": "Pentester.com",
+           "sub": "Chase card",
+           "amt": -19.0
+          },
+          {
+           "date": "Sep 30",
+           "label": "Pentester.com",
+           "sub": "Chase card",
+           "amt": 19.0
+          },
+          {
+           "date": "Sep 17",
+           "label": "Apple subscriptions",
+           "sub": "Apple Card",
+           "amt": -16.19
+          },
+          {
+           "date": "Sep 23",
+           "label": "YouTube Premium",
+           "sub": "Chase card",
+           "amt": -15.99
+          },
+          {
+           "date": "Sep 25",
+           "label": "Apple subscriptions",
+           "sub": "Apple Card",
+           "amt": -9.99
+          },
+          {
+           "date": "Sep 1",
+           "label": "Google One / storage",
+           "sub": "Apple Card",
+           "amt": -7.56
+          },
+          {
+           "date": "Sep 3",
+           "label": "ElevenLabs",
+           "sub": "Chase card",
+           "amt": -6.48
+          },
+          {
+           "date": "Sep 17",
+           "label": "Apple subscriptions",
+           "sub": "Apple Card",
+           "amt": -6.31
+          },
+          {
+           "date": "Sep 11",
+           "label": "Apple subscriptions",
+           "sub": "Apple Card",
+           "amt": 5.53
+          },
+          {
+           "date": "Sep 9",
+           "label": "Apple subscriptions",
+           "sub": "Apple Card",
+           "amt": -4.31
+          }
+         ]
+        },
+        {
+         "name": "Giving",
+         "hue": "magenta",
+         "amt": 250.0,
+         "items": [
+          {
+           "date": "Sep 10",
+           "label": "Calvary Baptist tithe",
+           "sub": "NCSB checking",
+           "amt": -250.0
+          }
+         ]
+        },
+        {
+         "name": "Health",
+         "hue": "red",
+         "amt": 232.88,
+         "items": [
+          {
+           "date": "Sep 1",
+           "label": "Hims & Hers",
+           "sub": "Chase card",
+           "amt": -175.0
+          },
+          {
+           "date": "Sep 3",
+           "label": "TRICARE Reserve Select",
+           "sub": "NCSB checking",
+           "amt": -57.88
+          }
+         ]
+        },
+        {
+         "name": "JDM Productions",
+         "hue": "orange",
+         "amt": 116.24,
+         "items": [
+          {
+           "date": "Sep 1",
+           "label": "Google Ads",
+           "sub": "Chase business card",
+           "amt": -54.7
+          },
+          {
+           "date": "Sep 11",
+           "label": "Adobe",
+           "sub": "Chase business card",
+           "amt": -32.39
+          },
+          {
+           "date": "Sep 11",
+           "label": "Pixieset galleries",
+           "sub": "Chase business card",
+           "amt": -21.6
+          },
+          {
+           "date": "Sep 11",
+           "label": "Adobe",
+           "sub": "Chase business card",
+           "amt": -7.55
+          }
+         ]
+        },
+        {
+         "name": "Tesla",
+         "hue": "sky",
+         "amt": 106.92,
+         "items": [
+          {
+           "date": "Sep 25",
+           "label": "Tesla connectivity",
+           "sub": "Chase card",
+           "amt": -106.92
+          }
+         ]
+        },
+        {
+         "name": "Personal care",
+         "hue": "slate",
+         "amt": 30.0,
+         "items": [
+          {
+           "date": "Sep 24",
+           "label": "Haircut (Sian Miller)",
+           "sub": "Venmo personal",
+           "amt": -30.0
+          }
+         ]
+        },
+        {
+         "name": "Entertainment",
+         "hue": "slate",
+         "amt": 27.5,
+         "items": [
+          {
+           "date": "Sep 5",
+           "label": "Roxy Theater",
+           "sub": "Chase card",
+           "amt": -10.0
+          },
+          {
+           "date": "Sep 11",
+           "label": "Roxy Theater",
+           "sub": "Chase card",
+           "amt": -10.0
+          },
+          {
+           "date": "Sep 26",
+           "label": "Roxy Theater",
+           "sub": "Chase card",
+           "amt": -7.5
+          }
+         ]
+        }
        ]
       }
      ]
@@ -391,42 +1052,150 @@ window.RECAP = {
      "blocks": [
       {
        "type": "sub",
-       "text": "Where the money came from",
+       "text": "Where the money came from · tap to expand",
        "right": "$2,641.19 total"
       },
       {
-       "type": "meter",
+       "type": "cats",
        "rows": [
-        [
-         "Clarkson payroll",
-         2069.85,
-         "$2,070"
-        ],
-        [
-         "Guard pay",
-         363.34,
-         "$363"
-        ],
-        [
-         "Uber",
-         116.04,
-         "$116"
-        ],
-        [
-         "Interest",
-         59.18,
-         "$59"
-        ],
-        [
-         "Other",
-         30.0,
-         "$30"
-        ],
-        [
-         "Cashback",
-         2.78,
-         "$3"
-        ]
+        {
+         "name": "Clarkson payroll",
+         "hue": "emerald",
+         "amt": 2069.85,
+         "items": [
+          {
+           "date": "Sep 17",
+           "label": "Clarkson University payroll",
+           "sub": "NCSB checking",
+           "amt": 1248.2
+          },
+          {
+           "date": "Sep 3",
+           "label": "Clarkson University payroll",
+           "sub": "NCSB checking",
+           "amt": 821.65
+          }
+         ]
+        },
+        {
+         "name": "Guard pay",
+         "hue": "green",
+         "amt": 363.34,
+         "items": [
+          {
+           "date": "Sep 1",
+           "label": "NY Army National Guard pay (DFAS)",
+           "sub": "NCSB checking",
+           "amt": 363.34
+          }
+         ]
+        },
+        {
+         "name": "Uber",
+         "hue": "slate",
+         "amt": 116.04,
+         "items": [
+          {
+           "date": "Sep 22",
+           "label": "Uber driver earnings",
+           "sub": "NCSB checking",
+           "amt": 86.86
+          },
+          {
+           "date": "Sep 29",
+           "label": "Uber driver earnings",
+           "sub": "NCSB checking",
+           "amt": 24.21
+          },
+          {
+           "date": "Sep 9",
+           "label": "Uber driver earnings",
+           "sub": "NCSB checking",
+           "amt": 4.97
+          }
+         ]
+        },
+        {
+         "name": "Interest",
+         "hue": "teal",
+         "amt": 59.18,
+         "items": [
+          {
+           "date": "Sep 1",
+           "label": "Apple Savings interest",
+           "sub": "Apple Savings",
+           "amt": 59.15
+          },
+          {
+           "date": "Sep 1",
+           "label": "Corning CU dividend",
+           "sub": "Corning CU savings",
+           "amt": 0.03
+          }
+         ]
+        },
+        {
+         "name": "Other",
+         "hue": "violet",
+         "amt": 30.0,
+         "items": [
+          {
+           "date": "Sep 26",
+           "label": "David Zufall, gift cards (Venmo)",
+           "sub": "Venmo personal",
+           "amt": 30.0
+          }
+         ]
+        },
+        {
+         "name": "Cashback",
+         "hue": "sky",
+         "amt": 2.78,
+         "items": [
+          {
+           "date": "Sep 23",
+           "label": "Apple Daily Cash",
+           "sub": "Apple Cash",
+           "amt": 0.94
+          },
+          {
+           "date": "Sep 18",
+           "label": "Apple Daily Cash",
+           "sub": "Apple Cash",
+           "amt": 0.65
+          },
+          {
+           "date": "Sep 18",
+           "label": "Apple Daily Cash",
+           "sub": "Apple Cash",
+           "amt": 0.49
+          },
+          {
+           "date": "Sep 25",
+           "label": "Apple Daily Cash",
+           "sub": "Apple Cash",
+           "amt": 0.3
+          },
+          {
+           "date": "Sep 18",
+           "label": "Apple Daily Cash",
+           "sub": "Apple Cash",
+           "amt": 0.19
+          },
+          {
+           "date": "Sep 10",
+           "label": "Apple Daily Cash",
+           "sub": "Apple Cash",
+           "amt": 0.13
+          },
+          {
+           "date": "Sep 2",
+           "label": "Apple Daily Cash",
+           "sub": "Apple Cash",
+           "amt": 0.08
+          }
+         ]
+        }
        ]
       }
      ]
@@ -1727,6 +2496,28 @@ window.RECAP = {
      ]
     },
     {
+     "hue": "teal",
+     "spine": "2026",
+     "blocks": [
+      {
+       "type": "sub",
+       "text": "Net by month",
+       "right": "tap a month"
+      },
+      {
+       "type": "year",
+       "metric": "net",
+       "fmt": "money"
+      },
+      {
+       "type": "goal",
+       "value": 17061.57,
+       "target": 10000,
+       "note": "2026 savings goal of $10,000 cleared in May. YTD shown is the chained figure."
+      }
+     ]
+    },
+    {
      "hue": "amber",
      "spine": "Notes",
      "type": "rows",
@@ -1781,11 +2572,429 @@ window.RECAP = {
      "blocks": [
       {
        "type": "sub",
-       "text": "Training days by main focus",
+       "text": "Training days · tap a day for the full session",
        "right": "28 of 30"
       },
       {
        "type": "cal",
+       "sessions": {
+        "2": [
+         [
+          "Barbell Squat",
+          "135x8, 225x5, 185x3, 165x3, 135x4"
+         ],
+         [
+          "Leg Extension",
+          "100x11, 100x11, 100x10, 120x8"
+         ],
+         [
+          "Seated Leg Curl",
+          "60x12, 100x8, 80x8"
+         ]
+        ],
+        "3": [
+         [
+          "Incline Smith Machine Press",
+          "135x7, 185x6, 155x10, 155x9"
+         ],
+         [
+          "Kneeling Kettlebell Clean (Upper Mobility)",
+          "30x15, 30x11, 30x12"
+         ],
+         [
+          "Overhead Straight Bar",
+          "60x12, 85x10, 75x10"
+         ]
+        ],
+        "4": [
+         [
+          "Close Grip Lat Pull",
+          "100x6, 200x1, 190x2, 170x9, 150x6"
+         ],
+         [
+          "Plank",
+          "2:00, 1:10"
+         ],
+         [
+          "Timed Sit Up",
+          "31 in 1:00"
+         ],
+         [
+          "Situps",
+          "15 reps"
+         ],
+         [
+          "Kettlebell Toe Raise",
+          "25x5, 15x10"
+         ],
+         [
+          "Dumbbell Curl",
+          "50x10, 50x10, 50x8, 50x6"
+         ],
+         [
+          "Pronated Curl",
+          "35x14, 35x8"
+         ]
+        ],
+        "5": [
+         [
+          "Chest Dips",
+          "5 reps, 25x12, 35x11"
+         ],
+         [
+          "Cable Crunch",
+          "100x10, 160x10, 180x4"
+         ],
+         [
+          "Treadmill Sprint",
+          "0:45 speed 11, 1:00 speed 12, 0:30 speed 12, 0:30 speed 12, 0:30 speed 12, 1:00 speed 10"
+         ]
+        ],
+        "6": [
+         [
+          "Outdoor run",
+          "9 mi @ 1:19:03"
+         ]
+        ],
+        "7": [
+         [
+          "Flat Barbell Bench Press",
+          "135x11, 175x13, 165x7"
+         ],
+         [
+          "Hand-release push-up EMOM",
+          "10 in 1:00, 9 in 1:00, 8 in 1:00, 8 in 1:00, 8 in 1:00, 8 in 1:00, 8 in 1:00, 8 in 1:00, 5 in 1:00, 5 in 1:00"
+         ],
+         [
+          "Stairs",
+          "20:00 level 7"
+         ]
+        ],
+        "8": [
+         [
+          "Lat Pulldown",
+          "105x10, 155x10, 145x7, 135x6"
+         ],
+         [
+          "Dumbbell Curl",
+          "60x10, 60x7, 60x8, 60x5"
+         ],
+         [
+          "Rear Delt Cable",
+          "20x7, 25x12, 20x10"
+         ],
+         [
+          "Split Lat Pulldown",
+          "70x10, 80x10, 80x9"
+         ],
+         [
+          "Stairs (Weighted)",
+          "25:00 30 lb vest"
+         ]
+        ],
+        "9": [
+         [
+          "Goblet Squat",
+          "55x10, 80x7, 90x5, 55x12"
+         ],
+         [
+          "Kettlebell Split Rdl (Lower Mobility)",
+          "40x10, 40x6"
+         ],
+         [
+          "Seated Leg Curl",
+          "65x15, 65x15, 100x5"
+         ],
+         [
+          "Leg Extension",
+          "100x10, 185x8, 125x8"
+         ],
+         [
+          "Treadmill run",
+          "2 mi @ 14:39"
+         ]
+        ],
+        "10": [
+         [
+          "Incline Dumbbell Bench Press",
+          "70x10, 120x10, 120x9, 120x7"
+         ],
+         [
+          "Chest Supported Cable Row",
+          "120x10, 150x10, 170x9, 190x7"
+         ],
+         [
+          "Straight Bar Cable Curl",
+          "70x10, 100x10, 90x10"
+         ],
+         [
+          "Oblique Cable",
+          "70x7, 60x8"
+         ],
+         [
+          "Zone 2 Cardio",
+          "0.75 mi @ 9:52"
+         ]
+        ],
+        "11": [
+         [
+          "Standing Barbell Press",
+          "95x5, 135x5, 145x2, 135x3"
+         ],
+         [
+          "Cable High-To-Low Fly",
+          "60x6, 90x3, 80x5"
+         ],
+         [
+          "Straight Bar Push Down",
+          "80x10, 140x9, 150x5"
+         ]
+        ],
+        "12": [
+         [
+          "Outdoor run",
+          "5 km @ 31:20"
+         ]
+        ],
+        "13": [
+         [
+          "Chin Up",
+          "4 reps, 11 reps, 5 reps"
+         ],
+         [
+          "Seated Cable Row",
+          "120x10, 110x9, 100x10"
+         ],
+         [
+          "EZ-Bar Curl",
+          "50x14, 50x12"
+         ],
+         [
+          "Stairs",
+          "20:00 level 7"
+         ]
+        ],
+        "14": [
+         [
+          "Flat Barbell Bench Press",
+          "135x10, 185x9, 185x5, 185x5"
+         ],
+         [
+          "Standing Barbell Press",
+          "95x8, 95x5, 95x5"
+         ],
+         [
+          "Plank",
+          "1:00, 1:00, 1:00"
+         ],
+         [
+          "Stairs",
+          "20:00 level 7"
+         ]
+        ],
+        "15": [
+         [
+          "Good Morning (Lower Mobility)",
+          "45x5, 75x5, 75x13"
+         ],
+         [
+          "Romanian Deadlift",
+          "150x10, 150x6"
+         ],
+         [
+          "One Leg Bosu",
+          "2:00, 1:00"
+         ],
+         [
+          "Lower Mobility",
+          "20:00"
+         ]
+        ],
+        "16": [
+         [
+          "Barbell Split Squat",
+          "95x6, 95x6, 95x6"
+         ],
+         [
+          "Seated Leg Curl",
+          "70x15, 70x15, 110x5"
+         ],
+         [
+          "Zone 2 Cardio",
+          "5 km @ 29:41"
+         ]
+        ],
+        "17": [
+         [
+          "Incline Dumbbell Bench Press",
+          "70x10, 150x6, 150x5, 120x10"
+         ],
+         [
+          "Lateral Dumbbell Raise",
+          "60x11, 60x10, 60x9"
+         ],
+         [
+          "Tricep Cable",
+          "30x21, 35x12"
+         ],
+         [
+          "Treadmill run",
+          "5 km @ 25:20"
+         ]
+        ],
+        "18": [
+         [
+          "Lat Pulldown",
+          "105x10, 160x10, 150x8, 140x7"
+         ],
+         [
+          "Dumbbell Curl",
+          "60x10, 60x10, 60x7, 60x5"
+         ]
+        ],
+        "19": [
+         [
+          "Outdoor run",
+          "5 km @ 23:39"
+         ]
+        ],
+        "20": [
+         [
+          "Standing Barbell Press",
+          "95x6, 115x8, 115x5"
+         ],
+         [
+          "Straight Bar Push Down",
+          "40x10, 80x10, 100x7, 80x7"
+         ],
+         [
+          "Overhead Straight Bar",
+          "85x11, 85x11, 90x5"
+         ]
+        ],
+        "21": [
+         [
+          "Flat Barbell Bench Press",
+          "135x10, 205x5, 205x4, 205x4"
+         ],
+         [
+          "Plank",
+          "1:30, 1:30"
+         ],
+         [
+          "Stairs (Weighted)",
+          "5:00 70 lb vest"
+         ]
+        ],
+        "22": [
+         [
+          "Deadlift",
+          "135x10, 225x5, 315x7, 225x6"
+         ],
+         [
+          "EZ-Bar Curl",
+          "70x11, 70x7, 70x7"
+         ],
+         [
+          "Stairs",
+          "20:00 level 7"
+         ]
+        ],
+        "23": [
+         [
+          "Barbell Split Squat",
+          "95x7, 95x7, 115x5"
+         ],
+         [
+          "Leg Press",
+          "135x10, 315x15, 315x6"
+         ],
+         [
+          "Plate Calf",
+          "90x15, 110x8"
+         ]
+        ],
+        "24": [
+         [
+          "Incline Dumbbell Bench Press",
+          "70x10, 140x10, 140x7, 140x7"
+         ],
+         [
+          "Lateral Dumbbell Raise",
+          "30x20, 35x23"
+         ],
+         [
+          "Treadmill run",
+          "5 km @ 28:20"
+         ]
+        ],
+        "25": [
+         [
+          "Lat Pulldown",
+          "100x10, 162.5x9, 150x7, 137.5x8"
+         ],
+         [
+          "Landmine Row To Press",
+          "35x10, 35x10"
+         ],
+         [
+          "Stairs (Weighted)",
+          "10:00 50 lb vest"
+         ]
+        ],
+        "26": [
+         [
+          "Outdoor run",
+          "5 km @ 27:15"
+         ]
+        ],
+        "28": [
+         [
+          "Flat Barbell Bench Press",
+          "135x10, 185x8, 175x7, 165x8"
+         ],
+         [
+          "EZ-Bar Skullcrusher",
+          "50x13, 50x10, 50x7"
+         ],
+         [
+          "Treadmill run",
+          "1.5 km @ 13:05"
+         ]
+        ],
+        "29": [
+         [
+          "Lat Pulldown",
+          "100x10, 150x9, 137.5x6, 125x7, 125x7"
+         ],
+         [
+          "EZ-Bar Curl",
+          "40x16, 40x8, 40x8"
+         ],
+         [
+          "Treadmill run",
+          "2 mi @ 14:15"
+         ]
+        ],
+        "30": [
+         [
+          "Kettlebell Split Rdl (Lower Mobility)",
+          "35x10, 35x11"
+         ],
+         [
+          "Smith Machine Squat",
+          "135x10, 185x9, 155x8"
+         ],
+         [
+          "Hip Abduction",
+          "110x10, 70x12"
+         ],
+         [
+          "Romanian Deadlift",
+          "80x12, 80x9"
+         ]
+        ]
+       },
        "days": {
         "2": [
          "Legs",
@@ -2048,6 +3257,32 @@ window.RECAP = {
        "Aug ref",
        "10 days · 72,905 lb"
       ]
+     ]
+    },
+    {
+     "hue": "green",
+     "spine": "2026",
+     "blocks": [
+      {
+       "type": "sub",
+       "text": "Gym days by month",
+       "right": "tap a month"
+      },
+      {
+       "type": "year",
+       "metric": "gymDays",
+       "fmt": "int",
+       "showAll": true
+      },
+      {
+       "type": "sub",
+       "text": "Volume by month, lb"
+      },
+      {
+       "type": "year",
+       "metric": "volume",
+       "fmt": "k"
+      }
      ]
     },
     {

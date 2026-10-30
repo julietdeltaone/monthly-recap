@@ -138,15 +138,19 @@
           (c[2] != null ? '<i class="b" style="height:' + (c[2] / max * 100).toFixed(1) + '%"></i>' : '') + '</div><small>' + esc(c[0]) + '</small></div>';
       }).join('') + '</div>' + (b.keys ? '<div class="key"><span><i style="background:rgba(var(--h-green),.75)"></i>' + esc(b.keys[0]) + '</span><span><i style="background:rgba(var(--h-red),.6)"></i>' + esc(b.keys[1]) + '</span></div>' : '');
     },
-    cal: function (b) {
+    cal: function (b, id) {
       var m = R.meta, first = new Date(m.year, m.mIdx, 1).getDay(), h = '';
+      var ses = b.sessions || {};
       ['S', 'M', 'T', 'W', 'T', 'F', 'S'].forEach(function (d) { h += '<div class="h">' + d + '</div>'; });
       for (var i = 0; i < first; i++) h += '<div class="dy x"></div>';
       for (var d = 1; d <= m.daysInMonth; d++) {
         var e = b.days[d], ev = (b.events || []).indexOf(d) > -1;
-        h += '<div class="dy' + (e ? ' on ' + e[1] : '') + (ev ? ' ev' : '') + '" title="' + esc(m.short + ' ' + d + (e ? ': ' + e[0] : '') + (ev && b.eventLabel ? ' (' + b.eventLabel + ')' : '')) + '"><b>' + d + '</b>' + (e ? '<span>' + esc(e[0]) + '</span>' : '') + '</div>';
+        var tg = ses[d] ? 'button type="button" data-day="' + d + '"' : 'div';
+        h += '<' + tg + ' class="dy' + (e ? ' on ' + e[1] : '') + (ev ? ' ev' : '') + '" title="' + esc(m.short + ' ' + d + (e ? ': ' + e[0] : '') + (ev && b.eventLabel ? ' (' + b.eventLabel + ')' : '')) + '"><b>' + d + '</b>' + (e ? '<span>' + esc(e[0]) + '</span>' : '') + '</' + tg.split(' ')[0] + '>';
       }
-      return '<div class="cal">' + h + '</div>' + (b.legend ? '<div class="key">' + b.legend.map(function (l) { return '<span class="' + l[1] + '"><i style="background:rgba(var(--c),.6)"></i>' + esc(l[0]) + '</span>'; }).join('') + '</div>' : '');
+      var days = Object.keys(ses).map(Number).sort(function (a, c) { return a - c; });
+      var panel = days.length ? '<div class="sess fill" id="' + id + '" data-cal="' + esc(JSON.stringify(ses)) + '" data-def="' + (b.defaultDay || days[days.length - 1]) + '"></div>' : '';
+      return '<div class="cal" data-for="' + id + '">' + h + '</div>' + panel + (b.legend ? '<div class="key">' + b.legend.map(function (l) { return '<span class="' + l[1] + '"><i style="background:rgba(var(--c),.6)"></i>' + esc(l[0]) + '</span>'; }).join('') + '</div>' : '');
     },
     tx: function (b, id) {
       var kinds = [['all', 'All'], ['in', 'Money in'], ['out', 'Money out'], ['mv', 'Moved']];
@@ -154,9 +158,45 @@
       b.items.forEach(function (t) { counts[t.kind]++; });
       return '<div class="filters" data-tx="' + id + '">' + kinds.map(function (k, i) {
         return '<button type="button" class="chip sm" data-k="' + k[0] + '" aria-pressed="' + (i === 0) + '">' + k[1] + ' <span class="n">' + counts[k[0]] + '</span></button>';
-      }).join('') + '</div><div class="tx" id="' + id + '">' + b.items.map(function (t) {
-        return '<div class="fill t" data-k="' + t.kind + '"><span class="d">' + esc(t.date) + '</span><span class="l">' + esc(t.label) + (t.sub ? '<small>' + esc(t.sub) + '</small>' : '') + '</span><span class="a ' + t.kind + '">' + (t.kind === 'in' ? '+' : t.kind === 'out' ? '−' : '') + money(Math.abs(t.amt)).replace('$', '$') + '</span></div>';
+      }).join('') + '<span class="sp"></span><button type="button" class="chip sm" data-sort="date" aria-pressed="true">By date</button><button type="button" class="chip sm" data-sort="amt" aria-pressed="false">By amount</button></div><div class="tx" id="' + id + '">' + b.items.map(function (t, i) {
+        return '<div class="fill t" data-k="' + t.kind + '" data-i="' + i + '" data-a="' + Math.abs(t.amt) + '"><span class="d">' + esc(t.date) + '</span><span class="l">' + esc(t.label) + (t.sub ? '<small>' + esc(t.sub) + '</small>' : '') + '</span><span class="a ' + t.kind + '">' + (t.kind === 'in' ? '+' : t.kind === 'out' ? '−' : '') + money(Math.abs(t.amt)).replace('$', '$') + '</span></div>';
       }).join('') + '</div>' + (b.items.length > TX_LIMIT ? '<button type="button" class="chip sm more" data-more="' + id + '">Show all</button>' : '');
+    },
+    /* expandable categories (from June/July): tap a row to see its line items */
+    cats: function (b) {
+      var max = 0, tot = 0;
+      b.rows.forEach(function (r) { max = Math.max(max, Math.abs(r.amt)); tot += r.amt; });
+      return '<div class="cats">' + b.rows.map(function (r) {
+        var pct = tot ? r.amt / tot * 100 : 0;
+        return '<details class="cat ' + (r.hue || 'slate') + '"><summary><i class="dt"></i><span class="nm">' + esc(r.name) + '</span><span class="ct">' + r.items.length + '</span><span class="pc">' + pct.toFixed(1) + '%</span><b>' + money(r.amt) + '</b><span class="chev" aria-hidden="true"></span>' +
+          '<span class="hbar"><i style="width:' + (max ? Math.abs(r.amt) / max * 100 : 0).toFixed(1) + '%"></i></span></summary><div class="tx">' +
+          r.items.map(function (t) {
+            return '<div class="fill t"><span class="d">' + esc(t.date) + '</span><span class="l">' + esc(t.label) + (t.sub ? '<small>' + esc(t.sub) + '</small>' : '') + '</span><span class="a ' + (t.amt > 0 ? 'in' : '') + '">' + (t.amt > 0 ? '+' : '\u2212') + money(Math.abs(t.amt)) + '</span></div>';
+          }).join('') + '</div></details>';
+      }).join('') + '</div>';
+    },
+    /* twelve-month bars from data/2026-year.js; current month highlighted, each month links to its page */
+    year: function (b) {
+      var Y = window.YEAR; if (!Y || !Y[b.metric]) return '';
+      var v = Y[b.metric], lo = 0, hi = 0;
+      v.forEach(function (x) { if (x != null) { lo = Math.min(lo, x); hi = Math.max(hi, x); } });
+      if (hi === lo) hi = lo + 1;
+      var span = hi - lo, zero = (hi / span * 100);
+      function fmt(x) { return b.fmt === 'money' ? money(x, { whole: true }) : b.fmt === 'k' ? Math.round(x / 1000) + 'k' : String(x); }
+      return '<div class="yr">' + v.map(function (x, i) {
+        var cur = i === R.meta.mIdx, f = Y.files && Y.files[i], tag = f && !cur ? 'a href="' + esc(f) + '"' : 'div';
+        var bar = '';
+        if (x != null) {
+          var hgt = Math.abs(x) / span * 100;
+          bar = '<i class="' + (x < 0 ? 'neg' : '') + '" style="' + (x < 0 ? 'top:' + zero.toFixed(1) : 'bottom:' + (100 - zero).toFixed(1)) + '%;height:' + Math.max(1.5, hgt).toFixed(1) + '%"></i>';
+        }
+        return '<' + tag + ' class="ym' + (cur ? ' cur' : '') + (x == null ? ' na' : '') + '" title="' + esc(Y.months[i] + (x != null ? ': ' + fmt(x) : '')) + '"><small>' + (x != null && (cur || b.showAll) ? esc(fmt(x)) : '&nbsp;') + '</small><span class="yb"><u style="top:' + zero.toFixed(1) + '%"></u>' + bar + '</span><em>' + esc(Y.months[i].charAt(0)) + '</em></' + tag.split(' ')[0] + '>';
+      }).join('') + '</div>';
+    },
+    goal: function (b) {
+      var pct = Math.min(100, b.value / b.target * 100);
+      return '<div class="goal"><div><b class="num">' + money(b.value) + '</b><span>of ' + money(b.target, { whole: true }) + '</span></div><span class="pct">' + (b.value / b.target * 100).toFixed(0) + '%</span></div>' +
+        '<div class="hbar tall"><i style="width:' + pct.toFixed(1) + '%"></i></div>' + (b.note ? '<p class="note">' + rich(b.note) + '</p>' : '');
     },
     cards: function (b) {
       return '<div class="cards' + (b.one ? ' one' : '') + '">' + b.cards.map(function (c) {
@@ -212,6 +252,7 @@
   /* ---------- routing: one domain at a time, by hash ---------- */
   var parts = document.getElementById('parts');
   var sideEl = null;
+  parts.addEventListener('toggle', function () { fitSide(); }, true);
   function show(id, fromClick) {
     var d = null;
     R.domains.forEach(function (x) { if (x.id === id) d = x; });
@@ -223,6 +264,7 @@
       if (c.getAttribute('data-d') === d.id) c.setAttribute('aria-current', 'page'); else c.removeAttribute('aria-current');
     });
     wireTx();
+    wireCal();
     fitSide();
     if (fromClick) {
       var barEl = document.querySelector('.bar');
@@ -245,6 +287,22 @@
   var rz = false;
   window.addEventListener('resize', function () { if (!rz) { rz = true; requestAnimationFrame(function () { rz = false; fitSide(); }); } }, { passive: true });
 
+  /* training calendar: tap a day to see every exercise and set logged */
+  function wireCal() {
+    [].forEach.call(parts.querySelectorAll('.cal[data-for]'), function (cal) {
+      var panel = document.getElementById(cal.getAttribute('data-for')); if (!panel) return;
+      var ses = JSON.parse(panel.getAttribute('data-cal'));
+      function pick(d) {
+        [].forEach.call(cal.querySelectorAll('[data-day]'), function (x) { x.setAttribute('aria-pressed', x.getAttribute('data-day') === String(d) ? 'true' : 'false'); });
+        var date = new Date(R.meta.year, R.meta.mIdx, d);
+        panel.innerHTML = '<div class="sub"><span>' + esc(date.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' })) + '</span><span>' + ses[d].length + ' exercises</span></div>' +
+          '<div class="sx">' + ses[d].map(function (e) { return '<span class="en">' + esc(e[0]) + '</span><span class="es">' + esc(e[1]) + '</span>'; }).join('') + '</div>';
+      }
+      cal.addEventListener('click', function (e) { var b = e.target.closest('[data-day]'); if (b) { pick(b.getAttribute('data-day')); fitSide(); } });
+      pick(panel.getAttribute('data-def'));
+    });
+  }
+
   /* long ledgers show the first TX_LIMIT rows of the active filter until "Show all" */
   function wireTx() {
     [].forEach.call(parts.querySelectorAll('.filters[data-tx]'), function (f) {
@@ -263,8 +321,16 @@
       }
       f.addEventListener('click', function (e) {
         var b = e.target.closest('button'); if (!b) return;
+        if (b.hasAttribute('data-sort')) {
+          var by = b.getAttribute('data-sort');
+          [].forEach.call(f.querySelectorAll('[data-sort]'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+          [].slice.call(list.children).sort(function (p, q) {
+            return by === 'amt' ? q.getAttribute('data-a') - p.getAttribute('data-a') : p.getAttribute('data-i') - q.getAttribute('data-i');
+          }).forEach(function (r) { list.appendChild(r); });
+          apply(); return;
+        }
         k = b.getAttribute('data-k'); all = false;
-        [].forEach.call(f.querySelectorAll('button'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        [].forEach.call(f.querySelectorAll('[data-k]'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
         apply(); fitSide();
       });
       if (more) more.addEventListener('click', function () { all = true; apply(); fitSide(); });
@@ -326,6 +392,13 @@
     });
   }
   window.addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(upd); } }, { passive: true });
+
+  /* back to top: appears after scrolling down a screen */
+  var up = document.createElement('button');
+  up.type = 'button'; up.className = 'up'; up.setAttribute('aria-label', 'Back to top'); up.innerHTML = '&#8593;';
+  up.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: rm.matches ? 'auto' : 'smooth' }); });
+  document.body.appendChild(up);
+  window.addEventListener('scroll', function () { up.classList.toggle('show', (window.scrollY || 0) > window.innerHeight); }, { passive: true });
 
   show(current(), false);
   upd();

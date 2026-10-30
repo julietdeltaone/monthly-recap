@@ -289,6 +289,21 @@ window.RECAP = {
        "Oct 23 to 25, Camp Smith"
       ]
      ]
+    },
+    {
+     "hue": "teal",
+     "spine": "2026",
+     "blocks": [
+      {
+       "type": "sub",
+       "text": "Net by month"
+      },
+      {
+       "type": "year",
+       "metric": "net",
+       "fmt": "money"
+      }
+     ]
     }
    ]
   },
@@ -313,72 +328,684 @@ window.RECAP = {
      "blocks": [
       {
        "type": "sub",
-       "text": "Spending by category",
+       "text": "Spending by category · tap to expand",
        "right": "$2,540.52 total"
       },
       {
-       "type": "meter",
+       "type": "cats",
        "rows": [
-        [
-         "JDM Productions",
-         710.38,
-         "$710"
-        ],
-        [
-         "Subscriptions",
-         446.06,
-         "$446"
-        ],
-        [
-         "Groceries",
-         350.31,
-         "$350"
-        ],
-        [
-         "Dining & coffee",
-         350.05,
-         "$350"
-        ],
-        [
-         "Giving",
-         250.0,
-         "$250"
-        ],
-        [
-         "Tesla",
-         157.07,
-         "$157"
-        ],
-        [
-         "Shopping",
-         98.38,
-         "$98"
-        ],
-        [
-         "Health",
-         86.86,
-         "$87"
-        ],
-        [
-         "Phone & devices",
-         30.59,
-         "$31"
-        ],
-        [
-         "Personal care",
-         30.0,
-         "$30"
-        ],
-        [
-         "Other",
-         19.57,
-         "$20"
-        ],
-        [
-         "Fees & travel",
-         11.25,
-         "$11"
-        ]
+        {
+         "name": "JDM Productions",
+         "hue": "orange",
+         "amt": 710.38,
+         "items": [
+          {
+           "date": "Oct 13",
+           "label": "B&H Photo, headshot studio kit",
+           "sub": "Chase business card",
+           "amt": -594.35
+          },
+          {
+           "date": "Oct 1",
+           "label": "Google Ads",
+           "sub": "Chase business card",
+           "amt": -54.49
+          },
+          {
+           "date": "Oct 11",
+           "label": "Adobe",
+           "sub": "Chase business card",
+           "amt": -32.39
+          },
+          {
+           "date": "Oct 11",
+           "label": "Pixieset galleries",
+           "sub": "Chase business card",
+           "amt": -21.6
+          },
+          {
+           "date": "Oct 11",
+           "label": "Adobe",
+           "sub": "Chase business card",
+           "amt": -7.55
+          }
+         ]
+        },
+        {
+         "name": "Subscriptions",
+         "hue": "teal",
+         "amt": 446.06,
+         "items": [
+          {
+           "date": "Oct 21",
+           "label": "Apple subscriptions",
+           "sub": "Apple Card",
+           "amt": -114.28
+          },
+          {
+           "date": "Oct 10",
+           "label": "Google One / storage",
+           "sub": "Chase card",
+           "amt": -107.99
+          },
+          {
+           "date": "Oct 9",
+           "label": "Origin finance app (annual)",
+           "sub": "Apple Card",
+           "amt": -99.0
+          },
+          {
+           "date": "Oct 13",
+           "label": "Apple subscriptions",
+           "sub": "Apple Card",
+           "amt": -59.37
+          },
+          {
+           "date": "Oct 5",
+           "label": "Apple subscriptions",
+           "sub": "Apple Card",
+           "amt": -30.22
+          },
+          {
+           "date": "Oct 1",
+           "label": "ChatGPT",
+           "sub": "Apple Card",
+           "amt": -21.6
+          },
+          {
+           "date": "Oct 27",
+           "label": "Claude subscription",
+           "sub": "Chase card",
+           "amt": -21.4
+          },
+          {
+           "date": "Oct 12",
+           "label": "Higgsfield refund",
+           "sub": "Chase card",
+           "amt": 18.16
+          },
+          {
+           "date": "Oct 12",
+           "label": "Higgsfield refund",
+           "sub": "Chase card",
+           "amt": 18.16
+          },
+          {
+           "date": "Oct 12",
+           "label": "Higgsfield refund",
+           "sub": "Chase card",
+           "amt": 18.16
+          },
+          {
+           "date": "Oct 12",
+           "label": "Higgsfield refund",
+           "sub": "Chase card",
+           "amt": 18.16
+          },
+          {
+           "date": "Oct 23",
+           "label": "YouTube Premium",
+           "sub": "Chase card",
+           "amt": -15.99
+          },
+          {
+           "date": "Oct 3",
+           "label": "Wispr Flow",
+           "sub": "Chase business card",
+           "amt": -15.0
+          },
+          {
+           "date": "Oct 22",
+           "label": "DoorDash DashPass",
+           "sub": "Chase card",
+           "amt": -9.99
+          },
+          {
+           "date": "Oct 25",
+           "label": "Apple subscriptions",
+           "sub": "Apple Card",
+           "amt": -9.99
+          },
+          {
+           "date": "Oct 1",
+           "label": "Google One / storage",
+           "sub": "Apple Card",
+           "amt": -7.56
+          },
+          {
+           "date": "Oct 17",
+           "label": "Apple subscriptions",
+           "sub": "Apple Card",
+           "amt": -6.31
+          }
+         ]
+        },
+        {
+         "name": "Groceries",
+         "hue": "green",
+         "amt": 350.31,
+         "items": [
+          {
+           "date": "Oct 6",
+           "label": "Walmart",
+           "sub": "Chase card",
+           "amt": -117.46
+          },
+          {
+           "date": "Oct 25",
+           "label": "Walmart",
+           "sub": "Chase card",
+           "amt": -50.69
+          },
+          {
+           "date": "Oct 14",
+           "label": "Walmart Supercenter",
+           "sub": "Apple Cash",
+           "amt": -49.75
+          },
+          {
+           "date": "Oct 22",
+           "label": "Walmart",
+           "sub": "Chase card",
+           "amt": -21.14
+          },
+          {
+           "date": "Oct 21",
+           "label": "Price Chopper",
+           "sub": "Chase card",
+           "amt": -16.03
+          },
+          {
+           "date": "Oct 5",
+           "label": "Price Chopper",
+           "sub": "Chase card",
+           "amt": -15.16
+          },
+          {
+           "date": "Oct 29",
+           "label": "Price Chopper",
+           "sub": "Chase card",
+           "amt": -14.5
+          },
+          {
+           "date": "Oct 20",
+           "label": "Price Chopper",
+           "sub": "Chase card",
+           "amt": -12.18
+          },
+          {
+           "date": "Oct 14",
+           "label": "Price Chopper",
+           "sub": "Apple Cash",
+           "amt": -12.08
+          },
+          {
+           "date": "Oct 1",
+           "label": "Price Chopper",
+           "sub": "Chase card",
+           "amt": -11.98
+          },
+          {
+           "date": "Oct 15",
+           "label": "Price Chopper",
+           "sub": "Apple Cash",
+           "amt": -11.86
+          },
+          {
+           "date": "Oct 9",
+           "label": "Price Chopper",
+           "sub": "Apple Cash",
+           "amt": -11.71
+          },
+          {
+           "date": "Oct 11",
+           "label": "Wild Oats Baking",
+           "sub": "Chase card",
+           "amt": -5.77
+          }
+         ]
+        },
+        {
+         "name": "Dining & coffee",
+         "hue": "amber",
+         "amt": 350.05,
+         "items": [
+          {
+           "date": "Oct 18",
+           "label": "A-1 Oriental Kitchen",
+           "sub": "Chase card",
+           "amt": -37.24
+          },
+          {
+           "date": "Oct 25",
+           "label": "Dinner with Ryan Blount (Venmo)",
+           "sub": "Venmo personal",
+           "amt": -30.0
+          },
+          {
+           "date": "Oct 1",
+           "label": "Taco Bell",
+           "sub": "Chase card",
+           "amt": -19.19
+          },
+          {
+           "date": "Oct 4",
+           "label": "Chipotle Mexican Grill",
+           "sub": "Apple Cash",
+           "amt": -18.95
+          },
+          {
+           "date": "Oct 10",
+           "label": "Chick-fil-A",
+           "sub": "Apple Cash",
+           "amt": -16.09
+          },
+          {
+           "date": "Oct 27",
+           "label": "Jreck Subs",
+           "sub": "Chase card",
+           "amt": -16.02
+          },
+          {
+           "date": "Oct 28",
+           "label": "Taco Bell",
+           "sub": "Chase card",
+           "amt": -12.39
+          },
+          {
+           "date": "Oct 22",
+           "label": "Wendy's",
+           "sub": "Chase card",
+           "amt": -11.97
+          },
+          {
+           "date": "Oct 26",
+           "label": "Subway",
+           "sub": "Chase card",
+           "amt": -10.78
+          },
+          {
+           "date": "Oct 16",
+           "label": "Subway",
+           "sub": "Chase card",
+           "amt": -10.25
+          },
+          {
+           "date": "Oct 7",
+           "label": "Park Bros Coffee",
+           "sub": "Apple Cash",
+           "amt": -10.2
+          },
+          {
+           "date": "Oct 30",
+           "label": "Park Bros",
+           "sub": "Chase card",
+           "amt": -10.2
+          },
+          {
+           "date": "Oct 17",
+           "label": "Grasse River Grind",
+           "sub": "Chase card",
+           "amt": -9.94
+          },
+          {
+           "date": "Oct 2",
+           "label": "Subway",
+           "sub": "Chase card",
+           "amt": -9.22
+          },
+          {
+           "date": "Oct 3",
+           "label": "Park Bros Coffee",
+           "sub": "Apple Cash",
+           "amt": -8.86
+          },
+          {
+           "date": "Oct 2",
+           "label": "Jernabi Coffeehouse",
+           "sub": "Apple Cash",
+           "amt": -7.5
+          },
+          {
+           "date": "Oct 8",
+           "label": "Sunoco",
+           "sub": "Apple Cash",
+           "amt": -7.01
+          },
+          {
+           "date": "Oct 22",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -6.94
+          },
+          {
+           "date": "Oct 4",
+           "label": "Dairy Queen",
+           "sub": "Apple Cash",
+           "amt": -6.9
+          },
+          {
+           "date": "Oct 3",
+           "label": "Tim Hortons",
+           "sub": "Chase card",
+           "amt": -6.86
+          },
+          {
+           "date": "Oct 6",
+           "label": "Sunoco",
+           "sub": "Apple Cash",
+           "amt": -6.75
+          },
+          {
+           "date": "Oct 25",
+           "label": "Dunkin'",
+           "sub": "Chase card",
+           "amt": -6.5
+          },
+          {
+           "date": "Oct 9",
+           "label": "Old Market Coffee",
+           "sub": "Apple Cash",
+           "amt": -6.48
+          },
+          {
+           "date": "Oct 28",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -5.99
+          },
+          {
+           "date": "Oct 4",
+           "label": "Tim Hortons",
+           "sub": "Chase card",
+           "amt": -4.7
+          },
+          {
+           "date": "Oct 6",
+           "label": "Tim Hortons",
+           "sub": "Chase card",
+           "amt": -4.63
+          },
+          {
+           "date": "Oct 21",
+           "label": "Tim Hortons",
+           "sub": "Chase card",
+           "amt": -4.19
+          },
+          {
+           "date": "Oct 16",
+           "label": "Tim Hortons",
+           "sub": "Chase card",
+           "amt": -4.15
+          },
+          {
+           "date": "Oct 14",
+           "label": "Park Bros Coffee",
+           "sub": "Apple Cash",
+           "amt": -3.78
+          },
+          {
+           "date": "Oct 11",
+           "label": "Little Victories",
+           "sub": "Chase card",
+           "amt": -3.7
+          },
+          {
+           "date": "Oct 17",
+           "label": "Sunoco",
+           "sub": "Apple Cash",
+           "amt": -3.65
+          },
+          {
+           "date": "Oct 19",
+           "label": "Dunkin'",
+           "sub": "Chase card",
+           "amt": -3.45
+          },
+          {
+           "date": "Oct 27",
+           "label": "Tim Hortons",
+           "sub": "Chase card",
+           "amt": -3.23
+          },
+          {
+           "date": "Oct 14",
+           "label": "Tim Hortons",
+           "sub": "Chase card",
+           "amt": -3.13
+          },
+          {
+           "date": "Oct 13",
+           "label": "Tim Hortons",
+           "sub": "Chase card",
+           "amt": -3.13
+          },
+          {
+           "date": "Oct 28",
+           "label": "Tim Hortons",
+           "sub": "Chase card",
+           "amt": -3.07
+          },
+          {
+           "date": "Oct 29",
+           "label": "Tim Hortons",
+           "sub": "Chase card",
+           "amt": -2.69
+          },
+          {
+           "date": "Oct 4",
+           "label": "Sunoco",
+           "sub": "Apple Cash",
+           "amt": -2.47
+          },
+          {
+           "date": "Oct 22",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -2.26
+          },
+          {
+           "date": "Oct 11",
+           "label": "Tim Hortons",
+           "sub": "Apple Cash",
+           "amt": -2.2
+          },
+          {
+           "date": "Oct 12",
+           "label": "McDonald's",
+           "sub": "Chase card",
+           "amt": -2.04
+          },
+          {
+           "date": "Oct 20",
+           "label": "Tim Hortons",
+           "sub": "Chase card",
+           "amt": -1.35
+          }
+         ]
+        },
+        {
+         "name": "Giving",
+         "hue": "magenta",
+         "amt": 250.0,
+         "items": [
+          {
+           "date": "Oct 9",
+           "label": "Calvary Baptist tithe",
+           "sub": "NCSB checking",
+           "amt": -250.0
+          }
+         ]
+        },
+        {
+         "name": "Tesla",
+         "hue": "sky",
+         "amt": 157.07,
+         "items": [
+          {
+           "date": "Oct 25",
+           "label": "Tesla connectivity",
+           "sub": "Chase card",
+           "amt": -106.92
+          },
+          {
+           "date": "Oct 22",
+           "label": "Tesla Supercharger",
+           "sub": "Chase card",
+           "amt": -13.19
+          },
+          {
+           "date": "Oct 10",
+           "label": "Tesla Supercharger",
+           "sub": "Chase card",
+           "amt": -11.89
+          },
+          {
+           "date": "Oct 10",
+           "label": "Tesla Supercharger",
+           "sub": "Chase card",
+           "amt": -8.76
+          },
+          {
+           "date": "Oct 4",
+           "label": "Tesla Supercharger",
+           "sub": "Chase card",
+           "amt": -8.44
+          },
+          {
+           "date": "Oct 10",
+           "label": "Tesla Supercharger",
+           "sub": "Chase card",
+           "amt": -5.0
+          },
+          {
+           "date": "Oct 4",
+           "label": "Tesla Supercharger",
+           "sub": "Chase card",
+           "amt": -2.87
+          }
+         ]
+        },
+        {
+         "name": "Shopping",
+         "hue": "violet",
+         "amt": 98.38,
+         "items": [
+          {
+           "date": "Oct 1",
+           "label": "Izod",
+           "sub": "Apple Card",
+           "amt": -40.0
+          },
+          {
+           "date": "Oct 4",
+           "label": "Amazon",
+           "sub": "Chase card",
+           "amt": -24.94
+          },
+          {
+           "date": "Oct 11",
+           "label": "Jericho",
+           "sub": "Chase card",
+           "amt": -19.83
+          },
+          {
+           "date": "Oct 23",
+           "label": "West Point PX",
+           "sub": "Chase card",
+           "amt": -11.4
+          },
+          {
+           "date": "Oct 25",
+           "label": "Applegreen",
+           "sub": "Chase card",
+           "amt": -2.21
+          }
+         ]
+        },
+        {
+         "name": "Health",
+         "hue": "red",
+         "amt": 86.86,
+         "items": [
+          {
+           "date": "Oct 5",
+           "label": "TRICARE Reserve Select",
+           "sub": "NCSB checking",
+           "amt": -57.88
+          },
+          {
+           "date": "Oct 2",
+           "label": "Swanson vitamins",
+           "sub": "Chase card",
+           "amt": -28.98
+          }
+         ]
+        },
+        {
+         "name": "Phone & devices",
+         "hue": "blue",
+         "amt": 30.59,
+         "items": [
+          {
+           "date": "Oct 14",
+           "label": "Apple Watch lease (Klarna)",
+           "sub": "Apple Card",
+           "amt": -30.59
+          }
+         ]
+        },
+        {
+         "name": "Personal care",
+         "hue": "slate",
+         "amt": 30.0,
+         "items": [
+          {
+           "date": "Oct 22",
+           "label": "Haircut (Sian Miller)",
+           "sub": "Venmo personal",
+           "amt": -30.0
+          }
+         ]
+        },
+        {
+         "name": "Other",
+         "hue": "slate",
+         "amt": 19.57,
+         "items": [
+          {
+           "date": "Oct 25",
+           "label": "Unlabeled card charge",
+           "sub": "Chase card",
+           "amt": -19.57
+          }
+         ]
+        },
+        {
+         "name": "Fees & travel",
+         "hue": "slate",
+         "amt": 11.25,
+         "items": [
+          {
+           "date": "Oct 1",
+           "label": "St. Lawrence County Clerk",
+           "sub": "Chase card",
+           "amt": -5.0
+          },
+          {
+           "date": "Oct 11",
+           "label": "Ogdensburg bridge toll",
+           "sub": "Apple Card",
+           "amt": -3.25
+          },
+          {
+           "date": "Oct 1",
+           "label": "St. Lawrence County Clerk",
+           "sub": "Chase card",
+           "amt": -3.0
+          }
+         ]
+        }
        ]
       }
      ]
@@ -389,42 +1016,186 @@ window.RECAP = {
      "blocks": [
       {
        "type": "sub",
-       "text": "Where the money came from",
+       "text": "Where the money came from · tap to expand",
        "right": "$5,923.87 total"
       },
       {
-       "type": "meter",
+       "type": "cats",
        "rows": [
-        [
-         "Clarkson payroll",
-         3380.78,
-         "$3,381"
-        ],
-        [
-         "JDM Productions",
-         1426.77,
-         "$1,427"
-        ],
-        [
-         "Taxi",
-         948.69,
-         "$949"
-        ],
-        [
-         "Uber",
-         88.38,
-         "$88"
-        ],
-        [
-         "Interest",
-         69.36,
-         "$69"
-        ],
-        [
-         "Cashback",
-         9.89,
-         "$10"
-        ]
+        {
+         "name": "Clarkson payroll",
+         "hue": "emerald",
+         "amt": 3380.78,
+         "items": [
+          {
+           "date": "Oct 1",
+           "label": "Clarkson University payroll",
+           "sub": "NCSB checking",
+           "amt": 1248.2
+          },
+          {
+           "date": "Oct 15",
+           "label": "Clarkson University payroll",
+           "sub": "NCSB checking",
+           "amt": 1187.23
+          },
+          {
+           "date": "Oct 29",
+           "label": "Clarkson University payroll",
+           "sub": "NCSB checking",
+           "amt": 945.35
+          }
+         ]
+        },
+        {
+         "name": "JDM Productions",
+         "hue": "orange",
+         "amt": 1426.77,
+         "items": [
+          {
+           "date": "Oct 5",
+           "label": "JD Meyers Productions (Square)",
+           "sub": "NCSB JDM checking",
+           "amt": 1135.92
+          },
+          {
+           "date": "Oct 6",
+           "label": "JD Meyers Productions (Venmo payout)",
+           "sub": "NCSB checking",
+           "amt": 290.85
+          }
+         ]
+        },
+        {
+         "name": "Taxi",
+         "hue": "amber",
+         "amt": 948.69,
+         "items": [
+          {
+           "date": "Oct 23",
+           "label": "Taxi fares (Square)",
+           "sub": "NCSB checking",
+           "amt": 347.82
+          },
+          {
+           "date": "Oct 5",
+           "label": "Taxi fares (Square)",
+           "sub": "NCSB checking",
+           "amt": 311.07
+          },
+          {
+           "date": "Oct 13",
+           "label": "Taxi fares (Square)",
+           "sub": "NCSB checking",
+           "amt": 289.8
+          }
+         ]
+        },
+        {
+         "name": "Uber",
+         "hue": "slate",
+         "amt": 88.38,
+         "items": [
+          {
+           "date": "Oct 6",
+           "label": "Uber driver earnings",
+           "sub": "NCSB checking",
+           "amt": 55.04
+          },
+          {
+           "date": "Oct 20",
+           "label": "Uber driver earnings",
+           "sub": "NCSB checking",
+           "amt": 33.34
+          }
+         ]
+        },
+        {
+         "name": "Interest",
+         "hue": "teal",
+         "amt": 69.36,
+         "items": [
+          {
+           "date": "Oct 1",
+           "label": "Apple Savings interest",
+           "sub": "Apple Savings",
+           "amt": 69.33
+          },
+          {
+           "date": "Oct 1",
+           "label": "Corning CU dividend",
+           "sub": "Corning CU savings",
+           "amt": 0.03
+          }
+         ]
+        },
+        {
+         "name": "Cashback",
+         "hue": "sky",
+         "amt": 9.89,
+         "items": [
+          {
+           "date": "Oct 22",
+           "label": "Apple Daily Cash",
+           "sub": "Apple Cash",
+           "amt": 3.43
+          },
+          {
+           "date": "Oct 9",
+           "label": "Apple Daily Cash",
+           "sub": "Apple Cash",
+           "amt": 1.98
+          },
+          {
+           "date": "Oct 14",
+           "label": "Apple Daily Cash",
+           "sub": "Apple Cash",
+           "amt": 1.78
+          },
+          {
+           "date": "Oct 15",
+           "label": "Apple Daily Cash",
+           "sub": "Apple Cash",
+           "amt": 0.92
+          },
+          {
+           "date": "Oct 6",
+           "label": "Apple Daily Cash",
+           "sub": "Apple Cash",
+           "amt": 0.91
+          },
+          {
+           "date": "Oct 2",
+           "label": "Apple Daily Cash",
+           "sub": "Apple Cash",
+           "amt": 0.35
+          },
+          {
+           "date": "Oct 2",
+           "label": "Apple Daily Cash",
+           "sub": "Apple Cash",
+           "amt": 0.22
+          },
+          {
+           "date": "Oct 18",
+           "label": "Apple Daily Cash",
+           "sub": "Apple Cash",
+           "amt": 0.19
+          },
+          {
+           "date": "Oct 2",
+           "label": "Apple Daily Cash",
+           "sub": "Apple Cash",
+           "amt": 0.08
+          },
+          {
+           "date": "Oct 12",
+           "label": "Apple Daily Cash",
+           "sub": "Apple Cash",
+           "amt": 0.03
+          }
+         ]
+        }
        ]
       }
      ]
@@ -1662,6 +2433,28 @@ window.RECAP = {
      ]
     },
     {
+     "hue": "teal",
+     "spine": "2026",
+     "blocks": [
+      {
+       "type": "sub",
+       "text": "Net by month",
+       "right": "tap a month"
+      },
+      {
+       "type": "year",
+       "metric": "net",
+       "fmt": "money"
+      },
+      {
+       "type": "goal",
+       "value": 20444.92,
+       "target": 10000,
+       "note": "2026 savings goal of $10,000 cleared in May. YTD shown is the chained figure."
+      }
+     ]
+    },
+    {
      "hue": "amber",
      "spine": "Notes",
      "type": "rows",
@@ -1726,11 +2519,295 @@ window.RECAP = {
      "blocks": [
       {
        "type": "sub",
-       "text": "Training days by main focus",
+       "text": "Training days · tap a day for the full session",
        "right": "17 of 30"
       },
       {
        "type": "cal",
+       "sessions": {
+        "1": [
+         [
+          "Chin Up",
+          "4 reps, 8 reps, 7 reps"
+         ],
+         [
+          "Plank",
+          "2:00, 1:00"
+         ],
+         [
+          "Chest Dips",
+          "10 reps, 16 reps"
+         ],
+         [
+          "Stairs",
+          "20:00 level 7"
+         ]
+        ],
+        "5": [
+         [
+          "Flat Barbell Bench Press",
+          "135x10, 195x5, 195x5, 185x8"
+         ],
+         [
+          "Standing Barbell Press",
+          "95x5, 105x8, 105x7"
+         ],
+         [
+          "Timed Sit Up",
+          "40 in 1:06"
+         ],
+         [
+          "Stairs",
+          "20:00 level 7"
+         ]
+        ],
+        "6": [
+         [
+          "Wide Grip Lat",
+          "80x10, 130x8, 130x7, 130x6"
+         ],
+         [
+          "EZ-Bar Preacher Curl Supinated",
+          "70x5, 50x10, 50x9"
+         ],
+         [
+          "Plank",
+          "3:00"
+         ],
+         [
+          "Zone 2 Cardio",
+          "1 mi @ 10:00"
+         ],
+         [
+          "Treadmill Sprint",
+          "2:00 speed 10, 1:00 speed 12"
+         ]
+        ],
+        "7": [
+         [
+          "Barbell Squat",
+          "135x5, 225x11, 185x5"
+         ],
+         [
+          "Kettlebell Split Rdl (Lower Mobility)",
+          "40x3, 25x5, 25x8, 25x5"
+         ],
+         [
+          "Zone 2 Cardio",
+          "1.5 mi @ 20:00"
+         ]
+        ],
+        "8": [
+         [
+          "Incline Dumbbell Bench Press",
+          "70x10, 120x10, 120x9, 120x8"
+         ],
+         [
+          "Pushup",
+          "33 reps"
+         ],
+         [
+          "Seated Cable Row",
+          "70x10, 120x10, 115x10, 115x10"
+         ]
+        ],
+        "9": [
+         [
+          "Lat Pulldown",
+          "100x10, 150x9, 140x8, 130x8"
+         ],
+         [
+          "Dumbbell Curl",
+          "60x6, 60x14, 60x9"
+         ],
+         [
+          "Split Lat Pulldown",
+          "70x10, 90x10"
+         ],
+         [
+          "Timed Sit Up",
+          "36 in 1:16"
+         ],
+         [
+          "Zone 2 Cardio",
+          "2.4 mi @ 20:00"
+         ]
+        ],
+        "12": [
+         [
+          "Flat Barbell Bench Press",
+          "135x10, 185x10, 185x8, 135x15"
+         ],
+         [
+          "Lateral Dumbbell Raise",
+          "35x24, 35x16"
+         ],
+         [
+          "Treadmill run",
+          "5 km @ 25:00"
+         ]
+        ],
+        "13": [
+         [
+          "Barbell Row",
+          "95x10, 135x5, 135x10, 135x8"
+         ],
+         [
+          "Straight Bar Cable Curl",
+          "70x10, 95x10, 95x9"
+         ],
+         [
+          "Timed Sit Up",
+          "40 in 1:02"
+         ],
+         [
+          "Pushup",
+          "36 reps"
+         ],
+         [
+          "Bars Down And Back",
+          "1 reps"
+         ]
+        ],
+        "14": [
+         [
+          "Barbell Squat",
+          "135x10, 185x10, 165x10"
+         ],
+         [
+          "Kettlebell Split Rdl (Lower Mobility)",
+          "40x11, 30x5"
+         ],
+         [
+          "Stairs",
+          "20:00 level 7"
+         ]
+        ],
+        "15": [
+         [
+          "Incline Dumbbell Bench Press",
+          "70x15, 120x15, 100x15"
+         ],
+         [
+          "Kneeling Kettlebell Clean (Upper Mobility)",
+          "30x16, 30x11, 30x12"
+         ],
+         [
+          "Stairs",
+          "20:00 level 7"
+         ]
+        ],
+        "16": [
+         [
+          "Lat Pulldown",
+          "100x10, 162.5x6, 137.5x10, 122x10"
+         ],
+         [
+          "EZ-Bar Curl",
+          "50x16, 50x12"
+         ],
+         [
+          "Rear Delt Cable",
+          "25x13, 20x20"
+         ],
+         [
+          "Zone 2 Cardio",
+          "2.14 mi @ 20:00"
+         ]
+        ],
+        "19": [
+         [
+          "Flat Barbell Bench Press",
+          "135x10, 185x11, 175x8, 165x8"
+         ],
+         [
+          "Landmine Row To Press",
+          "45x8, 45x8"
+         ],
+         [
+          "Lateral Dumbbell Raise",
+          "70x12, 50x15, 15x12"
+         ],
+         [
+          "Treadmill run",
+          "1.5 mi @ 14:15"
+         ]
+        ],
+        "20": [
+         [
+          "Chin Up",
+          "4 reps, 9 reps, 7 reps"
+         ],
+         [
+          "Trap Bar Deadlift",
+          "175x10, 315x4, 315x5, 265x6"
+         ],
+         [
+          "Plank",
+          "2:00, 1:10"
+         ],
+         [
+          "Stairs",
+          "20:00 level 7"
+         ]
+        ],
+        "26": [
+         [
+          "Flat Barbell Bench Press",
+          "135x10, 175x12, 175x10, 175x6"
+         ],
+         [
+          "Timed Sit Up",
+          "40 in 0:58"
+         ],
+         [
+          "Tricep Cable",
+          "30x22, 35x12"
+         ],
+         [
+          "Treadmill run",
+          "2 mi @ 16:07"
+         ]
+        ],
+        "27": [
+         [
+          "Lat Pulldown",
+          "100x10, 150x12, 140x10, 130x10"
+         ],
+         [
+          "EZ-Bar Curl",
+          "60x12, 40x13"
+         ],
+         [
+          "Plank",
+          "1:35, 1:30"
+         ]
+        ],
+        "28": [
+         [
+          "Barbell Squat",
+          "135x10, 195x10, 185x10"
+         ],
+         [
+          "Romanian Deadlift",
+          "90x14, 90x8"
+         ],
+         [
+          "Standing Calf Raise",
+          "40x10, 120x8, 180x5"
+         ],
+         [
+          "Decline Crunch",
+          "33 reps"
+         ]
+        ],
+        "30": [
+         [
+          "Outdoor run",
+          "1.5 mi @ 10:35"
+         ]
+        ]
+       },
        "days": {
         "1": [
          "Back",
@@ -1947,6 +3024,32 @@ window.RECAP = {
        "Sep ref",
        "28 days · 166,118 lb"
       ]
+     ]
+    },
+    {
+     "hue": "green",
+     "spine": "2026",
+     "blocks": [
+      {
+       "type": "sub",
+       "text": "Gym days by month",
+       "right": "tap a month"
+      },
+      {
+       "type": "year",
+       "metric": "gymDays",
+       "fmt": "int",
+       "showAll": true
+      },
+      {
+       "type": "sub",
+       "text": "Volume by month, lb"
+      },
+      {
+       "type": "year",
+       "metric": "volume",
+       "fmt": "k"
+      }
      ]
     },
     {
