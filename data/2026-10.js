@@ -3177,70 +3177,8 @@ window.RECAP = {
     {
      "hue": "magenta",
      "spine": "Sermons",
-     "type": "cards",
-     "one": true,
-     "cards": [
-      {
-       "hue": "magenta",
-       "spine": "Peace",
-       "date": [
-        "SUN",
-        "4",
-        "OCT"
-       ],
-       "title": "Where peace starts",
-       "text": "Romans 10:9, Philippians 2:12",
-       "pts": [
-        "Peace starts with salvation: believing and confessing Jesus with your whole life, including how you spend money and raise children.",
-        "It depends on relationship. Be plugged into a local body for accountability and perspective; no one, including a pastor, should lead without it.",
-        "It takes discipline. Cut the distractions, social media first, and help children build their own prayer lives."
-       ],
-       "tags": [
-        "Accountability",
-        "Distractions"
-       ]
-      },
-      {
-       "hue": "magenta",
-       "spine": "Patience",
-       "date": [
-        "SUN",
-        "11",
-        "OCT"
-       ],
-       "title": "Long-suffering",
-       "text": "Galatians 5:22, 2 Peter 3:9, Hebrews 6:11 to 12",
-       "pts": [
-        "Patience is rooted in trusting God’s promises, starting with \"I will never leave you nor forsake you.\"",
-        "God is not slow; His patience is giving people time to repent. Repentance is a lifestyle, not a one-time event.",
-        "Slow down. Superficial connections, online and in church, keep people from the depth that patience builds."
-       ],
-       "tags": [
-        "Promises",
-        "Repentance"
-       ]
-      },
-      {
-       "hue": "magenta",
-       "spine": "Kindness",
-       "date": [
-        "SUN",
-        "18",
-        "OCT"
-       ],
-       "title": "Kindness rooted in truth",
-       "text": "Galatians 5:22, Colossians 3:12, Ephesians 2:4",
-       "pts": [
-        "Genuine kindness flows from God’s love for us; without love in the heart it stays superficial.",
-        "Real kindness is grounded in truth and sometimes does not feel kind. Jerry’s \"work it out, don’t let the sun go down on your anger\" was kindness.",
-        "Clothe yourselves with compassion, kindness, humility, gentleness, and patience. Love binds them together. Keep running back to the Father."
-       ],
-       "tags": [
-        "Colossians 3",
-        "Forgiveness"
-       ]
-      }
-     ]
+     "type": "sermons",
+     "month": "2026-10"
     }
    ],
    "side": [

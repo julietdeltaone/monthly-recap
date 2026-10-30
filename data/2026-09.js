@@ -196,7 +196,7 @@ window.RECAP = {
        "hue": "amber",
        "spine": "Creative",
        "title": "2 shoots",
-       "text": "Mandy Dow and Kayla Bryson portraits. Megan Eddy films delivered and refund settled.",
+       "text": "Mandy Dow and Kayla Bryson portraits. Megan Eddy films delivered.",
        "tags": [
         "Tomford exchange closed"
        ],
@@ -2539,7 +2539,7 @@ window.RECAP = {
       },
       {
        "when": "Note",
-       "text": "The $150.00 Megan Eddy refund was paid from the JDM Venmo account, which Origin cannot see. It is outside these totals.",
+       "text": "The JDM Venmo account is not linked to Origin. Shoot payments count when they land in the bank.",
        "src": "gap"
       },
       {
@@ -3387,70 +3387,8 @@ window.RECAP = {
     {
      "hue": "magenta",
      "spine": "Sermons",
-     "type": "cards",
-     "one": true,
-     "cards": [
-      {
-       "hue": "magenta",
-       "spine": "Liberty",
-       "date": [
-        "SUN",
-        "13",
-        "SEP"
-       ],
-       "title": "Stand fast in freedom",
-       "text": "Galatians 5:1 to 15",
-       "pts": [
-        "Paul is confronting a church that slid back into rule-keeping. \"Stand fast\" is a military term: brace for what is coming.",
-        "Freedom in Christ is not a license for the flesh. The point of liberty is to serve one another in love.",
-        "The whole law is fulfilled in one command: love your neighbor as yourself. Biting and devouring each other consumes the body."
-       ],
-       "tags": [
-        "Galatians 5",
-        "Small groups"
-       ]
-      },
-      {
-       "hue": "magenta",
-       "spine": "Love",
-       "date": [
-        "SUN",
-        "20",
-        "SEP"
-       ],
-       "title": "Walk by the Spirit",
-       "text": "Galatians 5:16 to 26, 1 John 4",
-       "pts": [
-        "Walking in the Spirit means how you live: talk, posture, presence. Without it, you are already feeding the flesh.",
-        "The struggle never fully ends on this side of heaven; flesh and Spirit stay at war, as Paul admits in Romans 7.",
-        "Love is the first fruit and the root of the rest. Perfected love is what sustains the church through hard times."
-       ],
-       "tags": [
-        "1 John 4",
-        "Romans 12"
-       ]
-      },
-      {
-       "hue": "magenta",
-       "spine": "Joy",
-       "date": [
-        "SUN",
-        "27",
-        "SEP"
-       ],
-       "title": "Joy starts at salvation",
-       "text": "Psalm 95:1, John 15, Nehemiah 9",
-       "pts": [
-        "Real joy comes after bending the knee to Christ, and it does not depend on feelings. Bob’s plain testimony led two people to faith that week.",
-        "Joy and peace are the two things with no counterfeit. Persecuted believers keep joy because God’s presence is more real than their circumstances.",
-        "Brad shared his own season of despair as a pastor and how joy carried him through it. Nobody can hand you joy; it comes from your own relationship with Jesus."
-       ],
-       "tags": [
-        "Psalm 95",
-        "Testimony"
-       ]
-      }
-     ]
+     "type": "sermons",
+     "month": "2026-09"
     }
    ],
    "side": [
@@ -3705,7 +3643,7 @@ window.RECAP = {
      "spine": "Briefing",
      "type": "para",
      "text": [
-      "Two paid portrait sessions and one hard conversation closed out cleanly. Megan Eddy’s wedding films were delivered with a full explanation of the August camera failure and a $150.00 refund, and the family downloaded all seven videos on Sep 19.",
+      "Two paid portrait sessions, and the last of the August wedding work closed out. Megan Eddy’s films were delivered and the family downloaded all seven videos on Sep 19; the $150.00 refund for the camera failure was handled in August.",
       "The Julia Tomford service exchange from her 2022 wedding film finally closed on Sep 22 when she handed over a telephoto lens. Nothing is owed either way."
      ]
     },
@@ -3761,9 +3699,9 @@ window.RECAP = {
         "SEP"
        ],
        "title": "Megan Eddy films",
-       "text": "Seven videos downloaded. Refund of $150.00 sent with the explanation.",
+       "text": "All seven videos downloaded by the family. The August refund closed the incident.",
        "tags": [
-        "Resolved"
+        "Delivered"
        ],
        "foot": [
         "JDM-2026-04",
@@ -3836,8 +3774,8 @@ window.RECAP = {
        "$300 billed, paid by Venmo"
       ],
       [
-       "Refund",
-       "$150.00 to Megan Eddy"
+       "Delivered",
+       "Megan Eddy films (Sep 19)"
       ],
       [
        "Costs",
@@ -3927,7 +3865,7 @@ window.RECAP = {
      "hue": "violet",
      "spine": "c. Clean up",
      "type": "para",
-     "text": "Two loose ends from earlier in the year closed: the Megan Eddy refund and the Tomford exchange. Owning the camera failure plainly mattered more than the $150."
+     "text": "Two loose ends closed: the Megan Eddy films reached the family and the Tomford exchange settled with a lens. Owning the August camera failure plainly is what made the delivery land well."
     },
     {
      "hue": "violet",

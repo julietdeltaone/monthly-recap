@@ -109,6 +109,7 @@
     },
     rows: function (b) {
       return '<div class="rows">' + b.items.map(function (it) {
+        if (it.href) return '<a class="fill row link' + (it.hue ? ' ' + it.hue : '') + '" href="' + esc(it.href) + '">' + (it.when ? '<span class="when">' + esc(it.when) + '</span>' : '') + rich(it.text) + '</a>';
         return '<div class="fill row' + (it.hue ? ' ' + it.hue : '') + '">' + (it.when ? '<span class="when">' + esc(it.when) + '</span>' : '') + rich(it.text, true) + (it.src ? ' <span class="src">(' + esc(it.src) + ')</span>' : '') + '</div>';
       }).join('') + '</div>';
     },
@@ -198,6 +199,25 @@
       return '<div class="goal"><div><b class="num">' + money(b.value) + '</b><span>of ' + money(b.target, { whole: true }) + '</span></div><span class="pct">' + (b.value / b.target * 100).toFixed(0) + '%</span></div>' +
         '<div class="hbar tall"><i style="width:' + pct.toFixed(1) + '%"></i></div>' + (b.note ? '<p class="note">' + rich(b.note) + '</p>' : '');
     },
+    /* sermons come from data/sermons-2026.js, the one shared source; b.month = 'YYYY-MM' */
+    sermons: function (b) {
+      var list = (window.SERMONS || []).filter(function (x) { return x.date.slice(0, 7) === b.month; });
+      if (!list.length) return '<p class="fill para">No sermon notes recorded for this month.</p>';
+      return '<div class="cards one">' + list.map(function (x) {
+        var d = new Date(x.date + 'T12:00:00');
+        var box = [d.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase(), d.getDate(), d.toLocaleDateString('en-US', { month: 'short' }).toUpperCase()];
+        var spine = x.themes && x.themes[0] ? x.themes[0] : x.series;
+        return '<article class="card magenta" style="min-height:' + spineMin(spine) + 'px"><div class="spine"><span>' + esc(spine) + '</span></div><div class="body">' +
+          '<div class="date fill"><small>' + box[0] + '</small><b>' + box[1] + '</b><small>' + box[2] + '</small></div>' +
+          '<h3>' + esc(x.title) + '</h3><p>' + esc(x.passage) + ' \u00b7 ' + esc(x.series) + '</p>' +
+          (x.overview ? '<p class="ov">' + rich(x.overview) + '</p>' : '<span></span>') +
+          (x.points && x.points.length ? '<ul class="pts">' + x.points.map(function (p) { return '<li>' + rich(p) + '</li>'; }).join('') + '</ul>' : '') +
+          (x.application ? '<p class="app fill">' + rich(x.application) + '</p>' : '') +
+          (x.commentary ? '<p class="cm">' + rich(x.commentary) + '</p>' : '') +
+          (x.themes ? '<div class="th">' + x.themes.map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join('') + '</div>' : '') +
+          '</div></article>';
+      }).join('') + '</div>';
+    },
     cards: function (b) {
       return '<div class="cards' + (b.one ? ' one' : '') + '">' + b.cards.map(function (c) {
         var tagName = c.href ? 'a' : 'article', hue = c.hue || 'slate';
@@ -215,7 +235,7 @@
   var uid = 0;
   function band(bd) {
     var blocks = bd.blocks || [bd];
-    var bare = blocks.length === 1 && blocks[0].type === 'cards';
+    var bare = blocks.length === 1 && (blocks[0].type === 'cards' || blocks[0].type === 'sermons');
     var inner = blocks.map(function (b) { return BLOCK[b.type] ? BLOCK[b.type](b, 'tx' + (uid++)) : ''; }).join('');
     return '<div class="band ' + (bd.hue || 'slate') + '" style="min-height:' + spineMin(bd.spine) + 'px"><div class="spine"><span>' + esc(bd.spine) + '</span></div><div class="body"' + (bare ? ' style="padding:0;background:none"' : '') + '>' + inner + '</div></div>';
   }
@@ -226,17 +246,18 @@
 
   /* ---------- page shell ---------- */
   var m = R.meta, H = R.header;
-  document.title = m.label + ' · Monthly Recap · JD Meyers';
+  document.title = m.label + (m.titleSuffix != null ? m.titleSuffix : ' · Monthly Recap · JD Meyers');
 
   var top = '<header class="glass top">' +
     '<div class="title"><div><div class="crumb"><a href="index.html">2026 Recaps</a><span>/</span><span>' + esc(m.short) + '</span></div><h1>' + esc(m.label) + '</h1>' +
     '<div class="meta">' + H.meta.map(function (p) { return '<span class="lbl">' + esc(p[0]) + '</span><b>' + esc(p[1]) + '</b>'; }).join('') + '</div></div></div>' +
     '<div class="stats">' + H.stats.map(function (s) { return '<div class="stat"><span class="lbl">' + esc(s[0]) + '</span><b class="' + (s[2] ? 'neg' : '') + '">' + esc(s[1]) + '</b></div>'; }).join('') + '</div>' +
     '<div class="ring-cell">' + ringSVG(H.ring.pct, H.ring.text) + '<div class="cap"><b>' + esc(H.ring.cap) + '</b><span>' + esc(H.ring.sub) + '</span></div></div>' +
-    '<div>' + segRingSVG(H.mix.segs, H.mix.centre) + '<ul class="legend">' + H.mix.segs.map(function (s) { return '<li class="' + s[1] + '"><i></i>' + esc(s[0]) + '</li>'; }).join('') + '</ul></div>' +
+    (H.mix ? '<div>' + segRingSVG(H.mix.segs, H.mix.centre) + '<ul class="legend">' + H.mix.segs.map(function (s) { return '<li class="' + s[1] + '"><i></i>' + esc(s[0]) + '</li>'; }).join('') + '</ul></div>' : '') +
     '';
-  var nav = '<div class="monthnav">' + (m.prev ? '<a href="' + esc(m.prev[0]) + '" aria-label="Previous month">&#8249; ' + esc(m.prev[1]) + '</a>' : '<span>&#8249;</span>') +
-    (m.next ? '<a href="' + esc(m.next[0]) + '" aria-label="Next month">' + esc(m.next[1]) + ' &#8250;</a>' : '<span>&#8250;</span>') +
+  var hasNav = m.prev || m.next;
+  var nav = '<div class="monthnav">' + (!hasNav ? '' : (m.prev ? '<a href="' + esc(m.prev[0]) + '" aria-label="Previous month">&#8249; ' + esc(m.prev[1]) + '</a>' : '<span>&#8249;</span>') +
+    (m.next ? '<a href="' + esc(m.next[0]) + '" aria-label="Next month">' + esc(m.next[1]) + ' &#8250;</a>' : '<span>&#8250;</span>')) +
     '<button class="toggle" id="theme" type="button">LIGHT</button></div>';
   top += '</header>';
 
@@ -256,6 +277,7 @@
   function show(id, fromClick) {
     var d = null;
     R.domains.forEach(function (x) { if (x.id === id) d = x; });
+    if (!d) R.domains.forEach(function (x) { if (x.id === R.defaultDomain) d = x; });
     if (!d) d = R.domains[0];
     uid = 0;
     parts.innerHTML = sheet('main', d.mainLabel || d.label, d.main) + sheet('side', d.sideLabel || 'At a glance', d.side);
@@ -271,7 +293,7 @@
       if (barEl && barEl.getBoundingClientRect().top < 0) window.scrollTo(0, window.scrollY + barEl.getBoundingClientRect().top - 10);
     }
   }
-  function current() { return (location.hash || '').replace('#', '') || R.domains[0].id; }
+  function current() { return (location.hash || '').replace('#', '') || R.defaultDomain || R.domains[0].id; }
   window.addEventListener('hashchange', function () { show(current(), true); });
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href^="#"]');

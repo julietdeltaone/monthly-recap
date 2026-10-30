@@ -5,7 +5,7 @@
    Month nets sum to slightly more than the chained YTD because of the August YTD correction (-$56.74). */
 window.YEAR = {
   months:   ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-  files:    ['2026-01.html', '2026-02.html', '2026-03_v2.html', '2026-04.html', '2026-05.html', '2026-06.html', '2026-07.html', '2026-08.html', '2026-09.html', '2026-10.html', null, null],
+  files:    ['2026-01.html', '2026-02.html', '2026-03.html', '2026-04.html', '2026-05.html', '2026-06.html', '2026-07.html', '2026-08.html', '2026-09.html', '2026-10.html', null, null],
   net:      [865.41, 1094.28, 1444.32, 4233.98, 2883.12, 2464.22, 600.08, 4121.80, -588.90, 3383.35, null, null],
   income:   [3513.28, 2883.81, 3492.00, 5979.54, 5659.60, 4322.96, 2687.28, 7107.60, 2641.19, 5923.87, null, null],
   expenses: [2647.87, 1789.53, 2637.26, 1745.56, 2776.48, 1858.74, 2087.20, 2985.80, 3230.09, 2540.52, null, null],
