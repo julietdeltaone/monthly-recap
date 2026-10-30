@@ -53,7 +53,7 @@ window.RECAP = {
    ],
    [
     "YTD",
-    "$17,062"
+    "$14,347"
    ]
   ],
   "stats": [
@@ -142,7 +142,7 @@ window.RECAP = {
        "title": "−$588.90 net",
        "text": "$2,641.19 in, $3,230.09 out. Verizon payoff drives the red.",
        "tags": [
-        "YTD $17,062"
+        "YTD $14,347"
        ],
        "foot": [
         "Origin export",
@@ -179,15 +179,29 @@ window.RECAP = {
        "href": "#spiritual"
       },
       {
-       "hue": "blue",
-       "spine": "Intellectual",
-       "title": "MBA term + OTS",
-       "text": "FN 608, IS 606, OM 603 under way. Voucher route for the AFOQT retest set through the education center.",
+       "hue": "orange",
+       "spine": "Career",
+       "title": "OTS retest route",
+       "text": "Voucher route for the AFOQT retest set through the education center. DD-368 uploaded.",
        "tags": [
         "Retest window opens Nov 29"
        ],
        "foot": [
-        "Moodle, email",
+        "Email",
+        "Open"
+       ],
+       "href": "#career"
+      },
+      {
+       "hue": "blue",
+       "spine": "Intellectual",
+       "title": "MBA term",
+       "text": "FN 608, IS 606, OM 603 under way. OM 603 Paper 1 at 97.3%.",
+       "tags": [
+        "3 courses"
+       ],
+       "foot": [
+        "Moodle",
         "Open"
        ],
        "href": "#intellectual"
@@ -278,7 +292,7 @@ window.RECAP = {
       ],
       [
        "YTD",
-       "$17,061.57",
+       "$14,347.36",
        {
         "big": true
        }
@@ -348,7 +362,7 @@ window.RECAP = {
          "items": [
           {
            "date": "Sep 9",
-           "label": "Verizon, iPhone 17 Pro payoff",
+           "label": "Verizon",
            "sub": "Chase card",
            "amt": -833.25
           },
@@ -415,19 +429,19 @@ window.RECAP = {
           },
           {
            "date": "Sep 15",
-           "label": "Price Chopper",
+           "label": "Price Chopper Supermarkets",
            "sub": "Chase card",
            "amt": -17.21
           },
           {
            "date": "Sep 17",
-           "label": "Price Chopper",
+           "label": "Price Chopper Supermarkets",
            "sub": "Chase card",
            "amt": -16.3
           },
           {
            "date": "Sep 28",
-           "label": "Price Chopper",
+           "label": "Price Chopper Supermarkets",
            "sub": "Chase card",
            "amt": -11.53
           },
@@ -439,7 +453,7 @@ window.RECAP = {
           },
           {
            "date": "Sep 29",
-           "label": "Price Chopper",
+           "label": "Price Chopper Supermarkets",
            "sub": "Chase card",
            "amt": -10.97
           },
@@ -451,13 +465,13 @@ window.RECAP = {
           },
           {
            "date": "Sep 24",
-           "label": "Price Chopper",
+           "label": "Price Chopper Supermarkets",
            "sub": "Chase card",
            "amt": -9.02
           },
           {
            "date": "Sep 23",
-           "label": "Price Chopper",
+           "label": "Price Chopper Supermarkets",
            "sub": "Chase card",
            "amt": -8.98
           },
@@ -667,15 +681,9 @@ window.RECAP = {
            "amt": -3.83
           },
           {
-           "date": "Sep 1",
-           "label": "Sunoco",
-           "sub": "Chase card",
-           "amt": -3.55
-          },
-          {
-           "date": "Sep 5",
-           "label": "Sunoco",
-           "sub": "Chase card",
+           "date": "Sep 21",
+           "label": "Stewart's Shops",
+           "sub": "Apple Cash",
            "amt": -3.55
           },
           {
@@ -691,9 +699,15 @@ window.RECAP = {
            "amt": -3.55
           },
           {
-           "date": "Sep 21",
-           "label": "Stewart's Shops",
-           "sub": "Apple Cash",
+           "date": "Sep 5",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -3.55
+          },
+          {
+           "date": "Sep 1",
+           "label": "Sunoco",
+           "sub": "Chase card",
            "amt": -3.55
           },
           {
@@ -721,13 +735,7 @@ window.RECAP = {
            "amt": -2.27
           },
           {
-           "date": "Sep 3",
-           "label": "Sunoco",
-           "sub": "Chase card",
-           "amt": -2.26
-          },
-          {
-           "date": "Sep 2",
+           "date": "Sep 27",
            "label": "Sunoco",
            "sub": "Chase card",
            "amt": -2.26
@@ -745,7 +753,13 @@ window.RECAP = {
            "amt": -2.26
           },
           {
-           "date": "Sep 27",
+           "date": "Sep 3",
+           "label": "Sunoco",
+           "sub": "Chase card",
+           "amt": -2.26
+          },
+          {
+           "date": "Sep 2",
            "label": "Sunoco",
            "sub": "Chase card",
            "amt": -2.26
@@ -787,15 +801,15 @@ window.RECAP = {
            "amt": -1.4
           },
           {
-           "date": "Sep 16",
-           "label": "McDonald's",
-           "sub": "Apple Cash",
-           "amt": -1.08
-          },
-          {
            "date": "Sep 28",
            "label": "McDonald's",
            "sub": "Chase card",
+           "amt": -1.08
+          },
+          {
+           "date": "Sep 16",
+           "label": "McDonald's",
+           "sub": "Apple Cash",
            "amt": -1.08
           },
           {
@@ -861,10 +875,10 @@ window.RECAP = {
            "amt": -21.4
           },
           {
-           "date": "Sep 23",
-           "label": "Higgsfield",
+           "date": "Sep 30",
+           "label": "Pentester.com",
            "sub": "Chase card",
-           "amt": -19.0
+           "amt": 19.0
           },
           {
            "date": "Sep 29",
@@ -873,10 +887,10 @@ window.RECAP = {
            "amt": -19.0
           },
           {
-           "date": "Sep 30",
-           "label": "Pentester.com",
+           "date": "Sep 23",
+           "label": "Higgsfield",
            "sub": "Chase card",
-           "amt": 19.0
+           "amt": -19.0
           },
           {
            "date": "Sep 17",
@@ -898,7 +912,7 @@ window.RECAP = {
           },
           {
            "date": "Sep 1",
-           "label": "Google One / storage",
+           "label": "Google subscription",
            "sub": "Apple Card",
            "amt": -7.56
           },
@@ -1023,13 +1037,13 @@ window.RECAP = {
          "amt": 27.5,
          "items": [
           {
-           "date": "Sep 5",
+           "date": "Sep 11",
            "label": "Roxy Theater",
            "sub": "Chase card",
            "amt": -10.0
           },
           {
-           "date": "Sep 11",
+           "date": "Sep 5",
            "label": "Roxy Theater",
            "sub": "Chase card",
            "amt": -10.0
@@ -1141,7 +1155,7 @@ window.RECAP = {
          "items": [
           {
            "date": "Sep 26",
-           "label": "David Zufall, gift cards (Venmo)",
+           "label": "Venmo from David Zufall",
            "sub": "Venmo personal",
            "amt": 30.0
           }
@@ -1221,8 +1235,8 @@ window.RECAP = {
         },
         {
          "date": "Sep 1",
-         "label": "Apple Savings to Apple Cash",
-         "sub": "Moved · Apple Savings",
+         "label": "Apple Savings withdrawal",
+         "sub": "Savings · Apple Savings",
          "amt": -217.16,
          "kind": "mv"
         },
@@ -1270,7 +1284,7 @@ window.RECAP = {
         },
         {
          "date": "Sep 1",
-         "label": "Google One / storage",
+         "label": "Google subscription",
          "sub": "Subscriptions · Apple Card",
          "amt": -7.56,
          "kind": "out"
@@ -1438,15 +1452,15 @@ window.RECAP = {
         },
         {
          "date": "Sep 4",
-         "label": "TSA PreCheck renewal",
-         "sub": "Fees & travel · Chase card",
+         "label": "Idemia Tsa Precheck",
+         "sub": "Travel & fees · Chase card",
          "amt": -58.75,
          "kind": "out"
         },
         {
          "date": "Sep 4",
-         "label": "TSA PreCheck credit (Chase)",
-         "sub": "Fees & travel · Chase card",
+         "label": "Card travel credit",
+         "sub": "Travel & fees · Chase card",
          "amt": 58.75,
          "kind": "out"
         },
@@ -1592,7 +1606,7 @@ window.RECAP = {
         },
         {
          "date": "Sep 9",
-         "label": "Verizon, iPhone 17 Pro payoff",
+         "label": "Verizon",
          "sub": "Phone & devices · Chase card",
          "amt": -833.25,
          "kind": "out"
@@ -1823,7 +1837,7 @@ window.RECAP = {
         },
         {
          "date": "Sep 15",
-         "label": "Price Chopper",
+         "label": "Price Chopper Supermarkets",
          "sub": "Groceries · Chase card",
          "amt": -17.21,
          "kind": "out"
@@ -1914,7 +1928,7 @@ window.RECAP = {
         },
         {
          "date": "Sep 17",
-         "label": "Price Chopper",
+         "label": "Price Chopper Supermarkets",
          "sub": "Groceries · Chase card",
          "amt": -16.3,
          "kind": "out"
@@ -2075,14 +2089,14 @@ window.RECAP = {
         },
         {
          "date": "Sep 22",
-         "label": "Meta Pay verification",
+         "label": "Metapay*6Fca94Jg24",
          "sub": "Moved · Chase card",
          "amt": 1.0,
          "kind": "mv"
         },
         {
          "date": "Sep 22",
-         "label": "Meta Pay verification",
+         "label": "Metapay*6Fca94Jg24",
          "sub": "Moved · Chase card",
          "amt": -1.0,
          "kind": "mv"
@@ -2103,7 +2117,7 @@ window.RECAP = {
         },
         {
          "date": "Sep 23",
-         "label": "Price Chopper",
+         "label": "Price Chopper Supermarkets",
          "sub": "Groceries · Chase card",
          "amt": -8.98,
          "kind": "out"
@@ -2131,7 +2145,7 @@ window.RECAP = {
         },
         {
          "date": "Sep 24",
-         "label": "Price Chopper",
+         "label": "Price Chopper Supermarkets",
          "sub": "Groceries · Chase card",
          "amt": -9.02,
          "kind": "out"
@@ -2173,7 +2187,7 @@ window.RECAP = {
         },
         {
          "date": "Sep 25",
-         "label": "Venmo top-up",
+         "label": "Venmo transfer",
          "sub": "Moved · NCSB checking",
          "amt": -30.0,
          "kind": "mv"
@@ -2229,7 +2243,7 @@ window.RECAP = {
         },
         {
          "date": "Sep 26",
-         "label": "David Zufall, gift cards (Venmo)",
+         "label": "Venmo from David Zufall",
          "sub": "Other · Venmo personal",
          "amt": 30.0,
          "kind": "in"
@@ -2285,7 +2299,7 @@ window.RECAP = {
         },
         {
          "date": "Sep 28",
-         "label": "Price Chopper",
+         "label": "Price Chopper Supermarkets",
          "sub": "Groceries · Chase card",
          "amt": -11.53,
          "kind": "out"
@@ -2320,7 +2334,7 @@ window.RECAP = {
         },
         {
          "date": "Sep 29",
-         "label": "Price Chopper",
+         "label": "Price Chopper Supermarkets",
          "sub": "Groceries · Chase card",
          "amt": -10.97,
          "kind": "out"
@@ -2388,11 +2402,11 @@ window.RECAP = {
       ],
       [
        "YTD start",
-       "$17,650.47"
+       "$14,936.26"
       ],
       [
        "YTD end",
-       "$17,061.57",
+       "$14,347.36",
        {
         "big": true
        }
@@ -2511,9 +2525,9 @@ window.RECAP = {
       },
       {
        "type": "goal",
-       "value": 17061.57,
+       "value": 14347.36,
        "target": 10000,
-       "note": "2026 savings goal of $10,000 cleared in May. YTD shown is the chained figure."
+       "note": "2026 savings goal of $10,000."
       }
      ]
     },
@@ -2543,8 +2557,8 @@ window.RECAP = {
        "src": "gap"
       },
       {
-       "when": "Sep",
-       "text": "YTD carried from the corrected August close of $17,650.47.",
+       "when": "YTD",
+       "text": "Rebuilt from Jan 1 with the full-year export. Jan to Jul had a Chase card imported twice; the duplicates are removed.",
        "src": "chain"
       }
      ]
@@ -3473,52 +3487,18 @@ window.RECAP = {
    ]
   },
   {
-   "id": "intellectual",
-   "label": "Intellectual",
-   "hue": "blue",
-   "count": 3,
+   "id": "career",
+   "label": "Career",
+   "hue": "orange",
+   "count": "OTS",
    "main": [
     {
-     "hue": "blue",
+     "hue": "orange",
      "spine": "Briefing",
      "type": "para",
      "text": [
-      "The fall MBA term ran three courses at once through the Reh School: FN 608 Financial Management, IS 606 Business Information Systems, and OM 603 Decision Analysis. Evening classes replaced pickup sports.",
-      "On the Air Force side, the AFOQT quant score of 6 (minimum 10) set the month’s task: find the retest voucher route and wait out the 90 days. The answer came back that Guard members get vouchers through a base education center, not the recruiter."
-     ]
-    },
-    {
-     "hue": "blue",
-     "spine": "Courses",
-     "type": "cards",
-     "cards": [
-      {
-       "hue": "blue",
-       "spine": "FN 608",
-       "title": "Financial Management",
-       "text": "Feng. Weekly assignments on Coca-Cola building toward a final report.",
-       "tags": [
-        "Report 60%"
-       ]
-      },
-      {
-       "hue": "blue",
-       "spine": "IS 606",
-       "title": "Business Information Systems",
-       "text": "Chaudhry. Week 2 and 3 quizzes at 100%, first case study 90%. The Week 4 case study was missed.",
-       "tags": [
-        "Strict AI policy"
-       ]
-      },
-      {
-       "hue": "blue",
-       "spine": "OM 603",
-       "title": "Decision Analysis & SC Modeling",
-       "text": "Bowman. Paper 1, Production Yahtzee, scored 97.33%.",
-       "tags": [
-        "Paper 1 97%"
-       ]
-      }
+      "Three threads: the job at the Lewis School, the Guard, and the Air Force OTS application. The AFOQT quant score of 6 (minimum 10) set September’s task: find the retest voucher route and wait out the 90 days. The answer came back that Guard members get vouchers through a base education center, not the recruiter.",
+      "No drill in September."
      ]
     },
     {
@@ -3612,21 +3592,110 @@ window.RECAP = {
      ]
     },
     {
-     "hue": "blue",
-     "spine": "Ahead",
+     "hue": "orange",
+     "spine": "Paths",
      "type": "kv",
      "items": [
       [
-       "Retest",
-       "Window opens after Nov 29"
+       "OTS",
+       "Retest after Nov 29; board 27OTS01R, Jan 2027",
+       {
+        "tag": "Active"
+       }
       ],
       [
-       "Board",
-       "27OTS01R, Jan 2027"
+       "Clarkson",
+       "Administrative Coordinator since Jul 20",
+       {
+        "tag": "Active"
+       }
       ],
       [
        "Guard",
-       "No drill in September"
+       "HHC, 27th IBCT; no drill in September"
+      ],
+      [
+       "Civil service",
+       "Sheriff's deputy agility test pending"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intellectual",
+   "label": "Intellectual",
+   "hue": "blue",
+   "count": 3,
+   "main": [
+    {
+     "hue": "blue",
+     "spine": "Briefing",
+     "type": "para",
+     "text": "The fall MBA term ran three courses at once through the Reh School: FN 608 Financial Management, IS 606 Business Information Systems, and OM 603 Decision Analysis. Evening classes replaced pickup sports."
+    },
+    {
+     "hue": "blue",
+     "spine": "Courses",
+     "type": "cards",
+     "cards": [
+      {
+       "hue": "blue",
+       "spine": "FN 608",
+       "title": "Financial Management",
+       "text": "Feng. Weekly assignments on Coca-Cola building toward a final report.",
+       "tags": [
+        "Report 60%"
+       ]
+      },
+      {
+       "hue": "blue",
+       "spine": "IS 606",
+       "title": "Business Information Systems",
+       "text": "Chaudhry. Week 2 and 3 quizzes at 100%, first case study 90%. The Week 4 case study was missed.",
+       "tags": [
+        "Strict AI policy"
+       ]
+      },
+      {
+       "hue": "blue",
+       "spine": "OM 603",
+       "title": "Decision Analysis & SC Modeling",
+       "text": "Bowman. Paper 1, Production Yahtzee, scored 97.33%.",
+       "tags": [
+        "Paper 1 97%"
+       ]
+      }
+     ]
+    },
+    {
+     "hue": "violet",
+     "spine": "Study",
+     "type": "para",
+     "text": "AFOQT math prep began: arithmetic reasoning and math knowledge, aimed at the quant section."
+    }
+   ],
+   "side": [
+    {
+     "hue": "blue",
+     "spine": "Program",
+     "type": "kv",
+     "items": [
+      [
+       "Degree",
+       "Online General MBA, Reh School"
+      ],
+      [
+       "Done",
+       "AC 604, OM 607, MK 610, OS 603"
+      ],
+      [
+       "This term",
+       "FN 608, IS 606, OM 603"
+      ],
+      [
+       "Target",
+       "May 2027"
       ]
      ]
     }

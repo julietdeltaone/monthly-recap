@@ -50,7 +50,7 @@ window.RECAP = {
    ],
    [
     "YTD",
-    "$20,445"
+    "$17,731"
    ]
   ],
   "stats": [
@@ -95,7 +95,7 @@ window.RECAP = {
     [
      "Dining & coffee",
      "amber",
-     350
+     340
     ],
     [
      "Giving",
@@ -105,7 +105,7 @@ window.RECAP = {
     [
      "Other",
      "slate",
-     434
+     444
     ]
    ]
   }
@@ -139,7 +139,7 @@ window.RECAP = {
        "title": "+$3,383.35 net",
        "text": "$5,923.87 in, $2,540.52 out. JDM, taxi, and three Clarkson checks.",
        "tags": [
-        "YTD $20,445"
+        "YTD $17,731"
        ],
        "foot": [
         "Origin export",
@@ -176,15 +176,29 @@ window.RECAP = {
        "href": "#spiritual"
       },
       {
-       "hue": "blue",
-       "spine": "Intellectual",
+       "hue": "orange",
+       "spine": "Career",
        "title": "Retest booked",
-       "text": "AFOQT Nov 30 at Fort Drum. IS 606 at 92.4%, OM 603 at 97.1%.",
+       "text": "AFOQT Nov 30 at Fort Drum. Camp Smith screening. Sheriff agility test Oct 30.",
        "tags": [
         "Board Jan 25, 2027"
        ],
        "foot": [
-        "Moodle, email",
+        "Email",
+        "Open"
+       ],
+       "href": "#career"
+      },
+      {
+       "hue": "blue",
+       "spine": "Intellectual",
+       "title": "Final stretch",
+       "text": "IS 606 at 92.4%, OM 603 at 97.1%. Finals Nov 3 to 10.",
+       "tags": [
+        "3 courses"
+       ],
+       "foot": [
+        "Moodle",
         "Open"
        ],
        "href": "#intellectual"
@@ -271,7 +285,7 @@ window.RECAP = {
       ],
       [
        "YTD",
-       "$20,444.92",
+       "$17,730.71",
        {
         "big": true
        }
@@ -341,7 +355,7 @@ window.RECAP = {
          "items": [
           {
            "date": "Oct 13",
-           "label": "B&H Photo, headshot studio kit",
+           "label": "B&H Photo",
            "sub": "Chase business card",
            "amt": -594.35
           },
@@ -384,13 +398,13 @@ window.RECAP = {
           },
           {
            "date": "Oct 10",
-           "label": "Google One / storage",
+           "label": "Google subscription",
            "sub": "Chase card",
            "amt": -107.99
           },
           {
            "date": "Oct 9",
-           "label": "Origin finance app (annual)",
+           "label": "Origin finance app",
            "sub": "Apple Card",
            "amt": -99.0
           },
@@ -455,20 +469,20 @@ window.RECAP = {
            "amt": -15.0
           },
           {
-           "date": "Oct 22",
-           "label": "DoorDash DashPass",
-           "sub": "Chase card",
-           "amt": -9.99
-          },
-          {
            "date": "Oct 25",
            "label": "Apple subscriptions",
            "sub": "Apple Card",
            "amt": -9.99
           },
           {
+           "date": "Oct 22",
+           "label": "DoorDash",
+           "sub": "Chase Freedom",
+           "amt": -9.99
+          },
+          {
            "date": "Oct 1",
-           "label": "Google One / storage",
+           "label": "Google subscription",
            "sub": "Apple Card",
            "amt": -7.56
           },
@@ -511,25 +525,25 @@ window.RECAP = {
           },
           {
            "date": "Oct 21",
-           "label": "Price Chopper",
+           "label": "Price Chopper Supermarkets",
            "sub": "Chase card",
            "amt": -16.03
           },
           {
            "date": "Oct 5",
-           "label": "Price Chopper",
+           "label": "Price Chopper Supermarkets",
            "sub": "Chase card",
            "amt": -15.16
           },
           {
            "date": "Oct 29",
-           "label": "Price Chopper",
+           "label": "Price Chopper Supermarkets",
            "sub": "Chase card",
            "amt": -14.5
           },
           {
            "date": "Oct 20",
-           "label": "Price Chopper",
+           "label": "Price Chopper Supermarkets",
            "sub": "Chase card",
            "amt": -12.18
           },
@@ -541,7 +555,7 @@ window.RECAP = {
           },
           {
            "date": "Oct 1",
-           "label": "Price Chopper",
+           "label": "Price Chopper Supermarkets",
            "sub": "Chase card",
            "amt": -11.98
           },
@@ -568,7 +582,7 @@ window.RECAP = {
         {
          "name": "Dining & coffee",
          "hue": "amber",
-         "amt": 350.05,
+         "amt": 339.85,
          "items": [
           {
            "date": "Oct 18",
@@ -578,7 +592,7 @@ window.RECAP = {
           },
           {
            "date": "Oct 25",
-           "label": "Dinner with Ryan Blount (Venmo)",
+           "label": "Dinner (Ryan Blount, Venmo)",
            "sub": "Venmo personal",
            "amt": -30.0
           },
@@ -634,12 +648,6 @@ window.RECAP = {
            "date": "Oct 7",
            "label": "Park Bros Coffee",
            "sub": "Apple Cash",
-           "amt": -10.2
-          },
-          {
-           "date": "Oct 30",
-           "label": "Park Bros",
-           "sub": "Chase card",
            "amt": -10.2
           },
           {
@@ -840,7 +848,7 @@ window.RECAP = {
         {
          "name": "Tesla",
          "hue": "sky",
-         "amt": 157.07,
+         "amt": 167.27,
          "items": [
           {
            "date": "Oct 25",
@@ -859,6 +867,12 @@ window.RECAP = {
            "label": "Tesla Supercharger",
            "sub": "Chase card",
            "amt": -11.89
+          },
+          {
+           "date": "Oct 30",
+           "label": "Park Bros",
+           "sub": "Chase card",
+           "amt": -10.2
           },
           {
            "date": "Oct 10",
@@ -893,7 +907,7 @@ window.RECAP = {
          "items": [
           {
            "date": "Oct 1",
-           "label": "Izod",
+           "label": "Link* Izod",
            "sub": "Apple Card",
            "amt": -40.0
           },
@@ -982,7 +996,7 @@ window.RECAP = {
          ]
         },
         {
-         "name": "Fees & travel",
+         "name": "Travel & fees",
          "hue": "slate",
          "amt": 11.25,
          "items": [
@@ -994,7 +1008,7 @@ window.RECAP = {
           },
           {
            "date": "Oct 11",
-           "label": "Ogdensburg bridge toll",
+           "label": "Ogdensburg Bridge & Port Authority",
            "sub": "Apple Card",
            "amt": -3.25
           },
@@ -1235,7 +1249,7 @@ window.RECAP = {
         },
         {
          "date": "Oct 1",
-         "label": "Izod",
+         "label": "Link* Izod",
          "sub": "Shopping · Apple Card",
          "amt": -40.0,
          "kind": "out"
@@ -1256,14 +1270,14 @@ window.RECAP = {
         },
         {
          "date": "Oct 1",
-         "label": "Price Chopper",
+         "label": "Price Chopper Supermarkets",
          "sub": "Groceries · Chase card",
          "amt": -11.98,
          "kind": "out"
         },
         {
          "date": "Oct 1",
-         "label": "Google One / storage",
+         "label": "Google subscription",
          "sub": "Subscriptions · Apple Card",
          "amt": -7.56,
          "kind": "out"
@@ -1271,14 +1285,14 @@ window.RECAP = {
         {
          "date": "Oct 1",
          "label": "St. Lawrence County Clerk",
-         "sub": "Fees & travel · Chase card",
+         "sub": "Travel & fees · Chase card",
          "amt": -5.0,
          "kind": "out"
         },
         {
          "date": "Oct 1",
          "label": "St. Lawrence County Clerk",
-         "sub": "Fees & travel · Chase card",
+         "sub": "Travel & fees · Chase card",
          "amt": -3.0,
          "kind": "out"
         },
@@ -1375,8 +1389,8 @@ window.RECAP = {
         },
         {
          "date": "Oct 4",
-         "label": "Apple Savings to Apple Cash",
-         "sub": "Moved · Apple Savings",
+         "label": "Apple Savings withdrawal",
+         "sub": "Savings · Apple Savings",
          "amt": -69.33,
          "kind": "mv"
         },
@@ -1438,14 +1452,14 @@ window.RECAP = {
         },
         {
          "date": "Oct 5",
-         "label": "JDM account to personal checking",
+         "label": "Internet Transfer From X8718 Ck -",
          "sub": "Moved · NCSB checking",
          "amt": 1135.92,
          "kind": "mv"
         },
         {
          "date": "Oct 5",
-         "label": "JDM account to personal checking",
+         "label": "Internet Transfer To X6005 Ck -",
          "sub": "Moved · NCSB JDM checking",
          "amt": -1135.92,
          "kind": "mv"
@@ -1494,7 +1508,7 @@ window.RECAP = {
         },
         {
          "date": "Oct 5",
-         "label": "Price Chopper",
+         "label": "Price Chopper Supermarkets",
          "sub": "Groceries · Chase card",
          "amt": -15.16,
          "kind": "out"
@@ -1571,7 +1585,7 @@ window.RECAP = {
         },
         {
          "date": "Oct 9",
-         "label": "Origin finance app (annual)",
+         "label": "Origin finance app",
          "sub": "Subscriptions · Apple Card",
          "amt": -99.0,
          "kind": "out"
@@ -1627,7 +1641,7 @@ window.RECAP = {
         },
         {
          "date": "Oct 10",
-         "label": "Google One / storage",
+         "label": "Google subscription",
          "sub": "Subscriptions · Chase card",
          "amt": -107.99,
          "kind": "out"
@@ -1725,8 +1739,8 @@ window.RECAP = {
         },
         {
          "date": "Oct 11",
-         "label": "Ogdensburg bridge toll",
-         "sub": "Fees & travel · Apple Card",
+         "label": "Ogdensburg Bridge & Port Authority",
+         "sub": "Travel & fees · Apple Card",
          "amt": -3.25,
          "kind": "out"
         },
@@ -1781,7 +1795,7 @@ window.RECAP = {
         },
         {
          "date": "Oct 13",
-         "label": "B&H Photo, headshot studio kit",
+         "label": "B&H Photo",
          "sub": "JDM Productions · Chase business card",
          "amt": -594.35,
          "kind": "out"
@@ -1991,7 +2005,7 @@ window.RECAP = {
         },
         {
          "date": "Oct 20",
-         "label": "Price Chopper",
+         "label": "Price Chopper Supermarkets",
          "sub": "Groceries · Chase card",
          "amt": -12.18,
          "kind": "out"
@@ -2012,7 +2026,7 @@ window.RECAP = {
         },
         {
          "date": "Oct 21",
-         "label": "Price Chopper",
+         "label": "Price Chopper Supermarkets",
          "sub": "Groceries · Chase card",
          "amt": -16.03,
          "kind": "out"
@@ -2054,8 +2068,8 @@ window.RECAP = {
         },
         {
          "date": "Oct 22",
-         "label": "DoorDash DashPass",
-         "sub": "Subscriptions · Chase card",
+         "label": "DoorDash",
+         "sub": "Subscriptions · Chase Freedom",
          "amt": -9.99,
          "kind": "out"
         },
@@ -2145,7 +2159,7 @@ window.RECAP = {
         },
         {
          "date": "Oct 25",
-         "label": "Dinner with Ryan Blount (Venmo)",
+         "label": "Dinner (Ryan Blount, Venmo)",
          "sub": "Dining & coffee · Venmo personal",
          "amt": -30.0,
          "kind": "out"
@@ -2180,7 +2194,7 @@ window.RECAP = {
         },
         {
          "date": "Oct 26",
-         "label": "Venmo top-up",
+         "label": "Venmo transfer",
          "sub": "Moved · NCSB checking",
          "amt": -30.0,
          "kind": "mv"
@@ -2257,7 +2271,7 @@ window.RECAP = {
         },
         {
          "date": "Oct 29",
-         "label": "Price Chopper",
+         "label": "Price Chopper Supermarkets",
          "sub": "Groceries · Chase card",
          "amt": -14.5,
          "kind": "out"
@@ -2279,7 +2293,7 @@ window.RECAP = {
         {
          "date": "Oct 30",
          "label": "Park Bros",
-         "sub": "Dining & coffee · Chase card",
+         "sub": "Tesla · Chase card",
          "amt": -10.2,
          "kind": "out"
         }
@@ -2325,11 +2339,11 @@ window.RECAP = {
       ],
       [
        "YTD start",
-       "$17,061.57"
+       "$14,347.36"
       ],
       [
        "YTD end",
-       "$20,444.92",
+       "$17,730.71",
        {
         "big": true
        }
@@ -2448,9 +2462,9 @@ window.RECAP = {
       },
       {
        "type": "goal",
-       "value": 20444.92,
+       "value": 17730.71,
        "target": 10000,
-       "note": "2026 savings goal of $10,000 cleared in May. YTD shown is the chained figure."
+       "note": "2026 savings goal of $10,000."
       }
      ]
     },
@@ -3263,52 +3277,18 @@ window.RECAP = {
    ]
   },
   {
-   "id": "intellectual",
-   "label": "Intellectual",
-   "hue": "blue",
-   "count": 3,
+   "id": "career",
+   "label": "Career",
+   "hue": "orange",
+   "count": "Nov 30",
    "main": [
     {
-     "hue": "blue",
+     "hue": "orange",
      "spine": "Briefing",
      "type": "para",
      "text": [
-      "All three MBA courses are in their final stretch, and everything lands in the next eleven days: FN 608 final report Nov 3, OM 603 final exam Nov 5, IS 606 final project Nov 10. The semester ending is the thing to look forward to.",
-      "The OTS path moved from waiting to booked. The AFOQT retest is set for Mon Nov 30 at 9:00 AM at the UMGC National Testing Center on Fort Drum, with Dec 1 held as a backup. The voucher gets requested when Mr. Woods returns on Nov 23."
-     ]
-    },
-    {
-     "hue": "blue",
-     "spine": "Courses",
-     "type": "cards",
-     "cards": [
-      {
-       "hue": "blue",
-       "spine": "FN 608",
-       "title": "Financial Management",
-       "text": "Assignment 8 (risk factors) in Oct 26 with positive feedback. Final report on Coca-Cola due Nov 3; Self-Test 8 closes Nov 10.",
-       "tags": [
-        "Report due Nov 3"
-       ]
-      },
-      {
-       "hue": "blue",
-       "spine": "IS 606",
-       "title": "Business Information Systems",
-       "text": "Running 92.38%. Midterm 88%, quizzes 100%. Quiz W8n9 closes Nov 3; final project due Nov 10.",
-       "tags": [
-        "92.4%"
-       ]
-      },
-      {
-       "hue": "blue",
-       "spine": "OM 603",
-       "title": "Decision Analysis & SC Modeling",
-       "text": "Running 97.08%. Paper 2 (Travel Center) scored 100%. Only the final exam remains, Thu Nov 5 at 8 PM.",
-       "tags": [
-        "97.1%"
-       ]
-      }
+      "The OTS path moved from waiting to booked. The AFOQT retest is set for Mon Nov 30 at 9:00 AM at the UMGC National Testing Center on Fort Drum, with Dec 1 held as a backup. The voucher gets requested when Mr. Woods returns on Nov 23.",
+      "Work stayed busy with PT Month, the Guard sent a team to Camp Smith, and the sheriff's deputy civil service path picked back up with the agility test on Oct 30."
      ]
     },
     {
@@ -3368,6 +3348,144 @@ window.RECAP = {
    ],
    "side": [
     {
+     "hue": "red",
+     "spine": "Deadlines",
+     "type": "rows",
+     "items": [
+      {
+       "when": "Nov 6",
+       "text": "Drill weekend, Nov 6 to 8"
+      },
+      {
+       "when": "Nov 23",
+       "text": "Woods requests the AFOQT voucher"
+      },
+      {
+       "when": "Nov 30",
+       "text": "AFOQT retest, Fort Drum, 9 AM"
+      },
+      {
+       "when": "Dec 13",
+       "text": "Aim High retake request due"
+      },
+      {
+       "when": "Jan 25",
+       "text": "OTS board 27OTS01R"
+      }
+     ]
+    },
+    {
+     "hue": "orange",
+     "spine": "AFOQT",
+     "blocks": [
+      {
+       "type": "sub",
+       "text": "Quant score vs minimum"
+      },
+      {
+       "type": "meter",
+       "max": 100,
+       "rows": [
+        [
+         "Quant now",
+         6,
+         "6",
+         10
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": "Prep plan runs to Nov 30: arithmetic reasoning and math knowledge."
+      }
+     ]
+    },
+    {
+     "hue": "orange",
+     "spine": "Paths",
+     "type": "kv",
+     "items": [
+      [
+       "OTS",
+       "Retest booked; board Jan 2027",
+       {
+        "tag": "Active"
+       }
+      ],
+      [
+       "Clarkson",
+       "Administrative Coordinator",
+       {
+        "tag": "Active"
+       }
+      ],
+      [
+       "Guard",
+       "ETS June 2027"
+      ],
+      [
+       "Civil service",
+       "Agility test done; result pending"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "intellectual",
+   "label": "Intellectual",
+   "hue": "blue",
+   "count": 3,
+   "main": [
+    {
+     "hue": "blue",
+     "spine": "Briefing",
+     "type": "para",
+     "text": "All three MBA courses are in their final stretch, and everything lands in the next eleven days: FN 608 final report Nov 3, OM 603 final exam Nov 5, IS 606 final project Nov 10. The semester ending is the thing to look forward to."
+    },
+    {
+     "hue": "blue",
+     "spine": "Courses",
+     "type": "cards",
+     "cards": [
+      {
+       "hue": "blue",
+       "spine": "FN 608",
+       "title": "Financial Management",
+       "text": "Assignment 8 (risk factors) in Oct 26 with positive feedback. Final report on Coca-Cola due Nov 3; Self-Test 8 closes Nov 10.",
+       "tags": [
+        "Report due Nov 3"
+       ]
+      },
+      {
+       "hue": "blue",
+       "spine": "IS 606",
+       "title": "Business Information Systems",
+       "text": "Running 92.38%. Midterm 88%, quizzes 100%. Quiz W8n9 closes Nov 3; final project due Nov 10.",
+       "tags": [
+        "92.4%"
+       ]
+      },
+      {
+       "hue": "blue",
+       "spine": "OM 603",
+       "title": "Decision Analysis & SC Modeling",
+       "text": "Running 97.08%. Paper 2 (Travel Center) scored 100%. Only the final exam remains, Thu Nov 5 at 8 PM.",
+       "tags": [
+        "97.1%"
+       ]
+      }
+     ]
+    },
+    {
+     "hue": "violet",
+     "spine": "Study",
+     "type": "para",
+     "text": "AFOQT math prep continued toward the Nov 30 retest: diagnostic and first drill done."
+    }
+   ],
+   "side": [
+    {
      "hue": "blue",
      "spine": "Grades",
      "blocks": [
@@ -3415,38 +3533,8 @@ window.RECAP = {
        "text": "IS 606 final project; FN 608 Self-Test 8"
       },
       {
-       "when": "Nov 23",
-       "text": "Woods requests the AFOQT voucher"
-      },
-      {
-       "when": "Nov 30",
-       "text": "AFOQT retest, Fort Drum, 9 AM"
-      }
-     ]
-    },
-    {
-     "hue": "orange",
-     "spine": "AFOQT",
-     "blocks": [
-      {
-       "type": "sub",
-       "text": "Quant score vs minimum"
-      },
-      {
-       "type": "meter",
-       "max": 100,
-       "rows": [
-        [
-         "Quant now",
-         6,
-         "6",
-         10
-        ]
-       ]
-      },
-      {
-       "type": "note",
-       "text": "Prep plan runs to Nov 30: arithmetic reasoning and math knowledge."
+       "when": "Nov 4",
+       "text": "Registration opens for the next terms (through Nov 13)"
       }
      ]
     }

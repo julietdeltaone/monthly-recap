@@ -3,6 +3,9 @@ import json, datetime as dt
 S = '/tmp/claude-0/-home-claude/e2eb66b9-6aee-558a-b3a4-c4e64327d063/scratchpad/'
 REPO = '/home/claude/monthly-recap/'
 C = json.load(open(S + 'calc.json'))
+FIN = json.load(open(S + 'fin_all.json'))
+for _m in ('2026-09', '2026-10'):
+    _g = C[_m]['gym']; C[_m] = FIN[_m]; C[_m]['gym'] = _g
 
 def money(n, whole=False, plus=False):
     s = ('{:,.0f}' if whole else '{:,.2f}').format(abs(n))
@@ -18,7 +21,7 @@ def datebox(iso):
 SRC_HUE = {'Clarkson payroll': 'emerald', 'JDM Productions': 'orange', 'Taxi': 'amber', 'Guard pay': 'green', 'Uber': 'slate', 'Interest': 'teal', 'Cashback': 'sky', 'Other': 'violet'}
 CAT_HUE = {'Phone & devices': 'blue', 'Groceries': 'green', 'Dining & coffee': 'amber', 'Shopping': 'violet', 'Subscriptions': 'teal',
            'Giving': 'magenta', 'Health': 'red', 'JDM Productions': 'orange', 'Tesla': 'sky', 'Personal care': 'slate',
-           'Entertainment': 'slate', 'Fees & travel': 'slate', 'Other': 'slate'}
+           'Entertainment': 'slate', 'Travel & fees': 'slate', 'Other': 'slate'}
 
 ENTITIES = {
     'Potsdam': 'place', 'Canton': 'place', 'Fort Drum': 'place', 'Camp Smith': 'place', 'Ives Park': 'place',
@@ -77,7 +80,7 @@ def finance(m, brief, notes, upto=None):
         {'hue': 'teal', 'spine': '2026', 'blocks': [
             {'type': 'sub', 'text': 'Net by month', 'right': 'tap a month'},
             {'type': 'year', 'metric': 'net', 'fmt': 'money'},
-            {'type': 'goal', 'value': c['ytdEnd'], 'target': 10000, 'note': '2026 savings goal of $10,000 cleared in May. YTD shown is the chained figure.'}]},
+            {'type': 'goal', 'value': c['ytdEnd'], 'target': 10000, 'note': '2026 savings goal of $10,000.'}]},
         {'hue': 'amber', 'spine': 'Notes', 'type': 'rows', 'items': notes},
     ]
     return main, side, rate
@@ -122,7 +125,7 @@ fin_main, fin_side, rate = finance(m, [
     {'when': 'Sep 9', 'text': 'On Black backpack, ' + money(279) + '.', 'src': 'one-off'},
     {'when': 'Sep 1', 'text': 'Apple Savings to Apple Cash move of ' + money(217.16) + ' counted as money moved, not income.', 'src': 'rule'},
     {'when': 'Note', 'text': 'The JDM Venmo account is not linked to Origin. Shoot payments count when they land in the bank.', 'src': 'gap'},
-    {'when': 'Sep', 'text': 'YTD carried from the corrected August close of ' + money(17650.47) + '.', 'src': 'chain'},
+    {'when': 'YTD', 'text': 'Rebuilt from Jan 1 with the full-year export. Jan to Jul had a Chase card imported twice; the duplicates are removed.', 'src': 'chain'},
 ])
 ring_pct = round(g['days'] / 30 * 100)
 SEP = {
@@ -146,7 +149,8 @@ SEP['domains'].append({'id': 'overview', 'label': 'Overview', 'hue': 'slate', 'm
     {'hue': 'teal', 'spine': 'Financial', 'title': money(c['net'], plus=True) + ' net', 'text': money(c['income']) + ' in, ' + money(c['spend']) + ' out. Verizon payoff drives the red.', 'tags': ['YTD ' + money(c['ytdEnd'], whole=True)], 'foot': ['Origin export', 'Open'], 'href': '#financial'},
     {'hue': 'green', 'spine': 'Physical', 'title': '%d gym days' % g['days'], 'text': '{:,} lb moved, {} cardio sessions, {} miles. Nine-mile run on Sep 6.'.format(g['volume'], g['cardioSessions'], g['miles']), 'tags': ['28 of 30 days'], 'foot': ['FitNotes', 'Open'], 'href': '#physical'},
     {'hue': 'magenta', 'spine': 'Spiritual', 'title': '3 sermons', 'text': 'Galatians 5 series opens: liberty, love, joy.', 'tags': ['Fruit of the Spirit'], 'foot': ['CBC notes', 'Open'], 'href': '#spiritual'},
-    {'hue': 'blue', 'spine': 'Intellectual', 'title': 'MBA term + OTS', 'text': 'FN 608, IS 606, OM 603 under way. Voucher route for the AFOQT retest set through the education center.', 'tags': ['Retest window opens Nov 29'], 'foot': ['Moodle, email', 'Open'], 'href': '#intellectual'},
+    {'hue': 'orange', 'spine': 'Career', 'title': 'OTS retest route', 'text': 'Voucher route for the AFOQT retest set through the education center. DD-368 uploaded.', 'tags': ['Retest window opens Nov 29'], 'foot': ['Email', 'Open'], 'href': '#career'},
+    {'hue': 'blue', 'spine': 'Intellectual', 'title': 'MBA term', 'text': 'FN 608, IS 606, OM 603 under way. OM 603 Paper 1 at 97.3%.', 'tags': ['3 courses'], 'foot': ['Moodle', 'Open'], 'href': '#intellectual'},
     {'hue': 'amber', 'spine': 'Creative', 'title': '2 shoots', 'text': 'Mandy Dow and Kayla Bryson portraits. Megan Eddy films delivered.', 'tags': ['Tomford exchange closed'], 'foot': ['Notion ledger', 'Open'], 'href': '#creative'},
     {'hue': 'violet', 'spine': 'Reflections', 'title': 'The routine month', 'text': 'Nothing dramatic, and that was the point.', 'foot': ['5 notes', 'Open'], 'href': '#reflections'},
   ]}],
@@ -238,16 +242,11 @@ SEP['domains'].append({'id': 'spiritual', 'label': 'Spiritual', 'hue': 'magenta'
   {'hue': 'amber', 'spine': 'Habits', 'type': 'para', 'text': 'Keeping a daily Bible reading plan and a YouVersion Bible app streak alongside Sunday notes.'},
  ]})
 
-SEP['domains'].append({'id': 'intellectual', 'label': 'Intellectual', 'hue': 'blue', 'count': 3,
+SEP['domains'].append({'id': 'career', 'label': 'Career', 'hue': 'orange', 'count': 'OTS',
  'main': [
-  {'hue': 'blue', 'spine': 'Briefing', 'type': 'para', 'text': [
-    'The fall MBA term ran three courses at once through the Reh School: FN 608 Financial Management, IS 606 Business Information Systems, and OM 603 Decision Analysis. Evening classes replaced pickup sports.',
-    'On the Air Force side, the AFOQT quant score of 6 (minimum 10) set the month’s task: find the retest voucher route and wait out the 90 days. The answer came back that Guard members get vouchers through a base education center, not the recruiter.']},
-  {'hue': 'blue', 'spine': 'Courses', 'type': 'cards', 'cards': [
-    {'hue': 'blue', 'spine': 'FN 608', 'title': 'Financial Management', 'text': 'Feng. Weekly assignments on Coca-Cola building toward a final report.', 'tags': ['Report 60%']},
-    {'hue': 'blue', 'spine': 'IS 606', 'title': 'Business Information Systems', 'text': 'Chaudhry. Week 2 and 3 quizzes at 100%, first case study 90%. The Week 4 case study was missed.', 'tags': ['Strict AI policy']},
-    {'hue': 'blue', 'spine': 'OM 603', 'title': 'Decision Analysis & SC Modeling', 'text': 'Bowman. Paper 1, Production Yahtzee, scored 97.33%.', 'tags': ['Paper 1 97%']},
-  ]},
+  {'hue': 'orange', 'spine': 'Briefing', 'type': 'para', 'text': [
+    'Three threads: the job at the Lewis School, the Guard, and the Air Force OTS application. The AFOQT quant score of 6 (minimum 10) set September\u2019s task: find the retest voucher route and wait out the 90 days. The answer came back that Guard members get vouchers through a base education center, not the recruiter.',
+    'No drill in September.']},
   {'hue': 'red', 'spine': 'OTS', 'type': 'rows', 'items': [
     {'when': 'Aug 31', 'text': 'AFOQT at Pearson in Watertown. Verbal 61, quant 6 against a minimum of 10. Everything else passed.'},
     {'when': 'Sep 8', 'text': 'TSgt Powers (318th Recruiting Squadron) confirmed Guard and Reserve members get retest vouchers through a base education center.'},
@@ -264,8 +263,24 @@ SEP['domains'].append({'id': 'intellectual', 'label': 'Intellectual', 'hue': 'bl
   {'hue': 'red', 'spine': 'AFOQT', 'blocks': [
     {'type': 'sub', 'text': 'Aug 31 scores', 'right': 'line = minimum'},
     {'type': 'meter', 'max': 100, 'rows': [['Verbal', 61, '61', 15], ['CSO', 41, '41'], ['Pilot', 35, '35'], ['ABM', 26, '26'], ['Academic', 26, '26'], ['Quant', 6, '6', 10]]}]},
-  {'hue': 'blue', 'spine': 'Ahead', 'type': 'kv', 'items': [
-    ['Retest', 'Window opens after Nov 29'], ['Board', '27OTS01R, Jan 2027'], ['Guard', 'No drill in September']]},
+  {'hue': 'orange', 'spine': 'Paths', 'type': 'kv', 'items': [
+    ['OTS', 'Retest after Nov 29; board 27OTS01R, Jan 2027', {'tag': 'Active'}], ['Clarkson', 'Administrative Coordinator since Jul 20', {'tag': 'Active'}],
+    ['Guard', 'HHC, 27th IBCT; no drill in September'], ['Civil service', "Sheriff's deputy agility test pending"]]},
+ ]})
+
+SEP['domains'].append({'id': 'intellectual', 'label': 'Intellectual', 'hue': 'blue', 'count': 3,
+ 'main': [
+  {'hue': 'blue', 'spine': 'Briefing', 'type': 'para', 'text': 'The fall MBA term ran three courses at once through the Reh School: FN 608 Financial Management, IS 606 Business Information Systems, and OM 603 Decision Analysis. Evening classes replaced pickup sports.'},
+  {'hue': 'blue', 'spine': 'Courses', 'type': 'cards', 'cards': [
+    {'hue': 'blue', 'spine': 'FN 608', 'title': 'Financial Management', 'text': 'Feng. Weekly assignments on Coca-Cola building toward a final report.', 'tags': ['Report 60%']},
+    {'hue': 'blue', 'spine': 'IS 606', 'title': 'Business Information Systems', 'text': 'Chaudhry. Week 2 and 3 quizzes at 100%, first case study 90%. The Week 4 case study was missed.', 'tags': ['Strict AI policy']},
+    {'hue': 'blue', 'spine': 'OM 603', 'title': 'Decision Analysis & SC Modeling', 'text': 'Bowman. Paper 1, Production Yahtzee, scored 97.33%.', 'tags': ['Paper 1 97%']},
+  ]},
+  {'hue': 'violet', 'spine': 'Study', 'type': 'para', 'text': 'AFOQT math prep began: arithmetic reasoning and math knowledge, aimed at the quant section.'},
+ ],
+ 'side': [
+  {'hue': 'blue', 'spine': 'Program', 'type': 'kv', 'items': [
+    ['Degree', 'Online General MBA, Reh School'], ['Done', 'AC 604, OM 607, MK 610, OS 603'], ['This term', 'FN 608, IS 606, OM 603'], ['Target', 'May 2027']]},
  ]})
 
 SEP['domains'].append({'id': 'creative', 'label': 'Creative', 'hue': 'amber', 'count': 2,
@@ -355,7 +370,8 @@ OCT['domains'].append({'id': 'overview', 'label': 'Overview', 'hue': 'slate', 'm
     {'hue': 'teal', 'spine': 'Financial', 'title': money(c['net'], plus=True) + ' net', 'text': money(c['income']) + ' in, ' + money(c['spend']) + ' out. JDM, taxi, and three Clarkson checks.', 'tags': ['YTD ' + money(c['ytdEnd'], whole=True)], 'foot': ['Origin export', 'Open'], 'href': '#financial'},
     {'hue': 'green', 'spine': 'Physical', 'title': '%d gym days' % g['days'], 'text': 'Agility test on Oct 30: 1.5 miles in 10:35, 39 sit-ups. Zone 2 pace keeps climbing.', 'tags': ['Sheriff agility test'], 'foot': ['FitNotes', 'Open'], 'href': '#physical'},
     {'hue': 'magenta', 'spine': 'Spiritual', 'title': '3 sermons', 'text': 'Peace, patience, and kindness. Oct 25 missed for drill.', 'tags': ['Fruit of the Spirit'], 'foot': ['CBC notes', 'Open'], 'href': '#spiritual'},
-    {'hue': 'blue', 'spine': 'Intellectual', 'title': 'Retest booked', 'text': 'AFOQT Nov 30 at Fort Drum. IS 606 at 92.4%, OM 603 at 97.1%.', 'tags': ['Board Jan 25, 2027'], 'foot': ['Moodle, email', 'Open'], 'href': '#intellectual'},
+    {'hue': 'orange', 'spine': 'Career', 'title': 'Retest booked', 'text': 'AFOQT Nov 30 at Fort Drum. Camp Smith screening. Sheriff agility test Oct 30.', 'tags': ['Board Jan 25, 2027'], 'foot': ['Email', 'Open'], 'href': '#career'},
+    {'hue': 'blue', 'spine': 'Intellectual', 'title': 'Final stretch', 'text': 'IS 606 at 92.4%, OM 603 at 97.1%. Finals Nov 3 to 10.', 'tags': ['3 courses'], 'foot': ['Moodle', 'Open'], 'href': '#intellectual'},
     {'hue': 'amber', 'spine': 'Creative', 'title': 'Studio launched', 'text': 'Ken & TaShell wedding shoot, headshot studio kit, first studio sessions.', 'tags': ['Studio from $195'], 'foot': ['Notion ledger', 'Open'], 'href': '#creative'},
     {'hue': 'violet', 'spine': 'Reflections', 'title': 'Full calendar', 'text': 'Everything at once, and it held.', 'foot': ['5 notes', 'Open'], 'href': '#reflections'},
   ]}],
@@ -447,16 +463,11 @@ OCT['domains'].append({'id': 'spiritual', 'label': 'Spiritual', 'hue': 'magenta'
   {'hue': 'amber', 'spine': 'Habits', 'type': 'para', 'text': 'Daily Bible reading plan and YouVersion streak kept going through a crowded month.'},
  ]})
 
-OCT['domains'].append({'id': 'intellectual', 'label': 'Intellectual', 'hue': 'blue', 'count': 3,
+OCT['domains'].append({'id': 'career', 'label': 'Career', 'hue': 'orange', 'count': 'Nov 30',
  'main': [
-  {'hue': 'blue', 'spine': 'Briefing', 'type': 'para', 'text': [
-    'All three MBA courses are in their final stretch, and everything lands in the next eleven days: FN 608 final report Nov 3, OM 603 final exam Nov 5, IS 606 final project Nov 10. The semester ending is the thing to look forward to.',
-    'The OTS path moved from waiting to booked. The AFOQT retest is set for Mon Nov 30 at 9:00 AM at the UMGC National Testing Center on Fort Drum, with Dec 1 held as a backup. The voucher gets requested when Mr. Woods returns on Nov 23.']},
-  {'hue': 'blue', 'spine': 'Courses', 'type': 'cards', 'cards': [
-    {'hue': 'blue', 'spine': 'FN 608', 'title': 'Financial Management', 'text': 'Assignment 8 (risk factors) in Oct 26 with positive feedback. Final report on Coca-Cola due Nov 3; Self-Test 8 closes Nov 10.', 'tags': ['Report due Nov 3']},
-    {'hue': 'blue', 'spine': 'IS 606', 'title': 'Business Information Systems', 'text': 'Running 92.38%. Midterm 88%, quizzes 100%. Quiz W8n9 closes Nov 3; final project due Nov 10.', 'tags': ['92.4%']},
-    {'hue': 'blue', 'spine': 'OM 603', 'title': 'Decision Analysis & SC Modeling', 'text': 'Running 97.08%. Paper 2 (Travel Center) scored 100%. Only the final exam remains, Thu Nov 5 at 8 PM.', 'tags': ['97.1%']},
-  ]},
+  {'hue': 'orange', 'spine': 'Briefing', 'type': 'para', 'text': [
+    'The OTS path moved from waiting to booked. The AFOQT retest is set for Mon Nov 30 at 9:00 AM at the UMGC National Testing Center on Fort Drum, with Dec 1 held as a backup. The voucher gets requested when Mr. Woods returns on Nov 23.',
+    "Work stayed busy with PT Month, the Guard sent a team to Camp Smith, and the sheriff's deputy civil service path picked back up with the agility test on Oct 30."]},
   {'hue': 'red', 'spine': 'OTS', 'type': 'rows', 'items': [
     {'when': 'Oct 16', 'text': 'Mr. Woods (Test Control Officer, Joint Base MDL) sent the Pearson VUE steps for the retest voucher.'},
     {'when': 'Oct 19', 'text': 'Completed e-AFOQT voucher request form sent to Woods.'},
@@ -470,7 +481,34 @@ OCT['domains'].append({'id': 'intellectual', 'label': 'Intellectual', 'hue': 'bl
     {'text': 'Worked on the OT fieldwork manuals for Ashleigh Graveline.'},
     {'text': 'Clarkson Hall wayfinding moved from 3D videos to printable PDF visitor guides.'},
   ]},
-  {'hue': 'slate', 'spine': 'Civil service', 'type': 'para', 'text': 'Sheriff’s deputy civil service: agility test retaken Oct 30 after the original date fell during annual training. Result pending.'},
+  {'hue': 'slate', 'spine': 'Civil service', 'type': 'para', 'text': 'Sheriff\u2019s deputy civil service: agility test retaken Oct 30 after the original date fell during annual training. Result pending.'},
+ ],
+ 'side': [
+  {'hue': 'red', 'spine': 'Deadlines', 'type': 'rows', 'items': [
+    {'when': 'Nov 6', 'text': 'Drill weekend, Nov 6 to 8'},
+    {'when': 'Nov 23', 'text': 'Woods requests the AFOQT voucher'},
+    {'when': 'Nov 30', 'text': 'AFOQT retest, Fort Drum, 9 AM'},
+    {'when': 'Dec 13', 'text': 'Aim High retake request due'},
+    {'when': 'Jan 25', 'text': 'OTS board 27OTS01R'},
+  ]},
+  {'hue': 'orange', 'spine': 'AFOQT', 'blocks': [
+    {'type': 'sub', 'text': 'Quant score vs minimum'},
+    {'type': 'meter', 'max': 100, 'rows': [['Quant now', 6, '6', 10]]},
+    {'type': 'note', 'text': 'Prep plan runs to Nov 30: arithmetic reasoning and math knowledge.'}]},
+  {'hue': 'orange', 'spine': 'Paths', 'type': 'kv', 'items': [
+    ['OTS', 'Retest booked; board Jan 2027', {'tag': 'Active'}], ['Clarkson', 'Administrative Coordinator', {'tag': 'Active'}],
+    ['Guard', 'ETS June 2027'], ['Civil service', 'Agility test done; result pending']]},
+ ]})
+
+OCT['domains'].append({'id': 'intellectual', 'label': 'Intellectual', 'hue': 'blue', 'count': 3,
+ 'main': [
+  {'hue': 'blue', 'spine': 'Briefing', 'type': 'para', 'text': 'All three MBA courses are in their final stretch, and everything lands in the next eleven days: FN 608 final report Nov 3, OM 603 final exam Nov 5, IS 606 final project Nov 10. The semester ending is the thing to look forward to.'},
+  {'hue': 'blue', 'spine': 'Courses', 'type': 'cards', 'cards': [
+    {'hue': 'blue', 'spine': 'FN 608', 'title': 'Financial Management', 'text': 'Assignment 8 (risk factors) in Oct 26 with positive feedback. Final report on Coca-Cola due Nov 3; Self-Test 8 closes Nov 10.', 'tags': ['Report due Nov 3']},
+    {'hue': 'blue', 'spine': 'IS 606', 'title': 'Business Information Systems', 'text': 'Running 92.38%. Midterm 88%, quizzes 100%. Quiz W8n9 closes Nov 3; final project due Nov 10.', 'tags': ['92.4%']},
+    {'hue': 'blue', 'spine': 'OM 603', 'title': 'Decision Analysis & SC Modeling', 'text': 'Running 97.08%. Paper 2 (Travel Center) scored 100%. Only the final exam remains, Thu Nov 5 at 8 PM.', 'tags': ['97.1%']},
+  ]},
+  {'hue': 'violet', 'spine': 'Study', 'type': 'para', 'text': 'AFOQT math prep continued toward the Nov 30 retest: diagnostic and first drill done.'},
  ],
  'side': [
   {'hue': 'blue', 'spine': 'Grades', 'blocks': [
@@ -481,13 +519,8 @@ OCT['domains'].append({'id': 'intellectual', 'label': 'Intellectual', 'hue': 'bl
     {'when': 'Nov 3', 'text': 'FN 608 final report and peer feedback; IS 606 quiz'},
     {'when': 'Nov 5', 'text': 'OM 603 final exam, 8 PM'},
     {'when': 'Nov 10', 'text': 'IS 606 final project; FN 608 Self-Test 8'},
-    {'when': 'Nov 23', 'text': 'Woods requests the AFOQT voucher'},
-    {'when': 'Nov 30', 'text': 'AFOQT retest, Fort Drum, 9 AM'},
+    {'when': 'Nov 4', 'text': 'Registration opens for the next terms (through Nov 13)'},
   ]},
-  {'hue': 'orange', 'spine': 'AFOQT', 'blocks': [
-    {'type': 'sub', 'text': 'Quant score vs minimum'},
-    {'type': 'meter', 'max': 100, 'rows': [['Quant now', 6, '6', 10]]},
-    {'type': 'note', 'text': 'Prep plan runs to Nov 30: arithmetic reasoning and math knowledge.'}]},
  ]})
 
 OCT['domains'].append({'id': 'creative', 'label': 'Creative', 'hue': 'amber', 'count': 2,

@@ -32,7 +32,7 @@
     return c;
   }).reverse();
 
-  var ytd = 20444.92; /* chained YTD through Oct 30, from data/2026-10.js */
+  var ytd = Y.ytd.value;
   window.RECAP = {
     meta: { label: '2026 Monthly Recap', short: 'Index', mIdx: latest, year: 2026, daysInMonth: 31, titleSuffix: ' · JD Meyers', prev: null, next: null },
     entities: { 'Clarkson': 'school', 'Lewis School': 'school', 'Air Force': 'org', 'Fort Drum': 'place' },
@@ -68,7 +68,7 @@
           { hue: 'magenta', spine: 'Sermons', blocks: [{ type: 'sub', text: 'Sermons logged by month' }, { type: 'year', metric: 'sermons', fmt: 'int', showAll: true }] }
         ],
         side: [
-          { hue: 'teal', spine: 'Goal', blocks: [{ type: 'goal', value: ytd, target: Y.savingsGoal, note: 'The $10,000 goal cleared in May. Month nets sum $56.74 higher than the chained YTD because of the August correction.' }] }
+          { hue: 'teal', spine: 'Goal', blocks: [{ type: 'goal', value: ytd, target: Y.savingsGoal, note: 'YTD rebuilt from Jan 1 with the full-year export.' }] }
         ] }
     ]
   };
