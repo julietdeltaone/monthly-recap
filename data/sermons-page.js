@@ -6,7 +6,7 @@
   var S = (window.SERMONS || []).slice().sort(function (a, b) { return a.date < b.date ? -1 : 1; });
   var MON = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
   var NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  var SERIES_HUE = { 'Acts': 'sky', 'Teaching series': 'teal', 'Guest speaker': 'amber', 'Conviction': 'orange', 'Fruit of the Spirit': 'magenta' };
+  var SERIES_HUE = { 'Acts': 'sky', 'Standalone': 'teal', 'Trust series': 'green', 'Guest speaker': 'amber', 'Conviction': 'orange', 'Fruit of the Spirit': 'magenta' };
   var NOTES = { '2026-10-25': 'Drill weekend at Camp Smith' };
   var year = 2026, last = S.length ? S[S.length - 1].date : year + '-01-01';
   var lastDate = new Date(last + 'T12:00:00');
@@ -43,7 +43,7 @@
       side: [
         { hue: 'violet', spine: 'Sundays', type: 'kv', items: suns.map(function (d) {
           var s = byDate[iso(d)];
-          return [short(d), s ? s.title : (NOTES[iso(d)] || 'No notes'), s ? { tag: s.series === 'Fruit of the Spirit' ? 'Fruit' : s.series.split(' ')[0] } : {}];
+          return [short(d), s ? s.title : (NOTES[iso(d)] || 'No notes'), s ? { tag: s.series === 'Fruit of the Spirit' ? 'Fruit' : s.series === 'Guest speaker' ? 'Guest' : s.series.split(' ')[0] } : {}];
         }) }
       ]
     });

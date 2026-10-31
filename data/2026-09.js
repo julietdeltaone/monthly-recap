@@ -3593,6 +3593,32 @@ window.RECAP = {
     },
     {
      "hue": "orange",
+     "spine": "OTS",
+     "blocks": [
+      {
+       "type": "sub",
+       "text": "Air Force OTS thread",
+       "right": "stage 6 of 8"
+      },
+      {
+       "type": "seg",
+       "rows": [
+        [
+         "Retest route",
+         6,
+         8,
+         "6/8"
+        ]
+       ]
+      },
+      {
+       "type": "note",
+       "text": "Considering → Recruiter → DD-368 sent → DD-368 approved → AFOQT taken → Retest route → Retest booked → Board"
+      }
+     ]
+    },
+    {
+     "hue": "orange",
      "spine": "Paths",
      "type": "kv",
      "items": [

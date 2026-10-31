@@ -2,6 +2,7 @@
 import json, datetime as dt
 S = '/tmp/claude-0/-home-claude/e2eb66b9-6aee-558a-b3a4-c4e64327d063/scratchpad/'
 REPO = '/home/claude/monthly-recap/'
+STAGES = ['Considering', 'Recruiter', 'DD-368 sent', 'DD-368 approved', 'AFOQT taken', 'Retest route', 'Retest booked', 'Board']
 C = json.load(open(S + 'calc.json'))
 FIN = json.load(open(S + 'fin_all.json'))
 for _m in ('2026-09', '2026-10'):
@@ -263,6 +264,7 @@ SEP['domains'].append({'id': 'career', 'label': 'Career', 'hue': 'orange', 'coun
   {'hue': 'red', 'spine': 'AFOQT', 'blocks': [
     {'type': 'sub', 'text': 'Aug 31 scores', 'right': 'line = minimum'},
     {'type': 'meter', 'max': 100, 'rows': [['Verbal', 61, '61', 15], ['CSO', 41, '41'], ['Pilot', 35, '35'], ['ABM', 26, '26'], ['Academic', 26, '26'], ['Quant', 6, '6', 10]]}]},
+  {'hue': 'orange', 'spine': 'OTS', 'blocks': [{'type': 'sub', 'text': 'Air Force OTS thread', 'right': 'stage 6 of 8'}, {'type': 'seg', 'rows': [[STAGES[5], 6, 8, '6/8']]}, {'type': 'note', 'text': ' \u2192 '.join(STAGES)}]},
   {'hue': 'orange', 'spine': 'Paths', 'type': 'kv', 'items': [
     ['OTS', 'Retest after Nov 29; board 27OTS01R, Jan 2027', {'tag': 'Active'}], ['Clarkson', 'Administrative Coordinator since Jul 20', {'tag': 'Active'}],
     ['Guard', 'HHC, 27th IBCT; no drill in September'], ['Civil service', "Sheriff's deputy agility test pending"]]},
@@ -495,6 +497,7 @@ OCT['domains'].append({'id': 'career', 'label': 'Career', 'hue': 'orange', 'coun
     {'type': 'sub', 'text': 'Quant score vs minimum'},
     {'type': 'meter', 'max': 100, 'rows': [['Quant now', 6, '6', 10]]},
     {'type': 'note', 'text': 'Prep plan runs to Nov 30: arithmetic reasoning and math knowledge.'}]},
+  {'hue': 'orange', 'spine': 'OTS', 'blocks': [{'type': 'sub', 'text': 'Air Force OTS thread', 'right': 'stage 7 of 8'}, {'type': 'seg', 'rows': [[STAGES[6], 7, 8, '7/8']]}, {'type': 'note', 'text': ' \u2192 '.join(STAGES)}]},
   {'hue': 'orange', 'spine': 'Paths', 'type': 'kv', 'items': [
     ['OTS', 'Retest booked; board Jan 2027', {'tag': 'Active'}], ['Clarkson', 'Administrative Coordinator', {'tag': 'Active'}],
     ['Guard', 'ETS June 2027'], ['Civil service', 'Agility test done; result pending']]},

@@ -6,7 +6,7 @@
   var NOTES = [
     { tag: 'First month. Baselines set. Gym habit started.', chips: ['Gym started'] },
     { tag: 'Consistency over intensity.', chips: [] },
-    { tag: 'Wedding bookings starting to build.', chips: [] },
+    { tag: 'Shipped the TaxiZero app, the JDM site rebuild, and an LMSW short film. Winter term closed at 3.83.', chips: ['3 projects shipped'] },
     { tag: 'Three career paths all in motion.', chips: ['Bench 195 lb', '3 paths open'] },
     { tag: 'United closed. OTS is the path. DD-368 sent. Photography delivered.', chips: ['Bench PR 215 lb', 'MBA 92.5% and 94%'] },
     { tag: 'DD-368 approved and sent to the Air Force recruiter; Jul 4 deadline met. Spring semester closed with a 4.0. Both outdoor runs came back faster.', chips: ['8 mi at 8:37', '4.000 term GPA'] },
