@@ -229,18 +229,30 @@
     lanes: function (b) {
       var ST = window.STORY; if (!ST) return '';
       var cur = b.month != null ? b.month : R.meta.mIdx;
-      var head = '<div class="ln-row ln-head"><span class="ln-k"></span><div class="ln-track">' + ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'].map(function (x, i) {
-        return '<i class="' + (i === cur ? 'cur' : '') + '" style="left:' + (i / 12 * 100).toFixed(3) + '%">' + x + '</i>'; }).join('') + '</div></div>';
+      var MO = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      var grid = MO.map(function (x, i) { return '<b class="ln-grid" style="left:' + (i / 12 * 100).toFixed(3) + '%"></b>'; }).join('');
+      var head = '<div class="ln-row ln-head"><span class="ln-k"></span><div class="ln-track">' + MO.map(function (x, i) {
+        return '<i class="' + (i === cur ? 'cur' : '') + '" style="left:' + ((i + .5) / 12 * 100).toFixed(3) + '%">' + x + '</i>'; }).join('') + '</div></div>';
       function pos(at) { return Math.max(0, Math.min(100, (at - 1) / 12 * 100)); }
       var rows = ST.lanes.map(function (ln) {
-        var th = ST.threads[ln.t], items = ln.items.map(function (it) {
+        var th = ST.threads[ln.t], bars = '', labs = [];
+        ln.items.forEach(function (it) {
           var t2 = ST.threads[it.t || ln.t];
-          if (it.from != null) return '<span class="ln-span ' + t2.hue + '" style="left:' + pos(it.from).toFixed(2) + '%;width:' + (pos(it.to) - pos(it.from)).toFixed(2) + '%" title="' + esc(it.label) + '"><em>' + esc(it.label) + '</em></span>';
-          return '<span class="ln-dot ' + t2.hue + ' ' + (it.kind || '') + '" style="left:' + pos(it.at).toFixed(2) + '%" title="' + esc(it.label) + '"></span>';
+          if (it.from != null) {
+            var l = pos(it.from), w = pos(it.to) - l;
+            bars += '<span class="ln-span ' + t2.hue + '" style="left:' + l.toFixed(2) + '%;width:' + w.toFixed(2) + '%" title="' + esc(it.label) + '"><em>' + esc(it.label) + '</em></span>';
+            labs.push({ at: l + w / 2, label: it.label, span: true });
+          } else {
+            bars += '<span class="ln-dot ' + t2.hue + ' ' + (it.kind || '') + '" style="left:' + pos(it.at).toFixed(2) + '%" title="' + esc(it.label) + '"></span>';
+            labs.push({ at: pos(it.at), label: it.label });
+          }
+        });
+        var marks = labs.map(function (lb) {
+          var a = lb.at < 5 ? 'l' : lb.at > 95 ? 'r' : 'c';
+          return '<span class="ln-lab ' + a + (lb.span ? ' alt' : '') + '" style="left:' + lb.at.toFixed(2) + '%">' + esc(lb.label) + '</span>';
         }).join('');
-        var marks = ln.items.filter(function (it) { return it.at != null; }).map(function (it) {
-          return '<span class="ln-lab" style="left:' + pos(it.at).toFixed(2) + '%">' + esc(it.label) + '</span>'; }).join('');
-        return '<div class="ln-row ' + th.hue + '"><span class="ln-k">' + esc(th.label) + '</span><div class="ln-track"><b class="ln-cur" style="left:' + (cur / 12 * 100).toFixed(3) + '%;width:' + (100 / 12).toFixed(3) + '%"></b>' + items + '<div class="ln-labs">' + marks + '</div></div></div>';
+        return '<div class="ln-row ' + th.hue + '"><span class="ln-k">' + esc(ln.title || th.label) + '</span><div class="ln-track">' + grid +
+          '<b class="ln-cur" style="left:' + (cur / 12 * 100).toFixed(3) + '%;width:' + (100 / 12).toFixed(3) + '%"></b>' + bars + '<div class="ln-labs">' + marks + '</div></div></div>';
       }).join('');
       return '<div class="lanes-wrap"><div class="lanes">' + head + rows + '</div></div>';
     },
@@ -368,6 +380,7 @@
     });
     wireTx();
     wireCal();
+    fitLanes();
     fitSide();
     if (fromClick) {
       var barEl = document.querySelector('.bar');
@@ -381,6 +394,32 @@
     if (a && a.getAttribute('href') === location.hash) { e.preventDefault(); show(current(), true); }
   });
 
+  /* swimlane labels: measured, so names never overlap or clip. A bar too short for its name
+     shows the name underneath instead; labels stack into as many rows as they need. */
+  function fitLanes() {
+    [].forEach.call(document.querySelectorAll('.ln-row:not(.ln-head) .ln-track'), function (tr) {
+      var tw = tr.clientWidth; if (!tw) return;
+      [].forEach.call(tr.querySelectorAll('.ln-span'), function (sp, k) {
+        var em = sp.querySelector('em'), alt = tr.querySelectorAll('.ln-lab.alt')[k];
+        var fits = em.scrollWidth <= sp.clientWidth;
+        sp.classList.toggle('short', !fits);
+        if (alt) alt.style.display = fits ? 'none' : '';
+      });
+      var labs = [].filter.call(tr.querySelectorAll('.ln-lab'), function (l) { return l.style.display !== 'none'; });
+      var items = labs.map(function (l) {
+        var w = l.offsetWidth, at = parseFloat(l.style.left) / 100 * tw;
+        var x0 = l.classList.contains('l') ? at : l.classList.contains('r') ? at - w : at - w / 2;
+        return { el: l, x0: x0, x1: x0 + w };
+      }).sort(function (a, b) { return a.x0 - b.x0; });
+      var ends = [];
+      items.forEach(function (it) {
+        var r = 0; while (ends[r] != null && ends[r] > it.x0 - 8) r++;
+        ends[r] = it.x1; it.el.style.top = (r * 15) + 'px';
+      });
+      tr.style.height = (32 + Math.max(1, ends.length) * 15 + 8) + 'px';
+    });
+  }
+
   /* side sheet sticks only when it fits in the window, so it never overlaps or clips */
   function fitSide() {
     if (!sideEl) return;
@@ -388,7 +427,7 @@
     sideEl.classList.toggle('stick', fits);
   }
   var rz = false;
-  window.addEventListener('resize', function () { if (!rz) { rz = true; requestAnimationFrame(function () { rz = false; fitSide(); }); } }, { passive: true });
+  window.addEventListener('resize', function () { if (!rz) { rz = true; requestAnimationFrame(function () { rz = false; fitLanes(); fitSide(); }); } }, { passive: true });
 
   /* training calendar: tap a day to see every exercise and set logged */
   function wireCal() {
@@ -504,5 +543,6 @@
   window.addEventListener('scroll', function () { up.classList.toggle('show', (window.scrollY || 0) > window.innerHeight); }, { passive: true });
 
   show(current(), false);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitLanes);
   upd();
 })();
