@@ -60,11 +60,23 @@
           { hue: 'violet', spine: 'In my words', blocks: [{ type: 'words' }] }
         ],
         side: [
+          { hue: 'green', spine: 'Goals', blocks: [{ type: 'goalsum' }, { type: 'rows', items: [{ text: 'Open the full scorecard', href: '#goals' }] }] },
           { hue: 'red', spine: 'Now', type: 'kv', items: [['OTS', 'AFOQT retest Nov 30; board Jan 2027', { tag: 'Active' }], ['Job', 'Administrative Coordinator, Lewis School', { tag: 'Since Jul 20' }],
             ['MBA', 'Fall finals by Nov 10; May 2027 target'], ['Guard', 'ETS June 2027; last AFT 471 of 500'], ['Civil service', 'Sheriff\u2019s deputy agility test passed Oct 30'], ['Business', 'Studio launched in October']] },
           { hue: 'teal', spine: 'Totals', type: 'kv', items: [['YTD net', '$' + Math.round(ytd).toLocaleString('en-US'), { big: true }], ['Gym days', String(sum(Y.gymDays)), { big: true }], ['Sermons', String(sum(Y.sermons))]] },
           investBand,
           { hue: 'teal', spine: 'Net', blocks: [{ type: 'sub', text: 'Net by month' }, { type: 'year', metric: 'net', fmt: 'money' }] }
+        ] },
+      { id: 'goals', label: '2026 goals', hue: 'green', mainLabel: 'Goals, set January 2026', sideLabel: 'Scorecard',
+        main: [
+          { hue: 'slate', spine: 'By month', blocks: [{ type: 'sub', text: 'The monthly goals, month by month', right: 'through ' + (window.GOALS ? window.GOALS.through : '') }, { type: 'checks' }] }
+        ].concat((window.GOALS ? window.GOALS.groups : []).map(function (g) {
+          var met = g.goals.filter(function (x) { return x.status === 'met'; }).length;
+          return { hue: g.hue, spine: g.label, blocks: [{ type: 'sub', text: g.label, right: met + ' of ' + g.goals.length + ' met' }, { type: 'goalset', group: g.id }] };
+        })),
+        side: [
+          { hue: 'green', spine: 'Score', blocks: [{ type: 'goalsum' }] },
+          investBand
         ] },
       { id: 'months', label: 'Months', hue: 'teal', count: latest + 1, mainLabel: '2026 by month', sideLabel: 'The year so far',
         main: [

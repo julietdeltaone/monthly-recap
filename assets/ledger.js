@@ -256,6 +256,44 @@
       }).join('');
       return '<div class="lanes-wrap"><div class="lanes">' + head + rows + '</div></div>';
     },
+    /* 2026 goals scorecard from data/2026-goals.js */
+    goalsum: function () {
+      var G = window.GOALS; if (!G) return '';
+      var all = [].concat.apply([], G.groups.map(function (g) { return g.goals; }));
+      var ST = [['met', 'Met', 'green'], ['close', 'Close', 'amber'], ['behind', 'Behind', 'red'], ['open', 'Not tracked', 'slate']];
+      var n = {}; all.forEach(function (x) { n[x.status] = (n[x.status] || 0) + 1; });
+      var bar = ST.map(function (s) { return n[s[0]] ? '<i class="' + s[2] + '" style="flex:' + n[s[0]] + '" title="' + s[1] + ': ' + n[s[0]] + '"></i>' : ''; }).join('');
+      var tiles = ST.map(function (s) { return '<div class="gs-t ' + s[2] + '"><b>' + (n[s[0]] || 0) + '</b><span>' + s[1] + '</span></div>'; }).join('');
+      var pillars = G.groups.map(function (g) {
+        var m = g.goals.filter(function (x) { return x.status === 'met'; }).length, t = g.goals.filter(function (x) { return x.status !== 'open'; }).length;
+        return '<div class="gs-p ' + g.hue + '"><span>' + esc(g.label) + '</span><div class="hbar"><i style="width:' + (t ? m / t * 100 : 0).toFixed(1) + '%"></i></div><b>' + m + '/' + t + '</b></div>';
+      }).join('');
+      return '<div class="gs"><div class="gs-big"><b class="num">' + (n.met || 0) + '</b><span>of ' + all.length + ' goals met</span></div><div class="gs-bar">' + bar + '</div><div class="gs-tiles">' + tiles + '</div><div class="gs-pillars">' + pillars + '</div></div>';
+    },
+    goalset: function (b) {
+      var G = window.GOALS; if (!G) return '';
+      var g = G.groups.filter(function (x) { return x.id === b.group; })[0]; if (!g) return '';
+      var LBL = { met: 'Met', close: 'Close', behind: 'Behind', open: 'Not tracked' };
+      return '<div class="gl">' + g.goals.map(function (x) {
+        var p = x.pct != null ? Math.max(3, Math.min(100, x.pct)) : 0;
+        return '<div class="gl-r ' + x.status + '"><span class="gl-s">' + LBL[x.status] + '</span><div class="gl-m"><div class="gl-g">' + esc(x.goal) + '</div>' +
+          (x.status !== 'open' ? '<div class="hbar"><i style="width:' + p.toFixed(1) + '%"></i></div>' : '') +
+          (x.note ? '<div class="gl-n">' + esc(x.note) + '</div>' : '') + '</div><b class="gl-a">' + esc(x.actual) + '</b></div>';
+      }).join('') + '</div>';
+    },
+    checks: function () {
+      var G = window.GOALS; if (!G) return '';
+      var MO = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'], MN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      var head = '<span></span>' + MN.map(function (x) { return '<i>' + x + '</i>'; }).join('');
+      var rows = G.months.map(function (r) {
+        return '<span class="ck-k ' + r.hue + '">' + esc(r.label) + '</span>' + r.vals.map(function (v, i) {
+          var c = v == null ? 'ck-x' : v >= 1 ? 'ck-1' : v > 0 ? 'ck-h' : 'ck-0';
+          var tip = MN[i] + ': ' + (r.tips && r.tips[i] ? r.tips[i] : v == null ? 'ahead' : v >= 1 ? 'met' : v > 0 ? 'partly' : 'missed');
+          return '<em class="' + c + ' ' + r.hue + '" title="' + esc(tip) + '"></em>';
+        }).join('');
+      }).join('');
+      return '<div class="ck-wrap"><div class="ck">' + head + rows + '</div></div><div class="key ck-key"><span><em class="ck-1 slate"></em>Met</span><span><em class="ck-h slate"></em>Partly</span><span><em class="ck-0 slate"></em>Missed</span><span><em class="ck-x slate"></em>Ahead</span></div>';
+    },
     words: function (b) {
       var ST = window.STORY; if (!ST) return '';
       return '<div class="words">' + ST.words.filter(function (w) { return !b.only || b.only.indexOf(w[0]) > -1; }).map(function (w) {
