@@ -37,11 +37,11 @@ window.STORY = {
     { t: 'job', title: 'Day job', items: [ { from: 1, to: 7.65, label: 'Campus Safety & Security', t: 'safety' }, { at: 6.97, label: 'Interview' }, { from: 7.65, to: 11, label: 'Admin Coordinator, Lewis School' } ] },
     { t: 'guard', items: [ { at: 1.8, label: 'Drill cancelled' }, { at: 2.7, label: 'Drill' }, { at: 3.5, label: 'MMCS training' },
       { from: 8.2, to: 8.7, label: 'Annual Training' }, { at: 10.78, label: 'Camp Smith screening' }, { at: 12.9, label: 'ETS Jun 2027 \u2192', kind: 'next' } ] },
-    { t: 'civil', title: 'Civil service, United', items: [ { from: 4, to: 5.6, label: 'United', t: 'united' }, { at: 5.3, label: 'Civil service exam' }, { at: 8.5, label: 'Agility test missed', kind: 'flag' }, { at: 10.97, label: 'Agility test' } ] },
+    { t: 'civil', title: 'Civil service, United', items: [ { from: 4, to: 5.6, label: 'United', t: 'united' }, { at: 5.3, label: 'Civil service exam' }, { at: 8.5, label: 'Agility test missed', kind: 'flag' }, { at: 10.97, label: 'Agility test passed', kind: 'win' } ] },
     { t: 'mba', items: [ { from: 1.15, to: 3.45, label: 'Winter: 3.83' }, { from: 3.97, to: 6.4, label: 'Spring: 4.0' }, { from: 9, to: 11.35, label: 'Fall: 3 courses' } ] },
     { t: 'jdm', items: [ { at: 1.5, label: 'CU EMS headshots' }, { at: 3.5, label: 'Site + TaxiZero' }, { from: 5.25, to: 6.95, label: '9 shoots, 3 weddings' },
       { at: 8.03, label: 'Choate wedding' }, { at: 8.7, label: 'Eddy wedding' }, { at: 10.1, label: 'Ken & TaShell' }, { at: 10.42, label: 'Studio launch' } ] },
-    { t: 'fitness', items: [ { from: 1, to: 11, label: 'Gym: 17 to 28 days a month' }, { at: 5.85, label: '8 mi run' }, { at: 9.2, label: '9 mi run' }, { at: 9.6, label: '5K 23:39' }, { at: 10.97, label: 'Agility test' } ] },
+    { t: 'fitness', items: [ { from: 1, to: 11, label: 'Gym: 17 to 28 days a month' }, { at: 5.85, label: '8 mi run' }, { at: 9.2, label: '9 mi run' }, { at: 9.6, label: '5K 23:39' }, { at: 10.97, label: 'Agility passed', kind: 'win' } ] },
     { t: 'faith', items: [ { from: 1, to: 3.98, label: 'Acts' }, { from: 5.75, to: 6.95, label: 'Trust series' }, { from: 7.8, to: 8.1, label: 'Conviction' }, { from: 9.4, to: 11, label: 'Fruit of the Spirit' } ] },
     { t: 'money', items: [ { at: 6.9, label: 'Passed $10k saved', kind: 'win' }, { at: 9.3, label: 'Phone payoff' }, { at: 10.97, label: '$17.7k YTD' } ] }
   ],

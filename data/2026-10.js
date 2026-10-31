@@ -151,9 +151,9 @@ window.RECAP = {
        "hue": "green",
        "spine": "Physical",
        "title": "17 gym days",
-       "text": "Agility test on Oct 30: 1.5 miles in 10:35, 39 sit-ups. Zone 2 pace keeps climbing.",
+       "text": "Passed the agility test on Oct 30: 1.5 miles in 10:35, 39 sit-ups. Zone 2 pace keeps climbing.",
        "tags": [
-        "Sheriff agility test"
+        "Agility test passed"
        ],
        "foot": [
         "FitNotes",
@@ -179,7 +179,7 @@ window.RECAP = {
        "hue": "orange",
        "spine": "Career",
        "title": "Retest booked",
-       "text": "AFOQT Nov 30 at Fort Drum. Camp Smith screening. Sheriff agility test Oct 30.",
+       "text": "AFOQT Nov 30 at Fort Drum. Camp Smith screening. Sheriff agility test passed Oct 30.",
        "tags": [
         "Board Jan 25, 2027"
        ],
@@ -267,7 +267,7 @@ window.RECAP = {
       },
       {
        "when": "Oct 30",
-       "text": "Sheriff’s deputy agility test"
+       "text": "Sheriff’s deputy agility test: passed"
       }
      ]
     },
@@ -2524,7 +2524,7 @@ window.RECAP = {
      "type": "para",
      "text": [
       "17 training days through Oct 30, fewer than September because of the drill weekend, the Oct 3 wedding, and a busy back half. Lifting held its numbers while the focus shifted toward test prep: timed sit-ups, push-ups, and faster aerobic work.",
-      "On Oct 30 came the sheriff’s deputy agility test, retaken after the first date collided with annual training at Fort Drum. The 1.5-mile run took 10:35 and sit-ups came in at 39 in under a minute, on a springy pad instead of the hard floor used in training. Push-ups and sit-ups were pass or fail."
+      "On Oct 30 came the sheriff’s deputy agility test, retaken after the first date collided with annual training at Fort Drum. The 1.5-mile run took 10:35 and sit-ups came in at 39 in under a minute, on a springy pad instead of the hard floor used in training. Push-ups and sit-ups were pass or fail. Result: passed. For reference, the last Army Fitness Test score was 471 of 500."
      ]
     },
     {
@@ -2999,7 +2999,7 @@ window.RECAP = {
         },
         {
          "when": "Oct 30",
-         "text": "Agility test: 1.5 miles in 10:35 (7:03 per mile)"
+         "text": "Agility test passed: 1.5 miles in 10:35 (7:03 per mile)"
         }
        ]
       }
@@ -3072,6 +3072,13 @@ window.RECAP = {
      "type": "kv",
      "items": [
       [
+       "Result",
+       "Passed",
+       {
+        "big": true
+       }
+      ],
+      [
        "1.5 mile",
        "10:35",
        {
@@ -3080,18 +3087,19 @@ window.RECAP = {
       ],
       [
        "Sit-ups",
-       "39 in 1 minute",
-       {
-        "big": true
-       }
+       "39 in 1 minute, pass"
       ],
       [
        "Push-ups",
-       "Pass or fail"
+       "Pass"
       ],
       [
        "Note",
        "Retake; first date fell during AT"
+      ],
+      [
+       "Last AFT",
+       "471 of 500"
       ]
      ]
     },
@@ -3343,7 +3351,7 @@ window.RECAP = {
      "hue": "slate",
      "spine": "Civil service",
      "type": "para",
-     "text": "Sheriff’s deputy civil service: agility test retaken Oct 30 after the original date fell during annual training. Result pending."
+     "text": "Sheriff’s deputy civil service: agility test retaken Oct 30 after the original date fell during annual training. Passed: 1.5 miles in 10:35, sit-ups and push-ups both passed."
     }
    ],
    "side": [
@@ -3451,7 +3459,7 @@ window.RECAP = {
       ],
       [
        "Civil service",
-       "Agility test done; result pending"
+       "Agility test passed Oct 30"
       ]
      ]
     }

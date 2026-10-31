@@ -13,7 +13,7 @@
     { tag: "Started as Administrative Coordinator at Clarkson's Lewis School. Training pivoted into frisbee, soccer, and outdoor running.", chips: ['New job Jul 20', '13.6 h cardio'] },
     { tag: 'Annual Training at Fort Drum, two weddings, and the AFOQT on Aug 31: quant 6, retest after 90 days.', chips: ['AFOQT Aug 31', '2 weddings'] },
     { tag: 'The routine month. The Verizon payoff put it in the red on purpose. Three MBA courses, a 23:39 5K, and the retest route set.', chips: ['Galatians 5 series'] },
-    { tag: 'Wedding shoot, headshot studio launch, Camp Smith deployment screening, and the sheriff’s deputy agility test. Through Oct 30.', chips: ['Headshot studio', 'Retest Nov 30'] },
+    { tag: 'Wedding shoot, headshot studio launch, Camp Smith deployment screening, and a passed sheriff’s deputy agility test. Through Oct 30.', chips: ['Headshot studio', 'Agility test passed'] },
     { tag: 'AFOQT retest Nov 30 at Fort Drum. Semester closes Nov 10.', chips: ['Retest Nov 30'] },
     { tag: 'DPT White Coat ceremony Dec 11.', chips: ['White Coat Dec 11'] }
   ];
@@ -52,7 +52,7 @@
         ],
         side: [
           { hue: 'red', spine: 'Now', type: 'kv', items: [['OTS', 'AFOQT retest Nov 30; board Jan 2027', { tag: 'Active' }], ['Job', 'Administrative Coordinator, Lewis School', { tag: 'Since Jul 20' }],
-            ['MBA', 'Fall finals by Nov 10; May 2027 target'], ['Guard', 'ETS June 2027'], ['Business', 'Studio launched in October']] },
+            ['MBA', 'Fall finals by Nov 10; May 2027 target'], ['Guard', 'ETS June 2027; last AFT 471 of 500'], ['Civil service', 'Sheriff\u2019s deputy agility test passed Oct 30'], ['Business', 'Studio launched in October']] },
           { hue: 'teal', spine: 'Totals', type: 'kv', items: [['YTD net', '$' + Math.round(ytd).toLocaleString('en-US'), { big: true }], ['Gym days', String(sum(Y.gymDays)), { big: true }], ['Sermons', String(sum(Y.sermons))]] },
           { hue: 'teal', spine: 'Net', blocks: [{ type: 'sub', text: 'Net by month' }, { type: 'year', metric: 'net', fmt: 'money' }] }
         ] },
@@ -60,7 +60,7 @@
         main: [
           { hue: 'red', spine: 'Career', type: 'para', text: [
             '2026 is the year to lock in a career. United closed in May. DD-368 was approved and sent to the Air Force recruiter in June. The AFOQT on Aug 31 came back with verbal 61 and quant 6, below the minimum of 10, so the retest is set for Nov 30 at Fort Drum ahead of the January 2027 OTS board.',
-            "In July, a new thread started: Administrative Coordinator at the Lewis School at Clarkson. The sheriff's deputy civil service path picked back up with the agility test on Oct 30."] },
+            "In July, a new thread started: Administrative Coordinator at the Lewis School at Clarkson. The sheriff's deputy civil service path picked back up, and the agility test on Oct 30 was a pass."] },
           { hue: 'teal', spine: 'Months', type: 'cards', cards: cards }
         ],
         side: [

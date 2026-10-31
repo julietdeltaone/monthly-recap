@@ -371,9 +371,9 @@ OCT['domains'].append({'id': 'overview', 'label': 'Overview', 'hue': 'slate', 'm
     'Money came back strong at ' + money(c['net'], plus=True) + '. The AFOQT retest is booked for Nov 30 at Fort Drum, and the Galatians series reached patience and kindness.']},
   {'hue': 'slate', 'spine': 'Domains', 'type': 'cards', 'cards': [
     {'hue': 'teal', 'spine': 'Financial', 'title': money(c['net'], plus=True) + ' net', 'text': money(c['income']) + ' in, ' + money(c['spend']) + ' out. JDM, taxi, and three Clarkson checks.', 'tags': ['YTD ' + money(c['ytdEnd'], whole=True)], 'foot': ['Origin export', 'Open'], 'href': '#financial'},
-    {'hue': 'green', 'spine': 'Physical', 'title': '%d gym days' % g['days'], 'text': 'Agility test on Oct 30: 1.5 miles in 10:35, 39 sit-ups. Zone 2 pace keeps climbing.', 'tags': ['Sheriff agility test'], 'foot': ['FitNotes', 'Open'], 'href': '#physical'},
+    {'hue': 'green', 'spine': 'Physical', 'title': '%d gym days' % g['days'], 'text': 'Passed the agility test on Oct 30: 1.5 miles in 10:35, 39 sit-ups. Zone 2 pace keeps climbing.', 'tags': ['Agility test passed'], 'foot': ['FitNotes', 'Open'], 'href': '#physical'},
     {'hue': 'magenta', 'spine': 'Spiritual', 'title': '3 sermons', 'text': 'Peace, patience, and kindness. Oct 25 missed for drill.', 'tags': ['Fruit of the Spirit'], 'foot': ['CBC notes', 'Open'], 'href': '#spiritual'},
-    {'hue': 'orange', 'spine': 'Career', 'title': 'Retest booked', 'text': 'AFOQT Nov 30 at Fort Drum. Camp Smith screening. Sheriff agility test Oct 30.', 'tags': ['Board Jan 25, 2027'], 'foot': ['Email', 'Open'], 'href': '#career'},
+    {'hue': 'orange', 'spine': 'Career', 'title': 'Retest booked', 'text': 'AFOQT Nov 30 at Fort Drum. Camp Smith screening. Sheriff agility test passed Oct 30.', 'tags': ['Board Jan 25, 2027'], 'foot': ['Email', 'Open'], 'href': '#career'},
     {'hue': 'blue', 'spine': 'Intellectual', 'title': 'Final stretch', 'text': 'IS 606 at 92.4%, OM 603 at 97.1%. Finals Nov 3 to 10.', 'tags': ['3 courses'], 'foot': ['Moodle', 'Open'], 'href': '#intellectual'},
     {'hue': 'amber', 'spine': 'Creative', 'title': 'Studio launched', 'text': 'Ken & TaShell wedding shoot, headshot studio kit, first studio sessions.', 'tags': ['Studio from $195'], 'foot': ['Notion ledger', 'Open'], 'href': '#creative'},
     {'hue': 'violet', 'spine': 'Reflections', 'title': 'Full calendar', 'text': 'Everything at once, and it held.', 'foot': ['5 notes', 'Open'], 'href': '#reflections'},
@@ -387,7 +387,7 @@ OCT['domains'].append({'id': 'overview', 'label': 'Overview', 'hue': 'slate', 'm
     {'when': 'Oct 20', 'text': 'AFOQT retest seat confirmed for Nov 30'},
     {'when': 'Oct 23', 'text': 'Drill weekend at Camp Smith, Oct 23 to 25'},
     {'when': 'Oct 27', 'text': 'Aim High portal check: 4 of 21 tasks done'},
-    {'when': 'Oct 30', 'text': 'Sheriff’s deputy agility test'},
+    {'when': 'Oct 30', 'text': 'Sheriff’s deputy agility test: passed'},
   ]},
   {'hue': 'slate', 'spine': 'Numbers', 'type': 'kv', 'items': [
     ['Net', money(c['net'], plus=True), {'big': True}], ['YTD', money(c['ytdEnd']), {'big': True}],
@@ -401,7 +401,7 @@ OCT['domains'].append({'id': 'physical', 'label': 'Physical', 'hue': 'green', 'c
  'main': [
   {'hue': 'green', 'spine': 'Briefing', 'type': 'para', 'text': [
     '%d training days through Oct 30, fewer than September because of the drill weekend, the Oct 3 wedding, and a busy back half. Lifting held its numbers while the focus shifted toward test prep: timed sit-ups, push-ups, and faster aerobic work.' % g['days'],
-    'On Oct 30 came the sheriff’s deputy agility test, retaken after the first date collided with annual training at Fort Drum. The 1.5-mile run took 10:35 and sit-ups came in at 39 in under a minute, on a springy pad instead of the hard floor used in training. Push-ups and sit-ups were pass or fail.']},
+    'On Oct 30 came the sheriff’s deputy agility test, retaken after the first date collided with annual training at Fort Drum. The 1.5-mile run took 10:35 and sit-ups came in at 39 in under a minute, on a springy pad instead of the hard floor used in training. Push-ups and sit-ups were pass or fail. Result: passed. For reference, the last Army Fitness Test score was 471 of 500.']},
   {'hue': 'green', 'spine': 'Calendar', 'blocks': [
     {'type': 'sub', 'text': 'Training days · tap a day for the full session', 'right': '%d of 30' % g['days']},
     {'type': 'cal', 'sessions': sessions(m), 'days': gym_cal(m, {'2026-10-30': 'Test', '2026-10-12': '5K'}), 'events': [23, 24, 25], 'eventLabel': 'drill',
@@ -425,7 +425,7 @@ OCT['domains'].append({'id': 'physical', 'label': 'Physical', 'hue': 'green', 'c
       {'when': 'Oct 12', 'text': 'Treadmill 5K in 25:00 at speed 7.5'},
       {'when': 'Oct 16', 'text': 'Zone 2, 2.14 miles in 20 minutes'},
       {'when': 'Oct 26', 'text': 'Treadmill 2 miles in 16:07. Rough day, left lat cramping.'},
-      {'when': 'Oct 30', 'text': 'Agility test: 1.5 miles in 10:35 (7:03 per mile)'},
+      {'when': 'Oct 30', 'text': 'Agility test passed: 1.5 miles in 10:35 (7:03 per mile)'},
     ]}]},
  ],
  'side': [
@@ -438,7 +438,7 @@ OCT['domains'].append({'id': 'physical', 'label': 'Physical', 'hue': 'green', 'c
     {'type': 'sub', 'text': 'Volume by month, lb'},
     {'type': 'year', 'metric': 'volume', 'fmt': 'k'}]},
   {'hue': 'red', 'spine': 'Agility', 'type': 'kv', 'items': [
-    ['1.5 mile', '10:35', {'big': True}], ['Sit-ups', '39 in 1 minute', {'big': True}], ['Push-ups', 'Pass or fail'], ['Note', 'Retake; first date fell during AT']]},
+    ['Result', 'Passed', {'big': True}], ['1.5 mile', '10:35', {'big': True}], ['Sit-ups', '39 in 1 minute, pass'], ['Push-ups', 'Pass'], ['Note', 'Retake; first date fell during AT'], ['Last AFT', '471 of 500']]},
   {'hue': 'amber', 'spine': 'Sit-ups', 'blocks': [
     {'type': 'sub', 'text': 'Timed sit-ups per minute', 'right': 'Sep 4 to Oct 30'},
     {'type': 'spark', 'values': [31, 36.4, 28.4, 38.7, 41.4, 39], 'label': 'Sit-ups per minute', 'axis': ['31', '39 on test day']},
@@ -484,7 +484,7 @@ OCT['domains'].append({'id': 'career', 'label': 'Career', 'hue': 'orange', 'coun
     {'text': 'Worked on the OT fieldwork manuals for Ashleigh Graveline.'},
     {'text': 'Clarkson Hall wayfinding moved from 3D videos to printable PDF visitor guides.'},
   ]},
-  {'hue': 'slate', 'spine': 'Civil service', 'type': 'para', 'text': 'Sheriff\u2019s deputy civil service: agility test retaken Oct 30 after the original date fell during annual training. Result pending.'},
+  {'hue': 'slate', 'spine': 'Civil service', 'type': 'para', 'text': 'Sheriff\u2019s deputy civil service: agility test retaken Oct 30 after the original date fell during annual training. Passed: 1.5 miles in 10:35, sit-ups and push-ups both passed.'},
  ],
  'side': [
   {'hue': 'red', 'spine': 'Deadlines', 'type': 'rows', 'items': [
@@ -501,7 +501,7 @@ OCT['domains'].append({'id': 'career', 'label': 'Career', 'hue': 'orange', 'coun
   {'hue': 'orange', 'spine': 'OTS', 'blocks': [{'type': 'sub', 'text': 'Air Force OTS thread', 'right': 'stage 7 of 8'}, {'type': 'seg', 'rows': [[STAGES[6], 7, 8, '7/8']]}, {'type': 'note', 'text': ' \u2192 '.join(STAGES)}]},
   {'hue': 'orange', 'spine': 'Paths', 'type': 'kv', 'items': [
     ['OTS', 'Retest booked; board Jan 2027', {'tag': 'Active'}], ['Clarkson', 'Administrative Coordinator', {'tag': 'Active'}],
-    ['Guard', 'ETS June 2027'], ['Civil service', 'Agility test done; result pending']]},
+    ['Guard', 'ETS June 2027'], ['Civil service', 'Agility test passed Oct 30']]},
  ]})
 
 OCT['domains'].append({'id': 'intellectual', 'label': 'Intellectual', 'hue': 'blue', 'count': 3,
