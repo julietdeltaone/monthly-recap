@@ -33,6 +33,15 @@
   }).reverse();
 
   var ytd = Y.ytd.value;
+  var IV = Y.invest, ivStart = sum(IV.accounts.map(function (a) { return a.start; })), ivNow = sum(IV.accounts.map(function (a) { return a.now; }));
+  function k(n) { return '$' + (n / 1000).toFixed(1) + 'k'; }
+  function chg(a) { var d = a.now - a.start; return (d < 0 ? '−' : '+') + Math.abs(d / a.start * 100).toFixed(0) + '%'; }
+  var ivMax = Math.max.apply(null, IV.accounts.map(function (a) { return Math.max(a.now, a.start); }));
+  var investBand = { hue: 'teal', spine: 'Invested', blocks: [
+    { type: 'sub', text: 'Investments vs Jan 1', right: 'tick = Jan start' },
+    { type: 'goal', value: ivNow, target: ivStart, of: 'up from', note: money(ivNow - ivStart) + ' since January (' + ((ivNow / ivStart - 1) * 100).toFixed(0) + '%), about $' + IV.contributed.toLocaleString('en-US') + ' of it new money. As of ' + IV.asOf + '.' },
+    { type: 'meter', max: ivMax, rows: IV.accounts.map(function (a) { return [a.name, a.now, k(a.now) + ' ' + chg(a), a.start]; }) }
+  ] };
   window.RECAP = {
     meta: { label: '2026 Monthly Recap', short: 'Index', mIdx: latest, year: 2026, daysInMonth: 31, titleSuffix: ' · JD Meyers', prev: null, next: null },
     entities: { 'Clarkson': 'school', 'Lewis School': 'school', 'Air Force': 'org', 'Fort Drum': 'place' },
@@ -54,6 +63,7 @@
           { hue: 'red', spine: 'Now', type: 'kv', items: [['OTS', 'AFOQT retest Nov 30; board Jan 2027', { tag: 'Active' }], ['Job', 'Administrative Coordinator, Lewis School', { tag: 'Since Jul 20' }],
             ['MBA', 'Fall finals by Nov 10; May 2027 target'], ['Guard', 'ETS June 2027; last AFT 471 of 500'], ['Civil service', 'Sheriff\u2019s deputy agility test passed Oct 30'], ['Business', 'Studio launched in October']] },
           { hue: 'teal', spine: 'Totals', type: 'kv', items: [['YTD net', '$' + Math.round(ytd).toLocaleString('en-US'), { big: true }], ['Gym days', String(sum(Y.gymDays)), { big: true }], ['Sermons', String(sum(Y.sermons))]] },
+          investBand,
           { hue: 'teal', spine: 'Net', blocks: [{ type: 'sub', text: 'Net by month' }, { type: 'year', metric: 'net', fmt: 'money' }] }
         ] },
       { id: 'months', label: 'Months', hue: 'teal', count: latest + 1, mainLabel: '2026 by month', sideLabel: 'The year so far',
@@ -81,7 +91,9 @@
           { hue: 'magenta', spine: 'Sermons', blocks: [{ type: 'sub', text: 'Sermons logged by month' }, { type: 'year', metric: 'sermons', fmt: 'int', showAll: true }] }
         ],
         side: [
-          { hue: 'teal', spine: 'Goal', blocks: [{ type: 'goal', value: ytd, target: Y.savingsGoal, note: 'YTD rebuilt from Jan 1 with the full-year export.' }] }
+          { hue: 'teal', spine: 'Goal', blocks: [{ type: 'goal', value: ytd, target: Y.savingsGoal, note: 'YTD rebuilt from Jan 1 with the full-year export.' }] },
+          investBand,
+          { hue: 'teal', spine: 'Accounts', type: 'kv', items: IV.accounts.map(function (a) { return [a.name, '$' + Math.round(a.now).toLocaleString('en-US') + ' (Jan $' + a.start.toLocaleString('en-US') + ')', { tag: a.note }]; }) }
         ] }
     ]
   };

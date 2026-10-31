@@ -13,5 +13,17 @@ window.YEAR = {
   volume:   [96108, 110005, 137845, 128418, 88290, 114465, 108355, 72905, 166118, 102845, null, null],
   sermons:  [3, 3, 4, 0, 4, 3, 3, 1, 3, 3, null, null],
   ytd: { through: 'Oct 30', value: 17730.71 },
-  savingsGoal: 10000
+  savingsGoal: 10000,
+  /* Investments: Jan 1 baseline from the 2026 plan; current values as of Oct 30 to 31.
+     M1 from Plaid (Oct 30 close), Robinhood and Fidelity from their account pages (Oct 31). */
+  invest: {
+    asOf: 'Oct 31',
+    accounts: [
+      { name: 'M1 brokerage', start: 35000, now: 40668.85, note: 'SPY, XLE, JBND' },
+      { name: 'M1 Roth IRA', start: 10000, now: 13401.01, note: 'VTI, RSP, VT' },
+      { name: 'Fidelity 403(b)', start: 6200, now: 6681.90, note: 'Held in cash' },
+      { name: 'Robinhood', start: 4000, now: 3848.02, note: 'Crypto and stocks' }
+    ],
+    contributed: 1650
+  }
 };

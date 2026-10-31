@@ -203,7 +203,7 @@
     },
     goal: function (b) {
       var pct = Math.min(100, b.value / b.target * 100);
-      return '<div class="goal"><div><b class="num">' + money(b.value) + '</b><span>of ' + money(b.target, { whole: true }) + '</span></div><span class="pct">' + (b.value / b.target * 100).toFixed(0) + '%</span></div>' +
+      return '<div class="goal"><div><b class="num">' + money(b.value) + '</b><span>' + (b.of || 'of') + ' ' + money(b.target, { whole: true }) + '</span></div><span class="pct">' + (b.value / b.target * 100).toFixed(0) + '%</span></div>' +
         '<div class="hbar tall"><i style="width:' + pct.toFixed(1) + '%"></i></div>' + (b.note ? '<p class="note">' + rich(b.note) + '</p>' : '');
     },
     /* sermons come from data/sermons-2026.js, the one shared source; b.month = 'YYYY-MM' */
