@@ -42,7 +42,20 @@
       ring: { pct: Math.round((latest + 1) / 12 * 100), text: String(latest + 1), cap: 'Months', sub: 'of 12 recapped' }
     },
     footnote: 'Monthly dashboards tracking financial, physical, spiritual, intellectual, and creative progress.',
+    defaultDomain: 'story',
+    noHero: true,
     domains: [
+      { id: 'story', label: 'The year', hue: 'red', mainLabel: '2026 at a glance', sideLabel: 'Where it stands',
+        main: [
+          { hue: 'slate', spine: 'Threads', wide: true, blocks: [{ type: 'sub', text: 'Every thread of 2026, January to December', right: 'dot = milestone \u00b7 bar = span \u00b7 diamond = setback \u00b7 ring = next' }, { type: 'lanes', month: latest }] },
+          { hue: 'violet', spine: 'In my words', blocks: [{ type: 'words' }] }
+        ],
+        side: [
+          { hue: 'red', spine: 'Now', type: 'kv', items: [['OTS', 'AFOQT retest Nov 30; board Jan 2027', { tag: 'Active' }], ['Job', 'Administrative Coordinator, Lewis School', { tag: 'Since Jul 20' }],
+            ['MBA', 'Fall finals by Nov 10; May 2027 target'], ['Guard', 'ETS June 2027'], ['Business', 'Studio launched in October']] },
+          { hue: 'teal', spine: 'Totals', type: 'kv', items: [['YTD net', '$' + Math.round(ytd).toLocaleString('en-US'), { big: true }], ['Gym days', String(sum(Y.gymDays)), { big: true }], ['Sermons', String(sum(Y.sermons))]] },
+          { hue: 'teal', spine: 'Net', blocks: [{ type: 'sub', text: 'Net by month' }, { type: 'year', metric: 'net', fmt: 'money' }] }
+        ] },
       { id: 'months', label: 'Months', hue: 'teal', count: latest + 1, mainLabel: '2026 by month', sideLabel: 'The year so far',
         main: [
           { hue: 'red', spine: 'Career', type: 'para', text: [
@@ -57,7 +70,7 @@
             ['Gym days', String(sum(Y.gymDays))], ['Sermons', String(sum(Y.sermons))]] },
           { hue: 'teal', spine: 'Net', blocks: [{ type: 'sub', text: 'Net by month', right: 'tap a month' }, { type: 'year', metric: 'net', fmt: 'money' }] },
           { hue: 'green', spine: 'Gym', blocks: [{ type: 'sub', text: 'Gym days by month' }, { type: 'year', metric: 'gymDays', fmt: 'int', showAll: true }] },
-          { hue: 'magenta', spine: 'Links', type: 'rows', items: [{ text: 'Sermon notes, all of 2026', href: 'cbc-sermons.html' }, { text: 'Year at a glance', href: '2026-overview.html' }] }
+          { hue: 'magenta', spine: 'Links', type: 'rows', items: [{ text: 'Sermon notes, all of 2026', href: 'cbc-sermons.html' }, { text: 'The year at a glance', href: '#story' }] }
         ] },
       { id: 'year', label: 'Year trends', hue: 'violet', mainLabel: '2026 trends', sideLabel: 'Savings goal',
         main: [

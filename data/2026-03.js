@@ -3680,7 +3680,7 @@ window.RECAP = {
    "id": "reflections",
    "label": "Reflections",
    "hue": "violet",
-   "count": 2,
+   "count": 3,
    "main": [
     {
      "hue": "violet",
@@ -3699,6 +3699,12 @@ window.RECAP = {
      "spine": "b. June 2027",
      "type": "para",
      "text": "The Guard contract ends June 2027. Deliberate beats default, so the decision starts now."
+    },
+    {
+     "hue": "violet",
+     "spine": "c. Why the Air Force",
+     "type": "para",
+     "text": "One call to an O3 about Guard OCS settled it the other way. Not built for the Army, not an outdoors type; if it is eight or twenty years, it has to be the Air Force."
     }
    ],
    "side": [

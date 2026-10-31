@@ -3110,7 +3110,7 @@ window.RECAP = {
        ]
       },
       {
-       "hue": "amber",
+       "hue": "orange",
        "spine": "Videography",
        "date": [
         "SAT",
@@ -3163,7 +3163,7 @@ window.RECAP = {
    "id": "reflections",
    "label": "Reflections",
    "hue": "violet",
-   "count": 2,
+   "count": 3,
    "main": [
     {
      "hue": "violet",
@@ -3182,6 +3182,12 @@ window.RECAP = {
      "spine": "b. Cardio",
      "type": "para",
      "text": "Quietly the best cardio month of the year so far."
+    },
+    {
+     "hue": "violet",
+     "spine": "c. Why apply",
+     "type": "para",
+     "text": "Not a planned move. Bored at work and curious what other Hill campus departments paid, the listing showed up and the rest followed."
     }
    ],
    "side": [

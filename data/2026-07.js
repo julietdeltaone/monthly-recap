@@ -3356,7 +3356,7 @@ window.RECAP = {
      "type": "cards",
      "cards": [
       {
-       "hue": "amber",
+       "hue": "violet",
        "spine": "Photoshoot",
        "date": [
         "WED",
@@ -3409,7 +3409,7 @@ window.RECAP = {
    "id": "reflections",
    "label": "Reflections",
    "hue": "violet",
-   "count": 1,
+   "count": 3,
    "main": [
     {
      "hue": "violet",
@@ -3422,6 +3422,18 @@ window.RECAP = {
      "spine": "a. Transition",
      "type": "para",
      "text": "The month\u2019s real story is the job. Everything else held steady around it."
+    },
+    {
+     "hue": "violet",
+     "spine": "b. Why leave",
+     "type": "para",
+     "text": "Campus Safety paid $17.25 an hour on nights under a director nobody liked. The new role meant better pay and normal hours."
+    },
+    {
+     "hue": "violet",
+     "spine": "c. The MBA",
+     "type": "para",
+     "text": "Between terms, but the point is clear: the MBA turns a narrow criminal investigations degree into a broad one."
     }
    ],
    "side": [

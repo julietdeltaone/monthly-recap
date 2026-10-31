@@ -3845,6 +3845,12 @@ window.RECAP = {
     },
     {
      "hue": "violet",
+     "spine": "f. Direction",
+     "type": "para",
+     "text": "Intelligence was the first pick without much thought. Now leaning toward Air Force public affairs, which brings the photography in. The admin job has also shown a preference for background work: organization over people-facing roles."
+    },
+    {
+     "hue": "violet",
      "spine": "e. November",
      "type": "para",
      "text": "Finish the semester (Nov 3, 5, 10), drill quant every day toward Nov 30, chase the voucher on Nov 23, and take delivery of the iPhone Duo."

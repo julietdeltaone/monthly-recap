@@ -22,7 +22,8 @@ N['2026-01'] = dict(
     creative=dict(brief='CU EMS came back for a second headshot session on Jan 15: 13 subjects, six of them new staff. A Jan 2 session fell through when the client never confirmed.',
                   rows=[['Jan 2', 'Headshot session, client no-show.'], ['Jan 10', 'Waugg wedding cancelled.'], ['Jan', 'Bookings on the calendar: McGrath Jun 6, Niles Jun 27, Eddy Aug 22.']]),
     refl=dict(quote='Baselines set. The habit started.', items=[['a. Start', 'January was about starting things and writing down where they began: money, gym, church, school.'],
-              ['b. Knee', 'The knee note mattered. Less running now so there could be more later.']],
+              ['b. Knee', 'The knee note mattered. Less running now so there could be more later.'],
+              ['c. No plan yet', 'No set career goals at the start of the year. The only idea on the table was maybe a longer military career.']],
               line='The baseline month.', carry=['Keep the gym streak', 'Finish the winter MBA term', 'Fill the 2026 wedding calendar']),
 )
 
@@ -59,7 +60,8 @@ N['2026-03'] = dict(
     creative=dict(brief='Three finished projects: the LMSW documentary short, the rebuilt JDM website with a service-specific intake form, and the TaxiZero fare estimator using the Google Maps API.',
                   rows=[['Mar', 'LMSW video project with M. Maurer.'], ['Mar', 'JDM website and intake form rebuilt.'], ['Mar', 'TaxiZero fare estimator, live on GitHub Pages.'], ['Mar', 'Signed: McGrath Jun 6, Niles Jun 27, Eddy Aug 22.']]),
     refl=dict(quote='Finished, not just started.', items=[['a. Shipping', 'Three projects went live. Finishing is the habit worth keeping.'],
-              ['b. June 2027', 'The Guard contract ends June 2027. Deliberate beats default, so the decision starts now.']],
+              ['b. June 2027', 'The Guard contract ends June 2027. Deliberate beats default, so the decision starts now.'],
+              ['c. Why the Air Force', 'One call to an O3 about Guard OCS settled it the other way. Not built for the Army, not an outdoors type; if it is eight or twenty years, it has to be the Air Force.']],
               line='The shipping month.', carry=['Talk to an Air Force recruiter', 'Spring term: OS 603, MK 610', 'Fix the plank']),
 )
 
@@ -77,7 +79,8 @@ N['2026-04'] = dict(
                study='Leadership and organizational behavior, through OS 603.'),
     creative=dict(brief='A quiet month for shoots while spring bookings built for May and June.', rows=[]),
     refl=dict(quote='Every lane open at once.', items=[['a. Wide', 'April is the widest the picture gets: recruiter, United, civil service, and the business all live.'],
-              ['b. Ahead', 'Something would close first. It turned out to be United, in May.']],
+              ['b. Ahead', 'Something would close first. It turned out to be United, in May.'],
+              ['c. United', 'Always a long shot from the SkyWest days at the Ogdensburg airport, with a friend in Chicago pushing to come over as a crew scheduler. Worth finding out if it was possible.']],
               line='The open-field month.', carry=['DD-368 to SSG Wilson', 'Civil service exam May 9', 'May shoots']),
 )
 
@@ -94,7 +97,8 @@ N['2026-05'] = dict(
                study='Psychology and marketing, through MK 610.'),
     creative=dict(brief='Six paid jobs in May: senior and family portraits plus two weddings.', rows=[]),
     refl=dict(quote='The field narrowed, and that is clarity.', items=[['a. Closed doors', 'United saying no was a closed door, not a verdict. It made the OTS path obvious.'],
-              ['b. Business', 'The photography business delivered when the career picture was uncertain.']],
+              ['b. Business', 'The photography business delivered when the career picture was uncertain.'],
+              ['c. Side income', 'JD Meyers Productions is about stretching side income as far as it goes, never the main thing. May proved how far that can go.']],
               line='The narrowing month.', carry=['Get the DD-368 approved before Jul 4', 'Finish the spring term']),
 )
 
@@ -111,7 +115,8 @@ N['2026-06'] = dict(
                study='Military history and doctrine, ahead of the officer board.'),
     creative=dict(brief='Two weddings: the McGrath photos on Jun 6 and a JuliaKia wedding film on Jun 27.', rows=[]),
     refl=dict(quote='The deadline that mattered got met.', items=[['a. Out of my hands', 'The DD-368 is with the recruiter now.'],
-              ['b. Cardio', 'Quietly the best cardio month of the year so far.']],
+              ['b. Cardio', 'Quietly the best cardio month of the year so far.'],
+              ['c. Why apply', 'Not a planned move. Bored at work and curious what other Hill campus departments paid, the listing showed up and the rest followed.']],
               line='The deadline month.', carry=['Start at the Lewis School', 'Annual Training Aug 6 to 21', 'AFOQT prep']),
 )
 
@@ -126,7 +131,9 @@ N['2026-07'] = dict(
     intel=dict(brief='Between semesters. Spring closed at 4.000; fall starts in September with FN 608, IS 606, and OM 603.', courses=[],
                study='Self-directed: modern military strategy and doctrine, from the levels of war to lessons from Ukraine.'),
     creative=dict(brief='A quiet month while the August weddings approached.', rows=[]),
-    refl=dict(quote='New job, same habits.', items=[['a. Transition', 'The month’s real story is the job. Everything else held steady around it.']],
+    refl=dict(quote='New job, same habits.', items=[['a. Transition', 'The month’s real story is the job. Everything else held steady around it.'],
+              ['b. Why leave', 'Campus Safety paid $17.25 an hour on nights under a director nobody liked. The new role meant better pay and normal hours.'],
+              ['c. The MBA', 'Between terms, but the point is clear: the MBA turns a narrow criminal investigations degree into a broad one.']],
               line='The transition month.', carry=['Annual Training', 'Two August weddings', 'AFOQT Aug 31']),
 )
 
@@ -144,6 +151,7 @@ N['2026-08'] = dict(
     creative=dict(brief='Two weddings delivered. The camera overheated as the bride walked in at the Eddy wedding; coverage resumed for the vows and the bride got a direct explanation and a $150 refund.',
                   rows=[['Aug', 'Lesson: backup bodies and heat management are non-negotiable on wedding days.']]),
     refl=dict(quote='Backup bodies, cold cameras, drilled math.', items=[['a. Cadence', 'AT, two weddings, and the AFOQT back to back is not sustainable, but it showed what is possible.'],
-              ['b. Systems', 'The camera and the quant score get fixed the same way: preparation, not willpower.']],
+              ['b. Systems', 'The camera and the quant score get fixed the same way: preparation, not willpower.'],
+              ['c. S1', 'AT built a real kinship with the S1 group at HHC. The people are the best part of the Guard this year.']],
               line='The stress-test month.', carry=['Find the retest voucher route', 'Fall MBA term', 'Settle the Megan Eddy delivery']),
 )

@@ -4053,7 +4053,7 @@ window.RECAP = {
      "type": "cards",
      "cards": [
       {
-       "hue": "amber",
+       "hue": "violet",
        "spine": "Photoshoot",
        "date": [
         "FRI",
@@ -4125,7 +4125,7 @@ window.RECAP = {
    "id": "reflections",
    "label": "Reflections",
    "hue": "violet",
-   "count": 2,
+   "count": 3,
    "main": [
     {
      "hue": "violet",
@@ -4144,6 +4144,12 @@ window.RECAP = {
      "spine": "b. Knee",
      "type": "para",
      "text": "The knee note mattered. Less running now so there could be more later."
+    },
+    {
+     "hue": "violet",
+     "spine": "c. No plan yet",
+     "type": "para",
+     "text": "No set career goals at the start of the year. The only idea on the table was maybe a longer military career."
     }
    ],
    "side": [

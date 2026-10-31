@@ -323,6 +323,7 @@ SEP['domains'].append({'id': 'reflections', 'label': 'Reflections', 'hue': 'viol
   {'hue': 'violet', 'spine': 'b. Phone', 'type': 'para', 'text': 'The month went negative by choice. Paying off the iPhone 17 Pro breaks the yearly Verizon upgrade cycle and moves phone and watch onto Apple leases. Same cost on paper, more flexibility, and the trade-in value gets used instead of left on the table.'},
   {'hue': 'violet', 'spine': 'c. Clean up', 'type': 'para', 'text': 'Two loose ends closed: the Megan Eddy films reached the family and the Tomford exchange settled with a lens. Owning the August camera failure plainly is what made the delivery land well.'},
   {'hue': 'violet', 'spine': 'd. Waiting', 'type': 'para', 'text': 'OTS is a waiting game for now. The retest cannot happen before the 90-day window, so the useful work is the math, not the email.'},
+  {'hue': 'violet', 'spine': 'f. Faith', 'type': 'para', 'text': 'Still going steady. The goal is more daily Bible reading and prayer, and the Galatians series gives it a track to run on.'},
   {'hue': 'violet', 'spine': 'e. October', 'type': 'para', 'text': 'Get the AFOQT voucher in motion, run PT Month at work, close strong in all three courses, and land the Oct 3 wedding shoot.'},
  ],
  'side': [
@@ -567,6 +568,7 @@ OCT['domains'].append({'id': 'reflections', 'label': 'Reflections', 'hue': 'viol
   {'hue': 'violet', 'spine': 'b. Camp Smith', 'type': 'para', 'text': 'The drill was a reminder of why the S1 work matters. The questions that never show on a report, like family care plans and dependents, are the ones that decide whether a Soldier is actually ready to deploy.'},
   {'hue': 'violet', 'spine': 'c. The test', 'type': 'para', 'text': 'The agility test was worth the nerves. Training on a hard floor with full range of motion and testing on a springy pad was the unknown, and it went fine. Glad it is over.'},
   {'hue': 'violet', 'spine': 'd. Money', 'type': 'para', 'text': 'September’s red was planned and October more than covered it. Side income from taxi and JDM is real money when it stacks on three paychecks.'},
+  {'hue': 'violet', 'spine': 'f. Direction', 'type': 'para', 'text': 'Intelligence was the first pick without much thought. Now leaning toward Air Force public affairs, which brings the photography in. The admin job has also shown a preference for background work: organization over people-facing roles.'},
   {'hue': 'violet', 'spine': 'e. November', 'type': 'para', 'text': 'Finish the semester (Nov 3, 5, 10), drill quant every day toward Nov 30, chase the voucher on Nov 23, and take delivery of the iPhone Duo.'},
  ],
  'side': [

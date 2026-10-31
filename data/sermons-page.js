@@ -58,6 +58,7 @@
     header: {
       meta: [['Church', 'Calvary Baptist'], ['Pastor', 'Brad'], ['Through', short(lastDate)]],
       stats: [['Sermons', String(S.length)], ['Series', String(segs.length)], ['Months', String(months.filter(function (m) { return m.count; }).length)]],
+      showMix: true,
       ring: { pct: pct, text: String(pct), cap: 'Logged', sub: S.length + ' of ' + totalSundays + ' Sundays' },
       mix: { centre: String(S.length), segs: segs }
     },

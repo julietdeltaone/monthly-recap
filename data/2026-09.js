@@ -3970,6 +3970,12 @@ window.RECAP = {
     },
     {
      "hue": "violet",
+     "spine": "f. Faith",
+     "type": "para",
+     "text": "Still going steady. The goal is more daily Bible reading and prayer, and the Galatians series gives it a track to run on."
+    },
+    {
+     "hue": "violet",
      "spine": "e. October",
      "type": "para",
      "text": "Get the AFOQT voucher in motion, run PT Month at work, close strong in all three courses, and land the Oct 3 wedding shoot."

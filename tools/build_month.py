@@ -165,7 +165,8 @@ def build(m, F, G, L):
         'side': [{'hue': 'blue', 'spine': 'Program', 'type': 'kv', 'items': [['Degree', 'Online General MBA, Reh School'], ['Target', 'May 2027']]}]})
 
     cr = n['creative']
-    jc = [{'hue': 'amber' if j['status'] != 'Cancelled' else 'slate', 'spine': j['type'].split(' ')[-1], 'date': datebox(j['date']), 'title': j['client'],
+    TYPE_HUE = {'Wedding Photography': 'amber', 'Wedding Videography': 'orange', 'Photoshoot': 'violet', 'Drone': 'sky', 'Commercial': 'teal', 'Project': 'blue', 'Videography': 'orange'}
+    jc = [{'hue': TYPE_HUE.get(j['type'], 'amber') if j['status'] != 'Cancelled' else 'slate', 'spine': j['type'].split(' ')[-1], 'date': datebox(j['date']), 'title': j['client'],
            'text': j['type'] + (' at ' + j['loc'] if j['loc'] else '') + '.', 'tags': [money(j['amt'], whole=True) if j['amt'] else j['status']], 'foot': [j['status'], '']} for j in jobs]
     cm = [{'hue': 'amber', 'spine': 'Briefing', 'type': 'para', 'text': cr['brief']}]
     if jc: cm.append({'hue': 'amber', 'spine': 'Jobs', 'type': 'cards', 'cards': jc})

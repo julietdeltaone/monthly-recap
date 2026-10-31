@@ -3453,7 +3453,7 @@ window.RECAP = {
      "type": "cards",
      "cards": [
       {
-       "hue": "amber",
+       "hue": "violet",
        "spine": "Photoshoot",
        "date": [
         "FRI",
@@ -3471,7 +3471,7 @@ window.RECAP = {
        ]
       },
       {
-       "hue": "amber",
+       "hue": "violet",
        "spine": "Photoshoot",
        "date": [
         "SUN",
@@ -3489,7 +3489,7 @@ window.RECAP = {
        ]
       },
       {
-       "hue": "amber",
+       "hue": "violet",
        "spine": "Photoshoot",
        "date": [
         "SUN",
@@ -3507,7 +3507,7 @@ window.RECAP = {
        ]
       },
       {
-       "hue": "amber",
+       "hue": "violet",
        "spine": "Photoshoot",
        "date": [
         "MON",
@@ -3543,7 +3543,7 @@ window.RECAP = {
        ]
       },
       {
-       "hue": "amber",
+       "hue": "violet",
        "spine": "Photoshoot",
        "date": [
         "THU",
@@ -3561,7 +3561,7 @@ window.RECAP = {
        ]
       },
       {
-       "hue": "amber",
+       "hue": "orange",
        "spine": "Videography",
        "date": [
         "SAT",
@@ -3614,7 +3614,7 @@ window.RECAP = {
    "id": "reflections",
    "label": "Reflections",
    "hue": "violet",
-   "count": 2,
+   "count": 3,
    "main": [
     {
      "hue": "violet",
@@ -3633,6 +3633,12 @@ window.RECAP = {
      "spine": "b. Business",
      "type": "para",
      "text": "The photography business delivered when the career picture was uncertain."
+    },
+    {
+     "hue": "violet",
+     "spine": "c. Side income",
+     "type": "para",
+     "text": "JD Meyers Productions is about stretching side income as far as it goes, never the main thing. May proved how far that can go."
     }
    ],
    "side": [

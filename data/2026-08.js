@@ -3016,7 +3016,7 @@ window.RECAP = {
        ]
       },
       {
-       "hue": "amber",
+       "hue": "orange",
        "spine": "Videography",
        "date": [
         "SAT",
@@ -3080,7 +3080,7 @@ window.RECAP = {
    "id": "reflections",
    "label": "Reflections",
    "hue": "violet",
-   "count": 2,
+   "count": 3,
    "main": [
     {
      "hue": "violet",
@@ -3099,6 +3099,12 @@ window.RECAP = {
      "spine": "b. Systems",
      "type": "para",
      "text": "The camera and the quant score get fixed the same way: preparation, not willpower."
+    },
+    {
+     "hue": "violet",
+     "spine": "c. S1",
+     "type": "para",
+     "text": "AT built a real kinship with the S1 group at HHC. The people are the best part of the Guard this year."
     }
    ],
    "side": [

@@ -2978,12 +2978,12 @@ window.RECAP = {
          "8"
         ],
         [
-         "Shoulders",
+         "Chest",
          7,
          "7"
         ],
         [
-         "Chest",
+         "Shoulders",
          7,
          "7"
         ],
@@ -3272,7 +3272,7 @@ window.RECAP = {
    "id": "reflections",
    "label": "Reflections",
    "hue": "violet",
-   "count": 2,
+   "count": 3,
    "main": [
     {
      "hue": "violet",
@@ -3291,6 +3291,12 @@ window.RECAP = {
      "spine": "b. Ahead",
      "type": "para",
      "text": "Something would close first. It turned out to be United, in May."
+    },
+    {
+     "hue": "violet",
+     "spine": "c. United",
+     "type": "para",
+     "text": "Always a long shot from the SkyWest days at the Ogdensburg airport, with a friend in Chicago pushing to come over as a crew scheduler. Worth finding out if it was possible."
     }
    ],
    "side": [

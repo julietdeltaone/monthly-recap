@@ -57,6 +57,12 @@
     }
     return out;
   }
+  function threadHue(text) {
+    var ST = window.STORY; if (!ST || !text) return '';
+    for (var i = 0; i < ST.rules.length; i++) if (new RegExp(ST.rules[i][0], 'i').test(text)) return ST.threads[ST.rules[i][1]].hue;
+    return '';
+  }
+  var SERIES_HUE = { 'Acts': 'sky', 'Standalone': 'teal', 'Trust series': 'green', 'Guest speaker': 'amber', 'Conviction': 'orange', 'Fruit of the Spirit': 'magenta' };
   function spineMin(label) { return Math.max(0, String(label).length * 8.6 + 26); }
 
   /* ---------- chart builders ---------- */
@@ -110,7 +116,8 @@
     rows: function (b) {
       return '<div class="rows">' + b.items.map(function (it) {
         if (it.href) return '<a class="fill row link' + (it.hue ? ' ' + it.hue : '') + '" href="' + esc(it.href) + '">' + (it.when ? '<span class="when">' + esc(it.when) + '</span>' : '') + rich(it.text) + '</a>';
-        return '<div class="fill row' + (it.hue ? ' ' + it.hue : '') + '">' + (it.when ? '<span class="when">' + esc(it.when) + '</span>' : '') + rich(it.text, true) + (it.src ? ' <span class="src">(' + esc(it.src) + ')</span>' : '') + '</div>';
+        var hue = it.hue || (b.plain ? '' : threadHue(it.text));
+        return '<div class="fill row' + (hue ? ' ' + hue : '') + '">' + (it.when ? '<span class="when">' + esc(it.when) + '</span>' : '') + rich(it.text, true) + (it.src ? ' <span class="src">(' + esc(it.src) + ')</span>' : '') + '</div>';
       }).join('') + '</div>';
     },
     meter: function (b) {
@@ -207,7 +214,7 @@
         var d = new Date(x.date + 'T12:00:00');
         var box = [d.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase(), d.getDate(), d.toLocaleDateString('en-US', { month: 'short' }).toUpperCase()];
         var spine = x.themes && x.themes[0] ? x.themes[0] : x.series;
-        return '<article class="card magenta" style="min-height:' + spineMin(spine) + 'px"><div class="spine"><span>' + esc(spine) + '</span></div><div class="body">' +
+        return '<article class="card ' + (SERIES_HUE[x.series] || 'magenta') + '" style="min-height:' + spineMin(spine) + 'px"><div class="spine"><span>' + esc(spine) + '</span></div><div class="body">' +
           '<div class="date fill"><small>' + box[0] + '</small><b>' + box[1] + '</b><small>' + box[2] + '</small></div>' +
           '<h3>' + esc(x.title) + '</h3><p>' + esc(x.passage) + ' \u00b7 ' + esc(x.series) + '</p>' +
           (x.overview ? '<p class="ov">' + rich(x.overview) + '</p>' : '<span></span>') +
@@ -217,6 +224,30 @@
           (x.themes ? '<div class="th">' + x.themes.map(function (t) { return '<span class="tag">' + esc(t) + '</span>'; }).join('') + '</div>' : '') +
           '</div></article>';
       }).join('') + '</div>';
+    },
+    /* year swimlanes from data/2026-story.js; current month column highlighted */
+    lanes: function (b) {
+      var ST = window.STORY; if (!ST) return '';
+      var cur = b.month != null ? b.month : R.meta.mIdx;
+      var head = '<div class="ln-row ln-head"><span class="ln-k"></span><div class="ln-track">' + ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'].map(function (x, i) {
+        return '<i class="' + (i === cur ? 'cur' : '') + '" style="left:' + (i / 12 * 100).toFixed(3) + '%">' + x + '</i>'; }).join('') + '</div></div>';
+      function pos(at) { return Math.max(0, Math.min(100, (at - 1) / 12 * 100)); }
+      var rows = ST.lanes.map(function (ln) {
+        var th = ST.threads[ln.t], items = ln.items.map(function (it) {
+          var t2 = ST.threads[it.t || ln.t];
+          if (it.from != null) return '<span class="ln-span ' + t2.hue + '" style="left:' + pos(it.from).toFixed(2) + '%;width:' + (pos(it.to) - pos(it.from)).toFixed(2) + '%" title="' + esc(it.label) + '"><em>' + esc(it.label) + '</em></span>';
+          return '<span class="ln-dot ' + t2.hue + ' ' + (it.kind || '') + '" style="left:' + pos(it.at).toFixed(2) + '%" title="' + esc(it.label) + '"></span>';
+        }).join('');
+        var marks = ln.items.filter(function (it) { return it.at != null; }).map(function (it) {
+          return '<span class="ln-lab" style="left:' + pos(it.at).toFixed(2) + '%">' + esc(it.label) + '</span>'; }).join('');
+        return '<div class="ln-row ' + th.hue + '"><span class="ln-k">' + esc(th.label) + '</span><div class="ln-track"><b class="ln-cur" style="left:' + (cur / 12 * 100).toFixed(3) + '%;width:' + (100 / 12).toFixed(3) + '%"></b>' + items + '<div class="ln-labs">' + marks + '</div></div></div>';
+      }).join('');
+      return '<div class="lanes-wrap"><div class="lanes">' + head + rows + '</div></div>';
+    },
+    words: function (b) {
+      var ST = window.STORY; if (!ST) return '';
+      return '<div class="words">' + ST.words.filter(function (w) { return !b.only || b.only.indexOf(w[0]) > -1; }).map(function (w) {
+        return '<div class="fill wd"><b>' + esc(w[0]) + '</b><p>' + rich(w[1]) + '</p></div>'; }).join('') + '</div>';
     },
     cards: function (b) {
       return '<div class="cards' + (b.one ? ' one' : '') + '">' + b.cards.map(function (c) {
@@ -237,6 +268,7 @@
     var blocks = bd.blocks || [bd];
     var bare = blocks.length === 1 && (blocks[0].type === 'cards' || blocks[0].type === 'sermons');
     var inner = blocks.map(function (b) { return BLOCK[b.type] ? BLOCK[b.type](b, 'tx' + (uid++)) : ''; }).join('');
+    if (bd.wide) return '<div class="band wide ' + (bd.hue || 'slate') + '"><div class="body">' + inner + '</div></div>';
     return '<div class="band ' + (bd.hue || 'slate') + '" style="min-height:' + spineMin(bd.spine) + 'px"><div class="spine"><span>' + esc(bd.spine) + '</span></div><div class="body"' + (bare ? ' style="padding:0;background:none"' : '') + '>' + inner + '</div></div>';
   }
   function sheet(kind, label, bands) {
@@ -253,7 +285,7 @@
     '<div class="meta">' + H.meta.map(function (p) { return '<span class="lbl">' + esc(p[0]) + '</span><b>' + esc(p[1]) + '</b>'; }).join('') + '</div></div></div>' +
     '<div class="stats">' + H.stats.map(function (s) { return '<div class="stat"><span class="lbl">' + esc(s[0]) + '</span><b class="' + (s[2] ? 'neg' : '') + '">' + esc(s[1]) + '</b></div>'; }).join('') + '</div>' +
     '<div class="ring-cell">' + ringSVG(H.ring.pct, H.ring.text) + '<div class="cap"><b>' + esc(H.ring.cap) + '</b><span>' + esc(H.ring.sub) + '</span></div></div>' +
-    (H.mix ? '<div>' + segRingSVG(H.mix.segs, H.mix.centre) + '<ul class="legend">' + H.mix.segs.map(function (s) { return '<li class="' + s[1] + '"><i></i>' + esc(s[0]) + '</li>'; }).join('') + '</ul></div>' : '') +
+    (H.mix && H.showMix ? '<div>' + segRingSVG(H.mix.segs, H.mix.centre) + '<ul class="legend">' + H.mix.segs.map(function (s) { return '<li class="' + s[1] + '"><i></i>' + esc(s[0]) + '</li>'; }).join('') + '</ul></div>' : '') +
     '';
   var hasNav = m.prev || m.next;
   var nav = '<div class="monthnav">' + (!hasNav ? '' : (m.prev ? '<a href="' + esc(m.prev[0]) + '" aria-label="Previous month">&#8249; ' + esc(m.prev[1]) + '</a>' : '<span>&#8249;</span>') +
@@ -265,9 +297,56 @@
     return '<a class="chip ' + d.hue + '" href="#' + d.id + '" data-d="' + d.id + '"><span class="dot"></span>' + esc(d.label) + (d.count != null ? ' <span class="n">' + esc(d.count) + '</span>' : '') + '</a>';
   }).join('') + nav + '</nav>';
 
+  /* ---------- hero: big numbers vs last month and the year, then one strip of every day ---------- */
+  function thread(text) {
+    var ST = window.STORY; if (!ST) return null;
+    for (var i = 0; i < ST.rules.length; i++) if (new RegExp(ST.rules[i][0], 'i').test(text)) return ST.rules[i][1];
+    return null;
+  }
+  function heroHTML() {
+    var Y = window.YEAR, ST = window.STORY, mi = m.mIdx;
+    if (!Y || !ST || R.noHero) return '';
+    function avg(a) { var v = a.slice(0, mi).filter(function (x) { return x != null; }); return v.length ? v.reduce(function (p, q) { return p + q; }, 0) / v.length : null; }
+    function tile(label, key, hue, fmt) {
+      var v = Y[key][mi], pv = mi ? Y[key][mi - 1] : null, av = avg(Y[key]);
+      if (v == null) return '';
+      function d(x, ref) { if (ref == null) return ''; var diff = x - ref, up = diff >= 0; return '<span class="' + (up ? 'kup' : 'kdn') + '">' + (up ? '\u25B2 ' : '\u25BC ') + fmt(Math.abs(diff)) + '</span>'; }
+      var spark = Y[key].map(function (x, i) { return x == null ? '' : '<i class="' + (i === mi ? 'cur' : '') + '" style="height:' + Math.max(4, Math.abs(x) / Math.max.apply(null, Y[key].filter(function (z) { return z != null; }).map(Math.abs)) * 100).toFixed(0) + '%' + (x < 0 ? ';opacity:.45' : '') + '"></i>'; }).join('');
+      return '<div class="kpi ' + hue + '"><span class="lbl">' + label + '</span><b>' + fmt(v, true) + '</b><div class="dl">' + d(v, pv) + ' <small>vs ' + (mi ? Y.months[mi - 1] : '') + '</small> ' + d(v, av) + ' <small>vs avg</small></div><div class="ks">' + spark + '</div></div>';
+    }
+    var money_ = function (x, sign) { return (sign && x < 0 ? '\u2212' : '') + '$' + Math.round(Math.abs(x)).toLocaleString('en-US'); };
+    var int_ = function (x) { return String(Math.round(x)); };
+    var k_ = function (x) { return Math.round(x / 1000) + 'k'; };
+    var tiles = tile('Net saved', 'net', 'teal', money_) + tile('Gym days', 'gymDays', 'violet', int_) + tile('Lifting volume, lb', 'volume', 'violet', k_) + tile('Sermons logged', 'sermons', 'magenta', int_);
+    /* day strip: gym days, sermons, jobs, and every dated timeline item, each in its thread color */
+    var days = {}, add = function (d, t, label) { if (!d || d > m.daysInMonth) return; (days[d] = days[d] || []).push([t, label]); };
+    var ov = null, cr = null, ph = null;
+    R.domains.forEach(function (x) { if (x.id === 'overview') ov = x; if (x.id === 'creative') cr = x; if (x.id === 'physical') ph = x; });
+    function blocks(dm) { var out = []; (dm ? dm.main.concat(dm.side) : []).forEach(function (bd) { (bd.blocks || [bd]).forEach(function (b) { out.push(b); }); }); return out; }
+    blocks(ph).forEach(function (b) { if (b.type === 'cal') Object.keys(b.days).forEach(function (d) { add(+d, 'fitness', 'Gym: ' + b.days[d][0]); }); });
+    (window.SERMONS || []).forEach(function (s) { var dd = new Date(s.date + 'T12:00:00'); if (dd.getMonth() === mi && dd.getFullYear() === m.year) add(dd.getDate(), 'faith', 'Sermon: ' + s.title); });
+    blocks(cr).forEach(function (b) { if (b.type === 'cards') b.cards.forEach(function (c) { if (c.date && c.date[2] === m.short.toUpperCase()) add(+c.date[1], 'jdm', c.title); }); });
+    blocks(ov).forEach(function (b) { if (b.type === 'rows') b.items.forEach(function (it) {
+      var mm = /^([A-Z][a-z]{2})\s+(\d{1,2})$/.exec(it.when || ''); if (!mm || mm[1] !== m.short) return;
+      var t = thread(it.text); if (t && t !== 'faith' && t !== 'fitness') add(+mm[2], t, it.text);
+      if (/to (\d+)/.test(it.text) && t) { var end = +/to (\d+)/.exec(it.text)[1]; for (var q = +mm[2] + 1; q <= end; q++) add(q, t, it.text); }
+    }); });
+    var first = new Date(m.year, mi, 1).getDay(), cells = '', used = {};
+    for (var d = 1; d <= m.daysInMonth; d++) {
+      var ev = days[d] || [], dow = new Date(m.year, mi, d).getDay();
+      var bars = ev.map(function (e) { used[e[0]] = 1; return '<i class="' + ST.threads[e[0]].hue + '"></i>'; }).join('');
+      var prev = (days[d - 1] || []).map(function (e) { return e[1]; });
+      var lab = ev.filter(function (e) { return e[0] !== 'fitness' && prev.indexOf(e[1]) < 0; })[0];
+      cells += '<div class="sd' + (dow === 0 || dow === 6 ? ' we' : '') + '" title="' + esc(m.short + ' ' + d + (ev.length ? ': ' + ev.map(function (e) { return e[1]; }).join(' \u00b7 ') : '')) + '"><b>' + d + '</b><span class="sb">' + bars + '</span>' + (lab ? '<em class="' + ST.threads[lab[0]].hue + '">' + esc(lab[1].replace(/^Sermon: /, '')) + '</em>' : '') + '</div>';
+    }
+    var legend = Object.keys(ST.threads).filter(function (k) { return used[k]; }).map(function (k) { return '<span class="' + ST.threads[k].hue + '"><i></i>' + esc(ST.threads[k].label) + '</span>'; }).join('');
+    return '<section class="hero"><div class="kpis">' + tiles + '</div><div class="glass strip-wrap"><div class="sub"><span>' + esc(R.meta.label) + ', day by day</span><span>' + Object.keys(days).length + ' active days</span></div><div class="strip" style="--n:' + m.daysInMonth + '">' + cells + '</div><div class="key thr">' + legend + '</div></div>' +
+      '<div class="glass strip-wrap"><div class="sub"><span>2026 so far, by thread</span><span>' + esc(m.short) + ' highlighted</span></div>' + BLOCK.lanes({}) + '</div></section>';
+  }
+
   var wrap = document.createElement('div');
   wrap.className = 'wrap';
-  wrap.innerHTML = top + bar + '<main class="parts" id="parts"></main>' + (R.footnote ? '<p class="foot-note">' + rich(R.footnote) + '</p>' : '');
+  wrap.innerHTML = top + bar + '<div id="hero"></div><main class="parts" id="parts"></main>' + (R.footnote ? '<p class="foot-note">' + rich(R.footnote) + '</p>' : '');
   document.body.appendChild(wrap);
 
   /* ---------- routing: one domain at a time, by hash ---------- */
@@ -281,6 +360,8 @@
     if (!d) d = R.domains[0];
     uid = 0;
     parts.innerHTML = sheet('main', d.mainLabel || d.label, d.main) + sheet('side', d.sideLabel || 'At a glance', d.side);
+    var heroEl = document.getElementById('hero');
+    heroEl.innerHTML = d.id === 'overview' ? heroHTML() : '';
     sideEl = parts.querySelector('.sheet.side');
     [].forEach.call(document.querySelectorAll('.bar .chip'), function (c) {
       if (c.getAttribute('data-d') === d.id) c.setAttribute('aria-current', 'page'); else c.removeAttribute('aria-current');
