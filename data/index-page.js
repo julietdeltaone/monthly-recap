@@ -46,7 +46,7 @@
     meta: { label: '2026 Monthly Recap', short: 'Index', mIdx: latest, year: 2026, daysInMonth: 31, titleSuffix: ' · JD Meyers', prev: null, next: null },
     entities: { 'Clarkson': 'school', 'Lewis School': 'school', 'Air Force': 'org', 'Fort Drum': 'place' },
     header: {
-      meta: [['Owner', 'JD Meyers'], ['Months', (latest + 1) + ' of 12'], ['Updated', 'Oct 30']],
+      meta: [['Owner', 'JD Meyers'], ['Months', (latest + 1) + ' of 12'], ['Updated', 'Oct 31']],
       stats: [['YTD net', '$' + Math.round(ytd).toLocaleString('en-US')], ['Gym days', String(sum(Y.gymDays))], ['Sermons', String(sum(Y.sermons))]],
       ring: { pct: Math.round((latest + 1) / 12 * 100), text: String(latest + 1), cap: 'Months', sub: 'of 12 recapped' }
     },
@@ -62,7 +62,7 @@
         side: [
           { hue: 'green', spine: 'Goals', blocks: [{ type: 'goalsum' }, { type: 'rows', items: [{ text: 'Open the full scorecard', href: '#goals' }] }] },
           { hue: 'red', spine: 'Now', type: 'kv', items: [['OTS', 'AFOQT retest Nov 30; board Jan 2027', { tag: 'Active' }], ['Job', 'Administrative Coordinator, Lewis School', { tag: 'Since Jul 20' }],
-            ['MBA', 'Fall finals by Nov 10; May 2027 target'], ['Guard', 'ETS June 2027; last AFT 471 of 500'], ['Civil service', 'Sheriff\u2019s deputy agility test passed Oct 30'], ['Business', 'Studio launched in October']] },
+            ['MBA', 'Fall finals by Nov 10; May 2027 target'], ['Guard', 'ETS June 2027; last AFT 471 of 500'], ['Civil service', 'Sheriff\u2019s deputy agility test passed Oct 30'], ['Business', 'Studio launched in October; first 2027 booking in']] },
           { hue: 'teal', spine: 'Totals', type: 'kv', items: [['YTD net', '$' + Math.round(ytd).toLocaleString('en-US'), { big: true }], ['Gym days', String(sum(Y.gymDays)), { big: true }], ['Sermons', String(sum(Y.sermons))]] },
           investBand,
           { hue: 'teal', spine: 'Net', blocks: [{ type: 'sub', text: 'Net by month' }, { type: 'year', metric: 'net', fmt: 'money' }] }
@@ -71,11 +71,11 @@
         main: [
           { hue: 'slate', spine: 'By month', blocks: [{ type: 'sub', text: 'The monthly goals, month by month', right: 'through ' + (window.GOALS ? window.GOALS.through : '') }, { type: 'checks' }] }
         ].concat((window.GOALS ? window.GOALS.groups : []).map(function (g) {
-          var met = g.goals.filter(function (x) { return x.status === 'met'; }).length;
-          return { hue: g.hue, spine: g.label, blocks: [{ type: 'sub', text: g.label, right: met + ' of ' + g.goals.length + ' met' }, { type: 'goalset', group: g.id }] };
+          var met = g.goals.filter(function (x) { return x.status === 'met'; }).length, tr = g.goals.filter(function (x) { return x.status !== 'open'; }).length;
+          return { hue: g.hue, spine: g.label, blocks: [{ type: 'sub', text: g.label, right: met + ' of ' + tr + ' met' + (tr ? ' \u00b7 ' + Math.round(met / tr * 100) + '%' : '') }, { type: 'goalset', group: g.id }] };
         })),
         side: [
-          { hue: 'green', spine: 'Score', blocks: [{ type: 'goalsum' }] },
+          { hue: 'green', spine: 'Score', blocks: [{ type: 'goalsum', verdict: true }] },
           investBand
         ] },
       { id: 'months', label: 'Months', hue: 'teal', count: latest + 1, mainLabel: '2026 by month', sideLabel: 'The year so far',

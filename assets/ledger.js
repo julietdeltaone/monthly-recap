@@ -257,28 +257,37 @@
       return '<div class="lanes-wrap"><div class="lanes">' + head + rows + '</div></div>';
     },
     /* 2026 goals scorecard from data/2026-goals.js */
-    goalsum: function () {
+    goalsum: function (b) {
       var G = window.GOALS; if (!G) return '';
       var all = [].concat.apply([], G.groups.map(function (g) { return g.goals; }));
+      var tracked = all.filter(function (x) { return x.status !== 'open'; });
       var ST = [['met', 'Met', 'green'], ['close', 'Close', 'amber'], ['behind', 'Behind', 'red'], ['open', 'Not tracked', 'slate']];
       var n = {}; all.forEach(function (x) { n[x.status] = (n[x.status] || 0) + 1; });
+      var pMet = Math.round((n.met || 0) / tracked.length * 100), pNear = Math.round(((n.met || 0) + (n.close || 0)) / tracked.length * 100);
+      var avg = Math.round(tracked.reduce(function (t, x) { return t + (x.pct || 0); }, 0) / tracked.length);
       var bar = ST.map(function (s) { return n[s[0]] ? '<i class="' + s[2] + '" style="flex:' + n[s[0]] + '" title="' + s[1] + ': ' + n[s[0]] + '"></i>' : ''; }).join('');
       var tiles = ST.map(function (s) { return '<div class="gs-t ' + s[2] + '"><b>' + (n[s[0]] || 0) + '</b><span>' + s[1] + '</span></div>'; }).join('');
       var pillars = G.groups.map(function (g) {
         var m = g.goals.filter(function (x) { return x.status === 'met'; }).length, t = g.goals.filter(function (x) { return x.status !== 'open'; }).length;
-        return '<div class="gs-p ' + g.hue + '"><span>' + esc(g.label) + '</span><div class="hbar"><i style="width:' + (t ? m / t * 100 : 0).toFixed(1) + '%"></i></div><b>' + m + '/' + t + '</b></div>';
+        return '<a class="gs-p ' + g.hue + '" href="#goals" data-g="' + g.id + '"><span>' + esc(g.label) + '</span><div class="hbar"><i style="width:' + (t ? m / t * 100 : 0).toFixed(1) + '%"></i></div><b>' + m + '/' + t + '</b></a>';
       }).join('');
-      return '<div class="gs"><div class="gs-big"><b class="num">' + (n.met || 0) + '</b><span>of ' + all.length + ' goals met</span></div><div class="gs-bar">' + bar + '</div><div class="gs-tiles">' + tiles + '</div><div class="gs-pillars">' + pillars + '</div></div>';
+      return '<div class="gs"><div class="gs-big"><b class="num">' + pMet + '%</b><span>of tracked goals met<br>' + (n.met || 0) + ' of ' + tracked.length + ', through ' + esc(G.through) + '</span></div>' +
+        '<div class="gs-bar">' + bar + '</div><div class="gs-tiles">' + tiles + '</div>' +
+        '<div class="gs-nums"><div><b>' + pNear + '%</b><span>met or within reach</span></div><div><b>' + avg + '%</b><span>average progress</span></div><div><b>' + (all.length - tracked.length) + '</b><span>not tracked yet</span></div></div>' +
+        (b && b.verdict && G.verdict ? '<p class="gs-v">' + esc(G.verdict) + '</p>' : '') +
+        '<div class="gs-pillars">' + pillars + '</div></div>';
     },
     goalset: function (b) {
       var G = window.GOALS; if (!G) return '';
       var g = G.groups.filter(function (x) { return x.id === b.group; })[0]; if (!g) return '';
       var LBL = { met: 'Met', close: 'Close', behind: 'Behind', open: 'Not tracked' };
-      return '<div class="gl">' + g.goals.map(function (x) {
+      return '<span class="gl-anchor" id="g-' + g.id + '"></span>' + (g.take ? '<p class="gl-take">' + esc(g.take) + '</p>' : '') + '<div class="gl">' + g.goals.map(function (x) {
         var p = x.pct != null ? Math.max(3, Math.min(100, x.pct)) : 0;
+        var nums = x.status === 'open' ? '<b class="gl-a">' + esc(x.actual) + '</b>' :
+          '<div class="gl-nums"><b class="gl-a">' + esc(x.actual) + '</b>' + (x.delta ? '<span class="gl-d ' + (x.good ? 'gup' : 'gdn') + '">' + esc(x.delta) + '</span>' : '') + '</div>';
         return '<div class="gl-r ' + x.status + '"><span class="gl-s">' + LBL[x.status] + '</span><div class="gl-m"><div class="gl-g">' + esc(x.goal) + '</div>' +
-          (x.status !== 'open' ? '<div class="hbar"><i style="width:' + p.toFixed(1) + '%"></i></div>' : '') +
-          (x.note ? '<div class="gl-n">' + esc(x.note) + '</div>' : '') + '</div><b class="gl-a">' + esc(x.actual) + '</b></div>';
+          (x.status !== 'open' ? '<div class="gl-bar"><div class="hbar"><i style="width:' + p.toFixed(1) + '%"></i></div><small>' + (x.pct != null ? Math.round(x.pct) + '%' : '') + '</small></div>' : '') +
+          '<div class="gl-n">' + (x.target ? 'Target ' + esc(x.target) + (x.note ? ' · ' : '') : '') + (x.note ? esc(x.note) : '') + '</div></div>' + nums + '</div>';
       }).join('') + '</div>';
     },
     checks: function () {
@@ -337,15 +346,27 @@
     '<div class="ring-cell">' + ringSVG(H.ring.pct, H.ring.text) + '<div class="cap"><b>' + esc(H.ring.cap) + '</b><span>' + esc(H.ring.sub) + '</span></div></div>' +
     (H.mix && H.showMix ? '<div>' + segRingSVG(H.mix.segs, H.mix.centre) + '<ul class="legend">' + H.mix.segs.map(function (s) { return '<li class="' + s[1] + '"><i></i>' + esc(s[0]) + '</li>'; }).join('') + '</ul></div>' : '') +
     '';
-  var hasNav = m.prev || m.next;
-  var nav = '<div class="monthnav">' + (!hasNav ? '' : (m.prev ? '<a href="' + esc(m.prev[0]) + '" aria-label="Previous month">&#8249; ' + esc(m.prev[1]) + '</a>' : '<span>&#8249;</span>') +
-    (m.next ? '<a href="' + esc(m.next[0]) + '" aria-label="Next month">' + esc(m.next[1]) + ' &#8250;</a>' : '<span>&#8250;</span>')) +
-    '<button class="toggle" id="theme" type="button">LIGHT</button></div>';
+  /* ---------- navigation: one bar on every page ----------
+     Home (primary) | this page's sections (tabs) | previous month, Jump to any page, next month | theme.
+     The bar sticks to the top while scrolling, so Home and Jump are always one tap away. */
+  var here = (location.pathname.split('/').pop() || 'index.html');
+  var Yr = window.YEAR, MN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  var pages = [['index.html', 'Home: the year'], ['index.html#goals', '2026 goals'], ['cbc-sermons.html', 'Sermon notes']];
+  var monthsMenu = Yr ? Yr.files.map(function (f, i) { return f ? '<a href="' + f + '"' + (f === here ? ' aria-current="page"' : '') + '><b>' + Yr.months[i] + '</b><span>' + MN[i] + '</span></a>' : '<span class="off"><b>' + Yr.months[i] + '</b><span>Ahead</span></span>'; }).join('') : '';
+  var menu = '<details class="jump"><summary>Jump to<i></i></summary><div class="glass menu"><div class="mgrid">' + monthsMenu + '</div><div class="mlinks">' +
+    pages.map(function (p) { return '<a href="' + p[0] + '">' + p[1] + '</a>'; }).join('') + '</div></div></details>';
+  var isHome = here === 'index.html' || here === '';
+  var home = '<a class="home" href="index.html#story"' + (isHome ? ' aria-current="page"' : '') + '><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 7.5 8 2.5l6 5V14H10V10H6v4H2z"/></svg>Home</a>';
+  var nav = '<div class="navr">' +
+    (m.prev ? '<a class="step" href="' + esc(m.prev[0]) + '" aria-label="Previous month: ' + esc(m.prev[1]) + '">&#8249; ' + esc(m.prev[1]) + '</a>' : '') +
+    menu +
+    (m.next ? '<a class="step" href="' + esc(m.next[0]) + '" aria-label="Next month: ' + esc(m.next[1]) + '">' + esc(m.next[1]) + ' &#8250;</a>' : '') +
+    '<button class="toggle" id="theme" type="button" aria-label="Switch theme">LIGHT</button></div>';
   top += '</header>';
 
-  var bar = '<nav class="glass bar" aria-label="Sections">' + R.domains.map(function (d) {
+  var bar = '<nav class="glass bar" aria-label="Site">' + home + '<div class="tabs" role="tablist">' + R.domains.map(function (d) {
     return '<a class="chip ' + d.hue + '" href="#' + d.id + '" data-d="' + d.id + '"><span class="dot"></span>' + esc(d.label) + (d.count != null ? ' <span class="n">' + esc(d.count) + '</span>' : '') + '</a>';
-  }).join('') + nav + '</nav>';
+  }).join('') + '</div>' + nav + '</nav>';
 
   /* ---------- hero: big numbers vs last month and the year, then one strip of every day ---------- */
   function thread(text) {
@@ -421,8 +442,9 @@
     fitLanes();
     fitSide();
     if (fromClick) {
-      var barEl = document.querySelector('.bar');
-      if (barEl && barEl.getBoundingClientRect().top < 0) window.scrollTo(0, window.scrollY + barEl.getBoundingClientRect().top - 10);
+      var barEl = document.querySelector('.bar'), first = document.getElementById('hero').firstChild ? document.getElementById('hero') : parts;
+      var target = window.scrollY + first.getBoundingClientRect().top - (barEl ? barEl.offsetHeight : 0) - 22;
+      if (window.scrollY > target) window.scrollTo(0, Math.max(0, target));
     }
   }
   function current() { return (location.hash || '').replace('#', '') || R.defaultDomain || R.domains[0].id; }
@@ -460,8 +482,10 @@
 
   /* side sheet sticks only when it fits in the window, so it never overlaps or clips */
   function fitSide() {
+    var barEl = document.querySelector('.bar'), bh = barEl ? barEl.offsetHeight : 0;
+    root.style.setProperty('--barh', bh + 'px');
     if (!sideEl) return;
-    var fits = sideEl.offsetHeight + 32 < window.innerHeight && window.innerWidth > 900;
+    var fits = sideEl.offsetHeight + bh + 40 < window.innerHeight && window.innerWidth > 900;
     sideEl.classList.toggle('stick', fits);
   }
   var rz = false;
@@ -517,6 +541,22 @@
       apply();
     });
   }
+
+  /* scorecard rows jump to their goal group */
+  document.addEventListener('click', function (e) {
+    var p = e.target.closest && e.target.closest('.gs-p[data-g]'); if (!p) return;
+    e.preventDefault();
+    if (current() !== 'goals') { location.hash = 'goals'; }
+    setTimeout(function () {
+      var el = document.getElementById('g-' + p.getAttribute('data-g')), barEl = document.querySelector('.bar');
+      if (el) window.scrollTo(0, window.scrollY + el.closest('.band').getBoundingClientRect().top - (barEl ? barEl.offsetHeight : 0) - 22);
+    }, 60);
+  });
+  document.addEventListener('click', function (e) {
+    var j = document.querySelector('details.jump');
+    if (j && j.open && (!j.contains(e.target) || e.target.closest('.menu a'))) j.open = false;
+  });
+  document.addEventListener('keydown', function (e) { var j = document.querySelector('details.jump'); if (e.key === 'Escape' && j) j.open = false; });
 
   /* ---------- theme toggle ---------- */
   var btn = document.getElementById('theme');
