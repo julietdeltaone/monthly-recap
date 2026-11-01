@@ -257,6 +257,100 @@
       }).join('');
       return '<div class="lanes-wrap"><div class="lanes">' + head + rows + '</div></div>';
     },
+    /* training trends from data/2026-trends.js: is it going up, and in what way */
+    trends: function () {
+      var T = window.TRENDS, key = R.meta.year + '-' + ('0' + (R.meta.mIdx + 1)).slice(-2), i = T ? T.months.indexOf(key) : -1;
+      if (i < 0) return '';
+      var MO = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      var prevName = i ? MO[i - 1] : '';
+      function upto(a) { return a.slice(0, i + 1); }
+      function fit(v) { /* least-squares line through the non-empty points */
+        var p = []; v.forEach(function (y, x) { if (y != null) p.push([x, y]); });
+        if (p.length < 2) return null;
+        var n = p.length, mx = 0, my = 0; p.forEach(function (q) { mx += q[0] / n; my += q[1] / n; });
+        var sxx = 0, sxy = 0; p.forEach(function (q) { sxx += (q[0] - mx) * (q[0] - mx); sxy += (q[0] - mx) * (q[1] - my); });
+        var b = sxx ? sxy / sxx : 0; return { b: b, a: my - b * mx };
+      }
+      function line(v, o) { /* small line chart with its trend line; o.inv = lower is better */
+        o = o || {}; var W = 100, Hh = 36, pts = v.map(function (y, x) { return y == null ? null : [x, y]; }).filter(Boolean);
+        if (!pts.length) return '';
+        var ys = pts.map(function (q) { return q[1]; }), lo = Math.min.apply(null, ys), hi = Math.max.apply(null, ys);
+        if (o.base != null) { lo = Math.min(lo, o.base); hi = Math.max(hi, o.base); }
+        var pad = (hi - lo) * 0.15 || 1; lo -= pad; hi += pad;
+        var n = Math.max(2, v.length), X = function (x) { return (x / (n - 1) * W).toFixed(2); }, Y = function (y) { return (Hh - (y - lo) / (hi - lo) * Hh).toFixed(2); };
+        var d = pts.map(function (q, k) { return (k ? 'L' : 'M') + X(q[0]) + ' ' + Y(q[1]); }).join(' ');
+        var f = fit(v), tl = f ? '<path class="tl" d="M' + X(0) + ' ' + Y(f.a) + ' L' + X(n - 1) + ' ' + Y(f.a + f.b * (n - 1)) + '"/>' : '';
+        var bl = o.base != null ? '<path class="bl" d="M0 ' + Y(o.base) + ' L' + W + ' ' + Y(o.base) + '"/>' : '';
+        var last = pts[pts.length - 1];
+        return '<svg class="tline" viewBox="0 0 ' + W + ' ' + Hh + '" preserveAspectRatio="none" aria-hidden="true">' + bl + tl + '<path class="ln" d="' + d + '"/></svg>' +
+          '<i class="tdot" style="left:' + X(last[0]) + '%;top:' + (Y(last[1]) / Hh * 100).toFixed(1) + '%"></i>';
+      }
+      function sgn(x, fmt, inv) { if (x == null || isNaN(x)) return '<span class="td">no data</span>'; var good = inv ? x < 0 : x > 0, flat = Math.abs(x) < 1e-9;
+        return '<span class="td ' + (flat ? '' : good ? 'gup' : 'gdn') + '">' + (flat ? '±' : x > 0 ? '+' : '−') + fmt(Math.abs(x)) + '</span>'; }
+      function mmss(t) { t = Math.round(t); return Math.floor(t / 60) + ':' + ('0' + t % 60).slice(-2); }
+      function lastBefore(a) { for (var k = i - 1; k >= 0; k--) if (a[k] != null) return a[k]; return null; }
+      function one(x) { return (Math.round(x * 10) / 10).toString(); }
+
+      var idx = upto(T.index), now = idx[i], pv = lastBefore(T.index), f = fit(idx);
+      var ov = T.overload[i], tot = ov[0] + ov[1] + ov[2], rate = tot ? Math.round((ov[0] + ov[1]) / tot * 100) : null;
+      var rates = upto(T.overload).map(function (o) { var t = o[0] + o[1] + o[2]; return t ? Math.round((o[0] + o[1]) / t * 100) : null; });
+      var eq = upto(T.run.eq2), eqNow = eq[i], eqBest = Math.min.apply(null, eq.filter(function (x) { return x; }).concat([1e9]));
+      var miles = upto(T.run.miles);
+
+      /* the answer, in one line */
+      var dir = f ? f.b : 0, verdict = dir > 0.5 ? 'Yes, getting stronger' : dir < -0.5 ? 'Strength is slipping' : 'Holding steady';
+      var lead = '<div class="tv"><b>' + verdict + '.</b> Strength index ' + one(now) + ' (Jan = 100), trending ' + (dir >= 0 ? '+' : '−') + one(Math.abs(dir)) + ' a month' +
+        (rate != null ? '. ' + rate + '% of sessions matched or beat the last one' : '') +
+        (eqNow ? '. Best 2-mile equivalent ' + mmss(eqNow) + (eqNow <= eqBest ? ', the best of the year' : ' (year best ' + mmss(eqBest) + ')') : '') + '.</div>';
+
+      function tile(lbl, val, delta, chart, hue, note) {
+        return '<div class="tt ' + hue + '"><span class="lbl">' + lbl + '</span><b>' + val + '</b><div class="tdl">' + delta + (note ? ' <small>' + note + '</small>' : '') + '</div><div class="tc">' + chart + '</div></div>';
+      }
+      var tiles = '<div class="tts">' +
+        tile('Strength index', one(now), sgn(pv != null ? now - pv : null, one) + ' <small>vs ' + prevName + '</small> ' + sgn(now - 100, one) + ' <small>vs Jan</small>', line(idx, { base: 100 }), 'violet') +
+        tile('Beat last session', rate != null ? rate + '%' : 'n/a', '<span class="td">' + ov[0] + ' up · ' + ov[1] + ' same · ' + ov[2] + ' down</span>', line(rates, { base: 50 }), 'green') +
+        tile('2-mile equivalent', eqNow ? mmss(eqNow) : 'no run', sgn(eqNow && lastBefore(T.run.eq2) ? eqNow - lastBefore(T.run.eq2) : null, mmss, true) + ' <small>vs last run month</small>', line(eq, { inv: true, base: 950 }), 'sky', 'goal 15:50') +
+        tile('Miles run', one(miles[i]), sgn(i ? miles[i] - miles[i - 1] : null, one) + ' <small>vs ' + prevName + '</small>', line(miles), 'teal') +
+        '</div>';
+
+      /* by muscle group: one small chart each, ranked by trend */
+      var cats = Object.keys(T.byCat).map(function (c) { var v = upto(T.byCat[c]), ff = fit(v); return { c: c, v: v, b: ff ? ff.b : 0, now: v[i] }; })
+        .sort(function (a, b) { return b.b - a.b; });
+      var grid = '<div class="tcats">' + cats.map(function (c) {
+        var tag = c.b > 0.5 ? 'Rising' : c.b < -0.5 ? 'Falling' : 'Flat';
+        return '<div class="tcat ' + (c.b > 0.5 ? 'rise' : c.b < -0.5 ? 'fall' : 'flat') + '"><div class="tch"><span>' + esc(c.c) + '</span><em>' + tag + '</em></div><b>' + (c.now != null ? one(c.now) : '–') + '</b>' +
+          '<small>' + (c.b >= 0 ? '+' : '−') + one(Math.abs(c.b)) + '/mo</small><div class="tc">' + line(c.v, { base: 100 }) + '</div></div>';
+      }).join('') + '</div>';
+
+      /* every main lift: best set, estimated max, change, trend; tap for the detail */
+      var rows = T.lifts[i].map(function (l) {
+        var dv = l.prev != null ? l.e1 - l.prev : null, dj = l.e1 - l.first;
+        return '<details class="tl-r"><summary><span class="tl-n">' + esc(l.ex) + (l.pr ? ' <em class="pr">PR</em>' : '') + '<small>' + esc(l.cat) + ' · best set ' + esc(l.set) + '</small></span>' +
+          '<span class="tl-e"><b>' + l.e1 + '</b><small>est. max</small></span>' + sgn(dv, function (x) { return Math.round(x) + ''; }) + sgn(dj, function (x) { return Math.round(x) + ''; }) +
+          '<span class="tl-c">' + line(l.hist) + '</span><i class="chev"></i></summary>' +
+          '<div class="tl-d"><span><b>' + l.maxw + ' lb</b>max weight</span><span><b>' + l.maxr + '</b>max reps</span><span><b>' + l.bestvol.toLocaleString('en-US') + ' lb</b>best set volume</span>' +
+          '<span><b>' + l.vol.toLocaleString('en-US') + ' lb</b>month volume, ' + l.sets + ' sets</span><span><b>' + (l.slope >= 0 ? '+' : '−') + Math.abs(l.slope) + ' lb</b>trend per month</span></div></details>';
+      }).join('');
+      var table = rows ? '<div class="tlh"><span>Lift</span><span>Est. max</span><span>vs ' + prevName + '</span><span>vs first</span><span>Trend</span><span></span></div><div class="tlist">' + rows + '</div>' : '';
+
+      /* conditioning */
+      function cond(lbl, arr, fmt, inv, unit) {
+        var v = arr[i], p = lastBefore(arr), best = arr.slice(0, i + 1).filter(function (x) { return x != null; });
+        best = best.length ? (inv ? Math.min.apply(null, best) : Math.max.apply(null, best)) : null;
+        return '<div class="tk"><span>' + lbl + '</span><b>' + (v != null ? fmt(v) + (unit || '') : '–') + '</b>' + sgn(v != null && p != null ? v - p : null, fmt, inv) +
+          '<small>' + (best != null ? 'year best ' + fmt(best) + (unit || '') : '') + '</small></div>';
+      }
+      var condBlock = '<div class="tks">' +
+        cond('Best pace, 1 mi+', T.run.bestPace, mmss, true, '/mi') + cond('Longest run', T.run.longest, one, false, ' mi') +
+        cond('Top sprint speed', T.run.sprintMph, one, false, ' mph') + cond('Plank', T.body.plank, mmss, false) +
+        cond('Push-ups, one set', T.body.pushups, String, false) + cond('Sit-ups, one minute', T.body.situps, String, false) + cond('Chin-ups, one set', T.body.chinups, String, false) + '</div>';
+
+      return lead + tiles +
+        '<div class="sub"><span>By muscle group</span><span>index, Jan = 100 · dashed = trend</span></div>' + grid +
+        '<div class="sub"><span>Main lifts this month</span><span>tap a lift for detail</span></div>' + table +
+        '<div class="sub"><span>Running and conditioning</span><span>change vs the last month logged</span></div>' + condBlock +
+        '<p class="note">Estimated max = weight × (1 + reps ÷ 30), so a heavy triple and a lighter set of ten land on one scale. The strength index chains each lift against its own last best; new lifts join after their first month. 2-mile equivalent converts any run of 1.5 miles or more with Riegel’s formula.</p>';
+    },
     /* 2026 goals scorecard from data/2026-goals.js */
     goalsum: function (b) {
       var G = window.GOALS; if (!G) return '';
@@ -431,7 +525,9 @@
     if (!d) R.domains.forEach(function (x) { if (x.id === R.defaultDomain) d = x; });
     if (!d) d = R.domains[0];
     uid = 0;
-    parts.innerHTML = sheet('main', d.mainLabel || d.label, d.main) + sheet('side', d.sideLabel || 'At a glance', d.side);
+    var mainBands = d.main;
+    if (d.id === 'physical' && window.TRENDS && !R.noHero) mainBands = [{ hue: 'violet', spine: 'Trends', blocks: [{ type: 'sub', text: 'Am I making progress?', right: 'Jan to ' + m.short }, { type: 'trends' }] }].concat(d.main || []);
+    parts.innerHTML = sheet('main', d.mainLabel || d.label, mainBands) + sheet('side', d.sideLabel || 'At a glance', d.side);
     var heroEl = document.getElementById('hero');
     heroEl.innerHTML = d.id === 'overview' ? heroHTML() : '';
     sideEl = parts.querySelector('.sheet.side');
