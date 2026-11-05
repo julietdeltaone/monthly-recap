@@ -582,3 +582,9 @@ a.ym:hover .yb{box-shadow:inset 0 0 0 1px rgba(var(--c),.4)}
   .tl-r summary>:nth-child(4),.tl-c{display:none}
   .tt>b{font-size:22px}
 }
+
+
+.council-return{position:fixed;bottom:max(14px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:1000;display:flex;align-items:center;gap:10px;max-width:calc(100% - 24px);border:1px solid #77978a;border-radius:14px;padding:6px;background:#193b31ed;color:#fff;box-shadow:0 8px 24px #0003;backdrop-filter:blur(16px)}.council-return button{border:0;border-radius:10px;background:#e3efe8;color:#173c30;font:700 14px/1.3 system-ui;padding:11px 16px;white-space:nowrap;cursor:pointer}.council-return span{font:500 12px/1.4 system-ui}.council-return span:empty{display:none}body:has(.council-return){padding-bottom:80px}@media(prefers-reduced-motion:no-preference){.council-return{animation:council-in .25s ease-out}@keyframes council-in{from{opacity:0;translate:0 8px}to{opacity:1;translate:0 0}}}@media(max-width:600px){.council-return{width:calc(100% - 24px);justify-content:center;flex-wrap:wrap}.council-return button{flex:1}.council-return span{text-align:center}}
+
+/* Return is part of the navigation, never a floating footer tool. */
+.council-return{position:static;transform:none;flex:none;max-width:100%;border:0;box-shadow:none;padding:0;background:transparent;backdrop-filter:none}.council-return button{background:#204e3e;color:#fff;font-size:12px;padding:9px 11px}.council-return span{color:var(--text);max-width:180px}.bar:has(.council-return){flex-wrap:wrap}@media(max-width:600px){.council-return{width:auto;justify-content:flex-start}.council-return span{max-width:100%}}

@@ -5,6 +5,16 @@
    ===================================================================== */
 (function () {
   'use strict';
+  // Only a Council Desk launch enables the return control. No access token leaves the app.
+  var councilVisit=false;
+  try { if(new URLSearchParams(location.search).get('from')==='council')sessionStorage.setItem('council-recap-visit','1');councilVisit=sessionStorage.getItem('council-recap-visit')==='1'; } catch(e) {councilVisit=new URLSearchParams(location.search).get('from')==='council';}
+  if(councilVisit){
+    var returnBar=document.createElement('div');returnBar.className='council-return';
+    var returnButton=document.createElement('button');returnButton.type='button';returnButton.textContent='← Back to Council Desk';
+    var returnStatus=document.createElement('span');returnStatus.setAttribute('role','status');
+    returnButton.addEventListener('click',function(){if(window.opener&&!window.opener.closed){window.opener.focus();window.close();returnStatus.textContent='Council Desk is in your original tab.';}else{returnStatus.textContent='Open Council Desk from your original tab or invitation email.';}});
+    returnBar.appendChild(returnButton);returnBar.appendChild(returnStatus);document.body.appendChild(returnBar);
+  }
   var R = window.RECAP;
   var root = document.documentElement;
   var ns = 'http://www.w3.org/2000/svg';
@@ -514,6 +524,7 @@
   wrap.className = 'wrap';
   wrap.innerHTML = top + bar + '<div id="hero"></div><main class="parts" id="parts"></main>' + (R.footnote ? '<p class="foot-note">' + rich(R.footnote) + '</p>' : '');
   document.body.appendChild(wrap);
+  if(councilVisit)wrap.querySelector('.bar').prepend(returnBar);
 
   /* ---------- routing: one domain at a time, by hash ---------- */
   var parts = document.getElementById('parts');
@@ -738,3 +749,4 @@
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitLanes);
   upd();
 })();
+
