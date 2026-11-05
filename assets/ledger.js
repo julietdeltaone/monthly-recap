@@ -1,3 +1,42 @@
+/* Published monthly totals are authoritative. Session breakdowns are approximate and never replace them. */
+(function(root){
+'use strict';
+function summarize(recap){
+ var month=recap.meta.year+'-'+String(recap.meta.mIdx+1).padStart(2,'0'),domains=recap.domains||[];
+ function domain(id){return domains.find(function(d){return d.id===id})||{};}
+ function totals(d,spine){return [].concat(d.main||[],d.side||[]).find(function(b){return b.spine===spine})?.items||[];}
+ function firstNumber(text){var m=String(text==null?'':text).replace(/,/g,'').replace(/−/g,'-').replace(/\$/g,'').match(/-?\d+(?:\.\d+)?/);return m?Number(m[0]):null;}
+ function field(rows,key){var row=rows.find(function(r){return String(r[0]).toLowerCase()===key.toLowerCase()});return row?firstNumber(row[1]):null;}
+ var moneyRows=totals(domain('financial'),'Totals'),physical=domain('physical'),fitnessRows=totals(physical,'Totals');
+ var fitness={days:field(fitnessRows,'Days'),volume:field(fitnessRows,'Volume'),miles:field(fitnessRows,'Distance'),sessions:null,minutes:null,activities:{},locations:{indoor:0,outdoor:0,unspecified:0},sessionMiles:0};
+ var cardio=fitnessRows.find(function(r){return r[0]==='Cardio'}),match=String(cardio?.[1]||'').match(/(\d+)\s*sessions?\s*[·•,]\s*([\d.]+)\s*min/i);
+ if(match){fitness.sessions=Number(match[1]);fitness.minutes=Number(match[2]);}
+ var zoneIndoor=/zone\s*2\s+treadmill/i.test(JSON.stringify(physical));
+ [].concat(physical.main||[],physical.side||[]).forEach(function(band){(band.blocks||[band]).forEach(function(block){if(block.type!=='cal')return;Object.values(block.sessions||{}).forEach(function(rows){rows.forEach(function(row){var name=String(row[0]||''),text=String(row[1]||''),distance=text.match(/(\d+(?:\.\d+)?)\s*(mi(?:les?)?|km|kilomet(?:er|re)s?|met(?:er|re)s?)\b/i);if(!distance)return;var activity=/rower|rowing/i.test(name)?'Rowing':/cycl|bike/i.test(name)?'Cycling':/walk/i.test(name)?'Walking':/zone\s*2/i.test(name)?'Zone 2':/run|sprint|jog/i.test(name)?'Running':null;if(!activity)return;var unit=distance[2].toLowerCase(),miles=Number(distance[1])*(unit==='km'||unit.indexOf('kilomet')===0?0.621371:unit.indexOf('met')===0?0.000621371:1);var loc=/outdoor/i.test(name)?'outdoor':/treadmill|indoor|rower/i.test(name)||(activity==='Zone 2'&&zoneIndoor)?'indoor':'unspecified';var bucket=fitness.activities[activity]||(fitness.activities[activity]={miles:0,indoor:0,outdoor:0,unspecified:0});bucket.miles+=miles;bucket[loc]+=miles;fitness.locations[loc]+=miles;fitness.sessionMiles+=miles;});});});});
+ return {month:month,finance:{income:field(moneyRows,'Income'),spending:field(moneyRows,'Spending')===null?null:Math.abs(field(moneyRows,'Spending')),net:field(moneyRows,'Net')},fitness:fitness};
+}
+function esc(x){return String(x==null?'':x).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]});}
+function finite(x){return typeof x==='number'&&isFinite(x);}
+function num(x,d){return finite(x)?x.toLocaleString('en-US',{maximumFractionDigits:d==null?1:d}):'—';}
+function money(x){return finite(x)?(x<0?'−':'')+'$'+num(Math.abs(x),0):'—';}
+function monthLabel(month){if(!/^\d{4}-\d{2}$/.test(month||''))return 'previous month';return new Date(month+'-02T12:00:00').toLocaleString('en-US',{month:'short'});}
+function delta(value,previous,unit,previousMonth){if(!finite(value)||!finite(previous))return '<span class="mm-delta mm-empty">No prior-month figure</span>';var diff=value-previous,pct=previous>0?Math.abs(diff/previous*100):null;return '<span class="mm-delta '+(diff>0?'mm-up':diff<0?'mm-down':'mm-flat')+'">'+(diff>0?'+':diff<0?'−':'±')+(unit==='$'?'$':'')+num(Math.abs(diff),unit==='$'?2:1)+(unit&&unit!=='$'?' '+esc(unit):'')+(pct!==null?' <small>('+num(pct)+'%)</small>':'')+' <small>vs '+esc(monthLabel(previousMonth))+'</small></span>';}
+function stat(label,value,prior,unit,previousMonth,hero,currency){return '<article class="mm-stat'+(hero?' mm-hero':'')+'"><span>'+esc(label)+'</span><strong>'+ (currency?money(value):num(value))+(unit&&finite(value)?'<small>'+esc(unit)+'</small>':'')+'</strong>'+delta(value,prior,currency?'$':unit,previousMonth)+'</article>';}
+function comparisonBars(now,previous){var pairs=[{label:monthLabel(previous?.month),data:previous?.fitness},{label:monthLabel(now.month),data:now.fitness}],max=Math.max(1,...pairs.map(function(p){return p.data?.sessionMiles||0}));return '<section class="mm-location"><div class="mm-heading"><h3>Indoor / outdoor mileage</h3><span>Session records · approximate</span></div><div class="mm-location-chart" role="img" aria-label="Indoor, outdoor and unspecified session mileage for the current and previous month">'+pairs.map(function(p){var d=p.data;if(!d||!d.sessionMiles)return '<div class="mm-column"><div class="mm-no-column">—</div><strong>'+esc(p.label)+'</strong></div>';return '<div class="mm-column"><div class="mm-column-stack">'+['unspecified','outdoor','indoor'].map(function(loc){var miles=d.locations[loc];return miles>0?'<i class="mm-'+loc+'" style="height:'+Math.max(0,miles/max*100)+'%" title="'+loc+': '+num(miles,2)+' mi"></i>':''}).join('')+'</div><strong>'+esc(p.label)+'</strong><small>'+num(d.sessionMiles)+' mi</small></div>';}).join('')+'</div><div class="mm-legend"><span><i class="mm-indoor"></i>Indoor</span><span><i class="mm-outdoor"></i>Outdoor</span><span><i class="mm-unspecified"></i>Unspecified</span></div></section>';}
+function activities(now,previous){var keys=Array.from(new Set(Object.keys(now.fitness.activities).concat(Object.keys(previous?.fitness?.activities||{}))));if(!keys.length)return '';return '<section class="mm-activities"><div class="mm-heading"><h3>By cardio activity</h3><span>Recorded miles · kept separate</span></div>'+keys.map(function(k){var cur=now.fitness.activities[k],old=previous?.fitness?.activities?.[k];if(!cur)return '<div class="mm-activity-row"><strong>'+esc(k)+'</strong><span>Not recorded this month</span></div>';return '<div class="mm-activity-row"><strong>'+esc(k)+'</strong><span>'+num(cur.miles)+' mi</span>'+delta(cur.miles,old?.miles,'mi',previous?.month)+'</div>';}).join('')+'</section>';}
+function strength(data,compact){if(!data?.lifts?.length)return '';var rows=data.lifts.slice(0,compact?3:4).map(function(l){var d=finite(l.previousEstimate)?l.estimate-l.previousEstimate:null;return '<div class="mm-lift"><div><strong>'+esc(l.name)+'</strong><span>'+esc(l.set.replace(/ x /,' lb × '))+' reps</span></div><div>'+(d===null?'<span class="mm-empty">No prior-month set</span>':'<span class="mm-delta '+(d>=0?'mm-up':'mm-down')+'">'+(d>=0?'+':'−')+num(Math.abs(d),0)+' lb est.</span>')+'<small>'+(l.previousSet?'Previously '+esc(l.previousSet):'')+'</small><small>'+num(l.volume,0)+' lb monthly volume</small></div></div>';}).join('');var index=finite(data.index)?'<p class="mm-index">Strength index <strong>'+num(data.index)+'</strong> '+delta(data.index,data.previousIndex,'pts',data.previousMonth)+'</p>':'';return compact?'<details class="mm-strength"><summary>Working-set progress</summary>'+rows+index+'<small>Same exercise, prior calendar month. Estimated strength is calculated from weight and reps.</small></details>':'<section class="mm-strength"><h3>Working-set progress</h3>'+rows+index+'<small>Same exercise, prior calendar month. Estimates use weight × (1 + reps ÷ 30), not a tested maximum.</small></section>';}
+function strengthSummary(trends,month){
+ var i=(trends.months||[]).indexOf(month);if(i<0)return null;
+ var priorDate=new Date(month+'-01T12:00:00Z');priorDate.setUTCMonth(priorDate.getUTCMonth()-1);var previousMonth=priorDate.toISOString().slice(0,7),j=(trends.months||[]).indexOf(previousMonth);
+ var current=trends.lifts?.[i]||[],previous=j>=0?trends.lifts?.[j]||[]:[];
+ var names=['Flat Barbell Bench Press','Barbell Squat','Lat Pulldown','Trap Bar Deadlift'];
+ return {month:month,previousMonth:previousMonth,index:trends.index?.[i]??null,previousIndex:j>=0?trends.index?.[j]??null:null,lifts:names.map(function(name){var lift=current.find(function(l){return l.ex===name}),old=previous.find(function(l){return l.ex===name});return lift?{name:name,set:lift.set,estimate:lift.e1,previousSet:old?.set||'',previousEstimate:old?.e1??null,volume:lift.vol,previousVolume:old?.vol??null}:null;}).filter(Boolean)};
+}
+function render(now,previous,domain,strengthData,compact){if(!now)return '';var label=previous?.month||'',f=now.fitness,p=previous?.fitness||{},fin=now.finance,pfin=previous?.finance||{};if(domain==='financial'||domain==='Money')return '<section class="mm-dashboard mm-finance"><div class="mm-stat-grid mm-finance-grid">'+stat('Net saved',fin.net,pfin.net,'',label,true,true)+stat('Income',fin.income,pfin.income,'',label,false,true)+stat('Spending',fin.spending,pfin.spending,'',label,false,true)+'</div></section>';if(domain!=='physical'&&domain!=='Physical')return '';return '<section class="mm-dashboard mm-fitness"><div class="mm-stat-grid mm-main-stats">'+stat('Gym / training days',f.days,p.days,'days',label,true)+stat('Published cardio distance',f.miles,p.miles,'mi',label,true)+'</div><div class="mm-stat-grid mm-mini-stats">'+stat('Lifting volume',f.volume,p.volume,'lb',label)+stat('Cardio sessions',f.sessions,p.sessions,'',label)+stat('Cardio time',f.minutes,p.minutes,'min',label)+'</div>'+(compact?'<details class="mm-cardio-details"><summary>Cardio breakdown</summary>'+comparisonBars(now,previous)+activities(now,previous)+'</details>':comparisonBars(now,previous)+activities(now,previous))+strength(strengthData,compact)+'</section>';}
+root.MonthlyMetrics={summarize:summarize,strengthSummary:strengthSummary,render:render,delta:delta,monthLabel:monthLabel};
+if(typeof module!=='undefined'&&module.exports)module.exports=root.MonthlyMetrics;
+})(typeof window!=='undefined'?window:globalThis);
+
 /* =====================================================================
    Glass Ledger renderer: turns window.RECAP (data/2026-MM.js) into the page.
    Every month uses this same file, so every month looks and behaves the same.
@@ -320,7 +359,7 @@
         tile('Strength index', one(now), sgn(pv != null ? now - pv : null, one) + ' <small>vs ' + prevName + '</small> ' + sgn(now - 100, one) + ' <small>vs Jan</small>', line(idx, { base: 100 }), 'violet') +
         tile('Beat last session', rate != null ? rate + '%' : 'n/a', '<span class="td">' + ov[0] + ' up · ' + ov[1] + ' same · ' + ov[2] + ' down</span>', line(rates, { base: 50 }), 'green') +
         tile('2-mile equivalent', eqNow ? mmss(eqNow) : 'no run', sgn(eqNow && lastBefore(T.run.eq2) ? eqNow - lastBefore(T.run.eq2) : null, mmss, true) + ' <small>vs last run month</small>', line(eq, { inv: true, base: 950 }), 'sky', 'goal 15:50') +
-        tile('Miles run', one(miles[i]), sgn(i ? miles[i] - miles[i - 1] : null, one) + ' <small>vs ' + prevName + '</small>', line(miles), 'teal') +
+        tile('Running-only log miles', one(miles[i]), sgn(i ? miles[i] - miles[i - 1] : null, one) + ' <small>vs ' + prevName + '</small>', line(miles), 'teal') +
         '</div>';
 
       /* by muscle group: one small chart each, ranked by trend */
@@ -456,12 +495,12 @@
      The bar sticks to the top while scrolling, so Home and Jump are always one tap away. */
   var here = (location.pathname.split('/').pop() || 'index.html');
   var Yr = window.YEAR, MN = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  var pages = [['index.html', 'Home: the year'], ['index.html#goals', '2026 goals'], ['cbc-sermons.html', 'Sermon notes']];
+  var pages = [['index.html', 'Year overview'], ['index.html#goals', '2026 goals'], ['cbc-sermons.html', 'Sermon notes']];
   var monthsMenu = Yr ? Yr.files.map(function (f, i) { return f ? '<a href="' + f + '"' + (f === here ? ' aria-current="page"' : '') + '><b>' + Yr.months[i] + '</b><span>' + MN[i] + '</span></a>' : '<span class="off"><b>' + Yr.months[i] + '</b><span>Ahead</span></span>'; }).join('') : '';
   var menu = '<details class="jump"><summary>Jump to<i></i></summary><div class="glass menu"><div class="mgrid">' + monthsMenu + '</div><div class="mlinks">' +
     pages.map(function (p) { return '<a href="' + p[0] + '">' + p[1] + '</a>'; }).join('') + '<button type="button" class="mtheme" data-theme-btn>Switch to light</button></div></div></details>';
   var isHome = here === 'index.html' || here === '';
-  var home = '<a class="home" href="index.html#story"' + (isHome ? ' aria-current="page"' : '') + '><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 7.5 8 2.5l6 5V14H10V10H6v4H2z"/></svg>Home</a>';
+  var home = '<a class="home" href="index.html#story"' + (isHome ? ' aria-current="page"' : '') + '><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 7.5 8 2.5l6 5V14H10V10H6v4H2z"/></svg>Year overview</a>';
   var nav = '<div class="navr">' +
     (m.prev ? '<a class="step" href="' + esc(m.prev[0]) + '" aria-label="Previous month: ' + esc(m.prev[1]) + '">&#8249; ' + esc(m.prev[1]) + '</a>' : '') +
     menu +
@@ -537,10 +576,11 @@
     if (!d) d = R.domains[0];
     uid = 0;
     var mainBands = d.main;
-    if (d.id === 'physical' && window.TRENDS && !R.noHero) mainBands = [{ hue: 'violet', spine: 'Trends', blocks: [{ type: 'sub', text: 'Am I making progress?', right: 'Jan to ' + m.short }, { type: 'trends' }] }].concat(d.main || []);
+    // The shared monthly dashboard provides consistent lift comparisons and curated distance totals.
     parts.innerHTML = sheet('main', d.mainLabel || d.label, mainBands) + sheet('side', d.sideLabel || 'At a glance', d.side);
     var heroEl = document.getElementById('hero');
     heroEl.innerHTML = d.id === 'overview' ? heroHTML() : '';
+    paintMonthlyMetrics(d.id);
     sideEl = parts.querySelector('.sheet.side');
     [].forEach.call(document.querySelectorAll('.bar .chip'), function (c) {
       if (c.getAttribute('data-d') === d.id) c.setAttribute('aria-current', 'page'); else c.removeAttribute('aria-current');
@@ -560,6 +600,13 @@
       var target = window.scrollY + first.getBoundingClientRect().top - (barEl ? barEl.offsetHeight : 0) - 22;
       if (window.scrollY > target) window.scrollTo(0, Math.max(0, target));
     }
+  }
+  var monthlyCurrent=window.MonthlyMetrics.summarize(R),monthlyPrevious=null,monthlyCompareLoaded=false;
+  var previousDate=new Date(monthlyCurrent.month+'-01T12:00:00Z');previousDate.setUTCMonth(previousDate.getUTCMonth()-1);var previousMonth=previousDate.toISOString().slice(0,7);
+  function paintMonthlyMetrics(id){
+    if(id!=='physical'&&id!=='financial')return;
+    document.getElementById('hero').innerHTML=window.MonthlyMetrics.render(monthlyCurrent,monthlyPrevious,id,window.TRENDS?window.MonthlyMetrics.strengthSummary(window.TRENDS,monthlyCurrent.month):null,false);
+    if(!monthlyCompareLoaded){monthlyCompareLoaded=true;fetch('data/'+previousMonth+'.js',{credentials:'same-origin'}).then(function(response){if(!response.ok)throw Error('Previous month unavailable');return response.text();}).then(function(source){var match=source.match(/window\.RECAP\s*=\s*(\{[\s\S]*\})\s*;?\s*$/);if(!match)return;var prior=JSON.parse(match[1]);monthlyPrevious=window.MonthlyMetrics.summarize(prior);if(monthlyPrevious.month!==previousMonth){monthlyPrevious=null;return;}paintMonthlyMetrics(current());}).catch(function(){/* Current figures remain usable when the prior month is unavailable. */});}
   }
   function current() { return (location.hash || '').replace('#', '') || R.defaultDomain || R.domains[0].id; }
   window.addEventListener('hashchange', function () { show(current(), true); });
