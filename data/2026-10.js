@@ -3202,6 +3202,39 @@ window.RECAP = {
           "spine": "Sermons",
           "type": "sermons",
           "month": "2026-10"
+        },
+        {
+          "hue": "violet",
+          "spine": "Four-week reading update",
+          "type": "para",
+          "text": "1 & 2 Timothy: sound doctrine, character, leading by example, and perseverance."
+        },
+        {
+          "hue": "violet",
+          "spine": "Bible reading",
+          "type": "cards",
+          "cards": [
+            {
+              "hue": "violet",
+              "title": "Stay grounded in Scripture",
+              "text": "Test teaching against the Bible, even when it sounds convincing."
+            },
+            {
+              "hue": "violet",
+              "title": "Character comes first",
+              "text": "Evaluate leadership—and myself—by integrity and self-control rather than status or talent."
+            },
+            {
+              "hue": "violet",
+              "title": "Lead by example now",
+              "text": "Age or title shouldn’t determine whether I model faith through my words and actions."
+            },
+            {
+              "hue": "violet",
+              "title": "Persevere and invest in others",
+              "text": "Remain faithful through difficulty and pass what I’m learning on to others."
+            }
+          ]
         }
       ],
       "side": [
@@ -3932,6 +3965,28 @@ window.RECAP = {
         {
           "label": "October milestone",
           "text": "A new studio headshot service is now part of JD Meyers Productions."
+        }
+      ]
+    },
+    "Faith": {
+      "title": "1 & 2 Timothy · Four-week takeaways",
+      "summary": "Bible reading: sound doctrine, character, leading by example, and perseverance.",
+      "details": [
+        {
+          "label": "Stay grounded in Scripture",
+          "text": "Test teaching against the Bible, even when it sounds convincing."
+        },
+        {
+          "label": "Character comes first",
+          "text": "Evaluate leadership—and myself—by integrity and self-control rather than status or talent."
+        },
+        {
+          "label": "Lead by example now",
+          "text": "Age or title shouldn’t determine whether I model faith through my words and actions."
+        },
+        {
+          "label": "Persevere and invest in others",
+          "text": "Remain faithful through difficulty and pass what I’m learning on to others."
         }
       ]
     }
